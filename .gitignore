@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .DS_Store
 log/*
 tmp/*
@@ -12,21 +11,3 @@ config/initializers/twitter.rb
 db/*.sqlite3
 public/system/*
 public/assets/*
-=======
-*.rbc
-*.sassc
-.sass-cache
-capybara-*.html
-.rspec
-/.bundle
-/vendor/bundle
-/log/*
-/tmp/*
-/db/*.sqlite3
-/public/system/*
-/coverage/
-/spec/tmp/*
-**.orig
-rerun.txt
-pickle-email-*.html
->>>>>>> 867c172d5d52852eaf9d38ba0e2bf1ae7e95ffdb
