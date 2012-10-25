@@ -1,14 +1,14 @@
 <%= nested_form_for @chapter, :html => { :multipart => true } do |f| %>  
   <%= render "shared/error_messages", :target => @chapter %>
-	<div>
-	  <%= f.label :story_id, "Story" %><br />	
+  <div>
+    <%= f.label :story_id, "Story" %><br /> 
     <%= f.collection_select :story_id, Story.order(:name), :id, :name, :include_blank => false %>
   </div>
-	<div>
-	  <%= f.label :chapter_type, "Chapter Type" %><br />
-  	<%= f.collection_select :chapter_type, Chapter::CHAPTER_TYPES, :to_s, :humanize %>
+  <div>
+    <%= f.label :chapter_type, "Chapter Type" %><br />
+    <%= f.collection_select :chapter_type, Chapter::CHAPTER_TYPES, :to_s, :humanize %>
   </div>
-	<div>
+  <div>
     <%= f.label :number, "Number" %><br /> 
     (Enter 1 for the prologue or epilogue, 2 for a second prologue/epilogue. Regular chapters are numbered as you would expect.)<br />
     <%= f.text_field :number %>
@@ -22,28 +22,28 @@
     <%= render 'shared/wysiwym_basic_buttons' %>
     <%= f.text_area :content, :class => "data_entry" %>  
   </div>
-	<div>
-		<label>Illustrations</label>
-	  <%= f.fields_for :illustrations do |illustration_form| %>
-	    <div class="illustration">
-	    <% if illustration_form.object.illustration_file_name.blank? %>
-	      <%= illustration_form.file_field :illustration %>
-	    <% else %>
-	      <%= illustration_form.hidden_field :illustration %>
-	      <%= image_tag illustration_form.object.illustration.url(:embedded) %><br />
-	      <button class="insert_tag">Insert Tag</button><br />
-	      Filename: <%= illustration_form.object.illustration_file_name %><br />
-      	<%= link_to "Popover Image", illustration_form.object.illustration.url(:popover) %> |
-	      <%= link_to "Original Image", illustration_form.object.illustration.url %> |
-	    <% end %>
-	    <%= illustration_form.link_to_remove "Remove illustration" %><br />
-	    </div>
-	  <% end %>
-		<p><%= f.link_to_add "Add illustration", :illustrations %></p>
-	</div>
   <div>
-	  <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
-	</div>
+    <label>Illustrations</label>
+    <%= f.fields_for :illustrations do |illustration_form| %>
+      <div class="illustration">
+      <% if illustration_form.object.illustration_file_name.blank? %>
+        <%= illustration_form.file_field :illustration %>
+      <% else %>
+        <%= illustration_form.hidden_field :illustration %>
+        <%= image_tag illustration_form.object.illustration.url(:embedded) %><br />
+        <button class="insert_tag">Insert Tag</button><br />
+        Filename: <%= illustration_form.object.illustration_file_name %><br />
+        <%= link_to "Popover Image", illustration_form.object.illustration.url(:popover) %> |
+        <%= link_to "Original Image", illustration_form.object.illustration.url %> |
+      <% end %>
+      <%= illustration_form.link_to_remove "Remove illustration" %><br />
+      </div>
+    <% end %>
+    <p><%= f.link_to_add "Add illustration", :illustrations %></p>
+  </div>
+  <div>
+    <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
+  </div>
   <div>  
     <%= f.submit %>  
   </div>

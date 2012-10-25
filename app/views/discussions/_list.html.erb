@@ -1,43 +1,43 @@
 <% unless @discussions.empty? %>
   <div id="resources">
-		<% @discussions.each do |discussion| %>
-			<div class="resource">
-				<div class="comment_thumbnail">
-					<% if discussion.dragoon.avatar_file_name.blank? %>
-					  <%= image_tag("default-avatar.jpg") %>
-					<% else %>
-					  <%= image_tag discussion.dragoon.avatar.url(:thumbnail) %><br />
-					<% end %>
-				</div>
-			  <div class="comment_details">
-				  <p class="name_and_date"><% if discussion.sticky %><strong>Sticky: </strong><% end %><%= link_to discussion.subject, discussion %>
-						<% if @current_dragoon %>
-				      <% if @current_dragoon.views.count > 0 %>
-				      	<span class="unviewed">
-						      <% if discussion.comments.count == 0 %>
-						        <% if @current_dragoon.views.where(:viewable_id => discussion.id, :viewable_type => 'Discussion').count > 0 %>				
-							      	<% unless @current_dragoon.views.where(:viewable_id => discussion.id, :viewable_type => 'Discussion').first.viewed %>
-								        <%= "New!" %>
-								      <% end %>
-								    <% end %>
-							    <% else %>
-						  	    <% discussion.comments.each do |comment| %>
-						          <% if @current_dragoon.views.where(:viewable_id => comment.id, :viewable_type => 'Comment').count > 0 %>
-							        	<% unless @current_dragoon.views.where(:viewable_id => comment.id, :viewable_type => 'Comment').first.viewed %>
-								          <%= "New!" %>
-								          <% break %> 
-								        <% end %>
-								      <% end %>
-							      <% end %>
-							    <% end %>
-				      	</span>
-				      <% end %>
-				    <% end %>
-					</p>
-				  <p>Discussion posted by <%= link_to discussion.dragoon.name, dragoon_path(discussion.dragoon) %> <%= time_ago_in_words(discussion.created_at) %> ago.<br />
-					   <% unless discussion.comments.count == 0 %>Last comment posted by ??? <%= time_ago_in_words(discussion.comments.last.created_at) %> ago.<% end %></p>
-		    </div>
-		  </div>
-		<% end %>
-	</div>
+    <% @discussions.each do |discussion| %>
+      <div class="resource">
+        <div class="comment_thumbnail">
+          <% if discussion.dragoon.avatar_file_name.blank? %>
+            <%= image_tag("default-avatar.jpg") %>
+          <% else %>
+            <%= image_tag discussion.dragoon.avatar.url(:thumbnail) %><br />
+          <% end %>
+        </div>
+        <div class="comment_details">
+          <p class="name_and_date"><% if discussion.sticky %><strong>Sticky: </strong><% end %><%= link_to discussion.subject, discussion %>
+            <% if @current_dragoon %>
+              <% if @current_dragoon.views.count > 0 %>
+                <span class="unviewed">
+                  <% if discussion.comments.count == 0 %>
+                    <% if @current_dragoon.views.where(:viewable_id => discussion.id, :viewable_type => 'Discussion').count > 0 %>        
+                      <% unless @current_dragoon.views.where(:viewable_id => discussion.id, :viewable_type => 'Discussion').first.viewed %>
+                        <%= "New!" %>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <% discussion.comments.each do |comment| %>
+                      <% if @current_dragoon.views.where(:viewable_id => comment.id, :viewable_type => 'Comment').count > 0 %>
+                        <% unless @current_dragoon.views.where(:viewable_id => comment.id, :viewable_type => 'Comment').first.viewed %>
+                          <%= "New!" %>
+                          <% break %> 
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </span>
+              <% end %>
+            <% end %>
+          </p>
+          <p>Discussion posted by <%= link_to discussion.dragoon.name, dragoon_path(discussion.dragoon) %> <%= time_ago_in_words(discussion.created_at) %> ago.<br />
+             <% unless discussion.comments.count == 0 %>Last comment posted by ??? <%= time_ago_in_words(discussion.comments.last.created_at) %> ago.<% end %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>

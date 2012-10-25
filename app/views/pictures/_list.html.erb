@@ -1,20 +1,20 @@
 <% unless @pictures.empty? %>
   <div id="resources">
-		<% @pictures.each do |picture| %>
-		  <div class="resource">
-			  <div class="thumbnail">
-			    <%= link_to image_tag(picture.picture.url(:thumbnail)), picture %>
-			  </div>
-			  <div class="details">
-		  	  <h2><%= link_to picture.name, picture %></h2>
-					<% unless picture.publish %>
-					  <p class="unpublished">Unpublished</p>
-					<% end %>
-			    <p><%= picture.description %></p>
-			  </div>
-		  </div>
-		<% end %>
-	</div>
+    <% @pictures.each do |picture| %>
+      <div class="resource">
+        <div class="thumbnail">
+          <%= link_to image_tag(picture.picture.url(:thumbnail)), picture %>
+        </div>
+        <div class="details">
+          <h2><%= link_to picture.name, picture %></h2>
+          <% unless picture.publish %>
+            <p class="unpublished">Unpublished</p>
+          <% end %>
+          <p><%= picture.description %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <%= paginate @pictures %>

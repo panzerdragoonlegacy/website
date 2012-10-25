@@ -19,42 +19,42 @@
   </p>
   <p>  
     <%= f.label :mp4_video, "MP4 Video" %><br />
-	<% if @video.mp4_video? %>
-	 File has already been uploaded. Replace file?<br />
+  <% if @video.mp4_video? %>
+   File has already been uploaded. Replace file?<br />
    <% end %>
     <%= f.file_field :mp4_video %>  
   </p>
   <p>  
     <%= f.label :webm_video, "WebM Video" %><br />
-	  <% if @video.webm_video? %>
-	    File has already been uploaded. Replace file?<br />
+    <% if @video.webm_video? %>
+      File has already been uploaded. Replace file?<br />
     <% end %>
     <%= f.file_field :webm_video %>  
   </p>
   <label>Contributors</label>
-	<div class="scroll_checkboxes">
+  <div class="scroll_checkboxes">
     <% for dragoon in Dragoon.order(:name) %>
       <label>
-  	    <%= check_box_tag "video[dragoon_ids][]", dragoon.id, @video.dragoons.include?(dragoon) %>  
-	      <%= dragoon.name %>
-	    </label>
-	    <br />
- 		<% end %>
+        <%= check_box_tag "video[dragoon_ids][]", dragoon.id, @video.dragoons.include?(dragoon) %>  
+        <%= dragoon.name %>
+      </label>
+      <br />
+    <% end %>
   </div>
   <label>Tags</label>
-	<div class="scroll_checkboxes">
-  	<% for tag in Tag.order(:name) %>
+  <div class="scroll_checkboxes">
+    <% for tag in Tag.order(:name) %>
       <label>
-  	    <%= check_box_tag "video[tag_ids][]", tag.id, @video.tags.include?(tag) %>  
-	      <%= tag.name %>
-	    </label>
-	    <br />
- 		<% end %>
+        <%= check_box_tag "video[tag_ids][]", tag.id, @video.tags.include?(tag) %>  
+        <%= tag.name %>
+      </label>
+      <br />
+    <% end %>
   </div>
   <p>
     <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
   </p>
-	<p>  
-	  <%= f.submit %>  
-	</p>
+  <p>  
+    <%= f.submit %>  
+  </p>
 <% end %>

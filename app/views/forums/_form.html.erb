@@ -4,7 +4,7 @@
     <%= f.label :name, "Name" %><br />
     <%= f.text_field :name %>
   </div>
-	<div>
+  <div>
     <%= f.label :number, "Number" %><br /> 
     <%= f.text_field :number %>
   </div>
@@ -13,14 +13,14 @@
     <%= f.text_area :description, :rows => 5 %>
   </div>
   <div>
-   	<%= f.label :forum_picture, "Forum Picture" %><br />
-	  <% if @forum.forum_picture? %>
-	    <%= image_tag @forum.forum_picture.url(:thumbnail) %><br />
-	    File has already been uploaded. Replace file?<br />
-	  <% end %>
-	  <%= f.file_field :forum_picture %>
+    <%= f.label :forum_picture, "Forum Picture" %><br />
+    <% if @forum.forum_picture? %>
+      <%= image_tag @forum.forum_picture.url(:thumbnail) %><br />
+      File has already been uploaded. Replace file?<br />
+    <% end %>
+    <%= f.file_field :forum_picture %>
   </div>
   <div>
-	  <%= f.submit %>
-	</div>
+    <%= f.submit %>
+  </div>
 <% end %>

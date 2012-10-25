@@ -2,24 +2,24 @@
 
 <% if can? :manage, Page %>
   <ul class="administration">
-	  <li><%= link_to 'New Page', new_page_path %></li>
-	</ul>
+    <li><%= link_to 'New Page', new_page_path %></li>
+  </ul>
 <% end %>
 
 <% unless @pages.empty? %>
   <div id="resources">
-		<% @pages.each do |page| %>
-		  <div class="resource">
-			  <div class="details">
-				  <h2><%= link_to page.name, page %></h2>
-				  <% unless page.publish %>
-					  <p class="unpublished">Unpublished</p>
-					<% end %>
-				  <p><%= truncated_text page.content %></p>
-				</div>
-		  </div>
-		<% end %>
-	</div>
+    <% @pages.each do |page| %>
+      <div class="resource">
+        <div class="details">
+          <h2><%= link_to page.name, page %></h2>
+          <% unless page.publish %>
+            <p class="unpublished">Unpublished</p>
+          <% end %>
+          <p><%= truncated_text page.content %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <%= paginate @pages %>

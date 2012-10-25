@@ -1,66 +1,66 @@
 <% title "Categories" %>
 
 <% if can? :create, Category %>
-	<ul class="administration">
-	  <li><%= link_to 'New Category', new_category_path %></li>
-	</ul>
+  <ul class="administration">
+    <li><%= link_to 'New Category', new_category_path %></li>
+  </ul>
 <% end %>
 
 <ul>
   <li><%= link_to "Articles", articles_path %></li>
-	<% @article_categories.each do |article_category| %>
-	  <ul>
-		  <li><%= link_to article_category.name, article_category %><% unless article_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-		</ul>
-	<% end %>
-	<li><%= link_to "Downloads", downloads_path %></li>
-  <% @download_categories.each do |download_category| %>
-  	<ul>
-		  <li><%= link_to download_category.name, download_category %><% unless download_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-		</ul>
+  <% @article_categories.each do |article_category| %>
+    <ul>
+      <li><%= link_to article_category.name, article_category %><% unless article_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    </ul>
   <% end %>
-	<li><%= link_to "Encyclopaedia", encyclopaedia_entries_path %></li>
+  <li><%= link_to "Downloads", downloads_path %></li>
+  <% @download_categories.each do |download_category| %>
+    <ul>
+      <li><%= link_to download_category.name, download_category %><% unless download_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    </ul>
+  <% end %>
+  <li><%= link_to "Encyclopaedia", encyclopaedia_entries_path %></li>
   <% @encyclopaedia_entry_categories.each do |encyclopaedia_entry_category| %>
-  	<ul>
-		  <li><%= link_to encyclopaedia_entry_category.name, encyclopaedia_entry_category %><% unless encyclopaedia_entry_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-		</ul>
-	<% end %>
-	<li><%= link_to "Links", links_path %></li>
+    <ul>
+      <li><%= link_to encyclopaedia_entry_category.name, encyclopaedia_entry_category %><% unless encyclopaedia_entry_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    </ul>
+  <% end %>
+  <li><%= link_to "Links", links_path %></li>
   <% @link_categories.each do |link_category| %>
-	  <ul>
-		  <li><%= link_to link_category.name, link_category %><% unless link_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-		</ul>
-	<% end %>
+    <ul>
+      <li><%= link_to link_category.name, link_category %><% unless link_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    </ul>
+  <% end %>
   <li><%= link_to "Music", music_tracks_path %></li> 
- 	<% @music_track_categories.each do |music_track_category| %>
-	  <ul>
-		  <li><%= link_to music_track_category.name, music_track_category %><% unless music_track_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-		</ul>
-	<% end %>
-	<li><%= link_to "Pictures", pictures_path %></li>
+  <% @music_track_categories.each do |music_track_category| %>
+    <ul>
+      <li><%= link_to music_track_category.name, music_track_category %><% unless music_track_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    </ul>
+  <% end %>
+  <li><%= link_to "Pictures", pictures_path %></li>
   <% @picture_categories.each do |picture_category| %>
-  	<ul>
-		  <li><%= link_to picture_category.name, picture_category %><% unless picture_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-		</ul>
-	<% end %>
+  <ul>
+    <li><%= link_to picture_category.name, picture_category %><% unless picture_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+  </ul>
+  <% end %>
   <li><%= link_to "Poems", poems_path %></li>
   <li><%= link_to "Quizzes", quizzes_path %></li>
   <li><%= link_to "Resources", resources_path %></li>
   <% @resource_categories.each do |resource_category| %>
-  	<ul>
-		  <li><%= link_to resource_category.name, resource_category %><% unless resource_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-		</ul>
-	<% end %>
+    <ul>
+      <li><%= link_to resource_category.name, resource_category %><% unless resource_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    </ul>
+  <% end %>
   <li><%= link_to "Stories", stories_path %></li>
   <% @story_categories.each do |story_category| %>
-	  <ul>
-		  <li><%= link_to story_category.name, story_category %><% unless story_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-		</ul>
-	<% end %>
+    <ul>
+      <li><%= link_to story_category.name, story_category %><% unless story_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    </ul>
+  <% end %>
   <li><%= link_to "Videos", videos_path %></li>
- 	<% @video_categories.each do |video_category| %>
-  	<ul>
-		  <li><%= link_to video_category.name, video_category %><% unless video_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-		</ul>
-	<% end %>
+  <% @video_categories.each do |video_category| %>
+    <ul>
+      <li><%= link_to video_category.name, video_category %><% unless video_category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    </ul>
+  <% end %>
 </ul>

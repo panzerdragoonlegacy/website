@@ -1,25 +1,25 @@
 <% title @title %>
 
 <% if can? :create, Quiz %>
-	<ul class="administration">
-	  <li><%= link_to 'New Quiz', new_quiz_path %></li>
-	</ul>
+  <ul class="administration">
+    <li><%= link_to 'New Quiz', new_quiz_path %></li>
+  </ul>
 <% end %>
 
 <% unless @quizzes.empty? %>
   <div id="resources">
-		<% @quizzes.each do |quiz| %>
-			<div class="resource">
-			  <div class="details">
-		      <h2><%= link_to quiz.name, quiz %></h2>
-		      <% unless quiz.publish %>
-					  <p class="unpublished">Unpublished</p>
-					<% end %>
-		      <p><%= quiz.description %></p>
-		    </div>
-		  </div>
-		<% end %>
-	</div>
+    <% @quizzes.each do |quiz| %>
+      <div class="resource">
+        <div class="details">
+          <h2><%= link_to quiz.name, quiz %></h2>
+          <% unless quiz.publish %>
+            <p class="unpublished">Unpublished</p>
+          <% end %>
+          <p><%= quiz.description %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <%= paginate @quizzes %>

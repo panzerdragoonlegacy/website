@@ -15,10 +15,10 @@
     <%= f.text_area :message, :class => "data_entry" %>  
   </div>
   <% if can? :manage, Discussion %>
-	  <div>
-	    <%= f.check_box :sticky %> <%= f.label :sticky, "Sticky?" %>
-	  </div>
-	<% end %>
+    <div>
+      <%= f.check_box :sticky %> <%= f.label :sticky, "Sticky?" %>
+    </div>
+  <% end %>
   <div>
     <%= f.submit %>  
   </div>

@@ -1,25 +1,25 @@
 <% title "Forums" %>
 
 <% if can? :create, Forum %>
-	<ul class="administration">
-	  <li><%= link_to 'New Forum', new_forum_path %></li>
-	</ul>
+  <ul class="administration">
+    <li><%= link_to 'New Forum', new_forum_path %></li>
+  </ul>
 <% end %>
 
 <p>Posting on the new community forums will require you to <%= link_to "register a new account", register_path %>. Previous posts are accessible on the <%= link_to "old forums", "http://oldforums.thewilloftheancients.com" %> in a read-only state.</p>
 
 <% unless @forums.empty? %>
-	<div id="resources">
-		<% @forums.each do |forum| %>
-		  <div class="resource">
-			  <div class="thumbnail">
-			    <%= image_tag forum.forum_picture.url(:thumbnail) %>
-			  </div>
-			  <div class="details">
-		  	  <h2><%= link_to forum.name, forum %></h2>
-			    <p><%= forum.description %></p>
-			  </div>
-		  </div>
-		<% end %>
-	</div>
+  <div id="resources">
+    <% @forums.each do |forum| %>
+      <div class="resource">
+        <div class="thumbnail">
+          <%= image_tag forum.forum_picture.url(:thumbnail) %>
+        </div>
+        <div class="details">
+          <h2><%= link_to forum.name, forum %></h2>
+          <p><%= forum.description %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>

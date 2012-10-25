@@ -5,23 +5,23 @@
 <% end %>
 
 <% if can? :manage, @video %>
-	<ul class="administration">
-	  <li><%= link_to 'Edit Video', edit_video_path(@video) %></li>
-	  <li><%= link_to 'Delete Video', @video, :confirm => 'Are you sure you want to delete this video?', :method => :delete %></li>
-	</ul>
+  <ul class="administration">
+    <li><%= link_to 'Edit Video', edit_video_path(@video) %></li>
+    <li><%= link_to 'Delete Video', @video, :confirm => 'Are you sure you want to delete this video?', :method => :delete %></li>
+  </ul>
 <% end %>
-	
+  
 <h2>Contributed By:</h2>
 <ul>
   <% @video.dragoons.each do |dragoon| %>
-	  <li><%= link_to dragoon.name, dragoon %></li>
+    <li><%= link_to dragoon.name, dragoon %></li>
   <% end %>
 </ul>
-	
+  
 <video width="620" height="349" controls="true" autobuffer="true"> 
   <source type="video/mp4" src="<%= @video.mp4_video.url %>" /> 
   <source type="video/webm" src="<%= @video.webm_video.url %>" /> 
-	Your browser does not support the <code>video</code> element.
+  Your browser does not support the <code>video</code> element.
 </video>
 
 <p><%= @video.description %></p>
@@ -33,12 +33,12 @@
 <p>Download Video: <%= link_to "MP4", @video.mp4_video.url %> | <%= link_to "WebM", @video.webm_video.url %></p>
 
 <% if can? :manage, Tag %>
-	<h2>Tags:</h2>
-	<ul>
-		<% @video.tags.each do |tag| %>
-		  <li><%= link_to tag.name, tag %></li>
-		<% end %>
-	</ul>
+  <h2>Tags:</h2>
+  <ul>
+    <% @video.tags.each do |tag| %>
+      <li><%= link_to tag.name, tag %></li>
+    <% end %>
+  </ul>
 <% end %>
 
 <p class="links"><%= link_to 'Videos', videos_path %> | <%= link_to @video.category.name, category_path(@video.category) %></p>

@@ -8,13 +8,13 @@
 
 <% unless @projects.empty? %>
   <div id="resources">
-		<% @projects.each do |project| %>
-		  <div class="resource">
-			  <div class="details">
-		  	  <h2><%= link_to project.name, project %></h2>
-			    <p><%= project.description %></p>
-			  </div>
-		  </div>
-		<% end %>
-	</div>
+    <% @projects.each do |project| %>
+      <div class="resource">
+        <div class="details">
+          <h2><%= link_to project.name, project %></h2>
+          <p><%= project.description %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>

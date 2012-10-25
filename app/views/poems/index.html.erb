@@ -1,25 +1,25 @@
 <% title @title %>
 
 <% if can? :create, Poem %>
-	<ul class="administration">
-	  <li><%= link_to 'New Poem', new_poem_path %></li>
-	</ul>
+  <ul class="administration">
+    <li><%= link_to 'New Poem', new_poem_path %></li>
+  </ul>
 <% end %>
 
 <% unless @poems.empty? %>
   <div id="resources">
-		<% @poems.each do |poem| %>
-			<div class="resource">
-			  <div class="details">
-			    <h2><%= link_to poem.name, poem %></h2>
-					<% unless poem.publish %>
-					  <p class="unpublished">Unpublished</p>
-					<% end %>
-			    <p><%= poem.description %></p>
-		    </div>
-		  </div>
-		<% end %>
-	</div>
+    <% @poems.each do |poem| %>
+      <div class="resource">
+        <div class="details">
+          <h2><%= link_to poem.name, poem %></h2>
+          <% unless poem.publish %>
+            <p class="unpublished">Unpublished</p>
+          <% end %>
+          <p><%= poem.description %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <%= paginate @poems %>

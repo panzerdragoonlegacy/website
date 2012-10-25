@@ -1,31 +1,31 @@
 ﻿div.wysiwym
 {
-    line-height: 0.9em;
-    overflow: auto;
-    margin-top: 5px;
-    margin-bottom: 5px;
+  line-height: 0.9em;
+  overflow: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 button.tagbuttons
 {
-	float: left;
-	font-size: 0.9em;
-	padding: 1px 2px 1px 2px;
-	margin: 0px;
-    width: auto;
-    overflow: visible;
+  float: left;
+  font-size: 0.9em;
+  padding: 1px 2px 1px 2px;
+  margin: 0px;
+  width: auto;
+  overflow: visible;
 }
 
 button::-moz-focus-inner{padding:0;}
 
 div#modalWindow
 {
-	display: none;
+  display: none;
 }
 
 div.row {
-	overflow: auto;
-	margin-top: 5px;
+  overflow: auto;
+  margin-top: 5px;
 }
 
 div.row span.label {
@@ -58,4 +58,3 @@ div.formw textarea {
   margin: 0px;
   overflow: auto;
 }
-

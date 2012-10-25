@@ -5,16 +5,16 @@
 <% end %>
 
 <% if can? :manage, @picture %>
-	<ul class="administration">
-	  <li><%= link_to 'Edit Picture', edit_picture_path(@picture) %></li>
-	  <li><%= link_to 'Delete Picture', @picture, :confirm => 'Are you sure you want to delete this picture?', :method => :delete %></li>
-	</ul>
+  <ul class="administration">
+    <li><%= link_to 'Edit Picture', edit_picture_path(@picture) %></li>
+    <li><%= link_to 'Delete Picture', @picture, :confirm => 'Are you sure you want to delete this picture?', :method => :delete %></li>
+  </ul>
 <% end %>
 
 <h2>Contributed By:</h2>
 <ul>
   <% @picture.dragoons.each do |dragoon| %>
-	  <li><%= link_to dragoon.name, dragoon %></li>
+    <li><%= link_to dragoon.name, dragoon %></li>
   <% end %>
 </ul>
 
@@ -29,12 +29,12 @@
 <% end %>
 
 <% if can? :manage, Tag %>
-	<h2>Tags:</h2>
-	<ul>
-		<% @picture.tags.each do |tag| %>
-		  <li><%= link_to tag.name, tag %></li>
-		<% end %>
-	</ul>
+  <h2>Tags:</h2>
+  <ul>
+    <% @picture.tags.each do |tag| %>
+      <li><%= link_to tag.name, tag %></li>
+    <% end %>
+  </ul>
 <% end %>
 
 <p class="links"><%= link_to 'Pictures', pictures_path %> | <%= link_to @picture.category.name, category_path(@picture.category) %></p>

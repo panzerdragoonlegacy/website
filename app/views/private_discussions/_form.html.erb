@@ -12,13 +12,13 @@
   </div>
   <div>
     <label>Members</label>
-	  <div class="scroll_checkboxes">
-  	  <% for dragoon in Dragoon.order(:name).where("id != ?", @current_dragoon.id) %>
+    <div class="scroll_checkboxes">
+      <% for dragoon in Dragoon.order(:name).where("id != ?", @current_dragoon.id) %>
         <label>
-  	      <%= check_box_tag "private_discussion[dragoon_ids][]", dragoon.id, @private_discussion.dragoons.include?(dragoon) %> <%= dragoon.name %>
-	      </label>
-	      <br />
- 		  <% end %>
+          <%= check_box_tag "private_discussion[dragoon_ids][]", dragoon.id, @private_discussion.dragoons.include?(dragoon) %> <%= dragoon.name %>
+        </label>
+        <br />
+      <% end %>
     </div>
   </div>
   <div>  

@@ -1,31 +1,31 @@
 <% title "Private Discussions" %>
 
 <% if can? :create, PrivateDiscussion %>
-	<ul class="administration">
-	  <li><%= link_to 'New Private Discussion', new_private_discussion_path %></li>
-	</ul>
+  <ul class="administration">
+    <li><%= link_to 'New Private Discussion', new_private_discussion_path %></li>
+  </ul>
 <% end %>
 
 <% unless @private_discussions.empty? %>
   <div id="resources">
-		<% @private_discussions.each do |private_discussion| %>
-			<div class="resource">
-				<div class="comment_thumbnail">
-					<% if private_discussion.dragoon.avatar_file_name.blank? %>
-					  <%= image_tag("default-avatar.jpg") %>
-					<% else %>
-					  <%= image_tag private_discussion.dragoon.avatar.url(:thumbnail) %><br />
-					<% end %>
-				</div>
-			  <div class="comment_details">
-				  <p class="name_and_date"><%= link_to private_discussion.subject, private_discussion %></p>
-				  <p>
-					  Posted by <%= link_to private_discussion.dragoon.name, dragoon_path(private_discussion.dragoon) %> <%= time_ago_in_words(private_discussion.created_at) %> ago.
-					</p>
-				</div>
-		  </div>
-		<% end %>
-	</div>
+    <% @private_discussions.each do |private_discussion| %>
+      <div class="resource">
+        <div class="comment_thumbnail">
+          <% if private_discussion.dragoon.avatar_file_name.blank? %>
+            <%= image_tag("default-avatar.jpg") %>
+          <% else %>
+            <%= image_tag private_discussion.dragoon.avatar.url(:thumbnail) %><br />
+          <% end %>
+        </div>
+        <div class="comment_details">
+          <p class="name_and_date"><%= link_to private_discussion.subject, private_discussion %></p>
+          <p>
+            Posted by <%= link_to private_discussion.dragoon.name, dragoon_path(private_discussion.dragoon) %> <%= time_ago_in_words(private_discussion.created_at) %> ago.
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <%= paginate @private_discussions %>

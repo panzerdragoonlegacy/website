@@ -2,8 +2,8 @@
 
 <% @comments.each do |comment| %>
   <div>
-	  <p>Author: <%= link_to comment.dragoon.name, dragoon_path(comment.dragoon) %></p>
-	  <p>Comment: <%= comment.message %></p>
+    <p>Author: <%= link_to comment.dragoon.name, dragoon_path(comment.dragoon) %></p>
+    <p>Comment: <%= comment.message %></p>
   </div>
 <% end %>
 

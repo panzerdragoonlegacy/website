@@ -1,23 +1,23 @@
 <% title @title %>
 
 <% if can? :create, Discussion %>
-	<ul class="administration">
-	  <li><%= link_to 'New Discussion', new_discussion_path %></li>
-	</ul>
+  <ul class="administration">
+    <li><%= link_to 'New Discussion', new_discussion_path %></li>
+  </ul>
 <% end %>
 
 <% unless params[:dragoon_id] %>
   <% unless @forums.empty? %>
-		<h2>Forums</h2>
-		<ul>
-		<% @forums.each do |forum| %>
-		  <li><%= link_to forum.name, forum %></li>
-		<% end %>
-		</ul>
-	<% end %>
-	<% unless @discussions.empty? %>
-	  <h2>All Discussions</h2>
-	<% end %>
+    <h2>Forums</h2>
+    <ul>
+    <% @forums.each do |forum| %>
+      <li><%= link_to forum.name, forum %></li>
+    <% end %>
+    </ul>
+  <% end %>
+  <% unless @discussions.empty? %>
+    <h2>All Discussions</h2>
+  <% end %>
 <% end %>
 
 <%= render 'list' %>

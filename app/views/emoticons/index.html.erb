@@ -1,26 +1,26 @@
 <% title "Emoticons" %>
 
 <% if can? :create, Emoticon %>
-	<ul class="administration">
-	  <li><%= link_to 'New Emoticon', new_emoticon_path %></li>
-	</ul>
+  <ul class="administration">
+    <li><%= link_to 'New Emoticon', new_emoticon_path %></li>
+  </ul>
 <% end %>
 
 <% unless @emoticons.empty? %>
   <div id="resources">
-		<% @emoticons.each do |emoticon| %>
-		  <div class="resource">
-			  <div class="details">
-				  <h2><%= emoticon.name %></h2>
-					<% if can? :manage, emoticon %>
-						<ul class="administration">
-				      <%= link_to 'Delete Emoticon', emoticon, :confirm => 'Are you sure?', :method => :delete %></li>
-						</ul>
-					<% end %>
-				  <p><%= image_tag emoticon.emoticon.url %> <%= emoticon.code %></p>
-				</div>
-			</div>
-		<% end %>
+    <% @emoticons.each do |emoticon| %>
+      <div class="resource">
+        <div class="details">
+          <h2><%= emoticon.name %></h2>
+          <% if can? :manage, emoticon %>
+            <ul class="administration">
+              <%= link_to 'Delete Emoticon', emoticon, :confirm => 'Are you sure?', :method => :delete %></li>
+            </ul>
+          <% end %>
+          <p><%= image_tag emoticon.emoticon.url %> <%= emoticon.code %></p>
+        </div>
+      </div>
+    <% end %>
   </div>
 <% end %>
 

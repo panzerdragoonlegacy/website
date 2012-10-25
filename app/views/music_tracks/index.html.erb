@@ -1,22 +1,22 @@
 <% title @title %>
 
 <% if can? :create, MusicTrack %>
-	<ul class="administration">
-	  <li><%= link_to 'New Music Track', new_music_track_path %></li>
-	</ul>
+  <ul class="administration">
+    <li><%= link_to 'New Music Track', new_music_track_path %></li>
+  </ul>
 <% end %>
 
 <% unless params[:dragoon_id] %>
   <% unless @categories.empty? %>
-		<h2>Categories</h2>
-		<ul class="categories">
-		<% @categories.each do |category| %>
-		  <li><%= link_to category.name, category %><% unless category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-		<% end %>
-		</ul>
-	<% end %>
-	<% unless @music_tracks.empty? %>
-  	<h2>All Music Tracks</h2>
+    <h2>Categories</h2>
+    <ul class="categories">
+    <% @categories.each do |category| %>
+      <li><%= link_to category.name, category %><% unless category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    <% end %>
+    </ul>
+  <% end %>
+  <% unless @music_tracks.empty? %>
+    <h2>All Music Tracks</h2>
   <% end %>
 <% end %>
 

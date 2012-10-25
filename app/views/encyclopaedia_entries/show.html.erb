@@ -5,10 +5,10 @@
 <% end %>
 
 <% if can? :manage, @encyclopaedia_entry %>
-	<ul class="administration">
-	  <li><%= link_to 'Edit Encyclopaedia Entry', edit_encyclopaedia_entry_path(@encyclopaedia_entry) %></li>
-	  <li><%= link_to 'Delete Encyclopaedia Entry', @encyclopaedia_entry, :confirm => 'Are you sure you want to delete this encyclopaedia entry?', :method => :delete %></li>
-	</ul>
+  <ul class="administration">
+    <li><%= link_to 'Edit Encyclopaedia Entry', edit_encyclopaedia_entry_path(@encyclopaedia_entry) %></li>
+    <li><%= link_to 'Delete Encyclopaedia Entry', @encyclopaedia_entry, :confirm => 'Are you sure you want to delete this encyclopaedia entry?', :method => :delete %></li>
+  </ul>
 <% end %>
 
 <div id="information">

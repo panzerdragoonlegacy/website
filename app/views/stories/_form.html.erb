@@ -18,45 +18,45 @@
     <%= render 'shared/wysiwym_advanced_buttons' %>
     <%= f.text_area :content, :class => "data_entry" %>  
   </div>
-	<label>Authors</label>
-	<div class="scroll_checkboxes">
-	 	<% for dragoon in Dragoon.order(:name) %>
-	    <label>
-	 	    <%= check_box_tag "story[dragoon_ids][]", dragoon.id, @story.dragoons.include?(dragoon) %>  
-	      <%= dragoon.name %>
-	    </label>
-	    <br />
-	  <% end %>
-	</div>
-  <label>Tags</label>
-	<div class="scroll_checkboxes">
-  	<% for tag in Tag.order(:name) %>
+  <label>Authors</label>
+  <div class="scroll_checkboxes">
+    <% for dragoon in Dragoon.order(:name) %>
       <label>
-  	    <%= check_box_tag "story[tag_ids][]", tag.id, @story.tags.include?(tag) %>  
-	      <%= tag.name %>
-	    </label>
-	    <br />
- 		<% end %>
+        <%= check_box_tag "story[dragoon_ids][]", dragoon.id, @story.dragoons.include?(dragoon) %>  
+        <%= dragoon.name %>
+      </label>
+      <br />
+    <% end %>
   </div>
-	<div>
-		<label>Illustrations</label>
-	  <%= f.fields_for :illustrations do |illustration_form| %>
-	    <div class="illustration">
-	    <% if illustration_form.object.illustration_file_name.blank? %>
-	      <%= illustration_form.file_field :illustration %>
-	    <% else %>
-	      <%= illustration_form.hidden_field :illustration %>
-	      <%= image_tag illustration_form.object.illustration.url(:embedded) %><br />
+  <label>Tags</label>
+  <div class="scroll_checkboxes">
+    <% for tag in Tag.order(:name) %>
+      <label>
+        <%= check_box_tag "story[tag_ids][]", tag.id, @story.tags.include?(tag) %>  
+        <%= tag.name %>
+      </label>
+      <br />
+    <% end %>
+  </div>
+  <div>
+    <label>Illustrations</label>
+    <%= f.fields_for :illustrations do |illustration_form| %>
+      <div class="illustration">
+      <% if illustration_form.object.illustration_file_name.blank? %>
+        <%= illustration_form.file_field :illustration %>
+      <% else %>
+        <%= illustration_form.hidden_field :illustration %>
+        <%= image_tag illustration_form.object.illustration.url(:embedded) %><br />
         <button class="insert_tag">Insert Tag</button><br />
-	      Filename: <%= illustration_form.object.illustration_file_name %><br />
-      	<%= link_to "Popover Image", illustration_form.object.illustration.url(:popover) %> |
-	      <%= link_to "Original Image", illustration_form.object.illustration.url %> |
-	    <% end %>
-	    <%= illustration_form.link_to_remove "Remove illustration" %><br />
-	    </div>
-	  <% end %>
-		<p><%= f.link_to_add "Add illustration", :illustrations %></p>
-	</div>
+        Filename: <%= illustration_form.object.illustration_file_name %><br />
+        <%= link_to "Popover Image", illustration_form.object.illustration.url(:popover) %> |
+        <%= link_to "Original Image", illustration_form.object.illustration.url %> |
+      <% end %>
+      <%= illustration_form.link_to_remove "Remove illustration" %><br />
+      </div>
+    <% end %>
+    <p><%= f.link_to_add "Add illustration", :illustrations %></p>
+  </div>
   <div>
     <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
   </div>

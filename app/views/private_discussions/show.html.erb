@@ -3,34 +3,34 @@
 <h2>Private Discussion Members:</h2>
 <ul>
   <% @private_discussion.dragoons.each do |dragoon| %>
-	  <li><%= link_to dragoon.name, dragoon %></li>
+    <li><%= link_to dragoon.name, dragoon %></li>
   <% end %>
 </ul>
 
 <div id="resources">
-	<div class="resource">
-	  <div class="comment_thumbnail">
-			<% if @private_discussion.dragoon.avatar_file_name.blank? %>
-			  <%= image_tag("default-avatar.jpg") %>
-			<% else %>
-			  <%= image_tag @private_discussion.dragoon.avatar.url(:thumbnail) %><br />
-			<% end %>
-	  </div>
-	  <div class="comment_details">
-	    <p class="name_and_date">
-		    Posted by <%= link_to @private_discussion.dragoon.name, dragoon_path(@private_discussion.dragoon) %> <%= time_ago_in_words(@private_discussion.created_at) %> ago.
-		  </p>
-	    <div>
-	      <%= raw markdown_to_html @private_discussion.message %>
-	    </div>
-			<% if can? :manage, @private_discussion %>
-				<ul class="comment_administration">
-				  <li><%= link_to 'Edit Private Discussion', edit_private_discussion_path(@private_discussion) %></li>
-				  <li><%= link_to 'Delete Private Discussion', @private_discussion, :confirm => 'Are you sure you want to delete this private discussion? ALL comments belonging to this private discussion will be deleted.', :method => :delete %></li>
-				</ul>
-			<% end %>
-	  </div>
-	</div>
+  <div class="resource">
+    <div class="comment_thumbnail">
+      <% if @private_discussion.dragoon.avatar_file_name.blank? %>
+        <%= image_tag("default-avatar.jpg") %>
+      <% else %>
+        <%= image_tag @private_discussion.dragoon.avatar.url(:thumbnail) %><br />
+      <% end %>
+    </div>
+    <div class="comment_details">
+      <p class="name_and_date">
+        Posted by <%= link_to @private_discussion.dragoon.name, dragoon_path(@private_discussion.dragoon) %> <%= time_ago_in_words(@private_discussion.created_at) %> ago.
+      </p>
+      <div>
+        <%= raw markdown_to_html @private_discussion.message %>
+      </div>
+      <% if can? :manage, @private_discussion %>
+        <ul class="comment_administration">
+          <li><%= link_to 'Edit Private Discussion', edit_private_discussion_path(@private_discussion) %></li>
+          <li><%= link_to 'Delete Private Discussion', @private_discussion, :confirm => 'Are you sure you want to delete this private discussion? ALL comments belonging to this private discussion will be deleted.', :method => :delete %></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
   <%= render :partial => 'private_discussion_comments/comments' %>
 </div>
 

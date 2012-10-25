@@ -1,17 +1,17 @@
 <% unless @resources.empty? %>
   <div id="resources">
-		<% @resources.each do |resource| %>
-			<div class="resource">
-			  <div class="details">
-			    <h2><%= link_to resource.name, resource %></h2>
-			    <% unless resource.publish %>
-					  <p class="unpublished">Unpublished</p>
-					<% end %>
-			    <p><%= truncated_text resource.content %></p>
-		    </div>
-		  </div>
-		<% end %>
-	</div>
+    <% @resources.each do |resource| %>
+      <div class="resource">
+        <div class="details">
+          <h2><%= link_to resource.name, resource %></h2>
+          <% unless resource.publish %>
+            <p class="unpublished">Unpublished</p>
+          <% end %>
+          <p><%= truncated_text resource.content %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <%= paginate @resources %>

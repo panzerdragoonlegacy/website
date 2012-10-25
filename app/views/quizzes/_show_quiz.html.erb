@@ -1,15 +1,15 @@
 <%= form_tag quiz_path, :method => 'get' do %>
-	<ol>  
-	  <% for quiz_question in @quiz.quiz_questions %>  
-	  <li><%= quiz_question.content %></li>  
-	  <ul>  
-	    <% for quiz_answer in quiz_question.quiz_answers %>
-	      <li><%= radio_button_tag "results[" + quiz_question.id.to_s + "]", 
-	        quiz_answer.id.to_s, checked = chosen_answer(quiz_question, quiz_answer) %> 
-	        <%= quiz_answer.content %></li>
-	    <% end %>  
-	  </ul>  
-	  <% end %>  
-	</ol>
-	<%= submit_tag "View Your Score" %>
+  <ol>  
+    <% for quiz_question in @quiz.quiz_questions %>  
+    <li><%= quiz_question.content %></li>  
+    <ul>  
+      <% for quiz_answer in quiz_question.quiz_answers %>
+        <li><%= radio_button_tag "results[" + quiz_question.id.to_s + "]", 
+          quiz_answer.id.to_s, checked = chosen_answer(quiz_question, quiz_answer) %> 
+          <%= quiz_answer.content %></li>
+      <% end %>  
+    </ul>  
+    <% end %>  
+  </ol>
+  <%= submit_tag "View Your Score" %>
 <% end %>

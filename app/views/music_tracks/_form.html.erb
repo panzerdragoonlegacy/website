@@ -32,29 +32,29 @@
     <%= f.file_field :ogg_music_track %>  
   </p>
   <label>Contributors</label>
-	<div class="scroll_checkboxes">
+  <div class="scroll_checkboxes">
     <% for dragoon in Dragoon.order(:name) %>
       <label>
-  	    <%= check_box_tag "music_track[dragoon_ids][]", dragoon.id, @music_track.dragoons.include?(dragoon) %>  
-	      <%= dragoon.name %>
-	    </label>
-	    <br />
- 		<% end %>
+        <%= check_box_tag "music_track[dragoon_ids][]", dragoon.id, @music_track.dragoons.include?(dragoon) %>  
+        <%= dragoon.name %>
+      </label>
+      <br />
+    <% end %>
   </div>
   <label>Tags</label>
-	<div class="scroll_checkboxes">
-  	<% for tag in Tag.order(:name) %>
+  <div class="scroll_checkboxes">
+    <% for tag in Tag.order(:name) %>
       <label>
-  	    <%= check_box_tag "music_track[tag_ids][]", tag.id, @music_track.tags.include?(tag) %>  
-	      <%= tag.name %>
-	    </label>
-	    <br />
- 		<% end %>
+        <%= check_box_tag "music_track[tag_ids][]", tag.id, @music_track.tags.include?(tag) %>  
+        <%= tag.name %>
+      </label>
+      <br />
+    <% end %>
   </div>
   <p>
     <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
   </p>
-	<p>  
-	  <%= f.submit %>  
-	</p>
+  <p>  
+    <%= f.submit %>  
+  </p>
 <% end %>

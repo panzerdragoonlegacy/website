@@ -10,30 +10,30 @@
   </p>
   <%= f.fields_for :quiz_questions %>
   <p><%= f.link_to_add "Add Question", :quiz_questions %></p>
-	<label>Contributors</label>
-	<div class="scroll_checkboxes">
-	 	<% for dragoon in Dragoon.order(:name) %>
-	    <label>
-	 	    <%= check_box_tag "quiz[dragoon_ids][]", dragoon.id, @quiz.dragoons.include?(dragoon) %>  
-	      <%= dragoon.name %>
-	    </label>
-	    <br />
-		<% end %>
-	</div>
-  <label>Tags</label>
-	<div class="scroll_checkboxes">
-  	<% for tag in Tag.order(:name) %>
+  <label>Contributors</label>
+  <div class="scroll_checkboxes">
+    <% for dragoon in Dragoon.order(:name) %>
       <label>
-  	    <%= check_box_tag "quiz[tag_ids][]", tag.id, @quiz.tags.include?(tag) %>  
-	      <%= tag.name %>
-	    </label>
-	    <br />
- 		<% end %>
+        <%= check_box_tag "quiz[dragoon_ids][]", dragoon.id, @quiz.dragoons.include?(dragoon) %>  
+        <%= dragoon.name %>
+      </label>
+      <br />
+    <% end %>
+  </div>
+  <label>Tags</label>
+  <div class="scroll_checkboxes">
+    <% for tag in Tag.order(:name) %>
+      <label>
+        <%= check_box_tag "quiz[tag_ids][]", tag.id, @quiz.tags.include?(tag) %>  
+        <%= tag.name %>
+      </label>
+      <br />
+    <% end %>
   </div>
   <p>
     <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
   </p>
-	<p>  
-	  <%= f.submit "Submit" %>  
-	</p>
+  <p>  
+    <%= f.submit "Submit" %>  
+  </p>
 <% end %>

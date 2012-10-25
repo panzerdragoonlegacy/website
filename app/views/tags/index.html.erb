@@ -2,21 +2,21 @@
 
 <% if can? :manage, Tag %>
   <ul class="administration">
-	  <li><%= link_to 'New Tag', new_tag_path %></li>
-	</ul>
+    <li><%= link_to 'New Tag', new_tag_path %></li>
+  </ul>
 <% end %>
 
 <% unless @tags.empty? %>
   <div id="resources">
-		<% @tags.each do |tag| %>
-			<div class="resource">
-			  <div class="details">
-		  	  <h2><%= link_to tag.name, tag_path(tag) %></h2>
-			    <p><%= tag.description %></p>
-		    </div>
-		  </div>
-		<% end %>
-	</div>
+    <% @tags.each do |tag| %>
+      <div class="resource">
+        <div class="details">
+          <h2><%= link_to tag.name, tag_path(tag) %></h2>
+          <p><%= tag.description %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <%= paginate @tags %>

@@ -10,7 +10,7 @@
   </div>
   <div>
     <%= f.label :category_type, "Category Type" %><br />
- 	  <%= f.collection_select :category_type, Category::CATEGORY_TYPES, :to_s, :humanize %>
+    <%= f.collection_select :category_type, Category::CATEGORY_TYPES, :to_s, :humanize %>
   </div>
   <div>
     <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>

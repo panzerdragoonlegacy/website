@@ -10,13 +10,13 @@
   </div>
   <div>
     <label>Members</label>
-	  <div class="scroll_checkboxes">
-  	  <% for dragoon in Dragoon.order(:name) %>
+    <div class="scroll_checkboxes">
+      <% for dragoon in Dragoon.order(:name) %>
         <label>
-  	      <%= check_box_tag "project[dragoon_ids][]", dragoon.id, @project.dragoons.include?(dragoon) %> <%= dragoon.name %>
-	      </label>
-	      <br />
- 		  <% end %>
+          <%= check_box_tag "project[dragoon_ids][]", dragoon.id, @project.dragoons.include?(dragoon) %> <%= dragoon.name %>
+        </label>
+        <br />
+      <% end %>
     </div>
   </div>
   <div>  

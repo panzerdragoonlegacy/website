@@ -8,16 +8,16 @@
 
 <% unless params[:dragoon_id] %>
   <% unless @categories.empty? %>
-		<h2>Link Categories</h2>
-		<ul>
-			<% @categories.each do |category| %>
-			  <li><%= link_to category.name, category %><% unless category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-			<% end %>
-		</ul>
-	<% end %>
-	<% unless @links.empty? %>
-	  <h2>All Links</h2>
-	<% end %>
+    <h2>Link Categories</h2>
+    <ul>
+      <% @categories.each do |category| %>
+        <li><%= link_to category.name, category %><% unless category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% unless @links.empty? %>
+    <h2>All Links</h2>
+  <% end %>
 <% end %>
 
 <%= render 'list' %>

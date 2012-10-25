@@ -1,17 +1,17 @@
 <% unless @videos.empty? %>
   <div id="resources">
-		<% @videos.each do |video| %>
-			<div class="resource">
-			  <div class="details">
-		  	  <h2><%= link_to video.name, video %></h2>
-		      <% unless video.publish %>
-					  <p class="unpublished">Unpublished</p>
-					<% end %>
-			    <p><%= video.description %></p>
-			  </div>
-			</div>
-		<% end %>
-	</div>
+    <% @videos.each do |video| %>
+      <div class="resource">
+        <div class="details">
+          <h2><%= link_to video.name, video %></h2>
+          <% unless video.publish %>
+            <p class="unpublished">Unpublished</p>
+          <% end %>
+          <p><%= video.description %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <%= paginate @videos %>

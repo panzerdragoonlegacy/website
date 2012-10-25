@@ -10,29 +10,29 @@
 
 <% unless @news_entries.empty? %>
   <div id="resources">
-		<% @news_entries.each do |news_entry| %>
-			<div class="resource">
-				<div class="comment_thumbnail">
-					<% if news_entry.dragoon.avatar_file_name.blank? %>
-					  <%= image_tag("default-avatar.jpg") %>
-					<% else %>
-					  <%= image_tag news_entry.dragoon.avatar.url(:thumbnail) %><br />
-					<% end %>
-				</div>
-			  <div class="comment_details">
-			    <h2><%= link_to news_entry.name, news_entry %></h2>
-			    <p>Posted by <%= link_to news_entry.dragoon.name, news_entry.dragoon %>
-			      <% if news_entry.publish %>
-					    on <%= friendly_date news_entry.published_at %>.
-					  <% else %>
-  			      - <span class="unpublished">Unpublished</span>
-			      <% end %>
-			    </p>
-					<%= raw news_entry_markdown_to_html news_entry.content %>
-			  </div>
-			</div>
-		<% end %>
-	</div>
+    <% @news_entries.each do |news_entry| %>
+      <div class="resource">
+        <div class="comment_thumbnail">
+          <% if news_entry.dragoon.avatar_file_name.blank? %>
+            <%= image_tag("default-avatar.jpg") %>
+          <% else %>
+            <%= image_tag news_entry.dragoon.avatar.url(:thumbnail) %><br />
+          <% end %>
+        </div>
+        <div class="comment_details">
+          <h2><%= link_to news_entry.name, news_entry %></h2>
+          <p>Posted by <%= link_to news_entry.dragoon.name, news_entry.dragoon %>
+            <% if news_entry.publish %>
+              on <%= friendly_date news_entry.published_at %>.
+            <% else %>
+              - <span class="unpublished">Unpublished</span>
+            <% end %>
+          </p>
+          <%= raw news_entry_markdown_to_html news_entry.content %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <%= paginate @news_entries %>

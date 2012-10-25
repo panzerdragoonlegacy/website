@@ -18,37 +18,37 @@
     <%= f.text_area :information, :class => "data_entry" %>
   </p>
   <p>
-   	<%= f.label :picture, "Picture" %><br />
-	  <% if @picture.picture? %>
-	    <%= image_tag @picture.picture.url(:thumbnail) %><br />
-	    File has already been uploaded. Replace file?<br />
-	  <% end %>
-	  <%= f.file_field :picture %>
+    <%= f.label :picture, "Picture" %><br />
+    <% if @picture.picture? %>
+      <%= image_tag @picture.picture.url(:thumbnail) %><br />
+      File has already been uploaded. Replace file?<br />
+    <% end %>
+    <%= f.file_field :picture %>
   </p>
-	<label>Contributors</label>
-	<div class="scroll_checkboxes">
-	 	<% for dragoon in Dragoon.order(:name) %>
-	    <label>
-	 	    <%= check_box_tag "picture[dragoon_ids][]", dragoon.id, @picture.dragoons.include?(dragoon) %>  
-	      <%= dragoon.name %>
-	    </label>
-	    <br />
-		<% end %>
-	</div>
-  <label>Tags</label>
-	<div class="scroll_checkboxes">
-  	<% for tag in Tag.order(:name) %>
+  <label>Contributors</label>
+  <div class="scroll_checkboxes">
+    <% for dragoon in Dragoon.order(:name) %>
       <label>
-  	    <%= check_box_tag "picture[tag_ids][]", tag.id, @picture.tags.include?(tag) %>  
-	      <%= tag.name %>
-	    </label>
-	    <br />
- 		<% end %>
+        <%= check_box_tag "picture[dragoon_ids][]", dragoon.id, @picture.dragoons.include?(dragoon) %>  
+        <%= dragoon.name %>
+      </label>
+      <br />
+    <% end %>
+  </div>
+  <label>Tags</label>
+  <div class="scroll_checkboxes">
+    <% for tag in Tag.order(:name) %>
+      <label>
+        <%= check_box_tag "picture[tag_ids][]", tag.id, @picture.tags.include?(tag) %>  
+        <%= tag.name %>
+      </label>
+      <br />
+    <% end %>
   </div>
   <p>
     <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
   </p>
-	<p>
-	  <%= f.submit "Submit" %>
-	</p>
+  <p>
+    <%= f.submit "Submit" %>
+  </p>
 <% end %>

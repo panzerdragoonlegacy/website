@@ -1,29 +1,29 @@
 <% title @project_discussion.subject %>
 
 <div id="resources">
-	<div class="resource">
-	  <div class="comment_thumbnail">
-			<% if @project_discussion.dragoon.avatar_file_name.blank? %>
-			  <%= image_tag("default-avatar.jpg") %>
-			<% else %>
-			  <%= image_tag @project_discussion.dragoon.avatar.url(:thumbnail) %><br />
-			<% end %>
-	  </div>
-	  <div class="comment_details">
-	    <p class="name_and_date">
-		    Posted by <%= link_to @project_discussion.dragoon.name, dragoon_path(@project_discussion.dragoon) %> <%= time_ago_in_words(@project_discussion.created_at) %> ago.
-		  </p>
-	    <div>
-	      <%= raw markdown_to_html @project_discussion.message %>
-	    </div>
-			<% if can? :manage, @project_discussion %>
-				<ul class="comment_administration">
-				  <li><%= link_to 'Edit Project Discussion', edit_project_project_discussion_path(@project_discussion.project, @project_discussion) %></li>
-				  <li><%= link_to 'Delete Project Discussion', [@project_discussion.project, @project_discussion], :confirm => 'Are you sure you want to delete this discussion? ALL comments belonging to this discussion will be deleted.', :method => :delete %></li>
-				</ul>
-			<% end %>
-	  </div>
-	</div>
+  <div class="resource">
+    <div class="comment_thumbnail">
+      <% if @project_discussion.dragoon.avatar_file_name.blank? %>
+        <%= image_tag("default-avatar.jpg") %>
+      <% else %>
+        <%= image_tag @project_discussion.dragoon.avatar.url(:thumbnail) %><br />
+      <% end %>
+    </div>
+    <div class="comment_details">
+      <p class="name_and_date">
+        Posted by <%= link_to @project_discussion.dragoon.name, dragoon_path(@project_discussion.dragoon) %> <%= time_ago_in_words(@project_discussion.created_at) %> ago.
+      </p>
+      <div>
+        <%= raw markdown_to_html @project_discussion.message %>
+      </div>
+      <% if can? :manage, @project_discussion %>
+        <ul class="comment_administration">
+          <li><%= link_to 'Edit Project Discussion', edit_project_project_discussion_path(@project_discussion.project, @project_discussion) %></li>
+          <li><%= link_to 'Delete Project Discussion', [@project_discussion.project, @project_discussion], :confirm => 'Are you sure you want to delete this discussion? ALL comments belonging to this discussion will be deleted.', :method => :delete %></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
   <%= render :partial => 'project_discussion_comments/comments' %>
 </div>
 

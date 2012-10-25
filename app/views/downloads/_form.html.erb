@@ -14,35 +14,35 @@
   </p>
   <p>  
     <%= f.label :download, "Download" %><br />
-  	<% if @download.download? %>
-	    File has already been uploaded. Replace file?<br />
+    <% if @download.download? %>
+      File has already been uploaded. Replace file?<br />
     <% end %>
     <%= f.file_field :download %>  
   </p>
-	<label>Contributors</label>
-	<div class="scroll_checkboxes">
-	 	<% for dragoon in Dragoon.order(:name) %>
-	    <label>
-	 	    <%= check_box_tag "download[dragoon_ids][]", dragoon.id, @download.dragoons.include?(dragoon) %>  
-	      <%= dragoon.name %>
-	    </label>
-	    <br />
-		<% end %>
-	</div>
-  <label>Tags</label>
-	<div class="scroll_checkboxes">
-  	<% for tag in Tag.order(:name) %>
+  <label>Contributors</label>
+  <div class="scroll_checkboxes">
+    <% for dragoon in Dragoon.order(:name) %>
       <label>
-  	    <%= check_box_tag "download[tag_ids][]", tag.id, @download.tags.include?(tag) %>  
-	      <%= tag.name %>
-	    </label>
-	    <br />
- 		<% end %>
+        <%= check_box_tag "download[dragoon_ids][]", dragoon.id, @download.dragoons.include?(dragoon) %>  
+        <%= dragoon.name %>
+      </label>
+      <br />
+    <% end %>
+  </div>
+  <label>Tags</label>
+  <div class="scroll_checkboxes">
+    <% for tag in Tag.order(:name) %>
+      <label>
+        <%= check_box_tag "download[tag_ids][]", tag.id, @download.tags.include?(tag) %>  
+        <%= tag.name %>
+      </label>
+      <br />
+    <% end %>
   </div>
   <p>
     <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
   </p>
-	<p>  
-	  <%= f.submit "Submit" %>  
-	</p>
+  <p>  
+    <%= f.submit "Submit" %>  
+  </p>
 <% end %>

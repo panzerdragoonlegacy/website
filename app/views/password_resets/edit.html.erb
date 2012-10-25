@@ -4,14 +4,14 @@
 
 <% form_for @dragoon, :url => password_reset_path, :method => :put do |f| %>
   <%= render "shared/error_messages", :target => @dragoon %>
-	<div>  
-	  <%= f.label :password %><br />  
-	  <%= f.password_field :password %>  
-	</div>  
-	<div>  
-	  <%= f.label :password_confirmation %><br />
-	  <%= f.password_field :password_confirmation %>  
-	</div>
+  <div>  
+    <%= f.label :password %><br />  
+    <%= f.password_field :password %>  
+  </div>  
+  <div>  
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>  
+  </div>
   <div>
     <%= submit_tag "Update my password." %>
   </div>  
