@@ -1,0 +1,8 @@
+<p class="fields">  
+  <%= f.label :content, "Answer" %>  
+  <%= f.text_field :content %>
+  <%= f.label :correct, "Correct Answer?" %>
+  <%= f.radio_button :correct_answer, :true %> Yes
+  <%= f.radio_button :correct_answer, :false %> No
+  <%= f.link_to_remove "remove" %>
+</p>  

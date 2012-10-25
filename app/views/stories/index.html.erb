@@ -1,0 +1,23 @@
+<% title @title %>
+
+<% if can? :create, Story %>
+	<ul class="administration">
+	  <li><%= link_to 'New Story', new_story_path %></li>
+	</ul>
+<% end %>
+
+<% unless params[:dragoon_id] %>
+  <% unless @categories.empty? %>
+		<h2>Story Categories</h2>
+		<ul class="categories">
+		<% @categories.each do |category| %>
+		  <li><%= link_to category.name, category %><% unless category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+		<% end %>
+		</ul>
+	<% end %>
+	<% unless @stories.empty? %>
+  	<h2>All Stories</h2>
+  <% end %>
+<% end %>
+
+<%= render 'list' %>

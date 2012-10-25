@@ -1,0 +1,38 @@
+<% title @title %>
+
+<ul class="administration">
+  <li><%= link_to 'New Task', new_project_task_path(:project => @project) %></li>
+</ul>
+
+<% unless @project_tasks.empty? %>
+  <div id="resources">
+		<% @project_tasks.each do |project_task| %>
+		  <div class="resource">
+			  <div class="comment_thumbnail">
+					<% if project_task.dragoon.avatar_file_name.blank? %>
+					  <%= image_tag("default-avatar.jpg") %>
+					<% else %>
+					  <%= image_tag project_task.dragoon.avatar.url(:thumbnail) %><br />
+					<% end %>
+			  </div>
+			  <div class="comment_details">
+		  	  <p class="name_and_date"><%= project_task.name %></p>
+			    <p>
+				    Assigned to <%= link_to project_task.dragoon.name, dragoon_path(project_task.dragoon) %>.
+			    	<% if project_task.completed %>
+			        <span class="completed">Completed.</span>
+			      <% else %>
+			        <span class="incomplete">Incomplete.</span>
+			      <% end %>
+			      <%= link_to 'Edit Task.', edit_project_task_path(project_task) %>
+					  <%= link_to 'Delete Task.', project_task, :confirm => 'Are you sure you want to delete this task?', :method => :delete %>
+				  </p>
+			  </div>
+		  </div>
+		<% end %>
+	</div>
+<% end %>
+
+<%= paginate @project_tasks %>
+
+<p><%= link_to @project.name, project_path(@project) %></p>

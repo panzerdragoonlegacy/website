@@ -1,0 +1,25 @@
+<% title @title %>
+
+<% unless @dragoons.empty? %>
+  <div id="resources">
+		<% @dragoons.each do |dragoon| %>
+			<div class="resource">
+				<div class="comment_thumbnail">
+					<% if dragoon.avatar_file_name.blank? %>
+					  <%= image_tag("default-avatar.jpg") %>
+					<% else %>
+					  <%= image_tag dragoon.avatar.url(:thumbnail) %><br />
+					<% end %>
+				</div>
+			  <div class="comment_details">
+		      <h2><%= link_to dragoon.name, dragoon %></h2>
+		      <p><% unless dragoon.country.blank? %><%= dragoon.country %><% end %></p>
+		    </div>
+		  </div>
+		<% end %>
+	</div>
+<% end %>
+
+<%= paginate @dragoons %>
+
+<p><%= link_to @project.name, project_path(@project) %></p>

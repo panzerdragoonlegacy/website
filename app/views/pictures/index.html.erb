@@ -1,0 +1,23 @@
+<% title @title %>
+
+<% if can? :create, Picture %>
+	<ul class="administration">
+	  <li><%= link_to 'New Picture', new_picture_path %></li>
+	</ul>
+<% end %>
+
+<% unless params[:dragoon_id] %>
+  <% unless @categories.empty? %>
+		<h2>Picture Categories</h2>
+		<ul class="categories">
+		<% @categories.each do |category| %>
+		  <li><%= link_to category.name, category %><% unless category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+		<% end %>
+		</ul>
+	<% end %>
+	<% unless @pictures.empty? %>
+  	<h2>All Pictures</h2>
+  <% end %>
+<% end %>
+
+<%= render 'list' %>

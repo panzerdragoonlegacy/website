@@ -1,0 +1,58 @@
+<% title "Community" %>
+
+<h2>Forums</h2>
+
+<p>Posting on the new community forums will require you to <%= link_to "register a new account", register_path %>. Previous posts are accessible on the <%= link_to "old forums", "http://oldforums.thewilloftheancients.com" %> in a read-only state.</p>
+
+<% @discussion_categories.each do |discussion_category| %>
+  <div class="resource">
+	  <div class="details">
+  	  <h2><%= link_to discussion_category.name, discussion_category %></h2>
+	    <% unless discussion_category.publish == true %>
+	      <p class="unpublished">Unpublished</p>
+	    <% end %>
+	    <% if @current_dragoon %>
+        <% if @current_dragoon.views.count > 0 %>
+	      	<p class="unviewed">
+	  		    <% catch(:done) do %>
+			      	<% discussion_category.discussions.each do |discussion| %>
+			          <% if @current_dragoon.views.where(:viewable_id => discussion.id, :viewable_type => 'Discussion').count > 0 %>
+					      	<% unless @current_dragoon.views.where(:viewable_id => discussion.id, :viewable_type => 'Discussion').first.viewed %>
+						        <%= "New!" %>
+						        <% throw :done %>
+						      <% end %>
+						    <% end %>
+					      <% discussion.comments.each do |comment| %>
+					        <% if @current_dragoon.views.where(:viewable_id => comment.id, :viewable_type => 'Comment').count > 0 %>
+						        <% unless @current_dragoon.views.where(:viewable_id => comment.id, :viewable_type => 'Comment').first.viewed %>
+						          <%= "New!" %>
+						          <% throw :done %>
+						        <% end %>
+						      <% end %>
+					      <% end %>
+					    <% end %>
+					  <% end %>
+      	  </p>
+        <% end %>
+	    <% end %>
+	    <p><%= discussion_category.description %></p>
+	  </div>
+  </div>
+<% end %>
+
+<h2>Projects</h2>
+
+<% if can? :create, Project %>
+  <ul class="administration">
+    <li><%= link_to 'New Project', new_project_path %></li>
+  </ul>
+<% end %>
+
+<% @projects.each do |project| %>
+  <div class="resource">
+	  <div class="details">
+  	  <h2><%= link_to project.name, project %></h2>
+	    <p><%= project.description %></p>
+	  </div>
+  </div>
+<% end %>

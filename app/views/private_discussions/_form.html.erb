@@ -1,0 +1,27 @@
+<%= form_for @private_discussion do |f| %>  
+  <%= render "shared/error_messages", :target => @private_discussion %>
+  <div>
+    <%= f.label :subject, "Subject" %>
+    <%= f.text_field :subject %>  
+  </div>
+  <div>
+    <%= f.label :message, "Message" %>
+    <%= render 'shared/wysiwym_basic_buttons' %>
+    <%= render 'shared/emoticons' %>
+    <%= f.text_area :message, :class => "data_entry" %>
+  </div>
+  <div>
+    <label>Members</label>
+	  <div class="scroll_checkboxes">
+  	  <% for dragoon in Dragoon.order(:name).where("id != ?", @current_dragoon.id) %>
+        <label>
+  	      <%= check_box_tag "private_discussion[dragoon_ids][]", dragoon.id, @private_discussion.dragoons.include?(dragoon) %> <%= dragoon.name %>
+	      </label>
+	      <br />
+ 		  <% end %>
+    </div>
+  </div>
+  <div>  
+    <%= f.submit %>  
+  </div>
+<% end %>

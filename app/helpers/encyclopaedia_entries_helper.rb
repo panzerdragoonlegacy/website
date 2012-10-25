@@ -1,0 +1,2 @@
+module EncyclopaediaEntriesHelper
+end

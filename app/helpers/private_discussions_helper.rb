@@ -1,0 +1,2 @@
+module PrivateDiscussionsHelper
+end

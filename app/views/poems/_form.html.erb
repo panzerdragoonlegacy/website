@@ -1,0 +1,42 @@
+<%= form_for @poem do |f| %>  
+  <%= render "shared/error_messages", :target => @poem %>
+  <p>
+    <%= f.label :name, "Name" %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>  
+    <%= f.label :description, "Description" %><br />
+    <%= f.text_area :description, :rows => 3 %>  
+  </p>
+  <p>  
+    <%= f.label :content, "Content" %><br />
+    <%= render 'shared/wysiwym_basic_buttons' %>
+    <%= f.text_area :content, :class => "data_entry" %>  
+  </p>
+	<label>Contributors</label>
+	<div class="scroll_checkboxes">
+	 	<% for dragoon in Dragoon.order(:name) %>
+	    <label>
+	 	    <%= check_box_tag "poem[dragoon_ids][]", dragoon.id, @poem.dragoons.include?(dragoon) %>  
+	      <%= dragoon.name %>
+	    </label>
+	    <br />
+		<% end %>
+	</div>
+  <label>Tags</label>
+	<div class="scroll_checkboxes">
+  	<% for tag in Tag.order(:name) %>
+      <label>
+  	    <%= check_box_tag "poem[tag_ids][]", tag.id, @poem.tags.include?(tag) %>  
+	      <%= tag.name %>
+	    </label>
+	    <br />
+ 		<% end %>
+  </div>
+  <p>
+    <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
+  </p>
+  <p>  
+    <%= f.submit %>  
+  </p>
+<% end %>

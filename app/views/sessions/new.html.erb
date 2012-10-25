@@ -1,0 +1,20 @@
+<% title "Log In" %>  
+
+<%= form_tag sessions_path do %>  
+  <p>  
+    <%= label_tag :name_or_email_address %><br />  
+    <%= text_field_tag :name_or_email_address, params[:name_or_email_address] %>  
+  </p>
+  <p>  
+    <%= label_tag :password %><br />  
+    <%= password_field_tag :password %>  
+  </p>  
+  <p>
+	  <%= check_box_tag :stay_logged_in %> <%= label_tag :stay_logged_in, "Stay logged in?" %>
+	</p>
+  <p>
+    <%= submit_tag "Log In" %>
+  </p>  
+<% end %>
+
+<p>Forgotten your password? <%= link_to "Reset Password via email.", new_password_reset_path %></p>

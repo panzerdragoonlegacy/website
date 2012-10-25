@@ -1,0 +1,25 @@
+<%= form_for [@project, @project_discussion] do |f| %>  
+  <%= render "shared/error_messages", :target => @project_discussion %>
+	<div>
+	  <%= f.label :project_id, "Project" %><br />	
+    <%= f.collection_select :project_id, @projects, :id, :name, :include_blank => false %>
+  </div>
+  <div>
+    <%= f.label :subject, "Subject" %>
+    <%= f.text_field :subject %>  
+  </div>
+  <div>
+    <%= f.label :message, "Message" %>
+    <%= render 'shared/wysiwym_basic_buttons' %>
+    <%= render 'shared/emoticons' %>
+    <%= f.text_area :message, :class => "data_entry" %>
+  </div>
+  <% if can? :manage, Project %>
+	  <div>
+	    <%= f.check_box :sticky %> <%= f.label :sticky, "Sticky?" %>
+	  </div>
+	<% end %>
+  <div>  
+    <%= f.submit %>  
+  </div>
+<% end %>

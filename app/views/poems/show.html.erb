@@ -1,0 +1,32 @@
+<% title @poem.name %>
+
+<% unless @poem.publish %>
+  <p class="unpublished">Unpublished</p>
+<% end %>
+
+<% if can? :manage, @poem %>
+	<ul class="administration">
+	  <li><%= link_to 'Edit Poem', edit_poem_path(@poem) %></li>
+	  <li><%= link_to 'Delete Poem', @poem, :confirm => 'Are you sure you want to delete this poem?', :method => :delete %></li>
+	</ul>
+<% end %>
+
+<h2>Written By:</h2>
+<ul>
+  <% @poem.dragoons.each do |dragoon| %>
+	  <li><%= link_to dragoon.name, dragoon %></li>
+  <% end %>
+</ul>
+
+<%= raw markdown_to_html @poem.content %>
+
+<% if can? :manage, Tag %>
+	<h2>Tags:</h2>
+	<ul>
+		<% @poem.tags.each do |tag| %>
+		  <li><%= link_to tag.name, tag %></li>
+		<% end %>
+	</ul>
+<% end %>
+
+<p class="links"><%= link_to 'Poems', poems_path %></p>

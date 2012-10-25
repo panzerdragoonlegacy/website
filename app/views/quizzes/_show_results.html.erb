@@ -1,0 +1,21 @@
+<h3>Your Answers</h3>
+<ol>
+  <% for quiz_question in @quiz.quiz_questions %>
+    <li>
+      <dl>
+	      <dt><%= quiz_question.content %></dt>
+	      <% for quiz_answer in quiz_question.quiz_answers %>
+		      <% if chosen_answer(quiz_question, quiz_answer) %>
+            <dd>Your Answer: <%= quiz_answer.content %></dd>
+            <% if quiz_answer.correct_answer? %>
+              <dd>Correct!</dd>
+            <% else %>
+              <dd>Incorrect!</dd>
+            <% end %>	
+          <% end %>
+        <% end %>	
+	    <dl>
+    </li>
+  <% end %>
+</ol>
+<p>Your Score: <%= score.to_s + " out of " + @quiz.quiz_questions.count.to_s %></p>

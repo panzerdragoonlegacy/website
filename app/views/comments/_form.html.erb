@@ -1,0 +1,13 @@
+<%= form_for @comment do |f| %>
+  <div>
+	  <%= hidden_field_tag 'commentable_url', params["id"] %>
+	  <%= hidden_field_tag 'commentable_type', params["controller"].singularize %>
+    <%= f.label :message %><br />
+    <%= render 'shared/wysiwym_basic_buttons' %>
+    <%= render 'shared/emoticons' %>
+    <%= f.text_area :message, :class => "data_entry" %>
+  </div>
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>

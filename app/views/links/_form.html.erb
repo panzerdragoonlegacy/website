@@ -1,0 +1,42 @@
+<%= form_for @link do |f| %>  
+  <%= render "shared/error_messages", :target => @link %>    
+  <p>  
+    <%= f.label :category_id, "Category" %><br />
+    <%= f.collection_select :category_id, @categories, :id, :name, :include_blank => false %>
+  </p>
+  <p>
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name %>  
+  </p>
+  <p>
+    <%= f.label :url, "URL" %>
+    <%= f.text_field :url %>  
+  </p>
+  <p>
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description, :rows => 5 %>  
+  </p>
+	<label>Website Owners</label>
+	<div class="scroll_checkboxes">
+		<% for dragoon in Dragoon.order(:name) %>
+	    <label>
+		    <%= check_box_tag "link[dragoon_ids][]", dragoon.id, @link.dragoons.include?(dragoon) %>  
+	      <%= dragoon.name %>
+	   </label>
+	   <br />
+		<% end %>
+	</div>
+  <label>Tags</label>
+	<div class="scroll_checkboxes">
+  	<% for tag in Tag.order(:name) %>
+      <label>
+  	    <%= check_box_tag "link[tag_ids][]", tag.id, @link.tags.include?(tag) %>  
+	      <%= tag.name %>
+	    </label>
+	    <br />
+ 		<% end %>
+  </div>
+	<p>  
+	  <%= f.submit %>  
+	</p>
+<% end %>

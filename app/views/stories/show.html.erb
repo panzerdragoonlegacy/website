@@ -1,0 +1,54 @@
+<% title @story.name %>
+
+<% unless @story.publish %>
+  <p class="unpublished">Unpublished</p>
+<% end %>
+
+<% if can? :manage, @story %>
+	<ul class="administration">
+		<li><%= link_to 'Add Chapter', new_chapter_path(:story => @story) %>
+	  <li><%= link_to 'Edit Story', edit_story_path(@story) %></li>
+	  <li><%= link_to 'Delete Story', @story, :confirm => 'Are you sure you want to delete this story? ALL chapters belonging to this story will be deleted.', :method => :delete %></li>
+	</ul>
+<% end %>
+
+<h2>Written By:</h2>
+<ul>
+  <% @story.dragoons.each do |dragoon| %>
+	  <li><%= link_to dragoon.name, dragoon %></li>
+  <% end %>
+</ul>
+
+<%= raw illustrated_markdown_to_html @story.id, "Story", @story.content %>
+
+<% if @chapter_count > 0 %>
+	<h2>Table of Contents:</h2>
+	<ul>
+	<% @prologues.each do |prologue| %>
+  	<li><%= link_to prologue.name, chapter_path(prologue) %><% unless prologue.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+	<% end %>
+	<% @regular_chapters.each do |regular_chapter| %>
+    <li>
+		  <% unless regular_chapter.name.blank? %>
+		    <%= link_to "Chapter " + regular_chapter.number.to_s + ": " + regular_chapter.name, chapter_path(regular_chapter) %>
+		  <% else %>
+		    <%= link_to "Chapter " + regular_chapter.number.to_s, chapter_path(regular_chapter) %>
+		  <% end %>
+		<% unless regular_chapter.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+	<% end %>
+	<% @epilogues.each do |epilogue| %>   
+ 	  <li><%= link_to epilogue.name, chapter_path(epilogue) %><% unless epilogue.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+	<% end %>
+	</ul>
+<% end %>
+
+<% if can? :manage, Tag %>
+	<h2>Tags:</h2>
+	<ul>
+		<% @story.tags.each do |tag| %>
+		  <li><%= link_to tag.name, tag %></li>
+		<% end %>
+	</ul>
+<% end %>
+
+<p class="links"><%= link_to 'Stories', stories_path %> | <%= link_to @story.category.name, category_path(@story.category) %></p>

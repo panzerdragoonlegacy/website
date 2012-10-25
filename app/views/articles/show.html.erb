@@ -1,0 +1,34 @@
+<% title @article.name %>
+
+<% unless @article.publish %>
+  <p class="unpublished">Unpublished</p>
+<% end %>
+
+<% if can? :manage, @article %>
+	<ul class="administration">
+	  <li><%= link_to 'Edit Article', edit_article_path(@article) %></li>
+	  <li><%= link_to 'Delete Article', @article, :confirm => 'Are you sure you want to delete this article?', :method => :delete %></li>
+	</ul>
+<% end %>
+
+<h2>Written By:</h2>
+<ul>
+  <% @article.dragoons.each do |dragoon| %>
+	  <li><%= link_to dragoon.name, dragoon %></li>
+  <% end %>
+</ul>
+
+<p id="description"><%= @article.description %></p>
+
+<%= raw illustrated_markdown_to_html @article.id, "Article", @article.content %>
+
+<% if can? :manage, Tag %>
+	<h2>Tags:</h2>
+	<ul>
+		<% @article.tags.each do |tag| %>
+		  <li><%= link_to tag.name, tag %></li>
+		<% end %>
+	</ul>
+<% end %>
+
+<p class="links"><%= link_to 'Articles', articles_path %> | <%= link_to @article.category.name, category_path(@article.category) %></p>

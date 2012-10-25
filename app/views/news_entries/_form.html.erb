@@ -1,0 +1,24 @@
+<%= form_for @news_entry do |f| %>  
+  <%= render "shared/error_messages", :target => @news_entry %>
+  <div>
+    <%= f.label :name, "Name" %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div>  
+    <%= f.label :content, "Content" %><br />
+    <%= render 'shared/wysiwym_basic_buttons' %>
+    <%= render 'shared/emoticons' %>
+    <%= f.text_area :content, :class => "data_entry" %>  
+  </div>
+  <div>  
+    <%= f.label :status_update, "Status Update" %><br />
+    (This will be automatically posted to Twitter the first time that the news entry is published.)<br />
+    <%= f.text_area :status_update, :class => "status_update" %>  
+  </div>
+  <div>
+    <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %><br />
+  </div>
+  <div>
+    <%= f.submit %>  
+  </div>
+<% end %>

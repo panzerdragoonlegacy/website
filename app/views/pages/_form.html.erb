@@ -1,0 +1,35 @@
+<%= nested_form_for @page, :html => { :multipart => true } do |f| %>  
+  <%= render "shared/error_messages", :target => @page %>
+  <p>
+    <%= f.label :name, "Name" %><br />
+    <%= f.text_field :name %>
+  </p>
+	<p>  
+    <%= f.label :content, "Content" %><br />
+    <%= render 'shared/wysiwym_basic_buttons' %>
+    <%= render 'shared/wysiwym_advanced_buttons' %>
+    <%= f.text_area :content, :class => "data_entry" %>  
+  </p>
+	<div>
+		<label>Illustrations</label>
+	  <%= f.fields_for :illustrations do |illustration_form| %>
+	    <div class="illustration">
+	    <% if illustration_form.object.illustration_file_name.blank? %>
+	      <%= illustration_form.file_field :illustration %>
+	    <% else %>
+	      <%= illustration_form.hidden_field :illustration %>
+	      <%= image_tag(illustration_form.object.illustration.url) %><br />
+	      Filename: <%= illustration_form.object.illustration_file_name %> |
+	    <% end %>
+	    <%= illustration_form.link_to_remove "Remove illustration" %><br />
+	    </div>
+	  <% end %>
+		<p><%= f.link_to_add "Add illustration", :illustrations %></p>
+	</div>
+  <p>
+    <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
+  </p>
+  <p>  
+    <%= f.submit %>  
+  </p>
+<% end %>

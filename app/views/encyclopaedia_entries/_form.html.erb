@@ -1,0 +1,54 @@
+<%= nested_form_for @encyclopaedia_entry, :html => { :multipart => true } do |f| %>  
+  <%= render "shared/error_messages", :target => @encyclopaedia_entry %>    
+  <p>  
+    <%= f.label :category_id, "Category" %><br />
+    <%= f.collection_select :category_id, @categories, :id, :name, :include_blank => false %> 
+  </p>
+  <p>
+    <%= f.label :name, "Name" %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :encyclopaedia_entry_picture, "Encyclopaedia Entry Picture" %><br />
+    <% if @encyclopaedia_entry.encyclopaedia_entry_picture? %>
+    <%= image_tag @encyclopaedia_entry.encyclopaedia_entry_picture.url(:thumbnail) %><br />
+      File has already been uploaded. Replace file?<br />
+    <% end %>
+    <%= f.file_field :encyclopaedia_entry_picture %>  
+  </p>
+  <p>  
+    <%= f.label :information, "Information Box" %><br />
+    <%= f.text_area :information, :rows => 10 %>  
+  </p>
+  <p>  
+    <%= f.label :content, "Content" %><br />
+    <%= render 'shared/wysiwym_basic_buttons' %>
+    <%= render 'shared/wysiwym_advanced_buttons' %>
+    <%= f.text_area :content, :class => "data_entry" %>  
+  </p>
+	<div>
+		<label>Illustrations</label>
+	  <%= f.fields_for :illustrations do |illustration_form| %>
+	    <div class="illustration">
+	    <% if illustration_form.object.illustration_file_name.blank? %>
+	      <%= illustration_form.file_field :illustration %>
+	    <% else %>
+	      <%= illustration_form.hidden_field :illustration %>
+	      <%= image_tag illustration_form.object.illustration.url(:embedded) %><br />
+        <button class="insert_tag">Insert Tag</button><br />
+	      Filename: <%= illustration_form.object.illustration_file_name %><br />
+      	<%= link_to "Popover Image", illustration_form.object.illustration.url(:popover) %> |
+	      <%= link_to "Original Image", illustration_form.object.illustration.url %> |
+	    <% end %>
+	    <%= illustration_form.link_to_remove "Remove illustration" %><br />
+	    </div>
+	  <% end %>
+		<p><%= f.link_to_add "Add illustration", :illustrations %></p>
+	</div>
+  <p>
+   <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
+  </p>
+  <p>  
+    <%= f.submit "Submit" %>  
+  </p>
+<% end %>

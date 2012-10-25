@@ -1,0 +1,18 @@
+<% title "Change Password" %>
+
+<p>Hi, <%= @dragoon.name %>. Type in your desired password twice to reset it.</p>
+
+<% form_for @dragoon, :url => password_reset_path, :method => :put do |f| %>
+  <%= render "shared/error_messages", :target => @dragoon %>
+	<div>  
+	  <%= f.label :password %><br />  
+	  <%= f.password_field :password %>  
+	</div>  
+	<div>  
+	  <%= f.label :password_confirmation %><br />
+	  <%= f.password_field :password_confirmation %>  
+	</div>
+  <div>
+    <%= submit_tag "Update my password." %>
+  </div>  
+<% end %>
