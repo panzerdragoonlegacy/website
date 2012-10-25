@@ -1,15 +1,15 @@
 <%= nested_form_for @page, :html => { :multipart => true } do |f| %>  
   <%= render "shared/error_messages", :target => @page %>
-  <p>
+  <div>
     <%= f.label :name, "Name" %><br />
     <%= f.text_field :name %>
-  </p>
-  <p>  
+  </div>
+  <div>
     <%= f.label :content, "Content" %><br />
     <%= render 'shared/wysiwym_basic_buttons' %>
     <%= render 'shared/wysiwym_advanced_buttons' %>
     <%= f.text_area :content, :class => "data_entry" %>  
-  </p>
+  </div>
   <div>
     <label>Illustrations</label>
     <%= f.fields_for :illustrations do |illustration_form| %>
@@ -26,10 +26,10 @@
     <% end %>
     <p><%= f.link_to_add "Add illustration", :illustrations %></p>
   </div>
-  <p>
+  <div>
     <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
-  </p>
-  <p>  
+  </div>
+  <div>
     <%= f.submit %>  
-  </p>
+  </div>
 <% end %>

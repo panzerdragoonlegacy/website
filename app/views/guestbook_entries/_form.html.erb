@@ -1,46 +1,46 @@
 <%= form_for @guestbook_entry do |f| %>  
   <%= render "shared/error_messages", :target => @guestbook_entry %>
-  <p>
+  <div>
     <%= f.label :name, "Name" %><br />
     <%= f.text_field :name %>
-  </p>
-  <p>  
+  </div>
+  <div>
     <%= f.label :age, "Age" %><br />
     <%= f.text_field :age %>
-  </p>
-  <p>  
+  </div>
+  <div>
     <%= f.label :gender, "Gender" %><br />
     <%= f.text_field :gender %>
-  </p>
-  <p>  
+  </div>
+  <div>
     <%= f.label :country, "Country" %><br />
     <%= f.text_field :country %>
-  </p>
-  <p>  
+  </div>
+  <div>
     <%= f.label :favourite_games, "What are your favourite Panzer Dragoon games?" %><br />
     <%= f.text_area :favourite_games, :rows => 10 %>
-  </p>
-  <p>  
+  </div>
+  <div>
     <%= f.label :who_would_win, "Who would win in a fight, Atolm or the Grig Orig?" %><br />
     <%= f.text_area :who_would_win, :rows => 10 %>
-  </p>
-  <p>  
+  </div>
+  <div>
     <%= f.label :comments, "Do you have any other comments?" %><br />
     <%= render 'shared/wysiwym_basic_buttons' %>
     <%= f.text_area :comments, :class => "data_entry" %>
-  </p>
-  <p>  
+  </div>
+  <div>
     <%= f.label :email_address, "Email Address" %><br />
     <%= f.email_field :email_address %>
-  </p>
-  <p>  
+  </div>
+  <div>
     <%= f.label :website, "Website" %><br />
     <%= f.text_field :website %>
-  </p>
-  <p>
+  </div>
+  <div>
     <%= recaptcha_tags %>
-  </p>
-  <p>  
+  </div>
+  <div>
     <%= f.submit %>  
-  </p>
+  </div>
 <% end %>

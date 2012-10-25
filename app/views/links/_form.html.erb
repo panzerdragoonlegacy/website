@@ -1,21 +1,21 @@
 <%= form_for @link do |f| %>  
   <%= render "shared/error_messages", :target => @link %>    
-  <p>  
+  <div>
     <%= f.label :category_id, "Category" %><br />
     <%= f.collection_select :category_id, @categories, :id, :name, :include_blank => false %>
-  </p>
-  <p>
+  </div>
+  <div>
     <%= f.label :name, "Name" %>
     <%= f.text_field :name %>  
-  </p>
-  <p>
+  </div>
+  <div>
     <%= f.label :url, "URL" %>
     <%= f.text_field :url %>  
-  </p>
-  <p>
+  </div>
+  <div>
     <%= f.label :description, "Description" %>
     <%= f.text_area :description, :rows => 5 %>  
-  </p>
+  </div>
   <label>Website Owners</label>
   <div class="scroll_checkboxes">
     <% for dragoon in Dragoon.order(:name) %>
@@ -36,7 +36,7 @@
       <br />
     <% end %>
   </div>
-  <p>  
+  <div>
     <%= f.submit %>  
-  </p>
+  </div>
 <% end %>

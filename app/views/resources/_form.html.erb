@@ -1,6 +1,6 @@
 <%= nested_form_for @resource, :html => { :multipart => true } do |f| %>  
   <%= render "shared/error_messages", :target => @resource %>    
-  <div>  
+  <div>
     <%= f.label :category_id, "Category" %><br />
     <%= f.collection_select :category_id, @categories, :id, :name, :include_blank => false %> 
   </div>
@@ -8,7 +8,7 @@
     <%= f.label :name, "Name" %><br />
     <%= f.text_field :name %>
   </div>
-  <div>  
+  <div>
     <%= f.label :content, "Content" %><br />
     <%= render 'shared/wysiwym_basic_buttons' %>
     <%= render 'shared/wysiwym_advanced_buttons' %>
@@ -33,7 +33,7 @@
       </label>
       <br />
     <% end %>
-  </div>  
+  </div>
   <div>
     <label>Illustrations</label>
     <%= f.fields_for :illustrations do |illustration_form| %>
@@ -56,7 +56,7 @@
   <div>
     <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
   </div>
-  <div>  
+  <div>
     <%= f.submit %>  
   </div>
 <% end %>
