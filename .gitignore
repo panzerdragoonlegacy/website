@@ -3,6 +3,7 @@ log/*
 tmp/*
 .bundle
 config/database.yml
+config/deploy.rb
 config/initializers/recaptcha.rb
 config/initializers/secret_token.rb
 config/initializers/setup_mail.rb

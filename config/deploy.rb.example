@@ -1,0 +1,23 @@
+set :application, "APPLICATION_NAME"
+set :repository,  "REPOSITORY_NAME"
+
+set :scm, :git
+# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+
+set :deploy_to, "/home/chrisalley/webapps/thewilloftheancients2"
+
+role :web, "WEB_SERVER"                          # Your HTTP server, Apache/etc
+role :app, "APP_SERVER"                          # This may be the same as your `Web` server
+role :db,  "DATABASE_SERVER", :primary => true   # This is where Rails migrations will run
+
+set :user, "USERNAME"
+set :scm_username, "SCM_USERNAME"
+set :use_sudo, false
+default_run_options[:pty] = true
+
+namespace :deploy do
+  desc "Restart nginx"
+  task :restart do
+    run "#{deploy_to}/bin/restart"
+  end
+end
