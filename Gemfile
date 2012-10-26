@@ -27,7 +27,7 @@ gem 'rails_autolink'
 gem 'sanitize'
 gem 'nokogiri'
 gem 'jquery-rails'
-gem 'nested_form', :git => "git://github.com/jweslley/nested_form.git"
+gem 'nested_form'
 gem 'paperclip'
 gem 'mini_magick'
 gem 'kaminari'

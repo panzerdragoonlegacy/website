@@ -41,7 +41,6 @@
       <% if illustration_form.object.illustration_file_name.blank? %>
         <%= illustration_form.file_field :illustration %>
       <% else %>
-        <%= illustration_form.hidden_field :illustration %>
         <%= image_tag illustration_form.object.illustration.url(:embedded) %><br />
         <button class="insert_tag">Insert Tag</button><br />
         Filename: <%= illustration_form.object.illustration_file_name %><br />
