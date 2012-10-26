@@ -50,5 +50,6 @@ namespace :deploy do
   end
 end
 
+after "deploy", "deploy:cleanup" # Keeps only the last 5 releases
 after "deploy:setup", "deploy:setup_shared_directory"
 after "deploy:update_code", "deploy:symlink_extras"
