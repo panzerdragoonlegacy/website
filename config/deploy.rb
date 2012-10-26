@@ -1,22 +1,17 @@
 set :application, "thewilloftheancients"
 
-#set :scm, :none
-#set :repository, "."
-#set :deploy_via, :copy
-
 role :web, "web235.webfaction.com"                          # Your HTTP server, Apache/etc
 role :app, "web235.webfaction.com"                          # This may be the same as your `Web` server
 role :db,  "web235.webfaction.com", :primary => true        # This is where Rails migrations will run
 
 set :user, "chrisalley"
-set :deploy_to, "/home/chrisalley/webapps/twota4"
+set :deploy_to, "/home/chrisalley/webapps/thewilloftheancients"
 set :use_sudo, false
 default_run_options[:pty] = true
 
 set :scm, "git"
 set :repository,  "https://uriptical@github.com/uriptical/thewilloftheancients.git"
 set :branch, "master"
-#set :scm_username, "uriptical"
 
 namespace :deploy do
   desc "Restart nginx"
