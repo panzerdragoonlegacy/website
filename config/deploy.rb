@@ -5,7 +5,7 @@ role :app, "web235.webfaction.com"                          # This may be the sa
 role :db,  "web235.webfaction.com", :primary => true        # This is where Rails migrations will run
 
 set :user, "chrisalley"
-set :deploy_to, "/home/chrisalley/webapps/thewilloftheancients"
+set :deploy_to, "/home/chrisalley/webapps/twota"
 set :use_sudo, false
 default_run_options[:pty] = true
 
