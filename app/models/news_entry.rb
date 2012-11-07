@@ -23,7 +23,7 @@ class NewsEntry < ActiveRecord::Base
       
       # Create short URL of news entry using bitly:
       Bitly.use_api_version_3
-      bitly = Bitly.new('thewilloftheancients', 'R_288728cb3ec1866e2c1711e221e80574')
+      bitly = Bitly.new(APP_CONFIG['bitly']['username'], APP_CONFIG['bitly']['api_key'])
       u = bitly.shorten("http://www.thewilloftheancients.com/news/" + self.url)
       self.short_url = u.short_url
       
