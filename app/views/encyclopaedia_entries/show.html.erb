@@ -53,11 +53,11 @@
   <% end %>
   <% unless @encyclopaedia_entry.pictures.count == 0 %>  
     <h2>Related Pictures</h2>
-    <ul>
+    <div>     
       <% @encyclopaedia_entry.pictures.each do |picture| %>
-        <li><%= link_to picture.name, picture %></li>
+        <%= link_to image_tag(picture.picture.url(:mini_thumbnail)), picture %>
       <% end %>
-    </ul>
+    </div>
   <% end %>
   <% unless @encyclopaedia_entry.poems.count == 0 %>  
     <h2>Related Poems</h2>
