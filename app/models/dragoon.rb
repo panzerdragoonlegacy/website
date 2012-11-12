@@ -16,7 +16,7 @@ class Dragoon < ActiveRecord::Base
   before_create :set_default_administrator
 
   has_many :discussions, :dependent => :destroy
-  has_many :commments, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
   has_many :news_entries, :dependent => :destroy
   has_many :private_discussions, :dependent => :destroy
   has_many :private_discussion_comments, :dependent => :destroy
@@ -25,16 +25,16 @@ class Dragoon < ActiveRecord::Base
   has_many :views, :dependent => :destroy
   
   has_many :contributions, :dependent => :destroy
-  has_many :articles, :through => :contributions
-  has_many :downloads, :through => :contributions
-  has_many :links, :through => :contributions
-  has_many :music_tracks, :through => :contributions
-  has_many :pictures, :through => :contributions
-  has_many :poems, :through => :contributions
-  has_many :quizzes, :through => :contributions
-  has_many :resources, :through => :contributions
-  has_many :stories, :through => :contributions
-  has_many :videos, :through => :contributions
+  has_many :articles, :through => :contributions, :source => :contributable, :source_type => 'Article'
+  has_many :downloads, :through => :contributions, :source => :contributable, :source_type => 'Download'
+  has_many :links, :through => :contributions, :source => :contributable, :source_type => 'Link'
+  has_many :music_tracks, :through => :contributions, :source => :contributable, :source_type => 'MusicTrack'
+  has_many :pictures, :through => :contributions, :source => :contributable, :source_type => 'Picture'
+  has_many :poems, :through => :contributions, :source => :contributable, :source_type => 'Poem'
+  has_many :quizzes, :through => :contributions, :source => :contributable, :source_type => 'Quiz'
+  has_many :resources, :through => :contributions, :source => :contributable, :source_type => 'Resource'
+  has_many :stories, :through => :contributions, :source => :contributable, :source_type => 'Story'
+  has_many :videos, :through => :contributions, :source => :contributable, :source_type => 'Video'
   
   has_many :private_discussion_members, :dependent => :destroy
   has_many :private_discussions, :through => :private_discussion_members
