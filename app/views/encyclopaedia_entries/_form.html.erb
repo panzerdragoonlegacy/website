@@ -122,6 +122,17 @@
     </div>
   </div>
   <div>
+    <label>Related Resources</label>
+    <div class="scroll_checkboxes">
+      <% for resource in Resource.order(:name) %>
+        <label>
+          <%= check_box_tag "encyclopaedia_entry[resource_ids][]", resource.id, @encyclopaedia_entry.resources.include?(resource) %> <%= resource.name %>
+        </label>
+        <br />
+      <% end %>
+    </div>
+  </div>
+  <div>
     <label>Related Stories</label>
     <div class="scroll_checkboxes">
       <% for story in Story.order(:name) %>
