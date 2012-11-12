@@ -11,6 +11,8 @@ class Resource < ActiveRecord::Base
   belongs_to :category
   has_many :contributions, :as => :contributable, :dependent => :destroy
   has_many :dragoons, :through => :contributions
+  has_many :relations, :as => :relatable, :dependent => :destroy
+  has_many :encyclopaedia_entries, :through => :relations
   has_many :illustrations, :as => :illustratable, :dependent => :destroy
   accepts_nested_attributes_for :illustrations, :reject_if => lambda { |a| a[:illustration].blank? }, 
     :allow_destroy => true

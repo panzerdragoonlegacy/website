@@ -7,6 +7,9 @@ class EncyclopaediaEntriesController < ApplicationController
     @encyclopaedia_entries = EncyclopaediaEntry.accessible_by(current_ability).order(:name).page(params[:page]) 
   end
 
+  def show
+  end
+
   def create 
     @encyclopaedia_entry = EncyclopaediaEntry.new(params[:encyclopaedia_entry])
     if @encyclopaedia_entry.save

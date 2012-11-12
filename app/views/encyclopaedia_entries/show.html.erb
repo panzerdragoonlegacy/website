@@ -18,4 +18,87 @@
 
 <%= raw illustrated_markdown_to_html @encyclopaedia_entry.id, "EncyclopaediaEntry", @encyclopaedia_entry.content %>
 
+<% if can? :manage, @encyclopaedia_entry %>
+  <% unless @encyclopaedia_entry.articles.count == 0 %>  
+    <h2>Related Articles</h2>
+    <ul>
+      <% @encyclopaedia_entry.articles.each do |article| %>
+        <li><%= link_to article.name, article %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% unless @encyclopaedia_entry.downloads.count == 0 %>  
+    <h2>Related Downloads</h2>
+    <ul>
+      <% @encyclopaedia_entry.downloads.each do |download| %>
+        <li><%= link_to download.name, download %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% unless @encyclopaedia_entry.links.count == 0 %>  
+    <h2>Related Links</h2>
+    <ul>
+      <% @encyclopaedia_entry.links.each do |link| %>
+        <li><%= link_to link.name, link %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% unless @encyclopaedia_entry.music_tracks.count == 0 %>  
+    <h2>Related Music</h2>
+    <ul>
+      <% @encyclopaedia_entry.music_tracks.each do |music_track| %>
+        <li><%= link_to music_track.name, music_track %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% unless @encyclopaedia_entry.pictures.count == 0 %>  
+    <h2>Related Pictures</h2>
+    <ul>
+      <% @encyclopaedia_entry.pictures.each do |picture| %>
+        <li><%= link_to picture.name, picture %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% unless @encyclopaedia_entry.poems.count == 0 %>  
+    <h2>Related Poems</h2>
+    <ul>
+      <% @encyclopaedia_entry.poems.each do |poem| %>
+        <li><%= link_to poem.name, poem %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% unless @encyclopaedia_entry.quizzes.count == 0 %>  
+    <h2>Related Quizzes</h2>
+    <ul>
+      <% @encyclopaedia_entry.quizzes.each do |quiz| %>
+        <li><%= link_to quiz.name, quiz %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% unless @encyclopaedia_entry.resources.count == 0 %>  
+    <h2>Related Resources</h2>
+    <ul>
+      <% @encyclopaedia_entry.resources.each do |resource| %>
+        <li><%= link_to resource.name, resource %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% unless @encyclopaedia_entry.stories.count == 0 %>  
+    <h2>Related Stories</h2>
+    <ul>
+      <% @encyclopaedia_entry.stories.each do |story| %>
+        <li><%= link_to story.name, story %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% unless @encyclopaedia_entry.videos.count == 0 %>  
+    <h2>Related Videos</h2>
+    <ul>
+      <% @encyclopaedia_entry.videos.each do |video| %>
+        <li><%= link_to video.name, video %></li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
+
 <p class="links"><%= link_to 'Encyclopaedia',  encyclopaedia_entries_path %> | <%= link_to @encyclopaedia_entry.category.name, category_path(@encyclopaedia_entry.category) %></p>

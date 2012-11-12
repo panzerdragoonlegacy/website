@@ -45,6 +45,105 @@
     <p><%= f.link_to_add "Add illustration", :illustrations %></p>
   </div>
   <div>
+    <label>Related Articles</label>
+    <div class="scroll_checkboxes">
+      <% for article in Article.order(:name) %>
+        <label>
+          <%= check_box_tag "encyclopaedia_entry[article_ids][]", article.id, @encyclopaedia_entry.articles.include?(article) %> <%= article.name %>
+        </label>
+        <br />
+      <% end %>
+    </div>
+  </div>  
+  <div>
+    <label>Related Downloads</label>
+    <div class="scroll_checkboxes">
+      <% for download in Download.order(:name) %>
+        <label>
+          <%= check_box_tag "encyclopaedia_entry[download_ids][]", download.id, @encyclopaedia_entry.downloads.include?(download) %> <%= download.name %>
+        </label>
+        <br />
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <label>Related Links</label>
+    <div class="scroll_checkboxes">
+      <% for link in Link.order(:name) %>
+        <label>
+          <%= check_box_tag "encyclopaedia_entry[link_ids][]", link.id, @encyclopaedia_entry.links.include?(link) %> <%= link.name %>
+        </label>
+        <br />
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <label>Related Music</label>
+    <div class="scroll_checkboxes">
+      <% for music_track in MusicTrack.order(:name) %>
+        <label>
+          <%= check_box_tag "encyclopaedia_entry[music_track_ids][]", music_track.id, @encyclopaedia_entry.music_tracks.include?(music_track) %> <%= music_track.name %>
+        </label>
+        <br />
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <label>Related Pictures</label>
+    <div class="scroll_checkboxes">
+      <% for picture in Picture.order(:name) %>
+        <label>
+          <%= check_box_tag "encyclopaedia_entry[picture_ids][]", picture.id, @encyclopaedia_entry.pictures.include?(picture) %> <%= picture.name %>
+        </label>
+        <br />
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <label>Related Poems</label>
+    <div class="scroll_checkboxes">
+      <% for poem in Poem.order(:name) %>
+        <label>
+          <%= check_box_tag "encyclopaedia_entry[poem_ids][]", poem.id, @encyclopaedia_entry.poems.include?(poem) %> <%= poem.name %>
+        </label>
+        <br />
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <label>Related Quizzes</label>
+    <div class="scroll_checkboxes">
+      <% for quiz in Quiz.order(:name) %>
+        <label>
+          <%= check_box_tag "encyclopaedia_entry[quiz_ids][]", quiz.id, @encyclopaedia_entry.quizzes.include?(quiz) %> <%= quiz.name %>
+        </label>
+        <br />
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <label>Related Stories</label>
+    <div class="scroll_checkboxes">
+      <% for story in Story.order(:name) %>
+        <label>
+          <%= check_box_tag "encyclopaedia_entry[story_ids][]", story.id, @encyclopaedia_entry.stories.include?(story) %> <%= story.name %>
+        </label>
+        <br />
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <label>Related Videos</label>
+    <div class="scroll_checkboxes">
+      <% for video in Video.order(:name) %>
+        <label>
+          <%= check_box_tag "encyclopaedia_entry[video_ids][]", video.id, @encyclopaedia_entry.videos.include?(video) %> <%= video.name %>
+        </label>
+        <br />
+      <% end %>
+    </div>
+  </div>
+  <div>
     <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
   </div>
   <div>
