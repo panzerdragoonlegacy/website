@@ -21,6 +21,17 @@
     <% end %>
   </div>
   <div>
+    <label>Related Encyclopaedia Entries</label>
+    <div class="scroll_checkboxes">
+      <% for encyclopaedia_entry in EncyclopaediaEntry.order(:name) %>
+        <label>
+          <%= check_box_tag "quiz[encyclopaedia_entry_ids][]", encyclopaedia_entry.id, @quiz.encyclopaedia_entries.include?(encyclopaedia_entry) %> <%= encyclopaedia_entry.name %>
+        </label>
+        <br />
+      <% end %>
+    </div>
+  </div>
+  <div>
     <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
   </div>
   <div>

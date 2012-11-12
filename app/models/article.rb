@@ -5,7 +5,7 @@ class Article < ActiveRecord::Base
     url 
   end
   
-  attr_accessible :category_id, :name, :description, :content, :publish, :dragoon_ids,
+  attr_accessible :category_id, :name, :description, :content, :publish, :dragoon_ids, :encyclopaedia_entry_ids,
     :illustrations_attributes
   
   belongs_to :category
