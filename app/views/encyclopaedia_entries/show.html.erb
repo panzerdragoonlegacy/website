@@ -19,83 +19,83 @@
 <%= raw illustrated_markdown_to_html @encyclopaedia_entry.id, "EncyclopaediaEntry", @encyclopaedia_entry.content %>
 
 <% if can? :manage, @encyclopaedia_entry %>
-  <% unless @encyclopaedia_entry.articles.count == 0 %>  
+  <% unless @articles.count == 0 %>  
     <h2>Related Articles</h2>
     <ul>
-      <% @encyclopaedia_entry.articles.each do |article| %>
-        <li><%= link_to article.name, article %></li>
+      <% @articles.each do |article| %>
+        <li><%= link_to article.name, article %><% unless article.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
       <% end %>
     </ul>
   <% end %>
-  <% unless @encyclopaedia_entry.downloads.count == 0 %>  
+  <% unless @downloads.count == 0 %>  
     <h2>Related Downloads</h2>
     <ul>
-      <% @encyclopaedia_entry.downloads.each do |download| %>
-        <li><%= link_to download.name, download %></li>
+      <% @downloads.each do |download| %>
+        <li><%= link_to download.name, download %><% unless download.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
       <% end %>
     </ul>
   <% end %>
-  <% unless @encyclopaedia_entry.links.count == 0 %>  
+  <% unless @links.count == 0 %>  
     <h2>Related Links</h2>
     <ul>
-      <% @encyclopaedia_entry.links.each do |link| %>
-        <li><%= link_to link.name, link %></li>
+      <% @links.each do |link| %>
+        <li><%= link_to link.name, link %><% unless link.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
       <% end %>
     </ul>
   <% end %>
-  <% unless @encyclopaedia_entry.music_tracks.count == 0 %>  
+  <% unless @music_tracks.count == 0 %>  
     <h2>Related Music</h2>
     <ul>
-      <% @encyclopaedia_entry.music_tracks.each do |music_track| %>
-        <li><%= link_to music_track.name, music_track %></li>
+      <% @music_tracks.each do |music_track| %>
+        <li><%= link_to music_track.name, music_track %><% unless music_track.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
       <% end %>
     </ul>
   <% end %>
-  <% unless @encyclopaedia_entry.pictures.count == 0 %>  
+  <% unless @pictures.count == 0 %>  
     <h2>Related Pictures</h2>
     <div>     
-      <% @encyclopaedia_entry.pictures.each do |picture| %>
-        <%= link_to image_tag(picture.picture.url(:mini_thumbnail)), picture %>
+      <% @pictures.each do |picture| %>
+        <%= link_to image_tag(picture.picture.url(:mini_thumbnail)), picture %><% unless picture.publish %> - <span class="unpublished">Unpublished</span><% end %>
       <% end %>
     </div>
   <% end %>
-  <% unless @encyclopaedia_entry.poems.count == 0 %>  
+  <% unless @poems.count == 0 %>  
     <h2>Related Poems</h2>
     <ul>
-      <% @encyclopaedia_entry.poems.each do |poem| %>
-        <li><%= link_to poem.name, poem %></li>
+      <% @poems.each do |poem| %>
+        <li><%= link_to poem.name, poem %><% unless poem.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
       <% end %>
     </ul>
   <% end %>
-  <% unless @encyclopaedia_entry.quizzes.count == 0 %>  
+  <% unless @quizzes.count == 0 %>  
     <h2>Related Quizzes</h2>
     <ul>
-      <% @encyclopaedia_entry.quizzes.each do |quiz| %>
-        <li><%= link_to quiz.name, quiz %></li>
+      <% @quizzes.each do |quiz| %>
+        <li><%= link_to quiz.name, quiz %><% unless quiz.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
       <% end %>
     </ul>
   <% end %>
-  <% unless @encyclopaedia_entry.resources.count == 0 %>  
+  <% unless @resources.count == 0 %>  
     <h2>Related Resources</h2>
     <ul>
-      <% @encyclopaedia_entry.resources.each do |resource| %>
-        <li><%= link_to resource.name, resource %></li>
+      <% @resources.each do |resource| %>
+        <li><%= link_to resource.name, resource %><% unless resource.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
       <% end %>
     </ul>
   <% end %>
-  <% unless @encyclopaedia_entry.stories.count == 0 %>  
+  <% unless @stories.count == 0 %>  
     <h2>Related Stories</h2>
     <ul>
-      <% @encyclopaedia_entry.stories.each do |story| %>
-        <li><%= link_to story.name, story %></li>
+      <% @stories.each do |story| %>
+        <li><%= link_to story.name, story %><% unless story.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
       <% end %>
     </ul>
   <% end %>
-  <% unless @encyclopaedia_entry.videos.count == 0 %>  
+  <% unless @videos.count == 0 %>  
     <h2>Related Videos</h2>
     <ul>
-      <% @encyclopaedia_entry.videos.each do |video| %>
-        <li><%= link_to video.name, video %></li>
+      <% @videos.each do |video| %>
+        <li><%= link_to video.name, video %><% unless video.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
       <% end %>
     </ul>
   <% end %>

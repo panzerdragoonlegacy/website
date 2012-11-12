@@ -11,16 +11,16 @@ class EncyclopaediaEntry < ActiveRecord::Base
     :allow_destroy => true
 
   has_many :relations, :dependent => :destroy
-  has_many :articles, :through => :relations, :source => :relatable, :source_type => 'Article', :order => :name
-  has_many :downloads, :through => :relations, :source => :relatable, :source_type => 'Download', :order => :name
-  has_many :links, :through => :relations, :source => :relatable, :source_type => 'Link', :order => :name
-  has_many :music_tracks, :through => :relations, :source => :relatable, :source_type => 'MusicTrack', :order => :name
-  has_many :pictures, :through => :relations, :source => :relatable, :source_type => 'Picture', :order => :name
-  has_many :poems, :through => :relations, :source => :relatable, :source_type => 'Poem', :order => :name
-  has_many :quizzes, :through => :relations, :source => :relatable, :source_type => 'Quiz', :order => :name
-  has_many :resources, :through => :relations, :source => :relatable, :source_type => 'Resource', :order => :name
-  has_many :stories, :through => :relations, :source => :relatable, :source_type => 'Story', :order => :name
-  has_many :videos, :through => :relations, :source => :relatable, :source_type => 'Video', :order => :name
+  has_many :articles, :through => :relations, :source => :relatable, :source_type => 'Article'
+  has_many :downloads, :through => :relations, :source => :relatable, :source_type => 'Download'
+  has_many :links, :through => :relations, :source => :relatable, :source_type => 'Link'
+  has_many :music_tracks, :through => :relations, :source => :relatable, :source_type => 'MusicTrack'
+  has_many :pictures, :through => :relations, :source => :relatable, :source_type => 'Picture'
+  has_many :poems, :through => :relations, :source => :relatable, :source_type => 'Poem'
+  has_many :quizzes, :through => :relations, :source => :relatable, :source_type => 'Quiz'
+  has_many :resources, :through => :relations, :source => :relatable, :source_type => 'Resource'
+  has_many :stories, :through => :relations, :source => :relatable, :source_type => 'Story'
+  has_many :videos, :through => :relations, :source => :relatable, :source_type => 'Video'
   
   validates :name, :presence => true, :length => { :in => 2..100 }, :uniqueness => true
   validates :encyclopaedia_entry_picture, :presence => true

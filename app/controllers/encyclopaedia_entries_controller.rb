@@ -8,6 +8,16 @@ class EncyclopaediaEntriesController < ApplicationController
   end
 
   def show
+    @articles = @encyclopaedia_entry.articles.accessible_by(current_ability).order(:name)
+    @downloads = @encyclopaedia_entry.downloads.accessible_by(current_ability).order(:name)
+    @links = @encyclopaedia_entry.links.accessible_by(current_ability).order(:name)
+    @music_tracks = @encyclopaedia_entry.music_tracks.accessible_by(current_ability).order(:name)
+    @pictures = @encyclopaedia_entry.pictures.accessible_by(current_ability).order(:name)
+    @poems = @encyclopaedia_entry.poems.accessible_by(current_ability).order(:name)
+    @quizzes = @encyclopaedia_entry.quizzes.accessible_by(current_ability).order(:name)
+    @resources = @encyclopaedia_entry.resources.accessible_by(current_ability).order(:name)
+    @stories = @encyclopaedia_entry.stories.accessible_by(current_ability).order(:name)
+    @videos = @encyclopaedia_entry.videos.accessible_by(current_ability).order(:name)
   end
 
   def create 
@@ -36,5 +46,5 @@ private
 
   def categories
     @categories = Category.accessible_by(current_ability).where(:category_type => :encyclopaedia_entry).order(:name)
-  end  
+  end
 end
