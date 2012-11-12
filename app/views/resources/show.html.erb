@@ -20,13 +20,4 @@
 
 <%= raw illustrated_markdown_to_html @resource.id, "Resource", @resource.content %>
 
-<% if can? :manage, Tag %>
-  <h2>Tags:</h2>
-  <ul>
-    <% @resource.tags.each do |tag| %>
-      <li><%= link_to tag.name, tag %></li>
-    <% end %>
-  </ul>
-<% end %>
-
 <p class="links"><%= link_to 'Resources', resources_path %> | <%= link_to @resource.category.name, category_path(@resource.category) %></p>

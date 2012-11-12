@@ -30,17 +30,6 @@
     </div>
   </div>
   <div>
-    <label>Tags</label>
-    <div class="scroll_checkboxes">
-      <% for tag in Tag.order(:name) %>
-        <label>
-          <%= check_box_tag "article[tag_ids][]", tag.id, @article.tags.include?(tag) %> <%= tag.name %>
-        </label>
-        <br />
-      <% end %>
-    </div>
-  </div>
-  <div>
     <label>Illustrations</label>
     <%= f.fields_for :illustrations do |illustration_form| %>
       <div class="illustration">

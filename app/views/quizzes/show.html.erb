@@ -24,13 +24,4 @@
   <%= render 'show_quiz' %>
 <% end %>
 
-<% if can? :manage, Tag %>
-  <h2>Tags:</h2>
-  <ul>
-    <% @quiz.tags.each do |tag| %>
-      <li><%= link_to tag.name, tag %></li>
-    <% end %>
-  </ul>
-<% end %>
-
 <p class="links"><%= link_to 'Quizzes', quizzes_path %></p>

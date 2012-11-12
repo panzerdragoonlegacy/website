@@ -32,13 +32,4 @@
 
 <p>Download Video: <%= link_to "MP4", @video.mp4_video.url %> | <%= link_to "WebM", @video.webm_video.url %></p>
 
-<% if can? :manage, Tag %>
-  <h2>Tags:</h2>
-  <ul>
-    <% @video.tags.each do |tag| %>
-      <li><%= link_to tag.name, tag %></li>
-    <% end %>
-  </ul>
-<% end %>
-
 <p class="links"><%= link_to 'Videos', videos_path %> | <%= link_to @video.category.name, category_path(@video.category) %></p>

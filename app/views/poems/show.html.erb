@@ -20,13 +20,4 @@
 
 <%= raw markdown_to_html @poem.content %>
 
-<% if can? :manage, Tag %>
-  <h2>Tags:</h2>
-  <ul>
-    <% @poem.tags.each do |tag| %>
-      <li><%= link_to tag.name, tag %></li>
-    <% end %>
-  </ul>
-<% end %>
-
 <p class="links"><%= link_to 'Poems', poems_path %></p>

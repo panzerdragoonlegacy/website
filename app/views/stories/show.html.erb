@@ -42,13 +42,4 @@
   </ul>
 <% end %>
 
-<% if can? :manage, Tag %>
-  <h2>Tags:</h2>
-  <ul>
-    <% @story.tags.each do |tag| %>
-      <li><%= link_to tag.name, tag %></li>
-    <% end %>
-  </ul>
-<% end %>
-
 <p class="links"><%= link_to 'Stories', stories_path %> | <%= link_to @story.category.name, category_path(@story.category) %></p>

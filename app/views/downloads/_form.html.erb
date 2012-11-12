@@ -29,16 +29,6 @@
       <br />
     <% end %>
   </div>
-  <label>Tags</label>
-  <div class="scroll_checkboxes">
-    <% for tag in Tag.order(:name) %>
-      <label>
-        <%= check_box_tag "download[tag_ids][]", tag.id, @download.tags.include?(tag) %>  
-        <%= tag.name %>
-      </label>
-      <br />
-    <% end %>
-  </div>
   <div>
     <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
   </div>

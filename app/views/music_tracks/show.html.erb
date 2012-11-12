@@ -32,13 +32,4 @@
 
 <p>Download Music Track: <%= link_to "MP3", @music_track.mp3_music_track.url %> | <%= link_to "Ogg Vorbis", @music_track.ogg_music_track.url %></p>
 
-<% if can? :manage, Tag %>
-  <h2>Tags:</h2>
-  <ul>
-    <% @music_track.tags.each do |tag| %>
-      <li><%= link_to tag.name, tag %></li>
-    <% end %>
-  </ul>
-<% end %>
-
 <p class="links"><%= link_to 'Music', music_tracks_path %> | <%= link_to @music_track.category.name, category_path(@music_track.category) %></p>

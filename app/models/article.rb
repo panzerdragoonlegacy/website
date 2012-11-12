@@ -5,14 +5,12 @@ class Article < ActiveRecord::Base
     url 
   end
   
-  attr_accessible :category_id, :name, :description, :content, :publish, :dragoon_ids, :tag_ids, 
+  attr_accessible :category_id, :name, :description, :content, :publish, :dragoon_ids,
     :illustrations_attributes
   
   belongs_to :category
   has_many :contributions, :as => :contributable, :dependent => :destroy
   has_many :dragoons, :through => :contributions
-  has_many :taggings, :as => :taggable, :dependent => :destroy
-  has_many :tags, :through => :taggings
   has_many :illustrations, :as => :illustratable, :dependent => :destroy
   accepts_nested_attributes_for :illustrations, :reject_if => lambda { |a| a[:illustration].blank? }, 
     :allow_destroy => true

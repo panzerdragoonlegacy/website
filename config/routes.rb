@@ -22,7 +22,6 @@ TheWillOfTheAncients::Application.routes.draw do
   end
   resources :sessions
   resources :password_resets, :path => 'password-resets'
-  resources :tags
   resources :categories
   resources :forums
   resources :discussions

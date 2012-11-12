@@ -103,9 +103,6 @@
 							<% if can? :manage, Project %>
 							  <li><%= link_to "Projects", projects_path %></li>
 							<% end %>
-							<% if can? :manage, Tag %>
-							  <li><%= link_to "Tags", tags_path %></li>
-							<% end %>
 						</ul>
 					<% end %>
 		    </div>

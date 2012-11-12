@@ -18,16 +18,6 @@
               <% end %>
             </ul>
           <% end %>
-          <% if can? :manage, Tag %>
-            <% if link.tags.count > 0 %>  
-              <h3>Tags:</h3>
-              <ul>
-                <% link.tags.each do |tag| %>
-                  <li><%= link_to tag.name, tag %></li>
-                <% end %>
-              </ul>
-            <% end %>
-          <% end %>
           <p><%= link.description %></p>
         </div>
       </div>

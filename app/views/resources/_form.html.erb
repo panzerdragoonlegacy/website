@@ -24,16 +24,6 @@
       <br />
     <% end %>
   </div>
-  <label>Tags</label>
-  <div class="scroll_checkboxes">
-    <% for tag in Tag.order(:name) %>
-      <label>
-        <%= check_box_tag "resource[tag_ids][]", tag.id, @resource.tags.include?(tag) %>  
-        <%= tag.name %>
-      </label>
-      <br />
-    <% end %>
-  </div>
   <div>
     <label>Illustrations</label>
     <%= f.fields_for :illustrations do |illustration_form| %>

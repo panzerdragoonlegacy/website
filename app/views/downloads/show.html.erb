@@ -22,13 +22,4 @@
 
 <%= link_to "Download File", @download.download.url %>
 
-<% if can? :manage, Tag %>
-  <h2>Tags:</h2>
-  <ul>
-    <% @download.tags.each do |tag| %>
-      <li><%= link_to tag.name, tag %></li>
-    <% end %>
-  </ul>
-<% end %>
-
 <p class="links"><%= link_to 'Downloads', downloads_path %> | <%= link_to @download.category.name, category_path(@download.category) %></p>
