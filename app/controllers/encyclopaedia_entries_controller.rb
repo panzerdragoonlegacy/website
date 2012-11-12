@@ -30,6 +30,16 @@ class EncyclopaediaEntriesController < ApplicationController
   end
 
   def update
+    params[:encyclopaedia_entry][:article_ids] ||= []
+    params[:encyclopaedia_entry][:download_ids] ||= []
+    params[:encyclopaedia_entry][:link_ids] ||= []
+    params[:encyclopaedia_entry][:music_track_ids] ||= []
+    params[:encyclopaedia_entry][:picture_ids] ||= []
+    params[:encyclopaedia_entry][:poem_ids] ||= []
+    params[:encyclopaedia_entry][:quiz_ids] ||= []
+    params[:encyclopaedia_entry][:resource_ids] ||= []
+    params[:encyclopaedia_entry][:story_ids] ||= []
+    params[:encyclopaedia_entry][:video_ids] ||= []
     if @encyclopaedia_entry.update_attributes(params[:encyclopaedia_entry])
       redirect_to @encyclopaedia_entry, :notice => "Successfully updated encyclopaedia entry."
     else
