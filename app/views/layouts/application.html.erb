@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>The Will of the Ancients: A Panzer Dragoon and Crimson Dragon Fan Site | <%= yield(:title) %></title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="A Panzer Dragoon and Crimson Dragon fan site. Panzer Dragoon and Crimson Dragon news, encyclopaedia, forums, articles, pictures, videos, and more." />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <%= auto_discovery_link_tag(:atom, news_entries_path(:atom)) %>
@@ -11,117 +11,117 @@
     <%= csrf_meta_tag %>
   </head>
   <body>
-	  <div id="overall">
+    <div id="overall">
       <%= render 'shared/popover_illustration' %>
       <%= render 'shared/modal_window' %>
-		  <div id="header">
-		  	<%= link_to image_tag("logo.png", :id => "logo", :alt => "The Will of the Ancients: A Panzer Dragoon and Crimson Dragon Fan Site"), root_url %>
-		  </div>
-	    <div id="banner"></div>
-	    <div id="navigation">
-		    <label for="search" style="visibility:hidden;">Search:</label><input style="visibility:hidden;" id="search" type="text" value="" />
-				<ul>
-					<li><%= link_to "Latest News", root_url %></li>
-					<li><%= link_to "Categories", categories_path %></li>
-					<li><%= link_to "Encyclopaedia", encyclopaedia_entries_path %></li>
-					<li><%= link_to "Forums", "http://forums.thewilloftheancients.com" %></li>
-					<li><%= link_to "Dragoons", dragoons_path %></li>
-				</ul>
-	    </div>
-	     <div id="main">
-				<div id="aside">
-					<% if can? :manage, Dragoon %>
-						<% if current_dragoon %>
-						  <h3>Your Details</h3>
-						  <ul>
-						    <li>You are logged in as <%= link_to current_dragoon.name, dragoon_path(current_dragoon) %>.</li>
-							  <li><%= link_to "Edit Profile", edit_dragoon_path(current_dragoon) %>
-							  <li><%= link_to "Log Out", log_out_path %></li>
-						  </ul>
-						  <% unless projects.count == 0 %>
-							  <h3>Projects</h3>
-							  <ul>
-							    <% projects.each do |project| %>
-								    <li><%= link_to project.name, project %></li>
-								  <% end %>
-								</ul>
-							<% end %>
-						<% else %>
-						  <h3>Welcome, Divine Visitor</h3>
-						  <ul>
-						    <li><%= link_to "Register", register_path %></li>
-						    <li><%= link_to "Log In", log_in_path %></li>
-						  </ul>
-						<% end %>
-					<% end %>
-					<h3>Get Updates From...</h3>
-					<ul>
-						<li><%= link_to "News Feed (Atom)", news_entries_url(:atom) %></li>
-						<li><a href="http://plus.google.com/102197974088818103992">Google Plus</a></li>
-						<li><a href="http://www.facebook.com/thewilloftheancients">Facebook</a></li>
-						<li><a href="http://www.twitter.com/willancients">Twitter</a></li>
-					</ul>
-					<h3>Explore the Games</h3>
-					<ul>
-						<li><%= link_to "Panzer Dragoon", "/encyclopaedia/panzer-dragoon"%></li>
-						<li><%= link_to "Panzer Dragoon II Zwei", "/encyclopaedia/panzer-dragoon-ii-zwei"%></li>
-      			<li><%= link_to "Panzer Dragoon Mini", "/encyclopaedia/panzer-dragoon-mini"%></li>
-						<li><%= link_to "Panzer Dragoon Saga", "/encyclopaedia/panzer-dragoon-saga"%></li>
-						<li><%= link_to "Panzer Dragoon Orta", "/encyclopaedia/panzer-dragoon-orta"%></li>
-						<li><%= link_to "Sega Ages: Panzer Dragoon", "/encyclopaedia/sega-ages-2500-series-vol-27-panzer-dragoon"%></li>
-						<li><%= link_to "Crimson Dragon: Side Story", "/encyclopaedia/crimson-dragon-side-story" %></li>
-						<li><%= link_to "Crimson Dragon", "/encyclopaedia/crimson-dragon" %></li>
-					</ul>
-					<h3>Browse by Media Type</h3>
-					<ul>
-						<li><%= link_to "Articles", articles_path %></li>
-						<li><%= link_to "Downloads", downloads_path %></li>
-						<li><%= link_to "Links", links_path %></li>
-						<li><%= link_to "Music", music_tracks_path %></li>
-						<li><%= link_to "Pictures", pictures_path %></li>
-						<li><%= link_to "Poems", poems_path %></li>
-						<li><%= link_to "Quizzes", quizzes_path %></li>
-						<li><%= link_to "Resources", resources_path %></li>
-						<li><%= link_to "Stories", stories_path %></li>
+      <div id="header">
+        <%= link_to image_tag("logo.png", :id => "logo", :alt => "The Will of the Ancients: A Panzer Dragoon and Crimson Dragon Fan Site"), root_url %>
+      </div>
+      <div id="banner"></div>
+      <div id="navigation">
+        <label for="search" style="visibility:hidden;">Search:</label><input style="visibility:hidden;" id="search" type="text" value="" />
+        <ul>
+          <li><%= link_to "Latest News", root_url %></li>
+          <li><%= link_to "Categories", categories_path %></li>
+          <li><%= link_to "Encyclopaedia", encyclopaedia_entries_path %></li>
+          <li><%= link_to "Forums", "http://forums.thewilloftheancients.com" %></li>
+          <li><%= link_to "Dragoons", dragoons_path %></li>
+        </ul>
+      </div>
+      <div id="main">
+        <div id="aside">
+          <% if can? :manage, Dragoon %>
+            <% if current_dragoon %>
+              <h3>Your Details</h3>
+              <ul>
+                <li>You are logged in as <%= link_to current_dragoon.name, dragoon_path(current_dragoon) %>.</li>
+                <li><%= link_to "Edit Profile", edit_dragoon_path(current_dragoon) %>
+                <li><%= link_to "Log Out", log_out_path %></li>
+              </ul>
+              <% unless projects.count == 0 %>
+                <h3>Projects</h3>
+                <ul>
+                  <% projects.each do |project| %>
+                    <li><%= link_to project.name, project %></li>
+                  <% end %>
+                </ul>
+              <% end %>
+            <% else %>
+              <h3>Welcome, Divine Visitor</h3>
+              <ul>
+                <li><%= link_to "Register", register_path %></li>
+                <li><%= link_to "Log In", log_in_path %></li>
+              </ul>
+            <% end %>
+          <% end %>
+          <h3>Get Updates From...</h3>
+          <ul>
+          <li><%= link_to "News Feed (Atom)", news_entries_url(:atom) %></li>
+          <li><a href="http://plus.google.com/102197974088818103992">Google Plus</a></li>
+          <li><a href="http://www.facebook.com/thewilloftheancients">Facebook</a></li>
+          <li><a href="http://www.twitter.com/willancients">Twitter</a></li>
+          </ul>
+          <h3>Explore the Games</h3>
+          <ul>
+            <li><%= link_to "Panzer Dragoon", "/encyclopaedia/panzer-dragoon"%></li>
+            <li><%= link_to "Panzer Dragoon II Zwei", "/encyclopaedia/panzer-dragoon-ii-zwei"%></li>
+  <li><%= link_to "Panzer Dragoon Mini", "/encyclopaedia/panzer-dragoon-mini"%></li>
+            <li><%= link_to "Panzer Dragoon Saga", "/encyclopaedia/panzer-dragoon-saga"%></li>
+            <li><%= link_to "Panzer Dragoon Orta", "/encyclopaedia/panzer-dragoon-orta"%></li>
+            <li><%= link_to "Sega Ages: Panzer Dragoon", "/encyclopaedia/sega-ages-2500-series-vol-27-panzer-dragoon"%></li>
+            <li><%= link_to "Crimson Dragon: Side Story", "/encyclopaedia/crimson-dragon-side-story" %></li>
+            <li><%= link_to "Crimson Dragon", "/encyclopaedia/crimson-dragon" %></li>
+          </ul>
+          <h3>Browse by Media Type</h3>
+          <ul>
+            <li><%= link_to "Articles", articles_path %></li>
+            <li><%= link_to "Downloads", downloads_path %></li>
+            <li><%= link_to "Links", links_path %></li>
+            <li><%= link_to "Music", music_tracks_path %></li>
+            <li><%= link_to "Pictures", pictures_path %></li>
+            <li><%= link_to "Poems", poems_path %></li>
+            <li><%= link_to "Quizzes", quizzes_path %></li>
+            <li><%= link_to "Resources", resources_path %></li>
+            <li><%= link_to "Stories", stories_path %></li>
             <li><%= link_to "Videos", videos_path %></li>
-						<% if can? :manage, Emoticon %>
-							<li><%= link_to 'Emoticons', emoticons_path %></li>
-						<% end %>
-						<% if can? :manage, Page %>
-							<li><%= link_to 'Pages', pages_path %></li>
-						<% end %>
-				  </ul>
-				  <% if can? :manage, Forum %>
-					  <h3>Experimental Features</h3>
-					  <ul>
-							<% if can? :manage, Forum %>
-								<li><%= link_to 'Forums', forums_path %></li>
-							<% end %>
-						  <% if can? :manage, PrivateDiscussion %>
-							  <li><%= link_to "Private Discussions", private_discussions_path %></li>
-	            <% end %>
-							<% if can? :manage, Project %>
-							  <li><%= link_to "Projects", projects_path %></li>
-							<% end %>
-						</ul>
-					<% end %>
-		    </div>
-	      <div id="content">
-					<% flash.each do |name, msg| %>
-		        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-		      <% end %>
-	  			<h1><%= yield(:title) %></h1>
-		      <%= yield %>
-		    </div>
-	    </div>
-			<div id="footer">
-			  <ul>
-			  	<li><%= link_to "Sign the Guestbook", sign_guestbook_path %></li>
-			    <li><%= link_to "About the Site", "/about-the-site" %></li>
-			    <li><%= link_to "How to Contribute", "/how-to-contribute" %></li>
-			    <li><%= link_to "Copyright Information", "/copyright-information" %></li>
-			  </ul>
-		  </div>
-		</div>
+            <% if can? :manage, Emoticon %>
+              <li><%= link_to 'Emoticons', emoticons_path %></li>
+            <% end %>
+            <% if can? :manage, Page %>
+              <li><%= link_to 'Pages', pages_path %></li>
+            <% end %>
+          </ul>
+          <% if can? :manage, Forum %>
+            <h3>Experimental Features</h3>
+            <ul>
+              <% if can? :manage, Forum %>
+                <li><%= link_to 'Forums', forums_path %></li>
+              <% end %>
+              <% if can? :manage, PrivateDiscussion %>
+                <li><%= link_to "Private Discussions", private_discussions_path %></li>
+              <% end %>
+              <% if can? :manage, Project %>
+                <li><%= link_to "Projects", projects_path %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+        <div id="content">
+          <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <% end %>
+        <h1><%= yield(:title) %></h1>
+          <%= yield %>
+        </div>
+      </div>
+      <div id="footer">
+        <ul>
+          <li><%= link_to "Sign the Guestbook", sign_guestbook_path %></li>
+          <li><%= link_to "About the Site", "/about-the-site" %></li>
+          <li><%= link_to "How to Contribute", "/how-to-contribute" %></li>
+          <li><%= link_to "Copyright Information", "/copyright-information" %></li>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>
