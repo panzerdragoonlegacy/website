@@ -5,6 +5,10 @@
     <%= f.collection_select :category_id, @categories, :id, :name, :include_blank => false %> 
   </div>
   <div>
+    <%= f.label :track_number, "Track Number" %><br />
+    <%= f.text_field :track_number %>  
+  </div>
+  <div>
     <%= f.label :name, "Name" %><br />
     <%= f.text_field :name %>  
   </div>

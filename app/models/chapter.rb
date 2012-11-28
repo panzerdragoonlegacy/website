@@ -13,7 +13,8 @@ class Chapter < ActiveRecord::Base
   accepts_nested_attributes_for :illustrations, :reject_if => lambda { |a| a[:illustration].blank? }, 
     :allow_destroy => true
   
-  validates :number, :presence => true
+  validates :number, :presence => true, :numericality => { :only_integer => true,
+    :greater_than => 0, :less_than => 100 }
   validates :content, :presence => true
   
   # The list of chapter types.
