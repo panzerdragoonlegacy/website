@@ -6,7 +6,7 @@ class MusicTracksController < ApplicationController
   def index
     if params[:dragoon_id]
       @dragoon = Dragoon.find_by_url(params[:dragoon_id])
-      @music_tracks = MusicTrack.accessible_by(current_ability).joins(:contributions).where(:contributions => {:dragoon_id => @dragoon.id}).order(:name).page(params[:page])
+      @music_tracks = MusicTrack.accessible_by(current_ability).joins(:contributions).where(:contributions => {:dragoon_id => @dragoon.id}).order(:track_number).page(params[:page])
       @title = @dragoon.name + "'s Music"
     else
       @music_tracks = MusicTrack.accessible_by(current_ability).order(:name).page(params[:page])
