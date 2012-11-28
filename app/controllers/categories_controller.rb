@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
     @downloads = Download.accessible_by(current_ability).where(:category_id => @category.id).order(:name).page(params[:page])
     @encyclopaedia_entries = EncyclopaediaEntry.accessible_by(current_ability).where(:category_id => @category.id).order(:name).page(params[:page])
     @links = Link.accessible_by(current_ability).where(:category_id => @category.id).order(:name).page(params[:page])
-    @music_tracks = MusicTrack.accessible_by(current_ability).where(:category_id => @category.id).order(:track_number).page(params[:page])
+    @music_tracks = MusicTrack.accessible_by(current_ability).where(:category_id => @category.id).order(:track_number).order(:name).page(params[:page])
     @pictures = Picture.accessible_by(current_ability).where(:category_id => @category.id).order(:name).page(params[:page])
     @resources = Resource.accessible_by(current_ability).where(:category_id => @category.id).order(:name).page(params[:page])
     @stories = Story.accessible_by(current_ability).where(:category_id => @category.id).order(:name).page(params[:page])

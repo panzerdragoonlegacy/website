@@ -24,14 +24,12 @@
   Your browser does not support the <code>audio</code> element.
 </audio>
 
-<p>Track Number: <%= @music_track.track_number.to_s %> of <%= @music_track.category.music_tracks.count %></p>
-
 <p><%= @music_track.description %></p>
 
 <% unless @music_track.information.blank? %>
   <%= raw markdown_to_html @music_track.information %>
 <% end %>
 
-<p>Download Music Track: <%= link_to "MP3", @music_track.mp3_music_track.url %> | <%= link_to "Ogg Vorbis", @music_track.ogg_music_track.url %></p>
+<p><% unless @music_track.track_number == 0 %>Track Number: <%= @music_track.track_number.to_s %> of <%= @music_track.category.music_tracks.count %>. <% end %>Download Music Track: <%= link_to "MP3", @music_track.mp3_music_track.url %> | <%= link_to "Ogg Vorbis", @music_track.ogg_music_track.url %></p>
 
 <p class="links"><%= link_to 'Music', music_tracks_path %> | <%= link_to @music_track.category.name, category_path(@music_track.category) %></p>
