@@ -24,6 +24,8 @@
   Your browser does not support the <code>audio</code> element.
 </audio>
 
+<p>Track Number: <%= @music_track.track_number.to_s %> of <%= @music_track.category.music_tracks.count %></p>
+
 <p><%= @music_track.description %></p>
 
 <% unless @music_track.information.blank? %>
