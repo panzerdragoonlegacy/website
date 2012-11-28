@@ -12,7 +12,7 @@ class MusicTrack < ActiveRecord::Base
   has_many :encyclopaedia_entries, :through => :relations
   
   validates :track_number, :presence => true, :numericality => { :only_integer => true,
-    :greater_than => -1, :less_than => 50 }
+    :greater_than_or_equal_to => 0, :less_than_or_equal_to => 50 }
   validates :name, :presence => true, :length => { :in => 2..100 }, :uniqueness => true
   validates :description, :presence => true, :length => { :in => 2..250 }
   validates :category, :presence => true  
