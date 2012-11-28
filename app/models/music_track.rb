@@ -19,8 +19,8 @@ class MusicTrack < ActiveRecord::Base
   
   validates_attachment_presence :mp3_music_track
   validates_attachment_presence :ogg_music_track
-  validates_attachment_size :mp3_music_track, :less_than => 10.megabytes
-  validates_attachment_size :ogg_music_track, :less_than => 10.megabytes
+  validates_attachment_size :mp3_music_track, :less_than => 50.megabytes
+  validates_attachment_size :ogg_music_track, :less_than => 50.megabytes
   validates_attachment_content_type :mp3_music_track, :content_type => ['audio/mp3']
   validates_attachment_content_type :ogg_music_track, :content_type => ['audio/ogg']
 
