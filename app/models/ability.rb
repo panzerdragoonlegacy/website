@@ -41,7 +41,7 @@ class Ability
       end
       can :read, Article, :publish => true, :category => { :publish => true }
       can :read, Category, :publish => true
-      can :read, Chapter, :publish => true, :story => { :publish => true, :category => { :publish => true } }
+      can :read, Chapter, :publish => true, :story => { :publish => true }
       can :read, Comment
       can :read, Discussion
       can :read, Download, :publish => true, :category => { :publish => true }
