@@ -12,7 +12,6 @@ class NewsEntry < ActiveRecord::Base
   
   validates :name, :presence => true, :length => { :in => 2..55 }, :uniqueness => true
   validates :content, :presence => true
-  validates :status_update, :length => { :in => 0..110 }
     
   def publish_news_entry
     # The first time the news entry is published:
@@ -29,7 +28,7 @@ class NewsEntry < ActiveRecord::Base
       
       # Post the status update field + short URL to Twitter:
       client = Twitter::Client.new
-      client.update(self.status_update + " " + self.short_url)
+      client.update(self.name + " - " + self.short_url)
       
     end
   end

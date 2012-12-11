@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128041935) do
+ActiveRecord::Schema.define(:version => 20121211044815) do
 
   create_table "articles", :force => true do |t|
     t.string   "name"
@@ -228,7 +228,6 @@ ActiveRecord::Schema.define(:version => 20121128041935) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "published_at"
-    t.string   "status_update"
     t.string   "short_url"
     t.boolean  "publish"
   end
@@ -412,6 +411,7 @@ ActiveRecord::Schema.define(:version => 20121128041935) do
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "youtube_video_id"
   end
 
   create_table "views", :force => true do |t|

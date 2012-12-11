@@ -30,13 +30,13 @@ module NewsEntriesHelper
       file_name = tag.get_attribute('src')
       
       # If file extension is that of an audio file.
-      if file_name.split('.')[1] == 'ogg'
+      if file_name.split('.')[1] == 'mp3'
              
         # Replace surrounding paragraph with audio tag.
         tag.parent.name = 'audio'
         tag.parent.set_attribute('controls', 'controls')
         
-        music_track_url = file_name.sub('.ogg', '')
+        music_track_url = file_name.sub('.mp3', '')
         if music_track = MusicTrack.where(:url => music_track_url).first
           mp3_source_tag = html.create_element('source')
           ogg_source_tag = html.create_element('source')
@@ -51,19 +51,18 @@ module NewsEntriesHelper
           ogg_source_tag['src'] = music_track.ogg_music_track.url
           ogg_source_tag.add_next_sibling(p_tag)
           p_tag.content = 'Your browser does not support the audio element.'
-          
         end        
       end      
       
       # If file extension is that of a video file.
-      if file_name.split('.')[1] == 'webm'
+      if file_name.split('.')[1] == 'mp4'
              
         # Replace surrounding paragraph with video tag.
         tag.parent.name = 'video'
         tag.parent.set_attribute('width', '486')
         tag.parent.set_attribute('controls', 'controls')
         
-        video_url = file_name.sub('.webm', '')
+        video_url = file_name.sub('.mp4', '')
         if video = Video.where(:url => video_url).first
           mp4_source_tag = html.create_element('source')
           webm_source_tag = html.create_element('source')
@@ -78,8 +77,7 @@ module NewsEntriesHelper
           webm_source_tag['src'] = video.webm_video.url
           webm_source_tag.add_next_sibling(p_tag)
           p_tag.content = 'Your browser does not support the video element.'
-          
-        end        
+        end
       end
     end
     

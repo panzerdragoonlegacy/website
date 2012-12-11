@@ -31,6 +31,10 @@
     <% end %>
     <%= f.file_field :webm_video %>  
   </div>
+  <div>
+    <%= f.label :youtube_video_id, "YouTube Video ID" %><br />
+    <%= f.text_field :youtube_video_id %>    
+  </div>
   <label>Contributors</label>
   <div class="scroll_checkboxes">
     <% for dragoon in Dragoon.order(:name) %>

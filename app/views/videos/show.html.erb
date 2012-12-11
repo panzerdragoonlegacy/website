@@ -30,6 +30,6 @@
   <%= raw markdown_to_html @video.information %>
 <% end %>
 
-<p>Download Video: <%= link_to "MP4", @video.mp4_video.url %> | <%= link_to "WebM", @video.webm_video.url %></p>
+<p><% unless @video.youtube_video_id.blank? %>Watch Video: <%= link_to "YouTube", "http://www.youtube.com/watch?v=" + @video.youtube_video_id  %>. <% end %>Download Video: <%= link_to "MP4", @video.mp4_video.url %> | <%= link_to "WebM", @video.webm_video.url %></p>
 
 <p class="links"><%= link_to 'Videos', videos_path %> | <%= link_to @video.category.name, category_path(@video.category) %></p>
