@@ -28,7 +28,7 @@ class NewsEntry < ActiveRecord::Base
       
       # Post the status update field + short URL to Twitter:
       client = Twitter::Client.new
-      client.update(self.name + " - " + self.short_url)
+      client.update(self.name + ": " + self.short_url)
       
     end
   end
