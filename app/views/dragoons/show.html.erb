@@ -123,58 +123,58 @@
   </dl>
 <% end %>
 
-<% unless @website_contributions_count == 0 %>
+<% unless website_contributions_count(@dragoon) == 0 %>
   <h2>Website Contributions</h2>
   <ul>
-    <% unless @news_entry_count == 0 %>
-      <li><%= link_to pluralize(@news_entry_count, 'news entry'), dragoon_news_entries_path(@dragoon) %></li>
+    <% unless news_entry_count(@dragoon) == 0 %>
+      <li><%= link_to pluralize(news_entry_count(@dragoon), 'news entry'), dragoon_news_entries_path(@dragoon) %></li>
     <% end %>
-    <% unless @article_count == 0 %>
-      <li><%= link_to pluralize(@article_count, 'article'), dragoon_articles_path(@dragoon) %></li>
+    <% unless article_count(@dragoon) == 0 %>
+      <li><%= link_to pluralize(article_count(@dragoon), 'article'), dragoon_articles_path(@dragoon) %></li>
     <% end %>
-    <% unless @download_count == 0 %>
-      <li><%= link_to pluralize(@download_count, 'download'), dragoon_downloads_path(@dragoon) %></li>
+    <% unless download_count(@dragoon) == 0 %>
+      <li><%= link_to pluralize(download_count(@dragoon), 'download'), dragoon_downloads_path(@dragoon) %></li>
     <% end %>  
-    <% unless @link_count == 0 %>
-      <li><%= link_to pluralize(@link_count, 'link'), dragoon_links_path(@dragoon) %></li>
+    <% unless link_count(@dragoon) == 0 %>
+      <li><%= link_to pluralize(link_count(@dragoon), 'link'), dragoon_links_path(@dragoon) %></li>
     <% end %>
-    <% unless @music_track_count == 0 %>
-      <li><%= link_to pluralize(@music_track_count, 'music track'), dragoon_music_tracks_path(@dragoon) %></li>
+    <% unless music_track_count(@dragoon) == 0 %>
+      <li><%= link_to pluralize(music_track_count(@dragoon), 'music track'), dragoon_music_tracks_path(@dragoon) %></li>
     <% end %>
-    <% unless @picture_count == 0 %>
-      <li><%= link_to pluralize(@picture_count, 'picture'), dragoon_pictures_path(@dragoon) %></li>
+    <% unless picture_count(@dragoon) == 0 %>
+      <li><%= link_to pluralize(picture_count(@dragoon), 'picture'), dragoon_pictures_path(@dragoon) %></li>
     <% end %>
-    <% unless @poem_count == 0 %>
-      <li><%= link_to pluralize(@poem_count, 'poem'), dragoon_poems_path(@dragoon) %></li>
+    <% unless poem_count(@dragoon) == 0 %>
+      <li><%= link_to pluralize(poem_count(@dragoon), 'poem'), dragoon_poems_path(@dragoon) %></li>
     <% end %>
-    <% unless @quiz_count == 0 %>
-      <li><%= link_to pluralize(@quiz_count, 'quiz'), dragoon_quizzes_path(@dragoon) %></li>
+    <% unless quiz_count(@dragoon) == 0 %>
+      <li><%= link_to pluralize(quiz_count(@dragoon), 'quiz'), dragoon_quizzes_path(@dragoon) %></li>
     <% end %>
-    <% unless @resource_count == 0 %>
-      <li><%= link_to pluralize(@resource_count, 'resource'), dragoon_resources_path(@dragoon) %></li>
+    <% unless resource_count(@dragoon) == 0 %>
+      <li><%= link_to pluralize(resource_count(@dragoon), 'resource'), dragoon_resources_path(@dragoon) %></li>
     <% end %>
-    <% unless @story_count == 0 %>
-      <li><%= link_to pluralize(@story_count, 'story'), dragoon_stories_path(@dragoon) %></li>
+    <% unless story_count(@dragoon) == 0 %>
+      <li><%= link_to pluralize(story_count(@dragoon), 'story'), dragoon_stories_path(@dragoon) %></li>
     <% end %>
-    <% unless @video_count == 0 %>
-      <li><%= link_to pluralize(@video_count, 'video'), dragoon_videos_path(@dragoon) %></li>
+    <% unless video_count(@dragoon) == 0 %>
+      <li><%= link_to pluralize(video_count(@dragoon), 'video'), dragoon_videos_path(@dragoon) %></li>
     <% end %>
   </ul>
-  <p>Total: <%= pluralize(@website_contributions_count, 'website contribution') %>.</p>
+  <p>Total: <%= pluralize(website_contributions_count(@dragoon), 'website contribution') %>.</p>
 <% end%>
 
 <% if can? :manage, Discussion %>
-  <% unless @community_contributions_count == 0 %>
+  <% unless community_contributions_count(@dragoon) == 0 %>
     <h2>Community Contributions</h2>
     <ul>  
-      <% unless @discussion_count == 0 %>
-        <li><%= link_to pluralize(@discussion_count, 'discussion'), dragoon_discussions_path(@dragoon) %></li>
+      <% unless discussion_count(@dragoon) == 0 %>
+        <li><%= link_to pluralize(discussion_count(@dragoon), 'discussion'), dragoon_discussions_path(@dragoon) %></li>
       <% end %>
-      <% unless @comment_count == 0 %>
-        <li><%= link_to pluralize(@comment_count, 'comment'), dragoon_comments_path(@dragoon) %></li>
+      <% unless comment_count(@dragoon) == 0 %>
+        <li><%= link_to pluralize(comment_count(@dragoon), 'comment'), dragoon_comments_path(@dragoon) %></li>
       <% end %>
     </ul>
-    <p>Total: <%= pluralize(@community_contributions_count, 'community contribution') %>.</p>
+    <p>Total: <%= pluralize(community_contributions_count(@dragoon), 'community contribution') %>.</p>
   <% end %>
 <% end %>
 

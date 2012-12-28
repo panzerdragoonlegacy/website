@@ -19,7 +19,7 @@
         </div>
         <div class="comment_details">
           <h2><%= link_to dragoon.name, dragoon %></h2>
-          <p><% unless dragoon.country.blank? %><%= dragoon.country %><% end %></p>
+          <p><%= pluralize(website_contributions_count(dragoon), 'website contribution') %>
         </div>
       </div>
     <% end %>
