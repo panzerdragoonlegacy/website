@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.10'
 gem 'sqlite3', '1.3.6'
 gem 'rack', '1.4.0'
 
