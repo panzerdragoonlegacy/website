@@ -3,8 +3,6 @@ TheWillOfTheAncients::Application.routes.draw do
   get "log-in" => "sessions#new", :as => :log_in  
   get "log-out" => "sessions#destroy", :as => :log_out
   get "register" => "dragoons#new", :as => :register
-  get "sign-guestbook" => "guestbook_entries#new", :as => :sign_guestbook
-  get "community" => "community#index", :as => :community
   resources :dragoons do
     resources :news_entries, :path => 'news-entries'
     resources :articles
