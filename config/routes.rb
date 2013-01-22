@@ -39,7 +39,6 @@ TheWillOfTheAncients::Application.routes.draw do
   resources :music_tracks, :path => 'music'
   resources :links
   resources :encyclopaedia_entries, :path => 'encyclopaedia'
-  resources :guestbook_entries, :path => 'guestbook'
   resources :emoticons
   resources :projects do
     resources :project_discussions, :path => 'discussions' do
