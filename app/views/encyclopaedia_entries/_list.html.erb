@@ -4,7 +4,7 @@
       <div class="resource">
         <div class="thumbnail">
           <% if encyclopaedia_entry.encyclopaedia_entry_picture_file_name.blank? %>
-            <%= image_tag("sorry-no-image.jpg", :alt => "Sorry No Image", :width => "280", :height => "280") %>
+            <%= image_tag("default-encyclopaedia-entry-picture-thumbnail.jpg", :alt => "Sorry No Image", :width => "150", :height => "150") %>
           <% else %>
             <%= link_to encyclopaedia_entry_picture_tag(encyclopaedia_entry, :thumbnail), encyclopaedia_entry %>
           <% end %>

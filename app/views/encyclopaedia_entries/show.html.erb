@@ -12,7 +12,11 @@
 <% end %>
 
 <div id="information">
-  <%= encyclopaedia_entry_picture_tag @encyclopaedia_entry, :embedded %><br />
+  <% if @encyclopaedia_entry.encyclopaedia_entry_picture_file_name.blank? %>
+    <%= image_tag("default-encyclopaedia-entry-picture-embedded.jpg", :alt => "Sorry No Image", :width => "280", :height => "280") %><br />
+  <% else %>
+    <%= encyclopaedia_entry_picture_tag @encyclopaedia_entry, :embedded %><br />
+  <% end %>
   <%= raw markdown_to_html @encyclopaedia_entry.information %>
 </div>
 
