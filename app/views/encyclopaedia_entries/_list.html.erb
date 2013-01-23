@@ -3,7 +3,7 @@
     <% @encyclopaedia_entries.each do |encyclopaedia_entry| %>
       <div class="resource">
         <div class="thumbnail">
-          <%= link_to image_tag(encyclopaedia_entry.encyclopaedia_entry_picture.url(:thumbnail)), encyclopaedia_entry %>
+          <%= link_to encyclopaedia_entry_picture_tag(encyclopaedia_entry, :thumbnail), encyclopaedia_entry %>
         </div>
         <div class="details">
           <h2><%= link_to encyclopaedia_entry.name, encyclopaedia_entry %></h2>

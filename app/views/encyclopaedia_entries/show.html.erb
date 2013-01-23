@@ -12,7 +12,7 @@
 <% end %>
 
 <div id="information">
-  <%= image_tag @encyclopaedia_entry.encyclopaedia_entry_picture.url(:embedded) %><br />
+  <%= encyclopaedia_entry_picture_tag @encyclopaedia_entry, :embedded %><br />
   <%= raw markdown_to_html @encyclopaedia_entry.information %>
 </div>
 

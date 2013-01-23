@@ -3,7 +3,7 @@
     <% @pictures.each do |picture| %>
       <div class="resource">
         <div class="thumbnail">
-          <%= link_to image_tag(picture.picture.url(:thumbnail)), picture %>
+          <%= link_to picture_tag(picture, :thumbnail), picture %>
         </div>
         <div class="details">
           <h2><%= link_to picture.name, picture %></h2>
