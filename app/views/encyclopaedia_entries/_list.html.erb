@@ -3,7 +3,11 @@
     <% @encyclopaedia_entries.each do |encyclopaedia_entry| %>
       <div class="resource">
         <div class="thumbnail">
-          <%= link_to encyclopaedia_entry_picture_tag(encyclopaedia_entry, :thumbnail), encyclopaedia_entry %>
+          <% if encyclopaedia_entry.encyclopaedia_entry_picture_file_name.blank? %>
+            <%= image_tag("sorry-no-image.jpg", :alt => "Sorry No Image", :width => "280", :height => "280") %>
+          <% else %>
+            <%= link_to encyclopaedia_entry_picture_tag(encyclopaedia_entry, :thumbnail), encyclopaedia_entry %>
+          <% end %>
         </div>
         <div class="details">
           <h2><%= link_to encyclopaedia_entry.name, encyclopaedia_entry %></h2>
