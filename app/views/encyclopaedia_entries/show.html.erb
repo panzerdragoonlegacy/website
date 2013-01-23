@@ -18,87 +18,85 @@
 
 <%= raw illustrated_markdown_to_html @encyclopaedia_entry.id, "EncyclopaediaEntry", @encyclopaedia_entry.content %>
 
-<% if can? :manage, @encyclopaedia_entry %>
-  <% unless @articles.count == 0 %>  
-    <h2>Related Articles</h2>
-    <ul>
-      <% @articles.each do |article| %>
-        <li><%= link_to article.name, article %><% unless article.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  <% unless @downloads.count == 0 %>  
-    <h2>Related Downloads</h2>
-    <ul>
-      <% @downloads.each do |download| %>
-        <li><%= link_to download.name, download %><% unless download.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  <% unless @links.count == 0 %>  
-    <h2>Related Links</h2>
-    <ul>
-      <% @links.each do |link| %>
-        <li><%= link_to link.name, link %><% unless link.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  <% unless @music_tracks.count == 0 %>  
-    <h2>Related Music</h2>
-    <ul>
-      <% @music_tracks.each do |music_track| %>
-        <li><%= link_to music_track.name, music_track %><% unless music_track.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  <% unless @pictures.count == 0 %>  
-    <h2>Related Pictures</h2>
-    <div id="related_pictures">     
-      <% @pictures.each do |picture| %>
-        <%= link_to image_tag(picture.picture.url(:mini_thumbnail), :alt => picture.name, :width => "75", :height => "75"), picture %>
-      <% end %>
-    </div>
-  <% end %>
-  <% unless @poems.count == 0 %>  
-    <h2>Related Poems</h2>
-    <ul>
-      <% @poems.each do |poem| %>
-        <li><%= link_to poem.name, poem %><% unless poem.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  <% unless @quizzes.count == 0 %>  
-    <h2>Related Quizzes</h2>
-    <ul>
-      <% @quizzes.each do |quiz| %>
-        <li><%= link_to quiz.name, quiz %><% unless quiz.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  <% unless @resources.count == 0 %>  
-    <h2>Related Resources</h2>
-    <ul>
-      <% @resources.each do |resource| %>
-        <li><%= link_to resource.name, resource %><% unless resource.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  <% unless @stories.count == 0 %>  
-    <h2>Related Stories</h2>
-    <ul>
-      <% @stories.each do |story| %>
-        <li><%= link_to story.name, story %><% unless story.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  <% unless @videos.count == 0 %>  
-    <h2>Related Videos</h2>
-    <ul>
-      <% @videos.each do |video| %>
-        <li><%= link_to video.name, video %><% unless video.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
-      <% end %>
-    </ul>
-  <% end %>
+<% unless @articles.count == 0 %>  
+  <h2>Related Articles</h2>
+  <ul>
+    <% @articles.each do |article| %>
+      <li><%= link_to article.name, article %><% unless article.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    <% end %>
+  </ul>
+<% end %>
+<% unless @downloads.count == 0 %>  
+  <h2>Related Downloads</h2>
+  <ul>
+    <% @downloads.each do |download| %>
+      <li><%= link_to download.name, download %><% unless download.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    <% end %>
+  </ul>
+<% end %>
+<% unless @links.count == 0 %>  
+  <h2>Related Links</h2>
+  <ul>
+    <% @links.each do |link| %>
+      <li><%= link_to link.name, link %><% unless link.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    <% end %>
+  </ul>
+<% end %>
+<% unless @music_tracks.count == 0 %>  
+  <h2>Related Music</h2>
+  <ul>
+    <% @music_tracks.each do |music_track| %>
+      <li><%= link_to music_track.name, music_track %><% unless music_track.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    <% end %>
+  </ul>
+<% end %>
+<% unless @pictures.count == 0 %>  
+  <h2>Related Pictures</h2>
+  <div id="related_pictures">     
+    <% @pictures.each do |picture| %>
+      <%= link_to image_tag(picture.picture.url(:mini_thumbnail), :alt => picture.name, :width => "75", :height => "75"), picture %>
+    <% end %>
+  </div>
+<% end %>
+<% unless @poems.count == 0 %>  
+  <h2>Related Poems</h2>
+  <ul>
+    <% @poems.each do |poem| %>
+      <li><%= link_to poem.name, poem %><% unless poem.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    <% end %>
+  </ul>
+<% end %>
+<% unless @quizzes.count == 0 %>  
+  <h2>Related Quizzes</h2>
+  <ul>
+    <% @quizzes.each do |quiz| %>
+      <li><%= link_to quiz.name, quiz %><% unless quiz.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    <% end %>
+  </ul>
+<% end %>
+<% unless @resources.count == 0 %>  
+  <h2>Related Resources</h2>
+  <ul>
+    <% @resources.each do |resource| %>
+      <li><%= link_to resource.name, resource %><% unless resource.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    <% end %>
+  </ul>
+<% end %>
+<% unless @stories.count == 0 %>  
+  <h2>Related Stories</h2>
+  <ul>
+    <% @stories.each do |story| %>
+      <li><%= link_to story.name, story %><% unless story.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    <% end %>
+  </ul>
+<% end %>
+<% unless @videos.count == 0 %>  
+  <h2>Related Videos</h2>
+  <ul>
+    <% @videos.each do |video| %>
+      <li><%= link_to video.name, video %><% unless video.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    <% end %>
+  </ul>
 <% end %>
 
 <p class="links"><%= link_to 'Encyclopaedia',  encyclopaedia_entries_path %> | <%= link_to @encyclopaedia_entry.category.name, category_path(@encyclopaedia_entry.category) %></p>
