@@ -48,7 +48,6 @@ class Ability
       can :read, Dragoon
       can :read, EncyclopaediaEntry, :publish => true, :category => { :publish => true }
       can :read, Forum
-      can :read, GuestbookEntry
       can :read, Link
       can :read, MusicTrack, :publish => true, :category => { :publish => true }
       can :read, NewsEntry, :publish => true
@@ -59,7 +58,6 @@ class Ability
       can :read, Resource, :publish => true, :category => { :publish => true }
       can :read, Story, :publish => true, :category => { :publish => true }
       can :read, Video, :publish => true, :category => { :publish => true }
-      can :create, GuestbookEntry
     end
   end
 end
