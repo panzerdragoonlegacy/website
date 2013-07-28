@@ -13,7 +13,6 @@ $bad-text: #FF2200;
 $border-properties: 1px solid #333333;
 $header-background-colour: #111111;
 $input-background-colour: #343434;
-$banner: random_banner();
 
 @mixin caption-properties {
   font-size: 11px;
@@ -62,10 +61,10 @@ div#header {
   background-color: $header-background-colour;
   background-repeat: no-repeat;
   height: 100px;
-}
-
-div#header img#logo {
-  border: 0;
+  
+  img#logo {
+    border: 0;
+  }
 }
 
 div#banner {
@@ -82,43 +81,43 @@ div#navigation {
   height: 50px;
   background-color: $header-background-colour;
   border-bottom: $border-properties;
-}
 
-div#navigation label {
-  float: left;
-  color: white;
-  padding: 15px;
-}
+  label {
+    float: left;
+    color: white;
+    padding: 15px;
+  }
 
-div#navigation input {
-  float: left;
-  width: 150px;
-  color: black;
-  margin-top: 15px;
-  background-color: white;
-  height: 0px;
-}
+  input {
+    float: left;
+    width: 150px;
+    color: black;
+    margin-top: 15px;
+    background-color: white;
+    height: 0px;
+  }
 
-div#navigation ul {
-  margin: 0;
-  padding: 15px;
-}
+  ul {
+    margin: 0;
+    padding: 15px;
+  }
 
-div#navigation li {
-  display: inline;
-  padding: 10px;
-  font-size: 14px;
-  color: white;
-  text-shadow: 2px 2px 2px #252525;
-}
+  li {
+    display: inline;
+    padding: 10px;
+    font-size: 14px;
+    color: white;
+    text-shadow: 2px 2px 2px #252525;
+  }
 
-div#navigation a {
-  color: $main-text-colour;
-  text-decoration: none;
-}
+  a {
+    color: $main-text-colour;
+    text-decoration: none;
+  }
 
-div#navigation a:hover {
-  color: $link-colour-1;
+  a:hover {
+    color: $link-colour-1;
+  }
 }
 
 div#main {
@@ -136,23 +135,23 @@ div#aside {
   float: left;
   border: $border-properties;
   border-radius: 10px;
-  background-color: #343434;
+  background-color: $input-background-colour;
   @include gradients(right, #343434, #454545); 
   padding-bottom: 10px;
-}
 
-div#aside h3 {
-  padding-top: 10px;
-  padding-left: 20px;
-  text-shadow: 2px 2px 2px $header-background-colour;
-}
+  h3 {
+    padding-top: 10px;
+    padding-left: 20px;
+    text-shadow: 2px 2px 2px $header-background-colour;
+  }
 
-div#aside ul {
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 0px;
-  list-style-type: none;
-  line-height: 1.5;
+  ul {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 0px;
+    list-style-type: none;
+    line-height: 1.5;
+  }
 }
 
 div#content {
@@ -164,71 +163,86 @@ div#content {
   padding-top: 25px;
   padding-bottom: 25px;
   overflow: auto;
-}
 
-div#content h1 {
-  margin-top: -10px;
-  font-size: 19px;
-  text-shadow: 2px 2px 2px #252525;
-}
+  h1 {
+    margin-top: -10px;
+    font-size: 19px;
+    text-shadow: 2px 2px 2px #252525;
+  }
 
-div#content a {
-  color: $link-colour-2;
+  a {
+    color: $link-colour-2;
+  }
+  
+  div#related_pictures {
+    margin-top: 20px;
+    padding-bottom: 8px;
+    text-align: center;
+  
+    a img {
+      border-radius: 5px;
+      border: 1px solid #333333;
+      margin-bottom: -8px;
+    }
+  }
 }
 
 ul.administration {
   padding: 0;
-}
 
-ul.administration li {
-  display: inline;
-  padding-right: 5px;
+  li {
+    display: inline;
+    padding-right: 5px;
+  }
 }
 
 ul.comment_administration {
   padding: 0;
   margin-bottom: 0;
-}
 
-ul.comment_administration li {
-  display: inline;
-  padding-right: 5px;
+  li {
+    display: inline;
+    padding-right: 5px;
+  }
 }
 
 ul#contributors {
   padding: 0;
+
+  li {
+    display: inline;
+    padding-right: 5px;	
+  }
 }
 
-ul#contributors li {
-  display: inline;
-  padding-right: 5px;	
-}
+div#content {
 
-div#content p#description {
-  font-size: 16px;
-}
+  p#description {
+    font-size: 16px;
+  }
 
-div#content h2 {
-  font-size: 15px;
-  clear: both;
-  text-shadow: 2px 2px 2px #252525;
-}
+  h2 {
+    font-size: 15px;
+    clear: both;
+    text-shadow: 2px 2px 2px #252525;
+  }
 
-div#content h3 {
-  font-size: 13px;
-  clear: both;
-  font-weight: bold;
-}
+  h3 {
+    font-size: 13px;
+    clear: both;
+    font-weight: bold;
+  }
 
-div#content hr {
-  text-align: center;
-  height: 10px;
-  width: 400px;
-  border-radius: 5px;
-  border: $border-properties;
-  background-color: #343434;
-  margin-top: 25px;
-  margin-bottom: 25px;
+  hr {
+    text-align: center;
+    height: 10px;
+    width: 400px;
+    border-radius: 5px;
+    border: $border-properties;
+    background-color: $input-background-colour;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
 }
 
 div.left {
@@ -243,15 +257,15 @@ div.left {
   background-color: #343434;
   @include gradients(bottom, #343434, #454545);
   padding-bottom: 10px;
-}
 
-div.left img {
-  padding: 9px;
-  border: 0;
-}
-
-div.left p {
-  @include caption-properties;
+  img {
+    padding: 9px;
+    border: 0;
+  }
+  
+  p {
+    @include caption-properties;
+  }
 }
 
 div.right {
@@ -263,18 +277,18 @@ div.right {
   margin-left: 25px;
   margin-bottom: 25px;
   border: $border-properties;
-  background-color: #343434;
+  background-color: $input-background-colour;
   @include gradients(bottom, #343434, #454545);
   padding-bottom: 10px;
-}
+  
+  img {
+    padding: 9px;
+    border: 0;
+  }
 
-div.right img {
-  padding: 9px;
-  border: 0;
-}
-
-div.right p {
-  @include caption-properties;
+  p {
+    @include caption-properties;
+  }
 }
 
 div.sidebyside {
@@ -290,17 +304,17 @@ div.sidebysideleft {
   float: left;
   padding-bottom: 10px;
   border: $border-properties;
-  background-color: #343434;
+  background-color: $input-background-colour;
   @include gradients(bottom, #343434, #454545); 
-}
 
-div.sidebysideleft img {
-  padding: 9px;
-  border: 0;
-}
+  img {
+    padding: 9px;
+    border: 0;
+  }
 
-div.sidebysideleft p {
-  @include caption-properties;
+  p {
+    @include caption-properties;
+  }
 }
 
 div.sidebysideright {
@@ -310,17 +324,17 @@ div.sidebysideright {
   margin-left: 323px;
   padding-bottom: 10px;
   border: $border-properties;
-  background-color: #343434;
+  background-color: $input-background-colour;
   @include gradients(bottom, #343434, #454545);
-}
+  
+  img {
+    padding: 9px;
+    border: 0;
+  }
 
-div.sidebysideright img {
-  padding: 9px;
-  border: 0;
-}
-
-div.sidebysideright p {
-  @include caption-properties;
+  p {
+    @include caption-properties;
+  }
 }
 
 div#popover_illustration {
@@ -333,17 +347,17 @@ div#popover_illustration {
   float: left;
   margin-left: 150px;
   background-color: #000000;
-}
 
-div#popover_illustration img {
-  padding: 9px;
-}
+  img {
+    padding: 9px;
+  }
 
-div#popover_illustration p {
-  margin-bottom: 25px;
-  padding-left: 9px;
-  padding-right: 9px;
-  line-height: 2;
+  p {
+    margin-bottom: 25px;
+    padding-left: 9px;
+    padding-right: 9px;
+    line-height: 2;
+  }
 }
 
 div#information {
@@ -354,48 +368,36 @@ div#information {
   margin-left: 25px;
   margin-bottom: 25px;
   border: $border-properties;
-  background-color: #343434;
+  background-color: $input-background-colour;
   @include gradients(bottom, #343434, #454545); 
-}
 
-div#information img {
-  border-radius: 10px;
-  padding: 9px;
-}
+  img {
+    border-radius: 10px;
+    padding: 9px;
+  }
 
-div#information dl {
-  margin-top: 0;
-  font-size: 11px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 5px;
-  clear: both;
-}
+  dl {
+    margin-top: 0;
+    font-size: 11px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    clear: both;
+  }
 
-div#information dt {
-  float: left;
-  width: 140px;
-  font-weight: bold;
-}
+  dt {
+    float: left;
+    width: 140px;
+    font-weight: bold;
+  }
 
-div#information dd {
-  margin-left: 140px;
-}
+  dd {
+    margin-left: 140px;
+  }
 
-div#information a {
-  color: $link-colour-1;
-}
-
-div#content div#related_pictures {
-  margin-top: 20px;
-  padding-bottom: 8px;
-  text-align: center;
-}
-
-div#content div#related_pictures a img {
-  border-radius: 5px;
-  border: 1px solid #333333;
-  margin-bottom: -8px;
+  a {
+    color: $link-colour-1;
+  }
 }
 
 div#resources {
@@ -409,12 +411,12 @@ div.resource {
   margin-bottom: 25px;
   padding-bottom: 25px;
   overflow: auto;
-  background-color: #343434;
+  background-color: $input-background-colour;
   @include gradients(bottom, #343434, #454545); 
-}
 
-div.resource li {
-  font-size: 12px;
+  li {
+    font-size: 12px;
+  } 
 }
 
 div.thumbnail {
@@ -424,23 +426,23 @@ div.thumbnail {
   clear: none;
   padding-left: 20px;
   padding-top: 20px;
-}
 
-div.thumbnail img {
-  text-align: center;
-  border-radius: 5px;
-  border: $border-properties;
+  img {
+    text-align: center;
+    border-radius: 5px;
+    border: $border-properties;
+  }
 }
 
 div.details {
   overflow: auto;
   padding-left: 20px;
   padding-right: 20px;
-}
-
-div.details p {
-  margin-bottom: 0;
-  font-size: 12px;
+  
+  p {
+    margin-bottom: 0;
+    font-size: 12px;
+  }
 }
 
 div.comment_thumbnail {
@@ -450,48 +452,48 @@ div.comment_thumbnail {
   clear: none;
   padding-left: 20px;
   padding-top: 20px;
-}
 
-div.comment_thumbnail img {
-  text-align: center;
-  border-radius: 5px;
-  border: $border-properties;
+  img {
+    text-align: center;
+    border-radius: 5px;
+    border: $border-properties;
+  }
 }
 
 div.comment_details {
   overflow: auto;
   padding-left: 20px;
   padding-right: 20px;
-}
 
-div.comment_details p.name_and_date {
-  padding-top: 3px;
-  font-size: 12px;
-}
+  p.name_and_date {
+    padding-top: 3px;
+    font-size: 12px;
+  }
 
-div.comment_details p {
-  font-size: 12px;
-  margin-bottom: 0;
-}
+  p {
+    font-size: 12px;
+    margin-bottom: 0;
+  }
 
-div.comment_details div {
-  margin-top: 20px;
-  padding-bottom: 8px;
-  text-align: center;
-}
+  audio {
+    margin-top: 20px;
+  }
 
-div.comment_details div a img {
-  border-radius: 5px;
-  border: $border-properties;
-  margin-bottom: -8px;
-}
+  video {
+    margin-top: 20px;
+  }
 
-div.comment_details audio {
-  margin-top: 20px;
-}
-
-div.comment_details video {
-  margin-top: 20px;
+  div {
+    margin-top: 20px;
+    padding-bottom: 8px;
+    text-align: center;
+    
+    a img {
+      border-radius: 5px;
+      border: $border-properties;
+      margin-bottom: -8px;
+    }
+  }
 }
 
 div#footer {
@@ -502,26 +504,26 @@ div#footer {
   padding-bottom: 25px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-}
 
-div#footer ul {
-  text-align: center;
-  padding: 25px;
-  margin: 0;
-}
+  ul {
+    text-align: center;
+    padding: 25px;
+    margin: 0;
+  }
 
-div#footer li {
-  display: inline;
-  padding: 5px;
-}
+  li {
+    display: inline;
+    padding: 5px;
+  }
 
-div#footer a {
-  color: $main-text-colour;
-  text-decoration: none;
-}
+  a {
+    color: $main-text-colour;
+    text-decoration: none;
+  }
 
-div#footer a:hover {
-  color: $link-colour-1;
+  a:hover {
+    color: $link-colour-1;
+  }
 }
 
 label {
