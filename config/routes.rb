@@ -1,5 +1,7 @@
 TheWillOfTheAncients::Application.routes.draw do
 
+  get "search/index"
+
   get "log-in" => "sessions#new", :as => :log_in  
   get "log-out" => "sessions#destroy", :as => :log_out
   get "register" => "dragoons#new", :as => :register

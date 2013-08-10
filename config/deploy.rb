@@ -1,11 +1,11 @@
 set :application, "thewilloftheancients"
 
-role :web, "web235.webfaction.com"                          # Your HTTP server, Apache/etc
-role :app, "web235.webfaction.com"                          # This may be the same as your `Web` server
-role :db,  "web235.webfaction.com", :primary => true        # This is where Rails migrations will run
+role :web, "web412.webfaction.com"                          # Your HTTP server, Apache/etc
+role :app, "web412.webfaction.com"                          # This may be the same as your `Web` server
+role :db,  "web412.webfaction.com", :primary => true        # This is where Rails migrations will run
 
 set :user, "chrisalley"
-set :deploy_to, "/home/chrisalley/webapps/twota"
+set :deploy_to, "/home/chrisalley/webapps/thewilloftheancients"
 set :use_sudo, false
 default_run_options[:pty] = true
 
