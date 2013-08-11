@@ -28,8 +28,8 @@ namespace :deploy do
   
   desc "Setup script permissions."
   task :setup_script_permissions do
-    run "chmod +x current/scripts/adhoc_backup.sh"
-    run "chmod +x current/scripts/set_permissions.sh"
+    run "chmod +x #{deploy_to}/current/scripts/adhoc_backup.sh"
+    run "chmod +x #{deploy_to}/current/scripts/set_permissions.sh"
   end
 
   desc "Setup shared directory."
