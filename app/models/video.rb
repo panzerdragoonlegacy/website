@@ -17,8 +17,8 @@ class Video < ActiveRecord::Base
   
   validates_attachment_presence :mp4_video
   validates_attachment_presence :webm_video
-  validates_attachment_size :mp4_video, :less_than => 125.megabytes
-  validates_attachment_size :webm_video, :less_than => 125.megabytes
+  validates_attachment_size :mp4_video, :less_than => 75.megabytes
+  validates_attachment_size :webm_video, :less_than => 75.megabytes
   validates_attachment_content_type :mp4_video, :content_type => ['video/mp4']
   validates_attachment_content_type :webm_video, :content_type => ['video/webm']
 
