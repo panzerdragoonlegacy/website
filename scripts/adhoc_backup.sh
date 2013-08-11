@@ -24,7 +24,7 @@ function create_database_dumps() {
   else
     echo "Dump of the main site's database created."
     echo "Creating dump of the forum database..."
-    mysqldump chrisalley_twota -uchrisalley_twota -p > $backup_dir/twotaforums.sql
+    mysqldump chrisalley_twota -uchrisalley_twota -p > $backup_dir/thewilloftheancientsforums.sql
     if (( $? )); then
       echo "Could not create database dump of the forum database."
       remove_backup_directory
@@ -45,7 +45,7 @@ function copy_webapp_directories() {
   else
     echo "The Will of the Ancients webapp directory copied."
     echo "Copying The Will of the Ancients Forums webapp directory to backup directory..."
-    cp -r /home/chrisalley/webapps/twotaforums $backup_dir
+    cp -r /home/chrisalley/webapps/thewilloftheancientsforums $backup_dir
     if (( $? )); then
       echo "Could not copy The Will of the Ancients Forums webapp directory."
       remove_backup_directory
