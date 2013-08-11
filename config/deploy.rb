@@ -25,6 +25,12 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/config/application.yml #{release_path}/config/application.yml"
     run "ln -nfs #{shared_path}/assets #{release_path}/public/assets"
   end
+  
+  desc "Setup script permissions."
+  task :setup_script_permissions do
+    run "chmod +x current/scripts/adhoc_backup.sh"
+    run "chmod +x current/scripts/set_permissions.sh"
+  end
 
   desc "Setup shared directory."
   task :setup_shared_directory do
@@ -47,4 +53,5 @@ end
 
 after "deploy", "deploy:cleanup" # Keeps only the last 5 releases
 after "deploy:setup", "deploy:setup_shared_directory"
+after "deploy:setup", "deploy:setup_script_permissions"
 after "deploy:update_code", "deploy:symlink_extras"
