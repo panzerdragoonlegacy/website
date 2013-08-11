@@ -53,5 +53,4 @@ end
 
 after "deploy", "deploy:cleanup" # Keeps only the last 5 releases
 after "deploy:setup", "deploy:setup_shared_directory"
-after "deploy:setup", "deploy:setup_script_permissions"
-after "deploy:update_code", "deploy:symlink_extras"
+after "deploy:update_code", "deploy:symlink_extras", "deploy:setup_script_permissions"
