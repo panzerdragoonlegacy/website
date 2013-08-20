@@ -96,10 +96,6 @@
 <% unless @dragoon.windows_live_id.blank? && @dragoon.yahoo_id.blank? && @dragoon.aim_screenname.blank? && @dragoon.icq_number.blank? && @dragoon.jabber_id.blank? %>
   <h2>Instant Messengering Networks</h2>
   <dl>
-    <% unless @dragoon.windows_live_id.blank? %>
-      <dt>Windows Live ID:</dt>
-      <dd><%= @dragoon.windows_live_id %></dd>
-    <% end %>
     <% unless @dragoon.yahoo_id.blank? %>
       <dt>Yahoo! ID:</dt>
       <dd><%= @dragoon.yahoo_id %></dd>
@@ -113,7 +109,7 @@
       <dd><%= @dragoon.icq_number %></dd>
     <% end %>
     <% unless @dragoon.jabber_id.blank? %>
-      <dt>Jabber ID / Google Talk:</dt>
+      <dt>Jabber ID:</dt>
       <dd><%= @dragoon.jabber_id %></dd>
     <% end %>
     <% unless @dragoon.skype_name.blank? %>

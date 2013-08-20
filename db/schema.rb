@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130122054706) do
+ActiveRecord::Schema.define(:version => 20130820085816) do
 
   create_table "articles", :force => true do |t|
     t.string   "name"
@@ -117,7 +117,6 @@ ActiveRecord::Schema.define(:version => 20130122054706) do
     t.string   "playstation_network_online_id"
     t.string   "wii_number"
     t.string   "steam_username"
-    t.string   "windows_live_id"
     t.string   "yahoo_id"
     t.string   "aim_screenname"
     t.string   "icq_number"
