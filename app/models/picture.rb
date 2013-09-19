@@ -21,7 +21,7 @@ class Picture < ActiveRecord::Base
   validates_attachment_content_type :picture, :content_type => ['image/jpeg']
 
   has_attached_file :picture, 
-    :styles => { :mini_thumbnail => "75x75#", :thumbnail => "150x150>", 
+    :styles => { :mini_thumbnail => "75x75#", :thumbnail => "150x150>", :triple_thumbnail => "150x150#",
       :double_thumbnail => "240x240#", :single_thumbnail => "486x486>", :embedded => "625x625>" }, 
     :path => ":rails_root/public/system/:attachment/:id/:style/:picture_filename",
     :url => "/system/:attachment/:id/:style/:picture_filename"

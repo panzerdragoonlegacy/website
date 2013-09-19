@@ -130,6 +130,9 @@ module NewsEntriesHelper
         elsif img_count == 2
           img.set_attribute('src', picture.picture.url(:double_thumbnail))
           image_file = Paperclip::Geometry.from_file(picture.picture.path(:double_thumbnail))
+        elsif img_count == 3
+          img.set_attribute('src', picture.picture.url(:triple_thumbnail))
+          image_file = Paperclip::Geometry.from_file(picture.picture.path(:triple_thumbnail))
         else
           img.set_attribute('src', picture.picture.url(:mini_thumbnail))
           image_file = Paperclip::Geometry.from_file(picture.picture.path(:mini_thumbnail))
