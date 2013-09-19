@@ -11,8 +11,9 @@ module NewsEntriesHelper
     
     # Setup whitelist of html elements, attributes, and protocols that are allowed.
     allowed_elements = ['a', 'img', 'p', 'ul', 'ol', 'li', 'strong', 'em', 'cite', 
-      'blockquote', 'code', 'pre', 'dl', 'dt', 'dd', 'br', 'div', 'video', 'source', 'audio']
+      'blockquote', 'code', 'pre', 'dl', 'dt', 'dd', 'br', 'div', 'iframe', 'video', 'source', 'audio']
     allowed_attributes = {'a' => ['href'], 'img' => ['src', 'alt'], 
+      'iframe' => ['width', 'height', 'src', 'frameborder'],
       'video' => ['width', 'height', 'controls'],
       'audio' => ['controls'],
       'source' => ['type', 'src'],
@@ -24,6 +25,27 @@ module NewsEntriesHelper
       :protocols => allowed_protocols)
       
     html = Nokogiri::HTML.parse(html)      
+    
+    # Replace img tags with embedded YouTube video based on file prefix.
+    html.css('img').each do |tag|
+      file_name = tag.get_attribute('src')
+      
+      # If file prefix begins with "youtube:"
+      if file_name.split(':')[0] == 'youtube'
+        
+        # Replace surrounding paragraph with iframe:
+        tag.parent.name = 'iframe'
+        tag.parent.set_attribute('width', '486')
+        tag.parent.set_attribute('height', '320')
+        tag.parent.set_attribute('src', 'http://www.youtube.com/embed/' + file_name.split(':')[1])
+        tag.parent.set_attribute('frameborder', '0')
+      end
+    end
+    
+    # Remove leftover img tags within YouTube iframes:
+    html.css('iframe').each do |tag|
+      tag.children.remove
+    end
     
     # Replace img tags with audio and video tags based on file extension.
     html.css('img').each do |tag|
@@ -91,13 +113,27 @@ module NewsEntriesHelper
       div.search("img").wrap('<a></a>')
     end
     
+    # Finds out how many images are in the news entry.
+    img_count = 0
+    html.css('img').each do |img|
+      img_count = img_count + 1
+    end
+    
     # Sets correct id, src, width, and height attributes for the picture mini thumbnail.
     html.css('img').each do |img|
       file_name = img.get_attribute('src')
       picture_url = file_name.sub('.jpg', '')
       if picture = Picture.where(:url => picture_url).first
-        img.set_attribute('src', picture.picture.url(:mini_thumbnail))
-        image_file = Paperclip::Geometry.from_file(picture.picture.path(:mini_thumbnail))
+        if img_count == 1
+          img_set_attribute('src', picture.picture.url(:single_thumbnail))
+          image_file = Paperclip::Geometry.from_file(picture.picture.path(:single_thumbnail))
+        elsif img_count == 2
+          img_set_attribute('src', picture.picture.url(:double_thumbnail))
+          image_file = Paperclip::Geometry.from_file(picture.picture.path(:double_thumbnail))
+        else
+          img.set_attribute('src', picture.picture.url(:mini_thumbnail))
+          image_file = Paperclip::Geometry.from_file(picture.picture.path(:mini_thumbnail))
+        end
         img.set_attribute('width', image_file.width.to_i.to_s)
         img.set_attribute('height', image_file.height.to_i.to_s)
         img.set_attribute('alt', picture.name)
