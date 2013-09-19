@@ -125,10 +125,10 @@ module NewsEntriesHelper
       picture_url = file_name.sub('.jpg', '')
       if picture = Picture.where(:url => picture_url).first
         if img_count == 1
-          img_set_attribute('src', picture.picture.url(:single_thumbnail))
+          img.set_attribute('src', picture.picture.url(:single_thumbnail))
           image_file = Paperclip::Geometry.from_file(picture.picture.path(:single_thumbnail))
         elsif img_count == 2
-          img_set_attribute('src', picture.picture.url(:double_thumbnail))
+          img.set_attribute('src', picture.picture.url(:double_thumbnail))
           image_file = Paperclip::Geometry.from_file(picture.picture.path(:double_thumbnail))
         else
           img.set_attribute('src', picture.picture.url(:mini_thumbnail))
