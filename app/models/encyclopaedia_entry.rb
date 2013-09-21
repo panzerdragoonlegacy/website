@@ -23,7 +23,6 @@ class EncyclopaediaEntry < ActiveRecord::Base
   has_many :videos, :through => :relations, :source => :relatable, :source_type => 'Video'
   
   validates :name, :presence => true, :length => { :in => 2..100 }, :uniqueness => true
-  validates :encyclopaedia_entry_picture, :presence => true
   validates :information, :presence => true  
   validates :content, :presence => true
   validates :category, :presence => true
