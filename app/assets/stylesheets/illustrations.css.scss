@@ -131,24 +131,43 @@ div.sidebysideright {
 }
 
 div#popover_illustration {
+  border: $border-properties;
+  background-color: $input-background-colour;
+  @include gradients(bottom, #343434, #454545);
   display: none;
   position: fixed;
   border-radius: 10px;
-  width: 650px;
-  text-align: center;
-  top: 10%;
+  width: 700px;
+  top: 5%;
   float: left;
-  margin-left: 150px;
-  background-color: #000000;
-
+  margin-left: 125px;
+  
   img {
-    padding: 9px;
+    padding: 37px;
+    padding-top: 0;  
   }
-
+  
   p {
-    margin-bottom: 25px;
-    padding-left: 9px;
-    padding-right: 9px;
+    margin-top: 0;
+    margin-bottom: 37px;
+    padding-left: 37px;
+    padding-right: 37px;
     line-height: 2;
   }
+  
+  button {
+    padding: 10px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    color: white;
+  }
+  
+  button:hover {
+    color: $link-colour-1;
+  }  
 }
