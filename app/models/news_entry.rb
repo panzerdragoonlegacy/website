@@ -28,7 +28,7 @@ class NewsEntry < ActiveRecord::Base
       
       # Post the status update field + short URL to Twitter:
       client = Twitter::Client.new
-      if self.name[-1,1] == "?"
+      if self.name[-1] == "?" or self.name[-1] == "!"
         client.update(self.name + " " + self.short_url)
       else
         client.update(self.name + ": " + self.short_url)
