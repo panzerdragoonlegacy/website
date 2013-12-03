@@ -1,9 +1,5 @@
 class Chapter < ActiveRecord::Base
-  acts_as_url :story_chapter_name, :sync_url => true  
-  
-  def to_param
-    url
-  end
+  include Sluggable
   
   attr_accessible :story_id, :chapter_type, :number, :name, :content, :publish, 
     :illustrations_attributes

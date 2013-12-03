@@ -1,9 +1,5 @@
 class Download < ActiveRecord::Base
-  acts_as_url :name, :sync_url => true
-  
-  def to_param 
-    url
-  end
+  include Sluggable
   
   belongs_to :category
   has_many :contributions, :as => :contributable, :dependent => :destroy

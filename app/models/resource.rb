@@ -1,9 +1,5 @@
 class Resource < ActiveRecord::Base
-  acts_as_url :name, :sync_url => true
-  
-  def to_param 
-    url 
-  end
+  include Sluggable
   
   attr_accessible :category_id, :name, :content, :publish, :dragoon_ids, :encyclopaedia_entry_ids,
     :illustrations_attributes

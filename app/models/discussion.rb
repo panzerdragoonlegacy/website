@@ -1,9 +1,5 @@
 class Discussion < ActiveRecord::Base
-  acts_as_url :subject, :sync_url => true
-  
-  def to_param 
-    url 
-  end
+  include Sluggable
   
   belongs_to :dragoon
   belongs_to :forum
