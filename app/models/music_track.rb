@@ -1,8 +1,7 @@
 class MusicTrack < ActiveRecord::Base
-  acts_as_url :name, sync_url: true
   include Sluggable
+  include Categorisable
   
-  belongs_to :category
   has_many :contributions, :as => :contributable, :dependent => :destroy
   has_many :dragoons, :through => :contributions
   has_many :relations, :as => :relatable, :dependent => :destroy
@@ -12,7 +11,6 @@ class MusicTrack < ActiveRecord::Base
     :greater_than_or_equal_to => 0, :less_than_or_equal_to => 50 }
   validates :name, :presence => true, :length => { :in => 2..100 }, :uniqueness => true
   validates :description, :presence => true, :length => { :in => 2..250 }
-  validates :category, :presence => true  
   
   validates_attachment_presence :mp3_music_track
   validates_attachment_presence :ogg_music_track

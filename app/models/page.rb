@@ -1,5 +1,4 @@
 class Page < ActiveRecord::Base
-  acts_as_url :name, sync_url: true
   include Sluggable
   
   has_many :illustrations, :as => :illustratable, :dependent => :destroy

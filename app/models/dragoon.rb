@@ -1,5 +1,4 @@
 class Dragoon < ActiveRecord::Base
-  acts_as_url :name, sync_url: true
   include Sluggable
   
   attr_accessor :password

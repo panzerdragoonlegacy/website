@@ -1,8 +1,7 @@
 class EncyclopaediaEntry < ActiveRecord::Base
-  acts_as_url :name, sync_url: true
   include Sluggable
+  include Categorisable
   
-  belongs_to :category
   has_many :illustrations, :as => :illustratable, :dependent => :destroy
   accepts_nested_attributes_for :illustrations, :reject_if => lambda { |a| a[:illustration].blank? }, 
     :allow_destroy => true
@@ -22,7 +21,6 @@ class EncyclopaediaEntry < ActiveRecord::Base
   validates :name, :presence => true, :length => { :in => 2..100 }, :uniqueness => true
   validates :information, :presence => true  
   validates :content, :presence => true
-  validates :category, :presence => true
   
   validates_attachment_size :encyclopaedia_entry_picture, :less_than => 5.megabytes
   validates_attachment_content_type :encyclopaedia_entry_picture, :content_type => ['image/jpeg']

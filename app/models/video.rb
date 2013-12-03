@@ -1,8 +1,7 @@
 class Video < ActiveRecord::Base
-  acts_as_url :name, sync_url: true
   include Sluggable
+  include Categorisable
   
-  belongs_to :category
   has_many :contributions, :as => :contributable, :dependent => :destroy
   has_many :dragoons, :through => :contributions
   has_many :relations, :as => :relatable, :dependent => :destroy
@@ -10,7 +9,6 @@ class Video < ActiveRecord::Base
   
   validates :name, :presence => true, :length => { :in => 2..100 }, :uniqueness => true
   validates :description, :presence => true, :length => { :in => 2..250 }
-  validates :category, :presence => true  
   
   validates_attachment_presence :mp4_video
   validates_attachment_presence :webm_video

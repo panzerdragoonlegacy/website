@@ -1,5 +1,4 @@
 class Discussion < ActiveRecord::Base
-  acts_as_url :name, sync_url: true
   include Sluggable
   
   belongs_to :dragoon

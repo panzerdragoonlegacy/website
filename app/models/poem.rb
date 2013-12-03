@@ -1,5 +1,4 @@
 class Poem < ActiveRecord::Base
-  acts_as_url :name, sync_url: true
   include Sluggable
   
   has_many :contributions, :as => :contributable, :dependent => :destroy

@@ -1,5 +1,4 @@
 class NewsEntry < ActiveRecord::Base
-  acts_as_url :name, sync_url: true
   include Sluggable
 
   before_save :publish_news_entry
