@@ -1,12 +1,9 @@
 class MusicTrack < ActiveRecord::Base
-  include Sluggable
   include Categorisable
-  
-  has_many :contributions, :as => :contributable, :dependent => :destroy
-  has_many :dragoons, :through => :contributions
-  has_many :relations, :as => :relatable, :dependent => :destroy
-  has_many :encyclopaedia_entries, :through => :relations
-  
+  include Contributable
+  include Relatable
+  include Sluggable
+    
   validates :track_number, :presence => true, :numericality => { :only_integer => true,
     :greater_than_or_equal_to => 0, :less_than_or_equal_to => 50 }
   validates :name, :presence => true, :length => { :in => 2..100 }, :uniqueness => true

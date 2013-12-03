@@ -1,13 +1,11 @@
 class Chapter < ActiveRecord::Base
+  include Illustratable
   include Sluggable
   
   attr_accessible :story_id, :chapter_type, :number, :name, :content, :publish, 
     :illustrations_attributes
   
   belongs_to :story
-  has_many :illustrations, :as => :illustratable, :dependent => :destroy
-  accepts_nested_attributes_for :illustrations, :reject_if => lambda { |a| a[:illustration].blank? }, 
-    :allow_destroy => true
   
   validates :number, :presence => true, :numericality => { :only_integer => true,
     :greater_than => 0, :less_than => 100 }

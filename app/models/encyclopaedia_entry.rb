@@ -1,11 +1,8 @@
 class EncyclopaediaEntry < ActiveRecord::Base
-  include Sluggable
   include Categorisable
+  include Illustratable
+  include Sluggable
   
-  has_many :illustrations, :as => :illustratable, :dependent => :destroy
-  accepts_nested_attributes_for :illustrations, :reject_if => lambda { |a| a[:illustration].blank? }, 
-    :allow_destroy => true
-
   has_many :relations, :dependent => :destroy
   has_many :articles, :through => :relations, :source => :relatable, :source_type => 'Article'
   has_many :downloads, :through => :relations, :source => :relatable, :source_type => 'Download'

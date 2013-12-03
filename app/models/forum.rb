@@ -1,5 +1,4 @@
 class Forum < ActiveRecord::Base
-  acts_as_url :name, sync_url: true
   include Sluggable
 
   attr_accessible :name, :number, :description, :forum_picture
