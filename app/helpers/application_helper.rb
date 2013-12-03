@@ -17,14 +17,7 @@ module ApplicationHelper
       link_to(dragoon.name, dragoon)
     end
   end
-  
-  def friendly_date(datetime)
-    day = datetime.day.to_s
-    month = Date::MONTHNAMES[datetime.month].capitalize
-    year = datetime.year.to_s
-    return day + " " + month + ", " + year
-  end
-  
+    
   def display_emoticons(text)
     emoticons = Emoticon.all
     emoticons.each do |emoticon|

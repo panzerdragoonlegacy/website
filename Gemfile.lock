@@ -75,6 +75,8 @@ GEM
       activesupport (>= 3.0.0)
     kramdown (1.1.0)
     libv8 (3.11.8.17)
+    local_time (0.1.0)
+      coffee-rails
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -184,6 +186,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   kramdown
+  local_time
   mini_magick
   nested_form
   nokogiri

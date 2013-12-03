@@ -17,9 +17,9 @@
       <% end %>
     </div>
     <div class="comment_details">
-      <p class="name_and_date">Posted by <%= link_to @news_entry.dragoon.name, @news_entry.dragoon %>
+      <p class="name_and_date">Published by <%= link_to @news_entry.dragoon.name, @news_entry.dragoon %>
         <% if @news_entry.publish %>
-          on <%= friendly_date @news_entry.published_at %>.
+          <%= local_time_ago @news_entry.published_at %>.
         <% else %>
           - <span class="unpublished">Unpublished</span>
         <% end %>

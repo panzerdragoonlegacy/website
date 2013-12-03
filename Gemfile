@@ -31,6 +31,7 @@ gem 'nested_form'
 gem 'paperclip', '3.4.0'
 gem 'mini_magick'
 gem 'kaminari'
+gem 'local_time'
 gem 'stringex'
 gem 'pg'
 gem "bcrypt-ruby", :require => "bcrypt"

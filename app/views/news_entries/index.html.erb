@@ -23,7 +23,7 @@
           <h2><%= link_to news_entry.name, news_entry %></h2>
           <p>Posted by <%= link_to news_entry.dragoon.name, news_entry.dragoon %>
             <% if news_entry.publish %>
-              on <%= friendly_date news_entry.published_at %>.
+              <%= local_time_ago news_entry.published_at %>.
             <% else %>
               - <span class="unpublished">Unpublished</span>
             <% end %>
