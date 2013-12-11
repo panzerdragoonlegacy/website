@@ -10,6 +10,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'  
 end
 
+group :development do
+  gem 'capistrano', '2.15.5'
+end
+
 group :development, :test do
   gem 'debugger', '~> 1.6.3'
 end
@@ -21,7 +25,6 @@ end
 gem 'bcrypt-ruby', '~> 3.1.2', require: 'bcrypt'
 gem 'bitly', '~> 0.9.0'
 gem 'cancan', '~> 1.6.10'
-gem 'capistrano', '~> 3.0.1'
 gem 'country_select', '~> 1.2.0'
 gem 'jquery-rails', '~> 3.0.4'
 gem 'kaminari', '~> 0.15.0'
