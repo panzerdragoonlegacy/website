@@ -1,64 +1,39 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.16'
 gem 'sqlite3', '1.3.6'
 gem 'rack', '1.4.5'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-# Gems used only for assets and not required  
-# in production environments by default.  
 group :assets do  
-  gem 'sass-rails', " ~> 3.2.3"  
-  gem 'coffee-rails', " ~> 3.2.1"  
+  gem 'sass-rails', '~> 3.2.3'  
+  gem 'coffee-rails', '~> 3.2.1'  
   gem 'uglifier', '>= 1.0.3'  
 end
 
-gem 'jquery-rails'
-
-group :production do
-  gem 'therubyracer'
+group :development, :test do
+  gem 'debugger', '~> 1.6.3'
 end
 
-gem 'cancan'
-gem 'kramdown'
-gem 'rails_autolink'
-gem 'sanitize'
-gem 'nokogiri'
-gem 'jquery-rails'
-gem 'nested_form'
+group :production do
+  gem 'therubyracer', '~> 0.12.0'
+end
+
+gem 'bcrypt-ruby', '~> 3.1.2', require: 'bcrypt'
+gem 'bitly', '~> 0.9.0'
+gem 'cancan', '~> 1.6.10'
+gem 'capistrano', '~> 3.0.1'
+gem 'country_select', '~> 1.2.0'
+gem 'jquery-rails', '~> 3.0.4'
+gem 'kaminari', '~> 0.15.0'
+gem 'kramdown', '~> 1.3.0'
+gem 'local_time', '~> 0.2.0'
+gem 'mini_magick', '~> 3.7.0'
+gem 'nokogiri', '~> 1.6.0'
+gem 'nested_form', '~> 0.3.2'
 gem 'paperclip', '3.4.0'
-gem 'mini_magick'
-gem 'kaminari'
-gem 'local_time'
-gem 'stringex'
-gem 'pg'
-gem "bcrypt-ruby", :require => "bcrypt"
-gem 'twitter'
-gem 'bitly'
-gem "recaptcha", :require => "recaptcha/rails"
-gem "country_select"
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-gem 'capistrano'
-
-# To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
-# gem 'ruby-debug'
-# gem 'ruby-debug19'
-
-# Bundle the extra gems:
-# gem 'bj'
-# gem 'nokogiri'
-# gem 'sqlite3-ruby', :require => 'sqlite3'
-# gem 'aws-s3', :require => 'aws/s3'
-
-# Bundle gems for the local environment. Make sure to
-# put test-only gems in this group so their generators
-# and rake tasks are available in development mode:
-# group :development, :test do
-#   gem 'webrat'
-# end
+gem 'pg', '~> 0.17.0'
+gem 'rails_autolink', '~> 1.1.5'
+gem 'recaptcha', '~> 0.3.5', require: 'recaptcha/rails'
+gem 'sanitize', '~> 2.0.6'
+gem 'stringex', '~> 2.1.2'
+gem 'twitter', '~> 4.8.1'
