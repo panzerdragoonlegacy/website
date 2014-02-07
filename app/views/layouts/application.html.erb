@@ -105,6 +105,14 @@
               <% end %>
             </ul>
           <% end %>
+          <% unless @partner_sites.blank? %>
+            <h3>Partner Sites</h3>
+            <ul>
+              <% @partner_sites.each do |partner_site| %>
+                <li><%= link_to partner_site.name, partner_site.url %></li>
+              <% end %>
+            </ul>
+          <% end %>
         </div>
         <div id="content">
           <% flash.each do |name, msg| %>

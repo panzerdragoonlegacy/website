@@ -13,6 +13,9 @@
     <%= f.text_field :url %>  
   </div>
   <div>
+    <%= f.check_box :partner_site %> <%= f.label :partner_site, "Partner Site?" %>
+  </div>
+  <div>
     <%= f.label :description, "Description" %>
     <%= f.text_area :description, :rows => 5 %>  
   </div>
