@@ -4,6 +4,6 @@ class RemoveWindowsLiveIdFromDragoons < ActiveRecord::Migration
   end
 
   def down
-    add_column :dragoons, :windows_live_id
+    add_column :dragoons, :windows_live_id, :string
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140207223505) do
+ActiveRecord::Schema.define(:version => 20140212050651) do
 
   create_table "articles", :force => true do |t|
     t.string   "name"
@@ -201,9 +201,13 @@ ActiveRecord::Schema.define(:version => 20140207223505) do
     t.datetime "ogg_music_track_updated_at"
     t.boolean  "publish"
     t.integer  "category_id"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.integer  "track_number",                 :default => 0
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.integer  "track_number",                  :default => 0
+    t.string   "flac_music_track_file_name"
+    t.string   "flac_music_track_content_type"
+    t.integer  "flac_music_track_file_size"
+    t.datetime "flac_music_track_updated_at"
   end
 
   create_table "news_entries", :force => true do |t|

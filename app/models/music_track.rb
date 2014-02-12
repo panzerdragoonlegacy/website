@@ -11,8 +11,9 @@ class MusicTrack < ActiveRecord::Base
   
   validates_attachment_presence :mp3_music_track
   validates_attachment_presence :ogg_music_track
-  validates_attachment_size :mp3_music_track, :less_than => 50.megabytes
-  validates_attachment_size :ogg_music_track, :less_than => 50.megabytes
+  validates_attachment_size :mp3_music_track, :less_than => 25.megabytes
+  validates_attachment_size :ogg_music_track, :less_than => 25.megabytes
+  validates_attachment_size :flac_music_track, :less_than => 50.megabytes
   validates_attachment_content_type :mp3_music_track, :content_type => ['audio/mp3']
   validates_attachment_content_type :ogg_music_track, :content_type => ['audio/ogg']
 
@@ -22,8 +23,11 @@ class MusicTrack < ActiveRecord::Base
   has_attached_file :ogg_music_track,
     :path => ":rails_root/public/system/:attachment/:id/:style/:ogg_music_track_filename",
     :url => "/system/:attachment/:id/:style/:ogg_music_track_filename"
+  has_attached_file :flac_music_track,
+    :path => ":rails_root/public/system/:attachment/:id/:style/:flac_music_track_filename",
+    :url => "/system/:attachment/:id/:style/:flac_music_track_filename"
   
-  before_post_process :mp3_music_track_filename, :ogg_music_track_filename
+  before_post_process :mp3_music_track_filename, :ogg_music_track_filename, :flac_music_track_filename
   
   # Sets mp3_music_track filename in the database.
   def mp3_music_track_filename
@@ -39,6 +43,11 @@ class MusicTrack < ActiveRecord::Base
     end
   end
   
+  # Sets flac_music_track filename in the database.
+  def flac_music_track_filename
+    self.flac_music_track_file_name = self.name.to_url + ".flac"
+  end  
+  
   # Sets mp3_music_track filename in the file system.
   Paperclip.interpolates :mp3_music_track_filename do |attachment, style|
     attachment.instance.mp3_music_track_filename
@@ -47,5 +56,10 @@ class MusicTrack < ActiveRecord::Base
   # Sets ogg_music_track filename in the file system.
   Paperclip.interpolates :ogg_music_track_filename do |attachment, style|
     attachment.instance.ogg_music_track_filename
+  end
+  
+  # Sets flac_music_track filename in the file system.
+  Paperclip.interpolates :flac_music_track_filename do |attachment, style|
+    attachment.instance.flac_music_track_filename
   end
 end
