@@ -10,16 +10,16 @@ class EncyclopaediaEntriesController < ApplicationController
     @encyclopaedia_entry = EncyclopaediaEntry.find_by_url(params[:id])
     authorize @encyclopaedia_entry
 
-    @articles = ArticlePolicy::Scope.new(@encyclopaedia_entry.articles.order(:name)).resolve
-    @downloads = DownloadPolicy::Scope.new(@encyclopaedia_entry.downloads.order(:name)).resolve
-    @links = LinkPolicy::Scope.new(@encyclopaedia_entry.links.order(:name)).resolve
-    @music_tracks = MusicTrackPolicy::Scope.new(@encyclopaedia_entry.music_tracks.order(:name)).resolve
-    @pictures = PicturePolicy::Scope.new(@encyclopaedia_entry.pictures.order(:name)).resolve
-    @poems = PoemPolicy::Scope.new(@encyclopaedia_entry.poems.order(:name)).resolve
-    @quizzes = QuizPolicy::Scope.new(@encyclopaedia_entry.quizzes.order(:name)).resolve
-    @resources = ResourcePolicy::Scope.new(@encyclopaedia_entry.resources.order(:name)).resolve
-    @stories = StoryPolicy::Scope.new(@encyclopaedia_entry.stories.order(:name)).resolve
-    @videos = VideoPolicy::Scope.new(@encyclopaedia_entry.videos.order(:name)).resolve
+    @articles = ArticlePolicy::Scope.new(current_user, @encyclopaedia_entry.articles.order(:name)).resolve
+    @downloads = DownloadPolicy::Scope.new(current_user, @encyclopaedia_entry.downloads.order(:name)).resolve
+    @links = LinkPolicy::Scope.new(current_user, @encyclopaedia_entry.links.order(:name)).resolve
+    @music_tracks = MusicTrackPolicy::Scope.new(current_user, @encyclopaedia_entry.music_tracks.order(:name)).resolve
+    @pictures = PicturePolicy::Scope.new(current_user, @encyclopaedia_entry.pictures.order(:name)).resolve
+    @poems = PoemPolicy::Scope.new(current_user, @encyclopaedia_entry.poems.order(:name)).resolve
+    @quizzes = QuizPolicy::Scope.new(current_user, @encyclopaedia_entry.quizzes.order(:name)).resolve
+    @resources = ResourcePolicy::Scope.new(current_user, @encyclopaedia_entry.resources.order(:name)).resolve
+    @stories = StoryPolicy::Scope.new(current_user, @encyclopaedia_entry.stories.order(:name)).resolve
+    @videos = VideoPolicy::Scope.new(current_user, @encyclopaedia_entry.videos.order(:name)).resolve
   end
 
   def new

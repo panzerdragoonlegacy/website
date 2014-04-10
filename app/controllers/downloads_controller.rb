@@ -7,7 +7,7 @@ class DownloadsController < ApplicationController
       raise "Dragoon not found." unless @dragoon = Dragoon.find_by_url(params[:dragoon_id])
       @downloads = policy_scope(Download.joins(:contributions).where(contributions: { dragoon_id: @dragoon.id }).order(:name).page(params[:page]))
     else
-      @articles = policy_scope(Download.order(:name).page(params[:page]))
+      @downloads = policy_scope(Download.order(:name).page(params[:page]))
     end
   end
 
