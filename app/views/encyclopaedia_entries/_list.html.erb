@@ -1,4 +1,4 @@
-<% unless @encyclopaedia_entries.empty? %>
+<% if @encyclopaedia_entries %>
   <div id="resources">
     <% @encyclopaedia_entries.each do |encyclopaedia_entry| %>
       <div class="resource">
@@ -19,6 +19,5 @@
       </div>
     <% end %>
   </div>
+  <%= paginate @encyclopaedia_entries %>
 <% end %>
-
-<%= paginate @encyclopaedia_entries %>

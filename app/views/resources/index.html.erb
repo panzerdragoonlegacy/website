@@ -1,6 +1,10 @@
-<% title @title %>
+<% if @dragoon %>
+  <% title "#{@dragoon.name}'s Resources" %>
+<% else %>
+  <% title "Resources" %>
+<% end %>
 
-<% if can? :create, Resource %>
+<% if policy(Resource).new? %>
   <ul class="administration">
     <li><%= link_to 'New Resource', new_resource_path %></li>
   </ul>

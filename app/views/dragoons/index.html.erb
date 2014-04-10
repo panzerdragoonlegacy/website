@@ -1,12 +1,12 @@
 <% title "Dragoons" %>
 
-<% if can? :manage, Dragoon %>
+<% if policy(Dragoon).new? %>
   <ul class="administration">
     <li><%= link_to 'Register New Dragoon', new_dragoon_path %></li>
   </ul>
 <% end %>
 
-<% unless @dragoons.empty? %>
+<% if @dragoons %>
   <div id="resources">
     <% @dragoons.each do |dragoon| %>
       <div class="resource">
@@ -24,6 +24,5 @@
       </div>
     <% end %>
   </div>
+  <%= paginate @dragoons %>
 <% end %>
-
-<%= paginate @dragoons %>

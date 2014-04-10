@@ -1,52 +1,55 @@
 class NewsEntriesController < ApplicationController
-  before_filter :emoticons
-  load_resource :find_by => :url
-  authorize_resource
-  
+
   def index
     if params[:dragoon_id]
-      @dragoon = Dragoon.find_by_url(params[:dragoon_id])
-      @news_entries = NewsEntry.accessible_by(current_ability).where(:dragoon_id => @dragoon.id).order("created_at desc").page(params[:page])
-      @title = @dragoon.name + "'s News Entries"
+      raise "Dragoon not found." unless @dragoon = Dragoon.find_by_url(params[:dragoon_id])
+      @news_entries = policy_scope(NewsEntry.where(dragoon_id: @dragoon.id).order("created_at desc").page(params[:page]))
     else
-      @news_entries = NewsEntry.accessible_by(current_ability).order("created_at desc").page(params[:page])
-      @title = "Panzer Dragoon and Crimson Dragon News"
+      @news_entries = policy_scope(NewsEntry.order("created_at desc").page(params[:page]))
     end
   end
 
   def show
-    @dragoon = @news_entry.dragoon
-    @commentable = @news_entry
-    @comment = Comment.new
-    session[:redirect_path] = request.fullpath
+    @news_entry = NewsEntry.find_by_url(params[:id])
+    authorize @news_entry
+  end
+
+  def new
+    @news_entry = NewsEntry.new
+    authorize @news_entry
   end
 
   def create 
     @news_entry = NewsEntry.new(params[:news_entry])
+    authorize @news_entry
     @news_entry.dragoon = current_dragoon
     if @news_entry.save
-      redirect_to @news_entry, :notice => "Successfully created news entry."
+      redirect_to @news_entry, notice: "Successfully created news entry."
     else
-      render 'new'
+      render :new
     end
+  end
+
+  def edit
+    @news_entry = NewsEntry.find_by_url(params[:id])
+    authorize @news_entry
   end
   
   def update
+    @news_entry = NewsEntry.find_by_url(params[:id])
+    authorize @news_entry
     if @news_entry.update_attributes(params[:news_entry])
-      redirect_to @news_entry, :notice => "Successfully updated news entry."
+      redirect_to @news_entry, notice: "Successfully updated news entry."
     else
-      render 'edit'
+      render :edit
     end
   end
 
-  def destroy    
+  def destroy
+    @news_entry = NewsEntry.find_by_url(params[:id])
+    authorize @news_entry
     @news_entry.destroy
-    redirect_to news_entries_path, :notice => "Successfully destroyed news entry."
+    redirect_to news_entries_path, notice: "Successfully destroyed news entry."
   end
   
-private
-
-  def emoticons
-    @emoticons = Emoticon.order(:name)
-  end
 end

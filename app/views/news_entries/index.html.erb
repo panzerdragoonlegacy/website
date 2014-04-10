@@ -1,14 +1,18 @@
-<% title @title %>
+<% if @dragoon %>
+  <% title "#{@dragoon.name}'s News Entries" %>
+<% else %>
+  <% title "News Entries" %>
+<% end %>
 
 <p><%= link_to "Sign the petition for a rerelease of the Panzer Dragoon games!", "http://www.panzerdragoonrevival.com" %></p>
 
-<% if can? :create, NewsEntry %>
+<% if policy(NewsEntry).new? %>
   <ul class="administration">
     <li><%= link_to 'New News Entry', new_news_entry_path %></li>
   </ul>
 <% end %>
 
-<% unless @news_entries.empty? %>
+<% if @news_entries %>
   <div id="resources">
     <% @news_entries.each do |news_entry| %>
       <div class="resource">
@@ -33,6 +37,5 @@
       </div>
     <% end %>
   </div>
+  <%= paginate @news_entries %>
 <% end %>
-
-<%= paginate @news_entries %>

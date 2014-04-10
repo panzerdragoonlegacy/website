@@ -4,7 +4,7 @@
   <p class="unpublished">Unpublished</p>
 <% end %>
 
-<% if can? :manage, @picture %>
+<% if policy(@picture).edit? && policy(@picture).destroy? %>
   <ul class="administration">
     <li><%= link_to 'Edit Picture', edit_picture_path(@picture) %></li>
     <li><%= link_to 'Delete Picture', @picture, :confirm => 'Are you sure you want to delete this picture?', :method => :delete %></li>

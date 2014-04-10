@@ -1,4 +1,4 @@
-<% unless @pictures.empty? %>
+<% if @pictures %>
   <div id="resources">
     <% @pictures.each do |picture| %>
       <div class="resource">
@@ -15,6 +15,5 @@
       </div>
     <% end %>
   </div>
+  <%= paginate @pictures %>
 <% end %>
-
-<%= paginate @pictures %>

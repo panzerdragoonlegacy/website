@@ -1,50 +1,78 @@
 class CategoriesController < ApplicationController
-  load_resource :find_by => :url
-  authorize_resource
   
   def index
-    @article_categories = Category.accessible_by(current_ability).where(:category_type => :article).order(:name)
-    @download_categories = Category.accessible_by(current_ability).where(:category_type => :download).order(:name)
-    @encyclopaedia_entry_categories = Category.accessible_by(current_ability).where(:category_type => :encyclopaedia_entry).order(:name)
-    @link_categories = Category.accessible_by(current_ability).where(:category_type => :link).order(:name)
-    @music_track_categories = Category.accessible_by(current_ability).where(:category_type => :music_track).order(:name)
-    @picture_categories = Category.accessible_by(current_ability).where(:category_type => :picture).order(:name)
-    @resource_categories = Category.accessible_by(current_ability).where(:category_type => :resource).order(:name)
-    @story_categories = Category.accessible_by(current_ability).where(:category_type => :story).order(:name)
-    @video_categories = Category.accessible_by(current_ability).where(:category_type => :video).order(:name)
+    @article_categories = policy_scope(Category.where(category_type: :article).order(:name))
+    @download_categories = policy_scope(Category.where(category_type: :download).order(:name))
+    @encyclopaedia_entry_categories = policy_scope(Category.where(category_type: :encyclopaedia_entry).order(:name))
+    @link_categories = policy_scope(Category.where(category_type: :link).order(:name))
+    @music_track_categories = policy_scope(Category.where(category_type: :music_track).order(:name))
+    @picture_categories = policy_scope(Category.where(category_type: :picture).order(:name))
+    @resource_categories = policy_scope(Category.where(category_type: :resource).order(:name))
+    @story_categories = policy_scope(Category.where(category_type: :story).order(:name))
+    @video_categories = policy_scope(Category.where(category_type: :video).order(:name))
   end
 
   def show
-    @articles = Article.accessible_by(current_ability).where(:category_id => @category.id).order(:name).page(params[:page])
-    @downloads = Download.accessible_by(current_ability).where(:category_id => @category.id).order(:name).page(params[:page])
-    @encyclopaedia_entries = EncyclopaediaEntry.accessible_by(current_ability).where(:category_id => @category.id).order(:name).page(params[:page])
-    @links = Link.accessible_by(current_ability).where(:category_id => @category.id).order(:name).page(params[:page])
-    @music_tracks = MusicTrack.accessible_by(current_ability).where(:category_id => @category.id).order(:track_number).order(:name).page(params[:page])
-    @pictures = Picture.accessible_by(current_ability).where(:category_id => @category.id).order(:name).page(params[:page])
-    @resources = Resource.accessible_by(current_ability).where(:category_id => @category.id).order(:name).page(params[:page])
-    @stories = Story.accessible_by(current_ability).where(:category_id => @category.id).order(:name).page(params[:page])
-    @videos = Video.accessible_by(current_ability).where(:category_id => @category.id).order(:name).page(params[:page])
+    @category = Category.find_by_url(params[:id])
+    authorize @category
+
+    # This could potentially be replaced with @category.articles, @category.downloads, etc
+    case @category.category_type
+    when "article"
+      @articles = ArticlePolicy::Scope.new(current_user, Article.where(category_id: @category.id).order(:name).page(params[:page])).resolve
+    when "download"
+      @downloads = DownloadPolicy::Scope.new(current_user, Download.where(category_id: @category.id).order(:name).page(params[:page])).resolve
+    when "encyclopaedia_entry"
+      @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(current_user, EncyclopaediaEntry.where(category_id: @category.id).order(:name).page(params[:page])).resolve
+    when "link"
+      @links = LinkPolicy::Scope.new(current_user, Link.where(category_id: @category.id).order(:name).page(params[:page])).resolve
+    when "music_track"
+      @music_tracks = MusicTrackPolicy::Scope.new(current_user, MusicTrack.where(category_id: @category.id).order(:track_number).order(:name).page(params[:page])).resolve
+    when "picture"
+      @pictures = PicturePolicy::Scope.new(current_user, Picture.where(category_id: @category.id).order(:name).page(params[:page])).resolve
+    when "resource"
+      @resources = ResourcePolicy::Scope.new(current_user, Resource.where(category_id: @category.id).order(:name).page(params[:page])).resolve
+    when "story"
+      @stories = StoryPolicy::Scope.new(current_user, Story.where(category_id: @category.id).order(:name).page(params[:page])).resolve
+    when "video"
+      @videos = VideoPolicy::Scope.new(current_user, Video.where(category_id: @category.id).order(:name).page(params[:page])).resolve
+    end
+  end
+
+  def new
+    @category = Category.new
+    authorize @category
   end
   
   def create  
     @category = Category.new(params[:category])
+    authorize @category
     if @category.save
-      redirect_to @category, :notice => "Successfully created category."
+      redirect_to @category, notice: "Successfully created category."
     else  
-      render 'new'
+      render :new
     end
   end
   
+  def edit
+    @category = Category.find_by_url(params[:id])
+    authorize @category
+  end
+
   def update
+    @category = Category.find_by_url(params[:id])
+    authorize @category
     if @category.update_attributes(params[:category])
-      redirect_to @category, :notice => "Successfully updated category."
+      redirect_to @category, notice: "Successfully updated category."
     else
-      render 'edit'
+      render :edit
     end
   end
 
   def destroy
     @category.destroy
-    redirect_to categories_path, :notice => "Successfully destroyed category."
+    authorize @category
+    redirect_to categories_path, notice: "Successfully destroyed category."
   end
+
 end

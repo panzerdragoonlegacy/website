@@ -4,7 +4,7 @@
   <p class="unpublished">Unpublished</p>
 <% end %>
 
-<% if can? :manage, @category %>
+<% if  policy(@category).edit? && policy(@category).destroy? %>
   <ul class="administration">
     <li><%= link_to 'Edit Category', edit_category_path(@category) %></li>
     <li><%= link_to 'Delete Category', @category, :confirm => 'Are you sure you want to delete this category? ALL items belonging to this category will be deleted.', :method => :delete %></li>
@@ -13,55 +13,55 @@
 
 <%= @category.description %>
 
-<% unless @articles.empty? %>
+<% if @articles %>
   <h2>Articles in this Category</h2>
   <%= render 'articles/list' %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Articles', articles_path %></p>
 <% end %>
 
-<% unless @downloads.empty? %>
+<% if @downloads %>
   <h2>Downloads in this Category</h2>
   <%= render 'downloads/list' %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Downloads', downloads_path %></p>
 <% end %>
 
-<% unless @encyclopaedia_entries.empty? %>
+<% if @encyclopaedia_entries %>
   <h2>Encyclopaedia Entries in this Category</h2>
   <%= render 'encyclopaedia_entries/list' %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Encyclopaedia', encyclopaedia_entries_path %></p>
 <% end %>
 
-<% unless @links.empty? %>
+<% if @links %>
   <h2>Links in this Category</h2>
   <%= render 'links/list' %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Links', links_path %></p>
 <% end %>
 
-<% unless @music_tracks.empty? %>
+<% if @music_tracks %>
   <h2>Music Tracks in this Category</h2>
   <%= render 'music_tracks/list' %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Music', music_tracks_path %></p>
 <% end %>
 
-<% unless @pictures.empty? %>
+<% if @pictures %>
   <h2>Pictures in this Category</h2>
   <%= render 'pictures/list' %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Pictures', pictures_path %></p>
 <% end %>
 
-<% unless @resources.empty? %>
+<% if @resources %>
   <h2>Resources in this Category</h2>
   <%= render 'resources/list' %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Resources', resources_path %></p>
 <% end %>
 
-<% unless @stories.empty? %>
+<% if @stories %>
   <h2>Stories in this Category</h2>
   <%= render 'stories/list' %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Stories', stories_path %></p>
 <% end %>
 
-<% unless @videos.empty? %>
+<% if @videos %>
   <h2>Videos in this Category</h2>
   <%= render 'videos/list' %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Videos', videos_path %></p>

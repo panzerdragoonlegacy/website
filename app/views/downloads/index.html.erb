@@ -1,6 +1,10 @@
-<% title @title %>
+<% if @dragoon %>
+  <% title "#{@dragoon.name}'s Downloads" %>
+<% else %>
+  <% title "Downloads" %>
+<% end %>
 
-<% if can? :create, Download %>
+<% if policy(Download).new? %>
   <ul class="administration">
     <li><%= link_to 'New Download', new_download_path %></li>
   </ul>

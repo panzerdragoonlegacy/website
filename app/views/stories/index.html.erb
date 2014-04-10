@@ -1,6 +1,10 @@
-<% title @title %>
+<% if @dragoon %>
+  <% title "#{@dragoon.name}'s Stories" %>
+<% else %>
+  <% title "Stories" %>
+<% end %>
 
-<% if can? :create, Story %>
+<% if policy(Story).new? %>
   <ul class="administration">
     <li><%= link_to 'New Story', new_story_path %></li>
   </ul>

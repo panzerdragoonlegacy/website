@@ -1,6 +1,11 @@
 class Chapter < ActiveRecord::Base
   include Illustratable
-  include Sluggable
+  
+  acts_as_url :story_chapter_name, sync_url: true  
+  
+  def to_param
+    url
+  end
   
   attr_accessible :story_id, :chapter_type, :number, :name, :content, :publish, 
     :illustrations_attributes

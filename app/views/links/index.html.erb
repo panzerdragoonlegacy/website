@@ -1,13 +1,17 @@
-<% title @title %>
+<% if @dragoon %>
+  <% title "#{@dragoon.name}'s Links" %>
+<% else %>
+  <% title "Links" %>
+<% end %>
 
-<% if can? :create, Link %>
+<% if policy(Link).new? %>
   <ul class="administration">
     <li><%= link_to 'New Link', new_link_path %></li>
   </ul>
 <% end %>
 
 <% unless params[:dragoon_id] %>
-  <% unless @categories.empty? %>
+  <% if @categories %>
     <h2>Link Categories</h2>
     <ul>
       <% @categories.each do |category| %>
@@ -15,7 +19,7 @@
       <% end %>
     </ul>
   <% end %>
-  <% unless @links.empty? %>
+  <% if @links %>
     <h2>All Links</h2>
   <% end %>
 <% end %>

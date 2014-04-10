@@ -1,5 +1,12 @@
-class ApplicationController < ActionController::Base  
+class ApplicationController < ActionController::Base
+  
+  include Pundit
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  after_filter :verify_authorized, except: :index
+  after_filter :verify_policy_scoped, only: :index
+
   protect_from_forgery
+  helper_method :current_user
   helper_method :current_dragoon
   helper_method :current_ability
   helper_method :projects
@@ -7,7 +14,16 @@ class ApplicationController < ActionController::Base
   before_filter :partner_sites
       
   private
-  
+
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(request.referrer || root_path)
+  end
+
+  def current_user
+    current_dragoon
+  end
+
   def current_dragoon
     if session[:dragoon_id]
       @current_dragoon = Dragoon.find(session[:dragoon_id])
@@ -23,12 +39,7 @@ class ApplicationController < ActionController::Base
   def remember_token
     cookies.signed[:remember_token] || [nil, nil]
   end
-  
-  # Overrides default method used by CanCan.
-  def current_ability
-    @current_ability ||= Ability.new(current_dragoon)
-  end
-  
+    
   def set_dragoon_time_zone
     Time.zone = current_dragoon.time_zone if current_dragoon
   end
@@ -42,4 +53,5 @@ class ApplicationController < ActionController::Base
       @projects = Project.order(:name).joins(:project_members).where(:project_members => {:dragoon_id => @current_dragoon.id})
     end
   end
+
 end

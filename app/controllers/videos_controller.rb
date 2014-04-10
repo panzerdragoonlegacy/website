@@ -1,52 +1,63 @@
 class VideosController < ApplicationController
+
   before_filter :categories
-  load_resource :find_by => :url
-  authorize_resource
-    
+  
   def index
     if params[:dragoon_id]
-      @dragoon = Dragoon.find_by_url(params[:dragoon_id])
-      @videos = Video.accessible_by(current_ability).joins(:contributions).where(:contributions => {:dragoon_id => @dragoon.id}).order(:name).page(params[:page])
-      @title = @dragoon.name + "'s Videos"
+      raise "Dragoon not found." unless @dragoon = Dragoon.find_by_url(params[:dragoon_id])
+      @videos = policy_scope(Video.joins(:contributions).where(contributions: { dragoon_id: @dragoon.id }).order(:name).page(params[:page]))
     else
-      @videos = Video.accessible_by(current_ability).order(:name).page(params[:page])
-      @title = "Videos"
+      @videos = policy_scope(Video.order(:name).page(params[:page]))
     end
   end
 
   def show
-    @commentable = @video
-    @comment = Comment.new
-    session[:redirect_path] = request.fullpath
-    @emoticons = Emoticon.order(:name)
+    @video = Video.find_by_url(params[:id])
+    authorize @video
+  end
+
+  def new
+    @video = Video.new
+    authorize @video
   end
   
   def create 
     @video = Video.new(params[:video])
+    authorize @video
     if @video.save
-      redirect_to @video, :notice => "Successfully created video."
+      redirect_to @video, notice: "Successfully created video."
     else
-      render 'new'
+      render :new
     end
+  end
+
+  def edit
+    @video = Video.find_by_url(params[:id])
+    authorize @video
   end
   
   def update
-    params[:video][:dragoon_ids] ||= []  
+    @video = Video.find_by_url(params[:id])
+    authorize @video
+    params[:video][:dragoon_ids] ||= []
     if @video.update_attributes(params[:video])
-      redirect_to @video, :notice => "Successfully updated video."
+      redirect_to @video, notice: "Successfully updated video."
     else
-      render 'edit'
+      render :edit
     end
   end
 
-  def destroy    
+  def destroy
+    @video = Video.find_by_url(params[:id])
+    authorize @video
     @video.destroy
-    redirect_to videos_path, :notice => "Successfully destroyed video."
+    redirect_to videos_path, notice: "Successfully destroyed video."
   end
   
-private
+  private
 
   def categories
-    @categories = Category.accessible_by(current_ability).where(:category_type => :video).order(:name)
+    @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :video).order(:name)).resolve
   end
+
 end

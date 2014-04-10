@@ -4,7 +4,7 @@
   <p class="unpublished">Unpublished</p>
 <% end %>
 
-<% if can? :manage, @resource %>
+<% if policy(@resource).edit? && policy(@resource).destroy? %>
   <ul class="administration">
     <li><%= link_to 'Edit Resource', edit_resource_path(@resource) %></li>
     <li><%= link_to 'Delete Resource', @resource, :confirm => 'Are you sure you want to delete this resource?', :method => :delete %></li>

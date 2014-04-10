@@ -1,51 +1,59 @@
 class ChaptersController < ApplicationController
-  load_resource :find_by => :url
-  authorize_resource
   
-  def show
+  def show    
+    @chapter = Chapter.find_by_url(params[:id])
+    authorize @chapter
     previous_and_next_chapters
-    @commentable = @chapter
-    @comment = Comment.new
-    session[:redirect_path] = request.fullpath
-    @emoticons = Emoticon.all
   end
 
   def new
-    if params[:story]
-      @chapter.story_id = Story.find_by_url(params[:story]).id
-    end
+    story = Story.find_by_url(params[:story])
+    raise "Story not found." unless story.present?
+    @chapter = Chapter.new(story_id: story.id)
+    authorize @chapter
   end
 
   def create
     @chapter = Chapter.new(params[:chapter])
+    authorize @chapter
     if @chapter.save
-      redirect_to @chapter, :notice => "Successfully created chapter."
+      redirect_to @chapter, notice: "Successfully created chapter."
     else
-      render 'new'
+      render :new
     end
+  end
+
+  def edit
+    @chapter = Chapter.find_by_url(params[:id])
+    authorize @chapter
   end
   
   def update
+    @chapter = Chapter.find_by_url(params[:id])
+    authorize @chapter
     if @chapter.update_attributes(params[:chapter])
-      redirect_to @chapter, :notice => "Successfully updated chapter."
+      redirect_to @chapter, notice: "Successfully updated chapter."
     else
-      render 'edit'
+      render :edit
     end
   end
 
-  def destroy    
+  def destroy
+    @chapter = Chapter.find_by_url(params[:id])
+    authorize @chapter
     story = @chapter.story
     @chapter.destroy
-    redirect_to story_path(story), :notice => "Successfully destroyed chapter."
+    redirect_to story_path(story), notice: "Successfully destroyed chapter."
   end
   
-private
+  private
 
   def previous_and_next_chapters
-    all_chapters =  @chapter.story.chapters.accessible_by(current_ability)
-    prologues = @chapter.story.chapters.accessible_by(current_ability).where(:chapter_type => :prologue).order(:number)
-    regular_chapters = @chapter.story.chapters.accessible_by(current_ability).where(:chapter_type => :regular_chapter).order(:number)
-    epilogues = @chapter.story.chapters.accessible_by(current_ability).where(:chapter_type => :epilogue).order(:number)
+    all_chapters =  policy_scope(@chapter.story.chapters)
+    prologues = policy_scope(@chapter.story.chapters.where(chapter_type: :prologue).order(:number))
+    regular_chapters = policy_scope(@chapter.story.chapters.where(chapter_type: :regular_chapter).order(:number))
+    epilogues = policy_scope(@chapter.story.chapters.where(chapter_type: :epilogue).order(:number))
+
     all_chapters.each do |chapter|
       if (chapter.number == @chapter.number - 1) && (chapter.chapter_type == @chapter.chapter_type)
         @previous_chapter = chapter

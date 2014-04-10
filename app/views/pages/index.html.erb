@@ -1,12 +1,12 @@
 <% title "Pages" %>
 
-<% if can? :manage, Page %>
+<% if policy(Page).new? %>
   <ul class="administration">
     <li><%= link_to 'New Page', new_page_path %></li>
   </ul>
 <% end %>
 
-<% unless @pages.empty? %>
+<% if @pages %>
   <div id="resources">
     <% @pages.each do |page| %>
       <div class="resource">
@@ -20,6 +20,5 @@
       </div>
     <% end %>
   </div>
+  <%= paginate @pages %>
 <% end %>
-
-<%= paginate @pages %>

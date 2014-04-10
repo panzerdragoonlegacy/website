@@ -1,6 +1,10 @@
-<% title @title %>
+<% if @dragoon %>
+  <% title "#{@dragoon.name}'s Music Tracks" %>
+<% else %>
+  <% title "Music Tracks" %>
+<% end %>
 
-<% if can? :create, MusicTrack %>
+<% if policy(MusicTrack).new? %>
   <ul class="administration">
     <li><%= link_to 'New Music Track', new_music_track_path %></li>
   </ul>
@@ -20,7 +24,7 @@
   <% end %>
 <% end %>
 
-<% unless @music_tracks.empty? %>
+<% if @music_tracks %>
   <div id="resources">
     <% @music_tracks.each do |music_track| %>
       <div class="resource">
@@ -34,6 +38,5 @@
       </div>
     <% end %>
   </div>
+  <%= paginate @music_tracks %>
 <% end %>
-
-<%= paginate @music_tracks %>

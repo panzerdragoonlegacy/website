@@ -1,4 +1,4 @@
-<% unless @music_tracks.empty? %>
+<% if @music_tracks %>
   <div id="resources">
     <% @music_tracks.each do |music_track| %>
       <div class="resource">
@@ -12,6 +12,5 @@
       </div>
     <% end %>
   </div>
+  <%= paginate @music_tracks %>
 <% end %>
-
-<%= paginate @music_tracks %>

@@ -1,51 +1,63 @@
 class PicturesController < ApplicationController
+
   before_filter :categories
-  load_resource :find_by => :url
-  authorize_resource
-    
+  
   def index
     if params[:dragoon_id]
-      @dragoon = Dragoon.find_by_url(params[:dragoon_id])
-      @pictures = Picture.accessible_by(current_ability).joins(:contributions).where(:contributions => {:dragoon_id => @dragoon.id}).order(:name).page(params[:page])
-      @title = @dragoon.name + "'s Pictures"
+      raise "Dragoon not found." unless @dragoon = Dragoon.find_by_url(params[:dragoon_id])
+      @pictures = policy_scope(Picture.joins(:contributions).where(contributions: { dragoon_id: @dragoon.id }).order(:name).page(params[:page]))
     else
-      @pictures = Picture.accessible_by(current_ability).order(:name).page(params[:page])
-      @title = "Pictures"
+      @pictures = policy_scope(Picture.order(:name).page(params[:page]))
     end
   end
 
   def show
-    @commentable = @picture
-    @comment = Comment.new
-    session[:redirect_path] = request.fullpath
-    @emoticons = Emoticon.order(:name)
+    @picture = Picture.find_by_url(params[:id])
+    authorize @picture
+  end
+
+  def new
+    @picture = Picture.new
+    authorize @picture
   end
   
-  def create
+  def create 
     @picture = Picture.new(params[:picture])
+    authorize @picture
     if @picture.save
-      redirect_to @picture, :notice => "Successfully created picture."
-    else  
-      render 'new'
+      redirect_to @picture, notice: "Successfully created picture."
+    else
+      render :new
     end
+  end
+
+  def edit
+    @picture = Picture.find_by_url(params[:id])
+    authorize @picture
   end
   
   def update
+    @picture = Picture.find_by_url(params[:id])
+    authorize @picture
+    params[:picture][:dragoon_ids] ||= []
     if @picture.update_attributes(params[:picture])
-      redirect_to @picture, :notice => "Successfully updated picture."
+      redirect_to @picture, notice: "Successfully updated picture."
     else
-      render 'edit'
+      render :edit
     end
   end
 
   def destroy
+    @picture = Picture.find_by_url(params[:id])
+    authorize @picture
     @picture.destroy
-    redirect_to pictures_path, :notice => "Successfully destroyed picture."
+    redirect_to pictures_path, notice: "Successfully destroyed picture."
   end
-
-private
+  
+  private
 
   def categories
-    @categories = Category.accessible_by(current_ability).where(:category_type => :picture).order(:name)
+    @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :picture).order(:name)).resolve
   end
+
 end

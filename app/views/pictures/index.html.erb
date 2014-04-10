@@ -1,6 +1,10 @@
-<% title @title %>
+<% if @dragoon %>
+  <% title "#{@dragoon.name}'s Pictures" %>
+<% else %>
+  <% title "Pictures" %>
+<% end %>
 
-<% if can? :create, Picture %>
+<% if policy(Picture).new? %>
   <ul class="administration">
     <li><%= link_to 'New Picture', new_picture_path %></li>
   </ul>

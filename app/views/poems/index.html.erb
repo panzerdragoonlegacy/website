@@ -1,12 +1,16 @@
-<% title @title %>
+<% if @dragoon %>
+  <% title "#{@dragoon.name}'s Poems" %>
+<% else %>
+  <% title "Poems" %>
+<% end %>
 
-<% if can? :create, Poem %>
+<% if policy(Poem).new? %>
   <ul class="administration">
     <li><%= link_to 'New Poem', new_poem_path %></li>
   </ul>
 <% end %>
 
-<% unless @poems.empty? %>
+<% if @poems %>
   <div id="resources">
     <% @poems.each do |poem| %>
       <div class="resource">
@@ -20,6 +24,5 @@
       </div>
     <% end %>
   </div>
+  <%= paginate @poems %>
 <% end %>
-
-<%= paginate @poems %>

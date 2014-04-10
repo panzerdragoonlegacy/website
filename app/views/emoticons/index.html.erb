@@ -1,12 +1,12 @@
 <% title "Emoticons" %>
 
-<% if can? :create, Emoticon %>
+<% if policy(Emoticon).new? %>
   <ul class="administration">
     <li><%= link_to 'New Emoticon', new_emoticon_path %></li>
   </ul>
 <% end %>
 
-<% unless @emoticons.empty? %>
+<% if @emoticons %>
   <div id="resources">
     <% @emoticons.each do |emoticon| %>
       <div class="resource">
@@ -22,6 +22,5 @@
       </div>
     <% end %>
   </div>
+  <%= paginate @emoticons %>
 <% end %>
-
-<%= paginate @emoticons %>

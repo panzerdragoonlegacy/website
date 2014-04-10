@@ -1,6 +1,6 @@
 <% title "Encyclopaedia" %>
 
-<% if can? :create, EncyclopaediaEntry %>
+<% if policy(EncyclopaediaEntry).new? %>
   <ul class="administration">
     <li><%= link_to 'New Encyclopaedia Entry', new_encyclopaedia_entry_path %></li>
   </ul>

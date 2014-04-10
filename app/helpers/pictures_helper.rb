@@ -1,5 +1,5 @@
 module PicturesHelper
-  
+
   def picture_tag(picture, style)
     image_file = Paperclip::Geometry.from_file(picture.picture.path(style))
     image_tag(picture.picture.url(style), 

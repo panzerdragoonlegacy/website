@@ -1,6 +1,10 @@
-<% title @title %>
+<% if @dragoon %>
+  <% title "#{@dragoon.name}'s Videos" %>
+<% else %>
+  <% title "Videos" %>
+<% end %>
 
-<% if can? :create, Video %>
+<% if policy(Video).new? %>
   <ul class="administration">
     <li><%= link_to 'New Video', new_video_path %></li>
   </ul>

@@ -4,7 +4,7 @@
   <p class="unpublished">Unpublished</p>
 <% end %>
 
-<% if can? :manage, @story %>
+<% if policy(Chapter).new? && policy(@story).edit? && policy(@story).destroy? %>
   <ul class="administration">
     <li><%= link_to 'Add Chapter', new_chapter_path(:story => @story) %>
     <li><%= link_to 'Edit Story', edit_story_path(@story) %></li>

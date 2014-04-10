@@ -4,7 +4,7 @@
   <p class="unpublished">Unpublished</p>
 <% end %>
 
-<% if can? :manage, @download %>
+<% if policy(@download).edit? && policy(@download).destroy? %>
   <ul class="administration">
     <li><%= link_to 'Edit Download', edit_download_path(@download) %></li>
     <li><%= link_to 'Delete Download', @download, :confirm => 'Are you sure you want to delete this download?', :method => :delete %></li>

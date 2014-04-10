@@ -1,6 +1,6 @@
 <% title @dragoon.name %>
 
-<% if can? :manage, @dragoon %>
+<% if policy(@dragoon).edit? %>
   <ul id="administration">
     <li><%= link_to 'Edit Profile', edit_dragoon_path(@dragoon) %></li>
   </ul>
@@ -158,20 +158,5 @@
   </ul>
   <p>Total: <%= pluralize(website_contributions_count(@dragoon), 'website contribution') %>.</p>
 <% end%>
-
-<% if can? :manage, Discussion %>
-  <% unless community_contributions_count(@dragoon) == 0 %>
-    <h2>Community Contributions</h2>
-    <ul>  
-      <% unless discussion_count(@dragoon) == 0 %>
-        <li><%= link_to pluralize(discussion_count(@dragoon), 'discussion'), dragoon_discussions_path(@dragoon) %></li>
-      <% end %>
-      <% unless comment_count(@dragoon) == 0 %>
-        <li><%= link_to pluralize(comment_count(@dragoon), 'comment'), dragoon_comments_path(@dragoon) %></li>
-      <% end %>
-    </ul>
-    <p>Total: <%= pluralize(community_contributions_count(@dragoon), 'community contribution') %>.</p>
-  <% end %>
-<% end %>
 
 <p class="links"><%= link_to 'Dragoons', dragoons_path %></p>

@@ -1,4 +1,7 @@
-class SessionsController < ApplicationController  
+class SessionsController < ApplicationController
+
+  after_filter :verify_authorized, except: [:new, :create, :destroy]
+
   def new
   end
     
@@ -17,9 +20,10 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy  
+  def destroy
     cookies.delete(:remember_token)
     session[:dragoon_id] = nil
     redirect_to root_url, :notice => "Logged out!"  
   end
+
 end

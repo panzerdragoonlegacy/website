@@ -30,8 +30,8 @@
       </div>
       <div id="main">
         <div id="aside">
-          <% if can? :manage, Dragoon %>
-            <% if current_dragoon %>
+          <% if current_dragoon %>
+            <% if policy(current_dragoon).update? %>
               <h3>Your Details</h3>
               <ul>
                 <li>You are logged in as <%= link_to current_dragoon.name, dragoon_path(current_dragoon) %>.</li>
@@ -63,14 +63,30 @@
           </ul>
           <h3>Explore the Games</h3>
           <ul>
-            <li><%= link_to "Panzer Dragoon", "/encyclopaedia/panzer-dragoon"%></li>
-            <li><%= link_to "Panzer Dragoon II Zwei", "/encyclopaedia/panzer-dragoon-ii-zwei"%></li>
-            <li><%= link_to "Panzer Dragoon Mini", "/encyclopaedia/panzer-dragoon-mini"%></li>
-            <li><%= link_to "Panzer Dragoon Saga", "/encyclopaedia/panzer-dragoon-saga"%></li>
-            <li><%= link_to "Panzer Dragoon Orta", "/encyclopaedia/panzer-dragoon-orta"%></li>
-            <li><%= link_to "Sega Ages: Panzer Dragoon", "/encyclopaedia/sega-ages-2500-series-vol-27-panzer-dragoon"%></li>
-            <li><%= link_to "Crimson Dragon: Side Story", "/encyclopaedia/crimson-dragon-side-story" %></li>
-            <li><%= link_to "Crimson Dragon", "/encyclopaedia/crimson-dragon" %></li>
+            <% if EncyclopaediaEntry.find_by_url("panzer-dragoon").present? %>
+              <li><%= link_to "Panzer Dragoon", "/encyclopaedia/panzer-dragoon"%></li>
+            <% end %>
+            <% if EncyclopaediaEntry.find_by_url("panzer-dragoon-ii-zwei").present? %>
+              <li><%= link_to "Panzer Dragoon II Zwei", "/encyclopaedia/panzer-dragoon-ii-zwei"%></li>
+            <% end %>
+            <% if EncyclopaediaEntry.find_by_url("panzer-dragoon-mini").present? %>
+              <li><%= link_to "Panzer Dragoon Mini", "/encyclopaedia/panzer-dragoon-mini"%></li>
+            <% end %>
+            <% if EncyclopaediaEntry.find_by_url("panzer-dragoon-saga").present? %>
+              <li><%= link_to "Panzer Dragoon Saga", "/encyclopaedia/panzer-dragoon-saga"%></li>
+            <% end %>
+            <% if EncyclopaediaEntry.find_by_url("panzer-dragoon-orta").present? %>
+              <li><%= link_to "Panzer Dragoon Orta", "/encyclopaedia/panzer-dragoon-orta"%></li>
+            <% end %>
+            <% if EncyclopaediaEntry.find_by_url("sega-ages-2500-series-vol-27-panzer-dragoon").present? %>
+              <li><%= link_to "Sega Ages: Panzer Dragoon", "/encyclopaedia/sega-ages-2500-series-vol-27-panzer-dragoon"%></li>
+            <% end %>
+            <% if EncyclopaediaEntry.find_by_url("crimson-dragon-side-story").present? %>
+              <li><%= link_to "Crimson Dragon: Side Story", "/encyclopaedia/crimson-dragon-side-story" %></li>
+            <% end %>
+            <% if EncyclopaediaEntry.find_by_url("crimson-dragon").present? %>
+              <li><%= link_to "Crimson Dragon", "/encyclopaedia/crimson-dragon" %></li>
+            <% end %>
           </ul>
           <h3>Browse by Media Type</h3>
           <ul>
@@ -84,27 +100,13 @@
             <li><%= link_to "Resources", resources_path %></li>
             <li><%= link_to "Stories", stories_path %></li>
             <li><%= link_to "Videos", videos_path %></li>
-            <% if can? :manage, Emoticon %>
+            <% if policy(Emoticon).new? %>
               <li><%= link_to 'Emoticons', emoticons_path %></li>
             <% end %>
-            <% if can? :manage, Page %>
+            <% if policy(Page).new? %>
               <li><%= link_to 'Pages', pages_path %></li>
             <% end %>
           </ul>
-          <% if can? :manage, Forum %>
-            <h3>Experimental Features</h3>
-            <ul>
-              <% if can? :manage, Forum %>
-                <li><%= link_to 'Forums', forums_path %></li>
-              <% end %>
-              <% if can? :manage, PrivateDiscussion %>
-                <li><%= link_to "Private Discussions", private_discussions_path %></li>
-              <% end %>
-              <% if can? :manage, Project %>
-                <li><%= link_to "Projects", projects_path %></li>
-              <% end %>
-            </ul>
-          <% end %>
           <% unless @partner_sites.blank? %>
             <h3>Partner Sites</h3>
             <ul>

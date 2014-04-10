@@ -1,52 +1,63 @@
 class ArticlesController < ApplicationController
+
   before_filter :categories
-  load_resource :find_by => :url
-  authorize_resource
   
   def index
     if params[:dragoon_id]
-      @dragoon = Dragoon.find_by_url(params[:dragoon_id])
-      @articles = Article.accessible_by(current_ability).joins(:contributions).where(:contributions => {:dragoon_id => @dragoon.id}).order(:name).page(params[:page])
-      @title = @dragoon.name + "'s Articles"
+      raise "Dragoon not found." unless @dragoon = Dragoon.find_by_url(params[:dragoon_id])
+      @articles = policy_scope(Article.joins(:contributions).where(contributions: { dragoon_id: @dragoon.id }).order(:name).page(params[:page]))
     else
-      @articles = Article.accessible_by(current_ability).order(:name).page(params[:page])
-      @title = "Articles"
+      @articles = policy_scope(Article.order(:name).page(params[:page]))
     end
   end
 
   def show
-    @commentable = @article
-    @comment = Comment.new
-    session[:redirect_path] = request.fullpath
-    @emoticons = Emoticon.all
+    @article = Article.find_by_url(params[:id])
+    authorize @article
+  end
+
+  def new
+    @article = Article.new
+    authorize @article
   end
   
   def create 
     @article = Article.new(params[:article])
+    authorize @article
     if @article.save
-      redirect_to @article, :notice => "Successfully created article."
+      redirect_to @article, notice: "Successfully created article."
     else
-      render 'new'
+      render :new
     end
+  end
+
+  def edit
+    @article = Article.find_by_url(params[:id])
+    authorize @article
   end
   
   def update
+    @article = Article.find_by_url(params[:id])
+    authorize @article
     params[:article][:dragoon_ids] ||= []
     if @article.update_attributes(params[:article])      
-      redirect_to @article, :notice => "Successfully updated article."
+      redirect_to @article, notice: "Successfully updated article."
     else
-      render 'edit'
+      render :edit
     end
   end
 
-  def destroy    
+  def destroy
+    @article = Article.find_by_url(params[:id])
+    authorize @article
     @article.destroy
-    redirect_to articles_path, :notice => "Successfully destroyed article."
+    redirect_to articles_path, notice: "Successfully destroyed article."
   end
   
-private
+  private
 
   def categories
-    @categories = Category.accessible_by(current_ability).where(:category_type => :article).order(:name)
+    @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :article).order(:name)).resolve
   end
+
 end

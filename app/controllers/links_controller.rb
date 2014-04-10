@@ -1,43 +1,63 @@
 class LinksController < ApplicationController
+
   before_filter :categories
-  load_resource
-  authorize_resource
-    
+  
   def index
     if params[:dragoon_id]
-      @dragoon = Dragoon.find_by_url(params[:dragoon_id])
-      @links = Link.accessible_by(current_ability).joins(:contributions).where(:contributions => {:dragoon_id => @dragoon.id}).order(:name).page(params[:page])
-      @title = @dragoon.name + "'s Links"
+      raise "Dragoon not found." unless @dragoon = Dragoon.find_by_url(params[:dragoon_id])
+      @links = policy_scope(Link.joins(:contributions).where(contributions: { dragoon_id: @dragoon.id }).order(:name).page(params[:page]))
     else
-      @links = Link.accessible_by(current_ability).order(:name).page(params[:page])
-      @title = "Links"
+      @links = policy_scope(Link.order(:name).page(params[:page]))
     end
   end
+
+  def show
+    @link = Link.find(params[:id])
+    authorize @link
+  end
+
+  def new
+    @link = Link.new
+    authorize @link
+  end
   
-  def create
+  def create 
     @link = Link.new(params[:link])
+    authorize @link
     if @link.save
-      redirect_to links_path, :notice => "Successfully created link."
-    else  
-      render 'new'
+      redirect_to @link, notice: "Successfully created link."
+    else
+      render :new
     end
+  end
+
+  def edit
+    @link = Link.find(params[:id])
+    authorize @link
   end
   
   def update
+    @link = Link.find(params[:id])
+    authorize @link
+    params[:link][:dragoon_ids] ||= []
     if @link.update_attributes(params[:link])
-      redirect_to links_path, :notice => "Successfully updated link."
+      redirect_to @link, notice: "Successfully updated link."
     else
-      render 'edit'
+      render :edit
     end
   end
 
   def destroy
+    @link = Link.find(params[:id])
+    authorize @link
     @link.destroy
-    redirect_to links_path, :notice => "Successfully destroyed link."
+    redirect_to links_path, notice: "Successfully destroyed link."
   end
   
-private
+  private
+
   def categories
-    @categories = Category.accessible_by(current_ability).where(:category_type => :link).order(:name)
+    @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :link).order(:name)).resolve
   end
+
 end

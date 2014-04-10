@@ -1,52 +1,63 @@
 class MusicTracksController < ApplicationController
-  before_filter :categories
-  load_resource :find_by => :url
-  authorize_resource
 
+  before_filter :categories
+  
   def index
     if params[:dragoon_id]
-      @dragoon = Dragoon.find_by_url(params[:dragoon_id])
-      @music_tracks = MusicTrack.accessible_by(current_ability).joins(:contributions).where(:contributions => {:dragoon_id => @dragoon.id}).order(:name).page(params[:page])
-      @title = @dragoon.name + "'s Music"
+      raise "Dragoon not found." unless @dragoon = Dragoon.find_by_url(params[:dragoon_id])
+      @music_tracks = policy_scope(MusicTrack.joins(:contributions).where(contributions: { dragoon_id: @dragoon.id }).order(:name).page(params[:page]))
     else
-      @music_tracks = MusicTrack.accessible_by(current_ability).order(:name).page(params[:page])
-      @title = "Music"
+      @music_tracks = policy_scope(MusicTrack.order(:name).page(params[:page]))
     end
   end
 
   def show
-    @commentable = @music_track
-    @comment = Comment.new
-    session[:redirect_path] = request.fullpath
-    @emoticons = Emoticon.order(:name)
+    @music_track = MusicTrack.find_by_url(params[:id])
+    authorize @music_track
   end
 
+  def new
+    @music_track = MusicTrack.new
+    authorize @music_track
+  end
+  
   def create 
     @music_track = MusicTrack.new(params[:music_track])
+    authorize @music_track
     if @music_track.save
-      redirect_to @music_track, :notice => "Successfully created music track."
+      redirect_to @music_track, notice: "Successfully created music track."
     else
-      render 'new'
+      render :new
     end
+  end
+
+  def edit
+    @music_track = MusicTrack.find_by_url(params[:id])
+    authorize @music_track
   end
   
   def update
+    @music_track = MusicTrack.find_by_url(params[:id])
+    authorize @music_track
     params[:music_track][:dragoon_ids] ||= []
     if @music_track.update_attributes(params[:music_track])
-      redirect_to @music_track, :notice => "Successfully updated music track."
+      redirect_to @music_track, notice: "Successfully updated music track."
     else
-      render 'edit'
+      render :edit
     end
   end
 
   def destroy
+    @music_track = MusicTrack.find_by_url(params[:id])
+    authorize @music_track
     @music_track.destroy
-    redirect_to music_tracks_path, :notice => "Successfully destroyed music track."
+    redirect_to music_tracks_path, notice: "Successfully destroyed music track."
   end
-
-private
+  
+  private
 
   def categories
-    @categories = Category.accessible_by(current_ability).where(:category_type => :music_track).order(:name)
+    @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :music_track).order(:name)).resolve
   end
+
 end

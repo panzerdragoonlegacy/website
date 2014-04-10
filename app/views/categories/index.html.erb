@@ -1,6 +1,6 @@
 <% title "Categories" %>
 
-<% if can? :create, Category %>
+<% if policy(Category).new? %>
   <ul class="administration">
     <li><%= link_to 'New Category', new_category_path %></li>
   </ul>

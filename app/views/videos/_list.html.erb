@@ -1,4 +1,4 @@
-<% unless @videos.empty? %>
+<% if @videos %>
   <div id="resources">
     <% @videos.each do |video| %>
       <div class="resource">
@@ -12,6 +12,5 @@
       </div>
     <% end %>
   </div>
+  <%= paginate @videos %>
 <% end %>
-
-<%= paginate @videos %>

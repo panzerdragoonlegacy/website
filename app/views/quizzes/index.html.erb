@@ -1,12 +1,16 @@
-<% title @title %>
+<% if @dragoon %>
+  <% title "#{@dragoon.name}'s Quizzes" %>
+<% else %>
+  <% title "Quizzes" %>
+<% end %>
 
-<% if can? :create, Quiz %>
+<% if policy(Quiz).new? %>
   <ul class="administration">
     <li><%= link_to 'New Quiz', new_quiz_path %></li>
   </ul>
 <% end %>
 
-<% unless @quizzes.empty? %>
+<% if @quizzes %>
   <div id="resources">
     <% @quizzes.each do |quiz| %>
       <div class="resource">
@@ -20,6 +24,5 @@
       </div>
     <% end %>
   </div>
+  <%= paginate @quizzes %>
 <% end %>
-
-<%= paginate @quizzes %>

@@ -1,35 +1,50 @@
 class EncyclopaediaEntriesController < ApplicationController
+  
   before_filter :categories
-  load_resource :find_by => :url
-  authorize_resource
 
   def index
-    @encyclopaedia_entries = EncyclopaediaEntry.accessible_by(current_ability).order(:name).page(params[:page]) 
+    @encyclopaedia_entries = policy_scope(EncyclopaediaEntry.order(:name).page(params[:page]))
   end
 
   def show
-    @articles = @encyclopaedia_entry.articles.accessible_by(current_ability).order(:name)
-    @downloads = @encyclopaedia_entry.downloads.accessible_by(current_ability).order(:name)
-    @links = @encyclopaedia_entry.links.accessible_by(current_ability).order(:name)
-    @music_tracks = @encyclopaedia_entry.music_tracks.accessible_by(current_ability).order(:name)
-    @pictures = @encyclopaedia_entry.pictures.accessible_by(current_ability).order(:name)
-    @poems = @encyclopaedia_entry.poems.accessible_by(current_ability).order(:name)
-    @quizzes = @encyclopaedia_entry.quizzes.accessible_by(current_ability).order(:name)
-    @resources = @encyclopaedia_entry.resources.accessible_by(current_ability).order(:name)
-    @stories = @encyclopaedia_entry.stories.accessible_by(current_ability).order(:name)
-    @videos = @encyclopaedia_entry.videos.accessible_by(current_ability).order(:name)
+    @encyclopaedia_entry = EncyclopaediaEntry.find_by_url(params[:id])
+    authorize @encyclopaedia_entry
+
+    @articles = ArticlePolicy::Scope.new(@encyclopaedia_entry.articles.order(:name)).resolve
+    @downloads = DownloadPolicy::Scope.new(@encyclopaedia_entry.downloads.order(:name)).resolve
+    @links = LinkPolicy::Scope.new(@encyclopaedia_entry.links.order(:name)).resolve
+    @music_tracks = MusicTrackPolicy::Scope.new(@encyclopaedia_entry.music_tracks.order(:name)).resolve
+    @pictures = PicturePolicy::Scope.new(@encyclopaedia_entry.pictures.order(:name)).resolve
+    @poems = PoemPolicy::Scope.new(@encyclopaedia_entry.poems.order(:name)).resolve
+    @quizzes = QuizPolicy::Scope.new(@encyclopaedia_entry.quizzes.order(:name)).resolve
+    @resources = ResourcePolicy::Scope.new(@encyclopaedia_entry.resources.order(:name)).resolve
+    @stories = StoryPolicy::Scope.new(@encyclopaedia_entry.stories.order(:name)).resolve
+    @videos = VideoPolicy::Scope.new(@encyclopaedia_entry.videos.order(:name)).resolve
+  end
+
+  def new
+    @encyclopaedia_entry = EncyclopaediaEntry.new
+    authorize @encyclopaedia_entry
   end
 
   def create 
     @encyclopaedia_entry = EncyclopaediaEntry.new(params[:encyclopaedia_entry])
+    authorize @encyclopaedia_entry
     if @encyclopaedia_entry.save
-      redirect_to @encyclopaedia_entry, :notice => "Successfully created encyclopaedia entry."
+      redirect_to @encyclopaedia_entry, notice: "Successfully created encyclopaedia entry."
     else
-      render 'new'
+      render :new
     end
   end
 
+  def edit
+    @encyclopaedia_entry = EncyclopaediaEntry.find_by_url(params[:id])
+    authorize @encyclopaedia_entry
+  end
+
   def update
+    @encyclopaedia_entry = EncyclopaediaEntry.find_by_url(params[:id])
+    authorize @encyclopaedia_entry
     params[:encyclopaedia_entry][:article_ids] ||= []
     params[:encyclopaedia_entry][:download_ids] ||= []
     params[:encyclopaedia_entry][:link_ids] ||= []
@@ -41,20 +56,22 @@ class EncyclopaediaEntriesController < ApplicationController
     params[:encyclopaedia_entry][:story_ids] ||= []
     params[:encyclopaedia_entry][:video_ids] ||= []
     if @encyclopaedia_entry.update_attributes(params[:encyclopaedia_entry])
-      redirect_to @encyclopaedia_entry, :notice => "Successfully updated encyclopaedia entry."
+      redirect_to @encyclopaedia_entry, notice: "Successfully updated encyclopaedia entry."
     else
-      render 'edit'
+      render :edit
     end
   end
 
   def destroy    
     @encyclopaedia_entry.destroy
-    redirect_to encyclopaedia_entries_path, :notice => "Successfully destroyed encyclopaedia entry."
+    authorize @encyclopaedia_entry
+    redirect_to encyclopaedia_entries_path, notice: "Successfully destroyed encyclopaedia entry."
   end
   
-private
+  private
 
   def categories
-    @categories = Category.accessible_by(current_ability).where(:category_type => :encyclopaedia_entry).order(:name)
+    @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :encyclopaedia_entry).order(:name)).resolve
   end
+
 end
