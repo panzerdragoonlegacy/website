@@ -10,7 +10,7 @@ set :use_sudo, false
 default_run_options[:pty] = true
 
 set :scm, "git"
-set :repository,  "https://uriptical@github.com/uriptical/thewilloftheancients.git"
+set :repository,  "https://chrisalley@github.com/chrisalley/the-will-of-the-ancients.git"
 set :branch, "master"
 
 namespace :deploy do
