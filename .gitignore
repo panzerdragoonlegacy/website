@@ -18,4 +18,4 @@
 /public/system/*
 
 # Ignore compiled assets directory.
-public/assets/*
+/public/assets/*
