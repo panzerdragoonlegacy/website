@@ -35,6 +35,5 @@ gem 'recaptcha', '~> 0.3.6', require: 'recaptcha/rails'
 gem 'sanitize', '~> 2.1.0'
 gem 'sass-rails', '~> 4.0.3'
 gem 'stringex', '~> 2.5.2'
-gem 'turbolinks', '~> 2.2.2'
 gem 'twitter', '~> 4.8.1' # Out of date
 gem 'uglifier', '>= 2.5.0'
