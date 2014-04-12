@@ -27,7 +27,7 @@ class StoriesController < ApplicationController
   end
 
   def create 
-    @story = Story.new(params[:story])
+    @story = Story.new(story_params)
     authorize @story
     if @story.save
       redirect_to @story, notice: "Successfully created story."
@@ -42,7 +42,7 @@ class StoriesController < ApplicationController
   end
 
   def update
-    @story = Story.find_by_url(params[:id])
+    @story = Story.find_by_url(story_params)
     authorize @story
     params[:story][:dragoon_ids] ||= []
     if @story.update_attributes(params[:story])      
@@ -59,6 +59,19 @@ class StoriesController < ApplicationController
   end
   
   private
+
+  def story_params
+    params.require(:story).permit(
+      :category_id,
+      :name,
+      :description,
+      :content,
+      :publish,
+      dragoon_ids: [],
+      encyclopaedia_entry_ids: [],
+      illustrations_attributes: [:id, :illustration, :_destroy]
+    )
+  end
 
   def categories
     @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :story).order(:name)).resolve

@@ -33,7 +33,7 @@ class QuizzesController < ApplicationController
   end
 
   def create  
-    @quiz = Quiz.new(params[:quiz])
+    @quiz = Quiz.new(quiz_params)
     authorize @quiz
     if @quiz.save
       redirect_to @quiz, notice: "Successfully created quiz."
@@ -50,7 +50,7 @@ class QuizzesController < ApplicationController
   end
   
   def update
-    @quiz = Quiz.find_by_url(params[:id])
+    @quiz = Quiz.find_by_url(quiz_params)
     authorize @quiz
     params[:quiz][:dragoon_ids] ||= []  
     if @quiz.update_attributes(params[:quiz])
@@ -65,6 +65,19 @@ class QuizzesController < ApplicationController
     authorize @quiz
     @quiz.destroy
     redirect_to quizzes_path, notice: "Successfully destroyed quiz."
+  end
+
+  private
+
+  def quiz_params
+    params.require(:quiz).permit(
+      :name,
+      :description,
+      :publish,
+      quiz_questions_attributes: [:content, quiz_answers_attributes: [:content, :correct_answer]],
+      dragoon_ids: [],
+      encyclopaedia_entry_ids: []
+    )
   end
 
 end

@@ -28,7 +28,7 @@ class EncyclopaediaEntriesController < ApplicationController
   end
 
   def create 
-    @encyclopaedia_entry = EncyclopaediaEntry.new(params[:encyclopaedia_entry])
+    @encyclopaedia_entry = EncyclopaediaEntry.new(encyclopaedia_entry_params)
     authorize @encyclopaedia_entry
     if @encyclopaedia_entry.save
       redirect_to @encyclopaedia_entry, notice: "Successfully created encyclopaedia entry."
@@ -55,7 +55,7 @@ class EncyclopaediaEntriesController < ApplicationController
     params[:encyclopaedia_entry][:resource_ids] ||= []
     params[:encyclopaedia_entry][:story_ids] ||= []
     params[:encyclopaedia_entry][:video_ids] ||= []
-    if @encyclopaedia_entry.update_attributes(params[:encyclopaedia_entry])
+    if @encyclopaedia_entry.update_attributes(encyclopaedia_entry_params)
       redirect_to @encyclopaedia_entry, notice: "Successfully updated encyclopaedia entry."
     else
       render :edit
@@ -69,6 +69,28 @@ class EncyclopaediaEntriesController < ApplicationController
   end
   
   private
+
+  def encyclopaedia_entry_params
+    params.require(:encyclopaedia_entry).permit(
+      :category_id,
+      :name,
+      :picture,
+      :information,
+      :content,
+      :publish,
+      illustrations_attributes: [:id, :illustration, :_destroy],
+      article_ids: [],
+      download_ids: [],
+      link_ids: [],
+      music_track_ids: [],
+      picture_ids: [],
+      poem_ids: [],
+      quiz_ids: [],
+      resource_ids: [],
+      story_ids: [],
+      video_ids: []
+    )
+  end
 
   def categories
     @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :encyclopaedia_entry).order(:name)).resolve

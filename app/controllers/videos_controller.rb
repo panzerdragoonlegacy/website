@@ -22,7 +22,7 @@ class VideosController < ApplicationController
   end
   
   def create 
-    @video = Video.new(params[:video])
+    @video = Video.new(video_params)
     authorize @video
     if @video.save
       redirect_to @video, notice: "Successfully created video."
@@ -40,7 +40,7 @@ class VideosController < ApplicationController
     @video = Video.find_by_url(params[:id])
     authorize @video
     params[:video][:dragoon_ids] ||= []
-    if @video.update_attributes(params[:video])
+    if @video.update_attributes(video_params)
       redirect_to @video, notice: "Successfully updated video."
     else
       render :edit
@@ -55,6 +55,21 @@ class VideosController < ApplicationController
   end
   
   private
+
+  def video_params
+    params.require(:video).permit(
+      :category_id,
+      :name,
+      :description,
+      :information,
+      :mp4_video,
+      :webm_video,
+      :youtube_video_id,
+      :publish,
+      dragoon_ids: [],
+      encyclopaedia_entry_ids: []
+    )
+  end
 
   def categories
     @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :video).order(:name)).resolve

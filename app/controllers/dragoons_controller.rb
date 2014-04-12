@@ -15,7 +15,7 @@ class DragoonsController < ApplicationController
   end
 
   def create
-    @dragoon = Dragoon.new(params[:dragoon])
+    @dragoon = Dragoon.new(dragoon_params)
     authorize @dragoon
     if @dragoon.save
       session[:dragoon_id] = @dragoon.id
@@ -35,9 +35,9 @@ class DragoonsController < ApplicationController
   end
 
   def update
-    @dragoon = Dragoon.find_by_url(params[:id])
+    @dragoon = Dragoon.find_by_url(dragoon_params)
     authorize @dragoon
-    if @dragoon.update_attributes(params[:dragoon])
+    if @dragoon.update_attributes(dragoon_params)
       redirect_to @dragoon, notice: "Successfully updated profile."
     else
       render :edit
@@ -49,6 +49,40 @@ class DragoonsController < ApplicationController
     authorize @dragoon
     @dragoon.destroy
     redirect_to dragoons_path, notice: "Successfully destroyed dragoon."
+  end
+
+  private
+
+  def dragoon_params
+    params.require(:dragoon).permit(
+      :name,
+      :email_address,
+      :password,
+      :password_confirmation,
+      :time_zone,
+      :role,
+      :avatar,
+      :birthday,
+      :gender,
+      :country,
+      :information,
+      :favourite_quotations,
+      :occupation,
+      :interests,
+      :website,
+      :facebook_username,
+      :twitter_username,
+      :xbox_live_gamertag,
+      :playstation_network_online_id,
+      :wii_number,
+      :steam_username,
+      :windows_live_id,
+      :yahoo_id,
+      :aim_screenname,
+      :icq_number,
+      :jabber_id,
+      :skype_name
+    )
   end
 
 end

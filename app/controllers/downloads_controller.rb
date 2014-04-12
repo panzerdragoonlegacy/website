@@ -22,7 +22,7 @@ class DownloadsController < ApplicationController
   end
   
   def create 
-    @download = Download.new(params[:download])
+    @download = Download.new(download_params)
     authorize @download
     if @download.save
       redirect_to @download, notice: "Successfully created download."
@@ -40,7 +40,7 @@ class DownloadsController < ApplicationController
     @download = Download.find_by_url(params[:id])
     authorize @download
     params[:download][:dragoon_ids] ||= []
-    if @download.update_attributes(params[:download])
+    if @download.update_attributes(download_params)
       redirect_to @download, notice: "Successfully updated download."
     else
       render :edit
@@ -55,6 +55,18 @@ class DownloadsController < ApplicationController
   end
   
   private
+
+  def download_params
+    params.require(:download).permit(
+      :category_id,
+      :name,
+      :description,
+      :download,
+      :publish,
+      dragoon_ids: [],
+      encyclopaedia_entry_ids: []
+    )
+  end
 
   def categories
     @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :download).order(:name)).resolve

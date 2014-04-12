@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
   end
   
   def create 
-    @article = Article.new(params[:article])
+    @article = Article.new(article_params)
     authorize @article
     if @article.save
       redirect_to @article, notice: "Successfully created article."
@@ -40,7 +40,7 @@ class ArticlesController < ApplicationController
     @article = Article.find_by_url(params[:id])
     authorize @article
     params[:article][:dragoon_ids] ||= []
-    if @article.update_attributes(params[:article])      
+    if @article.update_attributes(article_params)
       redirect_to @article, notice: "Successfully updated article."
     else
       render :edit
@@ -55,6 +55,19 @@ class ArticlesController < ApplicationController
   end
   
   private
+
+  def article_params
+    params.require(:article).permit(
+      :category_id,
+      :name,
+      :description,
+      :content,
+      :publish,
+      dragoon_ids: [],
+      encyclopaedia_entry_ids: [],
+      illustrations_attributes: [:id, :illustration, :_destroy]
+    )
+  end
 
   def categories
     @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :article).order(:name)).resolve

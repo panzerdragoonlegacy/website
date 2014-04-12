@@ -20,7 +20,7 @@ class NewsEntriesController < ApplicationController
   end
 
   def create 
-    @news_entry = NewsEntry.new(params[:news_entry])
+    @news_entry = NewsEntry.new(news_entry_params)
     authorize @news_entry
     @news_entry.dragoon = current_dragoon
     if @news_entry.save
@@ -50,6 +50,16 @@ class NewsEntriesController < ApplicationController
     authorize @news_entry
     @news_entry.destroy
     redirect_to news_entries_path, notice: "Successfully destroyed news entry."
+  end
+
+  private
+
+  def news_entry_params
+    params.require(:news_entry).permit(
+      :name,
+      :content,
+      :publish
+    )
   end
   
 end

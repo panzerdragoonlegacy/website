@@ -45,7 +45,7 @@ class CategoriesController < ApplicationController
   end
   
   def create  
-    @category = Category.new(params[:category])
+    @category = Category.new(category_params)
     authorize @category
     if @category.save
       redirect_to @category, notice: "Successfully created category."
@@ -62,7 +62,7 @@ class CategoriesController < ApplicationController
   def update
     @category = Category.find_by_url(params[:id])
     authorize @category
-    if @category.update_attributes(params[:category])
+    if @category.update_attributes(category_params)
       redirect_to @category, notice: "Successfully updated category."
     else
       render :edit
@@ -73,6 +73,17 @@ class CategoriesController < ApplicationController
     @category.destroy
     authorize @category
     redirect_to categories_path, notice: "Successfully destroyed category."
+  end
+
+  private
+
+  def category_params
+    params.require(:category).permit(
+      :name,
+      :description,
+      :category_type,
+      :publish
+    )
   end
 
 end

@@ -20,7 +20,7 @@ class PoemsController < ApplicationController
   end
   
   def create 
-    @poem = Poem.new(params[:poem])
+    @poem = Poem.new(poem_params)
     authorize @poem
     if @poem.save
       redirect_to @poem, notice: "Successfully created poem."
@@ -35,7 +35,7 @@ class PoemsController < ApplicationController
   end
   
   def update
-    @poem = Poem.find_by_url(params[:id])
+    @poem = Poem.find_by_url(poem_params)
     authorize @poem
     params[:poem][:dragoon_ids] ||= []
     if @poem.update_attributes(params[:poem])
@@ -52,4 +52,17 @@ class PoemsController < ApplicationController
     redirect_to poems_path, notice: "Successfully destroyed poem."
   end
   
+  private
+
+  def poem_params
+    params.require(:poem).permit(
+      :name,
+      :description,
+      :content,
+      :publish,
+      dragoon_ids: [],
+      encyclopaedia_entry_ids: []
+    )
+  end
+
 end

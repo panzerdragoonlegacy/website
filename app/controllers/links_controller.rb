@@ -22,7 +22,7 @@ class LinksController < ApplicationController
   end
   
   def create 
-    @link = Link.new(params[:link])
+    @link = Link.new(link_params)
     authorize @link
     if @link.save
       redirect_to @link, notice: "Successfully created link."
@@ -40,7 +40,7 @@ class LinksController < ApplicationController
     @link = Link.find(params[:id])
     authorize @link
     params[:link][:dragoon_ids] ||= []
-    if @link.update_attributes(params[:link])
+    if @link.update_attributes(link_params)
       redirect_to @link, notice: "Successfully updated link."
     else
       render :edit
@@ -55,6 +55,19 @@ class LinksController < ApplicationController
   end
   
   private
+
+  def link_params
+    params.require(:link).permit(
+      :category_id,
+      :name,
+      :url,
+      :partner_site,
+      :description,
+      :publish,
+      dragoon_ids: [],
+      encyclopaedia_entry_ids: []
+    )
+  end
 
   def categories
     @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :link).order(:name)).resolve

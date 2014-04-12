@@ -1,8 +1,6 @@
 class Category < ActiveRecord::Base
   include Sluggable
 
-  attr_accessible :name, :description, :category_type, :publish
-
   has_many :articles, :dependent => :destroy
   has_many :downloads, :dependent => :destroy
   has_many :encyclopaedia_entries, :dependent => :destroy

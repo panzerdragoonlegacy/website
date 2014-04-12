@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   end
 
   def create 
-    @page = Page.new(params[:page])
+    @page = Page.new(page_params)
     authorize @page
     if @page.save
       redirect_to @page, notice: "Successfully created page."
@@ -32,7 +32,7 @@ class PagesController < ApplicationController
   def update
     @page = Page.find_by_url(params[:id])
     authorize @page
-    if @page.update_attributes(params[:page])
+    if @page.update_attributes(page_params)
       redirect_to @page, notice: "Successfully updated page."
     else
       render :edit
@@ -44,6 +44,17 @@ class PagesController < ApplicationController
     authorize @page
     @page.destroy
     redirect_to pages_path, notice: "Successfully destroyed page."
+  end
+
+  private
+
+  def page_params
+    params.require(:page).permit(
+      :name,
+      :content,
+      :publish,
+      illustrations_attributes: [:id, :illustration, :_destroy]
+    )
   end
 
 end

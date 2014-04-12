@@ -10,7 +10,7 @@ class EmoticonsController < ApplicationController
   end
 
   def create
-    @emoticon = Emoticon.new(params[:emoticon])
+    @emoticon = Emoticon.new(emoticon_params)
     authorize @emoticon
     if @emoticon.save
       redirect_to emoticons_path, notice: "Successfully created emoticon."
@@ -24,6 +24,12 @@ class EmoticonsController < ApplicationController
     authorize @emoticon
     @emoticon.destroy
     redirect_to emoticons_path, notice: "Successfully destroyed emoticon."
+  end
+
+  private
+
+  def emoticon_params
+    params.require(:emoticon).permit(:name, :emoticon)
   end
 
 end

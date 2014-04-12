@@ -22,7 +22,7 @@ class MusicTracksController < ApplicationController
   end
   
   def create 
-    @music_track = MusicTrack.new(params[:music_track])
+    @music_track = MusicTrack.new(music_track_params)
     authorize @music_track
     if @music_track.save
       redirect_to @music_track, notice: "Successfully created music track."
@@ -37,7 +37,7 @@ class MusicTracksController < ApplicationController
   end
   
   def update
-    @music_track = MusicTrack.find_by_url(params[:id])
+    @music_track = MusicTrack.find_by_url(music_track_params)
     authorize @music_track
     params[:music_track][:dragoon_ids] ||= []
     if @music_track.update_attributes(params[:music_track])
@@ -55,6 +55,22 @@ class MusicTracksController < ApplicationController
   end
   
   private
+
+  def music_track_params
+    params.require(:music_track).permit(
+      :category_id,
+      :track_number,
+      :name,
+      :description,
+      :information,
+      :mp3_music_track,
+      :ogg_music_track,
+      :flac_music_track,
+      :publish,
+      dragoon_ids: [],
+      encyclopaedia_entry_ids: []
+    )
+  end
 
   def categories
     @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :music_track).order(:name)).resolve

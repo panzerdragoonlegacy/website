@@ -53,5 +53,8 @@ module TheWillOfTheAncients
     
     # Not needed in Rails 4
     config.autoload_paths += %W(#{config.root}/app/models/concerns)
+
+    # Adds support for strong parameters instead of attr_accessible
+    config.active_record.whitelist_attributes = false
   end
 end

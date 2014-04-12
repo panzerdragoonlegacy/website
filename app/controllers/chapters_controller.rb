@@ -14,7 +14,7 @@ class ChaptersController < ApplicationController
   end
 
   def create
-    @chapter = Chapter.new(params[:chapter])
+    @chapter = Chapter.new(chapter_params)
     authorize @chapter
     if @chapter.save
       redirect_to @chapter, notice: "Successfully created chapter."
@@ -31,7 +31,7 @@ class ChaptersController < ApplicationController
   def update
     @chapter = Chapter.find_by_url(params[:id])
     authorize @chapter
-    if @chapter.update_attributes(params[:chapter])
+    if @chapter.update_attributes(chapter_params)
       redirect_to @chapter, notice: "Successfully updated chapter."
     else
       render :edit
@@ -47,6 +47,18 @@ class ChaptersController < ApplicationController
   end
   
   private
+
+  def chapter_params
+    params.require(:chapter).permit(
+      :story_id,
+      :chapter_type,
+      :number,
+      :name,
+      :content,
+      :publish,
+      illustrations_attributes: [:id, :illustration, :_destroy]
+    )
+  end
 
   def previous_and_next_chapters
     all_chapters =  policy_scope(@chapter.story.chapters)

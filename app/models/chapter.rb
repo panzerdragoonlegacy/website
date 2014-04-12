@@ -7,9 +7,6 @@ class Chapter < ActiveRecord::Base
     url
   end
   
-  attr_accessible :story_id, :chapter_type, :number, :name, :content, :publish, 
-    :illustrations_attributes
-  
   belongs_to :story
   
   validates :number, :presence => true, :numericality => { :only_integer => true,
