@@ -1,8 +1,6 @@
 class Forum < ActiveRecord::Base
   include Sluggable
 
-  attr_accessible :name, :number, :description, :forum_picture
-
   has_many :discussions, :dependent => :destroy  
   has_many :comments, :through => :discussions, :dependent => :destroy
   

@@ -1,5 +1,4 @@
 class ProjectTask < ActiveRecord::Base  
-  attr_accessible :project_id, :dragoon_id, :name, :completed
   
   belongs_to :project
   belongs_to :dragoon

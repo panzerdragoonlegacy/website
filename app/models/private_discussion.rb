@@ -1,5 +1,4 @@
 class PrivateDiscussion < ActiveRecord::Base  
-  attr_accessible :subject, :message, :dragoon_ids
   
   belongs_to :dragoon
   has_many :private_discussion_comments, :dependent => :destroy

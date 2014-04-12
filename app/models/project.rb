@@ -1,8 +1,6 @@
 class Project < ActiveRecord::Base
   include Sluggable
   
-  attr_accessible :name, :description, :dragoon_ids
-
   has_many :project_discussions, :dependent => :destroy
   has_many :project_tasks, :dependent => :destroy
   has_many :project_members, :dependent => :destroy

@@ -1,5 +1,4 @@
 class ProjectDiscussion < ActiveRecord::Base
-  attr_accessible :project_id, :subject, :message, :sticky
   
   belongs_to :dragoon
   belongs_to :project
