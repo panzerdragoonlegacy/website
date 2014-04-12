@@ -1,4 +1,5 @@
-$(document).ready ->
+$(document).on 'ready page:load', ->
+
   $("a.popover").click (event) ->
     event.preventDefault()
     popover_src = $(this).children("img").attr("data-popover-src")
