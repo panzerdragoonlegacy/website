@@ -1,4 +1,5 @@
 class EncyclopaediaEntry < ActiveRecord::Base
+  
   include Categorisable
   include Illustratable
   include Sluggable
@@ -18,13 +19,14 @@ class EncyclopaediaEntry < ActiveRecord::Base
   validates :name, :presence => true, :length => { :in => 2..100 }, :uniqueness => true
   validates :information, :presence => true  
   validates :content, :presence => true
-  
-  validates_attachment_size :encyclopaedia_entry_picture, :less_than => 5.megabytes
-  validates_attachment_content_type :encyclopaedia_entry_picture, :content_type => ['image/jpeg']
 
-  has_attached_file :encyclopaedia_entry_picture, :styles => { :thumbnail => "150x150", :embedded => "280x280>" }, 
-    :path => ":rails_root/public/system/:attachment/:id/:style/:encyclopaedia_entry_picture_filename",
-    :url => "/system/:attachment/:id/:style/:encyclopaedia_entry_picture_filename"
+  has_attached_file :encyclopaedia_entry_picture, styles: { thumbnail: "150x150", embedded: "280x280>" }, 
+    path: ":rails_root/public/system/:attachment/:id/:style/:encyclopaedia_entry_picture_filename",
+    url: "/system/:attachment/:id/:style/:encyclopaedia_entry_picture_filename"
+
+  validates_attachment :encyclopaedia_entry_picture, presence: true,
+    content_type: { content_type: "image/jpeg" },
+    size: { in: 0..5.megabytes }
   
   before_post_process :encyclopaedia_entry_picture_filename
   
@@ -39,4 +41,5 @@ class EncyclopaediaEntry < ActiveRecord::Base
   Paperclip.interpolates :encyclopaedia_entry_picture_filename do |attachment, style|
     attachment.instance.encyclopaedia_entry_picture_filename
   end
+
 end

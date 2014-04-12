@@ -1,13 +1,14 @@
 class Illustration < ActiveRecord::Base
-  belongs_to :illustratable, :polymorphic => true
   
-  validates_attachment_presence :illustration
-  validates_attachment_size :illustration, :less_than => 5.megabytes
-  validates_attachment_content_type :illustration, :content_type => ['image/jpeg']
+  belongs_to :illustratable, polymorphic: true
   
-  has_attached_file :illustration, :styles => { :embedded => "280x280>", :popover => "625x625" }, 
-    :path => ":rails_root/public/system/:attachment/:id/:style/:illustration_filename",
-    :url => "/system/:attachment/:id/:style/:illustration_filename"
+  has_attached_file :illustration, styles: { embedded: "280x280>", popover: "625x625" }, 
+    path: ":rails_root/public/system/:attachment/:id/:style/:illustration_filename",
+    url: "/system/:attachment/:id/:style/:illustration_filename"
+  
+  validates_attachment :illustration, presence: true,
+    content_type: { content_type: "image/jpeg" },
+    size: { in: 0..5.megabytes }
   
   before_post_process :illustration_filename
   
@@ -22,4 +23,5 @@ class Illustration < ActiveRecord::Base
   Paperclip.interpolates :illustration_filename do |attachment, style|
     attachment.instance.illustration_filename
   end
+  
 end

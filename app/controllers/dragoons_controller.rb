@@ -1,12 +1,9 @@
 class DragoonsController < ApplicationController
   
+  before_action :load_dragoon, except: [:index, :new, :create]
+
   def index
     @dragoons = policy_scope(Dragoon.order(:name).page(params[:page]))
-  end
-  
-  def show
-    @dragoon = Dragoon.find_by_url(params[:id])
-    authorize @dragoon
   end
 
   def new
@@ -29,14 +26,7 @@ class DragoonsController < ApplicationController
     end  
   end
 
-  def edit
-    @dragoon = Dragoon.find_by_url(params[:id])
-    authorize @dragoon
-  end
-
   def update
-    @dragoon = Dragoon.find_by_url(dragoon_params)
-    authorize @dragoon
     if @dragoon.update_attributes(dragoon_params)
       redirect_to @dragoon, notice: "Successfully updated profile."
     else
@@ -45,8 +35,6 @@ class DragoonsController < ApplicationController
   end
 
   def destroy
-    @dragoon = Dragoon.find_by_url(params[:id])
-    authorize @dragoon
     @dragoon.destroy
     redirect_to dragoons_path, notice: "Successfully destroyed dragoon."
   end
@@ -83,6 +71,11 @@ class DragoonsController < ApplicationController
       :jabber_id,
       :skype_name
     )
+  end
+
+  def load_dragoon
+    @dragoon = Dragoon.find_by url: params[:id]
+    authorize @dragoon
   end
 
 end

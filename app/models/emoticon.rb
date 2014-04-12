@@ -1,20 +1,20 @@
 class Emoticon < ActiveRecord::Base
-  validates :name, :presence => true, :length => { :in => 2..25 }, :uniqueness => true
-  validates :emoticon, :presence => true
+
+  validates :name, presence: true, length: { in: 2..25 }, uniqueness: true
   
   before_save :set_code
   
   def set_code
     self.code = ":" + self.name.to_url + ":"
   end
-  
-  validates_attachment_presence :emoticon
-  validates_attachment_size :emoticon, :less_than => 1.megabyte
-  validates_attachment_content_type :emoticon, :content_type => ['image/gif']
 
-  has_attached_file :emoticon, :styles => { :original => "18x18" }, 
-    :path => ":rails_root/public/system/:attachment/:id/:style/:emoticon_filename",
-    :url => "/system/:attachment/:id/:style/:emoticon_filename"
+  has_attached_file :emoticon, styles: { original: "18x18" }, 
+    path: ":rails_root/public/system/:attachment/:id/:style/:emoticon_filename",
+    url: "/system/:attachment/:id/:style/:emoticon_filename"
+
+  validates_attachment :emoticon, presence: true,
+    content_type: { content_type: "image/gif" },
+    size: { in: 0..1.megabytes }
   
   before_post_process :emoticon_filename
   
@@ -29,4 +29,5 @@ class Emoticon < ActiveRecord::Base
   Paperclip.interpolates :emoticon_filename do |attachment, style|
     attachment.instance.emoticon_filename
   end
+
 end

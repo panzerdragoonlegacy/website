@@ -1,22 +1,22 @@
 class Picture < ActiveRecord::Base
+  
   include Categorisable
   include Contributable
   include Relatable
   include Sluggable
   
-  validates :name, :presence => true, :length => { :in => 2..100 }, :uniqueness => true
-  validates :description, :presence => true, :length => { :in => 2..250 }
-  validates :picture, :presence => true
-  
-  validates_attachment_presence :picture
-  validates_attachment_size :picture, :less_than => 5.megabytes
-  validates_attachment_content_type :picture, :content_type => ['image/jpeg']
+  validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
+  validates :description, presence: true, length: { in: 2..250 }
 
   has_attached_file :picture, 
-    :styles => { :mini_thumbnail => "75x75#", :thumbnail => "150x150>", :triple_thumbnail => "150x150#",
-      :double_thumbnail => "240x240#", :single_thumbnail => "486x486>", :embedded => "625x625>" }, 
-    :path => ":rails_root/public/system/:attachment/:id/:style/:picture_filename",
-    :url => "/system/:attachment/:id/:style/:picture_filename"
+    styles: { mini_thumbnail: "75x75#", thumbnail: "150x150>", triple_thumbnail: "150x150#",
+      double_thumbnail: "240x240#", single_thumbnail: "486x486>", embedded: "625x625>" }, 
+    path: ":rails_root/public/system/:attachment/:id/:style/:picture_filename",
+    url: "/system/:attachment/:id/:style/:picture_filename"
+
+  validates_attachment :picture, presence: true,
+    content_type: { content_type: "image/jpeg" },
+    size: { in: 0..5.megabytes }
 
   before_post_process :picture_filename
   #after_post_process :update_picture_filename

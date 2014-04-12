@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-  after_filter :verify_authorized, except: [:new, :create, :destroy]
+  after_action :verify_authorized, except: [:new, :create, :destroy]
 
   def new
   end

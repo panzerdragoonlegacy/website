@@ -1,4 +1,5 @@
 class Dragoon < ActiveRecord::Base
+  
   include Sluggable
   
   attr_accessor :password
@@ -33,7 +34,6 @@ class Dragoon < ActiveRecord::Base
   has_many :project_members, :dependent => :destroy
   has_many :projects, :through => :project_members  
 
-
 #  validates_confirmation_of :password
 #  validates_presence_of :password, :on => :create
   
@@ -41,13 +41,14 @@ class Dragoon < ActiveRecord::Base
   validates :email_address, :presence => true, :length => { :in => 2..50 }, :uniqueness => true
   validates :password, :presence => true, :on => :create
   validates :password, :confirmation => true
-  
-  validates_attachment_size :avatar, :less_than => 5.megabytes
-  validates_attachment_content_type :avatar, :content_type => ['image/jpeg']
 
-  has_attached_file :avatar, :styles => { :thumbnail => "75x75#", :embedded => "280x280>" }, 
-    :path => ":rails_root/public/system/:attachment/:id/:style/:avatar_filename",
-    :url => "/system/:attachment/:id/:style/:avatar_filename"
+  has_attached_file :avatar, styles: { thumbnail: "75x75#", embedded: "280x280>" }, 
+    path: ":rails_root/public/system/:attachment/:id/:style/:avatar_filename",
+    url: "/system/:attachment/:id/:style/:avatar_filename"
+  
+  validates_attachment :avatar,
+    content_type: { content_type: "image/jpeg" },
+    size: { in: 0..5.megabytes }
   
   before_post_process :avatar_filename
   

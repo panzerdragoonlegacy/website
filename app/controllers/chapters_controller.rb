@@ -1,13 +1,13 @@
 class ChaptersController < ApplicationController
   
-  def show    
-    @chapter = Chapter.find_by_url(params[:id])
-    authorize @chapter
+  before_action :load_chapter, except: [:index, :new, :create]
+
+  def show
     previous_and_next_chapters
   end
 
   def new
-    story = Story.find_by_url(params[:story])
+    story = Story.find_by url: params[:story]
     raise "Story not found." unless story.present?
     @chapter = Chapter.new(story_id: story.id)
     authorize @chapter
@@ -23,14 +23,7 @@ class ChaptersController < ApplicationController
     end
   end
 
-  def edit
-    @chapter = Chapter.find_by_url(params[:id])
-    authorize @chapter
-  end
-  
   def update
-    @chapter = Chapter.find_by_url(params[:id])
-    authorize @chapter
     if @chapter.update_attributes(chapter_params)
       redirect_to @chapter, notice: "Successfully updated chapter."
     else
@@ -39,8 +32,6 @@ class ChaptersController < ApplicationController
   end
 
   def destroy
-    @chapter = Chapter.find_by_url(params[:id])
-    authorize @chapter
     story = @chapter.story
     @chapter.destroy
     redirect_to story_path(story), notice: "Successfully destroyed chapter."
@@ -58,6 +49,11 @@ class ChaptersController < ApplicationController
       :publish,
       illustrations_attributes: [:id, :illustration, :_destroy]
     )
+  end
+
+  def load_chapter
+    @chapter = Chapter.find_by url: params[:id]
+    authorize @chapter
   end
 
   def previous_and_next_chapters

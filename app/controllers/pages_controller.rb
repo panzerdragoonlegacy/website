@@ -1,12 +1,9 @@
 class PagesController < ApplicationController
   
+  before_action :load_page, except: [:index, :new, :create]
+
   def index
     @pages = policy_scope(Page.order(:name).page(params[:page]))
-  end
-  
-  def show
-    @page = Page.find_by_url(params[:id])
-    authorize @page
   end
 
   def new
@@ -24,14 +21,7 @@ class PagesController < ApplicationController
     end
   end
 
-  def edit
-    @page = Page.find_by_url(params[:id])
-    authorize @page
-  end
-  
   def update
-    @page = Page.find_by_url(params[:id])
-    authorize @page
     if @page.update_attributes(page_params)
       redirect_to @page, notice: "Successfully updated page."
     else
@@ -40,8 +30,6 @@ class PagesController < ApplicationController
   end
 
   def destroy
-    @page = Page.find_by_url(params[:id])
-    authorize @page
     @page.destroy
     redirect_to pages_path, notice: "Successfully destroyed page."
   end
@@ -55,6 +43,11 @@ class PagesController < ApplicationController
       :publish,
       illustrations_attributes: [:id, :illustration, :_destroy]
     )
+  end
+
+  def load_page
+    @page = Page.find_by url: params[:id]
+    authorize @page
   end
 
 end

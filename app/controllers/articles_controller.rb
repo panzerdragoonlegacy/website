@@ -1,19 +1,15 @@
 class ArticlesController < ApplicationController
 
-  before_filter :categories
+  before_action :load_categories, except: [:show, :destroy]
+  before_action :load_article, except: [:index, :new, :create]
   
   def index
     if params[:dragoon_id]
-      raise "Dragoon not found." unless @dragoon = Dragoon.find_by_url(params[:dragoon_id])
+      raise "Dragoon not found." unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
       @articles = policy_scope(Article.joins(:contributions).where(contributions: { dragoon_id: @dragoon.id }).order(:name).page(params[:page]))
     else
       @articles = policy_scope(Article.order(:name).page(params[:page]))
     end
-  end
-
-  def show
-    @article = Article.find_by_url(params[:id])
-    authorize @article
   end
 
   def new
@@ -30,15 +26,8 @@ class ArticlesController < ApplicationController
       render :new
     end
   end
-
-  def edit
-    @article = Article.find_by_url(params[:id])
-    authorize @article
-  end
   
   def update
-    @article = Article.find_by_url(params[:id])
-    authorize @article
     params[:article][:dragoon_ids] ||= []
     if @article.update_attributes(article_params)
       redirect_to @article, notice: "Successfully updated article."
@@ -48,8 +37,6 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find_by_url(params[:id])
-    authorize @article
     @article.destroy
     redirect_to articles_path, notice: "Successfully destroyed article."
   end
@@ -69,8 +56,13 @@ class ArticlesController < ApplicationController
     )
   end
 
-  def categories
+  def load_categories
     @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :article).order(:name)).resolve
+  end
+
+  def load_article
+    @article = Article.find_by url: params[:id]
+    authorize @article
   end
 
 end

@@ -1,19 +1,15 @@
 class LinksController < ApplicationController
 
-  before_filter :categories
+  before_action :load_categories, except: [:show, :destroy]
+  before_action :load_link, except: [:index, :new, :create]
   
   def index
     if params[:dragoon_id]
-      raise "Dragoon not found." unless @dragoon = Dragoon.find_by_url(params[:dragoon_id])
+      raise "Dragoon not found." unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
       @links = policy_scope(Link.joins(:contributions).where(contributions: { dragoon_id: @dragoon.id }).order(:name).page(params[:page]))
     else
       @links = policy_scope(Link.order(:name).page(params[:page]))
     end
-  end
-
-  def show
-    @link = Link.find(params[:id])
-    authorize @link
   end
 
   def new
@@ -30,15 +26,8 @@ class LinksController < ApplicationController
       render :new
     end
   end
-
-  def edit
-    @link = Link.find(params[:id])
-    authorize @link
-  end
   
   def update
-    @link = Link.find(params[:id])
-    authorize @link
     params[:link][:dragoon_ids] ||= []
     if @link.update_attributes(link_params)
       redirect_to @link, notice: "Successfully updated link."
@@ -48,8 +37,6 @@ class LinksController < ApplicationController
   end
 
   def destroy
-    @link = Link.find(params[:id])
-    authorize @link
     @link.destroy
     redirect_to links_path, notice: "Successfully destroyed link."
   end
@@ -69,8 +56,13 @@ class LinksController < ApplicationController
     )
   end
 
-  def categories
+  def load_categories
     @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :link).order(:name)).resolve
+  end
+
+  def load_link
+    @link = Link.find_by url: params[:id]
+    authorize @link
   end
 
 end

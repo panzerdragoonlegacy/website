@@ -1,19 +1,15 @@
 class ResourcesController < ApplicationController
 
-  before_filter :categories
+  before_action :load_categories, except: [:show, :destroy]
+  before_action :load_resource, except: [:index, :new, :create]
   
   def index
     if params[:dragoon_id]
-      raise "Dragoon not found." unless @dragoon = Dragoon.find_by_url(params[:dragoon_id])
+      raise "Dragoon not found." unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
       @resources = policy_scope(Resource.joins(:contributions).where(contributions: { dragoon_id: @dragoon.id }).order(:name).page(params[:page]))
     else
       @resources = policy_scope(Resource.order(:name).page(params[:page]))
     end
-  end
-
-  def show
-    @resource = Resource.find_by_url(params[:id])
-    authorize @resource
   end
 
   def new
@@ -31,14 +27,7 @@ class ResourcesController < ApplicationController
     end
   end
 
-  def edit
-    @resource = Resource.find_by_url(params[:id])
-    authorize @resource
-  end
-  
   def update
-    @resource = Resource.find_by_url(params[:id])
-    authorize @resource
     params[:resource][:dragoon_ids] ||= []
     if @resource.update_attributes(resource_params)
       redirect_to @resource, notice: "Successfully updated resource."
@@ -48,8 +37,6 @@ class ResourcesController < ApplicationController
   end
 
   def destroy
-    @resource = Resource.find_by_url(params[:id])
-    authorize @resource
     @resource.destroy
     redirect_to resources_path, notice: "Successfully destroyed resource."
   end
@@ -68,8 +55,13 @@ class ResourcesController < ApplicationController
     )
   end
 
-  def categories
+  def load_categories
     @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :resource).order(:name)).resolve
+  end
+
+  def load_resource
+    @resource = Resource.find_by url: params[:id]
+    authorize @resource
   end
 
 end

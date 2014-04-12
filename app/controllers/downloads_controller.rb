@@ -1,19 +1,15 @@
 class DownloadsController < ApplicationController
 
-  before_filter :categories
+  before_action :load_categories, except: [:show, :destroy]
+  before_action :load_download, except: [:index, :new, :create]
   
   def index
     if params[:dragoon_id]
-      raise "Dragoon not found." unless @dragoon = Dragoon.find_by_url(params[:dragoon_id])
+      raise "Dragoon not found." unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
       @downloads = policy_scope(Download.joins(:contributions).where(contributions: { dragoon_id: @dragoon.id }).order(:name).page(params[:page]))
     else
       @downloads = policy_scope(Download.order(:name).page(params[:page]))
     end
-  end
-
-  def show
-    @download = Download.find_by_url(params[:id])
-    authorize @download
   end
 
   def new
@@ -30,15 +26,8 @@ class DownloadsController < ApplicationController
       render :new
     end
   end
-
-  def edit
-    @download = Download.find_by_url(params[:id])
-    authorize @download
-  end
   
   def update
-    @download = Download.find_by_url(params[:id])
-    authorize @download
     params[:download][:dragoon_ids] ||= []
     if @download.update_attributes(download_params)
       redirect_to @download, notice: "Successfully updated download."
@@ -48,8 +37,6 @@ class DownloadsController < ApplicationController
   end
 
   def destroy
-    @download = Download.find_by_url(params[:id])
-    authorize @download
     @download.destroy
     redirect_to downloads_path, notice: "Successfully destroyed download."
   end
@@ -68,8 +55,13 @@ class DownloadsController < ApplicationController
     )
   end
 
-  def categories
+  def load_categories
     @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :download).order(:name)).resolve
+  end
+
+  def load_download
+    @download = Download.find_by url: params[:id]
+    authorize @download
   end
 
 end

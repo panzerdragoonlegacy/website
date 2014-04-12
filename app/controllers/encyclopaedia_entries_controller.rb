@@ -1,15 +1,13 @@
 class EncyclopaediaEntriesController < ApplicationController
   
-  before_filter :categories
+  before_action :load_categories, except: [:show, :destroy]
+  before_action :load_encyclopaedia_entry, except: [:index, :new, :create]
 
   def index
     @encyclopaedia_entries = policy_scope(EncyclopaediaEntry.order(:name).page(params[:page]))
   end
 
   def show
-    @encyclopaedia_entry = EncyclopaediaEntry.find_by_url(params[:id])
-    authorize @encyclopaedia_entry
-
     @articles = ArticlePolicy::Scope.new(current_user, @encyclopaedia_entry.articles.order(:name)).resolve
     @downloads = DownloadPolicy::Scope.new(current_user, @encyclopaedia_entry.downloads.order(:name)).resolve
     @links = LinkPolicy::Scope.new(current_user, @encyclopaedia_entry.links.order(:name)).resolve
@@ -37,14 +35,7 @@ class EncyclopaediaEntriesController < ApplicationController
     end
   end
 
-  def edit
-    @encyclopaedia_entry = EncyclopaediaEntry.find_by_url(params[:id])
-    authorize @encyclopaedia_entry
-  end
-
   def update
-    @encyclopaedia_entry = EncyclopaediaEntry.find_by_url(params[:id])
-    authorize @encyclopaedia_entry
     params[:encyclopaedia_entry][:article_ids] ||= []
     params[:encyclopaedia_entry][:download_ids] ||= []
     params[:encyclopaedia_entry][:link_ids] ||= []
@@ -62,9 +53,8 @@ class EncyclopaediaEntriesController < ApplicationController
     end
   end
 
-  def destroy    
+  def destroy
     @encyclopaedia_entry.destroy
-    authorize @encyclopaedia_entry
     redirect_to encyclopaedia_entries_path, notice: "Successfully destroyed encyclopaedia entry."
   end
   
@@ -74,7 +64,7 @@ class EncyclopaediaEntriesController < ApplicationController
     params.require(:encyclopaedia_entry).permit(
       :category_id,
       :name,
-      :picture,
+      :encyclopaedia_entry_picture,
       :information,
       :content,
       :publish,
@@ -92,8 +82,13 @@ class EncyclopaediaEntriesController < ApplicationController
     )
   end
 
-  def categories
+  def load_categories
     @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :encyclopaedia_entry).order(:name)).resolve
+  end
+
+  def load_encyclopaedia_entry
+    @encyclopaedia_entry = EncyclopaediaEntry.find_by url: params[:id]
+    authorize @encyclopaedia_entry
   end
 
 end

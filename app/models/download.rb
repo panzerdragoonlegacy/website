@@ -1,20 +1,20 @@
 class Download < ActiveRecord::Base
+  
   include Categorisable  
   include Contributable
   include Relatable
   include Sluggable
     
-  validates :name, :presence => true, :length => { :in => 2..100 }, :uniqueness => true
-  validates :description, :presence => true, :length => { :in => 2..250 }
-  validates :download, :presence => true
-  
-  validates_attachment_presence :download
-  validates_attachment_size :download, :less_than => 100.megabytes
-  validates_attachment_content_type :download, :content_type => ['application/zip']
+  validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
+  validates :description, presence: true, length: { in: 2..250 }
 
   has_attached_file :download,
-    :path => ":rails_root/public/system/:attachment/:id/:style/:download_filename",
-    :url => "/system/:attachment/:id/:style/:download_filename"
+    path: ":rails_root/public/system/:attachment/:id/:style/:download_filename",
+    url: "/system/:attachment/:id/:style/:download_filename"
+
+  validates_attachment :download, presence: true,
+    content_type: { content_type: "application/zip" },
+    size: { in: 0..100.megabytes }
   
   before_post_process :download_filename
   
@@ -29,4 +29,5 @@ class Download < ActiveRecord::Base
   Paperclip.interpolates :download_filename do |attachment, style|
     attachment.instance.download_filename
   end
+
 end

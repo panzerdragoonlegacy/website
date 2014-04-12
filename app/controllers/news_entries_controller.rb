@@ -1,17 +1,14 @@
 class NewsEntriesController < ApplicationController
 
+  before_action :load_news_entry, except: [:index, :new, :create]
+
   def index
     if params[:dragoon_id]
-      raise "Dragoon not found." unless @dragoon = Dragoon.find_by_url(params[:dragoon_id])
+      raise "Dragoon not found." unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
       @news_entries = policy_scope(NewsEntry.where(dragoon_id: @dragoon.id).order("created_at desc").page(params[:page]))
     else
       @news_entries = policy_scope(NewsEntry.order("created_at desc").page(params[:page]))
     end
-  end
-
-  def show
-    @news_entry = NewsEntry.find_by_url(params[:id])
-    authorize @news_entry
   end
 
   def new
@@ -29,16 +26,9 @@ class NewsEntriesController < ApplicationController
       render :new
     end
   end
-
-  def edit
-    @news_entry = NewsEntry.find_by_url(params[:id])
-    authorize @news_entry
-  end
   
   def update
-    @news_entry = NewsEntry.find_by_url(params[:id])
-    authorize @news_entry
-    if @news_entry.update_attributes(params[:news_entry])
+    if @news_entry.update_attributes(news_entry_params)
       redirect_to @news_entry, notice: "Successfully updated news entry."
     else
       render :edit
@@ -46,8 +36,6 @@ class NewsEntriesController < ApplicationController
   end
 
   def destroy
-    @news_entry = NewsEntry.find_by_url(params[:id])
-    authorize @news_entry
     @news_entry.destroy
     redirect_to news_entries_path, notice: "Successfully destroyed news entry."
   end
@@ -60,6 +48,11 @@ class NewsEntriesController < ApplicationController
       :content,
       :publish
     )
+  end
+
+  def load_news_entry
+    @news_entry = NewsEntry.find_by url: params[:id]
+    authorize @news_entry
   end
   
 end

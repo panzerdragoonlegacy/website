@@ -6,16 +6,16 @@
     <meta name="description" content="A Panzer Dragoon and Crimson Dragon fan site. Panzer Dragoon and Crimson Dragon news, encyclopaedia, forums, articles, pictures, videos, and more." />
     <%= favicon_link_tag asset_path('favicon.ico') %>
     <%= auto_discovery_link_tag(:atom, news_entries_path(:atom)) %>
-    <%= stylesheet_link_tag "application" %>
-    <%= javascript_include_tag "application" %>  
-    <%= csrf_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
   </head>
   <body>
     <div id="overall">
       <%= render 'illustrations/popover' %>
       <%= render 'shared/modal_window' %>
       <div id="header">
-        <%= link_to image_tag("logo.png", :id => "logo", :alt => "The Will of the Ancients: A Panzer Dragoon and Crimson Dragon Fan Site"), root_url %>
+        <%= link_to image_tag("logo.png", id: "logo", alt: "The Will of the Ancients: A Panzer Dragoon and Crimson Dragon Fan Site"), root_url %>
       </div>
       <div id="banner"></div>
       <div id="navigation">
@@ -38,14 +38,6 @@
                 <li><%= link_to "Edit Profile", edit_dragoon_path(current_dragoon) %>
                 <li><%= link_to "Log Out", log_out_path %></li>
               </ul>
-              <% unless projects.count == 0 %>
-                <h3>Projects</h3>
-                <ul>
-                  <% projects.each do |project| %>
-                    <li><%= link_to project.name, project %></li>
-                  <% end %>
-                </ul>
-              <% end %>
             <% else %>
               <h3>Welcome, Divine Visitor</h3>
               <ul>

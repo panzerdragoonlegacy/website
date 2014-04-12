@@ -20,7 +20,7 @@ class EmoticonsController < ApplicationController
   end
 
   def destroy    
-    @emoticon = Emoticon.find(params[:id])
+    @emoticon = Emoticon.find_by params[:id]
     authorize @emoticon
     @emoticon.destroy
     redirect_to emoticons_path, notice: "Successfully destroyed emoticon."

@@ -6,12 +6,12 @@ mail:
   user_name: 
   password: 
 
-session:
-  key: 
-  secret: 
-          
 twitter:
   consumer_key: 
   consumer_secret: 
   oauth_token: 
   oauth_token_secret: 
+
+bitly:
+  username: 
+  api_key: 

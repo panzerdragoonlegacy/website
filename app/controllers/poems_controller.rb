@@ -1,17 +1,14 @@
 class PoemsController < ApplicationController
 
+  before_action :load_poem, except: [:index, :new, :create]
+
   def index
     if params[:dragoon_id]
-      raise "Dragoon not found." unless @dragoon = Dragoon.find_by_url(params[:dragoon_id])
+      raise "Dragoon not found." unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
       @poems = policy_scope(Poem.joins(:contributions).where(contributions: { dragoon_id: @dragoon.id }).order(:name).page(params[:page]))
     else
       @poems = policy_scope(Poem.order(:name).page(params[:page]))
     end
-  end
-
-  def show
-    @poem = Poem.find_by_url(params[:id])
-    authorize @poem
   end
 
   def new
@@ -29,16 +26,9 @@ class PoemsController < ApplicationController
     end
   end
 
-  def edit
-    @poem = Poem.find_by_url(params[:id])
-    authorize @poem
-  end
-  
   def update
-    @poem = Poem.find_by_url(poem_params)
-    authorize @poem
     params[:poem][:dragoon_ids] ||= []
-    if @poem.update_attributes(params[:poem])
+    if @poem.update_attributes(poem_params)
       redirect_to @poem, notice: "Successfully updated poem."
     else
       render :edit
@@ -46,8 +36,6 @@ class PoemsController < ApplicationController
   end
 
   def destroy
-    @poem = Poem.find_by_url(params[:id])
-    authorize @poem
     @poem.destroy
     redirect_to poems_path, notice: "Successfully destroyed poem."
   end
@@ -63,6 +51,11 @@ class PoemsController < ApplicationController
       dragoon_ids: [],
       encyclopaedia_entry_ids: []
     )
+  end
+
+  def load_poem
+    @poem = Poem.find_by url: params[:id]
+    authorize @poem
   end
 
 end

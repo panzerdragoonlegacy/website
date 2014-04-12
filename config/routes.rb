@@ -1,16 +1,14 @@
-TheWillOfTheAncients::Application.routes.draw do
+Rails.application.routes.draw do
 
-  get "search/index"
-
-  get "log-in" => "sessions#new", :as => :log_in  
-  get "log-out" => "sessions#destroy", :as => :log_out
-  get "register" => "dragoons#new", :as => :register
+  get 'log-in', to: 'sessions#new', as: :log_in
+  get 'log-out', to: 'sessions#destroy', as: :log_out
+  get 'register', to: 'dragoons#new', as: :register
   resources :dragoons do
-    resources :news_entries, :path => 'news-entries'
+    resources :news_entries, path: 'news-entries'
     resources :articles
     resources :downloads
     resources :links
-    resources :music_tracks, :path => 'music-tracks'
+    resources :music_tracks, path: 'music-tracks'
     resources :pictures
     resources :poems
     resources :quizzes
@@ -19,24 +17,24 @@ TheWillOfTheAncients::Application.routes.draw do
     resources :videos
   end
   resources :sessions
-  resources :password_resets, :path => 'password-resets'
+  resources :password_resets, path: 'password-resets'
   resources :categories
   resources :articles
   resources :pictures
   resources :downloads
   resources :videos
   resources :quizzes
-  resources :news_entries, :path => 'news'
+  resources :news_entries, path: 'news'
   resources :stories
   resources :chapters
   resources :resources
   resources :poems
-  resources :music_tracks, :path => 'music'
+  resources :music_tracks, path: 'music'
   resources :links
-  resources :encyclopaedia_entries, :path => 'encyclopaedia'
+  resources :encyclopaedia_entries, path: 'encyclopaedia'
   resources :emoticons
   resources :pages
-  match '/:id' => 'pages#show'
-  root :to => "news_entries#index"
+  get ':id', to: 'pages#show'
+  root to: "news_entries#index"
 
 end

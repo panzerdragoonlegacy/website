@@ -1,5 +1,7 @@
 class CategoriesController < ApplicationController
   
+  before_action :load_category, except: [:index, :new, :create]
+
   def index
     @article_categories = policy_scope(Category.where(category_type: :article).order(:name))
     @download_categories = policy_scope(Category.where(category_type: :download).order(:name))
@@ -13,9 +15,6 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find_by_url(params[:id])
-    authorize @category
-
     # This could potentially be replaced with @category.articles, @category.downloads, etc
     case @category.category_type
     when "article"
@@ -54,14 +53,7 @@ class CategoriesController < ApplicationController
     end
   end
   
-  def edit
-    @category = Category.find_by_url(params[:id])
-    authorize @category
-  end
-
   def update
-    @category = Category.find_by_url(params[:id])
-    authorize @category
     if @category.update_attributes(category_params)
       redirect_to @category, notice: "Successfully updated category."
     else
@@ -71,7 +63,6 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    authorize @category
     redirect_to categories_path, notice: "Successfully destroyed category."
   end
 
@@ -84,6 +75,11 @@ class CategoriesController < ApplicationController
       :category_type,
       :publish
     )
+  end
+
+  def load_category
+    @category = Category.find_by url: params[:id]
+    authorize @category
   end
 
 end

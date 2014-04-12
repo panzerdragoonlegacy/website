@@ -1,4 +1,5 @@
 class PasswordResetsController < ApplicationController
+  
   before_filter :load_dragoon_using_perishable_token, :only => [:edit, :update]
   
   def new
@@ -45,10 +46,10 @@ class PasswordResetsController < ApplicationController
     end
   end
   
-private
+  private
   
   def load_dragoon_using_perishable_token
-    @dragoon = Dragoon.find_by_perishable_token(params[:id])
+    @dragoon = Dragoon.find_by perishable_token: params[:id]
     if @dragoon
       unless @dragoon.perishable_token_expiry > Time.now
         redirect_to root_url, :notice => "Sorry, this token has expired."
