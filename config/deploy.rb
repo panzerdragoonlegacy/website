@@ -23,6 +23,7 @@ namespace :deploy do
   task :symlink_extras do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{shared_path}/config/application.yml #{release_path}/config/application.yml"
+    run "ln -nfs #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
     run "ln -nfs #{shared_path}/assets #{release_path}/public/assets"
   end
   
