@@ -29,7 +29,7 @@ class MusicTracksController < ApplicationController
 
   def update
     params[:music_track][:dragoon_ids] ||= []
-    if @music_track.update_attributes(params[:music_track])
+    if @music_track.update_attributes(music_track_params)
       redirect_to @music_track, notice: "Successfully updated music track."
     else
       render :edit
