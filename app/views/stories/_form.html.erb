@@ -18,7 +18,7 @@
     <%= render 'shared/wysiwym_advanced_buttons' %>
     <%= f.text_area :content, :class => "data_entry" %>  
   </div>
-  <label>Authors</label>
+  <label>Contributors</label>
   <div class="scroll_checkboxes">
     <% for dragoon in Dragoon.order(:name) %>
       <label>
