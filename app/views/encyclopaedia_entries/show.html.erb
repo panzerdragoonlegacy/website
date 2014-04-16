@@ -42,7 +42,7 @@
   <h2>Related Links</h2>
   <ul>
     <% @links.each do |link| %>
-      <li><%= link_to link.name, link %><% unless link.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+      <li><%= link_to link.name, link %></li>
     <% end %>
   </ul>
 <% end %>
