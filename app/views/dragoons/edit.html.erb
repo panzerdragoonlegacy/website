@@ -119,6 +119,7 @@
     <%= f.text_field :skype_name %>  
   </div>  
   <div>
-    <%= f.submit "Update Profile" %>  
+    <%= f.submit "Update Profile" %>
+    <%= f.submit "Update and Continue Editing", name: :continue_editing %>
   </div>
 <% end %>

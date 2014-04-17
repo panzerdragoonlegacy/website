@@ -47,7 +47,8 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     authorize @category
     if @category.save
-      redirect_to @category, notice: "Successfully created category."
+      flash[:notice] = "Successfully created category."
+      params[:continue_editing] ? redirect_to(edit_category_path(@category)) : redirect_to(@category)
     else  
       render :new
     end
@@ -55,7 +56,8 @@ class CategoriesController < ApplicationController
   
   def update
     if @category.update_attributes(category_params)
-      redirect_to @category, notice: "Successfully updated category."
+      flash[:notice] = "Successfully updated category."
+      params[:continue_editing] ? redirect_to(edit_category_path(@category)) : redirect_to(@category)
     else
       render :edit
     end

@@ -15,7 +15,8 @@ class PagesController < ApplicationController
     @page = Page.new(page_params)
     authorize @page
     if @page.save
-      redirect_to @page, notice: "Successfully created page."
+      flash[:notice] = "Successfully created page."
+      params[:continue_editing] ? redirect_to(edit_page_path(@page)) : redirect_to(@page)
     else
       render :new
     end
@@ -23,7 +24,8 @@ class PagesController < ApplicationController
 
   def update
     if @page.update_attributes(page_params)
-      redirect_to @page, notice: "Successfully updated page."
+      flash[:notice] = "Successfully updated page."
+      params[:continue_editing] ? redirect_to(edit_page_path(@page)) : redirect_to(@page)
     else
       render :edit
     end

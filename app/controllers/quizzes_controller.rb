@@ -36,7 +36,8 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.new(quiz_params)
     authorize @quiz
     if @quiz.save
-      redirect_to @quiz, notice: "Successfully created quiz."
+      flash[:notice] = "Successfully created quiz."
+      params[:continue_editing] ? redirect_to(edit_quiz_path(@quiz)) : redirect_to(@quiz)
     else  
       render :new
     end
@@ -50,7 +51,8 @@ class QuizzesController < ApplicationController
   def update
     params[:quiz][:dragoon_ids] ||= []  
     if @quiz.update_attributes(quiz_params)
-      redirect_to @quiz, notice: "Successfully updated quiz."
+      flash[:notice] = "Successfully updated quiz."
+      params[:continue_editing] ? redirect_to(edit_quiz_path(@quiz)) : redirect_to(@quiz)
     else
       render :edit
     end

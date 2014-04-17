@@ -17,11 +17,12 @@ class ArticlesController < ApplicationController
     authorize @article
   end
   
-  def create 
+  def create
     @article = Article.new(article_params)
     authorize @article
     if @article.save
-      redirect_to @article, notice: "Successfully created article."
+      flash[:notice] = "Successfully created article."
+      params[:continue_editing] ? redirect_to(edit_article_path(@article)) : redirect_to(@article)
     else
       render :new
     end
@@ -30,7 +31,8 @@ class ArticlesController < ApplicationController
   def update
     params[:article][:dragoon_ids] ||= []
     if @article.update_attributes(article_params)
-      redirect_to @article, notice: "Successfully updated article."
+      flash[:notice] = "Successfully updated article."
+      params[:continue_editing] ? redirect_to(edit_article_path(@article)) : redirect_to(@article)
     else
       render :edit
     end

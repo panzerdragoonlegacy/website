@@ -21,7 +21,8 @@ class MusicTracksController < ApplicationController
     @music_track = MusicTrack.new(music_track_params)
     authorize @music_track
     if @music_track.save
-      redirect_to @music_track, notice: "Successfully created music track."
+      flash[:notice] = "Successfully created music track."
+      params[:continue_editing] ? redirect_to(edit_music_track_path(@music_track)) : redirect_to(@music_track)
     else
       render :new
     end
@@ -30,7 +31,8 @@ class MusicTracksController < ApplicationController
   def update
     params[:music_track][:dragoon_ids] ||= []
     if @music_track.update_attributes(music_track_params)
-      redirect_to @music_track, notice: "Successfully updated music track."
+      flash[:notice] = "Successfully updated music track."
+      params[:continue_editing] ? redirect_to(edit_music_track_path(@music_track)) : redirect_to(@music_track)
     else
       render :edit
     end

@@ -21,7 +21,8 @@ class ResourcesController < ApplicationController
     @resource = Resource.new(resource_params)
     authorize @resource
     if @resource.save
-      redirect_to @resource, notice: "Successfully created resource."
+      flash[:notice] = "Successfully created resource."
+      params[:continue_editing] ? redirect_to(edit_resource_path(@resource)) : redirect_to(@resource)
     else
       render :new
     end
@@ -30,7 +31,8 @@ class ResourcesController < ApplicationController
   def update
     params[:resource][:dragoon_ids] ||= []
     if @resource.update_attributes(resource_params)
-      redirect_to @resource, notice: "Successfully updated resource."
+      flash[:notice] = "Successfully updated resource."
+      params[:continue_editing] ? redirect_to(edit_resource_path(@resource)) : redirect_to(@resource)
     else
       render :edit
     end

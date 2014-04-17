@@ -21,7 +21,8 @@ class NewsEntriesController < ApplicationController
     authorize @news_entry
     @news_entry.dragoon = current_dragoon
     if @news_entry.save
-      redirect_to @news_entry, notice: "Successfully created news entry."
+      flash[:notice] = "Successfully created news entry."
+      params[:continue_editing] ? redirect_to(edit_news_entry_path(@news_entry)) : redirect_to(@news_entry)
     else
       render :new
     end
@@ -29,7 +30,8 @@ class NewsEntriesController < ApplicationController
   
   def update
     if @news_entry.update_attributes(news_entry_params)
-      redirect_to @news_entry, notice: "Successfully updated news entry."
+      flash[:notice] = "Successfully updated news entry."
+      params[:continue_editing] ? redirect_to(edit_news_entry_path(@news_entry)) : redirect_to(@news_entry)
     else
       render :edit
     end

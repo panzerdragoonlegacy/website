@@ -60,6 +60,7 @@
     <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
   </div>
   <div>
-    <%= f.submit %>
+    <%= f.submit "Save and View" %>
+    <%= f.submit "Save and Continue Editing", name: :continue_editing %>
   </div>
 <% end %>

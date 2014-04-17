@@ -21,7 +21,8 @@ class PicturesController < ApplicationController
     @picture = Picture.new(picture_params)
     authorize @picture
     if @picture.save
-      redirect_to @picture, notice: "Successfully created picture."
+      flash[:notice] = "Successfully created picture."
+      params[:continue_editing] ? redirect_to(edit_picture_path(@picture)) : redirect_to(@picture)
     else
       render :new
     end
@@ -30,7 +31,8 @@ class PicturesController < ApplicationController
   def update
     params[:picture][:dragoon_ids] ||= []
     if @picture.update_attributes(picture_params)
-      redirect_to @picture, notice: "Successfully updated picture."
+      flash[:notice] = "Successfully updated picture."
+      params[:continue_editing] ? redirect_to(edit_picture_path(@picture)) : redirect_to(@picture)
     else
       render :edit
     end

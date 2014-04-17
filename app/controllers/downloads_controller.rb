@@ -21,7 +21,8 @@ class DownloadsController < ApplicationController
     @download = Download.new(download_params)
     authorize @download
     if @download.save
-      redirect_to @download, notice: "Successfully created download."
+      flash[:notice] = "Successfully created download."
+      params[:continue_editing] ? redirect_to(edit_download_path(@download)) : redirect_to(@download)
     else
       render :new
     end
@@ -30,7 +31,8 @@ class DownloadsController < ApplicationController
   def update
     params[:download][:dragoon_ids] ||= []
     if @download.update_attributes(download_params)
-      redirect_to @download, notice: "Successfully updated download."
+      flash[:notice] = "Successfully updated download."
+      params[:continue_editing] ? redirect_to(edit_download_path(@download)) : redirect_to(@download)
     else
       render :edit
     end

@@ -28,7 +28,8 @@ class DragoonsController < ApplicationController
 
   def update
     if @dragoon.update_attributes(dragoon_params)
-      redirect_to @dragoon, notice: "Successfully updated profile."
+      flash[:notice] = "Successfully updated profile."
+      params[:continue_editing] ? redirect_to(edit_dragoon_path(@dragoon)) : redirect_to(@dragoon)
     else
       render :edit
     end

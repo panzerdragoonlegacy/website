@@ -20,7 +20,8 @@ class PoemsController < ApplicationController
     @poem = Poem.new(poem_params)
     authorize @poem
     if @poem.save
-      redirect_to @poem, notice: "Successfully created poem."
+      flash[:notice] = "Successfully created poem."
+      params[:continue_editing] ? redirect_to(edit_poem_path(@poem)) : redirect_to(@poem)
     else
       render :new
     end
@@ -29,7 +30,8 @@ class PoemsController < ApplicationController
   def update
     params[:poem][:dragoon_ids] ||= []
     if @poem.update_attributes(poem_params)
-      redirect_to @poem, notice: "Successfully updated poem."
+      flash[:notice] = "Successfully updated poem."
+      params[:continue_editing] ? redirect_to(edit_poem_path(@poem)) : redirect_to(@poem)
     else
       render :edit
     end

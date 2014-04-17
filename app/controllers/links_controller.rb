@@ -21,7 +21,8 @@ class LinksController < ApplicationController
     @link = Link.new(link_params)
     authorize @link
     if @link.save
-      redirect_to @link, notice: "Successfully created link."
+      flash[:notice] = "Successfully created link."
+      params[:continue_editing] ? redirect_to(edit_link_path(@link)) : redirect_to(@link)
     else
       render :new
     end
@@ -30,7 +31,8 @@ class LinksController < ApplicationController
   def update
     params[:link][:dragoon_ids] ||= []
     if @link.update_attributes(link_params)
-      redirect_to @link, notice: "Successfully updated link."
+      flash[:notice] = "Successfully updated link."
+      params[:continue_editing] ? redirect_to(edit_link_path(@link)) : redirect_to(@link)
     else
       render :edit
     end

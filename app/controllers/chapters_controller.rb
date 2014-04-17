@@ -17,7 +17,8 @@ class ChaptersController < ApplicationController
     @chapter = Chapter.new(chapter_params)
     authorize @chapter
     if @chapter.save
-      redirect_to @chapter, notice: "Successfully created chapter."
+      flash[:notice] = "Successfully created chapter."
+      params[:continue_editing] ? redirect_to(edit_chapter_path(@chapter)) : redirect_to(@chapter)
     else
       render :new
     end
@@ -25,7 +26,8 @@ class ChaptersController < ApplicationController
 
   def update
     if @chapter.update_attributes(chapter_params)
-      redirect_to @chapter, notice: "Successfully updated chapter."
+      flash[:notice] = "Successfully updated chapter."
+      params[:continue_editing] ? redirect_to(edit_chapter_path(@chapter)) : redirect_to(@chapter)
     else
       render :edit
     end

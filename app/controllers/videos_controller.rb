@@ -21,7 +21,8 @@ class VideosController < ApplicationController
     @video = Video.new(video_params)
     authorize @video
     if @video.save
-      redirect_to @video, notice: "Successfully created video."
+      flash[:notice] = "Successfully created video."
+      params[:continue_editing] ? redirect_to(edit_video_path(@video)) : redirect_to(@video)
     else
       render :new
     end
@@ -30,7 +31,8 @@ class VideosController < ApplicationController
   def update
     params[:video][:dragoon_ids] ||= []
     if @video.update_attributes(video_params)
-      redirect_to @video, notice: "Successfully updated video."
+      flash[:notice] = "Successfully updated video."
+      params[:continue_editing] ? redirect_to(edit_video_path(@video)) : redirect_to(@video)
     else
       render :edit
     end

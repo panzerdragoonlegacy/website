@@ -29,7 +29,8 @@ class EncyclopaediaEntriesController < ApplicationController
     @encyclopaedia_entry = EncyclopaediaEntry.new(encyclopaedia_entry_params)
     authorize @encyclopaedia_entry
     if @encyclopaedia_entry.save
-      redirect_to @encyclopaedia_entry, notice: "Successfully created encyclopaedia entry."
+      flash[:notice] = "Successfully created encyclopaedia entry."
+      params[:continue_editing] ? redirect_to(edit_encyclopaedia_entry_path(@encyclopaedia_entry)) : redirect_to(@encyclopaedia_entry)
     else
       render :new
     end
@@ -47,7 +48,8 @@ class EncyclopaediaEntriesController < ApplicationController
     params[:encyclopaedia_entry][:story_ids] ||= []
     params[:encyclopaedia_entry][:video_ids] ||= []
     if @encyclopaedia_entry.update_attributes(encyclopaedia_entry_params)
-      redirect_to @encyclopaedia_entry, notice: "Successfully updated encyclopaedia entry."
+      flash[:notice] = "Successfully updated encyclopaedia entry."
+      params[:continue_editing] ? redirect_to(edit_encyclopaedia_entry_path(@encyclopaedia_entry)) : redirect_to(@encyclopaedia_entry)
     else
       render :edit
     end

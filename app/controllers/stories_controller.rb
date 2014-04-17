@@ -28,7 +28,8 @@ class StoriesController < ApplicationController
     @story = Story.new(story_params)
     authorize @story
     if @story.save
-      redirect_to @story, notice: "Successfully created story."
+      flash[:notice] = "Successfully created story."
+      params[:continue_editing] ? redirect_to(edit_story_path(@story)) : redirect_to(@story)
     else
       render :new
     end
@@ -37,7 +38,8 @@ class StoriesController < ApplicationController
   def update
     params[:story][:dragoon_ids] ||= []
     if @story.update_attributes(story_params)      
-      redirect_to @story, notice: "Successfully updated story."
+      flash[:notice] = "Successfully updated story."
+      params[:continue_editing] ? redirect_to(edit_story_path(@story)) : redirect_to(@story)
     else
       render :edit
     end
