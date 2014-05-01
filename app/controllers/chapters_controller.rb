@@ -68,14 +68,14 @@ class ChaptersController < ApplicationController
       if (chapter.number == @chapter.number - 1) && (chapter.chapter_type == @chapter.chapter_type)
         @previous_chapter = chapter
       end
-  	  if (chapter.number == @chapter.number + 1) && (chapter.chapter_type == @chapter.chapter_type)
-  	    @next_chapter = chapter
-  	  end
-  	end
-  	if (@chapter == prologues.order(:number).last) && regular_chapters
-  	  @next_chapter = regular_chapters.first
-  	end
-	  if (@chapter == regular_chapters.order(:number).first) && prologues
+      if (chapter.number == @chapter.number + 1) && (chapter.chapter_type == @chapter.chapter_type)
+        @next_chapter = chapter
+      end
+    end
+    if (@chapter == prologues.order(:number).last) && regular_chapters
+      @next_chapter = regular_chapters.first
+    end
+    if (@chapter == regular_chapters.order(:number).first) && prologues
       @previous_chapter = prologues.last
     end
     if (@chapter == regular_chapters.order(:number).last) && epilogues
