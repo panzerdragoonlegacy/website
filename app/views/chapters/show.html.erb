@@ -7,13 +7,13 @@
 <% if policy(@chapter).edit? && policy(@chapter).destroy? %>
   <ul class="administration">
     <li><%= link_to 'Edit Chapter', edit_chapter_path(@chapter) %></li>
-    <li><%= link_to 'Delete Chapter', @chapter, :confirm => 'Are you sure you want to delete this chapter?', :method => :delete %></li>
+    <li><%= link_to 'Delete Chapter', @chapter, data: { confirm: 'Are you sure you want to delete this chapter?' }, method: :delete %></li>
   </ul>
 <% end %>
 
 <h2>
   <% if @chapter.chapter_type == :regular_chapter.to_s %>
-    Chapter <%= @chapter.number %><% unless @chapter.name.blank? %>:<% end %> 
+    Chapter <%= @chapter.number %><% unless @chapter.name.blank? %>:<% end %>
   <% end %>
   <%= @chapter.name %>
 </h2>
@@ -24,12 +24,12 @@
   <% if @previous_chapter %>
     <% if (@previous_chapter.chapter_type == :regular_chapter.to_s) %>
       <% if @previous_chapter.name.blank? %>
-        <%= link_to "‹ Chapter " + @previous_chapter.number.to_s, chapter_path(@previous_chapter) %> | 
+        <%= link_to "‹ Chapter " + @previous_chapter.number.to_s, chapter_path(@previous_chapter) %> |
       <% else %>
         <%= link_to "‹ Chapter " + @previous_chapter.number.to_s + ": " + @previous_chapter.name, chapter_path(@previous_chapter) %> |
       <% end %>
     <% else %>
-      <%= link_to "‹ " + @previous_chapter.name, chapter_path(@previous_chapter) %> |   
+      <%= link_to "‹ " + @previous_chapter.name, chapter_path(@previous_chapter) %> |
     <% end %>
   <% end %>
   <%= link_to "Table of Contents", story_path(@chapter.story) %>
@@ -41,7 +41,7 @@
         | <%= link_to "Chapter " + @next_chapter.number.to_s + ": " + @next_chapter.name + " ›", chapter_path(@next_chapter) %>
       <% end %>
     <% else %>
-      | <%= link_to @next_chapter.name + " ›", chapter_path(@next_chapter) %>   
+      | <%= link_to @next_chapter.name + " ›", chapter_path(@next_chapter) %>
     <% end %>
   <% end %>
 </nav>

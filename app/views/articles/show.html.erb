@@ -7,7 +7,7 @@
 <% if policy(@article).edit? && policy(@article).destroy? %>
   <ul class="administration">
     <li><%= link_to 'Edit Article', edit_article_path(@article) %></li>
-    <li><%= link_to 'Delete Article', @article, :confirm => 'Are you sure you want to delete this article?', :method => :delete %></li>
+    <li><%= link_to 'Delete Article', @article, data: { confirm: 'Are you sure you want to delete this article?' }, method: :delete %></li>
   </ul>
 <% end %>
 

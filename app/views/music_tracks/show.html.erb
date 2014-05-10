@@ -7,7 +7,7 @@
 <% if policy(@music_track).edit? && policy(@music_track).destroy? %>
   <ul class="administration">
     <li><%= link_to 'Edit Music Track', edit_music_track_path(@music_track) %></li>
-    <li><%= link_to 'Delete Music Track', @music_track, :confirm => 'Are you sure you want to delete this music track?', :method => :delete %></li>
+    <li><%= link_to 'Delete Music Track', @music_track, data: { confirm: 'Are you sure you want to delete this music track?' }, method: :delete %></li>
   </ul>
 <% end %>
 
@@ -18,8 +18,8 @@
   <% end %>
 </ul>
 
-<audio controls="true" autobuffer="true"> 
-  <source type="audio/mp3" src="<%= @music_track.mp3_music_track.url %>" /> 
+<audio controls="true" autobuffer="true">
+  <source type="audio/mp3" src="<%= @music_track.mp3_music_track.url %>" />
   <source type="audio/ogg" src="<%= @music_track.ogg_music_track.url %>" />
   Your browser does not support the <code>audio</code> element.
 </audio>
@@ -32,7 +32,7 @@
 
 <p>
   <% unless @music_track.track_number == 0 %>
-    Track <%= @music_track.track_number.to_s %> of <%= @music_track.category.music_tracks.count %>. 
+    Track <%= @music_track.track_number.to_s %> of <%= @music_track.category.music_tracks.count %>.
   <% end %>
   Download Music Track: <%= link_to "MP3", @music_track.mp3_music_track.url %> | <%= link_to "Ogg Vorbis", @music_track.ogg_music_track.url %><% if @music_track.flac_music_track.present? %> | <%= link_to "FLAC", @music_track.flac_music_track.url %><% end %>
 </p>

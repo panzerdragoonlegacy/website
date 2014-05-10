@@ -7,20 +7,20 @@
 <% if policy(@video).edit? && policy(@video).destroy? %>
   <ul class="administration">
     <li><%= link_to 'Edit Video', edit_video_path(@video) %></li>
-    <li><%= link_to 'Delete Video', @video, :confirm => 'Are you sure you want to delete this video?', :method => :delete %></li>
+    <li><%= link_to 'Delete Video', @video, data: { confirm: 'Are you sure you want to delete this video?' }, method: :delete %></li>
   </ul>
 <% end %>
-  
+
 <h2>Contributed By:</h2>
 <ul>
   <% @video.dragoons.each do |dragoon| %>
     <li><%= link_to dragoon.name, dragoon %></li>
   <% end %>
 </ul>
-  
-<video width="620" height="349" controls="true" autobuffer="true"> 
-  <source type="video/mp4" src="<%= @video.mp4_video.url %>" /> 
-  <source type="video/webm" src="<%= @video.webm_video.url %>" /> 
+
+<video width="620" height="349" controls="true" autobuffer="true">
+  <source type="video/mp4" src="<%= @video.mp4_video.url %>" />
+  <source type="video/webm" src="<%= @video.webm_video.url %>" />
   Your browser does not support the <code>video</code> element.
 </video>
 
