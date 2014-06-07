@@ -1,7 +1,7 @@
-<%= nested_form_for @chapter, :html => { :multipart => true } do |f| %>  
+<%= nested_form_for @chapter, :html => { :multipart => true } do |f| %>
   <%= render "shared/error_messages", :target => @chapter %>
   <div>
-    <%= f.label :story_id, "Story" %><br /> 
+    <%= f.label :story_id, "Story" %><br />
     <%= f.collection_select :story_id, Story.order(:name), :id, :name, :include_blank => false %>
   </div>
   <div>
@@ -9,7 +9,7 @@
     <%= f.collection_select :chapter_type, Chapter::CHAPTER_TYPES, :to_s, :humanize %>
   </div>
   <div>
-    <%= f.label :number, "Number" %><br /> 
+    <%= f.label :number, "Number" %><br />
     (Enter 1 for the prologue or epilogue, 2 for a second prologue/epilogue. Regular chapters are numbered as you would expect.)<br />
     <%= f.text_field :number %>
   </div>
@@ -19,7 +19,6 @@
   </div>
   <div>
     <%= f.label :content, "Content" %><br />
-    <%= render 'shared/wysiwym_basic_buttons' %>
     <%= f.text_area :content, :class => "data_entry" %>  
   </div>
   <div>
