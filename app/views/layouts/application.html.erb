@@ -6,8 +6,8 @@
     <meta name="description" content="A Panzer Dragoon and Crimson Dragon fan site. Panzer Dragoon and Crimson Dragon news, encyclopaedia, forums, articles, pictures, videos, and more." />
     <%= favicon_link_tag asset_path('favicon.ico') %>
     <%= auto_discovery_link_tag(:atom, news_entries_path(:atom)) %>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
   </head>
   <body>

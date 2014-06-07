@@ -1,4 +1,4 @@
-$(document).ready(function () { // Wait until page is ready rendering the page
+$(document).on('ready page:load', function() {
 
   jQuery.fn.extend({
     getSelectedTextInTextArea: function () {
