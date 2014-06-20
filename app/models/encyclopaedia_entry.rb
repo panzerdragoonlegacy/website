@@ -1,5 +1,4 @@
 class EncyclopaediaEntry < ActiveRecord::Base
-  
   include Categorisable
   include Illustratable
   include Sluggable
@@ -41,5 +40,4 @@ class EncyclopaediaEntry < ActiveRecord::Base
   Paperclip.interpolates :encyclopaedia_entry_picture_filename do |attachment, style|
     attachment.instance.encyclopaedia_entry_picture_filename
   end
-
 end

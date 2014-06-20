@@ -1,5 +1,4 @@
 class MusicTracksController < ApplicationController
-
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_music_track, except: [:index, :new, :create]
   
@@ -69,5 +68,4 @@ class MusicTracksController < ApplicationController
     @music_track = MusicTrack.find_by url: params[:id]
     authorize @music_track
   end
-
 end

@@ -1,5 +1,4 @@
 module QuizzesHelper
-
   # Returns true if the specified quiz_answer is the dragoon's chosen answer.
   def chosen_answer(quiz_question, quiz_answer)
     if params[:results]
@@ -20,5 +19,4 @@ module QuizzesHelper
     end
     return score
   end
-  
 end

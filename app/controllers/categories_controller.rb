@@ -1,5 +1,4 @@
 class CategoriesController < ApplicationController
-  
   before_action :load_category, except: [:index, :new, :create]
 
   def index
@@ -83,5 +82,4 @@ class CategoriesController < ApplicationController
     @category = Category.find_by url: params[:id]
     authorize @category
   end
-
 end

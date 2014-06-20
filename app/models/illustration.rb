@@ -1,5 +1,4 @@
 class Illustration < ActiveRecord::Base
-  
   belongs_to :illustratable, polymorphic: true
   
   has_attached_file :illustration, styles: { embedded: "280x280>", popover: "625x625" }, 
@@ -23,5 +22,4 @@ class Illustration < ActiveRecord::Base
   Paperclip.interpolates :illustration_filename do |attachment, style|
     attachment.instance.illustration_filename
   end
-  
 end

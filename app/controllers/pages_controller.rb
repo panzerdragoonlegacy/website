@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-  
   before_action :load_page, except: [:index, :new, :create]
 
   def index
@@ -51,5 +50,4 @@ class PagesController < ApplicationController
     @page = Page.find_by url: params[:id]
     authorize @page
   end
-
 end

@@ -1,5 +1,4 @@
 class Download < ActiveRecord::Base
-  
   include Categorisable  
   include Contributable
   include Relatable
@@ -29,5 +28,4 @@ class Download < ActiveRecord::Base
   Paperclip.interpolates :download_filename do |attachment, style|
     attachment.instance.download_filename
   end
-
 end

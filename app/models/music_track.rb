@@ -1,5 +1,4 @@
 class MusicTrack < ActiveRecord::Base
-  
   include Categorisable
   include Contributable
   include Relatable
@@ -67,5 +66,4 @@ class MusicTrack < ActiveRecord::Base
   Paperclip.interpolates :flac_music_track_filename do |attachment, style|
     attachment.instance.flac_music_track_filename
   end
-
 end

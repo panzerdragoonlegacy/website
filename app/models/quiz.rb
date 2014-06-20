@@ -1,5 +1,4 @@
 class Quiz < ActiveRecord::Base
-
   include Contributable
   include Relatable
   include Sluggable
@@ -9,5 +8,4 @@ class Quiz < ActiveRecord::Base
 
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
   validates :description, presence: true, length: { in: 2..250 }
-  
 end

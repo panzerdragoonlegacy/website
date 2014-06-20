@@ -1,7 +1,5 @@
 class StoryPolicy < ApplicationPolicy
-  
   class Scope < Struct.new(:user, :scope)
-  
     def resolve
       if user
         return scope if user.role? :administrator
@@ -11,7 +9,6 @@ class StoryPolicy < ApplicationPolicy
       end
       scope.joins(:category).where(publish: true, categories: { publish: true })
     end
-
   end
 
   def show?
@@ -21,5 +18,4 @@ class StoryPolicy < ApplicationPolicy
     end
     record.publish? and record.category.publish?
   end
-
 end

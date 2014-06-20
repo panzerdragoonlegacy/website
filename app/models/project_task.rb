@@ -1,5 +1,4 @@
 class ProjectTask < ActiveRecord::Base  
-  
   belongs_to :project
   belongs_to :dragoon
   has_many :contributions, :as => :contributable, :dependent => :destroy

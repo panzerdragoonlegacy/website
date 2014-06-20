@@ -1,5 +1,4 @@
 class PicturesController < ApplicationController
-
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_picture, except: [:index, :new, :create]
   
@@ -66,5 +65,4 @@ class PicturesController < ApplicationController
     @picture = Picture.find_by url: params[:id]
     authorize @picture
   end
-
 end

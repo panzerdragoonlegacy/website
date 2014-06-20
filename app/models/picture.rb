@@ -1,5 +1,4 @@
 class Picture < ActiveRecord::Base
-  
   include Categorisable
   include Contributable
   include Relatable
@@ -44,5 +43,4 @@ class Picture < ActiveRecord::Base
    # self.picture_file_name = new_file_name
    # self.information = "old_path = " + old_path + " new_path = " + new_path + " picture_file_name = " + self.picture_file_name
   #end
-  
 end

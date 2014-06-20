@@ -1,5 +1,4 @@
 class Video < ActiveRecord::Base
- 
   include Categorisable
   include Contributable
   include Relatable
@@ -47,5 +46,4 @@ class Video < ActiveRecord::Base
   Paperclip.interpolates :webm_video_filename do |attachment, style|
     attachment.instance.webm_video_filename
   end
-
 end

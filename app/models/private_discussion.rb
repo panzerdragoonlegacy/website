@@ -1,5 +1,4 @@
 class PrivateDiscussion < ActiveRecord::Base  
-  
   belongs_to :dragoon
   has_many :private_discussion_comments, :dependent => :destroy
   has_many :private_discussion_members, :dependent => :destroy

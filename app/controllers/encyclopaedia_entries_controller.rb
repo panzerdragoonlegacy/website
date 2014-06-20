@@ -1,5 +1,4 @@
 class EncyclopaediaEntriesController < ApplicationController
-  
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_encyclopaedia_entry, except: [:index, :new, :create]
 
@@ -92,5 +91,4 @@ class EncyclopaediaEntriesController < ApplicationController
     @encyclopaedia_entry = EncyclopaediaEntry.find_by url: params[:id]
     authorize @encyclopaedia_entry
   end
-
 end

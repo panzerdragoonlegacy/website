@@ -1,5 +1,4 @@
 class NewsEntriesController < ApplicationController
-
   before_action :load_news_entry, except: [:index, :new, :create]
 
   def index
@@ -56,5 +55,4 @@ class NewsEntriesController < ApplicationController
     @news_entry = NewsEntry.find_by url: params[:id]
     authorize @news_entry
   end
-  
 end

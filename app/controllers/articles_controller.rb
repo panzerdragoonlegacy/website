@@ -1,5 +1,4 @@
 class ArticlesController < ApplicationController
-
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_article, except: [:index, :new, :create]
   
@@ -66,5 +65,4 @@ class ArticlesController < ApplicationController
     @article = Article.find_by url: params[:id]
     authorize @article
   end
-
 end

@@ -1,5 +1,4 @@
 class QuizzesController < ApplicationController
-  
   before_action :load_quiz, except: [:index, :new, :create]
 
   def index
@@ -80,5 +79,4 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.find_by url: params[:id]
     authorize @quiz
   end
-
 end

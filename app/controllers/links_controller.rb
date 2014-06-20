@@ -1,5 +1,4 @@
 class LinksController < ApplicationController
-
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_link, except: [:index, :new, :create]
   
@@ -66,5 +65,4 @@ class LinksController < ApplicationController
     @link = Link.find_by url: params[:id]
     authorize @link
   end
-
 end

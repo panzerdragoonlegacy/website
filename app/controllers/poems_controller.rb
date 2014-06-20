@@ -1,5 +1,4 @@
 class PoemsController < ApplicationController
-
   before_action :load_poem, except: [:index, :new, :create]
 
   def index
@@ -59,5 +58,4 @@ class PoemsController < ApplicationController
     @poem = Poem.find_by url: params[:id]
     authorize @poem
   end
-
 end

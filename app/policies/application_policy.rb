@@ -1,5 +1,4 @@
 class ApplicationPolicy < Struct.new(:user, :record)
-
   def new?
   	user ? user.role?(:administrator) : false
   end
@@ -19,5 +18,4 @@ class ApplicationPolicy < Struct.new(:user, :record)
   def destroy?
   	user ? user.role?(:administrator) : false
   end
-
 end

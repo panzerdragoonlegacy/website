@@ -1,5 +1,4 @@
 module NewsEntriesHelper
-  
   def news_entry_markdown_to_html(markdown_text)
     require 'rails_autolink'
     require 'kramdown'
@@ -164,5 +163,4 @@ module NewsEntriesHelper
     
     return html
   end
-  
 end

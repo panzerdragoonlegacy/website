@@ -1,5 +1,4 @@
 class VideosController < ApplicationController
-
   before_action :load_categories, expect: [:show, :destroy]
   before_action :load_video, except: [:index, :new, :create]
   
@@ -68,5 +67,4 @@ class VideosController < ApplicationController
     @video = Video.find_by url: params[:id]
     authorize @video
   end
-
 end

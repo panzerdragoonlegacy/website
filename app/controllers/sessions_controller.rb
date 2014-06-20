@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   after_action :verify_authorized, except: [:new, :create, :destroy]
 
   def new
@@ -25,5 +24,4 @@ class SessionsController < ApplicationController
     session[:dragoon_id] = nil
     redirect_to root_url, :notice => "Logged out!"  
   end
-
 end

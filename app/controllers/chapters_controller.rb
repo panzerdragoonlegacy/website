@@ -1,5 +1,4 @@
 class ChaptersController < ApplicationController
-  
   before_action :load_chapter, except: [:index, :new, :create]
 
   def show
@@ -85,5 +84,4 @@ class ChaptersController < ApplicationController
       @previous_chapter = regular_chapters.last
     end
   end
-  
 end

@@ -1,5 +1,4 @@
 class ResourcesController < ApplicationController
-
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_resource, except: [:index, :new, :create]
   
@@ -65,5 +64,4 @@ class ResourcesController < ApplicationController
     @resource = Resource.find_by url: params[:id]
     authorize @resource
   end
-
 end

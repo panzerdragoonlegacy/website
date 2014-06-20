@@ -1,5 +1,4 @@
 class DragoonsController < ApplicationController
-  
   before_action :load_dragoon, except: [:index, :new, :create]
 
   def index
@@ -78,5 +77,4 @@ class DragoonsController < ApplicationController
     @dragoon = Dragoon.find_by url: params[:id]
     authorize @dragoon
   end
-
 end

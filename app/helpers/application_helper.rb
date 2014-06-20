@@ -1,5 +1,4 @@
 module ApplicationHelper
-  
   def title(page_title)
     content_for(:title) { page_title }
   end
@@ -166,6 +165,5 @@ module ApplicationHelper
     html = display_emoticons(html)
       
     return html
-  end  
-  
+  end
 end

@@ -1,5 +1,4 @@
 class Emoticon < ActiveRecord::Base
-
   validates :name, presence: true, length: { in: 2..25 }, uniqueness: true
   
   before_save :set_code
@@ -29,5 +28,4 @@ class Emoticon < ActiveRecord::Base
   Paperclip.interpolates :emoticon_filename do |attachment, style|
     attachment.instance.emoticon_filename
   end
-
 end

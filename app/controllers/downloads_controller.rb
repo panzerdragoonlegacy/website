@@ -1,5 +1,4 @@
 class DownloadsController < ApplicationController
-
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_download, except: [:index, :new, :create]
   
@@ -65,5 +64,4 @@ class DownloadsController < ApplicationController
     @download = Download.find_by url: params[:id]
     authorize @download
   end
-
 end

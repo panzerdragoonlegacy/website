@@ -1,7 +1,5 @@
 class PoemPolicy < ApplicationPolicy
-  
   class Scope < Struct.new(:user, :scope)
-  
     def resolve
       if user
         return scope if user.role? :administrator
@@ -11,7 +9,6 @@ class PoemPolicy < ApplicationPolicy
       end
       scope.where(publish: true)
     end
-
   end
 
   def show?
@@ -21,5 +18,4 @@ class PoemPolicy < ApplicationPolicy
     end
     record.publish?
   end
-
 end

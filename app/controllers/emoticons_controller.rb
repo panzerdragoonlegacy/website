@@ -1,5 +1,4 @@
 class EmoticonsController < ApplicationController
-  
   def index
     @emoticons = policy_scope(Emoticon.order(:name).page(params[:page]))
   end
@@ -31,5 +30,4 @@ class EmoticonsController < ApplicationController
   def emoticon_params
     params.require(:emoticon).permit(:name, :emoticon)
   end
-
 end

@@ -1,14 +1,11 @@
 class CategoryPolicy < ApplicationPolicy
-  
   class Scope < Struct.new(:user, :scope)
-  
     def resolve
       if user
         return scope if user.role? :administrator
       end
       scope.where(publish: true)
     end
-
   end
 
   def show?
@@ -17,5 +14,4 @@ class CategoryPolicy < ApplicationPolicy
     end
     record.publish?
   end
-
 end

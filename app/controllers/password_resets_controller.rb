@@ -1,5 +1,4 @@
 class PasswordResetsController < ApplicationController
-  
   before_filter :load_dragoon_using_perishable_token, :only => [:edit, :update]
   
   def new
@@ -58,5 +57,4 @@ class PasswordResetsController < ApplicationController
       redirect_to root_url, :notice => "Could not validate token."
     end
   end
- 
 end

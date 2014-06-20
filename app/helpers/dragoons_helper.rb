@@ -1,5 +1,4 @@
 module DragoonsHelper
-    
   def article_count(dragoon)
     policy_scope(dragoon.articles).count
   end
@@ -50,5 +49,4 @@ module DragoonsHelper
     poem_count(dragoon) + quiz_count(dragoon) + resource_count(dragoon) + story_count(dragoon) + 
     video_count(dragoon)
   end
-  
 end

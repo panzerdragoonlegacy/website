@@ -1,5 +1,4 @@
-class Dragoon < ActiveRecord::Base
-  
+class Dragoon < ActiveRecord::Base  
   include Sluggable
   
   attr_accessor :password
@@ -107,5 +106,4 @@ class Dragoon < ActiveRecord::Base
       self.password_digest = BCrypt::Password.create(password)
     end
   end
-  
 end

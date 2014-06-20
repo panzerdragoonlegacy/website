@@ -1,5 +1,4 @@
 class ProjectDiscussion < ActiveRecord::Base
-  
   belongs_to :dragoon
   belongs_to :project
   has_many :project_discussion_comments, :dependent => :destroy

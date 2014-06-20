@@ -1,5 +1,4 @@
 class StoriesController < ApplicationController
-
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_story, except: [:index, :new, :create]
     
@@ -73,5 +72,4 @@ class StoriesController < ApplicationController
     @story = Story.find_by url: params[:id]
     authorize @story
   end
-
 end
