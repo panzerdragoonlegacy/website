@@ -1,4 +1,5 @@
 <% title @resource.name %>
+<% description truncated_text(@resource.content) %>
 
 <% unless @resource.publish %>
   <p class="unpublished">Unpublished</p>

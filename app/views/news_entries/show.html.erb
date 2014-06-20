@@ -1,4 +1,5 @@
 <% title @news_entry.name %>
+<% description truncated_text(@news_entry.content) %>
 
 <% if policy(@news_entry).edit? && policy(@news_entry).destroy? %>
   <ul class="administration">

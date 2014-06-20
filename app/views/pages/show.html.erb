@@ -1,4 +1,5 @@
 <% title @page.name %>
+<% description truncated_text(@page.content) %>
 
 <% unless @page.publish %>
   <p class="unpublished">Unpublished</p>

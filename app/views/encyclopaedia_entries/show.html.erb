@@ -1,4 +1,5 @@
 <% title @encyclopaedia_entry.name %>
+<% description truncated_text(@encyclopaedia_entry.content) %>
 
 <% unless @encyclopaedia_entry.publish %>
   <p class="unpublished">Unpublished</p>

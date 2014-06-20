@@ -8,4 +8,20 @@ class DragoonPolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def new?
+    if user
+      user.role?(:administrator)
+    else
+      Dragoon.count == 0 ? true : false
+    end
+  end
+
+  def create?
+    if user
+      user.role?(:administrator)
+    else
+      Dragoon.count == 0 ? true : false
+    end
+  end
 end
