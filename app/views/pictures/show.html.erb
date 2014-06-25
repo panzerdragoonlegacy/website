@@ -19,7 +19,7 @@
   <% end %>
 </ul>
 
-<%= picture_tag @picture, :embedded %>
+<%= link_to picture_tag(@picture, :embedded), @picture.picture.url %>
 
 <p><%= link_to "View Full Size", @picture.picture.url %></p>
 
