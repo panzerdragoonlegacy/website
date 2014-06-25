@@ -21,7 +21,7 @@ class LinksController < ApplicationController
     authorize @link
     if @link.save
       flash[:notice] = "Successfully created link."
-      params[:continue_editing] ? redirect_to(edit_link_path(@link)) : redirect_to(@link)
+      params[:continue_editing] ? redirect_to(edit_link_path(@link)) : redirect_to(links_path)
     else
       render :new
     end
@@ -31,7 +31,7 @@ class LinksController < ApplicationController
     params[:link][:dragoon_ids] ||= []
     if @link.update_attributes(link_params)
       flash[:notice] = "Successfully updated link."
-      params[:continue_editing] ? redirect_to(edit_link_path(@link)) : redirect_to(@link)
+      params[:continue_editing] ? redirect_to(edit_link_path(@link)) : redirect_to(links_path)
     else
       render :edit
     end
@@ -62,7 +62,7 @@ class LinksController < ApplicationController
   end
 
   def load_link
-    @link = Link.find_by url: params[:id]
+    @link = Link.find params[:id]
     authorize @link
   end
 end
