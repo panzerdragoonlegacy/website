@@ -12,7 +12,7 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def show?
-  	if user
+    if user
       return true if user.role? :administrator
       return true if user.role?(:registered) && record.contributions.first.dragoon_id == user.id
     end

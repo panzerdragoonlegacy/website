@@ -9,7 +9,7 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def show?
-  	if user
+    if user
       return true if user.role? :administrator
     end
     record.publish?
