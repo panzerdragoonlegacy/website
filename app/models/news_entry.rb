@@ -16,18 +16,14 @@ class NewsEntry < ActiveRecord::Base
       # Set published_at field in the database to the current datetime:
       self.published_at = DateTime.now
       
-      # Create short URL of news entry using bitly:
-      Bitly.use_api_version_3
-      bitly = Bitly.new(APP_CONFIG['bitly']['username'], APP_CONFIG['bitly']['api_key'])
-      u = bitly.shorten("http://www.thewilloftheancients.com/news/" + self.url)
-      self.short_url = u.short_url
+      full_url = "http://www.thewilloftheancients.com/news/" + self.url
       
       # Post the status update field + short URL to Twitter:
       client = Twitter::Client.new
       if self.name[-1] == "?" or self.name[-1] == "!"
-        client.update(self.name + " " + self.short_url)
+        client.update(self.name + " " + full_url)
       else
-        client.update(self.name + ": " + self.short_url)
+        client.update(self.name + ": " + full_url)
       end    
     end
   end

@@ -17,7 +17,6 @@ group :production do
 end
 
 gem 'bcrypt', '~> 3.1.7'
-gem 'bitly', '~> 0.10.1'
 gem 'coffee-rails', '~> 4.0.1'
 gem 'country_select', '~> 1.3.1'
 gem 'jquery-rails', '~> 3.1.0'
