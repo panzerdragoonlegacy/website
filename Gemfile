@@ -9,7 +9,13 @@ group :development do
 end
 
 group :development, :test do
-  gem 'debugger', '~> 1.6.6'
+  gem 'byebug', '~> 3.1.2'
+  gem 'rspec-rails', '~> 3.0.1'
+end
+
+group :test do
+  gem 'factory_girl_rails', '~> 4.4.1'
+  gem 'shoulda-matchers', '~> 2.6.1'
 end
 
 group :production do

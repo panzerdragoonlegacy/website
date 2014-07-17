@@ -4,8 +4,8 @@ class Article < ActiveRecord::Base
   include Illustratable
   include Relatable
   include Sluggable
-        
-  validates :name, :presence => true, :length => { :in => 2..100 }, :uniqueness => true
-  validates :description, :presence => true, :length => { :in => 2..250 }
-  validates :content, :presence => true
+
+  validates :name, presence: true, uniqueness: true, length: { in: 2..100 }
+  validates :description, presence: true, length: { in: 2..250 }
+  validates :content, presence: true
 end
