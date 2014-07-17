@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'log-in', to: 'sessions#new', as: :log_in
   get 'log-out', to: 'sessions#destroy', as: :log_out
   get 'register', to: 'dragoons#new', as: :register
@@ -36,5 +35,4 @@ Rails.application.routes.draw do
   resources :pages
   get ':id', to: 'pages#show'
   root to: "news_entries#index"
-
 end
