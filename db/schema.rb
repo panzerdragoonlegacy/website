@@ -9,72 +9,72 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140212050651) do
+ActiveRecord::Schema.define(version: 20140814104325) do
 
-  create_table "articles", :force => true do |t|
+  create_table "articles", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
     t.text     "content"
     t.boolean  "publish"
     t.integer  "category_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  create_table "categories", :force => true do |t|
+  create_table "categories", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
     t.string   "category_type"
     t.boolean  "publish"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  create_table "chapters", :force => true do |t|
+  create_table "chapters", force: true do |t|
     t.integer  "story_id"
-    t.string   "chapter_type", :default => "regular_chapter"
-    t.integer  "number",       :default => 1
+    t.string   "chapter_type", default: "regular_chapter"
+    t.integer  "number",       default: 1
     t.string   "name"
     t.string   "url"
     t.text     "content"
     t.boolean  "publish"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
-  create_table "comments", :force => true do |t|
+  create_table "comments", force: true do |t|
     t.text     "message"
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.integer  "dragoon_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
-  create_table "contributions", :force => true do |t|
+  create_table "contributions", force: true do |t|
     t.integer  "dragoon_id"
     t.integer  "contributable_id"
     t.string   "contributable_type"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
-  create_table "discussions", :force => true do |t|
+  create_table "discussions", force: true do |t|
     t.string   "subject"
     t.string   "url"
     t.text     "message"
     t.integer  "forum_id"
     t.integer  "dragoon_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean  "sticky"
   end
 
-  create_table "downloads", :force => true do |t|
+  create_table "downloads", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
@@ -85,11 +85,11 @@ ActiveRecord::Schema.define(:version => 20140212050651) do
     t.datetime "download_updated_at"
     t.boolean  "publish"
     t.integer  "category_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
-  create_table "dragoons", :force => true do |t|
+  create_table "dragoons", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.string   "email_address"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(:version => 20140212050651) do
     t.string   "perishable_token"
     t.datetime "perishable_token_expiry"
     t.string   "time_zone"
-    t.string   "role",                          :default => "guest"
+    t.string   "role",                          default: "guest"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -122,22 +122,23 @@ ActiveRecord::Schema.define(:version => 20140212050651) do
     t.string   "icq_number"
     t.string   "jabber_id"
     t.string   "skype_name"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.integer  "forum_member_id"
   end
 
-  create_table "emoticons", :force => true do |t|
+  create_table "emoticons", force: true do |t|
     t.string   "name"
     t.string   "code"
     t.string   "emoticon_file_name"
     t.string   "emoticon_content_type"
     t.integer  "emoticon_file_size"
     t.datetime "emoticon_updated_at"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
-  create_table "encyclopaedia_entries", :force => true do |t|
+  create_table "encyclopaedia_entries", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.text     "information"
@@ -148,45 +149,45 @@ ActiveRecord::Schema.define(:version => 20140212050651) do
     t.datetime "encyclopaedia_entry_picture_updated_at"
     t.boolean  "publish"
     t.integer  "category_id"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
-  create_table "forums", :force => true do |t|
+  create_table "forums", force: true do |t|
     t.string   "name"
     t.string   "url"
-    t.integer  "number",                     :default => 1
+    t.integer  "number",                     default: 1
     t.string   "description"
     t.string   "forum_picture_file_name"
     t.string   "forum_picture_content_type"
     t.integer  "forum_picture_file_size"
     t.datetime "forum_picture_updated_at"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
-  create_table "illustrations", :force => true do |t|
+  create_table "illustrations", force: true do |t|
     t.integer  "illustratable_id"
     t.string   "illustratable_type"
     t.string   "illustration_file_name"
     t.string   "illustration_content_type"
     t.integer  "illustration_file_size"
     t.datetime "illustration_updated_at"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
-  create_table "links", :force => true do |t|
+  create_table "links", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
     t.integer  "category_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.boolean  "partner_site", :default => false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "partner_site", default: false
   end
 
-  create_table "music_tracks", :force => true do |t|
+  create_table "music_tracks", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
@@ -201,37 +202,37 @@ ActiveRecord::Schema.define(:version => 20140212050651) do
     t.datetime "ogg_music_track_updated_at"
     t.boolean  "publish"
     t.integer  "category_id"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
-    t.integer  "track_number",                  :default => 0
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "track_number",                  default: 0
     t.string   "flac_music_track_file_name"
     t.string   "flac_music_track_content_type"
     t.integer  "flac_music_track_file_size"
     t.datetime "flac_music_track_updated_at"
   end
 
-  create_table "news_entries", :force => true do |t|
+  create_table "news_entries", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.text     "content"
     t.integer  "dragoon_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.datetime "published_at"
     t.string   "short_url"
     t.boolean  "publish"
   end
 
-  create_table "pages", :force => true do |t|
+  create_table "pages", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.text     "content"
     t.boolean  "publish"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "pictures", :force => true do |t|
+  create_table "pictures", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
@@ -242,149 +243,149 @@ ActiveRecord::Schema.define(:version => 20140212050651) do
     t.datetime "picture_updated_at"
     t.boolean  "publish"
     t.integer  "category_id"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
-  create_table "poems", :force => true do |t|
+  create_table "poems", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
     t.text     "content"
     t.boolean  "publish"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  create_table "private_discussion_comments", :force => true do |t|
+  create_table "private_discussion_comments", force: true do |t|
     t.text     "message"
     t.integer  "private_discussion_id"
     t.integer  "dragoon_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
-  create_table "private_discussion_members", :force => true do |t|
+  create_table "private_discussion_members", force: true do |t|
     t.integer  "private_discussion_id"
     t.integer  "dragoon_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
-  create_table "private_discussions", :force => true do |t|
+  create_table "private_discussions", force: true do |t|
     t.string   "subject"
     t.text     "message"
     t.integer  "dragoon_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "project_discussion_comments", :force => true do |t|
+  create_table "project_discussion_comments", force: true do |t|
     t.text     "message"
     t.integer  "project_discussion_id"
     t.integer  "dragoon_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
-  create_table "project_discussions", :force => true do |t|
+  create_table "project_discussions", force: true do |t|
     t.string   "subject"
     t.text     "message"
     t.boolean  "sticky"
     t.integer  "dragoon_id"
     t.integer  "project_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "project_members", :force => true do |t|
+  create_table "project_members", force: true do |t|
     t.integer  "project_id"
     t.integer  "dragoon_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "project_tasks", :force => true do |t|
+  create_table "project_tasks", force: true do |t|
     t.string   "name"
     t.boolean  "completed"
     t.integer  "project_id"
     t.integer  "dragoon_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "projects", :force => true do |t|
+  create_table "projects", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  create_table "quiz_answers", :force => true do |t|
+  create_table "quiz_answers", force: true do |t|
     t.integer  "quiz_question_id"
     t.text     "content"
-    t.boolean  "correct_answer",   :default => false
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.boolean  "correct_answer",   default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
-  create_table "quiz_questions", :force => true do |t|
+  create_table "quiz_questions", force: true do |t|
     t.integer  "quiz_id"
     t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "quizzes", :force => true do |t|
+  create_table "quizzes", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
     t.boolean  "publish"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  create_table "relations", :force => true do |t|
+  create_table "relations", force: true do |t|
     t.integer  "encyclopaedia_entry_id"
     t.integer  "relatable_id"
     t.string   "relatable_type"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  create_table "resources", :force => true do |t|
+  create_table "resources", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.text     "content"
     t.boolean  "publish"
     t.integer  "category_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  create_table "stories", :force => true do |t|
+  create_table "stories", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
     t.text     "content"
     t.boolean  "publish"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "category_id"
   end
 
-  create_table "topics", :force => true do |t|
+  create_table "topics", force: true do |t|
     t.string   "subject"
     t.string   "url"
     t.text     "message"
     t.integer  "dragoon_id"
     t.integer  "project_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "videos", :force => true do |t|
+  create_table "videos", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
@@ -399,18 +400,18 @@ ActiveRecord::Schema.define(:version => 20140212050651) do
     t.datetime "webm_video_updated_at"
     t.boolean  "publish"
     t.integer  "category_id"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.string   "youtube_video_id"
   end
 
-  create_table "views", :force => true do |t|
+  create_table "views", force: true do |t|
     t.integer  "dragoon_id"
     t.integer  "viewable_id"
     t.string   "viewable_type"
     t.boolean  "viewed"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
 end

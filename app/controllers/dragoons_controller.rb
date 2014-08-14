@@ -47,6 +47,7 @@ class DragoonsController < ApplicationController
       :email_address,
       :password,
       :password_confirmation,
+      :forum_member_id,
       :time_zone,
       :role,
       :avatar,

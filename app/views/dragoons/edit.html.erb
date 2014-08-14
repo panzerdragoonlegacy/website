@@ -20,6 +20,10 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %>  
   </div>
+  <div>  
+    <%= f.label :forum_member_id, "Forum Member ID" %><br />
+    <%= f.text_field :forum_member_id %>  
+  </div>
   <div>
     <%= f.label :time_zone %><br />
     <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all, :default => "UTC" %>

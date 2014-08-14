@@ -6,6 +6,10 @@
   </ul>
 <% end %>
 
+<% if @dragoon.forum_member_id.present? %>
+  <%= link_to "View Forum Profile", "http://forums.thewilloftheancients.com/profile.php?mode=viewprofile&u=#{@dragoon.forum_member_id.to_s}" %>
+<% end %> 
+
 <% unless @dragoon.avatar_file_name.blank? %>
   <%= image_tag @dragoon.avatar.url(:embedded) %><br />
 <% end %>
