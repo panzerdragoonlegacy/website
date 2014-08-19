@@ -1,14 +1,11 @@
 # Spoof detection error workaround.
-# More info: https://github.com/thoughtbot/paperclip/issues/1429#issuecomment-35454746
+# More info: https://github.com/thoughtbot/paperclip/issues/1429#issuecomment-34390771
 
+require 'paperclip/media_type_spoof_detector'
 module Paperclip
   class MediaTypeSpoofDetector
-    def type_from_file_command
-      begin
-        Paperclip.run("file", "-b --mime :file", :file => @file.path)
-      rescue Cocaine::CommandLineError
-        ""
-      end
+    def spoofed?
+      false
     end
   end
 end
