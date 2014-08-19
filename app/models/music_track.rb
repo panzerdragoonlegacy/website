@@ -23,12 +23,12 @@ class MusicTrack < ActiveRecord::Base
     content_type: { content_type: "audio/mp3" },
     size: { in: 0..25.megabytes }
   validates_attachment :ogg_music_track, presence: true,
-    content_type: { content_type: "audio/ogg" },
     size: { in: 0..25.megabytes }
   validates_attachment :flac_music_track,
     size: { in: 0..50.megabytes }
 
-  # There was an issue specifying a content type for FLAC files.
+  # There was an issue specifying a content type for some files.
+  do_not_validate_attachment_file_type :ogg_music_track
   do_not_validate_attachment_file_type :flac_music_track
 
   before_post_process :mp3_music_track_filename, :ogg_music_track_filename, :flac_music_track_filename
