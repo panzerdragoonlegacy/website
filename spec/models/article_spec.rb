@@ -7,6 +7,8 @@ RSpec.describe Article, type: :model do
     it { should respond_to(:description) }
     it { should respond_to(:content) }
     it { should respond_to(:publish) }
+    it { should respond_to(:created_at) }
+    it { should respond_to(:updated_at) }
   end
 
   describe "field lengths" do

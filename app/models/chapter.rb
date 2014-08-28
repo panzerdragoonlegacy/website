@@ -9,9 +9,9 @@ class Chapter < ActiveRecord::Base
   
   belongs_to :story
   
-  validates :number, :presence => true, :numericality => { :only_integer => true,
-    :greater_than => 0, :less_than => 100 }
-  validates :content, :presence => true
+  validates :number, presence: true, numericality: { only_integer: true,
+    greater_than: 0, less_than: 100 }
+  validates :content, presence: true
   
   # The list of chapter types.
   CHAPTER_TYPES = %w[prologue regular_chapter epilogue]
