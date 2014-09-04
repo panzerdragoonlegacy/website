@@ -1,14 +1,19 @@
-<% if @chapters %>
-  <div id="resources">
-    <% @chapters.each do |chapter| %>
-      <div class="resource">
-        <div class="details">
-          <h2><%= link_to chapter.name, chapter %></h2>
-          <% unless chapter.publish == true %>
-            <p class="unpublished">Unpublished</p>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
+<% if @chapter_count > 0 %>
+  <ul>
+  <% @prologues.each do |prologue| %>
+    <li><%= link_to prologue.name, chapter_path(prologue) %><% unless prologue.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+  <% end %>
+  <% @regular_chapters.each do |regular_chapter| %>
+    <li>
+      <% unless regular_chapter.name.blank? %>
+        <%= link_to "Chapter " + regular_chapter.number.to_s + ": " + regular_chapter.name, chapter_path(regular_chapter) %>
+      <% else %>
+        <%= link_to "Chapter " + regular_chapter.number.to_s, chapter_path(regular_chapter) %>
+      <% end %>
+    <% unless regular_chapter.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+  <% end %>
+  <% @epilogues.each do |epilogue| %>
+    <li><%= link_to epilogue.name, chapter_path(epilogue) %><% unless epilogue.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+  <% end %>
+  </ul>
 <% end %>

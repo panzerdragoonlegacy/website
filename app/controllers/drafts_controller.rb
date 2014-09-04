@@ -2,7 +2,12 @@ class DraftsController < ApplicationController
   def index
     @articles = policy_scope(Article.where(publish: false).order(:name))
     @categories = policy_scope(Category.where(publish: false).order(:name))
-    @chapters = policy_scope(Chapter.where(publish: false).order(:name))
+
+    @chapter_count = ChapterPolicy::Scope.new(current_user, Chapter.where(publish: false)).resolve.count
+    @prologues = ChapterPolicy::Scope.new(current_user, Chapter.where(publish: false, chapter_type: :prologue).order(:number)).resolve
+    @regular_chapters = ChapterPolicy::Scope.new(current_user, Chapter.where(publish: false, chapter_type: :regular_chapter).order(:number)).resolve
+    @epilogues = ChapterPolicy::Scope.new(current_user, Chapter.where(publish: false, chapter_type: :epilogue).order(:number)).resolve
+
     @downloads = policy_scope(Download.where(publish: false).order(:name))
     @encyclopaedia_entries = policy_scope(EncyclopaediaEntry.where(publish: false).order(:name))
     @music_tracks = policy_scope(MusicTrack.where(publish: false).order(:name))
