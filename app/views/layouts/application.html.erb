@@ -36,6 +36,7 @@
                 <li>You are logged in as <%= link_to current_dragoon.name, dragoon_path(current_dragoon) %>.</li>
                 <li><%= link_to "Edit Profile", edit_dragoon_path(current_dragoon) %>
                 <li><%= link_to "Log Out", log_out_path %></li>
+                <li><%= link_to "Drafts", drafts_path %></li>
               </ul>
             <% else %>
               <h3>Welcome, Divine Visitor</h3>

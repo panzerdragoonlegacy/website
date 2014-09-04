@@ -1,13 +1,12 @@
-<% if @articles %>
+<% if @chapters %>
   <div id="resources">
-    <% @articles.each do |article| %>
+    <% @chapters.each do |chapter| %>
       <div class="resource">
         <div class="details">
-          <h2><%= link_to article.name, article %></h2>
-          <% unless article.publish == true %>
+          <h2><%= link_to chapter.name, chapter %></h2>
+          <% unless chapter.publish == true %>
             <p class="unpublished">Unpublished</p>
           <% end %>
-          <p><%= article.description %></p>
         </div>
       </div>
     <% end %>

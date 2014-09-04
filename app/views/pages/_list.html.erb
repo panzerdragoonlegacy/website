@@ -1,13 +1,13 @@
-<% if @articles %>
+<% if @pages %>
   <div id="resources">
-    <% @articles.each do |article| %>
+    <% @pages.each do |page| %>
       <div class="resource">
         <div class="details">
-          <h2><%= link_to article.name, article %></h2>
-          <% unless article.publish == true %>
+          <h2><%= link_to page.name, page %></h2>
+          <% unless page.publish %>
             <p class="unpublished">Unpublished</p>
           <% end %>
-          <p><%= article.description %></p>
+          <p><%= truncated_text page.content %></p>
         </div>
       </div>
     <% end %>

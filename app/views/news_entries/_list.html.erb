@@ -1,0 +1,15 @@
+<% if @news_entries %>
+  <div id="resources">
+    <% @news_entries.each do |news_entry| %>
+      <div class="resource">
+        <div class="details">
+          <h2><%= link_to news_entry.name, news_entry %></h2>
+          <% unless news_entry.publish %>
+            <p class="unpublished">Unpublished</p>
+          <% end %>
+          <p><%= truncated_text news_entry.content %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
