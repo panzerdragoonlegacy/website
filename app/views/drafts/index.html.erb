@@ -8,7 +8,7 @@
   <h2>Draft Categories</h2>
   <%= render 'categories/list' %>
 <% end %>
-<% if @chapters.present? %>
+<% if @chapter_count > 0 %>
   <h2>Draft Chapters</h2>
   <%= render 'chapters/list' %>
 <% end %>
