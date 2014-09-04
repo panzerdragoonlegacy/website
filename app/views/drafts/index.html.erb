@@ -1,16 +1,16 @@
 <% title "Drafts" %>
 
-<% if @articles.present? %>
-  <h2>Draft Articles</h2>
-  <%= render 'articles/list' %>
-<% end %>
 <% if @categories.present? %>
   <h2>Draft Categories</h2>
   <%= render 'categories/list' %>
 <% end %>
-<% if @chapter_count > 0 %>
-  <h2>Draft Chapters</h2>
-  <%= render 'chapters/list' %>
+<% if @news_entries.present? %>
+  <h2>Draft News Entries</h2>
+  <%= render 'news_entries/list' %>
+<% end %>
+<% if @articles.present? %>
+  <h2>Draft Articles</h2>
+  <%= render 'articles/list' %>
 <% end %>
 <% if @downloads.present? %>
   <h2>Draft Downloads</h2>
@@ -23,14 +23,6 @@
 <% if @music_tracks.present? %>
   <h2>Draft Music Tracks</h2>
   <%= render 'music_tracks/list' %>
-<% end %>
-<% if @news_entries.present? %>
-  <h2>Draft News Entries</h2>
-  <%= render 'news_entries/list' %>
-<% end %>
-<% if @pages.present? %>
-  <h2>Draft Pages</h2>
-  <%= render 'pages/list' %>
 <% end %>
 <% if @pictures.present? %>
   <h2>Draft Pictures</h2>
@@ -52,7 +44,15 @@
   <h2>Draft Stories</h2>
   <%= render 'stories/list' %>
 <% end %>
+<% if @chapter_count > 0 %>
+  <h2>Draft Chapters</h2>
+  <%= render 'chapters/list' %>
+<% end %>
 <% if @videos.present? %>
   <h2>Draft Videos</h2>
   <%= render 'videos/list' %>
+<% end %>
+<% if @pages.present? %>
+  <h2>Draft Pages</h2>
+  <%= render 'pages/list' %>
 <% end %>
