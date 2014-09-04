@@ -1,6 +1,10 @@
 <%= form_for @news_entry do |f| %>
   <%= render "shared/error_messages", :target => @news_entry %>
   <div>
+    <%= f.label :dragoon_id, "Author" %><br />
+    <%= f.collection_select :dragoon_id, Dragoon.order(:name), :id, :name, :include_blank => false %>
+  </div>
+  <div>
     <%= f.label :name, "Name" %><br />
     <%= f.text_field :name %><br />
     (News entry names are limited to 55 characters and should describe the entry's content. The name should not end with a punctuation mark. All important words should start a capital letter, e.g. "Crimson Dragon: Side Story is Currently Unavailable".)

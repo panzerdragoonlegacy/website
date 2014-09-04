@@ -18,7 +18,6 @@ class NewsEntriesController < ApplicationController
   def create 
     @news_entry = NewsEntry.new(news_entry_params)
     authorize @news_entry
-    @news_entry.dragoon = current_dragoon
     if @news_entry.save
       flash[:notice] = "Successfully created news entry."
       params[:continue_editing] ? redirect_to(edit_news_entry_path(@news_entry)) : redirect_to(@news_entry)
