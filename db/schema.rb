@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140814104325) do
+ActiveRecord::Schema.define(version: 20140904063624) do
 
   create_table "articles", force: true do |t|
     t.string   "name"
@@ -46,32 +46,12 @@ ActiveRecord::Schema.define(version: 20140814104325) do
     t.datetime "updated_at",                               null: false
   end
 
-  create_table "comments", force: true do |t|
-    t.text     "message"
-    t.integer  "commentable_id"
-    t.string   "commentable_type"
-    t.integer  "dragoon_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
   create_table "contributions", force: true do |t|
     t.integer  "dragoon_id"
     t.integer  "contributable_id"
     t.string   "contributable_type"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-  end
-
-  create_table "discussions", force: true do |t|
-    t.string   "subject"
-    t.string   "url"
-    t.text     "message"
-    t.integer  "forum_id"
-    t.integer  "dragoon_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean  "sticky"
   end
 
   create_table "downloads", force: true do |t|
@@ -151,19 +131,6 @@ ActiveRecord::Schema.define(version: 20140814104325) do
     t.integer  "category_id"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
-  end
-
-  create_table "forums", force: true do |t|
-    t.string   "name"
-    t.string   "url"
-    t.integer  "number",                     default: 1
-    t.string   "description"
-    t.string   "forum_picture_file_name"
-    t.string   "forum_picture_content_type"
-    t.integer  "forum_picture_file_size"
-    t.datetime "forum_picture_updated_at"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
   end
 
   create_table "illustrations", force: true do |t|
@@ -257,71 +224,6 @@ ActiveRecord::Schema.define(version: 20140814104325) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "private_discussion_comments", force: true do |t|
-    t.text     "message"
-    t.integer  "private_discussion_id"
-    t.integer  "dragoon_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
-  create_table "private_discussion_members", force: true do |t|
-    t.integer  "private_discussion_id"
-    t.integer  "dragoon_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
-  create_table "private_discussions", force: true do |t|
-    t.string   "subject"
-    t.text     "message"
-    t.integer  "dragoon_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "project_discussion_comments", force: true do |t|
-    t.text     "message"
-    t.integer  "project_discussion_id"
-    t.integer  "dragoon_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
-  create_table "project_discussions", force: true do |t|
-    t.string   "subject"
-    t.text     "message"
-    t.boolean  "sticky"
-    t.integer  "dragoon_id"
-    t.integer  "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "project_members", force: true do |t|
-    t.integer  "project_id"
-    t.integer  "dragoon_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "project_tasks", force: true do |t|
-    t.string   "name"
-    t.boolean  "completed"
-    t.integer  "project_id"
-    t.integer  "dragoon_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "projects", force: true do |t|
-    t.string   "name"
-    t.string   "url"
-    t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   create_table "quiz_answers", force: true do |t|
     t.integer  "quiz_question_id"
     t.text     "content"
@@ -403,15 +305,6 @@ ActiveRecord::Schema.define(version: 20140814104325) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.string   "youtube_video_id"
-  end
-
-  create_table "views", force: true do |t|
-    t.integer  "dragoon_id"
-    t.integer  "viewable_id"
-    t.string   "viewable_type"
-    t.boolean  "viewed"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
   end
 
 end

@@ -4,7 +4,6 @@ class NewsEntry < ActiveRecord::Base
   before_save :publish_news_entry
   
   belongs_to :dragoon
-  has_many :comments, :as => :commentable, :dependent => :destroy
   
   validates :name, :presence => true, :length => { :in => 2..55 }, :uniqueness => true
   validates :content, :presence => true

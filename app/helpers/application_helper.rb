@@ -157,12 +157,6 @@ module ApplicationHelper
     html = Sanitize.clean(html, :elements => allowed_elements, :attributes => allowed_attributes, 
       :protocols => allowed_protocols)
 
-    # todo (maybe): find a way of merging blockquotes that are next to each other together into one blockquote,
-    # with multiple paragraphs inside it.
-    
-    # todo (maybe): search all other comments belonging to the same commentable and add "Fred wrote:" at
-    # the start of the blockquote if it matches something Fred said that isn't in a blockquote.
-      
     # Converts non-html links to html links.
     html = auto_link(html, :sanitize => false)      
       

@@ -6,14 +6,7 @@ class Dragoon < ActiveRecord::Base
   before_save :encrypt_password
   before_create :set_default_administrator
 
-  has_many :discussions, :dependent => :destroy
-  has_many :comments, :dependent => :destroy
   has_many :news_entries, :dependent => :destroy
-  has_many :private_discussions, :dependent => :destroy
-  has_many :private_discussion_comments, :dependent => :destroy
-  has_many :project_discussions, :dependent => :destroy
-  has_many :project_comments, :dependent => :destroy
-  has_many :views, :dependent => :destroy
   
   has_many :contributions, :dependent => :destroy
   has_many :articles, :through => :contributions, :source => :contributable, :source_type => 'Article'
@@ -27,12 +20,6 @@ class Dragoon < ActiveRecord::Base
   has_many :stories, :through => :contributions, :source => :contributable, :source_type => 'Story'
   has_many :videos, :through => :contributions, :source => :contributable, :source_type => 'Video'
   
-  has_many :private_discussion_members, :dependent => :destroy
-  has_many :private_discussions, :through => :private_discussion_members
-  
-  has_many :project_members, :dependent => :destroy
-  has_many :projects, :through => :project_members  
-
 #  validates_confirmation_of :password
 #  validates_presence_of :password, :on => :create
   
