@@ -12,6 +12,7 @@ class NewsEntriesController < ApplicationController
 
   def new
     @news_entry = NewsEntry.new
+    @news_entry.dragoon = current_dragoon
     authorize @news_entry
   end
 
