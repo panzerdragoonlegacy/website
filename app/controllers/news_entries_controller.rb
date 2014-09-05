@@ -45,6 +45,7 @@ class NewsEntriesController < ApplicationController
 
   def news_entry_params
     params.require(:news_entry).permit(
+      :dragoon_id,
       :name,
       :content,
       :publish
