@@ -4,6 +4,7 @@ gem 'rails', '4.1.1'
 
 group :development do
   gem 'capistrano', '2.15.5' # Out of date
+  gem 'puma', '~> 2.9.1'
   gem 'spring', '~> 1.1.2'
   gem 'sqlite3', '~> 1.3.9'
 end
