@@ -12,7 +12,7 @@ module NewsEntriesHelper
     allowed_elements = ['a', 'img', 'p', 'ul', 'ol', 'li', 'strong', 'em', 'cite', 
       'blockquote', 'code', 'pre', 'dl', 'dt', 'dd', 'br', 'div', 'iframe', 'video', 'source', 'audio']
     allowed_attributes = {'a' => ['href'], 'img' => ['src', 'alt'], 
-      'iframe' => ['width', 'height', 'src', 'frameborder'],
+      'iframe' => ['width', 'height', 'src', 'frameborder', 'allowfullscreen'],
       'video' => ['width', 'height', 'controls'],
       'audio' => ['controls'],
       'source' => ['type', 'src'],
