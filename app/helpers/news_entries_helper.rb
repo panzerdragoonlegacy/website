@@ -23,8 +23,8 @@ module NewsEntriesHelper
     html = Sanitize.clean(html, :elements => allowed_elements, :attributes => allowed_attributes, 
       :protocols => allowed_protocols)
       
-    html = Nokogiri::HTML.parse(html)      
-    
+    html = Nokogiri::HTML.parse(html)
+        
     # Replace img tags with embedded YouTube video based on file prefix.
     html.css('img').each do |tag|
       file_name = tag.get_attribute('src')
@@ -145,6 +145,30 @@ module NewsEntriesHelper
         
       else
         img.set_attribute('src', '')
+      end
+    end
+
+    # Convert paragraphs to embedded YouTube videos if they contain links to YouTube videos:
+    html.css('p').each do |tag|
+      link = tag.content
+      if (link =~ /(.):\/\/www.youtube.com\/embed\/(.)/) or 
+        (link =~ /(.):\/\/www.youtube.com\/watch\?v=(.)/) or 
+        (link =~ /(.):\/\/youtu.be\/(.)/)      
+        
+        # Get video ID which comes after the last ?v= or / in the URL:
+        if link =~ /(.)watch\?v=(.)/
+          video_id = link.split('?v=')[-1]
+        else
+          video_id = link.split('/')[-1]
+        end
+
+        # Replace surrounding paragraph with YouTube iframe:
+        tag.name = 'iframe'
+        tag.set_attribute('width', '486')
+        tag.set_attribute('height', '320')
+        tag.set_attribute('src', 'https://www.youtube.com/embed/' + video_id)
+        tag.set_attribute('frameborder', '0')
+        tag.set_attribute('allowfullscreen', '')
       end
     end
       
