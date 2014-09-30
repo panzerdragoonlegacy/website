@@ -24,27 +24,6 @@ module NewsEntriesHelper
       :protocols => allowed_protocols)
       
     html = Nokogiri::HTML.parse(html)
-        
-    # Replace img tags with embedded YouTube video based on file prefix.
-    html.css('img').each do |tag|
-      file_name = tag.get_attribute('src')
-      
-      # If file prefix begins with "youtube:"
-      if file_name.split(':')[0] == 'youtube'
-        
-        # Replace surrounding paragraph with iframe:
-        tag.parent.name = 'iframe'
-        tag.parent.set_attribute('width', '486')
-        tag.parent.set_attribute('height', '320')
-        tag.parent.set_attribute('src', 'http://www.youtube.com/embed/' + file_name.split(':')[1])
-        tag.parent.set_attribute('frameborder', '0')
-      end
-    end
-    
-    # Remove leftover img tags within YouTube iframes:
-    html.css('iframe').each do |tag|
-      tag.children.remove
-    end
     
     # Replace img tags with audio and video tags based on file extension.
     html.css('img').each do |tag|
