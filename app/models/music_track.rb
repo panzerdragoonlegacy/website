@@ -36,20 +36,20 @@ class MusicTrack < ActiveRecord::Base
   # Sets mp3_music_track filename in the database.
   def mp3_music_track_filename
     if self.mp3_music_track_content_type == 'audio/mp3'
-      self.mp3_music_track_file_name = self.name.to_url + ".mp3"
+      self.mp3_music_track_file_name = self.name.to_url + ".mp3" if self.mp3_music_track.present?
     end
   end
   
   # Sets ogg_music_track filename in the database.
   def ogg_music_track_filename
     if self.ogg_music_track_content_type == 'audio/ogg'
-      self.ogg_music_track_file_name = self.name.to_url + ".ogg"
+      self.ogg_music_track_file_name = self.name.to_url + ".ogg" if self.ogg_music_track.present?
     end
   end
   
   # Sets flac_music_track filename in the database.
   def flac_music_track_filename
-    self.flac_music_track_file_name = self.name.to_url + ".flac"
+    self.flac_music_track_file_name = self.name.to_url + ".flac" if self.flac_music_track.present?
   end  
   
   # Sets mp3_music_track filename in the file system.

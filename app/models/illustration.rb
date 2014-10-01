@@ -14,7 +14,7 @@ class Illustration < ActiveRecord::Base
   # Sets illustration filename in the database.
   def illustration_filename
     if self.illustration_content_type == 'image/jpeg'
-      self.illustration_file_name = self.illustration_file_name.split('.')[0].to_url + ".jpg"
+      self.illustration_file_name = self.illustration_file_name.split('.')[0].to_url + ".jpg" if self.illustration.present?
     end
   end
   

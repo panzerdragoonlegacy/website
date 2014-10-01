@@ -23,7 +23,7 @@ class Picture < ActiveRecord::Base
   # Sets picture filename in the database when record is created.
   def picture_filename
     if self.picture_content_type == 'image/jpeg'
-      self.picture_file_name = self.name.to_url + ".jpg"
+      self.picture_file_name = self.name.to_url + ".jpg" if self.picture.present?
     end
   end
   

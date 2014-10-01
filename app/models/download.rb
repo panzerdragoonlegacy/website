@@ -20,7 +20,7 @@ class Download < ActiveRecord::Base
   # Sets download filename in the database.
   def download_filename
     if self.download_content_type == 'application/zip'
-      self.download_file_name = self.name.to_url + ".zip"
+      self.download_file_name = self.name.to_url + ".zip" if self.download.present?
     end
   end
   

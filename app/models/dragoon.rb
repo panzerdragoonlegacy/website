@@ -41,7 +41,7 @@ class Dragoon < ActiveRecord::Base
   # Sets avatar filename in the database.
   def avatar_filename
     if self.avatar_content_type == 'image/jpeg'
-      self.avatar_file_name = "avatar.jpg"
+      self.avatar_file_name = "avatar.jpg" if self.avatar.present?
     end
   end
   

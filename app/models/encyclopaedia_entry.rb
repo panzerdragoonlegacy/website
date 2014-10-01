@@ -32,7 +32,7 @@ class EncyclopaediaEntry < ActiveRecord::Base
   # Sets encyclopaedia_entry_picture filename in the database.
   def encyclopaedia_entry_picture_filename
     if self.encyclopaedia_entry_picture_content_type == 'image/jpeg'
-      self.encyclopaedia_entry_picture_file_name = self.name.to_url + ".jpg"
+      self.encyclopaedia_entry_picture_file_name = self.name.to_url + ".jpg" if self.encyclopaedia_entry_picture.present?
     end
   end
   

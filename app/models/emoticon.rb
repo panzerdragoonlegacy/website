@@ -20,7 +20,7 @@ class Emoticon < ActiveRecord::Base
   # Sets emoticon filename in the database.
   def emoticon_filename
     if self.emoticon_content_type == 'image/gif'
-      self.emoticon_file_name = self.name.to_url + ".gif"
+      self.emoticon_file_name = self.name.to_url + ".gif" if self.emoticon.present?
     end
   end
   

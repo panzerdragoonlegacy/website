@@ -26,14 +26,14 @@ class Video < ActiveRecord::Base
   # Sets mp4_video filename in the database.
   def mp4_video_filename
     if self.mp4_video_content_type == 'video/mp4'
-      self.mp4_video_file_name = self.name.to_url + ".mp4"
+      self.mp4_video_file_name = self.name.to_url + ".mp4" if self.mp4_video.present?
     end
   end
   
   # Sets webm_video filename in the database.
   def webm_video_filename
     if self.webm_video_content_type == 'video/webm'
-      self.webm_video_file_name = self.name.to_url + ".webm"
+      self.webm_video_file_name = self.name.to_url + ".webm" if self.webm_video.present?
     end
   end
   
