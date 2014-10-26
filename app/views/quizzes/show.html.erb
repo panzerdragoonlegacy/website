@@ -7,6 +7,7 @@
 
 <% if policy(@quiz).edit? && policy(@quiz).destroy? %>
   <ul class="administration">
+    <li><%= link_to 'New Poem', new_poem_path %></li>
     <li><%= link_to 'Edit Quiz', edit_quiz_path(@quiz) %></li>
     <li><%= link_to 'Delete Quiz', @quiz, data: { confirm: 'Are you sure you want to delete this quiz?' }, method: :delete %></li>
   </ul>

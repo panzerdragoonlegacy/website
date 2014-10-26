@@ -7,6 +7,7 @@
 
 <% if  policy(@category).edit? && policy(@category).destroy? %>
   <ul class="administration">
+    <li><%= link_to 'New Category', new_category_path %></li>
     <li><%= link_to 'Edit Category', edit_category_path(@category) %></li>
     <li><%= link_to 'Delete Category', @category, data: { confirm: 'Are you sure you want to delete this category? ALL items belonging to this category will be deleted.' }, method: :delete %></li>
   </ul>
