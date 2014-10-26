@@ -18,62 +18,53 @@
 <% if @articles %>
   <h2>Articles in this Category</h2>
   <%= render 'articles/list' %>
-  <% paginate @articles if @articles %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Articles', articles_path %></p>
 <% end %>
 
 <% if @downloads %>
   <h2>Downloads in this Category</h2>
   <%= render 'downloads/list' %>
-  <% paginate @downloads if @downloads %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Downloads', downloads_path %></p>
 <% end %>
 
 <% if @encyclopaedia_entries %>
   <h2>Encyclopaedia Entries in this Category</h2>
   <%= render 'encyclopaedia_entries/list' %>
-  <% paginate @encyclopaedia_entries if @encyclopaedia_entries %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Encyclopaedia', encyclopaedia_entries_path %></p>
 <% end %>
 
 <% if @links %>
   <h2>Links in this Category</h2>
   <%= render 'links/list' %>
-  <% paginate @links if @links %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Links', links_path %></p>
 <% end %>
 
 <% if @music_tracks %>
   <h2>Music Tracks in this Category</h2>
   <%= render 'music_tracks/list' %>
-  <% paginate @music_tracks if @music_tracks %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Music', music_tracks_path %></p>
 <% end %>
 
 <% if @pictures %>
   <h2>Pictures in this Category</h2>
   <%= render 'pictures/list' %>
-  <% paginate @pictures if @pictures %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Pictures', pictures_path %></p>
 <% end %>
 
 <% if @resources %>
   <h2>Resources in this Category</h2>
   <%= render 'resources/list' %>
-  <% paginate @resources if @resources %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Resources', resources_path %></p>
 <% end %>
 
 <% if @stories %>
   <h2>Stories in this Category</h2>
   <%= render 'stories/list' %>
-  <% paginate @stories if @stories %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Stories', stories_path %></p>
 <% end %>
 
 <% if @videos %>
   <h2>Videos in this Category</h2>
   <%= render 'videos/list' %>
-  <% paginate @videos if @videos %>
   <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Videos', videos_path %></p>
 <% end %>
