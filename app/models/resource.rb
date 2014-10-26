@@ -5,6 +5,6 @@ class Resource < ActiveRecord::Base
   include Relatable
   include Sluggable
     
-  validates :name, :presence => true, :length => { :in => 2..100 }, :uniqueness => true
-  validates :content, :presence => true
+  validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
+  validates :content, presence: true
 end

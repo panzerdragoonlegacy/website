@@ -51,7 +51,7 @@ module NewsEntriesHelper
           ogg_source_tag['src'] = music_track.ogg_music_track.url
           ogg_source_tag.add_next_sibling(p_tag)
           p_tag.content = 'Your browser does not support the audio element.'
-        end        
+        end
       end      
       
       # If file extension is that of a video file.

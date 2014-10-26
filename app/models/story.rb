@@ -5,11 +5,14 @@ class Story < ActiveRecord::Base
   include Relatable
   include Sluggable
     
-  has_many :chapters, :dependent => :destroy
+  has_many :chapters, dependent: :destroy
   
-  validates :name, :presence => true, :length => { :in => 2..100 }, :uniqueness => true
-  validates :description, :presence => true, :length => { :in => 2..250 }
+  validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
+  validates :description, presence: true, length: { in: 2..250 }
+  
   after_save :update_chapter_urls
+
+  private
   
   # Updates chapter urls based on the (potentially) changed story url.
   def update_chapter_urls

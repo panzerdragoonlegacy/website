@@ -1,12 +1,14 @@
 class NewsEntry < ActiveRecord::Base
   include Sluggable
-
-  before_save :publish_news_entry
   
   belongs_to :dragoon
   
-  validates :name, :presence => true, :length => { :in => 2..55 }, :uniqueness => true
-  validates :content, :presence => true
+  validates :name, presence: true, length: { in: 2..55 }, uniqueness: true
+  validates :content, presence: true
+
+  before_save :publish_news_entry
+
+  private
     
   def publish_news_entry
     # The first time the news entry is published:

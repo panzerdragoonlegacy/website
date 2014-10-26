@@ -5,6 +5,6 @@ class Link < ActiveRecord::Base
   has_many :contributions, as: :contributable, dependent: :destroy
   has_many :dragoons, through: :contributions
 
-  validates :name, :presence => true, :length => { :in => 2..100 }, :uniqueness => true
-  validates :description, :presence => true, :length => { :in => 2..250 }
+  validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
+  validates :description, presence: true, length: { in: 2..250 }
 end

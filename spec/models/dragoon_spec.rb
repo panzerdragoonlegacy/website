@@ -1,5 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Dragoon, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Dragoon, type: :model do
+  pending describe "fields" do
+    it "model to be split into two"
+  end
 end
