@@ -7,8 +7,6 @@ class NewsEntry < ActiveRecord::Base
   validates :content, presence: true
 
   before_save :publish_news_entry
-
-  private
     
   def publish_news_entry
     # The first time the news entry is published:
