@@ -2,26 +2,31 @@ module Syncable
   extend ActiveSupport::Concern
     
   included do
-    def sync_filename_of(attachment, filename: filename)
+    def sync_file_name_of(attachment, file_name: file_name)
       if self.send(attachment).present?
-        if filename != self["#{attachment}_file_name"] and self.persisted?
-          # Loop through each attachment style:
+        if file_name != self["#{attachment}_file_name"] and self.persisted?
+          # Rename each attachment style:
           self.send(attachment).options[:styles].each do |key, value|
-            # Get the full path of the file from when it was last saved: 
-            style_path = self.class.find(self.id).send(attachment).path(key)
-
-            # Continue to rename the file if it exists:
-            if style_path and File.exists?(style_path)
-              style_directory = File.dirname style_path
-              style_file = File.open style_path
-              File.rename style_file, "#{style_directory}/#{filename}"
-            end
+            file_path = self.class.find(self.id).send(attachment).path(key)
+            rename_file file_path, file_name
           end
+
+          # Rename the original file:
+          file_path = self.class.find(self.id).send(attachment).path
+          rename_file file_path, file_name
         end
         
         # Rename the filename in the database:
-        self["#{attachment}_file_name"] = filename
+        self["#{attachment}_file_name"] = file_name
       end
     end
-  end  
+
+    def rename_file(file_path, file_name)
+      if file_path and File.exists?(file_path)
+        file_directory = File.dirname file_path
+        file = File.open file_path
+        File.rename file, "#{file_directory}/#{file_name}"
+      end
+    end
+  end
 end

@@ -42,10 +42,10 @@ class EncyclopaediaEntry < ActiveRecord::Base
     content_type: { content_type: "image/jpeg" },
     size: { in: 0..5.megabytes }
   
-  before_save :sync_filename
+  before_save :sync_file_name
 
-  def sync_filename
-    sync_filename_of :encyclopaedia_entry_picture, 
-      filename: "#{self.name.to_url}.jpg"
+  def sync_file_name
+    sync_file_name_of :encyclopaedia_entry_picture, 
+      file_name: "#{self.name.to_url}.jpg"
   end
 end

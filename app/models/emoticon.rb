@@ -11,10 +11,10 @@ class Emoticon < ActiveRecord::Base
     content_type: { content_type: "image/gif" },
     size: { in: 0..1.megabytes }
   
-  before_save :sync_filename, :set_code
+  before_save :sync_file_name, :set_code
 
-  def sync_filename
-    sync_filename_of :emoticon, filename: "#{self.name.to_url}.gif"
+  def sync_file_name
+    sync_file_name_of :emoticon, file_name: "#{self.name.to_url}.gif"
   end
 
   def set_code

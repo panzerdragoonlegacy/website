@@ -15,10 +15,10 @@ class Illustration < ActiveRecord::Base
     content_type: { content_type: "image/jpeg" },
     size: { in: 0..5.megabytes }
 
-  before_save :sync_filename
+  before_save :sync_file_name
 
-  def sync_filename
-    sync_filename_of :illustration, 
-      filename: "#{self.illustration_file_name.split('.')[0].to_url}.jpg"
+  def sync_file_name
+    sync_file_name_of :illustration, 
+      file_name: "#{self.illustration_file_name.split('.')[0].to_url}.jpg"
   end
 end
