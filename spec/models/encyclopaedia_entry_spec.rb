@@ -37,6 +37,28 @@ RSpec.describe EncyclopaediaEntry, type: :model do
   end
 
   describe "nested attributes" do
-    it { should accept_nested_attributes_for(:illustrations).allow_destroy(true) }
+    it { should accept_nested_attributes_for(:illustrations).
+      allow_destroy(true) }
+  end
+
+  describe "file attachment" do
+    it { should have_attached_file(:encyclopaedia_entry_picture) }
+    it { should validate_attachment_presence(:encyclopaedia_entry_picture) }
+    it { should validate_attachment_content_type(:encyclopaedia_entry_picture).
+      allowing('image/jpeg') }
+    it { should validate_attachment_size(:encyclopaedia_entry_picture).
+      less_than(5.megabytes) }
+  end
+
+  describe "callbacks" do
+    context "before save" do
+      it "sets the entry's picture file name to match the entry's name" do
+        valid_encyclopaedia_entry = FactoryGirl.build :valid_encyclopaedia_entry
+        valid_encyclopaedia_entry.name = "New Name"
+        valid_encyclopaedia_entry.save
+        expect(valid_encyclopaedia_entry.encyclopaedia_entry_picture_file_name).
+          to eq "new-name.jpg"
+      end
+    end
   end
 end

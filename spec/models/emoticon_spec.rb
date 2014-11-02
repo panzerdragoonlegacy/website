@@ -15,9 +15,26 @@ RSpec.describe Emoticon, type: :model do
     it { should ensure_length_of(:name).is_at_least(2).is_at_most(25) }
   end
 
-  pending describe "methods" do
+  describe "file attachment" do
+    it { should have_attached_file(:emoticon) }
+    it { should validate_attachment_presence(:emoticon) }
+    it { should validate_attachment_content_type(:emoticon).
+      allowing('image/gif') }
+    it { should validate_attachment_size(:emoticon).less_than(1.megabyte) }
+  end
+
+  describe "callbacks" do
     context "before save" do
-      it "should set the code to a lowercase verion of the name surrounded by colons" do
+      it "sets code to a lowercase verion of the name surrounded by colons" do
+        valid_emoticon = FactoryGirl.build :valid_emoticon, name: "New Name"
+        valid_emoticon.save
+        expect(valid_emoticon.code).to eq ":new-name:"
+      end
+
+      it "sets the emoticon file name to match the emoticon's name" do
+        valid_emoticon = FactoryGirl.build :valid_emoticon, name: "New Name"
+        valid_emoticon.save
+        expect(valid_emoticon.emoticon_file_name).to eq "new-name.gif"
       end
     end
   end

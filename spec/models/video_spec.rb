@@ -31,4 +31,19 @@ RSpec.describe Video, type: :model do
     it { should have_many(:relations).dependent(:destroy) }
     it { should have_many(:encyclopaedia_entries).through(:relations) }
   end
+
+  describe "file attachments" do
+    it { should have_attached_file(:mp4_video) }
+    it { should validate_attachment_presence(:mp4_video) }
+    it { should validate_attachment_content_type(:mp4_video).
+      allowing('video/mp4') }
+    it { should validate_attachment_size(:mp4_video).
+      less_than(50.megabytes) }
+    it { should have_attached_file(:webm_video) }
+    it { should validate_attachment_presence(:webm_video) }
+    it { should validate_attachment_content_type(:webm_video).
+      allowing('video/webm') }
+    it { should validate_attachment_size(:webm_video).
+      less_than(50.megabytes) }
+  end
 end

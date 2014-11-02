@@ -29,4 +29,23 @@ RSpec.describe Picture, type: :model do
     it { should have_many(:relations).dependent(:destroy) }
     it { should have_many(:encyclopaedia_entries).through(:relations) }
   end
+
+  describe "file attachment" do
+    it { should have_attached_file(:picture) }
+    it { should validate_attachment_presence(:picture) }
+    it { should validate_attachment_content_type(:picture).
+      allowing('image/jpeg') }
+    it { should validate_attachment_size(:picture).
+      less_than(5.megabytes) }
+  end
+
+  describe "callbacks" do
+    context "before save" do
+      it "sets the picture file name to match the picture's name" do
+        valid_picture = FactoryGirl.build :valid_picture, name: "New Name"
+        valid_picture.save
+        expect(valid_picture.picture_file_name).to eq "new-name.jpg"
+      end
+    end
+  end
 end

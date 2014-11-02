@@ -34,4 +34,22 @@ RSpec.describe MusicTrack, type: :model do
     it { should have_many(:relations).dependent(:destroy) }
     it { should have_many(:encyclopaedia_entries).through(:relations) }
   end
+
+  describe "file attachments" do
+    it { should have_attached_file(:mp3_music_track) }
+    it { should validate_attachment_presence(:mp3_music_track) }
+    it { should validate_attachment_content_type(:mp3_music_track).
+      allowing('audio/mp3') }
+    it { should validate_attachment_size(:mp3_music_track).
+      less_than(25.megabytes) }
+    it { should have_attached_file(:ogg_music_track) }
+    it { should validate_attachment_presence(:ogg_music_track) }
+    it { should validate_attachment_content_type(:ogg_music_track).
+      allowing('audio/ogg') }
+    it { should validate_attachment_size(:ogg_music_track).
+      less_than(25.megabytes) }
+    it { should have_attached_file(:flac_music_track) }
+    it { should validate_attachment_size(:flac_music_track).
+      less_than(50.megabytes) }
+  end
 end

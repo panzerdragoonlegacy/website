@@ -29,4 +29,22 @@ RSpec.describe Download, type: :model do
     it { should have_many(:relations).dependent(:destroy) }
     it { should have_many(:encyclopaedia_entries).through(:relations) }
   end
+
+  describe "file attachment" do
+    it { should have_attached_file(:download) }
+    it { should validate_attachment_presence(:download) }
+    it { should validate_attachment_content_type(:download).
+      allowing('application/zip') }
+    it { should validate_attachment_size(:download).less_than(100.megabytes) }
+  end
+
+  describe "callbacks" do
+    context "before save" do
+      it "sets the download file name to match the download's name" do
+        valid_download = FactoryGirl.build :valid_download, name: "New Name"
+        valid_download.save
+        expect(valid_download.download_file_name).to eq "new-name.zip"
+      end
+    end
+  end
 end
