@@ -7,6 +7,7 @@ role :db,  "web412.webfaction.com", :primary => true        # This is where Rail
 set :user, "chrisalley"
 set :deploy_to, "/home/chrisalley/webapps/thewilloftheancients"
 set :use_sudo, false
+set :default_env, { path: "#{deploy_to}/bin:$PATH", gem_home: "#{deploy_to}/gems" }
 default_run_options[:pty] = true
 
 set :scm, "git"
@@ -26,7 +27,7 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
     run "ln -nfs #{shared_path}/assets #{release_path}/public/assets"
   end
-  
+
   desc "Setup script permissions."
   task :setup_script_permissions do
     run "chmod +x #{deploy_to}/current/scripts/adhoc_backup.sh"
@@ -41,7 +42,7 @@ namespace :deploy do
     put File.read("config/examples/application.yml"), "#{shared_path}/config/application.yml"
     put File.read("config/examples/secrets.yml"), "#{shared_path}/config/secrets.yml"
   end
-  
+
   namespace :assets do
     desc "Precompile assets on local machine and upload them to the server."
     task :precompile, roles: :web, except: {no_release: true} do
