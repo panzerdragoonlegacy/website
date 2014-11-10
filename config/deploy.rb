@@ -7,7 +7,10 @@ role :db,  "web412.webfaction.com", :primary => true        # This is where Rail
 set :user, "chrisalley"
 set :deploy_to, "/home/chrisalley/webapps/thewilloftheancients"
 set :use_sudo, false
-set :default_env, { path: "#{deploy_to}/bin:$PATH", gem_home: "#{deploy_to}/gems" }
+set :default_environment, {
+  'PATH' => "#{deploy_to}/bin:$PATH",
+  'GEM_HOME' => "#{deploy_to}/gems",
+}
 default_run_options[:pty] = true
 
 set :scm, "git"
