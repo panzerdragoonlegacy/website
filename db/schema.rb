@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141109092630) do
+ActiveRecord::Schema.define(version: 20150115012458) do
 
   create_table "articles", force: true do |t|
     t.string   "name"
@@ -75,8 +75,6 @@ ActiveRecord::Schema.define(version: 20141109092630) do
     t.string   "email_address"
     t.string   "password_digest"
     t.string   "remember_token"
-    t.string   "perishable_token"
-    t.datetime "perishable_token_expiry"
     t.string   "time_zone"
     t.string   "role",                          default: "guest"
     t.string   "avatar_file_name"

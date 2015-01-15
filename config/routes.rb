@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   end
   resources :drafts
   resources :sessions
-  resources :password_resets, path: 'password-resets'
   resources :categories
   resources :articles
   resources :pictures

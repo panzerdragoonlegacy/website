@@ -1,13 +1,13 @@
-class Dragoon < ActiveRecord::Base  
+class Dragoon < ActiveRecord::Base
   include Sluggable
-  
+
   attr_accessor :password
-  
+
   before_save :encrypt_password
   before_create :set_default_administrator
 
   has_many :news_entries, :dependent => :destroy
-  
+
   has_many :contributions, :dependent => :destroy
   has_many :articles, :through => :contributions, :source => :contributable, :source_type => 'Article'
   has_many :downloads, :through => :contributions, :source => :contributable, :source_type => 'Download'
@@ -19,32 +19,32 @@ class Dragoon < ActiveRecord::Base
   has_many :resources, :through => :contributions, :source => :contributable, :source_type => 'Resource'
   has_many :stories, :through => :contributions, :source => :contributable, :source_type => 'Story'
   has_many :videos, :through => :contributions, :source => :contributable, :source_type => 'Video'
-  
+
 #  validates_confirmation_of :password
 #  validates_presence_of :password, :on => :create
-  
+
   validates :name, :presence => true, :length => { :in => 2..50 }, :uniqueness => true
   validates :email_address, :presence => true, :length => { :in => 2..50 }, :uniqueness => true
   validates :password, :presence => true, :on => :create
   validates :password, :confirmation => true
 
-  has_attached_file :avatar, styles: { thumbnail: "75x75#", embedded: "280x280>" }, 
+  has_attached_file :avatar, styles: { thumbnail: "75x75#", embedded: "280x280>" },
     path: ":rails_root/public/system/:attachment/:id/:style/:avatar_filename",
     url: "/system/:attachment/:id/:style/:avatar_filename"
-  
+
   validates_attachment :avatar,
     content_type: { content_type: "image/jpeg" },
     size: { in: 0..5.megabytes }
-  
+
   before_post_process :avatar_filename
-  
+
   # Sets avatar filename in the database.
   def avatar_filename
     if self.avatar_content_type == 'image/jpeg'
       self.avatar_file_name = "avatar.jpg" if self.avatar.present?
     end
   end
-  
+
   # Sets avatar filename in the file system.
   Paperclip.interpolates :avatar_filename do |attachment, style|
     attachment.instance.avatar_filename
@@ -52,33 +52,27 @@ class Dragoon < ActiveRecord::Base
 
   GENDERS = %w[female male other]
   ROLES = %w[administrator registered suspended guest]
-  
+
   # Returns true if dragoon belongs to the specified role.
   def role?(role)
     self.role == role.to_s ? true : false
   end
-  
+
   # Sets default administrator if he/she is the first user.
   def set_default_administrator
     Dragoon.count < 1 ? self.role = :administrator.to_s : self.role = :registered.to_s
   end
 
-  def create_perishable_token
-    self.perishable_token_expiry = 1.day.from_now
-    self.perishable_token = rand(10 ** 100).to_s
-    self.save #(:validate => false)
-  end
-  
   def create_remember_token
     self.remember_token = rand(10 ** 100).to_s
     self.save
   end
-  
+
   def self.authenticate_with_remember_token(id, cookie_remember_token)
     dragoon = find_by_id(id)
     (dragoon && dragoon.remember_token == cookie_remember_token) ? dragoon : nil
   end
-    
+
   def self.dragoon_exists?(name_or_email_address)
     dragoon = find_by_name(name_or_email_address) || dragoon = find_by_email_address(name_or_email_address)
   end
