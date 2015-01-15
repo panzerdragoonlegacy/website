@@ -7,7 +7,11 @@
           <% if policy(link).edit? && policy(link).destroy? %>
             <ul class="administration">
               <li><%= link_to 'Edit Link', edit_link_path(link) %></li>
-              <li><%= link_to 'Delete Link', link, data: { confirm: 'Are you sure you want to delete this link?' }, method: :delete %></li>
+              <li>
+                <%= link_to 'Delete Link', link, data: {
+                  confirm: 'Are you sure you want to delete this link?' },
+                  method: :delete %>
+              </li>
             </ul>
           <% end %>
           <% if link.dragoons.count > 0 %>

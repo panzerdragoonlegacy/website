@@ -2,7 +2,9 @@
 
 <% if policy(EncyclopaediaEntry).new? %>
   <ul class="administration">
-    <li><%= link_to 'New Encyclopaedia Entry', new_encyclopaedia_entry_path %></li>
+    <li>
+      <%= link_to 'New Encyclopaedia Entry', new_encyclopaedia_entry_path %>
+    </li>
   </ul>
 <% end %>
 
@@ -10,7 +12,12 @@
   <h2>Encyclopaedia Categories</h2>
   <ul class="categories">
   <% @categories.each do |category| %>
-    <li><%= link_to category.name, category %><% unless category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    <li>
+      <%= link_to category.name, category %>
+      <% unless category.publish %>
+         - <span class="unpublished">Unpublished</span>
+      <% end %>
+    </li>
   <% end %>
   </ul>
 <% end %>

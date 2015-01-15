@@ -5,11 +5,17 @@
   <p class="unpublished">Unpublished</p>
 <% end %>
 
-<% if  policy(@category).edit? && policy(@category).destroy? %>
+<% if policy(@category).edit? && policy(@category).destroy? %>
   <ul class="administration">
     <li><%= link_to 'New Category', new_category_path %></li>
     <li><%= link_to 'Edit Category', edit_category_path(@category) %></li>
-    <li><%= link_to 'Delete Category', @category, data: { confirm: 'Are you sure you want to delete this category? ALL items belonging to this category will be deleted.' }, method: :delete %></li>
+    <li>
+      <%= link_to 'Delete Category', @category,
+        data: { confirm: 'Are you sure you want to delete this category? " +
+          "ALL items belonging to this category will be deleted.' },
+        method: :delete
+      %>
+    </li>
   </ul>
 <% end %>
 
@@ -18,53 +24,62 @@
 <% if @articles %>
   <h2>Articles in this Category</h2>
   <%= render 'articles/list' %>
-  <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Articles', articles_path %></p>
+  <p><%= link_to 'Categories', categories_path %> |
+    <%= link_to 'Articles', articles_path %></p>
 <% end %>
 
 <% if @downloads %>
   <h2>Downloads in this Category</h2>
   <%= render 'downloads/list' %>
-  <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Downloads', downloads_path %></p>
+  <p><%= link_to 'Categories', categories_path %> |
+    <%= link_to 'Downloads', downloads_path %></p>
 <% end %>
 
 <% if @encyclopaedia_entries %>
   <h2>Encyclopaedia Entries in this Category</h2>
   <%= render 'encyclopaedia_entries/list' %>
-  <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Encyclopaedia', encyclopaedia_entries_path %></p>
+  <p><%= link_to 'Categories', categories_path %> |
+    <%= link_to 'Encyclopaedia', encyclopaedia_entries_path %></p>
 <% end %>
 
 <% if @links %>
   <h2>Links in this Category</h2>
   <%= render 'links/list' %>
-  <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Links', links_path %></p>
+  <p><%= link_to 'Categories', categories_path %> |
+    <%= link_to 'Links', links_path %></p>
 <% end %>
 
 <% if @music_tracks %>
   <h2>Music Tracks in this Category</h2>
   <%= render 'music_tracks/list' %>
-  <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Music', music_tracks_path %></p>
+  <p><%= link_to 'Categories', categories_path %> |
+    <%= link_to 'Music', music_tracks_path %></p>
 <% end %>
 
 <% if @pictures %>
   <h2>Pictures in this Category</h2>
   <%= render 'pictures/list' %>
-  <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Pictures', pictures_path %></p>
+  <p><%= link_to 'Categories', categories_path %> |
+    <%= link_to 'Pictures', pictures_path %></p>
 <% end %>
 
 <% if @resources %>
   <h2>Resources in this Category</h2>
   <%= render 'resources/list' %>
-  <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Resources', resources_path %></p>
+  <p><%= link_to 'Categories', categories_path %> |
+    <%= link_to 'Resources', resources_path %></p>
 <% end %>
 
 <% if @stories %>
   <h2>Stories in this Category</h2>
   <%= render 'stories/list' %>
-  <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Stories', stories_path %></p>
+  <p><%= link_to 'Categories', categories_path %> |
+    <%= link_to 'Stories', stories_path %></p>
 <% end %>
 
 <% if @videos %>
   <h2>Videos in this Category</h2>
   <%= render 'videos/list' %>
-  <p><%= link_to 'Categories', categories_path %> | <%= link_to 'Videos', videos_path %></p>
+  <p><%= link_to 'Categories', categories_path %> |
+    <%= link_to 'Videos', videos_path %></p>
 <% end %>

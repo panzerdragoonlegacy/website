@@ -1,7 +1,7 @@
 <% title "Edit Profile" %>
 
-<%= form_for @dragoon, :html => { :multipart => true } do |f| %>
-  <%= render "shared/error_messages", :target => @dragoon %>
+<%= form_for @dragoon, html: { multipart: true } do |f| %>
+  <%= render "shared/error_messages", target: @dragoon %>
   <div>
     <% if current_dragoon.role? :administrator %>
       <%= f.label :name %><br />
@@ -10,23 +10,25 @@
   </div>
   <div>
     <%= f.label :email_address %><br />
-    <%= f.email_field :email_address %>  
+    <%= f.email_field :email_address %>
   </div>
-  <div>  
+  <div>
     <%= f.label :password %><br />
-    <%= f.password_field :password %>  
+    <%= f.password_field :password %>
   </div>
-  <div>  
+  <div>
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>  
+    <%= f.password_field :password_confirmation %>
   </div>
-  <div>  
+  <div>
     <%= f.label :forum_member_id, "Forum Member ID" %><br />
-    <%= f.text_field :forum_member_id %>  
+    <%= f.text_field :forum_member_id %>
   </div>
   <div>
     <%= f.label :time_zone %><br />
-    <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all, :default => "UTC" %>
+    <%= f.time_zone_select :time_zone,
+      ActiveSupport::TimeZone.all, default: "UTC"
+    %>
   </div>
   <% if current_dragoon.role? :administrator %>
     <div>
@@ -41,87 +43,90 @@
       <%= image_tag @dragoon.avatar.url(:thumbnail) %><br />
       File has already been uploaded. Replace file?<br />
     <% end %>
-    <%= f.file_field :avatar %>  
+    <%= f.file_field :avatar %>
   </div>
-  <div>  
+  <div>
     <%= f.label :birthday %><br />
-     <%= f.date_select :birthday, :start_year => 1850, :end_year => Time.now.year, :include_blank => true %>
+    <%= f.date_select :birthday, start_year: 1850, end_year: Time.now.year,
+      include_blank: true %>
   </div>
-  <div>  
+  <div>
     <%= f.label :gender %><br />
-     <%= f.collection_select :gender, Dragoon::GENDERS, :to_s, :humanize, :include_blank => true %>
+    <%= f.collection_select :gender, Dragoon::GENDERS, :to_s, :humanize,
+      include_blank: true %>
   </div>
-  <div>  
+  <div>
     <%= f.label :country %><br />
-    <%= f.country_select :country, nil, :include_blank => true %>
-  </div>
-  <div>  
-    <%= f.label :information, "Information" %><br />  
-    <%= f.text_area :information, :rows => 7  %>  
+    <%= f.country_select :country, nil, include_blank: true %>
   </div>
   <div>
-    <%= f.label :favourite_quotations, "Favourite Quotations" %><br />  
-    <%= f.text_area :favourite_quotations, :rows => 5 %>  
-  </div>
-  <div>  
-    <%= f.label :occupation, "Occupation" %><br />  
-    <%= f.text_field :occupation %>  
+    <%= f.label :information, "Information" %><br />
+    <%= f.text_area :information, rows: 7  %>
   </div>
   <div>
-    <%= f.label :interests, "Interests" %><br />  
-    <%= f.text_field :interests %>  
+    <%= f.label :favourite_quotations, "Favourite Quotations" %><br />
+    <%= f.text_area :favourite_quotations, rows: 5 %>
   </div>
   <div>
-    <%= f.label :website, "Website" %><br />  
-    <%= f.text_field :website %>  
+    <%= f.label :occupation, "Occupation" %><br />
+    <%= f.text_field :occupation %>
+  </div>
+  <div>
+    <%= f.label :interests, "Interests" %><br />
+    <%= f.text_field :interests %>
+  </div>
+  <div>
+    <%= f.label :website, "Website" %><br />
+    <%= f.text_field :website %>
   </div>
   <h2>Gaming Networks</h2>
-  <div>  
-    <%= f.label :xbox_live_gamertag, "Xbox Live Gamertag" %><br />  
-    <%= f.text_field :xbox_live_gamertag %>  
-  </div>
-  <div>  
-    <%= f.label :playstation_network_online_id, "Playstation Network Online ID" %><br />  
-    <%= f.text_field :playstation_network_online_id %>  
+  <div>
+    <%= f.label :xbox_live_gamertag, "Xbox Live Gamertag" %><br />
+    <%= f.text_field :xbox_live_gamertag %>
   </div>
   <div>
-    <%= f.label :wii_number, "Wii Number" %><br />  
-    <%= f.text_field :wii_number %>  
-  </div>      
+    <%= f.label :playstation_network_online_id,
+      "Playstation Network Online ID" %><br />  
+    <%= f.text_field :playstation_network_online_id %>
+  </div>
   <div>
-    <%= f.label :steam_username, "Steam Username" %><br />  
-    <%= f.text_field :steam_username %>  
+    <%= f.label :wii_number, "Wii Number" %><br />
+    <%= f.text_field :wii_number %>
+  </div>
+  <div>
+    <%= f.label :steam_username, "Steam Username" %><br />
+    <%= f.text_field :steam_username %>
   </div>
   <h2>Social Networks</h2>
-  <div>  
-    <%= f.label :facebook_username, "Facebook Username" %><br />  
-    <%= f.text_field :facebook_username %>  
+  <div>
+    <%= f.label :facebook_username, "Facebook Username" %><br />
+    <%= f.text_field :facebook_username %>
   </div>
   <div>
-    <%= f.label :twitter_username, "Twitter Username" %><br />  
-    <%= f.text_field :twitter_username %>  
+    <%= f.label :twitter_username, "Twitter Username" %><br />
+    <%= f.text_field :twitter_username %>
   </div>
   <h2>Instant Messengering Networks</h2>
   <div>
-    <%= f.label :yahoo_id, "Yahoo! ID" %><br />  
-    <%= f.text_field :yahoo_id %>  
+    <%= f.label :yahoo_id, "Yahoo! ID" %><br />
+    <%= f.text_field :yahoo_id %>
   </div>
   <div>
-    <%= f.label :aim_screenname, "AIM Screenname" %><br />  
-    <%= f.text_field :aim_screenname %>  
+    <%= f.label :aim_screenname, "AIM Screenname" %><br />
+    <%= f.text_field :aim_screenname %>
   </div>
   <div>
-    <%= f.label :icq_number, "ICQ Number" %><br />  
-    <%= f.text_field :icq_number %>  
+    <%= f.label :icq_number, "ICQ Number" %><br />
+    <%= f.text_field :icq_number %>
   </div>
   <div>
-    <%= f.label :jabber_id, "Jabber ID" %><br />  
-    <%= f.text_field :jabber_id %>  
+    <%= f.label :jabber_id, "Jabber ID" %><br />
+    <%= f.text_field :jabber_id %>
   </div>
   <div>
-    <%= f.label :skype_name, "Skype Name" %><br />  
-    <%= f.text_field :skype_name %>  
-  </div>  
+    <%= f.label :skype_name, "Skype Name" %><br />
+    <%= f.text_field :skype_name %>
+  </div>
   <div>
     <%= f.submit "Update Profile" %>
     <%= f.submit "Update and Continue Editing", name: :continue_editing %>

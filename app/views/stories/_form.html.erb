@@ -1,8 +1,9 @@
-<%= nested_form_for @story, :html => { :multipart => true } do |f| %>  
-  <%= render "shared/error_messages", :target => @story %>
+<%= nested_form_for @story, html: { multipart: true } do |f| %>
+  <%= render "shared/error_messages", target: @story %>
   <div>
     <%= f.label :category_id, "Category" %><br />
-    <%= f.collection_select :category_id, @categories, :id, :name, :include_blank => false %> 
+    <%= f.collection_select :category_id, @categories, :id, :name,
+      include_blank: false %>
   </div>
   <div>
     <%= f.label :name, "Name" %><br />
@@ -10,17 +11,18 @@
   </div>
   <div>
     <%= f.label :description, "Description" %><br />
-    <%= f.text_area :description, :rows => 3 %>  
+    <%= f.text_area :description, rows: 3 %>
   </div>
   <div>
     <%= f.label :content, "Content" %><br />
-    <%= f.text_area :content, :class => "data_entry" %>  
+    <%= f.text_area :content, class: "data_entry" %>
   </div>
   <label>Contributors</label>
   <div class="scroll_checkboxes">
     <% for dragoon in Dragoon.order(:name) %>
       <label>
-        <%= check_box_tag "story[dragoon_ids][]", dragoon.id, @story.dragoons.include?(dragoon) %>  
+        <%= check_box_tag "story[dragoon_ids][]", dragoon.id,
+          @story.dragoons.include?(dragoon) %>
         <%= dragoon.name %>
       </label>
       <br />
@@ -33,11 +35,14 @@
       <% if illustration_form.object.illustration_file_name.blank? %>
         <%= illustration_form.file_field :illustration %>
       <% else %>
-        <%= image_tag illustration_form.object.illustration.url(:embedded) %><br />
+        <%= image_tag illustration_form.object.illustration.url(:embedded) %>
+        <br />
         <button class="insert_tag">Insert Tag</button><br />
         Filename: <%= illustration_form.object.illustration_file_name %><br />
-        <%= link_to "Popover Image", illustration_form.object.illustration.url(:popover) %> |
-        <%= link_to "Original Image", illustration_form.object.illustration.url %> |
+        <%= link_to "Popover Image",
+          illustration_form.object.illustration.url(:popover) %> |
+        <%= link_to "Original Image",
+          illustration_form.object.illustration.url %> |
       <% end %>
       <%= illustration_form.link_to_remove "Remove illustration" %><br />
       </div>
@@ -49,7 +54,10 @@
     <div class="scroll_checkboxes">
       <% for encyclopaedia_entry in EncyclopaediaEntry.order(:name) %>
         <label>
-          <%= check_box_tag "story[encyclopaedia_entry_ids][]", encyclopaedia_entry.id, @story.encyclopaedia_entries.include?(encyclopaedia_entry) %> <%= encyclopaedia_entry.name %>
+          <%= check_box_tag "story[encyclopaedia_entry_ids][]",
+            encyclopaedia_entry.id,
+            @story.encyclopaedia_entries.include?(encyclopaedia_entry) %>
+          <%= encyclopaedia_entry.name %>
         </label>
         <br />
       <% end %>

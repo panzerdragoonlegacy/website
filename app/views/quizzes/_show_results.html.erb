@@ -11,11 +11,13 @@
               <dd>Correct!</dd>
             <% else %>
               <dd>Incorrect!</dd>
-            <% end %> 
+            <% end %>
           <% end %>
-        <% end %> 
+        <% end %>
       <dl>
     </li>
   <% end %>
 </ol>
-<p>Your Score: <%= score.to_s + " out of " + @quiz.quiz_questions.count.to_s %></p>
+<p>
+  Your Score: <%= score.to_s + " out of " + @quiz.quiz_questions.count.to_s %>
+</p>

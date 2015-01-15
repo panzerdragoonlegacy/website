@@ -14,7 +14,10 @@
           <h2><%= emoticon.name %></h2>
           <% if can? :manage, emoticon %>
             <ul class="administration">
-              <%= link_to 'Delete Emoticon', emoticon, data: { confirm: 'Are you sure?' }, method: :delete %></li>
+              <li>
+                <%= link_to 'Delete Emoticon', emoticon, data: {
+                  confirm: 'Are you sure?' }, method: :delete %>
+              </li>
             </ul>
           <% end %>
           <p><%= image_tag emoticon.emoticon.url %> <%= emoticon.code %></p>

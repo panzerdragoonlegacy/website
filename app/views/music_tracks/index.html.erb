@@ -15,7 +15,12 @@
     <h2>Categories</h2>
     <ul class="categories">
     <% @categories.each do |category| %>
-      <li><%= link_to category.name, category %><% unless category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+      <li>
+        <%= link_to category.name, category %>
+        <% unless category.publish %>
+           - <span class="unpublished">Unpublished</span>
+        <% end %>
+      </li>
     <% end %>
     </ul>
   <% end %>
@@ -32,7 +37,7 @@
           <h2><%= link_to music_track.name, music_track %></h2>
           <% unless music_track.publish %>
             <p class="unpublished">Unpublished</p>
-          <% end %> 
+          <% end %>
           <p><%= music_track.description %></p>
         </div>
       </div>

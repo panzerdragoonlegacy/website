@@ -15,7 +15,12 @@
     <h2>Resource Categories</h2>
     <ul class="categories">
     <% @categories.each do |category| %>
-      <li><%= link_to category.name, category %><% unless category.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+      <li>
+        <%= link_to category.name, category %>
+        <% unless category.publish %>
+           - <span class="unpublished">Unpublished</span>
+        <% end %>
+      </li>
     <% end %>
     </ul>
   <% end %>

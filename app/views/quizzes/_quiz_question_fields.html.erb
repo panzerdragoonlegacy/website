@@ -2,7 +2,7 @@
   <p>
     <%= f.label :content, "Question" %>
     <%= f.link_to_remove "remove" %><br />
-    <%= f.text_area :content, :rows => 3 %>  
+    <%= f.text_area :content, rows: 3 %>  
   </p>
   <%= f.fields_for :quiz_answers %>
   <p><%= f.link_to_add "Add Answer", :quiz_answers %></p>

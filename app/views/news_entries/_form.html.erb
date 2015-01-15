@@ -1,22 +1,29 @@
 <%= form_for @news_entry do |f| %>
-  <%= render "shared/error_messages", :target => @news_entry %>
+  <%= render "shared/error_messages", target: @news_entry %>
   <div>
     <%= f.label :dragoon_id, "Author" %><br />
-    <%= f.collection_select :dragoon_id, Dragoon.order(:name), :id, :name, :include_blank => false %>
+    <%= f.collection_select :dragoon_id, Dragoon.order(:name), :id, :name,
+      include_blank: false %>
   </div>
   <div>
     <%= f.label :name, "Name" %><br />
     <%= f.text_field :name %><br />
-    (News entry names are limited to 55 characters and should describe the entry's content. The name should not end with a punctuation mark. All important words should start a capital letter, e.g. "Crimson Dragon: Side Story is Currently Unavailable".)
+    (News entry names are limited to 55 characters and should describe the
+      entry's content. The name should not end with a punctuation mark. All
+      important words should start a capital letter, e.g. "Crimson Dragon:
+      Side Story is Currently Unavailable".)
   </div>
   <div>
     <%= f.label :content, "Content" %><br />
-    (You may use a <a href="/markdown-syntax-guide" target="_blank">limited subset of Markdown</a> to format news entries)<br />
-    <%= f.text_area :content, :class => "data_entry" %>  
+    (You may use a <a href="/markdown-syntax-guide" target="_blank">limited
+      subset of Markdown</a> to format news entries)<br />
+    <%= f.text_area :content, class: "data_entry" %>
   </div>
   <div>
     <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %><br />
-    (This news entry will be automatically posted to Twitter the first time that it is published. The tweet will then be posted to Facebook automatically by Twitter. The Google+ page has been retired.)
+    (This news entry will be automatically posted to Twitter the first time
+      that it is published. The tweet will then be posted to Facebook
+      automatically by Twitter.)
   </div>
   <div>
     <%= f.submit "Save and View" %>

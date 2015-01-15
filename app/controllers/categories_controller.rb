@@ -23,8 +23,6 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    # This could potentially be replaced with @category.articles,
-    # @category.downloads, etc
     case @category.category_type
     when "article"
       @articles = ArticlePolicy::Scope.new(current_user, Article.where(

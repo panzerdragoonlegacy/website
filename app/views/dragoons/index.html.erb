@@ -19,7 +19,11 @@
         </div>
         <div class="comment_details">
           <h2><%= link_to dragoon.name, dragoon %></h2>
-          <p><%= pluralize(website_contributions_count(dragoon), 'website contribution') %>
+          <p>
+            <%= pluralize(website_contributions_count(dragoon),
+              'website contribution')
+            %>
+          </p>
         </div>
       </div>
     <% end %>

@@ -7,8 +7,13 @@
 <% end %>
 
 <% if @dragoon.forum_member_id.present? %>
-  <p><%= link_to "View Forum Profile", "http://forums.thewilloftheancients.com/profile.php?mode=viewprofile&u=#{@dragoon.forum_member_id.to_s}" %></p>
-<% end %> 
+  <p>
+    <%= link_to "View Forum Profile",
+      "http://forums.thewilloftheancients.com/profile.php?mode=viewprofile" +
+      "&u=#{@dragoon.forum_member_id.to_s}"
+    %>
+  </p>
+<% end %>
 
 <% unless @dragoon.avatar_file_name.blank? %>
   <%= image_tag @dragoon.avatar.url(:embedded) %><br />
@@ -23,12 +28,19 @@
   <% end %>
 <% end %>
 
-<% unless @dragoon.birthday.blank? && @dragoon.gender.blank? && @dragoon.country.blank? && @dragoon.information.blank? && @dragoon.favourite_quotations.blank? && @dragoon.occupation.blank? && @dragoon.interests.blank? && @dragoon.website.blank? %>
+<% unless @dragoon.birthday.blank? && @dragoon.gender.blank? &&
+  @dragoon.country.blank? && @dragoon.information.blank? &&
+  @dragoon.favourite_quotations.blank? && @dragoon.occupation.blank? &&
+  @dragoon.interests.blank? && @dragoon.website.blank? %>
   <h2>Personal Information</h2>
   <dl>
     <% unless @dragoon.birthday.blank? %>
       <dt>Birthday:</dt>
-      <dd><%= @dragoon.birthday.day %> <%= Date::MONTHNAMES[@dragoon.birthday.month] %>, <%= @dragoon.birthday.year %></dd>
+      <dd>
+        <%= @dragoon.birthday.day %>
+        <%= Date::MONTHNAMES[@dragoon.birthday.month] %>,
+        <%= @dragoon.birthday.year %>
+      </dd>
     <% end %>
     <% unless @dragoon.gender.blank? %>
       <dt>Gender:</dt>
@@ -61,12 +73,18 @@
   </dl>
 <% end %>
 
-<% unless @dragoon.xbox_live_gamertag.blank? && @dragoon.playstation_network_online_id.blank? && @dragoon.wii_number.blank? && @dragoon.steam_username.blank? %>
+<% unless @dragoon.xbox_live_gamertag.blank? &&
+  @dragoon.playstation_network_online_id.blank? && @dragoon.wii_number.blank?
+  && @dragoon.steam_username.blank? %>
   <h2>Gaming Networks</h2>
   <dl>
     <% unless @dragoon.xbox_live_gamertag.blank? %>
       <dt>Xbox Live Gamertag:</dt>
-      <dd><%= link_to @dragoon.xbox_live_gamertag, "http://live.xbox.com/Profile?gamertag=" + @dragoon.xbox_live_gamertag %></dd>
+      <dd>
+        <%= link_to @dragoon.xbox_live_gamertag,
+          "http://live.xbox.com/Profile?gamertag=" +
+          @dragoon.xbox_live_gamertag %>
+      </dd>
     <% end %>
     <% unless @dragoon.playstation_network_online_id.blank? %>
       <dt>Playstation Network Online ID:</dt>
@@ -78,26 +96,38 @@
     <% end %>
     <% unless @dragoon.steam_username.blank? %>
       <dt>Steam Username:</dt>
-      <dd><%= link_to @dragoon.steam_username, "http://steamcommunity.com/id/" + @dragoon.steam_username %></dd>
+      <dd>
+        <%= link_to @dragoon.steam_username, "http://steamcommunity.com/id/" +
+          @dragoon.steam_username %>
+      </dd>
     <% end %>
   </dl>
 <% end %>
 
-<% unless @dragoon.facebook_username.blank? && @dragoon.twitter_username.blank? %>
+<% unless @dragoon.facebook_username.blank? &&
+  @dragoon.twitter_username.blank? %>
   <h2>Social Networks</h2>
   <dl>
     <% unless @dragoon.facebook_username.blank? %>
       <dt>Facebook Username:</dt>
-      <dd><%= link_to @dragoon.facebook_username, "http://www.facebook.com/" + @dragoon.facebook_username %></dd>
+      <dd>
+        <%= link_to @dragoon.facebook_username, "http://www.facebook.com/" +
+          @dragoon.facebook_username %>
+      </dd>
     <% end %>
     <% unless @dragoon.twitter_username.blank? %>
       <dt>Twitter Username:</dt>
-      <dd><%= link_to @dragoon.twitter_username, "http://www.twitter.com/" + @dragoon.twitter_username %></dd>
+      <dd>
+        <%= link_to @dragoon.twitter_username, "http://www.twitter.com/" +
+          @dragoon.twitter_username %>
+      </dd>
     <% end %>
   </dl>
 <% end %>
 
-<% unless @dragoon.yahoo_id.blank? && @dragoon.aim_screenname.blank? && @dragoon.icq_number.blank? && @dragoon.jabber_id.blank? && @dragoon.skype_name.blank? %>
+<% unless @dragoon.yahoo_id.blank? && @dragoon.aim_screenname.blank? &&
+  @dragoon.icq_number.blank? && @dragoon.jabber_id.blank? &&
+  @dragoon.skype_name.blank? %>
   <h2>Instant Messengering Networks</h2>
   <dl>
     <% unless @dragoon.yahoo_id.blank? %>
@@ -127,40 +157,74 @@
   <h2>Website Contributions</h2>
   <ul>
     <% unless news_entry_count(@dragoon) == 0 %>
-      <li><%= link_to pluralize(news_entry_count(@dragoon), 'news entry'), dragoon_news_entries_path(@dragoon) %></li>
+      <li>
+        <%= link_to pluralize(news_entry_count(@dragoon), 'news entry'),
+          dragoon_news_entries_path(@dragoon) %>
+      </li>
     <% end %>
     <% unless article_count(@dragoon) == 0 %>
-      <li><%= link_to pluralize(article_count(@dragoon), 'article'), dragoon_articles_path(@dragoon) %></li>
+      <li>
+        <%= link_to pluralize(article_count(@dragoon), 'article'),
+          dragoon_articles_path(@dragoon) %>
+      </li>
     <% end %>
     <% unless download_count(@dragoon) == 0 %>
-      <li><%= link_to pluralize(download_count(@dragoon), 'download'), dragoon_downloads_path(@dragoon) %></li>
-    <% end %>  
+      <li>
+        <%= link_to pluralize(download_count(@dragoon), 'download'),
+          dragoon_downloads_path(@dragoon) %>
+      </li>
+    <% end %>
     <% unless link_count(@dragoon) == 0 %>
-      <li><%= link_to pluralize(link_count(@dragoon), 'link'), dragoon_links_path(@dragoon) %></li>
+      <li>
+        <%= link_to pluralize(link_count(@dragoon), 'link'),
+          dragoon_links_path(@dragoon) %>
+      </li>
     <% end %>
     <% unless music_track_count(@dragoon) == 0 %>
-      <li><%= link_to pluralize(music_track_count(@dragoon), 'music track'), dragoon_music_tracks_path(@dragoon) %></li>
+      <li>
+        <%= link_to pluralize(music_track_count(@dragoon), 'music track'),
+          dragoon_music_tracks_path(@dragoon) %>
+      </li>
     <% end %>
     <% unless picture_count(@dragoon) == 0 %>
-      <li><%= link_to pluralize(picture_count(@dragoon), 'picture'), dragoon_pictures_path(@dragoon) %></li>
+      <li>
+        <%= link_to pluralize(picture_count(@dragoon), 'picture'),
+          dragoon_pictures_path(@dragoon) %>
+      </li>
     <% end %>
     <% unless poem_count(@dragoon) == 0 %>
-      <li><%= link_to pluralize(poem_count(@dragoon), 'poem'), dragoon_poems_path(@dragoon) %></li>
+      <li>
+        <%= link_to pluralize(poem_count(@dragoon), 'poem'),
+          dragoon_poems_path(@dragoon) %>
+      </li>
     <% end %>
     <% unless quiz_count(@dragoon) == 0 %>
-      <li><%= link_to pluralize(quiz_count(@dragoon), 'quiz'), dragoon_quizzes_path(@dragoon) %></li>
+      <li>
+        <%= link_to pluralize(quiz_count(@dragoon), 'quiz'),
+          dragoon_quizzes_path(@dragoon) %>
+      </li>
     <% end %>
     <% unless resource_count(@dragoon) == 0 %>
-      <li><%= link_to pluralize(resource_count(@dragoon), 'resource'), dragoon_resources_path(@dragoon) %></li>
+      <li>
+        <%= link_to pluralize(resource_count(@dragoon), 'resource'),
+          dragoon_resources_path(@dragoon) %>
+      </li>
     <% end %>
     <% unless story_count(@dragoon) == 0 %>
-      <li><%= link_to pluralize(story_count(@dragoon), 'story'), dragoon_stories_path(@dragoon) %></li>
+      <li>
+        <%= link_to pluralize(story_count(@dragoon), 'story'),
+          dragoon_stories_path(@dragoon) %>
+      </li>
     <% end %>
     <% unless video_count(@dragoon) == 0 %>
-      <li><%= link_to pluralize(video_count(@dragoon), 'video'), dragoon_videos_path(@dragoon) %></li>
+      <li>
+        <%= link_to pluralize(video_count(@dragoon), 'video'),
+          dragoon_videos_path(@dragoon) %>
+      </li>
     <% end %>
   </ul>
-  <p>Total: <%= pluralize(website_contributions_count(@dragoon), 'website contribution') %>.</p>
+  <p>Total: <%= pluralize(website_contributions_count(@dragoon),
+    'website contribution') %>.</p>
 <% end%>
 
 <p class="links"><%= link_to 'Dragoons', dragoons_path %></p>

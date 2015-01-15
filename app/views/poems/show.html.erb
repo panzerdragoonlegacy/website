@@ -9,7 +9,11 @@
   <ul class="administration">
     <li><%= link_to 'New Poem', new_poem_path %></li>
     <li><%= link_to 'Edit Poem', edit_poem_path(@poem) %></li>
-    <li><%= link_to 'Delete Poem', @poem, data: { confirm: 'Are you sure you want to delete this poem?' }, method: :delete %></li>
+    <li>
+      <%= link_to 'Delete Poem', @poem, data: {
+        confirm: 'Are you sure you want to delete this poem?' },
+        method: :delete %>
+    </li>
   </ul>
 <% end %>
 

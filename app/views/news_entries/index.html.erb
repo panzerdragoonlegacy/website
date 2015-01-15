@@ -4,7 +4,10 @@
   <% title "News Entries" %>
 <% end %>
 
-<p><%= link_to "Sign the petition for a rerelease of the Panzer Dragoon games!", "http://www.panzerdragoonrevival.com" %></p>
+<p>
+  <%= link_to "Sign the petition for a rerelease of the Panzer Dragoon games!",
+    "http://www.panzerdragoonrevival.com" %>
+</p>
 
 <% if policy(NewsEntry).new? %>
   <ul class="administration">
@@ -25,7 +28,9 @@
         </div>
         <div class="comment_details">
           <h2><%= link_to news_entry.name, news_entry %></h2>
-          <p>Published by <%= link_to news_entry.dragoon.name, news_entry.dragoon %>
+          <p>
+            Published by <%= link_to news_entry.dragoon.name,
+              news_entry.dragoon %>
             <% if news_entry.publish %>
               <%= local_time_ago news_entry.published_at %>.
             <% else %>

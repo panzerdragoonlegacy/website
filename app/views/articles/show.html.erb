@@ -7,9 +7,19 @@
 
 <% if policy(@article).edit? && policy(@article).destroy? %>
   <ul class="administration">
-    <li><%= link_to 'New Article', new_article_path(category: @article.category) %></li>
-    <li><%= link_to 'Edit Article', edit_article_path(@article) %></li>
-    <li><%= link_to 'Delete Article', @article, data: { confirm: 'Are you sure you want to delete this article?' }, method: :delete %></li>
+    <li>
+      <%= link_to 'New Article',
+        new_article_path(category: @article.category) %>
+    </li>
+    <li>
+      <%= link_to 'Edit Article', edit_article_path(@article) %>
+    </li>
+    <li>
+      <%= link_to 'Delete Article', @article,
+        data: { confirm: 'Are you sure you want to delete this article?' },
+        method: :delete
+      %>
+    </li>
   </ul>
 <% end %>
 
@@ -24,4 +34,7 @@
 
 <%= raw illustrated_markdown_to_html @article.id, "Article", @article.content %>
 
-<p class="links"><%= link_to 'Articles', articles_path %> | <%= link_to @article.category.name, category_path(@article.category) %></p>
+<p class="links">
+  <%= link_to 'Articles', articles_path %> |
+  <%= link_to @article.category.name, category_path(@article.category) %>
+</p>

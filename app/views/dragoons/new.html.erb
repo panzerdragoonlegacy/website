@@ -1,7 +1,7 @@
 <% title "Register" %>
 
 <%= form_for @dragoon do |f| %>
-  <%= render "shared/error_messages", :target => @dragoon %>
+  <%= render "shared/error_messages", target: @dragoon %>
   <div>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
@@ -19,7 +19,8 @@
     <%= f.password_field :password_confirmation %>
   </div>
   <div>
-    <%= check_box_tag :stay_logged_in %> <%= label_tag :stay_logged_in, "Stay logged in?" %>
+    <%= check_box_tag :stay_logged_in %>
+    <%= label_tag :stay_logged_in, "Stay logged in?" %>
   </div>
   <div>
     <%= f.submit "Register" %>

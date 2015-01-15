@@ -3,14 +3,16 @@
 <%= form_tag sessions_path do %>
   <div>
     <%= label_tag :name_or_email_address %><br />
-    <%= text_field_tag :name_or_email_address, params[:name_or_email_address] %>
+    <%= text_field_tag :name_or_email_address,
+      params[:name_or_email_address] %>
   </div>
   <div>
     <%= label_tag :password %><br />
     <%= password_field_tag :password %>
   </div>
   <div>
-    <%= check_box_tag :stay_logged_in %> <%= label_tag :stay_logged_in, "Stay logged in?" %>
+    <%= check_box_tag :stay_logged_in %>
+    <%= label_tag :stay_logged_in, "Stay logged in?" %>
   </div>
   <div>
     <%= submit_tag "Log In" %>

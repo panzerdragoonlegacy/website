@@ -1,12 +1,12 @@
-<%= nested_form_for @quiz do |f| %>  
-  <%= render "shared/error_messages", :target => @quiz %>
+<%= nested_form_for @quiz do |f| %>
+  <%= render "shared/error_messages", target: @quiz %>
   <div>
     <%= f.label :name, "Name" %><br />
-    <%= f.text_field :name %>  
+    <%= f.text_field :name %>
   </div>
   <div>
     <%= f.label :description, "Description" %><br />
-    <%= f.text_area :description, :rows => 5 %>  
+    <%= f.text_area :description, rows: 5 %>
   </div>
   <%= f.fields_for :quiz_questions %>
   <p><%= f.link_to_add "Add Question", :quiz_questions %></p>
@@ -14,7 +14,8 @@
   <div class="scroll_checkboxes">
     <% for dragoon in Dragoon.order(:name) %>
       <label>
-        <%= check_box_tag "quiz[dragoon_ids][]", dragoon.id, @quiz.dragoons.include?(dragoon) %>  
+        <%= check_box_tag "quiz[dragoon_ids][]", dragoon.id,
+          @quiz.dragoons.include?(dragoon) %>
         <%= dragoon.name %>
       </label>
       <br />
@@ -25,7 +26,10 @@
     <div class="scroll_checkboxes">
       <% for encyclopaedia_entry in EncyclopaediaEntry.order(:name) %>
         <label>
-          <%= check_box_tag "quiz[encyclopaedia_entry_ids][]", encyclopaedia_entry.id, @quiz.encyclopaedia_entries.include?(encyclopaedia_entry) %> <%= encyclopaedia_entry.name %>
+          <%= check_box_tag "quiz[encyclopaedia_entry_ids][]",
+            encyclopaedia_entry.id,
+            @quiz.encyclopaedia_entries.include?(encyclopaedia_entry) %>
+          <%= encyclopaedia_entry.name %>
         </label>
         <br />
       <% end %>

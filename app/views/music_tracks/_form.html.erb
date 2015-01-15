@@ -1,8 +1,9 @@
-<%= form_for @music_track, :html => { :multipart => true } do |f| %>
-  <%= render "shared/error_messages", :target => @music_track %>
+<%= form_for @music_track, html: { multipart: true } do |f| %>
+  <%= render "shared/error_messages", target: @music_track %>
   <div>
     <%= f.label :category_id, "Category" %><br />
-    <%= f.collection_select :category_id, @categories, :id, :name, :include_blank => false %>
+    <%= f.collection_select :category_id, @categories, :id, :name,
+      include_blank: false %>
   </div>
   <div>
     <%= f.label :track_number, "Track Number" %><br />
@@ -18,7 +19,7 @@
   </div>
   <div>
     <%= f.label :information, "Information" %><br />
-    <%= f.text_area :information, :class => "data_entry" %>  
+    <%= f.text_area :information, :class => "data_entry" %>
   </div>
   <div>
     <%= f.label :mp3_music_track, "MP3 Music Track" %><br />
@@ -45,7 +46,8 @@
   <div class="scroll_checkboxes">
     <% for dragoon in Dragoon.order(:name) %>
       <label>
-        <%= check_box_tag "music_track[dragoon_ids][]", dragoon.id, @music_track.dragoons.include?(dragoon) %>
+        <%= check_box_tag "music_track[dragoon_ids][]", dragoon.id,
+          @music_track.dragoons.include?(dragoon) %>
         <%= dragoon.name %>
       </label>
       <br />
@@ -56,7 +58,10 @@
     <div class="scroll_checkboxes">
       <% for encyclopaedia_entry in EncyclopaediaEntry.order(:name) %>
         <label>
-          <%= check_box_tag "music_track[encyclopaedia_entry_ids][]", encyclopaedia_entry.id, @music_track.encyclopaedia_entries.include?(encyclopaedia_entry) %> <%= encyclopaedia_entry.name %>
+          <%= check_box_tag "music_track[encyclopaedia_entry_ids][]",
+            encyclopaedia_entry.id,
+            @music_track.encyclopaedia_entries.include?(encyclopaedia_entry) %> 
+          <%= encyclopaedia_entry.name %>
         </label>
         <br />
       <% end %>
