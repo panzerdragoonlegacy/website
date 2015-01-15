@@ -1,6 +1,6 @@
 Twitter.configure do |config|
-  config.consumer_key = APP_CONFIG['twitter']['consumer_key']
-  config.consumer_secret = APP_CONFIG['twitter']['consumer_secret']
-  config.oauth_token = APP_CONFIG['twitter']['oauth_token']
-  config.oauth_token_secret = APP_CONFIG['twitter']['oauth_token_secret']
+  config.consumer_key = Rails.application.secrets.twitter["consumer_key"]
+  config.consumer_secret = Rails.application.secrets.twitter["consumer_secret"]
+  config.oauth_token = Rails.application.secrets.twitter["oauth_token"]
+  config.oauth_token_secret = Rails.application.secrets.twitter["oauth_token_secret"]
 end
