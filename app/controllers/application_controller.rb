@@ -11,10 +11,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_dragoon
   helper_method :current_ability
-  helper_method :projects
   before_filter :set_dragoon_time_zone
   before_filter :partner_sites
-      
+
   private
 
   def user_not_authorized
@@ -33,7 +32,7 @@ class ApplicationController < ActionController::Base
       @current_dragoon ||= dragoon_from_remember_token
     end
   end
-  
+
   def dragoon_from_remember_token
     Dragoon.authenticate_with_remember_token(*remember_token)
   end
@@ -41,18 +40,12 @@ class ApplicationController < ActionController::Base
   def remember_token
     cookies.signed[:remember_token] || [nil, nil]
   end
-    
+
   def set_dragoon_time_zone
     Time.zone = current_dragoon.time_zone if current_dragoon
   end
-  
+
   def partner_sites
     @partner_sites = Link.where(partner_site: true).order(:name)
-  end
-  
-  def projects
-    if @current_dragoon
-      @projects = Project.order(:name).joins(:project_members).where(:project_members => {:dragoon_id => @current_dragoon.id})
-    end
   end
 end
