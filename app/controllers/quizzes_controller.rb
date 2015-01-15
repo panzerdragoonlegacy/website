@@ -3,8 +3,12 @@ class QuizzesController < ApplicationController
 
   def index
     if params[:dragoon_id]
-      raise "Dragoon not found." unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
-      @quizzes = policy_scope(Quiz.joins(:contributions).where(contributions: { dragoon_id: @dragoon.id }).order(:name).page(params[:page]))
+      unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
+        raise "Dragoon not found."
+      end
+      @quizzes = policy_scope(Quiz.joins(:contributions).where(
+        contributions: { dragoon_id: @dragoon.id }).order(:name).page(
+        params[:page]))
     else
       @quizzes = policy_scope(Quiz.order(:name).page(params[:page]))
     end
@@ -27,31 +31,39 @@ class QuizzesController < ApplicationController
   def new
     @quiz = Quiz.new
     authorize @quiz
-    quiz_question = @quiz.quiz_questions.build  
-    3.times { quiz_question.quiz_answers.build }  
+    quiz_question = @quiz.quiz_questions.build
+    3.times { quiz_question.quiz_answers.build }
   end
 
-  def create  
+  def create
     @quiz = Quiz.new(quiz_params)
     authorize @quiz
     if @quiz.save
       flash[:notice] = "Successfully created quiz."
-      params[:continue_editing] ? redirect_to(edit_quiz_path(@quiz)) : redirect_to(@quiz)
-    else  
+      if params[:continue_editing]
+        redirect_to edit_quiz_path(@quiz)
+      else
+        redirect_to @quiz
+      end
+    else
       render :new
     end
   end
 
   def edit
-    quiz_question = @quiz.quiz_questions.build  
-    3.times { quiz_question.quiz_answers.build }  
+    quiz_question = @quiz.quiz_questions.build
+    3.times { quiz_question.quiz_answers.build }
   end
-  
+
   def update
-    params[:quiz][:dragoon_ids] ||= []  
+    params[:quiz][:dragoon_ids] ||= []
     if @quiz.update_attributes(quiz_params)
       flash[:notice] = "Successfully updated quiz."
-      params[:continue_editing] ? redirect_to(edit_quiz_path(@quiz)) : redirect_to(@quiz)
+      if params[:continue_editing]
+        redirect_to edit_quiz_path(@quiz)
+      else
+        redirect_to @quiz
+      end
     else
       render :edit
     end
@@ -69,7 +81,11 @@ class QuizzesController < ApplicationController
       :name,
       :description,
       :publish,
-      quiz_questions_attributes: [:content, quiz_answers_attributes: [:content, :correct_answer]],
+      quiz_questions_attributes: [
+        :content, quiz_answers_attributes: [
+          :content, :correct_answer
+        ]
+      ],
       dragoon_ids: [],
       encyclopaedia_entry_ids: []
     )

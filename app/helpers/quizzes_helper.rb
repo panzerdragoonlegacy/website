@@ -7,16 +7,16 @@ module QuizzesHelper
       end
     end
   end
-  
+
   # Returns the dragoon's quiz score.
   def score
     score = 0
-    params[:results].each do |key, value|    
+    params[:results].each do |key, value|
       quiz_answer = QuizAnswer.find(value)
       if quiz_answer.correct_answer?
         score = score + 1
       end
     end
-    return score
+    score
   end
 end

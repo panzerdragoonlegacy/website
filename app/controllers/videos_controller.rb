@@ -1,11 +1,15 @@
 class VideosController < ApplicationController
   before_action :load_categories, expect: [:show, :destroy]
   before_action :load_video, except: [:index, :new, :create]
-  
+
   def index
     if params[:dragoon_id]
-      raise "Dragoon not found." unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
-      @videos = policy_scope(Video.joins(:contributions).where(contributions: { dragoon_id: @dragoon.id }).order(:name).page(params[:page]))
+      unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
+        raise "Dragoon not found."
+      end
+      @videos = policy_scope(Video.joins(:contributions).where(
+        contributions: { dragoon_id: @dragoon.id }).order(:name).page(
+        params[:page]))
     else
       @videos = policy_scope(Video.order(:name).page(params[:page]))
     end
@@ -15,13 +19,17 @@ class VideosController < ApplicationController
     @video = Video.new
     authorize @video
   end
-  
-  def create 
+
+  def create
     @video = Video.new(video_params)
     authorize @video
     if @video.save
       flash[:notice] = "Successfully created video."
-      params[:continue_editing] ? redirect_to(edit_video_path(@video)) : redirect_to(@video)
+      if params[:continue_editing]
+        redirect_to edit_video_path(@video)
+      else
+        redirect_to @video
+      end
     else
       render :new
     end
@@ -31,7 +39,11 @@ class VideosController < ApplicationController
     params[:video][:dragoon_ids] ||= []
     if @video.update_attributes(video_params)
       flash[:notice] = "Successfully updated video."
-      params[:continue_editing] ? redirect_to(edit_video_path(@video)) : redirect_to(@video)
+      if params[:continue_editing]
+        redirect_to edit_video_path(@video)
+      else
+        redirect_to @video
+      end
     else
       render :edit
     end
@@ -41,7 +53,7 @@ class VideosController < ApplicationController
     @video.destroy
     redirect_to videos_path, notice: "Successfully destroyed video."
   end
-  
+
   private
 
   def video_params
@@ -60,7 +72,8 @@ class VideosController < ApplicationController
   end
 
   def load_categories
-    @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :video).order(:name)).resolve
+    @categories = CategoryPolicy::Scope.new(current_user, Category.where(
+      category_type: :video).order(:name)).resolve
   end
 
   def load_video

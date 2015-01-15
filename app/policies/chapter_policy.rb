@@ -4,7 +4,9 @@ class ChapterPolicy < ApplicationPolicy
       if user
         return scope if user.role? :administrator
         if user.role? :registered && scope.present?
-          return scope if scope.first.story.contributions.first.dragoon_id == user.id
+          if scope.first.story.contributions.first.dragoon_id == user.id
+            return scope
+          end
         end
       end
       scope.joins(:story).where(publish: true, stories: { publish: true })
@@ -14,7 +16,10 @@ class ChapterPolicy < ApplicationPolicy
   def show?
     if user
       return true if user.role? :administrator
-      return true if user.role?(:registered) && record.story.contributions.first.dragoon_id == user.id
+      if (user.role?(:registered) &&
+        record.story.contributions.first.dragoon_id == user.id)
+        return true
+      end
     end
     record.publish? and record.story.publish?
   end

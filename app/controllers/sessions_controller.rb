@@ -3,13 +3,15 @@ class SessionsController < ApplicationController
 
   def new
   end
-    
+
   def create
-    dragoon = Dragoon.authenticate(params[:name_or_email_address], params[:password])
+    dragoon = Dragoon.authenticate(params[:name_or_email_address],
+      params[:password])
     if dragoon
       if params[:stay_logged_in]
         dragoon.create_remember_token
-        cookies.permanent.signed[:remember_token] = [dragoon.id, dragoon.remember_token]
+        cookies.permanent.signed[:remember_token] = [dragoon.id,
+          dragoon.remember_token]
       end
       session[:dragoon_id] = dragoon.id
       redirect_to root_url, :notice => "Logged in!"
@@ -22,6 +24,6 @@ class SessionsController < ApplicationController
   def destroy
     cookies.delete(:remember_token)
     session[:dragoon_id] = nil
-    redirect_to root_url, :notice => "Logged out!"  
+    redirect_to root_url, :notice => "Logged out!"
   end
 end

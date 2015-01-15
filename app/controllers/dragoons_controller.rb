@@ -17,18 +17,23 @@ class DragoonsController < ApplicationController
       session[:dragoon_id] = @dragoon.id
       if params[:stay_logged_in]
         @dragoon.create_remember_token
-        cookies.permanent.signed[:remember_token] = [@dragoon.id, @dragoon.remember_token]
+        cookies.permanent.signed[:remember_token] = [@dragoon.id,
+          @dragoon.remember_token]
       end
-      redirect_to root_url, notice: "Signed up!"  
-    else  
-      render :new 
-    end  
+      redirect_to root_url, notice: "Signed up!"
+    else
+      render :new
+    end
   end
 
   def update
     if @dragoon.update_attributes(dragoon_params)
       flash[:notice] = "Successfully updated profile."
-      params[:continue_editing] ? redirect_to(edit_dragoon_path(@dragoon)) : redirect_to(@dragoon)
+      if params[:continue_editing]
+        redirect_to edit_dragoon_path(@dragoon)
+      else
+        redirect_to @dragoon
+      end
     else
       render :edit
     end

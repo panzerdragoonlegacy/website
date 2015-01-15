@@ -1,21 +1,30 @@
 class StoriesController < ApplicationController
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_story, except: [:index, :new, :create]
-    
+
   def index
     if params[:dragoon_id]
-      raise "Dragoon not found." unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
-      @stories = policy_scope(Story.joins(:contributions).where(contributions: { dragoon_id: @dragoon.id }).order(:name).page(params[:page]))
+      unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
+        raise "Dragoon not found."
+      end
+      @stories = policy_scope(Story.joins(:contributions).where(
+        contributions: { dragoon_id: @dragoon.id }).order(:name).page(
+        params[:page]))
     else
       @stories = policy_scope(Story.order(:name).page(params[:page]))
     end
   end
 
-  def show    
-    @chapter_count = ChapterPolicy::Scope.new(current_user, @story.chapters).resolve.count
-    @prologues = ChapterPolicy::Scope.new(current_user, @story.chapters.where(chapter_type: :prologue).order(:number)).resolve
-    @regular_chapters = ChapterPolicy::Scope.new(current_user, @story.chapters.where(chapter_type: :regular_chapter).order(:number)).resolve
-    @epilogues = ChapterPolicy::Scope.new(current_user, @story.chapters.where(chapter_type: :epilogue).order(:number)).resolve
+  def show
+    @chapter_count = ChapterPolicy::Scope.new(current_user,
+      @story.chapters).resolve.count
+    @prologues = ChapterPolicy::Scope.new(current_user,
+      @story.chapters.where(chapter_type: :prologue).order(:number)).resolve
+    @regular_chapters = ChapterPolicy::Scope.new(current_user,
+      @story.chapters.where(chapter_type: :regular_chapter).order(
+      :number)).resolve
+    @epilogues = ChapterPolicy::Scope.new(current_user,
+      @story.chapters.where(chapter_type: :epilogue).order(:number)).resolve
   end
 
   def new
@@ -23,22 +32,30 @@ class StoriesController < ApplicationController
     authorize @story
   end
 
-  def create 
+  def create
     @story = Story.new(story_params)
     authorize @story
     if @story.save
       flash[:notice] = "Successfully created story."
-      params[:continue_editing] ? redirect_to(edit_story_path(@story)) : redirect_to(@story)
+      if params[:continue_editing]
+        redirect_to edit_story_path(@story)
+      else
+        redirect_to @story
+      end
     else
       render :new
     end
   end
-  
+
   def update
     params[:story][:dragoon_ids] ||= []
-    if @story.update_attributes(story_params)      
+    if @story.update_attributes(story_params)
       flash[:notice] = "Successfully updated story."
-      params[:continue_editing] ? redirect_to(edit_story_path(@story)) : redirect_to(@story)
+      if params[:continue_editing]
+        redirect_to edit_story_path(@story)
+      else
+        redirect_to @story
+      end
     else
       render :edit
     end
@@ -48,7 +65,7 @@ class StoriesController < ApplicationController
     @story.destroy
     redirect_to stories_path, notice: "Successfully destroyed story."
   end
-  
+
   private
 
   def story_params
@@ -65,7 +82,8 @@ class StoriesController < ApplicationController
   end
 
   def load_categories
-    @categories = CategoryPolicy::Scope.new(current_user, Category.where(category_type: :story).order(:name)).resolve
+    @categories = CategoryPolicy::Scope.new(current_user, Category.where(
+      category_type: :story).order(:name)).resolve
   end
 
   def load_story

@@ -4,7 +4,8 @@ class PoemPolicy < ApplicationPolicy
       if user
         return scope if user.role? :administrator
         if user.role? :registered
-          return scope.joins(:contributions).where("poems.publish = 't' OR contributions.dragoon_id = ?", user.id)
+          return scope.joins(:contributions).where("poems.publish = 't' OR " +
+            "contributions.dragoon_id = ?", user.id)
         end
       end
       scope.where(publish: true)
@@ -14,7 +15,10 @@ class PoemPolicy < ApplicationPolicy
   def show?
     if user
       return true if user.role? :administrator
-      return true if user.role?(:registered) && record.contributions.first.dragoon_id == user.id
+      if (user.role?(:registered) &&
+        record.contributions.first.dragoon_id == user.id)
+        return true
+      end
     end
     record.publish?
   end

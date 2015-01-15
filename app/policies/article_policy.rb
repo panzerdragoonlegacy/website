@@ -4,7 +4,9 @@ class ArticlePolicy < ApplicationPolicy
       if user
         return scope if user.role? :administrator
         if user.role? :registered
-          return scope.joins(:category, :contributions).where("(articles.publish = 't' AND categories.publish = 't') OR contributions.dragoon_id = ?", user.id)
+          return scope.joins(:category, :contributions).where(
+            "(articles.publish = 't' AND categories.publish = 't') OR " +
+            "contributions.dragoon_id = ?", user.id)
         end
       end
       scope.joins(:category).where(publish: true, categories: { publish: true })
@@ -14,7 +16,10 @@ class ArticlePolicy < ApplicationPolicy
   def show?
     if user
       return true if user.role? :administrator
-      return true if user.role?(:registered) && record.contributions.first.dragoon_id == user.id
+      if (user.role?(:registered) &&
+        record.contributions.first.dragoon_id == user.id)
+        return true
+      end
     end
     record.publish? and record.category.publish?
   end

@@ -6,7 +6,8 @@ class DraftsController < ApplicationController
 
     @articles = policy_scope(Article.where(publish: false).order(:name))
     @downloads = policy_scope(Download.where(publish: false).order(:name))
-    @encyclopaedia_entries = policy_scope(EncyclopaediaEntry.where(publish: false).order(:name))
+    @encyclopaedia_entries = policy_scope(EncyclopaediaEntry.where(
+      publish: false).order(:name))
     @music_tracks = policy_scope(MusicTrack.where(publish: false).order(:name))
     @pictures = policy_scope(Picture.where(publish: false).order(:name))
     @poems = policy_scope(Poem.where(publish: false).order(:name))
@@ -15,9 +16,12 @@ class DraftsController < ApplicationController
     @stories = policy_scope(Story.where(publish: false).order(:name))
 
     @chapter_count = policy_scope(Chapter.where(publish: false)).count
-    @prologues = policy_scope(Chapter.where(publish: false, chapter_type: :prologue).order(:number))
-    @regular_chapters = policy_scope(Chapter.where(publish: false, chapter_type: :regular_chapter).order(:number))
-    @epilogues = policy_scope(Chapter.where(publish: false, chapter_type: :epilogue).order(:number))
+    @prologues = policy_scope(Chapter.where(publish: false,
+      chapter_type: :prologue).order(:number))
+    @regular_chapters = policy_scope(Chapter.where(publish: false,
+      chapter_type: :regular_chapter).order(:number))
+    @epilogues = policy_scope(Chapter.where(publish: false,
+      chapter_type: :epilogue).order(:number))
 
     @videos = policy_scope(Video.where(publish: false).order(:name))
 

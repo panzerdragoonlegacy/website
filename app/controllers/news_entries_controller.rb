@@ -3,10 +3,14 @@ class NewsEntriesController < ApplicationController
 
   def index
     if params[:dragoon_id]
-      raise "Dragoon not found." unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
-      @news_entries = policy_scope(NewsEntry.where(dragoon_id: @dragoon.id).order("created_at desc").page(params[:page]))
+      unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
+        raise "Dragoon not found."
+      end
+      @news_entries = policy_scope(NewsEntry.where(
+        dragoon_id: @dragoon.id).order("created_at desc").page(params[:page]))
     else
-      @news_entries = policy_scope(NewsEntry.order("created_at desc").page(params[:page]))
+      @news_entries = policy_scope(NewsEntry.order("created_at desc").page(
+        params[:page]))
     end
   end
 
@@ -16,21 +20,29 @@ class NewsEntriesController < ApplicationController
     authorize @news_entry
   end
 
-  def create 
+  def create
     @news_entry = NewsEntry.new(news_entry_params)
     authorize @news_entry
     if @news_entry.save
       flash[:notice] = "Successfully created news entry."
-      params[:continue_editing] ? redirect_to(edit_news_entry_path(@news_entry)) : redirect_to(@news_entry)
+      if params[:continue_editing]
+        redirect_to edit_news_entry_path(@news_entry)
+      else
+        redirect_to @news_entry
+      end
     else
       render :new
     end
   end
-  
+
   def update
     if @news_entry.update_attributes(news_entry_params)
       flash[:notice] = "Successfully updated news entry."
-      params[:continue_editing] ? redirect_to(edit_news_entry_path(@news_entry)) : redirect_to(@news_entry)
+      if params[:continue_editing]
+        redirect_to edit_news_entry_path(@news_entry)
+      else
+        redirect_to @news_entry
+      end
     else
       render :edit
     end

@@ -17,7 +17,11 @@ class ChaptersController < ApplicationController
     authorize @chapter
     if @chapter.save
       flash[:notice] = "Successfully created chapter."
-      params[:continue_editing] ? redirect_to(edit_chapter_path(@chapter)) : redirect_to(@chapter)
+      if params[:continue_editing]
+        redirect_to edit_chapter_path(@chapter)
+      else
+        redirect_to @chapter
+      end
     else
       render :new
     end
@@ -26,7 +30,11 @@ class ChaptersController < ApplicationController
   def update
     if @chapter.update_attributes(chapter_params)
       flash[:notice] = "Successfully updated chapter."
-      params[:continue_editing] ? redirect_to(edit_chapter_path(@chapter)) : redirect_to(@chapter)
+      if params[:continue_editing]
+        redirect_to edit_chapter_path(@chapter)
+      else
+        redirect_to @chapter
+      end
     else
       render :edit
     end
@@ -37,7 +45,7 @@ class ChaptersController < ApplicationController
     @chapter.destroy
     redirect_to story_path(story), notice: "Successfully destroyed chapter."
   end
-  
+
   private
 
   def chapter_params
@@ -59,15 +67,20 @@ class ChaptersController < ApplicationController
 
   def previous_and_next_chapters
     all_chapters =  policy_scope(@chapter.story.chapters)
-    prologues = policy_scope(@chapter.story.chapters.where(chapter_type: :prologue).order(:number))
-    regular_chapters = policy_scope(@chapter.story.chapters.where(chapter_type: :regular_chapter).order(:number))
-    epilogues = policy_scope(@chapter.story.chapters.where(chapter_type: :epilogue).order(:number))
+    prologues = policy_scope(@chapter.story.chapters.where(
+      chapter_type: :prologue).order(:number))
+    regular_chapters = policy_scope(@chapter.story.chapters.where(
+      chapter_type: :regular_chapter).order(:number))
+    epilogues = policy_scope(@chapter.story.chapters.where(
+      chapter_type: :epilogue).order(:number))
 
     all_chapters.each do |chapter|
-      if (chapter.number == @chapter.number - 1) && (chapter.chapter_type == @chapter.chapter_type)
+      if ((chapter.number == @chapter.number - 1) &&
+        (chapter.chapter_type == @chapter.chapter_type))
         @previous_chapter = chapter
       end
-      if (chapter.number == @chapter.number + 1) && (chapter.chapter_type == @chapter.chapter_type)
+      if ((chapter.number == @chapter.number + 1) &&
+        (chapter.chapter_type == @chapter.chapter_type))
         @next_chapter = chapter
       end
     end
