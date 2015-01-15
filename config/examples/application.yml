@@ -1,13 +1,9 @@
-recaptcha:
-  public_key: 
-  private_key: 
-
 mail:
-  user_name: 
-  password: 
+  user_name:
+  password:
 
 twitter:
-  consumer_key: 
-  consumer_secret: 
-  oauth_token: 
-  oauth_token_secret: 
+  consumer_key:
+  consumer_secret:
+  oauth_token:
+  oauth_token_secret:
