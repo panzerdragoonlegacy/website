@@ -74,8 +74,8 @@
 <% end %>
 
 <% unless @dragoon.xbox_live_gamertag.blank? &&
-  @dragoon.playstation_network_online_id.blank? && @dragoon.wii_number.blank?
-  && @dragoon.steam_username.blank? %>
+  @dragoon.playstation_network_online_id.blank? &&
+  @dragoon.wii_number.blank? && @dragoon.steam_username.blank? %>
   <h2>Gaming Networks</h2>
   <dl>
     <% unless @dragoon.xbox_live_gamertag.blank? %>
