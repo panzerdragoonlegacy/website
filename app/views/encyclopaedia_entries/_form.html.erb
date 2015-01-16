@@ -13,8 +13,8 @@
     <%= f.label :encyclopaedia_entry_picture, "Encyclopaedia Entry Picture" %>
     <br />
     <% if @encyclopaedia_entry.encyclopaedia_entry_picture? %>
-    <%= image_tag
-      @encyclopaedia_entry.encyclopaedia_entry_picture.url(:thumbnail) %>
+      <%= image_tag(
+        @encyclopaedia_entry.encyclopaedia_entry_picture.url(:thumbnail)) %>
       <br />
       File has already been uploaded. Replace file?<br />
     <% end %>
