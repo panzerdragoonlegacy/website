@@ -15,11 +15,11 @@
   </div>
   <div>
     <%= f.label :description, "Description" %><br />
-    <%= f.text_area :description, :rows => 5 %>
+    <%= f.text_area :description, rows: 5 %>
   </div>
   <div>
     <%= f.label :information, "Information" %><br />
-    <%= f.text_area :information, :class => "data_entry" %>
+    <%= f.text_area :information, class: "data_entry" %>
   </div>
   <div>
     <%= f.label :mp3_music_track, "MP3 Music Track" %><br />
@@ -60,7 +60,7 @@
         <label>
           <%= check_box_tag "music_track[encyclopaedia_entry_ids][]",
             encyclopaedia_entry.id,
-            @music_track.encyclopaedia_entries.include?(encyclopaedia_entry) %> 
+            @music_track.encyclopaedia_entries.include?(encyclopaedia_entry) %>
           <%= encyclopaedia_entry.name %>
         </label>
         <br />

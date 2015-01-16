@@ -6,7 +6,7 @@ module NewsEntriesHelper
     require 'nokogiri'
 
     # Converts remaining Markdown syntax to html tags using Kramdown.
-    html = Kramdown::Document.new(markdown_text, :auto_ids => false).to_html
+    html = Kramdown::Document.new(markdown_text, auto_ids: false).to_html
 
     # Setup whitelist of html elements, attributes, and protocols.
     allowed_elements = ['a', 'img', 'p', 'ul', 'ol', 'li', 'strong', 'em',
@@ -114,7 +114,7 @@ module NewsEntriesHelper
     html.css('img').each do |img|
       file_name = img.get_attribute('src')
       picture_url = file_name.sub('.jpg', '')
-      if picture = Picture.where(:url => picture_url).first
+      if picture = Picture.where(url: picture_url).first
         if img_count == 1
           img.set_attribute('src', picture.picture.url(:single_thumbnail))
           image_file = Paperclip::Geometry.from_file(picture.picture.path(

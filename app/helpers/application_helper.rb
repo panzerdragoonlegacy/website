@@ -11,7 +11,7 @@ module ApplicationHelper
     html = markdown_to_html(markdown_text)
     require 'sanitize'
     html = Sanitize.clean(html).strip
-    html = truncate(html, :length => 250, :separator => ' ')
+    html = truncate(html, length: 250, separator: ' ')
     return html
   end
 
@@ -35,7 +35,7 @@ module ApplicationHelper
     require 'sanitize'
 
     # Converts remaining Markdown syntax to html tags using Kramdown.
-    html = Kramdown::Document.new(markdown_text, :auto_ids => false).to_html
+    html = Kramdown::Document.new(markdown_text, auto_ids: false).to_html
 
     # Setup whitelist of html elements, attributes, and protocols.
     allowed_elements = ['a', 'p', 'ul', 'ol', 'li', 'strong', 'em', 'cite',
@@ -59,7 +59,7 @@ module ApplicationHelper
     )
 
     # Converts non-html links to html links.
-    html = auto_link(html, :sanitize => false)
+    html = auto_link(html, sanitize: false)
 
     html = display_emoticons(html)
 
@@ -75,7 +75,7 @@ module ApplicationHelper
     # Todo: automatically insert table of contents
 
     # Converts Markdown syntax to html tags using Kramdown.
-    html = Kramdown::Document.new(markdown_text, :auto_ids => true).to_html
+    html = Kramdown::Document.new(markdown_text, auto_ids: true).to_html
 
     # Setup whitelist of html elements, attributes, and protocols.
     allowed_elements = ['h2', 'h3', 'a', 'img', 'p', 'ul', 'ol', 'li', 'strong',
@@ -196,7 +196,7 @@ module ApplicationHelper
     )
 
     # Converts non-html links to html links.
-    html = auto_link(html, :sanitize => false)
+    html = auto_link(html, sanitize: false)
 
     html = display_emoticons(html)
 

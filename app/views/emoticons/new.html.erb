@@ -1,7 +1,7 @@
 <% title "New Emoticon" %>
 
 <%= form_for @emoticon, html: { multipart: true } do |f| %>
-  <%= render "shared/error_messages", :target => @emoticon %>
+  <%= render "shared/error_messages", target: @emoticon %>
   <div>
     <%= f.label :name, "Name" %><br />
     <%= f.text_field :name %>

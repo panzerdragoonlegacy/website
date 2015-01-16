@@ -3,7 +3,8 @@
     <% @encyclopaedia_entries.each do |encyclopaedia_entry| %>
       <div class="resource">
         <div class="thumbnail">
-          <% if encyclopaedia_entry.encyclopaedia_entry_picture_file_name.blank? %>
+          <% if encyclopaedia_entry.encyclopaedia_entry_picture_file_name.
+            blank? %>
             <%= image_tag("default-encyclopaedia-entry-picture-thumbnail.jpg",
               alt: "Sorry No Image", width: "150", height: "150") %>
           <% else %>
