@@ -68,6 +68,9 @@ module ApplicationHelper
       end
     end
 
+    # Converts nokogiri variable to html.
+    html = html.to_html
+
     # Converts non-html links to html links.
     require 'rails_autolink'
     html = auto_link(html, sanitize: false)
