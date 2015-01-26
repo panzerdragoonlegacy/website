@@ -3,17 +3,17 @@
 <%= form_for @emoticon, html: { multipart: true } do |f| %>
   <%= render "shared/error_messages", target: @emoticon %>
   <div>
-    <%= f.label :name, "Name" %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div>
     <%= f.label :emoticon, "Emoticon" %><br />
     (Should be an 18x18 transparent gif)<br />
     <% if @emoticon.emoticon? %>
-      <%= image_tag @emoticon.emoticon.url %><br />
-      File has already been uploaded. Replace file?<br />
+    <%= image_tag @emoticon.emoticon.url %><br />
+    File has already been uploaded. Replace file?<br />
     <% end %>
     <%= f.file_field :emoticon %>
+  </div>
+  <div>
+    <%= f.label :name, "Name" %><br />
+    <%= f.text_field :name %>
   </div>
   <div>
     <%= f.submit "Save" %>
