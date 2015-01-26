@@ -23,12 +23,14 @@
 
 <% if @articles %>
   <h2>Articles in this Category</h2>
-  <ul class="administration">
-    <li>
-      <%= link_to 'New Article',
-        new_article_path(category: @category) %>
-    </li>
-  </ul>
+  <% if policy(Article).new? %>
+    <ul class="administration">
+      <li>
+        <%= link_to 'New Article',
+          new_article_path(category: @category) %>
+      </li>
+    </ul>
+  <% end %>
   <%= render 'articles/list' %>
   <p><%= link_to 'Categories', categories_path %> |
     <%= link_to 'Articles', articles_path %></p>
@@ -36,12 +38,14 @@
 
 <% if @downloads %>
   <h2>Downloads in this Category</h2>
-  <ul class="administration">
-    <li>
-      <%= link_to 'New Download',
-        new_download_path(category: @category) %>
-    </li>
-  </ul>
+  <% if policy(Download).new? %>
+    <ul class="administration">
+      <li>
+        <%= link_to 'New Download',
+          new_download_path(category: @category) %>
+      </li>
+    </ul>
+  <% end %>
   <%= render 'downloads/list' %>
   <p><%= link_to 'Categories', categories_path %> |
     <%= link_to 'Downloads', downloads_path %></p>
@@ -49,12 +53,14 @@
 
 <% if @encyclopaedia_entries %>
   <h2>Encyclopaedia Entries in this Category</h2>
-  <ul class="administration">
-    <li>
-      <%= link_to 'New Encyclopaedia Entry',
-        new_encyclopaedia_entry_path(category: @category) %>
-    </li>
-  </ul>
+  <% if policy(EncyclopaediaEntry).new? %>
+    <ul class="administration">
+      <li>
+        <%= link_to 'New Encyclopaedia Entry',
+          new_encyclopaedia_entry_path(category: @category) %>
+      </li>
+    </ul>
+  <% end %>
   <%= render 'encyclopaedia_entries/list' %>
   <p><%= link_to 'Categories', categories_path %> |
     <%= link_to 'Encyclopaedia', encyclopaedia_entries_path %></p>
@@ -62,12 +68,14 @@
 
 <% if @links %>
   <h2>Links in this Category</h2>
-  <ul class="administration">
-    <li>
-      <%= link_to 'New Link',
-        new_link_path(category: @category) %>
-    </li>
-  </ul>
+  <% if policy(Link).new? %>
+    <ul class="administration">
+      <li>
+        <%= link_to 'New Link',
+          new_link_path(category: @category) %>
+      </li>
+    </ul>
+  <% end %>
   <%= render 'links/list' %>
   <p><%= link_to 'Categories', categories_path %> |
     <%= link_to 'Links', links_path %></p>
@@ -75,12 +83,14 @@
 
 <% if @music_tracks %>
   <h2>Music Tracks in this Category</h2>
-  <ul class="administration">
-    <li>
-      <%= link_to 'New Music Track',
-        new_music_track_path(category: @category) %>
-    </li>
-  </ul>
+  <% if policy(MusicTrack).new? %>
+    <ul class="administration">
+      <li>
+        <%= link_to 'New Music Track',
+          new_music_track_path(category: @category) %>
+      </li>
+    </ul>
+  <% end %>
   <%= render 'music_tracks/list' %>
   <p><%= link_to 'Categories', categories_path %> |
     <%= link_to 'Music', music_tracks_path %></p>
@@ -88,12 +98,14 @@
 
 <% if @pictures %>
   <h2>Pictures in this Category</h2>
-  <ul class="administration">
-    <li>
-      <%= link_to 'New Picture',
-        new_picture_path(category: @category) %>
-    </li>
-  </ul>
+  <% if policy(Picture).new? %>
+    <ul class="administration">
+      <li>
+        <%= link_to 'New Picture',
+          new_picture_path(category: @category) %>
+      </li>
+    </ul>
+  <% end %>
   <%= render 'pictures/list' %>
   <p><%= link_to 'Categories', categories_path %> |
     <%= link_to 'Pictures', pictures_path %></p>
@@ -101,12 +113,14 @@
 
 <% if @resources %>
   <h2>Resources in this Category</h2>
-  <ul class="administration">
-    <li>
-      <%= link_to 'New Resource',
-        new_resource_path(category: @category) %>
-    </li>
-  </ul>
+  <% if policy(Resource).new? %>
+    <ul class="administration">
+      <li>
+        <%= link_to 'New Resource',
+          new_resource_path(category: @category) %>
+      </li>
+    </ul>
+  <% end %>
   <%= render 'resources/list' %>
   <p><%= link_to 'Categories', categories_path %> |
     <%= link_to 'Resources', resources_path %></p>
@@ -114,12 +128,14 @@
 
 <% if @stories %>
   <h2>Stories in this Category</h2>
-  <ul class="administration">
-    <li>
-      <%= link_to 'New Story',
-        new_story_path(category: @category) %>
-    </li>
-  </ul>
+  <% if policy(Story).new? %>
+    <ul class="administration">
+      <li>
+        <%= link_to 'New Story',
+          new_story_path(category: @category) %>
+      </li>
+    </ul>
+  <% end %>
   <%= render 'stories/list' %>
   <p><%= link_to 'Categories', categories_path %> |
     <%= link_to 'Stories', stories_path %></p>
@@ -127,12 +143,14 @@
 
 <% if @videos %>
   <h2>Videos in this Category</h2>
-  <ul class="administration">
-    <li>
-      <%= link_to 'New Video',
-        new_video_path(category: @category) %>
-    </li>
-  </ul>
+  <% if policy(Video).new? %>
+    <ul class="administration">
+      <li>
+        <%= link_to 'New Video',
+          new_video_path(category: @category) %>
+      </li>
+    </ul>
+  <% end %>
   <%= render 'videos/list' %>
   <p><%= link_to 'Categories', categories_path %> |
     <%= link_to 'Videos', videos_path %></p>
