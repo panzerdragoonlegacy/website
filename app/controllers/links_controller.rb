@@ -16,7 +16,13 @@ class LinksController < ApplicationController
   end
 
   def new
-    @link = Link.new
+    if params[:category]
+      category = Category.find_by url: params[:category]
+      raise "Category not found." unless category.present?
+      @link = Link.new category: category
+    else
+      @link = Link.new
+    end
     authorize @link
   end
 

@@ -16,7 +16,13 @@ class VideosController < ApplicationController
   end
 
   def new
-    @video = Video.new
+    if params[:category]
+      category = Category.find_by url: params[:category]
+      raise "Category not found." unless category.present?
+      @video = Video.new category: category
+    else
+      @video = Video.new
+    end
     authorize @video
   end
 

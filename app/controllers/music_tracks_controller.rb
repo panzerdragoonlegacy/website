@@ -16,7 +16,13 @@ class MusicTracksController < ApplicationController
   end
 
   def new
-    @music_track = MusicTrack.new
+    if params[:category]
+      category = Category.find_by url: params[:category]
+      raise "Category not found." unless category.present?
+      @music_track = MusicTrack.new category: category
+    else
+      @music_track = MusicTrack.new
+    end
     authorize @music_track
   end
 

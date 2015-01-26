@@ -31,7 +31,13 @@ class EncyclopaediaEntriesController < ApplicationController
   end
 
   def new
-    @encyclopaedia_entry = EncyclopaediaEntry.new
+    if params[:category]
+      category = Category.find_by url: params[:category]
+      raise "Category not found." unless category.present?
+      @encyclopaedia_entry = EncyclopaediaEntry.new category: category
+    else
+      @encyclopaedia_entry = EncyclopaediaEntry.new
+    end
     authorize @encyclopaedia_entry
   end
 

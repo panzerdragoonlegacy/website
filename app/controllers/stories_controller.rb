@@ -28,7 +28,13 @@ class StoriesController < ApplicationController
   end
 
   def new
-    @story = Story.new
+    if params[:category]
+      category = Category.find_by url: params[:category]
+      raise "Category not found." unless category.present?
+      @story = Story.new category: category
+    else
+      @story = Story.new
+    end
     authorize @story
   end
 

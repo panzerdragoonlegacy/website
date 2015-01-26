@@ -16,7 +16,13 @@ class ResourcesController < ApplicationController
   end
 
   def new
-    @resource = Resource.new
+    if params[:category]
+      category = Category.find_by url: params[:category]
+      raise "Category not found." unless category.present?
+      @resource = Resource.new category: category
+    else
+      @resource = Resource.new
+    end
     authorize @resource
   end
 

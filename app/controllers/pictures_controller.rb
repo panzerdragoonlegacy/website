@@ -16,7 +16,13 @@ class PicturesController < ApplicationController
   end
 
   def new
-    @picture = Picture.new
+    if params[:category]
+      category = Category.find_by url: params[:category]
+      raise "Category not found." unless category.present?
+      @picture = Picture.new category: category
+    else
+      @picture = Picture.new
+    end
     authorize @picture
   end
 

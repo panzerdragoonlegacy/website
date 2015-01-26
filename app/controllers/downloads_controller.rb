@@ -16,7 +16,13 @@ class DownloadsController < ApplicationController
   end
 
   def new
-    @download = Download.new
+    if params[:category]
+      category = Category.find_by url: params[:category]
+      raise "Category not found." unless category.present?
+      @download = Download.new category: category
+    else
+      @download = Download.new
+    end
     authorize @download
   end
 

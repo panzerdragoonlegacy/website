@@ -16,7 +16,13 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new
+    if params[:category]
+      category = Category.find_by url: params[:category]
+      raise "Category not found." unless category.present?
+      @article = Article.new category: category
+    else
+      @article = Article.new
+    end
     authorize @article
   end
 
