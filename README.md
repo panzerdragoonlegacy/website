@@ -1,5 +1,27 @@
-# The Will of the Ancients
+The Will of the Ancients
+========================
 
-Live website available at: http://www.thewilloftheancients.com
+A custom content management system for
+[thewilloftheancients.com](http://www.thewilloftheancients.com)
 
-Copyright © 2013 Chris Alley. I plan to release this code under an open source license in the future, once it becomes more stable. The source code is custom written for The Will of the Ancients and the code provided is intended to be example code; it is not designed to be easily used for other websites. Please let me know if you wish to use part or all of this codebase on another website.
+Installing Locally
+------------------
+
+This guide assumes that you already have Git, Ruby, RubyGems, and Bundler
+installed on your development machine.
+
+```
+git clone https://github.com/chrisalley/the-will-of-the-ancients.git
+cd the-will-of-the-ancients
+cp config/examples/database.yml config/database.yml
+cp config/examples/secrets.yml config/secrets.yml
+bundle
+rake db:schema:load
+rails s
+```
+
+Copyright
+---------
+
+Source code and other assets in this repository are provided for demonstration
+purposes only. Source code files in this repository are © 2015 Chris Alley.
