@@ -23,7 +23,7 @@ rake db:schema:load
 rails s
 ```
 
-Then visit http://localhost:3000 to view the website. If you previously
+Then visit `http://localhost:3000` to view the website. If you previously
 installed a copy of the website with a different dataset you may need to clear
 your browser cookies.
 
