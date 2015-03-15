@@ -12,7 +12,7 @@
       <div class="resource">
         <div class="details">
           <h2><%= emoticon.name %></h2>
-          <% if can? :manage, emoticon %>
+          <% if policy(emoticon).destroy? %>
             <ul class="administration">
               <li>
                 <%= link_to 'Delete Emoticon', emoticon, data: {
