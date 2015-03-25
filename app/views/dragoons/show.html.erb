@@ -6,11 +6,11 @@
   </ul>
 <% end %>
 
-<% if @dragoon.forum_member_id.present? %>
+<% if @dragoon.discourse_username.present? %>
   <p>
     <%= link_to "View Forum Profile",
-      "http://forums.thewilloftheancients.com/profile.php?mode=viewprofile" +
-      "&u=#{@dragoon.forum_member_id.to_s}"
+      "http://forums.thewilloftheancients.com/users/" +
+      "#{@dragoon.discourse_username.to_s.downcase}"
     %>
   </p>
 <% end %>

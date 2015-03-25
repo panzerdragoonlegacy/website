@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150115012458) do
+ActiveRecord::Schema.define(version: 20150325012728) do
 
-  create_table "articles", force: true do |t|
+  create_table "articles", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "categories", force: true do |t|
+  create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "updated_at",    null: false
   end
 
-  create_table "chapters", force: true do |t|
+  create_table "chapters", force: :cascade do |t|
     t.integer  "story_id"
     t.string   "chapter_type", default: "regular_chapter"
     t.integer  "number",       default: 1
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "updated_at",                               null: false
   end
 
-  create_table "contributions", force: true do |t|
+  create_table "contributions", force: :cascade do |t|
     t.integer  "dragoon_id"
     t.integer  "contributable_id"
     t.string   "contributable_type"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "updated_at",         null: false
   end
 
-  create_table "downloads", force: true do |t|
+  create_table "downloads", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "updated_at",            null: false
   end
 
-  create_table "dragoons", force: true do |t|
+  create_table "dragoons", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.string   "email_address"
@@ -102,10 +102,10 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.string   "skype_name"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
-    t.integer  "forum_member_id"
+    t.string   "discourse_username"
   end
 
-  create_table "emoticons", force: true do |t|
+  create_table "emoticons", force: :cascade do |t|
     t.string   "name"
     t.string   "code"
     t.string   "emoticon_file_name"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "updated_at",            null: false
   end
 
-  create_table "encyclopaedia_entries", force: true do |t|
+  create_table "encyclopaedia_entries", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.text     "information"
@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "updated_at",                               null: false
   end
 
-  create_table "illustrations", force: true do |t|
+  create_table "illustrations", force: :cascade do |t|
     t.integer  "illustratable_id"
     t.string   "illustratable_type"
     t.string   "illustration_file_name"
@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "updated_at",                null: false
   end
 
-  create_table "links", force: true do |t|
+  create_table "links", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.boolean  "partner_site", default: false
   end
 
-  create_table "music_tracks", force: true do |t|
+  create_table "music_tracks", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
@@ -176,7 +176,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "flac_music_track_updated_at"
   end
 
-  create_table "news_entries", force: true do |t|
+  create_table "news_entries", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.text     "content"
@@ -188,7 +188,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.boolean  "publish"
   end
 
-  create_table "pages", force: true do |t|
+  create_table "pages", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.text     "content"
@@ -197,7 +197,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pictures", force: true do |t|
+  create_table "pictures", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
@@ -212,7 +212,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "updated_at",           null: false
   end
 
-  create_table "poems", force: true do |t|
+  create_table "poems", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
@@ -222,7 +222,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "quiz_answers", force: true do |t|
+  create_table "quiz_answers", force: :cascade do |t|
     t.integer  "quiz_question_id"
     t.text     "content"
     t.boolean  "correct_answer",   default: false
@@ -230,14 +230,14 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "updated_at",                       null: false
   end
 
-  create_table "quiz_questions", force: true do |t|
+  create_table "quiz_questions", force: :cascade do |t|
     t.integer  "quiz_id"
     t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "quizzes", force: true do |t|
+  create_table "quizzes", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
@@ -246,7 +246,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "relations", force: true do |t|
+  create_table "relations", force: :cascade do |t|
     t.integer  "encyclopaedia_entry_id"
     t.integer  "relatable_id"
     t.string   "relatable_type"
@@ -254,7 +254,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "resources", force: true do |t|
+  create_table "resources", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.text     "content"
@@ -264,7 +264,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "stories", force: true do |t|
+  create_table "stories", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
@@ -275,7 +275,7 @@ ActiveRecord::Schema.define(version: 20150115012458) do
     t.integer  "category_id"
   end
 
-  create_table "videos", force: true do |t|
+  create_table "videos", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"

@@ -52,7 +52,7 @@ class DragoonsController < ApplicationController
       :email_address,
       :password,
       :password_confirmation,
-      :forum_member_id,
+      :discourse_username,
       :time_zone,
       :role,
       :avatar,
