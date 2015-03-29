@@ -1,8 +1,10 @@
 <% title @resource.name %>
 <% description truncated_text(@resource.content) %>
 
-<% unless @resource.publish %>
+<% if !@resource.publish %>
   <p class="unpublished">Unpublished</p>
+<% elsif !@resource.category.publish %>
+  <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
 <% if policy(@resource).edit? && policy(@resource).destroy? %>

@@ -1,8 +1,10 @@
 <% title @picture.name %>
 <% description @picture.description %>
 
-<% unless @picture.publish %>
+<% if !@picture.publish %>
   <p class="unpublished">Unpublished</p>
+<% elsif !@picture.category.publish %>
+  <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
 <% if policy(@picture).edit? && policy(@picture).destroy? %>

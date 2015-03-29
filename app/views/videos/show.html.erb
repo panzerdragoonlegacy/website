@@ -1,8 +1,10 @@
 <% title @video.name %>
 <% description @video.description %>
 
-<% unless @video.publish %>
+<% if !@video.publish %>
   <p class="unpublished">Unpublished</p>
+<% elsif !@video.category.publish %>
+  <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
 <% if policy(@video).edit? && policy(@video).destroy? %>

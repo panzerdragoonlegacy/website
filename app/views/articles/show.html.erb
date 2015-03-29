@@ -1,8 +1,10 @@
 <% title @article.name %>
 <% description @article.description %>
 
-<% unless @article.publish %>
+<% if !@article.publish %>
   <p class="unpublished">Unpublished</p>
+<% elsif !@article.category.publish %>
+  <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
 <% if policy(@article).edit? && policy(@article).destroy? %>

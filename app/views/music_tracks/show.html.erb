@@ -1,8 +1,10 @@
 <% title @music_track.name %>
 <% description @music_track.description %>
 
-<% unless @music_track.publish %>
+<% if !@music_track.publish %>
   <p class="unpublished">Unpublished</p>
+<% elsif !@music_track.category.publish %>
+  <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
 <% if policy(@music_track).edit? && policy(@music_track).destroy? %>

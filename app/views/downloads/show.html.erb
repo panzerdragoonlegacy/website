@@ -1,8 +1,10 @@
 <% title @download.name %>
 <% description @download.description %>
 
-<% unless @download.publish %>
+<% if !@download.publish %>
   <p class="unpublished">Unpublished</p>
+<% elsif !@download.category.publish %>
+  <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
 <% if policy(@download).edit? && policy(@download).destroy? %>

@@ -1,8 +1,10 @@
 <% title @encyclopaedia_entry.name %>
 <% description truncated_text(@encyclopaedia_entry.content) %>
 
-<% unless @encyclopaedia_entry.publish %>
+<% if !@encyclopaedia_entry.publish %>
   <p class="unpublished">Unpublished</p>
+<% elsif !@encyclopaedia_entry.category.publish %>
+  <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
 <% if policy(@encyclopaedia_entry).edit? &&
@@ -44,8 +46,10 @@
     <% @articles.each do |article| %>
       <li>
         <%= link_to article.name, article %>
-        <% unless article.publish %>
+        <% if !article.publish %>
            - <span class="unpublished">Unpublished</span>
+        <% elsif !article.category.publish %>
+           - <span class="unpublished">Published in Unpublished Category</span>
         <% end %>
       </li>
     <% end %>
@@ -57,8 +61,10 @@
     <% @downloads.each do |download| %>
       <li>
         <%= link_to download.name, download %>
-        <% unless download.publish %>
+        <% if !download.publish %>
            - <span class="unpublished">Unpublished</span>
+        <% elsif !download.category.publish %>
+           - <span class="unpublished">Published in Unpublished Category</span>
         <% end %>
       </li>
     <% end %>
@@ -78,8 +84,10 @@
     <% @music_tracks.each do |music_track| %>
       <li>
         <%= link_to music_track.name, music_track %>
-        <% unless music_track.publish %>
+        <% if !music_track.publish %>
            - <span class="unpublished">Unpublished</span>
+        <% elsif !music_track.category.publish %>
+           - <span class="unpublished">Published in Unpublished Category</span>
         <% end %>
       </li>
     <% end %>
@@ -126,8 +134,10 @@
     <% @resources.each do |resource| %>
       <li>
         <%= link_to resource.name, resource %>
-        <% unless resource.publish %>
+        <% if !resource.publish %>
            - <span class="unpublished">Unpublished</span>
+        <% elsif !resource.category.publish %>
+           - <span class="unpublished">Published in Unpublished Category</span>
         <% end %>
       </li>
     <% end %>
@@ -139,8 +149,10 @@
     <% @stories.each do |story| %>
       <li>
         <%= link_to story.name, story %>
-        <% unless story.publish %>
+        <% if !story.publish %>
            - <span class="unpublished">Unpublished</span>
+        <% elsif !story.category.publish %>
+           - <span class="unpublished">Published in Unpublished Category</span>
         <% end %>
       </li>
     <% end %>
@@ -152,8 +164,10 @@
     <% @videos.each do |video| %>
       <li>
         <%= link_to video.name, video %>
-        <% unless video.publish %>
+        <% if !video.publish %>
            - <span class="unpublished">Unpublished</span>
+        <% elsif !video.category.publish %>
+           - <span class="unpublished">Published in Unpublished Category</span>
         <% end %>
       </li>
     <% end %>

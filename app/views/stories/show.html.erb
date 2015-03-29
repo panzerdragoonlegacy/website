@@ -1,8 +1,10 @@
 <% title @story.name %>
 <% description @story.description %>
 
-<% unless @story.publish %>
+<% if !@story.publish %>
   <p class="unpublished">Unpublished</p>
+<% elsif !@encyclopaedia_entry.category.publish %>
+  <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
 <% if policy(Chapter).new? && policy(@story).edit? && policy(@story).destroy? %>
