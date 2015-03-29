@@ -40,6 +40,8 @@
   <%= raw markdown_to_html @picture.information %>
 <% end %>
 
+<%= render partial: 'shared/related_encyclopaedia_entries' %>
+
 <p class="links">
   <%= link_to 'Pictures', pictures_path %> |
   <%= link_to @picture.category.name, category_path(@picture.category) %>

@@ -1,0 +1,15 @@
+<% unless @encyclopaedia_entries.count == 0 %>
+  <h2>Related Encyclopaedia Entries</h2>
+  <ul>
+    <% @encyclopaedia_entries.each do |encyclopaedia_entry| %>
+      <li>
+        <%= link_to encyclopaedia_entry.name, encyclopaedia_entry %>
+        <% if !encyclopaedia_entry.publish %>
+           - <span class="unpublished">Unpublished</span>
+        <% elsif !encyclopaedia_entry.category.publish %>
+           - <span class="unpublished">Unpublished Category</span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

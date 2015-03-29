@@ -26,4 +26,6 @@
 
 <%= raw markdown_to_html @poem.content %>
 
+<%= render partial: 'shared/related_encyclopaedia_entries' %>
+
 <p class="links"><%= link_to 'Poems', poems_path %></p>

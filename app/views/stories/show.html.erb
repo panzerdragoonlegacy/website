@@ -66,6 +66,8 @@
   </ul>
 <% end %>
 
+<%= render partial: 'shared/related_encyclopaedia_entries' %>
+
 <p class="links">
   <%= link_to 'Stories', stories_path %> |
   <%= link_to @story.category.name, category_path(@story.category) %>

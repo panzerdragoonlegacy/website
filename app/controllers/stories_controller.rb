@@ -25,6 +25,8 @@ class StoriesController < ApplicationController
       :number)).resolve
     @epilogues = ChapterPolicy::Scope.new(current_user,
       @story.chapters.where(chapter_type: :epilogue).order(:number)).resolve
+    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(current_user,
+      @story.encyclopaedia_entries.order(:name)).resolve
   end
 
   def new

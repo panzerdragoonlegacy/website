@@ -26,6 +26,8 @@ class QuizzesController < ApplicationController
         flash.now[:notice] = "You haven't filled out the quiz."
       end
     end
+    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(current_user,
+      @quiz.encyclopaedia_entries.order(:name)).resolve
   end
 
   def new

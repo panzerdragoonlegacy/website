@@ -47,6 +47,8 @@
   <%= link_to "WebM", @video.webm_video.url %>
 </p>
 
+<%= render partial: 'shared/related_encyclopaedia_entries' %>
+
 <p class="links">
   <%= link_to 'Videos', videos_path %> |
   <%= link_to @video.category.name, category_path(@video.category) %>

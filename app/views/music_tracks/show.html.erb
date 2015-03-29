@@ -54,6 +54,8 @@
   <% end %>
 </p>
 
+<%= render partial: 'shared/related_encyclopaedia_entries' %>
+
 <p class="links">
   <%= link_to 'Music', music_tracks_path %> |
   <%= link_to @music_track.category.name,

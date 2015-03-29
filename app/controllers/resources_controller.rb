@@ -15,6 +15,11 @@ class ResourcesController < ApplicationController
     end
   end
 
+  def show
+    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(current_user,
+      @resource.encyclopaedia_entries.order(:name)).resolve
+  end
+
   def new
     if params[:category]
       category = Category.find_by url: params[:category]

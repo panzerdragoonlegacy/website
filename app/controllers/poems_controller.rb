@@ -14,6 +14,11 @@ class PoemsController < ApplicationController
     end
   end
 
+  def show
+    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(current_user,
+      @poem.encyclopaedia_entries.order(:name)).resolve
+  end
+
   def new
     @poem = Poem.new
     authorize @poem
