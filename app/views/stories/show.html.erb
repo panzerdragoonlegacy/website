@@ -3,7 +3,7 @@
 
 <% if !@story.publish %>
   <p class="unpublished">Unpublished</p>
-<% elsif !@encyclopaedia_entry.category.publish %>
+<% elsif !@story.category.publish %>
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
