@@ -22,6 +22,8 @@
   </div>
   <div>
     <%= f.label :content, "Content" %><br />
+    (You may use a <a href="/markdown-syntax-guide" target="_blank">limited
+      subset of Markdown</a> to format the chapter's content)<br />
     <%= f.text_area :content, class: "data_entry" %>
   </div>
   <div>
@@ -33,7 +35,7 @@
       <% else %>
         <%= image_tag illustration_form.object.illustration.url(:embedded) %>
         <br />
-        <button class="insert_tag">Insert Tag</button><br />
+        <button class="insert_tag">Insert Markdown Tag</button><br />
         Filename: <%= illustration_form.object.illustration_file_name %>
         <br />
         <%= link_to "Popover Image",
