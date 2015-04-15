@@ -17,17 +17,6 @@
       subset of Markdown</a> to format the resource's content)<br />
     <%= f.text_area :content, class: "data_entry" %>
   </div>
-  <label>Contributors</label>
-  <div class="scroll_checkboxes">
-    <% for dragoon in Dragoon.order(:name) %>
-      <label>
-        <%= check_box_tag "resource[dragoon_ids][]", dragoon.id,
-          @resource.dragoons.include?(dragoon) %>
-        <%= dragoon.name %>
-      </label>
-      <br />
-    <% end %>
-  </div>
   <div>
     <label>Illustrations</label>
     <%= f.fields_for :illustrations do |illustration_form| %>
@@ -48,6 +37,17 @@
       </div>
     <% end %>
     <p><%= f.link_to_add "Add illustration", :illustrations %></p>
+  </div>
+  <label>Contributors</label>
+  <div class="scroll_checkboxes">
+    <% for dragoon in Dragoon.order(:name) %>
+      <label>
+        <%= check_box_tag "resource[dragoon_ids][]", dragoon.id,
+          @resource.dragoons.include?(dragoon) %>
+        <%= dragoon.name %>
+      </label>
+      <br />
+    <% end %>
   </div>
   <div>
     <label>Related Encyclopaedia Entries</label>
