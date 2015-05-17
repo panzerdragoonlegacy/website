@@ -13,12 +13,10 @@
     <% @article_categories.each do |article_category| %>
       <ul>
         <li>
-          <h3>
-            <%= link_to article_category.name, article_category %>
-            <% unless article_category.publish %>
-               - <span class="unpublished">Unpublished</span>
-            <% end %>
-          </h3>
+          <%= link_to article_category.name, article_category %>
+          <% unless article_category.publish %>
+             - <span class="unpublished">Unpublished</span>
+          <% end %>
         </li>
       </ul>
     <% end %>
@@ -28,12 +26,10 @@
     <% @download_categories.each do |download_category| %>
       <ul>
         <li>
-          <h3>
-            <%= link_to download_category.name, download_category %>
-            <% unless download_category.publish %>
-               - <span class="unpublished">Unpublished</span>
-            <% end %>
-          </h3>
+          <%= link_to download_category.name, download_category %>
+          <% unless download_category.publish %>
+             - <span class="unpublished">Unpublished</span>
+          <% end %>
         </li>
       </ul>
     <% end %>
@@ -65,13 +61,11 @@
             category_group).each do |encyclopaedia_entry_category| %>
             <ul>
               <li>
-                <h4>
-                  <%= link_to encyclopaedia_entry_category.name,
-                    encyclopaedia_entry_category %>
-                  <% unless encyclopaedia_entry_category.publish %>
-                     - <span class="unpublished">Unpublished</span>
-                  <% end %>
-                </h4>
+                <%= link_to encyclopaedia_entry_category.name,
+                  encyclopaedia_entry_category %>
+                <% unless encyclopaedia_entry_category.publish %>
+                   - <span class="unpublished">Unpublished</span>
+                <% end %>
               </li>
             </ul>
           <% end %>
@@ -80,13 +74,11 @@
       <% @encyclopaedia_entry_categories.where(category_group: nil).
         each do |encyclopaedia_entry_category| %>
         <li>
-          <h4>
-            <%= link_to encyclopaedia_entry_category.name,
-              encyclopaedia_entry_category %>
-            <% unless encyclopaedia_entry_category.publish %>
-               - <span class="unpublished">Unpublished</span>
-            <% end %>
-          </h4>
+          <%= link_to encyclopaedia_entry_category.name,
+            encyclopaedia_entry_category %>
+          <% unless encyclopaedia_entry_category.publish %>
+             - <span class="unpublished">Unpublished</span>
+          <% end %>
         </li>
       <% end %>
     </ul>
@@ -96,12 +88,10 @@
     <% @link_categories.each do |link_category| %>
       <ul>
         <li>
-          <h3>
-            <%= link_to link_category.name, link_category %>
-            <% unless link_category.publish %>
-               - <span class="unpublished">Unpublished</span>
-            <% end %>
-          </h3>
+          <%= link_to link_category.name, link_category %>
+          <% unless link_category.publish %>
+             - <span class="unpublished">Unpublished</span>
+          <% end %>
         </li>
       </ul>
     <% end %>
@@ -133,12 +123,10 @@
             each do |music_track_category| %>
             <ul>
               <li>
-                <h4>
-                  <%= link_to music_track_category.name, music_track_category %>
-                  <% unless music_track_category.publish %>
-                     - <span class="unpublished">Unpublished</span>
-                  <% end %>
-                </h4>
+                <%= link_to music_track_category.name, music_track_category %>
+                <% unless music_track_category.publish %>
+                   - <span class="unpublished">Unpublished</span>
+                <% end %>
               </li>
             </ul>
           <% end %>
@@ -147,12 +135,10 @@
       <% @music_track_categories.where(category_group: nil).
         each do |music_track_category| %>
         <li>
-          <h4>
-            <%= link_to music_track_category.name, music_track_category %>
-            <% unless music_track_category.publish %>
-               - <span class="unpublished">Unpublished</span>
-            <% end %>
-          </h4>
+          <%= link_to music_track_category.name, music_track_category %>
+          <% unless music_track_category.publish %>
+             - <span class="unpublished">Unpublished</span>
+          <% end %>
         </li>
       <% end %>
     </ul>
@@ -184,12 +170,10 @@
             each do |picture_category| %>
             <ul>
               <li>
-                <h4>
-                  <%= link_to picture_category.name, picture_category %>
-                  <% unless picture_category.publish %>
-                     - <span class="unpublished">Unpublished</span>
-                  <% end %>
-                </h4>
+                <%= link_to picture_category.name, picture_category %>
+                <% unless picture_category.publish %>
+                   - <span class="unpublished">Unpublished</span>
+                <% end %>
               </li>
             </ul>
           <% end %>
@@ -198,12 +182,10 @@
       <% @picture_categories.where(category_group: nil).
         each do |picture_category| %>
         <li>
-          <h3>
-            <%= link_to picture_category.name, picture_category %>
-            <% unless picture_category.publish %>
-               - <span class="unpublished">Unpublished</span>
-            <% end %>
-          </h3>
+          <%= link_to picture_category.name, picture_category %>
+          <% unless picture_category.publish %>
+             - <span class="unpublished">Unpublished</span>
+          <% end %>
         </li>
       <% end %>
     </ul>
@@ -241,12 +223,10 @@
             each do |resource_category| %>
             <ul>
               <li>
-                <h4>
-                  <%= link_to resource_category.name, resource_category %>
-                  <% unless resource_category.publish %>
-                     - <span class="unpublished">Unpublished</span>
-                  <% end %>
-                </h4>
+                <%= link_to resource_category.name, resource_category %>
+                <% unless resource_category.publish %>
+                   - <span class="unpublished">Unpublished</span>
+                <% end %>
               </li>
             </ul>
           <% end %>
@@ -255,12 +235,10 @@
       <% @resource_categories.where(category_group: nil).
         each do |resource_category| %>
         <li>
-          <h3>
-            <%= link_to resource_category.name, resource_category %>
-            <% unless resource_category.publish %>
-               - <span class="unpublished">Unpublished</span>
-            <% end %>
-          </h3>
+          <%= link_to resource_category.name, resource_category %>
+          <% unless resource_category.publish %>
+             - <span class="unpublished">Unpublished</span>
+          <% end %>
         </li>
       <% end %>
     </ul>
@@ -270,12 +248,10 @@
     <% @story_categories.each do |story_category| %>
       <ul>
         <li>
-          <h3>
-            <%= link_to story_category.name, story_category %>
-            <% unless story_category.publish %>
-               - <span class="unpublished">Unpublished</span>
-            <% end %>
-          </h3>
+          <%= link_to story_category.name, story_category %>
+          <% unless story_category.publish %>
+             - <span class="unpublished">Unpublished</span>
+          <% end %>
         </li>
       </ul>
     <% end %>
@@ -307,12 +283,10 @@
             each do |video_category| %>
             <ul>
               <li>
-                <h4>
-                  <%= link_to video_category.name, video_category %>
-                  <% unless video_category.publish %>
-                     - <span class="unpublished">Unpublished</span>
-                  <% end %>
-                </h4>
+                <%= link_to video_category.name, video_category %>
+                <% unless video_category.publish %>
+                   - <span class="unpublished">Unpublished</span>
+                <% end %>
               </li>
             </ul>
           <% end %>
@@ -321,12 +295,10 @@
       <% @video_categories.where(category_group: nil).
         each do |video_category| %>
         <li>
-          <h3>
-            <%= link_to video_category.name, video_category %>
-            <% unless video_category.publish %>
-              - <span class="unpublished">Unpublished</span>
-            <% end %>
-          </h3>
+          <%= link_to video_category.name, video_category %>
+          <% unless video_category.publish %>
+            - <span class="unpublished">Unpublished</span>
+          <% end %>
         </li>
       <% end %>
     </ul>
