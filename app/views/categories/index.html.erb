@@ -62,16 +62,16 @@
           <% end %>
         </li>
       <% end %>
-      <% @encyclopaedia_entry_categories.
+      <% @encyclopaedia_entry_categories.where(category_group: nil).
         each do |encyclopaedia_entry_category| %>
         <li>
-          <h3>
+          <h4>
             <%= link_to encyclopaedia_entry_category.name,
               encyclopaedia_entry_category %>
             <% unless encyclopaedia_entry_category.publish %>
                - <span class="unpublished">Unpublished</span>
             <% end %>
-          </h3>
+          </h4>
         </li>
       <% end %>
     </ul>
@@ -98,7 +98,7 @@
         each do |music_track_category_group| %>
         <li>
           <h3><%= music_track_category_group.name %></h3>
-          <% @picture_categories.where(category_group:
+          <% @music_track_categories.where(category_group:
             music_track_category_group).each do |music_track_category| %>
             <ul>
               <li>
@@ -113,14 +113,15 @@
           <% end %>
         </li>
       <% end %>
-      <% @music_track_categories.each do |music_track_category| %>
+      <% @music_track_categories.where(category_group: nil).
+        each do |music_track_category| %>
         <li>
-          <h3>
+          <h4>
             <%= link_to music_track_category.name, music_track_category %>
             <% unless music_track_category.publish %>
                - <span class="unpublished">Unpublished</span>
             <% end %>
-          </h3>
+          </h4>
         </li>
       <% end %>
     </ul>
