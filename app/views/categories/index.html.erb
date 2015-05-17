@@ -42,12 +42,27 @@
     <h2><%= link_to "Encyclopaedia", encyclopaedia_entries_path %></h2>
     <ul>
       <% @category_groups.where(category_group_type: :encyclopaedia_entry).
-        each do |encyclopaedia_entry_category_group| %>
+        each do |category_group| %>
         <li>
-          <h3><%= encyclopaedia_entry_category_group.name %></h3>
+          <h3><%= category_group.name %></h3>
+          <% if (policy(category_group).edit? and
+            policy(category_group).destroy?) %>
+            <ul class="administration">
+              <li><%= link_to 'Edit Category Group', edit_category_group_path(
+                category_group) %></li>
+              <li>
+                <%= link_to 'Delete Category Group', category_group,
+                  data: { confirm: "Are you sure you want to delete this " +
+                    "category group? ALL categories belonging to this " +
+                    "category group (and ALL ITEMS BELONGING TO THOSE " +
+                    "CATEGORIES) will be deleted." },
+                  method: :delete
+                %>
+              </li>
+            </ul>
+          <% end %>
           <% @encyclopaedia_entry_categories.where(category_group:
-            encyclopaedia_entry_category_group).
-            each do |encyclopaedia_entry_category| %>
+            category_group).each do |encyclopaedia_entry_category| %>
             <ul>
               <li>
                 <h4>
@@ -95,11 +110,27 @@
     <h2><%= link_to "Music", music_tracks_path %></h2>
     <ul>
       <% @category_groups.where(category_group_type: :music_track).
-        each do |music_track_category_group| %>
+        each do |category_group| %>
         <li>
-          <h3><%= music_track_category_group.name %></h3>
-          <% @music_track_categories.where(category_group:
-            music_track_category_group).each do |music_track_category| %>
+          <h3><%= category_group.name %></h3>
+          <% if (policy(category_group).edit? and
+            policy(category_group).destroy?) %>
+            <ul class="administration">
+              <li><%= link_to 'Edit Category Group', edit_category_group_path(
+                category_group) %></li>
+              <li>
+                <%= link_to 'Delete Category Group', category_group,
+                  data: { confirm: "Are you sure you want to delete this " +
+                    "category group? ALL categories belonging to this " +
+                    "category group (and ALL ITEMS BELONGING TO THOSE " +
+                    "CATEGORIES) will be deleted." },
+                  method: :delete
+                %>
+              </li>
+            </ul>
+          <% end %>
+          <% @music_track_categories.where(category_group: category_group).
+            each do |music_track_category| %>
             <ul>
               <li>
                 <h4>
@@ -130,10 +161,26 @@
     <h2><%= link_to "Pictures", pictures_path %></h2>
     <ul>
       <% @category_groups.where(category_group_type: :picture).
-        each do |picture_category_group| %>
+        each do |category_group| %>
         <li>
-          <h3><%= picture_category_group.name %></h3>
-          <% @picture_categories.where(category_group: picture_category_group).
+          <h3><%= category_group.name %></h3>
+          <% if (policy(category_group).edit? and
+            policy(category_group).destroy?) %>
+            <ul class="administration">
+              <li><%= link_to 'Edit Category Group', edit_category_group_path(
+                category_group) %></li>
+              <li>
+                <%= link_to 'Delete Category Group', category_group,
+                  data: { confirm: "Are you sure you want to delete this " +
+                    "category group? ALL categories belonging to this " +
+                    "category group (and ALL ITEMS BELONGING TO THOSE " +
+                    "CATEGORIES) will be deleted." },
+                  method: :delete
+                %>
+              </li>
+            </ul>
+          <% end %>
+          <% @picture_categories.where(category_group: category_group).
             each do |picture_category| %>
             <ul>
               <li>
@@ -171,11 +218,27 @@
     <h2><%= link_to "Resources", resources_path %></h2></li>
     <ul>
       <% @category_groups.where(category_group_type: :resource).
-        each do |resource_category_group| %>
+        each do |category_group| %>
         <li>
-          <h3><%= resource_category_group.name %></h3>
-          <% @resource_categories.where(category_group: resource_category_group
-            ).each do |resource_category| %>
+          <h3><%= category_group.name %></h3>
+          <% if (policy(category_group).edit? and
+            policy(category_group).destroy?) %>
+            <ul class="administration">
+              <li><%= link_to 'Edit Category Group', edit_category_group_path(
+                category_group) %></li>
+              <li>
+                <%= link_to 'Delete Category Group', category_group,
+                  data: { confirm: "Are you sure you want to delete this " +
+                    "category group? ALL categories belonging to this " +
+                    "category group (and ALL ITEMS BELONGING TO THOSE " +
+                    "CATEGORIES) will be deleted." },
+                  method: :delete
+                %>
+              </li>
+            </ul>
+          <% end %>
+          <% @resource_categories.where(category_group: category_group).
+            each do |resource_category| %>
             <ul>
               <li>
                 <h4>
@@ -221,11 +284,27 @@
     <h2><%= link_to "Videos", videos_path %></h2>
     <ul>
       <% @category_groups.where(category_group_type: :video).
-        each do |video_category_group| %>
+        each do |category_group| %>
         <li>
-          <h3><%= video_category_group.name %></h3>
-          <% @video_categories.where(category_group: video_category_group
-            ).each do |video_category| %>
+          <h3><%= category_group.name %></h3>
+          <% if (policy(category_group).edit? and
+            policy(category_group).destroy?) %>
+            <ul class="administration">
+              <li><%= link_to 'Edit Category Group', edit_category_group_path(
+                category_group) %></li>
+              <li>
+                <%= link_to 'Delete Category Group', category_group,
+                  data: { confirm: "Are you sure you want to delete this " +
+                    "category group? ALL categories belonging to this " +
+                    "category group (and ALL ITEMS BELONGING TO THOSE " +
+                    "CATEGORIES) will be deleted." },
+                  method: :delete
+                %>
+              </li>
+            </ul>
+          <% end %>
+          <% @video_categories.where(category_group: category_group).
+            each do |video_category| %>
             <ul>
               <li>
                 <h4>
