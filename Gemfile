@@ -17,7 +17,7 @@ end
 
 group :test do
   gem 'factory_girl_rails', '~> 4.4.1'
-  gem 'shoulda-matchers', '~> 2.6.1'
+  gem 'shoulda-matchers', '~> 2.8.0'
 end
 
 group :production do
