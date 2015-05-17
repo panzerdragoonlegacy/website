@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
   resources :drafts
   resources :sessions
+  resources :category_groups, path: 'category-groups'
   resources :categories
   resources :articles
   resources :pictures

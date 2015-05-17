@@ -1,7 +1,10 @@
 class CategoriesController < ApplicationController
+  before_action :load_category_groups, except: [:show, :destroy]
   before_action :load_category, except: [:index, :new, :create]
 
   def index
+    @category_groups = policy_scope(CategoryGroup.order(:name))
+
     @article_categories = policy_scope(Category.where(
       category_type: :article).order(:name))
     @download_categories = policy_scope(Category.where(
@@ -98,11 +101,17 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(
+      :category_type,
+      :category_group_id,
       :name,
       :description,
-      :category_type,
       :publish
     )
+  end
+
+  def load_category_groups
+    @category_groups = CategoryGroupPolicy::Scope.new(current_user,
+      CategoryGroup.order(:name)).resolve
   end
 
   def load_category

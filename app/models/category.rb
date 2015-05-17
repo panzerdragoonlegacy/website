@@ -1,6 +1,7 @@
 class Category < ActiveRecord::Base
   include Sluggable
 
+  belongs_to :category_group
   has_many :articles, dependent: :destroy
   has_many :downloads, dependent: :destroy
   has_many :encyclopaedia_entries, dependent: :destroy

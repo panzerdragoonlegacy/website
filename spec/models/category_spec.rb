@@ -20,6 +20,7 @@ RSpec.describe Category, type: :model do
   end
 
   describe "associations" do
+    it { should belong_to(:category_group) }
     it { should have_many(:articles).dependent(:destroy) }
     it { should have_many(:downloads).dependent(:destroy) }
     it { should have_many(:encyclopaedia_entries).dependent(:destroy) }
