@@ -64,17 +64,15 @@
       <% end %>
       <% @encyclopaedia_entry_categories.
         each do |encyclopaedia_entry_category| %>
-        <ul>
-          <li>
-            <h3>
-              <%= link_to encyclopaedia_entry_category.name,
-                encyclopaedia_entry_category %>
-              <% unless encyclopaedia_entry_category.publish %>
-                 - <span class="unpublished">Unpublished</span>
-              <% end %>
-            </h3>
-          </li>
-        </ul>
+        <li>
+          <h3>
+            <%= link_to encyclopaedia_entry_category.name,
+              encyclopaedia_entry_category %>
+            <% unless encyclopaedia_entry_category.publish %>
+               - <span class="unpublished">Unpublished</span>
+            <% end %>
+          </h3>
+        </li>
       <% end %>
     </ul>
   </li>
@@ -116,16 +114,14 @@
         </li>
       <% end %>
       <% @music_track_categories.each do |music_track_category| %>
-        <ul>
-          <li>
-            <h3>
-              <%= link_to music_track_category.name, music_track_category %>
-              <% unless music_track_category.publish %>
-                 - <span class="unpublished">Unpublished</span>
-              <% end %>
-            </h3>
-          </li>
-        </ul>
+        <li>
+          <h3>
+            <%= link_to music_track_category.name, music_track_category %>
+            <% unless music_track_category.publish %>
+               - <span class="unpublished">Unpublished</span>
+            <% end %>
+          </h3>
+        </li>
       <% end %>
     </ul>
   </li>
