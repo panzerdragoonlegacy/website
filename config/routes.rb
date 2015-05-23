@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'site-map', to: 'site_map#show', as: :site_map
   get 'log-in', to: 'sessions#new', as: :log_in
   get 'log-out', to: 'sessions#destroy', as: :log_out
   get 'register', to: 'dragoons#new', as: :register
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
     resources :stories
     resources :videos
   end
+  resources :site_map
   resources :drafts
   resources :sessions
   resources :category_groups, path: 'category-groups'

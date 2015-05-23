@@ -1,0 +1,29 @@
+<ul>
+  <% @category_groups.where(category_group_type: category_group_type).
+    each do |category_group| %>
+    <li>
+      <h3><%= category_group.name %></h3>
+      <% if policy(category_group).edit? or policy(category_group).destroy? %>
+        <ul class="administration">
+          <% if policy(category_group).edit? %>
+            <li>
+              <%= link_to 'Edit Category Group', edit_category_group_path(
+                category_group) %>
+            </li>
+          <% end %>
+          <% if policy(category_group).destroy? %>
+            <li>
+              <%= link_to 'Delete Category Group', category_group,
+                data: { confirm: "Are you sure you want to delete the " +
+                  "category group '#{category_group.name}'?" },
+                method: :delete
+              %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+      <%= render partial: 'categories', locals: { categories: @categories,
+        category_type: category_group_type } %>
+    </li>
+  <% end %>
+</ul>

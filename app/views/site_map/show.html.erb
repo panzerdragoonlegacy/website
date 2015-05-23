@@ -1,0 +1,71 @@
+<% title "Site Map" %>
+
+<% if policy(CategoryGroup).new? or policy(Category).new? %>
+  <ul class="administration">
+    <% if policy(CategoryGroup).new? %>
+      <li><%= link_to 'New Category Group', new_category_group_path %></li>
+    <% end %>
+    <% if policy(Category).new? %>
+      <li><%= link_to 'New Category', new_category_path %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<ul>
+  <li>
+    <h2><%= link_to "Articles", articles_path %></h2>
+    <%= render partial: 'categories', locals: { categories: @categories,
+      category_type: :article } %>
+  </li>
+  <li>
+    <h2><%= link_to "Downloads", downloads_path %></h2>
+    <%= render partial: 'categories', locals: { categories: @categories,
+      category_type: :download } %>
+  </li>
+  <li>
+    <h2><%= link_to "Encyclopaedia", encyclopaedia_entries_path %></h2>
+    <%= render partial: 'category_groups', locals: {
+      category_groups: @category_groups, categories: @categories,
+      category_group_type: :encyclopaedia_entry } %>
+  </li>
+  <li>
+    <h2><%= link_to "Links", links_path %></h2>
+    <%= render partial: 'categories', locals: { categories: @categories,
+      category_type: :link } %>
+  </li>
+  <li>
+    <h2><%= link_to "Music", music_tracks_path %></h2>
+    <%= render partial: 'category_groups', locals: {
+      category_groups: @category_groups, categories: @categories,
+      category_group_type: :music_track } %>
+  </li>
+  <li>
+    <h2><%= link_to "Pictures", pictures_path %></h2>
+    <%= render partial: 'category_groups', locals: {
+      category_groups: @category_groups, categories: @categories,
+      category_group_type: :picture } %>
+  </li>
+  <li>
+    <h2><%= link_to "Poems", poems_path %></h2>
+  </li>
+  <li>
+    <h2><%= link_to "Quizzes", quizzes_path %></h2>
+  </li>
+  <li>
+    <h2><%= link_to "Resources", resources_path %></h2></li>
+    <%= render partial: 'category_groups', locals: {
+      category_groups: @category_groups, categories: @categories,
+      category_group_type: :resource } %>
+  </li>
+  <li>
+    <h2><%= link_to "Stories", stories_path %></h2>
+    <%= render partial: 'categories', locals: { categories: @categories,
+      category_type: :story } %>
+  </li>
+  <li>
+    <h2><%= link_to "Videos", videos_path %></h2>
+    <%= render partial: 'category_groups', locals: {
+      category_groups: @category_groups, categories: @categories,
+      category_group_type: :video } %>
+  </li>
+</ul>
