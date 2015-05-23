@@ -22,8 +22,9 @@
           <% end %>
         </ul>
       <% end %>
-      <%= render partial: 'categories', locals: { categories: categories,
-        category_type: category_group_type, category_group: category_group } %>
+      <%= render partial: 'site_map/categories', locals: {
+        categories: categories, category_type: category_group_type,
+        category_group: category_group } %>
     </li>
   <% end %>
 </ul>

@@ -1,4 +1,5 @@
 class VideosController < ApplicationController
+  before_action :load_category_groups, only: [:index]
   before_action :load_categories, expect: [:show, :destroy]
   before_action :load_video, except: [:index, :new, :create]
 

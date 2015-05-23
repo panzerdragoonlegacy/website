@@ -11,18 +11,11 @@
 <% end %>
 
 <% unless params[:dragoon_id] %>
-  <% unless @categories.empty? %>
+  <% unless @category_groups.empty? or @categories.empty? %>
     <h2>Video Categories</h2>
-    <ul class="categories">
-    <% @categories.each do |category| %>
-      <li>
-        <%= link_to category.name, category %>
-        <% unless category.publish %>
-           - <span class="unpublished">Unpublished</span>
-        <% end %>
-      </li>
-    <% end %>
-    </ul>
+    <%= render partial: 'site_map/category_groups', locals: {
+      category_groups: @category_groups, categories: @categories,
+      category_group_type: :video } %>
   <% end %>
   <% unless @videos.empty? %>
     <h2>All Videos</h2>

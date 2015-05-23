@@ -1,4 +1,5 @@
 class EncyclopaediaEntriesController < ApplicationController
+  before_action :load_category_groups, only: [:index]
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_encyclopaedia_entry, except: [:index, :new, :create]
 

@@ -11,18 +11,11 @@
 <% end %>
 
 <% unless params[:dragoon_id] %>
-  <% unless @categories.empty? %>
-    <h2>Categories</h2>
-    <ul class="categories">
-    <% @categories.each do |category| %>
-      <li>
-        <%= link_to category.name, category %>
-        <% unless category.publish %>
-           - <span class="unpublished">Unpublished</span>
-        <% end %>
-      </li>
-    <% end %>
-    </ul>
+  <% unless @category_groups.empty? or @categories.empty? %>
+    <h2>Music Categories</h2>
+    <%= render partial: 'site_map/category_groups', locals: {
+      category_groups: @category_groups, categories: @categories,
+      category_group_type: :music_track } %>
   <% end %>
   <% unless @music_tracks.empty? %>
     <h2>All Music Tracks</h2>

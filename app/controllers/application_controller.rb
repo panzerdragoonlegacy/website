@@ -48,4 +48,8 @@ class ApplicationController < ActionController::Base
   def partner_sites
     @partner_sites = Link.where(partner_site: true).order(:name)
   end
+
+  def load_category_groups
+    @category_groups = policy_scope(CategoryGroup.order(:name))
+  end
 end

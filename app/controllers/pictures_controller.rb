@@ -1,4 +1,5 @@
 class PicturesController < ApplicationController
+  before_action :load_category_groups, only: [:index]
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_picture, except: [:index, :new, :create]
 
