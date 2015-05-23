@@ -1,8 +1,8 @@
 <ul>
-  <% @category_groups.where(category_group_type: category_group_type).
+  <% category_groups.where(category_group_type: category_group_type).
     each do |category_group| %>
     <li>
-      <h3><%= category_group.name %></h3>
+      <%= category_group.name %>
       <% if policy(category_group).edit? or policy(category_group).destroy? %>
         <ul class="administration">
           <% if policy(category_group).edit? %>
@@ -22,8 +22,8 @@
           <% end %>
         </ul>
       <% end %>
-      <%= render partial: 'categories', locals: { categories: @categories,
-        category_type: category_group_type } %>
+      <%= render partial: 'categories', locals: { categories: categories,
+        category_type: category_group_type, category_group: category_group } %>
     </li>
   <% end %>
 </ul>

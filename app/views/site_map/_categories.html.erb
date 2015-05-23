@@ -1,5 +1,7 @@
 <ul>
-  <% @categories.where(category_type: category_type).each do |category| %>
+  <% categories.where(category_type: category_type,
+    category_group: (defined?(category_group) ? category_group : nil))
+    .each do |category| %>
     <li>
       <%= link_to category.name, category %>
       <% unless category.publish %>
