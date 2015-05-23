@@ -14,7 +14,7 @@ class CategoryGroupsController < ApplicationController
       if params[:continue_editing]
         redirect_to edit_category_group_path(@category_group)
       else
-        redirect_to categories_path
+        redirect_to site_map_path
       end
     else
       render :new
@@ -27,7 +27,7 @@ class CategoryGroupsController < ApplicationController
       if params[:continue_editing]
         redirect_to edit_category_group_path(@category_group)
       else
-        redirect_to categories_path
+        redirect_to site_map_path
       end
     else
       render :edit
@@ -36,7 +36,7 @@ class CategoryGroupsController < ApplicationController
 
   def destroy
     @category_group.destroy
-    redirect_to categories_path,
+    redirect_to site_map_path,
       notice: "Successfully destroyed category group."
   end
 

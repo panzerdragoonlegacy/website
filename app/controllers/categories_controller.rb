@@ -1,29 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :load_category_groups, except: [:show, :destroy]
-  before_action :load_category, except: [:index, :new, :create]
-
-  def index
-    @category_groups = policy_scope(CategoryGroup.order(:name))
-
-    @article_categories = policy_scope(Category.where(
-      category_type: :article).order(:name))
-    @download_categories = policy_scope(Category.where(
-      category_type: :download).order(:name))
-    @encyclopaedia_entry_categories = policy_scope(Category.where(
-      category_type: :encyclopaedia_entry).order(:name))
-    @link_categories = policy_scope(Category.where(
-      category_type: :link).order(:name))
-    @music_track_categories = policy_scope(Category.where(
-      category_type: :music_track).order(:name))
-    @picture_categories = policy_scope(Category.where(
-      category_type: :picture).order(:name))
-    @resource_categories = policy_scope(Category.where(
-      category_type: :resource).order(:name))
-    @story_categories = policy_scope(Category.where(
-      category_type: :story).order(:name))
-    @video_categories = policy_scope(Category.where(
-      category_type: :video).order(:name))
-  end
+  before_action :load_category, except: [:new, :create]
 
   def show
     case @category.category_type
@@ -94,7 +71,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    redirect_to categories_path, notice: "Successfully destroyed category."
+    redirect_to site_map_path, notice: "Successfully destroyed category."
   end
 
   private
