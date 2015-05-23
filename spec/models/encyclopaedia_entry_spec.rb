@@ -31,6 +31,8 @@ RSpec.describe EncyclopaediaEntry, type: :model do
     it { should have_many(:links) }
     it { should have_many(:music_tracks) }
     it { should have_many(:pictures) }
+    it { should have_many(:poems) }
+    it { should have_many(:quizzes) }
     it { should have_many(:resources) }
     it { should have_many(:stories) }
     it { should have_many(:videos) }
