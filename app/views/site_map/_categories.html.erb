@@ -7,24 +7,6 @@
       <% unless category.publish %>
          - <span class="unpublished">Unpublished</span>
       <% end %>
-      <% if policy(category).edit? or policy(category).destroy? %>
-        <ul class="administration">
-          <% if policy(category).edit? %>
-            <li>
-              <%= link_to 'Edit Category', edit_category_path(category) %>
-            </li>
-          <% end %>
-          <% if policy(category).destroy? %>
-            <li>
-              <%= link_to 'Delete Category', category,
-                data: { confirm: "Are you sure you want to delete the " +
-                  "category '#{category.name}'?" },
-                method: :delete
-              %>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
     </li>
   <% end %>
 </ul>
