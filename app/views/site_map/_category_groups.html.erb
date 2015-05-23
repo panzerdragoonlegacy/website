@@ -2,7 +2,7 @@
   <% category_groups.where(category_group_type: category_group_type).
     each do |category_group| %>
     <li>
-      <%= category_group.name %>
+      <h3><%= category_group.name %></h3>
       <% if policy(category_group).edit? or policy(category_group).destroy? %>
         <ul class="administration">
           <% if policy(category_group).edit? %>
