@@ -19,13 +19,54 @@ RSpec.describe Category, type: :model do
     it { should validate_length_of(:description).is_at_least(2).is_at_most(250) }
     it { should validate_presence_of(:category_type) }
 
+    describe "validation of category type reassignment" do
+      before do
+        @category = FactoryGirl.create :category, category_type: :article
+        @article = FactoryGirl.create :valid_article
+      end
+
+      context "category has children" do
+        before do
+          @category.articles << @article
+        end
+
+        context "category type has changed" do
+          it "should not be valid" do
+            @category.category_type = :download
+            expect(@category).not_to be_valid
+          end
+        end
+
+        context "category type has not changed" do
+          it "should be valid" do
+            expect(@category).to be_valid
+          end
+        end
+      end
+
+      context "category has no children" do
+        context "category type has changed" do
+          it "should be valid" do
+            @category.category_type = :download
+            expect(@category).to be_valid
+          end
+        end
+
+        context "category type has not changed" do
+          it "should be valid" do
+            expect(@category).to be_valid
+          end
+        end
+      end
+    end
+
     describe "validation of category group" do
       context "category type is also a category group type" do
         before do
           @category_group = FactoryGirl.create(:category_group,
-            category_group_type: :music_track.to_s)
+            category_group_type: :music_track)
           @category = FactoryGirl.build :category,
-            category_type: :music_track.to_s
+            category_type: :music_track
         end
 
         context "category group is present" do
@@ -39,7 +80,7 @@ RSpec.describe Category, type: :model do
           context "category type does not match the group's type" do
             it "should not be valid" do
               different_category_group = FactoryGirl.create(:category_group,
-                category_group_type: :video.to_s)
+                category_group_type: :video)
               @category.category_group = different_category_group
               expect(@category).not_to be_valid
             end
@@ -56,12 +97,12 @@ RSpec.describe Category, type: :model do
 
       context "category type is not a category group type" do
         before do
-          @category = FactoryGirl.build :category, category_type: :article.to_s
+          @category = FactoryGirl.build :category, category_type: :article
         end
 
         it "should not validate if a category group is present" do
           category_group = FactoryGirl.create(:category_group,
-            category_group_type: :music_track.to_s)
+            category_group_type: :music_track)
           @category.category_group = category_group
           expect(@category).not_to be_valid
         end

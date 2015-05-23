@@ -20,10 +20,23 @@ class Category < ActiveRecord::Base
   CATEGORY_TYPES = %w[article download encyclopaedia_entry link music_track
     picture resource story video]
 
+  before_validation :validate_category_type_reassignment
   before_validation :validate_presence_of_category_group
   before_validation :validate_category_and_category_group_type_match
 
   private
+
+  def validate_category_type_reassignment
+    if self.persisted?
+      persisted_category = Category.find self.id
+      if self.category_type != persisted_category.category_type
+        if self.send(persisted_category.category_type.pluralize).present?
+          self.errors.add(persisted_category.category_type, 'category type ' +
+            'cannot be reassigned while the category contains items.')
+        end
+      end
+    end
+  end
 
   def validate_presence_of_category_group
     if self.category_type.in?(CategoryGroup::CATEGORY_GROUP_TYPES)
