@@ -14,4 +14,10 @@ class CategoryPolicy < ApplicationPolicy
     end
     record.publish?
   end
+
+  def destroy?
+    if user and record.send(record.category_type.pluralize).blank?
+      return true if user.role? :administrator
+    end
+  end
 end
