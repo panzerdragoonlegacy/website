@@ -8,7 +8,7 @@ class SiteMapController < ApplicationController
       category_type: :download).order(:name))
     @encyclopaedia_entry_category_groups = policy_scope(CategoryGroup.where(
       category_group_type: :encyclopaedia_entry).order(:name))
-    @link_groups = policy_scope(Category.where(
+    @link_categories = policy_scope(Category.where(
       category_type: :link).order(:name))
     @music_track_category_groups = policy_scope(CategoryGroup.where(
       category_group_type: :music_track).order(:name))
