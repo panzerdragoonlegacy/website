@@ -8,14 +8,13 @@
   </ul>
 <% end %>
 
-<% unless @category_groups.empty? or @categories.empty? %>
+<% if @category_groups.present? %>
   <h2>Encyclopaedia Categories</h2>
   <%= render partial: 'site_map/category_groups', locals: {
-    category_groups: @category_groups, categories: @categories,
-    category_group_type: :encyclopaedia_entry } %>
+    category_groups: @category_groups } %>
 <% end %>
 
-<% unless @encyclopaedia_entries.empty? %>
+<% if @encyclopaedia_entries.present? %>
   <h2>All Encyclopaedia Entries</h2>
   <%= render 'list' %>
 <% end %>

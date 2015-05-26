@@ -1,6 +1,5 @@
 class ResourcesController < ApplicationController
-  before_action :load_category_groups, only: [:index]
-  before_action :load_categories, except: [:show, :destroy]
+  before_action :load_categories, except: [:index, :show, :destroy]
   before_action :load_resource, except: [:index, :new, :create]
 
   def index
@@ -12,6 +11,8 @@ class ResourcesController < ApplicationController
         contributions: { dragoon_id: @dragoon.id }).order(:name).page(
         params[:page]))
     else
+      @category_groups = policy_scope(CategoryGroup.where(
+        category_group_type: :resource).order(:name))
       @resources = policy_scope(Resource.order(:name).page(params[:page]))
     end
   end

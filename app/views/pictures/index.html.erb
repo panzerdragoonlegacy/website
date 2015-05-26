@@ -11,14 +11,13 @@
 <% end %>
 
 <% unless params[:dragoon_id] %>
-  <% unless @category_groups.empty? or @categories.empty? %>
+  <% if @category_groups.present? %>
     <h2>Picture Categories</h2>
     <%= render partial: 'site_map/category_groups', locals: {
-      category_groups: @category_groups, categories: @categories,
-      category_group_type: :picture } %>
+      category_groups: @category_groups } %>
     </ul>
   <% end %>
-  <% unless @pictures.empty? %>
+  <% if @pictures.present? %>
     <h2>All Pictures</h2>
   <% end %>
 <% end %>

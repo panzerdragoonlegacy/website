@@ -1,12 +1,14 @@
-<ul>
-  <% categories.where(category_type: category_type,
-    category_group: (defined?(category_group) ? category_group : nil))
-    .each do |category| %>
-    <li>
-      <%= link_to category.name, category %>
-      <% unless category.publish %>
-         - <span class="unpublished">Unpublished</span>
+<% if categories.present? %>
+  <ul>
+    <% categories.each do |category| %>
+      <% if policy(category).show? %>
+        <li>
+          <%= link_to category.name, category %>
+          <% unless category.publish %>
+             - <span class="unpublished">Unpublished</span>
+          <% end %>
+        </li>
       <% end %>
-    </li>
-  <% end %>
-</ul>
+    <% end %>
+  </ul>
+<% end %>

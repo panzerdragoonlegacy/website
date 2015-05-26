@@ -1,6 +1,5 @@
 class VideosController < ApplicationController
-  before_action :load_category_groups, only: [:index]
-  before_action :load_categories, expect: [:show, :destroy]
+  before_action :load_categories, expect: [:index, :show, :destroy]
   before_action :load_video, except: [:index, :new, :create]
 
   def index
@@ -12,6 +11,8 @@ class VideosController < ApplicationController
         contributions: { dragoon_id: @dragoon.id }).order(:name).page(
         params[:page]))
     else
+      @category_groups = policy_scope(CategoryGroup.where(
+        category_group_type: :video).order(:name))
       @videos = policy_scope(Video.order(:name).page(params[:page]))
     end
   end

@@ -5,6 +5,10 @@ class CategoryGroupPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    true
+  end
+
   def destroy?
     if user and record.categories.blank?
       return true if user.role? :administrator

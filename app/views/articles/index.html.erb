@@ -11,7 +11,7 @@
 <% end %>
 
 <% unless params[:dragoon_id] %>
-  <% unless @categories.empty? %>
+  <% if @categories.present? %>
     <h2>Article Categories</h2>
     <ul class="categories">
       <% @categories.each do |category| %>
@@ -23,7 +23,7 @@
       <% end %>
     </ul>
   <% end %>
-  <% unless @articles.empty? %>
+  <% if @articles.present? %>
     <h2>All Articles</h2>
   <% end %>
 <% end %>

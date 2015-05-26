@@ -11,13 +11,12 @@
 <% end %>
 
 <% unless params[:dragoon_id] %>
-  <% unless @category_groups.empty? or @categories.empty? %>
+  <% if @category_groups.present? %>
     <h2>Music Categories</h2>
     <%= render partial: 'site_map/category_groups', locals: {
-      category_groups: @category_groups, categories: @categories,
-      category_group_type: :music_track } %>
+      category_groups: @category_groups } %>
   <% end %>
-  <% unless @music_tracks.empty? %>
+  <% if @music_tracks.present? %>
     <h2>All Music Tracks</h2>
   <% end %>
 <% end %>

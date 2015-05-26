@@ -14,36 +14,33 @@
 <ul>
   <li>
     <h2><%= link_to "Articles", articles_path %></h2>
-    <%= render partial: 'categories', locals: { categories: @categories,
-      category_type: :article } %>
+    <%= render partial: 'categories', locals: {
+      categories: @article_categories } %>
   </li>
   <li>
     <h2><%= link_to "Downloads", downloads_path %></h2>
-    <%= render partial: 'categories', locals: { categories: @categories,
-      category_type: :download } %>
+    <%= render partial: 'categories', locals: {
+      categories: @download_categories } %>
   </li>
   <li>
     <h2><%= link_to "Encyclopaedia", encyclopaedia_entries_path %></h2>
     <%= render partial: 'category_groups', locals: {
-      category_groups: @category_groups, categories: @categories,
-      category_group_type: :encyclopaedia_entry } %>
+      category_groups: @encyclopaedia_entry_category_groups } %>
   </li>
   <li>
     <h2><%= link_to "Links", links_path %></h2>
-    <%= render partial: 'categories', locals: { categories: @categories,
-      category_type: :link } %>
+    <%= render partial: 'categories', locals: {
+      categories: @link_categories } %>
   </li>
   <li>
     <h2><%= link_to "Music", music_tracks_path %></h2>
     <%= render partial: 'category_groups', locals: {
-      category_groups: @category_groups, categories: @categories,
-      category_group_type: :music_track } %>
+      category_groups: @music_track_category_groups } %>
   </li>
   <li>
     <h2><%= link_to "Pictures", pictures_path %></h2>
     <%= render partial: 'category_groups', locals: {
-      category_groups: @category_groups, categories: @categories,
-      category_group_type: :picture } %>
+      category_groups: @picture_category_groups } %>
   </li>
   <li>
     <h2><%= link_to "Poems", poems_path %></h2>
@@ -54,18 +51,16 @@
   <li>
     <h2><%= link_to "Resources", resources_path %></h2></li>
     <%= render partial: 'category_groups', locals: {
-      category_groups: @category_groups, categories: @categories,
-      category_group_type: :resource } %>
+      category_groups: @resource_category_groups } %>
   </li>
   <li>
     <h2><%= link_to "Stories", stories_path %></h2>
-    <%= render partial: 'categories', locals: { categories: @categories,
-      category_type: :story } %>
+    <%= render partial: 'categories', locals: {
+      categories: @story_categories } %>
   </li>
   <li>
     <h2><%= link_to "Videos", videos_path %></h2>
     <%= render partial: 'category_groups', locals: {
-      category_groups: @category_groups, categories: @categories,
-      category_group_type: :video } %>
+      category_groups: @video_category_groups } %>
   </li>
 </ul>

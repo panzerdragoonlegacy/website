@@ -1,9 +1,10 @@
 class EncyclopaediaEntriesController < ApplicationController
-  before_action :load_category_groups, only: [:index]
-  before_action :load_categories, except: [:show, :destroy]
+  before_action :load_categories, except: [:index, :show, :destroy]
   before_action :load_encyclopaedia_entry, except: [:index, :new, :create]
 
   def index
+    @category_groups = policy_scope(CategoryGroup.where(
+      category_group_type: :encyclopaedia_entry).order(:name))
     @encyclopaedia_entries = policy_scope(EncyclopaediaEntry.order(
       :name).page(params[:page]))
   end

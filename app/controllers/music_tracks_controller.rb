@@ -1,6 +1,5 @@
 class MusicTracksController < ApplicationController
-  before_action :load_category_groups, only: [:index]
-  before_action :load_categories, except: [:show, :destroy]
+  before_action :load_categories, except: [:index, :show, :destroy]
   before_action :load_music_track, except: [:index, :new, :create]
 
   def index
@@ -12,6 +11,8 @@ class MusicTracksController < ApplicationController
         contributions: { dragoon_id: @dragoon.id }).order(:name).page(
         params[:page]))
     else
+      @category_groups = policy_scope(CategoryGroup.where(
+        category_group_type: :music_tracks).order(:name))
       @music_tracks = policy_scope(MusicTrack.order(:name).page(params[:page]))
     end
   end
