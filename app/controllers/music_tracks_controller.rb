@@ -12,7 +12,7 @@ class MusicTracksController < ApplicationController
         params[:page]))
     else
       @category_groups = policy_scope(CategoryGroup.where(
-        category_group_type: :music_tracks).order(:name))
+        category_group_type: :music_track).order(:name))
       @music_tracks = policy_scope(MusicTrack.order(:name).page(params[:page]))
     end
   end
