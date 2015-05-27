@@ -18,12 +18,14 @@ RSpec.describe MusicTrack, type: :model do
 
   describe "validations" do
     it { should validate_presence_of(:track_number) }
-    it { should validate_numericality_of(:track_number) }
+    it { should validate_numericality_of(:track_number).
+      is_greater_than_or_equal_to(0).is_less_than_or_equal_to(50) }
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
     it { should validate_length_of(:name).is_at_least(2).is_at_most(100) }
     it { should validate_presence_of(:description) }
-    it { should validate_length_of(:description).is_at_least(2).is_at_most(250) }
+    it { should validate_length_of(:description).is_at_least(2).
+      is_at_most(250) }
     it { should validate_presence_of(:category) }
   end
 

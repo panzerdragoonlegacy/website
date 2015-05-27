@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :videos
   end
   resources :site_map
+  resources :sagas
   resources :drafts
   resources :sessions
   resources :category_groups, path: 'category-groups'

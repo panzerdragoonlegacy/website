@@ -14,7 +14,8 @@ RSpec.describe Chapter, type: :model do
 
   pending describe "validations" do
     it { should validate_presence_of(:number) }
-    it { should validate_numericality_of(:number) }
+    it { should validate_numericality_of(:number).is_greater_than(0).
+      is_less_than(100) }
     it { should validate_presence_of(:content) }
   end
 
@@ -24,7 +25,8 @@ RSpec.describe Chapter, type: :model do
   end
 
   describe "nested attributes" do
-    it { should accept_nested_attributes_for(:illustrations).allow_destroy(true) }
+    it { should accept_nested_attributes_for(:illustrations).
+      allow_destroy(true) }
   end
 
   pending describe "methods" do

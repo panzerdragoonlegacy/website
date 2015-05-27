@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150517062412) do
+ActiveRecord::Schema.define(version: 20150527082856) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "name"
@@ -272,6 +272,17 @@ ActiveRecord::Schema.define(version: 20150517062412) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "sagas", force: :cascade do |t|
+    t.string   "name"
+    t.string   "url"
+    t.integer  "sequence_number",        default: 1
+    t.integer  "encyclopaedia_entry_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "sagas", ["encyclopaedia_entry_id"], name: "index_sagas_on_encyclopaedia_entry_id"
 
   create_table "stories", force: :cascade do |t|
     t.string   "name"

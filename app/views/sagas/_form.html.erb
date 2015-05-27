@@ -1,0 +1,20 @@
+<%= form_for @saga do |f| %>
+  <%= render "shared/error_messages", target: @saga %>
+  <div>
+    <%= f.label :encyclopaedia_entry_id, "Encyclopaedia Entry" %><br />
+    <%= f.collection_select :encyclopaedia_entry_id, @encyclopaedia_entries,
+      :id, :name, include_blank: false %>
+  </div>
+  <div>
+    <%= f.label :sequence_number, "Sequence Number" %><br />
+    <%= f.text_field :sequence_number %>
+  </div>
+  <div>
+    <%= f.label :name, "Name" %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.submit "Save and View Index" %>
+    <%= f.submit "Save and Continue Editing", name: :continue_editing %>
+  </div>
+<% end %>

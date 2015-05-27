@@ -63,63 +63,19 @@
             </li>
             <li><a href="https://www.twitter.com/willancients">Twitter</a></li>
           </ul>
-          <h3>Explore the Games</h3>
-          <ul>
-            <% if EncyclopaediaEntry.find_by_url("panzer-dragoon").present? %>
-              <li>
-                <%= link_to "Panzer Dragoon",
-                  "/encyclopaedia/panzer-dragoon"%>
-              </li>
-            <% end %>
-            <% if EncyclopaediaEntry.find_by_url(
-              "panzer-dragoon-ii-zwei").present? %>
-              <li>
-                <%= link_to "Panzer Dragoon II Zwei",
-                  "/encyclopaedia/panzer-dragoon-ii-zwei"%>
-              </li>
-            <% end %>
-            <% if EncyclopaediaEntry.find_by_url(
-              "panzer-dragoon-mini").present? %>
-              <li>
-                <%= link_to "Panzer Dragoon Mini",
-                  "/encyclopaedia/panzer-dragoon-mini"%>
-              </li>
-            <% end %>
-            <% if EncyclopaediaEntry.find_by_url(
-              "panzer-dragoon-saga").present? %>
-              <li>
-                <%= link_to "Panzer Dragoon Saga",
-                  "/encyclopaedia/panzer-dragoon-saga"%>
-              </li>
-            <% end %>
-            <% if EncyclopaediaEntry.find_by_url(
-              "panzer-dragoon-orta").present? %>
-              <li>
-                <%= link_to "Panzer Dragoon Orta",
-                  "/encyclopaedia/panzer-dragoon-orta"%>
-              </li>
-            <% end %>
-            <% if EncyclopaediaEntry.find_by_url(
-              "sega-ages-2500-series-vol-27-panzer-dragoon").present? %>
-              <li>
-                <%= link_to "Sega Ages: Panzer Dragoon",
-                  "/encyclopaedia/sega-ages-2500-series-vol-27-panzer-dragoon"
-                %>
-              </li>
-            <% end %>
-            <% if EncyclopaediaEntry.find_by_url(
-              "crimson-dragon-side-story").present? %>
-              <li>
-                <%= link_to "Crimson Dragon: Side Story",
-                  "/encyclopaedia/crimson-dragon-side-story" %>
-              </li>
-            <% end %>
-            <% if EncyclopaediaEntry.find_by_url("crimson-dragon").present? %>
-              <li>
-                <%= link_to "Crimson Dragon", "/encyclopaedia/crimson-dragon" %>
-              </li>
-            <% end %>
-          </ul>
+          <% if @sagas.present? %>
+            <h3>Browse by Saga</h3>
+            <ul>
+              <% @sagas.each do |saga| %>
+                <% if policy(saga.encyclopaedia_entry).show? %>
+                  <li>
+                    <%= link_to saga.name,
+                      encyclopaedia_entry_path(saga.encyclopaedia_entry) %>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          <% end %>
           <h3>Browse by Media Type</h3>
           <ul>
             <li><%= link_to "Articles", articles_path %></li>
@@ -138,8 +94,11 @@
             <% if policy(Page).new? %>
               <li><%= link_to 'Pages', pages_path %></li>
             <% end %>
+            <% if policy(Saga).new? %>
+              <li><%= link_to 'Sagas', sagas_path %></li>
+            <% end %>
           </ul>
-          <% unless @partner_sites.blank? %>
+          <% if @partner_sites.present? %>
             <h3>Partner Sites</h3>
             <ul>
               <% @partner_sites.each do |partner_site| %>

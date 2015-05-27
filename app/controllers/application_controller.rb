@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :current_dragoon
-  helper_method :current_ability
   before_filter :set_dragoon_time_zone
+  before_filter :sagas
   before_filter :partner_sites
 
   private
@@ -45,7 +45,11 @@ class ApplicationController < ActionController::Base
     Time.zone = current_dragoon.time_zone if current_dragoon
   end
 
+  def sagas
+    @sagas = policy_scope(Saga.order(:sequence_number))
+  end
+
   def partner_sites
-    @partner_sites = Link.where(partner_site: true).order(:name)
+    @partner_sites = policy_scope(Link.where(partner_site: true).order(:name))
   end
 end
