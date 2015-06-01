@@ -24,7 +24,7 @@
             </ul>
           <% end %>
           <%= render partial: 'site_map/categories', locals: {
-            categories: category_group.categories } %>
+            categories: category_group.categories.order(:name) } %>
         </li>
       <% end %>
     <% end %>
