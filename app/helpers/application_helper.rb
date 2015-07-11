@@ -87,8 +87,8 @@ module ApplicationHelper
     contents_added = false
     markdown_text.each_line do |line|
       if line.start_with? "## " and !contents_added
-        updated_markdown = "## Contents\n\n* replace this with toc\n{:toc}" +
-          "\n\n" + updated_markdown
+        line = "## Contents\n\n* replace this with toc\n{:toc}" +
+          "\n\n" + line
         contents_added = true
       end
       updated_markdown += line 
