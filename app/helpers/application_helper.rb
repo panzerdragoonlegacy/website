@@ -129,10 +129,11 @@ module ApplicationHelper
     require 'nokogiri'
     html = Nokogiri::HTML.parse(html)
 
-    # Remove the "Contents" list item and link from the table of contents.
+    # Remove the "Contents" and "References" list items and links from the table
+    # of contents.
     html.css('li').each do |li|
       li.css('a').each do |a|
-        if a.get_attribute('href') == '#contents'
+        if a.get_attribute('href').in?(['#contents', '#references'])
           li.remove
         end
       end
