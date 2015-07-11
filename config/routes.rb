@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :stories
     resources :videos
   end
+  resources :searches
   resources :site_map
   resources :sagas
   resources :drafts
