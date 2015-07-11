@@ -81,11 +81,22 @@ module ApplicationHelper
   end
 
   def illustrated_markdown_to_html(id, type, markdown_text)
-    # Todo: automatically insert table of contents
+    # Automatically insert the table of contents before the first second level
+    # Atx-style header.
+    updated_markdown = ""
+    contents_added = false
+    markdown_text.each_line do |line|
+      if line.start_with? "## " and !contents_added
+        updated_markdown = "## Contents\n\n* replace this with toc\n{:toc}" +
+          "\n\n" + updated_markdown
+        contents_added = true
+      end
+      updated_markdown += line 
+    end
 
     # Converts Markdown syntax to html tags using Kramdown.
     require 'kramdown'
-    html = Kramdown::Document.new(markdown_text, auto_ids: true).to_html
+    html = Kramdown::Document.new(updated_markdown, auto_ids: true).to_html
 
     # Setup whitelist of html elements, attributes, and protocols.
     allowed_elements = ['h2', 'h3', 'a', 'img', 'p', 'ul', 'ol', 'li', 'strong',
@@ -117,6 +128,15 @@ module ApplicationHelper
 
     require 'nokogiri'
     html = Nokogiri::HTML.parse(html)
+
+    # Remove the "Contents" list item and link from the table of contents.
+    html.css('li').each do |li|
+      li.css('a').each do |a|
+        if a.get_attribute('href') == '#contents'
+          li.remove
+        end
+      end
+    end    
 
     # Replace paragraphs wrapping the images with divs.
     html.css('img').each do |img|
