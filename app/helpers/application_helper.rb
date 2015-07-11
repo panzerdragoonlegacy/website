@@ -137,7 +137,21 @@ module ApplicationHelper
           li.remove
         end
       end
-    end    
+    end
+
+    # Remove the table of contents heading and list if the list is empty.
+    html.css('ul').each do |ul|
+      li_count = 0
+      ul.css('li').each do |li|
+        li_count = li_count + 1
+      end
+      if li_count == 0
+        ul.remove
+        html.css('h2').each do |h2|
+          h2.remove if h2.get_attribute('id') == 'contents'
+        end
+      end
+    end
 
     # Replace paragraphs wrapping the images with divs.
     html.css('img').each do |img|
