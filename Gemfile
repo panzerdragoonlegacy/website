@@ -39,5 +39,5 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'stringex', '~> 2.5.2'
 gem 'therubyracer', '~> 0.12.2'
 gem 'turbolinks', '~> 2.5.3'
-gem 'twitter', '~> 4.8.1' # Out of date
+gem 'twitter', '~> 5.14.0'
 gem 'uglifier', '>= 2.5.0'
