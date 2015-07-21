@@ -17,10 +17,10 @@ class Video < ActiveRecord::Base
   
   validates_attachment :mp4_video, presence: true,
     content_type: { content_type: "video/mp4" },
-    size: { in: 0..50.megabytes }
+    size: { in: 0..200.megabytes }
   validates_attachment :webm_video, presence: true,
     content_type: { content_type: "video/webm" },
-    size: { in: 0..50.megabytes }
+    size: { in: 0..200.megabytes }
 
   before_save :sync_file_names
 

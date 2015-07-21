@@ -38,12 +38,12 @@ RSpec.describe Video, type: :model do
     it { should validate_attachment_content_type(:mp4_video).
       allowing('video/mp4') }
     it { should validate_attachment_size(:mp4_video).
-      less_than(50.megabytes) }
+      less_than(200.megabytes) }
     it { should have_attached_file(:webm_video) }
     it { should validate_attachment_presence(:webm_video) }
     it { should validate_attachment_content_type(:webm_video).
       allowing('video/webm') }
     it { should validate_attachment_size(:webm_video).
-      less_than(50.megabytes) }
+      less_than(200.megabytes) }
   end
 end
