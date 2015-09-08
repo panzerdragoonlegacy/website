@@ -88,4 +88,7 @@ Rails.application.configure do
   # Record callbacks. You can opt into the new behavior and remove this warning
   # by setting:
   config.active_record.raise_in_transactional_callbacks = true
+
+  # Set the Rails log to a maximum size of 100MB.
+  config.logger = Logger.new(config.paths.log.first, 1, 100.megabytes)
 end
