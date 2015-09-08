@@ -89,6 +89,6 @@ Rails.application.configure do
   # by setting:
   config.active_record.raise_in_transactional_callbacks = true
 
-  # Set the Rails log to a maximum size of 100MB.
-  config.logger = Logger.new(config.paths.log.first, 1, 100.megabytes)
+  # Set the production log to a maximum size of 100MB.
+  config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log", 1, 104857600)
 end
