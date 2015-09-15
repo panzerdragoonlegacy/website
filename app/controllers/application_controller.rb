@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :current_dragoon
-  before_filter :set_dragoon_time_zone
   before_filter :sagas
   before_filter :partner_sites
 
@@ -39,10 +38,6 @@ class ApplicationController < ActionController::Base
 
   def remember_token
     cookies.signed[:remember_token] || [nil, nil]
-  end
-
-  def set_dragoon_time_zone
-    Time.zone = current_dragoon.time_zone if current_dragoon
   end
 
   def sagas

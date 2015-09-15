@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150527082856) do
+ActiveRecord::Schema.define(version: 20150915091228) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "name"
@@ -84,33 +84,16 @@ ActiveRecord::Schema.define(version: 20150527082856) do
     t.string   "email_address"
     t.string   "password_digest"
     t.string   "remember_token"
-    t.string   "time_zone"
-    t.string   "role",                          default: "guest"
+    t.string   "role",                default: "guest"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.date     "birthday"
-    t.string   "gender"
-    t.string   "country"
-    t.text     "information"
-    t.text     "favourite_quotations"
-    t.string   "occupation"
-    t.string   "interests"
     t.string   "website"
     t.string   "facebook_username"
     t.string   "twitter_username"
-    t.string   "xbox_live_gamertag"
-    t.string   "playstation_network_online_id"
-    t.string   "wii_number"
-    t.string   "steam_username"
-    t.string   "yahoo_id"
-    t.string   "aim_screenname"
-    t.string   "icq_number"
-    t.string   "jabber_id"
-    t.string   "skype_name"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "discourse_username"
   end
 

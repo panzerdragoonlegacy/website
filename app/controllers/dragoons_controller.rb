@@ -56,26 +56,9 @@ class DragoonsController < ApplicationController
       :time_zone,
       :role,
       :avatar,
-      :birthday,
-      :gender,
-      :country,
-      :information,
-      :favourite_quotations,
-      :occupation,
-      :interests,
       :website,
       :facebook_username,
-      :twitter_username,
-      :xbox_live_gamertag,
-      :playstation_network_online_id,
-      :wii_number,
-      :steam_username,
-      :windows_live_id,
-      :yahoo_id,
-      :aim_screenname,
-      :icq_number,
-      :jabber_id,
-      :skype_name
+      :twitter_username
     )
   end
 

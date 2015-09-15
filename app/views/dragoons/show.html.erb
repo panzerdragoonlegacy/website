@@ -28,86 +28,13 @@
   <% end %>
 <% end %>
 
-<% unless @dragoon.birthday.blank? && @dragoon.gender.blank? &&
-  @dragoon.country.blank? && @dragoon.information.blank? &&
-  @dragoon.favourite_quotations.blank? && @dragoon.occupation.blank? &&
-  @dragoon.interests.blank? && @dragoon.website.blank? %>
-  <h2>Personal Information</h2>
+<% unless @dragoon.website.blank? && @dragoon.facebook_username.blank? &&
+  @dragoon.twitter_username.blank? %>
   <dl>
-    <% unless @dragoon.birthday.blank? %>
-      <dt>Birthday:</dt>
-      <dd>
-        <%= @dragoon.birthday.day %>
-        <%= Date::MONTHNAMES[@dragoon.birthday.month] %>,
-        <%= @dragoon.birthday.year %>
-      </dd>
-    <% end %>
-    <% unless @dragoon.gender.blank? %>
-      <dt>Gender:</dt>
-      <dd><%= @dragoon.gender.humanize %></dd>
-    <% end %>
-    <% unless @dragoon.country.blank? %>
-      <dt>Country:</dt>
-      <dd><%= @dragoon.country %></dd>
-    <% end %>
-    <% unless @dragoon.information.blank? %>
-      <dt>Information:</dt>
-      <dd><%= @dragoon.information %></dd>
-    <% end %>
-    <% unless @dragoon.favourite_quotations.blank? %>
-      <dt>Favourite Quotations:</dt>
-      <dd><%= @dragoon.favourite_quotations %></dd>
-    <% end %>
-    <% unless @dragoon.occupation.blank? %>
-      <dt>Occupation:</dt>
-      <dd><%= @dragoon.occupation %></dd>
-    <% end %>
-    <% unless @dragoon.interests.blank? %>
-      <dt>Interests:</dt>
-      <dd><%= @dragoon.interests %></dd>
-    <% end %>
     <% unless @dragoon.website.blank? %>
       <dt>Website:</dt>
       <dd><%= link_to @dragoon.website, @dragoon.website %></dd>
     <% end %>
-  </dl>
-<% end %>
-
-<% unless @dragoon.xbox_live_gamertag.blank? &&
-  @dragoon.playstation_network_online_id.blank? &&
-  @dragoon.wii_number.blank? && @dragoon.steam_username.blank? %>
-  <h2>Gaming Networks</h2>
-  <dl>
-    <% unless @dragoon.xbox_live_gamertag.blank? %>
-      <dt>Xbox Live Gamertag:</dt>
-      <dd>
-        <%= link_to @dragoon.xbox_live_gamertag,
-          "http://live.xbox.com/Profile?gamertag=" +
-          @dragoon.xbox_live_gamertag %>
-      </dd>
-    <% end %>
-    <% unless @dragoon.playstation_network_online_id.blank? %>
-      <dt>Playstation Network Online ID:</dt>
-      <dd><%= @dragoon.playstation_network_online_id %></dd>
-    <% end %>
-    <% unless @dragoon.wii_number.blank? %>
-      <dt>Wii Number:</dt>
-      <dd><%= @dragoon.wii_number %></dd>
-    <% end %>
-    <% unless @dragoon.steam_username.blank? %>
-      <dt>Steam Username:</dt>
-      <dd>
-        <%= link_to @dragoon.steam_username, "http://steamcommunity.com/id/" +
-          @dragoon.steam_username %>
-      </dd>
-    <% end %>
-  </dl>
-<% end %>
-
-<% unless @dragoon.facebook_username.blank? &&
-  @dragoon.twitter_username.blank? %>
-  <h2>Social Networks</h2>
-  <dl>
     <% unless @dragoon.facebook_username.blank? %>
       <dt>Facebook Username:</dt>
       <dd>
@@ -121,34 +48,6 @@
         <%= link_to @dragoon.twitter_username, "http://www.twitter.com/" +
           @dragoon.twitter_username %>
       </dd>
-    <% end %>
-  </dl>
-<% end %>
-
-<% unless @dragoon.yahoo_id.blank? && @dragoon.aim_screenname.blank? &&
-  @dragoon.icq_number.blank? && @dragoon.jabber_id.blank? &&
-  @dragoon.skype_name.blank? %>
-  <h2>Instant Messengering Networks</h2>
-  <dl>
-    <% unless @dragoon.yahoo_id.blank? %>
-      <dt>Yahoo! ID:</dt>
-      <dd><%= @dragoon.yahoo_id %></dd>
-    <% end %>
-    <% unless @dragoon.aim_screenname.blank? %>
-      <dt>AIM Screenname:</dt>
-      <dd><%= @dragoon.aim_screenname %></dd>
-    <% end %>
-    <% unless @dragoon.icq_number.blank? %>
-      <dt>ICQ Number:</dt>
-      <dd><%= @dragoon.icq_number %></dd>
-    <% end %>
-    <% unless @dragoon.jabber_id.blank? %>
-      <dt>Jabber ID:</dt>
-      <dd><%= @dragoon.jabber_id %></dd>
-    <% end %>
-    <% unless @dragoon.skype_name.blank? %>
-      <dt>Skype Name:</dt>
-      <dd><%= @dragoon.skype_name %></dd>
     <% end %>
   </dl>
 <% end %>
