@@ -16,7 +16,7 @@ class Download < ActiveRecord::Base
     content_type: { content_type: "application/zip" },
     size: { in: 0..100.megabytes }
   
-  before_save :sync_file_name
+  #before_save :sync_file_name
 
   def sync_file_name
     sync_file_name_of :download, file_name: "#{self.name.to_url}.zip"

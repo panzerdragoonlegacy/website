@@ -24,7 +24,7 @@ class Picture < ActiveRecord::Base
     content_type: { content_type: "image/jpeg" },
     size: { in: 0..5.megabytes }
 
-  before_save :sync_file_name
+  #before_save :sync_file_name
 
   def sync_file_name
     sync_file_name_of :picture, file_name: "#{self.name.to_url}.jpg"

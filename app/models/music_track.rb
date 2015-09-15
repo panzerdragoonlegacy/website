@@ -36,7 +36,7 @@ class MusicTrack < ActiveRecord::Base
   # There was an issue specifying a content type for FLAC files.
   do_not_validate_attachment_file_type :flac_music_track
 
-  before_save :sync_file_names
+  #before_save :sync_file_names
 
   def sync_file_names
     sync_file_name_of :mp3_music_track, file_name: "#{self.name.to_url}.mp3"

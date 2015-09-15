@@ -22,7 +22,7 @@ class Video < ActiveRecord::Base
     content_type: { content_type: "video/webm" },
     size: { in: 0..200.megabytes }
 
-  before_save :sync_file_names
+  #before_save :sync_file_names
 
   def sync_file_names
     sync_file_name_of :mp4_video, file_name: "#{self.name.to_url}.mp4"
