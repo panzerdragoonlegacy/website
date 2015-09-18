@@ -1,0 +1,14 @@
+<%= form_for @user do |f| %>
+  <%= render "shared/error_messages", target: @user %>
+  <div>
+    <%= f.label :email, "Email" %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div>
+    <%= f.check_box :administrator %> 
+    <%= f.label :administrator, "Administrator?" %>
+  </div>
+  <div>
+    <%= f.submit "Save" %>
+  </div>
+<% end %>

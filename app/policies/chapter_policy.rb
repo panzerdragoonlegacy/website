@@ -2,7 +2,7 @@ class ChapterPolicy < ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
     def resolve
       if user
-        return scope if user.role? :administrator
+        return scope if user.administrator
         if user.role? :registered && scope.present?
           if scope.first.story.contributions.first.dragoon_id == user.id
             return scope
@@ -15,7 +15,7 @@ class ChapterPolicy < ApplicationPolicy
 
   def show?
     if user
-      return true if user.role? :administrator
+      return true if user.administrator
       if (user.role?(:registered) &&
         record.story.contributions.first.dragoon_id == user.id)
         return true

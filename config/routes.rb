@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  get 'site-map', to: 'site_map#show', as: :site_map
-  get 'log-in', to: 'sessions#new', as: :log_in
-  get 'log-out', to: 'sessions#destroy', as: :log_out
-  get 'register', to: 'dragoons#new', as: :register
+  devise_for :users, path_names: {
+    sign_in: "log-in", 
+    sign_out: "log-out",
+    sign_up: "register"
+  }
+  resources :users
+
   resources :dragoons do
     resources :news_entries, path: 'news-entries'
     resources :articles
@@ -17,10 +20,10 @@ Rails.application.routes.draw do
     resources :videos
   end
   resources :searches
+  get 'site-map', to: 'site_map#show', as: :site_map
   resources :site_map
   resources :sagas
   resources :drafts
-  resources :sessions
   resources :category_groups, path: 'category-groups'
   resources :categories
   resources :articles

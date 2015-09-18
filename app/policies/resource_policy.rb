@@ -2,7 +2,7 @@ class ResourcePolicy < ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
     def resolve
       if user
-        return scope if user.role? :administrator
+        return scope if user.administrator
         if user.role? :registered
           return scope.joins(:category, :contributions).where(
             "(resources.publish = 't' AND categories.publish = 't') OR " +
@@ -15,7 +15,7 @@ class ResourcePolicy < ApplicationPolicy
 
   def show?
     if user
-      return true if user.role? :administrator
+      return true if user.administrator
       if (user.role?(:registered) &&
         record.contributions.first.dragoon_id == user.id)
         return true

@@ -37,25 +37,6 @@
       </div>
       <div id="main">
         <div id="aside">
-          <% if current_dragoon %>
-            <% if policy(current_dragoon).update? %>
-              <h3>Your Details</h3>
-              <ul>
-                <li>You are logged in as <%= link_to current_dragoon.name,
-                  dragoon_path(current_dragoon) %>.</li>
-                <li><%= link_to "Edit Profile",
-                  edit_dragoon_path(current_dragoon) %>
-                <li><%= link_to "Log Out", log_out_path %></li>
-                <li><%= link_to "Drafts", drafts_path %></li>
-              </ul>
-            <% else %>
-              <h3>Welcome, Divine Visitor</h3>
-              <ul>
-                <li><%= link_to "Register", register_path %></li>
-                <li><%= link_to "Log In", log_in_path %></li>
-              </ul>
-            <% end %>
-          <% end %>
           <h3>Get Updates From...</h3>
           <ul>
             <li><%= link_to "Atom Web Feed", news_entries_url(:atom) %></li>
@@ -91,22 +72,40 @@
             <li><%= link_to "Resources", resources_path %></li>
             <li><%= link_to "Stories", stories_path %></li>
             <li><%= link_to "Videos", videos_path %></li>
-            <% if policy(Emoticon).new? %>
-              <li><%= link_to 'Emoticons', emoticons_path %></li>
-            <% end %>
-            <% if policy(Page).new? %>
-              <li><%= link_to 'Pages', pages_path %></li>
-            <% end %>
-            <% if policy(Saga).new? %>
-              <li><%= link_to 'Sagas', sagas_path %></li>
-            <% end %>
           </ul>
+          <% if current_user %>
+            <% if current_user.administrator %>
+              <h3>Administrator Resources</h3>
+              <ul>
+                <li><%= link_to 'Emoticons', emoticons_path %></li>
+                <li><%= link_to 'Pages', pages_path %></li>
+                <li><%= link_to 'Sagas', sagas_path %></li>
+                <li><%= link_to 'Users', users_path %></li>
+              </ul>
+            <% end %>
+          <% end %>
           <% if @partner_sites.present? %>
             <h3>Partner Sites</h3>
             <ul>
               <% @partner_sites.each do |partner_site| %>
                 <li><%= link_to partner_site.name, partner_site.url %></li>
               <% end %>
+            </ul>
+          <% end %>
+          <% if user_signed_in? %>
+            <h3>Your Details</h3>
+            <ul>
+              <li>You are logged in as <%= current_user.email %>.</li>
+              <li><%= link_to "Edit Profile", edit_user_registration_path %>
+              <li><%= link_to "Log Out", destroy_user_session_path, 
+                method: :delete %></li>
+              <li><%= link_to "Drafts", drafts_path %></li>
+            </ul>
+          <% else %>
+            <h3>Contributor Access</h3>
+            <ul>
+              <li><%= link_to "Register", new_user_registration_path %></li>
+              <li><%= link_to "Log In", new_user_session_path %></li>
             </ul>
           <% end %>
         </div>

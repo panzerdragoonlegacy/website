@@ -1,0 +1,33 @@
+<% title "Users" %>
+
+<p>Admins cannot create users. Users must register themselves.</p>
+
+<% if @users %>
+  <div id="resources">
+    <% @users.each do |user| %>
+      <div class="resource">
+        <div class="details">
+          <h2><%= user.email %></h2>
+          <dl>
+            <dt>Administrator?</dt>
+            <dd><%= user.administrator ? "Yes" : "No" %></dd>
+            <dt>Confirmed?</dt>
+            <dd><%= user.confirmed_at.present? ? "Yes" : "No" %></dd>
+            <dt>Locked?</dt>
+            <dd><%= user.locked_at.present? ? "Yes" : "No" %></dd>
+          </dl>
+          <% if policy(user).edit? and policy(user).destroy? %>
+            <ul class="administration">
+              <li><%= link_to 'Edit User', edit_user_path(user) %></li>
+              <li>
+                <%= link_to 'Delete User', user, data: {
+                  confirm: 'Are you sure?' }, method: :delete %>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= paginate @users %>
+<% end %>

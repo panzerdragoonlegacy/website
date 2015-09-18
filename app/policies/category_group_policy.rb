@@ -11,7 +11,7 @@ class CategoryGroupPolicy < ApplicationPolicy
 
   def destroy?
     if user and record.categories.blank?
-      return true if user.role? :administrator
+      return true if user.administrator
     end
   end
 end

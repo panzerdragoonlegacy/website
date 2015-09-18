@@ -2,7 +2,7 @@ class EncyclopaediaEntryPolicy < ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
     def resolve
       if user
-        return scope if user.role? :administrator
+        return scope if user.administrator
       end
       scope.joins(:category).where(publish: true, categories: { publish: true })
     end
@@ -10,7 +10,7 @@ class EncyclopaediaEntryPolicy < ApplicationPolicy
 
   def show?
     if user
-      return true if user.role? :administrator
+      return true if user.administrator
     end
     record.publish? and record.category.publish?
   end

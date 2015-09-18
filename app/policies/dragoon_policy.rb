@@ -11,7 +11,7 @@ class DragoonPolicy < ApplicationPolicy
 
   def new?
     if user
-      user.role?(:administrator)
+      user.administrator
     else
       Dragoon.count == 0 ? true : false
     end
@@ -19,7 +19,7 @@ class DragoonPolicy < ApplicationPolicy
 
   def create?
     if user
-      user.role?(:administrator)
+      user.administrator
     else
       Dragoon.count == 0 ? true : false
     end

@@ -22,7 +22,7 @@ group :test do
 end
 
 gem 'bcrypt', '~> 3.1.7'
-gem 'country_select', '~> 1.3.1'
+gem 'devise', '~> 3.5.2'
 gem 'jquery-rails', '~> 3.1.0'
 gem 'kaminari', '~> 0.15.1'
 gem 'kramdown', '~> 1.3.3'
