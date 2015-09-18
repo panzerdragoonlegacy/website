@@ -14,13 +14,7 @@ class DragoonsController < ApplicationController
     @dragoon = Dragoon.new(dragoon_params)
     authorize @dragoon
     if @dragoon.save
-      session[:dragoon_id] = @dragoon.id
-      if params[:stay_logged_in]
-        @dragoon.create_remember_token
-        cookies.permanent.signed[:remember_token] = [@dragoon.id,
-          @dragoon.remember_token]
-      end
-      redirect_to root_url, notice: "Signed up!"
+      redirect_to @dragoon, notice: "Successfully created dragoon profile."
     else
       render :new
     end
@@ -28,7 +22,7 @@ class DragoonsController < ApplicationController
 
   def update
     if @dragoon.update_attributes(dragoon_params)
-      flash[:notice] = "Successfully updated profile."
+      flash[:notice] = "Successfully updated dragoon profile."
       if params[:continue_editing]
         redirect_to edit_dragoon_path(@dragoon)
       else
@@ -41,7 +35,7 @@ class DragoonsController < ApplicationController
 
   def destroy
     @dragoon.destroy
-    redirect_to dragoons_path, notice: "Successfully destroyed dragoon."
+    redirect_to dragoons_path, notice: "Successfully destroyed dragoon profile."
   end
 
   private
@@ -50,11 +44,7 @@ class DragoonsController < ApplicationController
     params.require(:dragoon).permit(
       :name,
       :email_address,
-      :password,
-      :password_confirmation,
       :discourse_username,
-      :time_zone,
-      :role,
       :avatar,
       :website,
       :facebook_username,

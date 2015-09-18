@@ -19,10 +19,10 @@
   <%= image_tag @dragoon.avatar.url(:embedded) %><br />
 <% end %>
 
-<% if current_dragoon %>
-  <% if current_dragoon.role? :administrator %>
+<% if user_signed_in? %>
+  <% if current_user.administrator %>
     <dl>
-      <dt>Email Address:</dt>
+      <dt>Email Address (only administrators can see this):</dt>
       <dd><%= @dragoon.email_address %></dd>
     </dl>
   <% end %>
