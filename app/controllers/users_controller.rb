@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :load_contributor_profiles, except: [:show, :destroy]
   before_action :load_user, except: [:index]
 
   def index
@@ -24,8 +25,14 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(
       :email,
+      :contributor_profile_id,
       :administrator
     )
+  end
+
+  def load_contributor_profiles
+    @contributor_profiles = ContributorProfilePolicy::Scope.new(current_user, 
+      ContributorProfile.order(:name)).resolve
   end
 
   def load_user

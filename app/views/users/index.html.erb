@@ -14,6 +14,13 @@
         <div class="details">
           <h2><%= user.email %></h2>
           <dl>
+            <% if user.contributor_profile %>
+              <dt>Contributor Profile</dt>
+              <dd>
+                <%= link_to user.contributor_profile.name, 
+                  contributor_profile_path(user.contributor_profile) %>
+              </dd>
+            <% end %>
             <dt>Administrator?</dt>
             <dd><%= user.administrator ? "Yes" : "No" %></dd>
             <dt>Confirmed?</dt>
