@@ -2,12 +2,14 @@ class NewsEntriesController < ApplicationController
   before_action :load_news_entry, except: [:index, :new, :create]
 
   def index
-    if params[:dragoon_id]
-      unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
-        raise "Dragoon not found."
+    if params[:contributor_profile_id]
+      unless @contributor_profile = ContributorProfile.find_by(
+        url: params[:contributor_profile_id])
+        raise "Contributor profile not found."
       end
       @news_entries = policy_scope(NewsEntry.where(
-        dragoon_id: @dragoon.id).order("created_at desc").page(params[:page]))
+        contributor_profile_id: @contributor_profile.id).order(
+        "created_at desc").page(params[:page]))
     else
       @news_entries = policy_scope(NewsEntry.order("created_at desc").page(
         params[:page]))
@@ -56,7 +58,7 @@ class NewsEntriesController < ApplicationController
 
   def news_entry_params
     params.require(:news_entry).permit(
-      :dragoon_id,
+      :contributor_profile_id,
       :name,
       :content,
       :publish

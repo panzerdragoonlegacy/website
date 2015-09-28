@@ -6,7 +6,7 @@ FactoryGirl.define do
       content "Test Content"
 
       category { FactoryGirl.create(:category) }
-      dragoons { [FactoryGirl.create(:dragoon)] }
+      contributor_profiles { [FactoryGirl.create(:contributor_profile)] }
 
       factory :published_article_in_published_category do
         publish true

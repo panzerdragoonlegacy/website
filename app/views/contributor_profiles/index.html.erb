@@ -1,0 +1,34 @@
+<% title "Contributors" %>
+
+<% if policy(ContributorProfile).new? %>
+  <ul class="administration">
+    <li>
+      <%= link_to 'New Contributor Profile', new_contributor_profile_path %>
+    </li>
+  </ul>
+<% end %>
+
+<% if @contributor_profiles %>
+  <div id="resources">
+    <% @contributor_profiles.each do |contributor_profile| %>
+      <div class="resource">
+        <div class="comment_thumbnail">
+          <% if contributor_profile.avatar_file_name.blank? %>
+            <%= image_tag("default-avatar.jpg") %>
+          <% else %>
+            <%= image_tag contributor_profile.avatar.url(:thumbnail) %><br />
+          <% end %>
+        </div>
+        <div class="comment_details">
+          <h2><%= link_to contributor_profile.name, contributor_profile %></h2>
+          <p>
+            <%= pluralize(website_contributions_count(contributor_profile),
+              'website contribution')
+            %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= paginate @contributor_profiles %>
+<% end %>

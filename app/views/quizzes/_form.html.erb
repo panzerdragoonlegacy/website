@@ -12,11 +12,12 @@
   <p><%= f.link_to_add "Add Question", :quiz_questions %></p>
   <label>Contributors</label>
   <div class="scroll_checkboxes">
-    <% for dragoon in Dragoon.order(:name) %>
+    <% for contributor_profile in ContributorProfile.order(:name) %>
       <label>
-        <%= check_box_tag "quiz[dragoon_ids][]", dragoon.id,
-          @quiz.dragoons.include?(dragoon) %>
-        <%= dragoon.name %>
+        <%= check_box_tag "quiz[contributor_profile_ids][]", 
+          contributor_profile.id,
+          @quiz.contributor_profiles.include?(contributor_profile) %>
+        <%= contributor_profile.name %>
       </label>
       <br />
     <% end %>

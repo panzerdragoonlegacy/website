@@ -3,13 +3,14 @@ class MusicTracksController < ApplicationController
   before_action :load_music_track, except: [:index, :new, :create]
 
   def index
-    if params[:dragoon_id]
-      unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
-        raise "Dragoon not found."
+    if params[:contributor_profile_id]
+      unless @contributor_profile = ContributorProfile.find_by(
+        url: params[:contributor_profile_id])
+        raise "Contributor profile not found."
       end
       @music_tracks = policy_scope(MusicTrack.joins(:contributions).where(
-        contributions: { dragoon_id: @dragoon.id }).order(:name).page(
-        params[:page]))
+        contributions: { contributor_profile_id: @contributor_profile.id }).
+        order(:name).page(params[:page]))
     else
       @category_groups = policy_scope(CategoryGroup.where(
         category_group_type: :music_track).order(:name))
@@ -49,7 +50,7 @@ class MusicTracksController < ApplicationController
   end
 
   def update
-    params[:music_track][:dragoon_ids] ||= []
+    params[:music_track][:contributor_profile_ids] ||= []
     if @music_track.update_attributes(music_track_params)
       flash[:notice] = "Successfully updated music track."
       if params[:continue_editing]
@@ -80,7 +81,7 @@ class MusicTracksController < ApplicationController
       :ogg_music_track,
       :flac_music_track,
       :publish,
-      dragoon_ids: [],
+      contributor_profile_ids: [],
       encyclopaedia_entry_ids: []
     )
   end

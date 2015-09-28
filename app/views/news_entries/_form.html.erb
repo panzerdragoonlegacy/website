@@ -1,9 +1,9 @@
 <%= form_for @news_entry do |f| %>
   <%= render "shared/error_messages", target: @news_entry %>
   <div>
-    <%= f.label :dragoon_id, "Author" %><br />
-    <%= f.collection_select :dragoon_id, Dragoon.order(:name), :id, :name,
-      include_blank: false %>
+    <%= f.label :contributor_profile_id, "Author" %><br />
+    <%= f.collection_select :contributor_profile_id, 
+      ContributorProfile.order(:name), :id, :name, include_blank: false %>
   </div>
   <div>
     <%= f.label :name, "Name" %><br />

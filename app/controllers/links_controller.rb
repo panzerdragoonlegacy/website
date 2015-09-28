@@ -3,13 +3,14 @@ class LinksController < ApplicationController
   before_action :load_link, except: [:index, :new, :create]
 
   def index
-    if params[:dragoon_id]
-      unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
-        raise "Dragoon not found."
+    if params[:contributor_profile_id]
+      unless @contributor_profile = ContributorProfile.find_by(
+        url: params[:contributor_profile_id])
+        raise "Contributor profile not found."
       end
       @links = policy_scope(Link.joins(:contributions).where(
-        contributions: { dragoon_id: @dragoon.id }).order(:name).page(
-        params[:page]))
+        contributions: { contributor_profile_id: @contributor_profile.id }).
+        order(:name).page(params[:page]))
     else
       @links = policy_scope(Link.order(:name).page(params[:page]))
     end
@@ -47,7 +48,7 @@ class LinksController < ApplicationController
   end
 
   def update
-    params[:link][:dragoon_ids] ||= []
+    params[:link][:contributor_profile_ids] ||= []
     if @link.update_attributes(link_params)
       flash[:notice] = "Successfully updated link."
       if params[:continue_editing]
@@ -75,7 +76,7 @@ class LinksController < ApplicationController
       :partner_site,
       :description,
       :publish,
-      dragoon_ids: [],
+      contributor_profile_ids: [],
       encyclopaedia_entry_ids: []
     )
   end

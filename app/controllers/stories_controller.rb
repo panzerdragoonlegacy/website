@@ -3,13 +3,14 @@ class StoriesController < ApplicationController
   before_action :load_story, except: [:index, :new, :create]
 
   def index
-    if params[:dragoon_id]
-      unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
-        raise "Dragoon not found."
+    if params[:contributor_profile_id]
+      unless @contributor_profile_id = ContributorProfile.find_by(
+        url: params[:contributor_profile_id])
+        raise "Contributor profile not found."
       end
       @stories = policy_scope(Story.joins(:contributions).where(
-        contributions: { dragoon_id: @dragoon.id }).order(:name).page(
-        params[:page]))
+        contributions: { contributor_profile_id: @contributor_profile.id }).
+        order(:name).page(params[:page]))
     else
       @stories = policy_scope(Story.order(:name).page(params[:page]))
     end
@@ -56,7 +57,7 @@ class StoriesController < ApplicationController
   end
 
   def update
-    params[:story][:dragoon_ids] ||= []
+    params[:story][:contributor_profile_ids] ||= []
     if @story.update_attributes(story_params)
       flash[:notice] = "Successfully updated story."
       if params[:continue_editing]
@@ -83,7 +84,7 @@ class StoriesController < ApplicationController
       :description,
       :content,
       :publish,
-      dragoon_ids: [],
+      contributor_profile_ids: [],
       encyclopaedia_entry_ids: [],
       illustrations_attributes: [:id, :illustration, :_destroy]
     )

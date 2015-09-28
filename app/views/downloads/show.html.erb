@@ -26,8 +26,8 @@
 
 <h2>Contributed By:</h2>
 <ul>
-  <% @download.dragoons.each do |dragoon| %>
-    <li><%= link_to dragoon.name, dragoon %></li>
+  <% @download.contributor_profile.each do |contributor_profile| %>
+    <li><%= link_to contributor_profile.name, contributor_profile %></li>
   <% end %>
 </ul>
 

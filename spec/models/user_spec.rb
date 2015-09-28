@@ -21,11 +21,10 @@ RSpec.describe User, type: :model do
     it { should respond_to(:created_at) }
     it { should respond_to(:updated_at) }
     it { should respond_to(:administrator) }
-  end
-
-  describe "validations" do
+    it { should respond_to(:contributor_profile) }
   end
 
   describe "associations" do
+    it { should belong_to(:contributor_profile) }
   end
 end

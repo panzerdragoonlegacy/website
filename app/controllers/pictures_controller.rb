@@ -3,13 +3,14 @@ class PicturesController < ApplicationController
   before_action :load_picture, except: [:index, :new, :create]
 
   def index
-    if params[:dragoon_id]
-      unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
-        raise "Dragoon not found."
+    if params[:contributor_profile_id]
+      unless @contributor_profile = ContributorProfile.find_by(
+        url: params[:contributor_profile_id])
+        raise "Contributor profile not found."
       end
       @pictures = policy_scope(Picture.joins(:contributions).where(
-        contributions: { dragoon_id: @dragoon.id }).order(:name).page(
-        params[:page]))
+        contributions: { contributor_profile_id: @contributor_profile.id }).
+        order(:name).page(params[:page]))
     else
       @category_groups = policy_scope(CategoryGroup.where(
         category_group_type: :picture).order(:name))
@@ -49,7 +50,7 @@ class PicturesController < ApplicationController
   end
 
   def update
-    params[:picture][:dragoon_ids] ||= []
+    params[:picture][:contributor_profile_ids] ||= []
     if @picture.update_attributes(picture_params)
       flash[:notice] = "Successfully updated picture."
       if params[:continue_editing]
@@ -77,7 +78,7 @@ class PicturesController < ApplicationController
       :information,
       :picture,
       :publish,
-      dragoon_ids: [],
+      contributor_profile_ids: [],
       encyclopaedia_entry_ids: []
     )
   end

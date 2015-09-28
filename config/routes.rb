@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   }
   resources :users
 
-  resources :dragoons do
+  resources :contributor_profiles, path: 'contributors' do
     resources :news_entries, path: 'news-entries'
     resources :articles
     resources :downloads

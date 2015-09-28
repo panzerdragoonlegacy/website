@@ -8,7 +8,7 @@ atom_feed do |feed|
       entry.content(news_entry_markdown_to_html(news_entry.content),
         type: 'html')
       entry.author do |author|
-        author.name(news_entry.dragoon.name)
+        author.name(news_entry.contributor_profile.name)
       end
     end
   end

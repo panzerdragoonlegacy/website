@@ -25,7 +25,7 @@ RSpec.describe Story, type: :model do
     it { should have_many(:chapters).dependent(:destroy) }
     it { should belong_to(:category) }
     it { should have_many(:contributions).dependent(:destroy) }
-    it { should have_many(:dragoons).through(:contributions) }
+    it { should have_many(:contributor_profiles).through(:contributions) }
     it { should have_many(:illustrations).dependent(:destroy) }
     it { should have_many(:relations).dependent(:destroy) }
     it { should have_many(:encyclopaedia_entries).through(:relations) }

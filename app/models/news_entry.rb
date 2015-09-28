@@ -1,7 +1,7 @@
 class NewsEntry < ActiveRecord::Base
   include Sluggable
 
-  belongs_to :dragoon
+  belongs_to :contributor_profile
 
   validates :name, presence: true, length: { in: 2..55 }, uniqueness: true
   validates :content, presence: true

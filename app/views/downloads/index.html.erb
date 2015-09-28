@@ -1,5 +1,5 @@
-<% if @dragoon %>
-  <% title "#{@dragoon.name}'s Downloads" %>
+<% if @contributor_profile %>
+  <% title "#{@contributor_profile.name}'s Downloads" %>
 <% else %>
   <% title "Downloads" %>
 <% end %>
@@ -10,7 +10,7 @@
   </ul>
 <% end %>
 
-<% unless params[:dragoon_id] %>
+<% unless params[:contributor_profile_id] %>
   <% if @categories.present? %>
     <h2>Download Categories</h2>
     <ul class="categories">

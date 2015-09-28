@@ -3,9 +3,10 @@ class QuizPolicy < ApplicationPolicy
     def resolve
       if user
         return scope if user.administrator
-        if user.role? :registered
+        if user.contributor_profile.present?
           return scope.joins(:contributions).where("quizzes.publish = 't' OR " +
-            "contributions.dragoon_id = ?", user.id)
+            "contributions.contributor_profile_id = ?", 
+            user.contributor_profile_id)
         end
       end
       scope.where(publish: true)
@@ -15,9 +16,11 @@ class QuizPolicy < ApplicationPolicy
   def show?
     if user
       return true if user.administrator
-      if (user.role?(:registered) &&
-        record.contributions.first.dragoon_id == user.id)
-        return true
+      if user.contributor_profile.present?
+        if record.contributions.first.contributor_profile_id == 
+          user.contributor_profile_id
+          return true
+        end
       end
     end
     record.publish?

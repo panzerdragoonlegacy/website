@@ -3,8 +3,9 @@ class ChapterPolicy < ApplicationPolicy
     def resolve
       if user
         return scope if user.administrator
-        if user.role? :registered && scope.present?
-          if scope.first.story.contributions.first.dragoon_id == user.id
+        if user.contributor_profile.present? && scope.present?
+          if scope.first.story.contributions.first.contributor_profile_id == 
+            user.contributor_profile_id
             return scope
           end
         end
@@ -16,9 +17,11 @@ class ChapterPolicy < ApplicationPolicy
   def show?
     if user
       return true if user.administrator
-      if (user.role?(:registered) &&
-        record.story.contributions.first.dragoon_id == user.id)
-        return true
+      if user.contributor_profile.present?
+        if record.story.contributions.first.contributor_profile_id == 
+          user.contributor_profile_id
+          return true
+        end
       end
     end
     record.publish? and record.story.publish?

@@ -1,5 +1,5 @@
-<%= form_for @dragoon, html: { multipart: true } do |f| %>
-  <%= render "shared/error_messages", target: @dragoon %>
+<%= form_for @contributor_profile, html: { multipart: true } do |f| %>
+  <%= render "shared/error_messages", target: @contributor_profile %>
   <div>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
@@ -14,8 +14,8 @@
   </div>
   <div>
     <%= f.label :avatar, "Avatar" %><br />
-    <% if @dragoon.avatar? %>
-      <%= image_tag @dragoon.avatar.url(:thumbnail) %><br />
+    <% if @contributor_profile.avatar? %>
+      <%= image_tag @contributor_profile.avatar.url(:thumbnail) %><br />
       File has already been uploaded. Replace file?<br />
     <% end %>
     <%= f.file_field :avatar %>
@@ -33,7 +33,7 @@
     <%= f.text_field :twitter_username %>
   </div>
   <div>
-    <%= f.submit "Update Dragoon" %>
+    <%= f.submit "Update Contributor Profile" %>
     <%= f.submit "Update and Continue Editing", name: :continue_editing %>
   </div>
 <% end %>

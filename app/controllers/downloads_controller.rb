@@ -3,13 +3,14 @@ class DownloadsController < ApplicationController
   before_action :load_download, except: [:index, :new, :create]
 
   def index
-    if params[:dragoon_id]
-      unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
-        raise "Dragoon not found."
+    if params[:contributor_profile_id]
+      unless @contributor_profile = ContributorProfile.find_by(
+        url: params[:contributor_profile_id])
+        raise "Contributor profile not found."
       end
       @downloads = policy_scope(Download.joins(:contributions).where(
-        contributions: { dragoon_id: @dragoon.id }).order(:name).page(
-        params[:page]))
+        contributions: { contributor_profile_id: @contributor_profile.id }).
+        order(:name).page(params[:page]))
     else
       @downloads = policy_scope(Download.order(:name).page(params[:page]))
     end
@@ -47,7 +48,7 @@ class DownloadsController < ApplicationController
   end
 
   def update
-    params[:download][:dragoon_ids] ||= []
+    params[:download][:contributor_profile_ids] ||= []
     if @download.update_attributes(download_params)
       flash[:notice] = "Successfully updated download."
       if params[:continue_editing]
@@ -74,7 +75,7 @@ class DownloadsController < ApplicationController
       :description,
       :download,
       :publish,
-      dragoon_ids: [],
+      contributor_profile_ids: [],
       encyclopaedia_entry_ids: []
     )
   end

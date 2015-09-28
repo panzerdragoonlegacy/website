@@ -25,7 +25,7 @@ RSpec.describe Download, type: :model do
   describe "associations" do
     it { should belong_to(:category) }
     it { should have_many(:contributions).dependent(:destroy) }
-    it { should have_many(:dragoons).through(:contributions) }
+    it { should have_many(:contributor_profiles).through(:contributions) }
     it { should have_many(:relations).dependent(:destroy) }
     it { should have_many(:encyclopaedia_entries).through(:relations) }
   end

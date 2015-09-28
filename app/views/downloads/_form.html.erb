@@ -22,11 +22,11 @@
   </div>
   <label>Contributors</label>
   <div class="scroll_checkboxes">
-    <% for dragoon in Dragoon.order(:name) %>
+    <% for contributor_profile in ContributorProfile.order(:name) %>
       <label>
-        <%= check_box_tag "download[dragoon_ids][]", dragoon.id,
-          @download.dragoons.include?(dragoon) %>
-        <%= dragoon.name %>
+        <%= check_box_tag "download[contributor_profile_ids][]", 
+          contributor_profile.id, @download.contributor_profiles.include?(
+          contributor_profile) %> <%= contributor_profile.name %>
       </label>
       <br />
     <% end %>

@@ -1,0 +1,138 @@
+<% title @contributor_profile.name %>
+
+<% if policy(@contributor_profile).edit? %>
+  <ul id="administration">
+    <li>
+      <%= link_to 'Edit Contributor Profile', 
+        edit_contributor_profile_path(@contributor_profile) %>
+    </li>
+  </ul>
+<% end %>
+
+<% if @contributor_profile.discourse_username.present? %>
+  <p>
+    <%= link_to "View Forum Profile",
+      "http://forums.thewilloftheancients.com/users/" +
+      "#{@contributor_profile.discourse_username.to_s.downcase}"
+    %>
+  </p>
+<% end %>
+
+<% unless @contributor_profile.avatar_file_name.blank? %>
+  <%= image_tag @contributor_profile.avatar.url(:embedded) %><br />
+<% end %>
+
+<% if user_signed_in? %>
+  <% if current_user.administrator %>
+    <dl>
+      <dt>Email Address (only administrators can see this):</dt>
+      <dd><%= @contributor_profile.email_address %></dd>
+    </dl>
+  <% end %>
+<% end %>
+
+<% unless @contributor_profile.website.blank? and 
+  @contributor_profile.facebook_username.blank? and 
+  @contributor_profile.twitter_username.blank? %>
+  <dl>
+    <% unless @contributor_profile.website.blank? %>
+      <dt>Website:</dt>
+      <dd>
+        <%= link_to @contributor_profile.website, 
+          @contributor_profile.website %>
+      </dd>
+    <% end %>
+    <% unless @contributor_profile.facebook_username.blank? %>
+      <dt>Facebook Username:</dt>
+      <dd>
+        <%= link_to @contributor_profile.facebook_username, 
+          "http://www.facebook.com/" + @contributor_profile.facebook_username %>
+      </dd>
+    <% end %>
+    <% unless @contributor_profile.twitter_username.blank? %>
+      <dt>Twitter Username:</dt>
+      <dd>
+        <%= link_to @contributor_profile.twitter_username, 
+          "http://www.twitter.com/" + @contributor_profile.twitter_username %>
+      </dd>
+    <% end %>
+  </dl>
+<% end %>
+
+<% unless website_contributions_count(@contributor_profile) == 0 %>
+  <h2>Website Contributions</h2>
+  <ul>
+    <% unless news_entry_count(@contributor_profile) == 0 %>
+      <li>
+        <%= link_to(pluralize(news_entry_count(@contributor_profile), 
+          'news entry'), contributor_profile_news_entries_path(
+          @contributor_profile)) %>
+      </li>
+    <% end %>
+    <% unless article_count(@contributor_profile) == 0 %>
+      <li>
+        <%= link_to(pluralize(article_count(@contributor_profile), 'article'),
+          contributor_profile_articles_path(@contributor_profile)) %>
+      </li>
+    <% end %>
+    <% unless download_count(@contributor_profile) == 0 %>
+      <li>
+        <%= link_to(pluralize(download_count(@contributor_profile), 'download'),
+          contributor_profile_downloads_path(@contributor_profile)) %>
+      </li>
+    <% end %>
+    <% unless link_count(@contributor_profile) == 0 %>
+      <li>
+        <%= link_to(pluralize(link_count(@contributor_profile), 'link'),
+          contributor_profile_links_path(@contributor_profile)) %>
+      </li>
+    <% end %>
+    <% unless music_track_count(@contributor_profile) == 0 %>
+      <li>
+        <%= link_to(pluralize(music_track_count(@contributor_profile), 
+          'music track'), contributor_profile_music_tracks_path(
+          @contributor_profile)) %>
+      </li>
+    <% end %>
+    <% unless picture_count(@contributor_profile) == 0 %>
+      <li>
+        <%= link_to(pluralize(picture_count(@contributor_profile), 'picture'),
+          contributor_profile_pictures_path(@contributor_profile)) %>
+      </li>
+    <% end %>
+    <% unless poem_count(@contributor_profile) == 0 %>
+      <li>
+        <%= link_to(pluralize(poem_count(@contributor_profile), 'poem'),
+          contributor_profile_poems_path(@contributor_profile)) %>
+      </li>
+    <% end %>
+    <% unless quiz_count(@contributor_profile) == 0 %>
+      <li>
+        <%= link_to(pluralize(quiz_count(@contributor_profile), 'quiz'),
+          contributor_profile_quizzes_path(@contributor_profile)) %>
+      </li>
+    <% end %>
+    <% unless resource_count(@contributor_profile) == 0 %>
+      <li>
+        <%= link_to(pluralize(resource_count(@contributor_profile), 'resource'),
+          contributor_profile_resources_path(@contributor_profile)) %>
+      </li>
+    <% end %>
+    <% unless story_count(@contributor_profile) == 0 %>
+      <li>
+        <%= link_to(pluralize(story_count(@contributor_profile), 'story'),
+          contributor_profile_stories_path(@contributor_profile)) %>
+      </li>
+    <% end %>
+    <% unless video_count(@contributor_profile) == 0 %>
+      <li>
+        <%= link_to(pluralize(video_count(@contributor_profile), 'video'),
+          contributor_profile_videos_path(@contributor_profile)) %>
+      </li>
+    <% end %>
+  </ul>
+  <p>Total: <%= pluralize(website_contributions_count(@contributor_profile),
+    'website contribution') %>.</p>
+<% end%>
+
+<p class="links"><%= link_to 'Contributors', contributor_profiles_path %></p>

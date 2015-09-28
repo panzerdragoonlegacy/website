@@ -2,13 +2,14 @@ class PoemsController < ApplicationController
   before_action :load_poem, except: [:index, :new, :create]
 
   def index
-    if params[:dragoon_id]
-      unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
-        raise "Dragoon not found."
+    if params[:contributor_profile_id]
+      unless @contributor_profile = ContributorProfile.find_by(
+        url: params[:contributor_profile_id])
+        raise "Contributor profile not found."
       end
       @poems = policy_scope(Poem.joins(:contributions).where(
-        contributions: { dragoon_id: @dragoon.id }).order(:name).page(
-        params[:page]))
+        contributions: { contributor_profile_id: @contributor_profile.id }).
+        order(:name).page(params[:page]))
     else
       @poems = policy_scope(Poem.order(:name).page(params[:page]))
     end
@@ -40,7 +41,7 @@ class PoemsController < ApplicationController
   end
 
   def update
-    params[:poem][:dragoon_ids] ||= []
+    params[:poem][:contributor_profile_ids] ||= []
     if @poem.update_attributes(poem_params)
       flash[:notice] = "Successfully updated poem."
       if params[:continue_editing]
@@ -66,7 +67,7 @@ class PoemsController < ApplicationController
       :description,
       :content,
       :publish,
-      dragoon_ids: [],
+      contributor_profile_ids: [],
       encyclopaedia_entry_ids: []
     )
   end

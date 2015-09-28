@@ -7,7 +7,9 @@
 
 <% if policy(@chapter).edit? && policy(@chapter).destroy? %>
   <ul class="administration">
-    <li><%= link_to 'New Chapter', new_chapter_path(story: @chapter.story) %></li>
+    <li>
+      <%= link_to 'New Chapter', new_chapter_path(story: @chapter.story) %>
+    </li>
     <li><%= link_to 'Edit Chapter', edit_chapter_path(@chapter) %></li>
     <li>
       <%= link_to 'Delete Chapter', @chapter, data: {

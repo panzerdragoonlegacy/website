@@ -3,13 +3,14 @@ class ResourcesController < ApplicationController
   before_action :load_resource, except: [:index, :new, :create]
 
   def index
-    if params[:dragoon_id]
-      unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
-        raise "Dragoon not found."
+    if params[:contributor_profile_id]
+      unless @contributor_profile = ContributorProfile.find_by(
+        url: params[:contributor_profile_id])
+        raise "Contributor profile not found."
       end
       @resources = policy_scope(Resource.joins(:contributions).where(
-        contributions: { dragoon_id: @dragoon.id }).order(:name).page(
-        params[:page]))
+        contributions: { contributor_profile_id: @contributor_profile.id }).
+        order(:name).page(params[:page]))
     else
       @category_groups = policy_scope(CategoryGroup.where(
         category_group_type: :resource).order(:name))
@@ -49,7 +50,7 @@ class ResourcesController < ApplicationController
   end
 
   def update
-    params[:resource][:dragoon_ids] ||= []
+    params[:resource][:contributor_profile_ids] ||= []
     if @resource.update_attributes(resource_params)
       flash[:notice] = "Successfully updated resource."
       if params[:continue_editing]
@@ -75,7 +76,7 @@ class ResourcesController < ApplicationController
       :name,
       :content,
       :publish,
-      dragoon_ids: [],
+      contributor_profile_ids: [],
       encyclopaedia_entry_ids: [],
       illustrations_attributes: [:id, :illustration, :_destroy]
     )

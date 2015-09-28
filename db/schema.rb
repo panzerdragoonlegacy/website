@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918114501) do
+ActiveRecord::Schema.define(version: 20150922130141) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "name"
@@ -56,11 +56,27 @@ ActiveRecord::Schema.define(version: 20150918114501) do
   end
 
   create_table "contributions", force: :cascade do |t|
-    t.integer  "dragoon_id"
+    t.integer  "contributor_profile_id"
     t.integer  "contributable_id"
     t.string   "contributable_type"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "contributor_profiles", force: :cascade do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "email_address"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "website"
+    t.string   "facebook_username"
+    t.string   "twitter_username"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "discourse_username"
   end
 
   create_table "downloads", force: :cascade do |t|
@@ -76,22 +92,6 @@ ActiveRecord::Schema.define(version: 20150918114501) do
     t.integer  "category_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
-  end
-
-  create_table "dragoons", force: :cascade do |t|
-    t.string   "name"
-    t.string   "url"
-    t.string   "email_address"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.string   "website"
-    t.string   "facebook_username"
-    t.string   "twitter_username"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.string   "discourse_username"
   end
 
   create_table "emoticons", force: :cascade do |t|
@@ -169,9 +169,9 @@ ActiveRecord::Schema.define(version: 20150918114501) do
     t.string   "name"
     t.string   "url"
     t.text     "content"
-    t.integer  "dragoon_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "contributor_profile_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.datetime "published_at"
     t.string   "short_url"
     t.boolean  "publish"
@@ -296,6 +296,7 @@ ActiveRecord::Schema.define(version: 20150918114501) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.boolean  "administrator",          default: false
+    t.integer  "contributor_profile_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

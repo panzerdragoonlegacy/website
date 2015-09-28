@@ -16,12 +16,6 @@ module ApplicationHelper
     truncate(html, length: 250, separator: ' ')
   end
 
-  def display_dragoons(dragoons)
-    dragoons.each do |dragoon|
-      link_to(dragoon.name, dragoon)
-    end
-  end
-
   def display_emoticons(text)
     emoticons = Emoticon.all
     emoticons.each do |emoticon|

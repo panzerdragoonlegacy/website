@@ -31,11 +31,12 @@
   </div>
   <label>Contributors</label>
   <div class="scroll_checkboxes">
-    <% for dragoon in Dragoon.order(:name) %>
+    <% for contributor_profile in ContributorProfile.order(:name) %>
       <label>
-        <%= check_box_tag "picture[dragoon_ids][]", dragoon.id,
-          @picture.dragoons.include?(dragoon) %>
-        <%= dragoon.name %>
+        <%= check_box_tag "picture[contributor_profile_ids][]", 
+          contributor_profile.id,
+          @picture.contributor_profiles.include?(contributor_profile) %>
+        <%= contributor_profile.name %>
       </label>
       <br />
     <% end %>

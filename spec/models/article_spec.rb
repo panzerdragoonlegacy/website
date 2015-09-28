@@ -25,7 +25,7 @@ RSpec.describe Article, type: :model do
   describe "associations" do
     it { should belong_to(:category) }
     it { should have_many(:contributions).dependent(:destroy) }
-    it { should have_many(:dragoons).through(:contributions) }
+    it { should have_many(:contributor_profiles).through(:contributions) }
     it { should have_many(:illustrations).dependent(:destroy) }
     it { should have_many(:relations).dependent(:destroy) }
     it { should have_many(:encyclopaedia_entries).through(:relations) }
@@ -36,7 +36,7 @@ RSpec.describe Article, type: :model do
   end
 
   pending describe "association validations" do
-    it "has at least one dragoon" do
+    it "has at least one contributor profile" do
     end
   end
 

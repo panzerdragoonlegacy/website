@@ -3,10 +3,10 @@ class ResourcePolicy < ApplicationPolicy
     def resolve
       if user
         return scope if user.administrator
-        if user.role? :registered
-          return scope.joins(:category, :contributions).where(
-            "(resources.publish = 't' AND categories.publish = 't') OR " +
-            "contributions.dragoon_id = ?", user.id)
+        if user.contributor_profile.present?
+          return scope.joins(:contributions).where("resources.publish = 't'" +
+            " OR contributions.contributor_profile_id = ?", 
+            user.contributor_profile_id)
         end
       end
       scope.joins(:category).where(publish: true, categories: { publish: true })
@@ -16,9 +16,11 @@ class ResourcePolicy < ApplicationPolicy
   def show?
     if user
       return true if user.administrator
-      if (user.role?(:registered) &&
-        record.contributions.first.dragoon_id == user.id)
-        return true
+      if user.contributor_profile.present?
+        if record.contributions.first.contributor_profile_id == 
+          user.contributor_profile_id
+          return true
+        end
       end
     end
     record.publish? and record.category.publish?

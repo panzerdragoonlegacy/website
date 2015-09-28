@@ -3,13 +3,14 @@ class VideosController < ApplicationController
   before_action :load_video, except: [:index, :new, :create]
 
   def index
-    if params[:dragoon_id]
-      unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
-        raise "Dragoon not found."
+    if params[:contributor_profile_id]
+      unless @contributor_profile = ContributorProfile.find_by(
+        url: params[:contributor_profile_id])
+        raise "Contributor profile not found."
       end
       @videos = policy_scope(Video.joins(:contributions).where(
-        contributions: { dragoon_id: @dragoon.id }).order(:name).page(
-        params[:page]))
+        contributions: { contributor_profile_id: @contributor_profile.id }).
+        order(:name).page(params[:page]))
     else
       @category_groups = policy_scope(CategoryGroup.where(
         category_group_type: :video).order(:name))
@@ -49,7 +50,7 @@ class VideosController < ApplicationController
   end
 
   def update
-    params[:video][:dragoon_ids] ||= []
+    params[:video][:contributor_profile_ids] ||= []
     if @video.update_attributes(video_params)
       flash[:notice] = "Successfully updated video."
       if params[:continue_editing]
@@ -79,7 +80,7 @@ class VideosController < ApplicationController
       :webm_video,
       :youtube_video_id,
       :publish,
-      dragoon_ids: [],
+      contributor_profile_ids: [],
       encyclopaedia_entry_ids: []
     )
   end

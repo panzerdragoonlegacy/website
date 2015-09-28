@@ -14,11 +14,13 @@
               </li>
             </ul>
           <% end %>
-          <% if link.dragoons.count > 0 %>
+          <% if link.contributor_profiles.count > 0 %>
             <h3>Maintained By:</h3>
             <ul>
-              <% link.dragoons.each do |dragoon| %>
-                <li><%= link_to dragoon.name, dragoon %></li>
+              <% link.contributor_profiles.each do |contributor_profile| %>
+                <li>
+                  <%= link_to contributor_profile.name, contributor_profile %>
+                </li>
               <% end %>
             </ul>
           <% end %>

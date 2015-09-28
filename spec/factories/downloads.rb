@@ -7,7 +7,7 @@ FactoryGirl.define do
         'spec/fixtures/download.zip', 'application/zip')
 
       category { FactoryGirl.create(:category) }
-      dragoons { [FactoryGirl.create(:dragoon)] }
+      contributor_profiles { [FactoryGirl.create(:contributor_profile)] }
     end
   end
 end

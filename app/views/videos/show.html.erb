@@ -23,8 +23,8 @@
 
 <h2>Contributed By:</h2>
 <ul>
-  <% @video.dragoons.each do |dragoon| %>
-    <li><%= link_to dragoon.name, dragoon %></li>
+  <% @video.contributor_profiles.each do |contributor_profile| %>
+    <li><%= link_to contributor_profile.name, contributor_profile %></li>
   <% end %>
 </ul>
 

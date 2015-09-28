@@ -7,7 +7,7 @@ FactoryGirl.define do
         'spec/fixtures/picture.jpg', 'image/jpeg')
 
       category { FactoryGirl.create(:category) }
-      dragoons { [FactoryGirl.create(:dragoon)] }
+      contributor_profiles { [FactoryGirl.create(:contributor_profile)] }
     end
   end
 end

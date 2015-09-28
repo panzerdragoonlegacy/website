@@ -2,13 +2,14 @@ class QuizzesController < ApplicationController
   before_action :load_quiz, except: [:index, :new, :create]
 
   def index
-    if params[:dragoon_id]
-      unless @dragoon = Dragoon.find_by(url: params[:dragoon_id])
-        raise "Dragoon not found."
+    if params[:contributor_profile_id]
+      unless @contributor_profile = ContributorProfile.find_by(
+        url: params[:contributor_profile_id])
+        raise "Contributor profile not found."
       end
       @quizzes = policy_scope(Quiz.joins(:contributions).where(
-        contributions: { dragoon_id: @dragoon.id }).order(:name).page(
-        params[:page]))
+        contributions: { contributor_profile_id: @contributor_profile.id }).
+        order(:name).page(params[:page]))
     else
       @quizzes = policy_scope(Quiz.order(:name).page(params[:page]))
     end
@@ -58,7 +59,7 @@ class QuizzesController < ApplicationController
   end
 
   def update
-    params[:quiz][:dragoon_ids] ||= []
+    params[:quiz][:contributor_profile_ids] ||= []
     if @quiz.update_attributes(quiz_params)
       flash[:notice] = "Successfully updated quiz."
       if params[:continue_editing]
@@ -88,7 +89,7 @@ class QuizzesController < ApplicationController
           :content, :correct_answer
         ]
       ],
-      dragoon_ids: [],
+      contributor_profile_ids: [],
       encyclopaedia_entry_ids: []
     )
   end

@@ -1,5 +1,5 @@
-<% if @dragoon %>
-  <% title "#{@dragoon.name}'s News Entries" %>
+<% if @contributor_profile %>
+  <% title "#{@contributor_profile.name}'s News Entries" %>
 <% else %>
   <% title "News Entries" %>
 <% end %>
@@ -20,17 +20,18 @@
     <% @news_entries.each do |news_entry| %>
       <div class="resource">
         <div class="comment_thumbnail">
-          <% if news_entry.dragoon.avatar_file_name.blank? %>
+          <% if news_entry.contributor_profile.avatar_file_name.blank? %>
             <%= image_tag("default-avatar.jpg") %>
           <% else %>
-            <%= image_tag news_entry.dragoon.avatar.url(:thumbnail) %><br />
+            <%= image_tag news_entry.contributor_profile.avatar.url(
+              :thumbnail) %><br />
           <% end %>
         </div>
         <div class="comment_details">
           <h2><%= link_to news_entry.name, news_entry %></h2>
           <p>
-            Published by <%= link_to news_entry.dragoon.name,
-              news_entry.dragoon %>
+            Published by <%= link_to news_entry.contributor_profile.name,
+              news_entry.contributor_profile %>
             <% if news_entry.publish %>
               <%= local_time_ago news_entry.published_at %>.
             <% else %>

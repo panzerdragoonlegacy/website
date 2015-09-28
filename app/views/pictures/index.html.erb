@@ -1,5 +1,5 @@
-<% if @dragoon %>
-  <% title "#{@dragoon.name}'s Pictures" %>
+<% if @contributor_profile %>
+  <% title "#{@contributor_profile.name}'s Pictures" %>
 <% else %>
   <% title "Pictures" %>
 <% end %>
@@ -10,7 +10,7 @@
   </ul>
 <% end %>
 
-<% unless params[:dragoon_id] %>
+<% unless params[:contributor_profile_id] %>
   <% if @category_groups.present? %>
     <h2>Picture Categories</h2>
     <%= render partial: 'site_map/category_groups', locals: {
