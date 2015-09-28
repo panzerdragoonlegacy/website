@@ -1,5 +1,5 @@
 class ContributorProfilesController < ApplicationController
-  before_action :load_contributor_profle, except: [:index, :new, :create]
+  before_action :load_contributor_profile, except: [:index, :new, :create]
 
   def index
     @contributor_profiles = policy_scope(ContributorProfile.order(:name).page(
