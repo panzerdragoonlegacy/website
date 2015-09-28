@@ -4,7 +4,7 @@
   Admins cannot create users. Users must be registered when not already logged
   in as another use. To register, first <%= link_to "Log Out", 
   destroy_user_session_path, method: :delete %>, then load the 
-  <% link_to "Register", new_user_registration_path %> page.
+  <%= link_to "Register", new_user_registration_path %> page.
 </p>
 
 <% if @users %>
