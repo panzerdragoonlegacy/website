@@ -264,7 +264,7 @@ describe DownloadPolicy do
       end
 
       context "accessing downloads that the user contributes to" do
-        context "accessing an published download" do
+        context "accessing a published download" do
           let(:download) {
             FactoryGirl.create(
               :published_download_in_unpublished_category, 

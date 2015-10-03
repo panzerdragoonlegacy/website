@@ -264,7 +264,7 @@ describe ArticlePolicy do
       end
 
       context "accessing articles that the user contributes to" do
-        context "accessing an published article" do
+        context "accessing a published article" do
           let(:article) {
             FactoryGirl.create(
               :published_article_in_unpublished_category, 

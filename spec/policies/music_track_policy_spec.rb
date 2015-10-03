@@ -264,7 +264,7 @@ describe MusicTrackPolicy do
       end
 
       context "accessing music tracks that the user contributes to" do
-        context "accessing an published music track" do
+        context "accessing a published music track" do
           let(:music_track) {
             FactoryGirl.create(
               :published_music_track_in_unpublished_category, 

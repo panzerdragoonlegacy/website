@@ -264,7 +264,7 @@ describe PicturePolicy do
       end
 
       context "accessing pictures that the user contributes to" do
-        context "accessing an published picture" do
+        context "accessing a published picture" do
           let(:picture) {
             FactoryGirl.create(
               :published_picture_in_unpublished_category, 

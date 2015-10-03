@@ -264,7 +264,7 @@ describe ResourcePolicy do
       end
 
       context "accessing resources that the user contributes to" do
-        context "accessing an published resource" do
+        context "accessing a published resource" do
           let(:resource) {
             FactoryGirl.create(
               :published_resource_in_unpublished_category, 

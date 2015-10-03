@@ -264,7 +264,7 @@ describe StoryPolicy do
       end
 
       context "accessing stories that the user contributes to" do
-        context "accessing an published story" do
+        context "accessing a published story" do
           let(:story) {
             FactoryGirl.create(
               :published_story_in_unpublished_category, 

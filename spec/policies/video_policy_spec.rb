@@ -264,7 +264,7 @@ describe VideoPolicy do
       end
 
       context "accessing videos that the user contributes to" do
-        context "accessing an published video" do
+        context "accessing a published video" do
           let(:video) {
             FactoryGirl.create(
               :published_video_in_unpublished_category, 
