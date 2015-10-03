@@ -5,6 +5,4 @@ class User < ActiveRecord::Base
     :trackable, :validatable, :confirmable, :lockable, :timeoutable
 
   belongs_to :contributor_profile
-
-  validates :contributor_profile_id, uniqueness: true
 end

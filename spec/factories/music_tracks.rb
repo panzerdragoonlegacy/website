@@ -1,30 +1,32 @@
 FactoryGirl.define do
-  factory :picture do
-    factory :valid_picture do
-      sequence(:name) { |n| "Picture #{n}" }
+  factory :music_track do
+    factory :valid_music_track do
+      sequence(:name) { |n| "Music Track #{n}" }
       description "Test Description"
-      picture Rack::Test::UploadedFile.new(
-        'spec/fixtures/picture.jpg', 'image/jpeg')
+      mp3_music_track Rack::Test::UploadedFile.new(
+        'spec/fixtures/music_track.mp3', 'audio/mp3')
+      ogg_music_track Rack::Test::UploadedFile.new(
+        'spec/fixtures/music_track.ogg', 'audio/ogg')
 
       category { FactoryGirl.create(:category) }
       contributor_profiles { [FactoryGirl.create(:contributor_profile)] }
 
-      factory :published_picture_in_published_category do
+      factory :published_music_track_in_published_category do
         publish true
         category { FactoryGirl.create(:published_category) }
       end
 
-      factory :unpublished_picture_in_published_category do
+      factory :unpublished_music_track_in_published_category do
         publish false
         category { FactoryGirl.create(:published_category) }
       end
 
-      factory :published_picture_in_unpublished_category do
+      factory :published_music_track_in_unpublished_category do
         publish true
         category { FactoryGirl.create(:unpublished_category) }
       end
 
-      factory :unpublished_picture_in_unpublished_category do
+      factory :unpublished_music_track_in_unpublished_category do
         publish false
         category { FactoryGirl.create(:unpublished_category) }
       end

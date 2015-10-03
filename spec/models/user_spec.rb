@@ -27,8 +27,4 @@ RSpec.describe User, type: :model do
   describe "associations" do
     it { should belong_to(:contributor_profile) }
   end
-
-  describe "validations" do
-    it { should validate_uniqueness_of(:contributor_profile_id) }
-  end
 end

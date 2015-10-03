@@ -61,11 +61,11 @@ describe CategoryGroupPolicy do
       it { should permit_new_and_create }
       it { should permit_edit_and_update }
 
-      context "category has no children" do
+      context "category group has no children" do
         it { should permit_action(:destroy) }
       end
 
-      context "category has children" do
+      context "category group has children" do
         before do
           category_group.categories << FactoryGirl.create(:category)
         end

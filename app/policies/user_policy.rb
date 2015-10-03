@@ -4,6 +4,7 @@ class UserPolicy < ApplicationPolicy
       if user
         return scope if user.administrator
       end
+      []
     end
   end
 
