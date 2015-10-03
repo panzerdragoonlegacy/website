@@ -17,6 +17,16 @@ FactoryGirl.define do
         publish false
         category { FactoryGirl.create(:published_category) }
       end
+
+      factory :published_article_in_unpublished_category do
+        publish true
+        category { FactoryGirl.create(:unpublished_category) }
+      end
+
+      factory :unpublished_article_in_unpublished_category do
+        publish false
+        category { FactoryGirl.create(:unpublished_category) }
+      end
     end
   end
 end

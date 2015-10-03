@@ -5,8 +5,11 @@ FactoryGirl.define do
     category_type :article
 
     factory :published_category do
-      sequence(:name) { |n| "Published Category #{n}" }
       publish true
+    end
+
+    factory :unpublished_category do
+      publish false
     end
   end
 end
