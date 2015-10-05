@@ -1,5 +1,53 @@
 <% title "Drafts" %>
 
+<% if policy(NewsEntry).new? or policy(Category).new? or 
+  policy(EncyclopaediaEntry).new? or policy(Article).new? or 
+  policy(Download).new? or policy(MusicTrack).new? or policy(Picture).new? or
+  policy(Poem).new? or policy(Quiz).new? or policy(Resource).new? or
+  policy(Story).new? or policy(Video).new? %>
+  <h2>Create a New Draft</h2>
+  <ul>
+    <% if policy(NewsEntry).new? %>
+      <li><%= link_to 'New News Entry', new_news_entry_path %></li>
+    <% end %>
+    <% if policy(Category).new? %>
+      <li><%= link_to 'New Category', new_category_path %></li>
+    <% end %>
+    <% if policy(EncyclopaediaEntry).new? %>
+      <li>
+        <%= link_to 'New Encyclopaedia Entry', new_encyclopaedia_entry_path %>
+      </li>
+    <% end %>
+    <% if policy(Article).new? %>
+      <li><%= link_to 'New Article', new_article_path %></li>
+    <% end %>
+    <% if policy(Download).new? %>
+      <li><%= link_to 'New Download', new_download_path %></li>
+    <% end %>
+    <% if policy(MusicTrack).new? %>
+      <li><%= link_to 'New Music Track', new_music_track_path %></li>
+    <% end %>
+    <% if policy(Picture).new? %>
+      <li><%= link_to 'New Picture', new_picture_path %></li>
+    <% end %>
+    <% if policy(Poem).new? %>
+      <li><%= link_to 'New Poem', new_poem_path %></li>
+    <% end %>
+    <% if policy(Quiz).new? %>
+      <li><%= link_to 'New Quiz', new_quiz_path %></li>
+    <% end %>
+    <% if policy(Resource).new? %>
+      <li><%= link_to 'New Resource', new_resource_path %></li>
+    <% end %>
+    <% if policy(Story).new? %>
+      <li><%= link_to 'New Story', new_story_path %></li>
+    <% end %>
+    <% if policy(Video).new? %>
+      <li><%= link_to 'New Video', new_video_path %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <% if @categories.present? %>
   <h2>Draft Categories</h2>
   <%= render 'categories/list' %>
