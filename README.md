@@ -4,8 +4,8 @@ The Will of the Ancients
 A custom content management system for
 [thewilloftheancients.com](http://www.thewilloftheancients.com)
 
-Installing Locally
-------------------
+Installing the Project in Development
+-------------------------------------
 
 This guide assumes that you already have Git, Ruby, RubyGems, and Bundler
 installed on your development machine.
@@ -26,6 +26,15 @@ rails s
 Then visit `http://localhost:3000` to view the website. If you previously
 installed a copy of the website with a different dataset you may need to clear
 your browser cookies.
+
+Setting Up an Admin Account in Development
+------------------------------------------
+
+1. Add the Mandrill username and API key to `config/secrets.yml`.
+2. Start the Rails server with `rails s`.
+3. Register an account at `http://localhost:3000/users/register`.
+4. Open Rails console with `rails c`.
+5. Set the user to be an administrator: `User.last.update administrator: true`.
 
 Publishing Code Changes
 -----------------------
