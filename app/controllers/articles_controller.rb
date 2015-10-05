@@ -33,7 +33,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = Article.new article_params
     authorize @article
     if @article.save
       flash[:notice] = "Successfully created article."
@@ -49,7 +49,7 @@ class ArticlesController < ApplicationController
 
   def update
     params[:article][:contributor_profile_ids] ||= []
-    if @article.update_attributes(article_params)
+    if @article.update_attributes article_params
       flash[:notice] = "Successfully updated article."
       if params[:continue_editing]
         redirect_to edit_article_path(@article)
@@ -70,14 +70,7 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(
-      :category_id,
-      :name,
-      :description,
-      :content,
-      :publish,
-      contributor_profile_ids: [],
-      encyclopaedia_entry_ids: [],
-      illustrations_attributes: [:id, :illustration, :_destroy]
+      policy(@article || :article).permitted_attributes
     )
   end
 

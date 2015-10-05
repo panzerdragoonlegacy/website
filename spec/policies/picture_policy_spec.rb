@@ -10,6 +10,13 @@ describe PicturePolicy do
   context "being a visitor" do
     let(:user) { nil }
 
+    context "creating a new picture" do
+      let(:picture) { Picture.new }
+
+      it { should forbid_new_and_create }
+      it { should forbid_mass_assignment_of(:publish) }
+    end
+
     context "accessing pictures in a published category" do
       context "accessing a published picture" do
         let(:picture) {
@@ -21,9 +28,9 @@ describe PicturePolicy do
         end
 
         it { should permit_action(:show) }
-        it { should forbid_new_and_create }
         it { should forbid_edit_and_update }
         it { should forbid_action(:destroy) }
+        it { should forbid_mass_assignment_of(:publish) }
       end
 
       context "accessing an unpublished picture" do
@@ -36,9 +43,9 @@ describe PicturePolicy do
         end
 
         it { should forbid_action(:show) }
-        it { should forbid_new_and_create }
         it { should forbid_edit_and_update }
         it { should forbid_action(:destroy) }
+        it { should forbid_mass_assignment_of(:publish) }
       end
     end
     
@@ -53,9 +60,9 @@ describe PicturePolicy do
         end
 
         it { should forbid_action(:show) }
-        it { should forbid_new_and_create }
         it { should forbid_edit_and_update }
         it { should forbid_action(:destroy) }
+        it { should forbid_mass_assignment_of(:publish) }
       end
 
       context "accessing an unpublished picture" do
@@ -68,15 +75,22 @@ describe PicturePolicy do
         end
 
         it { should forbid_action(:show) }
-        it { should forbid_new_and_create }
         it { should forbid_edit_and_update }
         it { should forbid_action(:destroy) }
+        it { should forbid_mass_assignment_of(:publish) }
       end
     end
   end
 
   context "being a registered user" do
     let(:user) { FactoryGirl.create(:registered_user) }
+
+    context "creating a new picture" do
+      let(:picture) { Picture.new }
+
+      it { should forbid_new_and_create }
+      it { should forbid_mass_assignment_of(:publish) }
+    end
 
     context "accessing pictures in a published category" do
       context "accessing a published picture" do
@@ -89,9 +103,9 @@ describe PicturePolicy do
         end
 
         it { should permit_action(:show) }
-        it { should forbid_new_and_create }
         it { should forbid_edit_and_update }
         it { should forbid_action(:destroy) }
+        it { should forbid_mass_assignment_of(:publish) }
       end
 
       context "accessing an unpublished picture" do
@@ -104,9 +118,9 @@ describe PicturePolicy do
         end
 
         it { should forbid_action(:show) }
-        it { should forbid_new_and_create }
         it { should forbid_edit_and_update }
         it { should forbid_action(:destroy) }
+        it { should forbid_mass_assignment_of(:publish) }
       end
     end
 
@@ -121,9 +135,9 @@ describe PicturePolicy do
         end
 
         it { should forbid_action(:show) }
-        it { should forbid_new_and_create }
         it { should forbid_edit_and_update }
         it { should forbid_action(:destroy) }
+        it { should forbid_mass_assignment_of(:publish) }
       end
 
       context "accessing an unpublished picture" do
@@ -136,9 +150,9 @@ describe PicturePolicy do
         end
 
         it { should forbid_action(:show) }
-        it { should forbid_new_and_create }
         it { should forbid_edit_and_update }
         it { should forbid_action(:destroy) }
+        it { should forbid_mass_assignment_of(:publish) }
       end
     end
   end
@@ -154,6 +168,13 @@ describe PicturePolicy do
       )
     }
 
+    context "creating a new picture" do
+      let(:picture) { Picture.new }
+
+      it { should permit_new_and_create }
+      it { should forbid_mass_assignment_of(:publish) }
+    end
+
     context "accessing pictures in a published category" do
       context "accessing pictures that the user does not contribute to" do
         context "accessing a published picture" do
@@ -166,9 +187,9 @@ describe PicturePolicy do
           end
 
           it { should permit_action(:show) }
-          it { should forbid_new_and_create }
           it { should forbid_edit_and_update }
           it { should forbid_action(:destroy) }
+          it { should forbid_mass_assignment_of(:publish) }
         end
 
         context "accessing an unpublished picture" do
@@ -181,9 +202,9 @@ describe PicturePolicy do
           end
 
           it { should forbid_action(:show) }
-          it { should forbid_new_and_create }
           it { should forbid_edit_and_update }
           it { should forbid_action(:destroy) }
+          it { should forbid_mass_assignment_of(:publish) }
         end
       end
 
@@ -203,9 +224,9 @@ describe PicturePolicy do
           end
 
           it { should permit_action(:show) }
-          it { should forbid_new_and_create }
           it { should forbid_edit_and_update }
           it { should forbid_action(:destroy) }
+          it { should forbid_mass_assignment_of(:publish) }
         end
 
         context "accessing an unpublished picture" do
@@ -223,9 +244,9 @@ describe PicturePolicy do
           end
 
           it { should permit_action(:show) }
-          it { should forbid_new_and_create }
-          it { should forbid_edit_and_update }
-          it { should forbid_action(:destroy) }
+          it { should permit_edit_and_update }
+          it { should permit_action(:destroy) }
+          it { should forbid_mass_assignment_of(:publish) }
         end
       end
     end
@@ -242,9 +263,9 @@ describe PicturePolicy do
           end
 
           it { should permit_action(:show) }
-          it { should forbid_new_and_create }
           it { should forbid_edit_and_update }
           it { should forbid_action(:destroy) }
+          it { should forbid_mass_assignment_of(:publish) }
         end
 
         context "accessing an unpublished picture" do
@@ -257,9 +278,9 @@ describe PicturePolicy do
           end
 
           it { should forbid_action(:show) }
-          it { should forbid_new_and_create }
           it { should forbid_edit_and_update }
           it { should forbid_action(:destroy) }
+          it { should forbid_mass_assignment_of(:publish) }
         end
       end
 
@@ -279,9 +300,9 @@ describe PicturePolicy do
           end
 
           it { should permit_action(:show) }
-          it { should forbid_new_and_create }
           it { should forbid_edit_and_update }
           it { should forbid_action(:destroy) }
+          it { should forbid_mass_assignment_of(:publish) }
         end
 
         context "accessing an unpublished picture" do
@@ -299,9 +320,9 @@ describe PicturePolicy do
           end
 
           it { should permit_action(:show) }
-          it { should forbid_new_and_create }
-          it { should forbid_edit_and_update }
-          it { should forbid_action(:destroy) }
+          it { should permit_edit_and_update }
+          it { should permit_action(:destroy) }
+          it { should forbid_mass_assignment_of(:publish) }
         end
       end
     end
@@ -309,6 +330,13 @@ describe PicturePolicy do
 
   context "being an administrator" do
     let(:user) { FactoryGirl.create(:administrator) }
+
+    context "creating a new picture" do
+      let(:picture) { Picture.new }
+
+      it { should permit_new_and_create }
+      it { should permit_mass_assignment_of(:publish) }
+    end
 
     context "accessing pictures in a published category" do
       context "accessing a published picture" do
@@ -321,9 +349,9 @@ describe PicturePolicy do
         end
 
         it { should permit_action(:show) }
-        it { should permit_new_and_create }
         it { should permit_edit_and_update }
         it { should permit_action(:destroy) }
+        it { should permit_mass_assignment_of(:publish) }
       end
 
       context "accessing an unpublished picture" do
@@ -336,9 +364,9 @@ describe PicturePolicy do
         end
 
         it { should permit_action(:show) }
-        it { should permit_new_and_create }
         it { should permit_edit_and_update }
         it { should permit_action(:destroy) }
+        it { should permit_mass_assignment_of(:publish) }
       end
     end
 
@@ -353,9 +381,9 @@ describe PicturePolicy do
         end
 
         it { should permit_action(:show) }
-        it { should permit_new_and_create }
         it { should permit_edit_and_update }
         it { should permit_action(:destroy) }
+        it { should permit_mass_assignment_of(:publish) }
       end
 
       context "accessing an unpublished picture" do
@@ -368,9 +396,9 @@ describe PicturePolicy do
         end
 
         it { should permit_action(:show) }
-        it { should permit_new_and_create }
         it { should permit_edit_and_update }
         it { should permit_action(:destroy) }
+        it { should permit_mass_assignment_of(:publish) }
       end
     end
   end

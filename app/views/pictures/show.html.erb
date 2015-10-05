@@ -7,21 +7,28 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if policy(@picture).edit? && policy(@picture).destroy? %>
+<% if policy(@picture).new? or policy(@picture).edit? or 
+  policy(@picture).destroy? %>
   <ul class="administration">
-    <li>
-      <%= link_to 'New Picture',
-        new_picture_path(category: @picture.category) %>
-    </li>
-    <li>
-      <%= link_to 'Edit Picture',
-        edit_picture_path(@picture) %>
-    </li>
-    <li>
-      <%= link_to 'Delete Picture', @picture, data: {
-        confirm: 'Are you sure you want to delete this picture?' },
-        method: :delete %>
-    </li>
+    <% if policy(@picture).new? %>
+      <li>
+        <%= link_to 'New Picture',
+          new_picture_path(category: @picture.category) %>
+      </li>
+    <% end %>
+    <% if policy(@picture).edit? %>
+      <li>
+        <%= link_to 'Edit Picture',
+          edit_picture_path(@picture) %>
+      </li>
+    <% end %>
+    <% if policy(@picture).destroy? %>
+      <li>
+        <%= link_to 'Delete Picture', @picture, data: {
+          confirm: 'Are you sure you want to delete this picture?' },
+          method: :delete %>
+      </li>
+    <% end %>
   </ul>
 <% end %>
 

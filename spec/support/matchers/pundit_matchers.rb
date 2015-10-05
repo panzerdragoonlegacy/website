@@ -46,6 +46,22 @@ RSpec::Matchers.define :permit_edit_and_update do
   end
 end
 
+RSpec::Matchers.define :permit_mass_assignment_of do |attribute|
+  match do |policy|
+    policy.permitted_attributes.include? attribute
+  end
+
+  failure_message do |policy|
+    "#{policy.class} does not permit the mass assignment of the #{attribute} " +
+      "attribute for #{policy.user.inspect}."
+  end
+
+  failure_message_when_negated do |policy|
+    "#{policy.class} does not forbid the mass assignment of the #{attribute} " +
+      "attribute for #{policy.user.inspect}."
+  end
+end
+
 RSpec::Matchers.define :forbid_action do |action|
   match do |policy|
     !policy.public_send("#{action}?")
@@ -91,5 +107,21 @@ RSpec::Matchers.define :forbid_edit_and_update do
   failure_message_when_negated do |policy|
     "#{policy.class} does not permit the edit or update action on " +
       "#{policy.record} for #{policy.user.inspect}."
+  end
+end
+
+RSpec::Matchers.define :forbid_mass_assignment_of do |attribute|
+  match do |policy|
+    policy.permitted_attributes.exclude? attribute
+  end
+
+  failure_message do |policy|
+    "#{policy.class} does not forbid the mass assignment of the #{attribute} " +
+      "attribute for #{policy.user.inspect}."
+  end
+
+  failure_message_when_negated do |policy|
+    "#{policy.class} does not permit the mass assignment of the #{attribute} " +
+      "attribute for #{policy.user.inspect}."
   end
 end

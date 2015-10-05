@@ -35,7 +35,7 @@ class PicturesController < ApplicationController
   end
 
   def create
-    @picture = Picture.new(picture_params)
+    @picture = Picture.new picture_params
     authorize @picture
     if @picture.save
       flash[:notice] = "Successfully created picture."
@@ -51,7 +51,7 @@ class PicturesController < ApplicationController
 
   def update
     params[:picture][:contributor_profile_ids] ||= []
-    if @picture.update_attributes(picture_params)
+    if @picture.update_attributes picture_params
       flash[:notice] = "Successfully updated picture."
       if params[:continue_editing]
         redirect_to edit_picture_path(@picture)
@@ -72,14 +72,7 @@ class PicturesController < ApplicationController
 
   def picture_params
     params.require(:picture).permit(
-      :category_id,
-      :name,
-      :description,
-      :information,
-      :picture,
-      :publish,
-      contributor_profile_ids: [],
-      encyclopaedia_entry_ids: []
+      policy(@picture || :picture).permitted_attributes
     )
   end
 
