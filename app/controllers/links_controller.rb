@@ -75,7 +75,6 @@ class LinksController < ApplicationController
       :url,
       :partner_site,
       :description,
-      :publish,
       contributor_profile_ids: [],
       encyclopaedia_entry_ids: []
     )

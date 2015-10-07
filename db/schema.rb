@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928125816) do
+ActiveRecord::Schema.define(version: 20151007103825) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.string   "description"
     t.text     "content"
-    t.boolean  "publish"
+    t.boolean  "publish",     default: false
     t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -29,9 +29,9 @@ ActiveRecord::Schema.define(version: 20150928125816) do
     t.string   "url"
     t.string   "description"
     t.string   "category_type"
-    t.boolean  "publish"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.boolean  "publish",           default: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "category_group_id"
   end
 
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20150928125816) do
     t.string   "name"
     t.string   "url"
     t.text     "content"
-    t.boolean  "publish"
+    t.boolean  "publish",      default: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
   end
@@ -88,10 +88,10 @@ ActiveRecord::Schema.define(version: 20150928125816) do
     t.string   "download_content_type"
     t.integer  "download_file_size"
     t.datetime "download_updated_at"
-    t.boolean  "publish"
+    t.boolean  "publish",               default: false
     t.integer  "category_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   create_table "emoticons", force: :cascade do |t|
@@ -114,10 +114,10 @@ ActiveRecord::Schema.define(version: 20150928125816) do
     t.string   "encyclopaedia_entry_picture_content_type"
     t.integer  "encyclopaedia_entry_picture_file_size"
     t.datetime "encyclopaedia_entry_picture_updated_at"
-    t.boolean  "publish"
+    t.boolean  "publish",                                  default: false
     t.integer  "category_id"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
   end
 
   create_table "illustrations", force: :cascade do |t|
@@ -154,10 +154,10 @@ ActiveRecord::Schema.define(version: 20150928125816) do
     t.string   "ogg_music_track_content_type"
     t.integer  "ogg_music_track_file_size"
     t.datetime "ogg_music_track_updated_at"
-    t.boolean  "publish"
+    t.boolean  "publish",                       default: false
     t.integer  "category_id"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
     t.integer  "track_number",                  default: 0
     t.string   "flac_music_track_file_name"
     t.string   "flac_music_track_content_type"
@@ -170,20 +170,20 @@ ActiveRecord::Schema.define(version: 20150928125816) do
     t.string   "url"
     t.text     "content"
     t.integer  "contributor_profile_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.datetime "published_at"
     t.string   "short_url"
-    t.boolean  "publish"
+    t.boolean  "publish",                default: false
   end
 
   create_table "pages", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.text     "content"
-    t.boolean  "publish"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "publish",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -195,10 +195,10 @@ ActiveRecord::Schema.define(version: 20150928125816) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
-    t.boolean  "publish"
+    t.boolean  "publish",              default: false
     t.integer  "category_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "poems", force: :cascade do |t|
@@ -206,9 +206,9 @@ ActiveRecord::Schema.define(version: 20150928125816) do
     t.string   "url"
     t.string   "description"
     t.text     "content"
-    t.boolean  "publish"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "publish",     default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "quiz_answers", force: :cascade do |t|
@@ -230,9 +230,9 @@ ActiveRecord::Schema.define(version: 20150928125816) do
     t.string   "name"
     t.string   "url"
     t.string   "description"
-    t.boolean  "publish"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "publish",     default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "relations", force: :cascade do |t|
@@ -247,10 +247,10 @@ ActiveRecord::Schema.define(version: 20150928125816) do
     t.string   "name"
     t.string   "url"
     t.text     "content"
-    t.boolean  "publish"
+    t.boolean  "publish",     default: false
     t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "sagas", force: :cascade do |t|
@@ -269,9 +269,9 @@ ActiveRecord::Schema.define(version: 20150928125816) do
     t.string   "url"
     t.string   "description"
     t.text     "content"
-    t.boolean  "publish"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "publish",     default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "category_id"
   end
 
@@ -317,10 +317,10 @@ ActiveRecord::Schema.define(version: 20150928125816) do
     t.string   "webm_video_content_type"
     t.integer  "webm_video_file_size"
     t.datetime "webm_video_updated_at"
-    t.boolean  "publish"
+    t.boolean  "publish",                 default: false
     t.integer  "category_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "youtube_video_id"
   end
 

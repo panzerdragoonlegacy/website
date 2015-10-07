@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
       unless @contributor_profile = ContributorProfile.find_by(
         url: params[:contributor_profile_id])
         raise "Contributor profile not found."
-      end
+      end  
       @articles = policy_scope(Article.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
         order(:name).page(params[:page]))
