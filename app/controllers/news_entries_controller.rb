@@ -10,6 +10,9 @@ class NewsEntriesController < ApplicationController
       @news_entries = policy_scope(NewsEntry.where(
         contributor_profile_id: @contributor_profile.id).order(
         "created_at desc").page(params[:page]))
+    elsif params[:drafts]
+      @news_entries = policy_scope(NewsEntry.where(publish: false).
+        order("created_at desc").page(params[:page]))
     else
       @news_entries = policy_scope(NewsEntry.order("created_at desc").page(
         params[:page]))

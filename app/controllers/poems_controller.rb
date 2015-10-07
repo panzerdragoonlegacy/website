@@ -10,6 +10,9 @@ class PoemsController < ApplicationController
       @poems = policy_scope(Poem.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
         order(:name).page(params[:page]))
+    elsif params[:drafts]
+      @poems = policy_scope(Poem.where(publish: false).order(:name).
+        page(params[:page]))
     else
       @poems = policy_scope(Poem.order(:name).page(params[:page]))
     end

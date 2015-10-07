@@ -11,6 +11,9 @@ class ArticlesController < ApplicationController
       @articles = policy_scope(Article.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
         order(:name).page(params[:page]))
+    elsif params[:drafts]
+      @articles = policy_scope(Article.where(publish: false).order(:name).
+        page(params[:page]))
     else
       @articles = policy_scope(Article.order(:name).page(params[:page]))
     end

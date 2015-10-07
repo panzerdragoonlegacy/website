@@ -2,7 +2,12 @@ class PagesController < ApplicationController
   before_action :load_page, except: [:index, :new, :create]
 
   def index
-    @pages = policy_scope(Page.order(:name).page(params[:page]))
+    if params[:drafts]
+      @pages = policy_scope(Page.where(publish: false).order(:name).
+        page(params[:page]))
+    else
+      @pages = policy_scope(Page.order(:name).page(params[:page]))
+    end
   end
 
   def new

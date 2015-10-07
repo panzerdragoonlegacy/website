@@ -11,6 +11,9 @@ class ResourcesController < ApplicationController
       @resources = policy_scope(Resource.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
         order(:name).page(params[:page]))
+    elsif params[:drafts]
+      @resources = policy_scope(Resource.where(publish: false).order(:name).
+        page(params[:page]))
     else
       @category_groups = policy_scope(CategoryGroup.where(
         category_group_type: :resource).order(:name))

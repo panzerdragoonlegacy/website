@@ -11,6 +11,9 @@ class StoriesController < ApplicationController
       @stories = policy_scope(Story.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
         order(:name).page(params[:page]))
+    elsif params[:drafts]
+      @stories = policy_scope(Story.where(publish: false).order(:name).
+        page(params[:page]))
     else
       @stories = policy_scope(Story.order(:name).page(params[:page]))
     end

@@ -1,6 +1,19 @@
 class ChaptersController < ApplicationController
   before_action :load_chapter, except: [:index, :new, :create]
 
+  def index
+    if params[:drafts]
+      @chapter_count = policy_scope(Chapter.where(publish: false).
+        page(params[:page])).count
+      @prologues = policy_scope(Chapter.where(publish: false,
+        chapter_type: :prologue).order(:number).page(params[:page]))
+      @regular_chapters = policy_scope(Chapter.where(publish: false,
+        chapter_type: :regular_chapter).order(:number).page(params[:page]))
+      @epilogues = policy_scope(Chapter.where(publish: false,
+        chapter_type: :epilogue).order(:number).page(params[:page]))
+    end
+  end
+
   def show
     previous_and_next_chapters
   end

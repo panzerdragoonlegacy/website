@@ -3,10 +3,15 @@ class EncyclopaediaEntriesController < ApplicationController
   before_action :load_encyclopaedia_entry, except: [:index, :new, :create]
 
   def index
-    @category_groups = policy_scope(CategoryGroup.where(
-      category_group_type: :encyclopaedia_entry).order(:name))
-    @encyclopaedia_entries = policy_scope(EncyclopaediaEntry.order(
-      :name).page(params[:page]))
+    if params[:drafts]
+      @encyclopaedia_entries = policy_scope(EncyclopaediaEntry.where(
+        publish: false).order(:name).page(params[:page]))
+    else
+      @category_groups = policy_scope(CategoryGroup.where(
+        category_group_type: :encyclopaedia_entry).order(:name))
+      @encyclopaedia_entries = policy_scope(EncyclopaediaEntry.order(
+        :name).page(params[:page]))
+    end
   end
 
   def show

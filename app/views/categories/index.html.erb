@@ -1,0 +1,9 @@
+<% title "Categories" %>
+
+<% if policy(Category).new? %>
+  <ul class="administration">
+    <li><%= link_to 'New Category', new_category_path %></li>
+  </ul>
+<% end %>
+
+<%= render 'list' %>

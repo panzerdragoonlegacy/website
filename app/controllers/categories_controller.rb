@@ -1,6 +1,13 @@
 class CategoriesController < ApplicationController
-  before_action :load_category_groups, except: [:show, :destroy]
-  before_action :load_category, except: [:new, :create]
+  before_action :load_category_groups, except: [:index, :show, :destroy]
+  before_action :load_category, except: [:index, :new, :create]
+
+  def index
+    if params[:drafts]
+      @categories = policy_scope(Category.where(publish: false).order(:name).
+        page(params[:page]))
+    end
+  end
 
   def show
     case @category.category_type
