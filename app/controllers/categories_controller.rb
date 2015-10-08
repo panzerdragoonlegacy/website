@@ -6,6 +6,8 @@ class CategoriesController < ApplicationController
     if params[:filter] == 'draft'
       @categories = policy_scope(Category.where(publish: false).order(:name).
         page(params[:page]))
+    else
+      redirect_to site_map_path
     end
   end
 
