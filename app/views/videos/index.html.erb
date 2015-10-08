@@ -1,5 +1,7 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Videos" %>
+<% elsif params[:filter] == 'draft' %>
+  <% title "Draft Videos" %>
 <% else %>
   <% title "Videos" %>
 <% end %>

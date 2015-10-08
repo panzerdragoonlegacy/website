@@ -1,4 +1,8 @@
-<% title "Encyclopaedia" %>
+<% if params[:filter] == 'draft' %>
+  <% title "Draft Encyclopaedia Entries" %>
+<% else %>
+  <% title "Encyclopaedia" %>
+<% end %>
 
 <% if policy(EncyclopaediaEntry).new? %>
   <ul class="administration">
@@ -15,6 +19,8 @@
 <% end %>
 
 <% if @encyclopaedia_entries.present? %>
-  <h2>All Encyclopaedia Entries</h2>
+  <% unless params[:filter] %>
+    <h2>All Encyclopaedia Entries</h2>
+  <% end %>
   <%= render 'list' %>
 <% end %>

@@ -11,7 +11,7 @@ class VideosController < ApplicationController
       @videos = policy_scope(Video.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
         order(:name).page(params[:page]))
-    elsif params[:drafts]
+    elsif params[:filter] == 'draft'
       @videos = policy_scope(Video.where(publish: false).order(:name).
         page(params[:page]))
     else

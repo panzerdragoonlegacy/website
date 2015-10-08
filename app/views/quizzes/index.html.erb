@@ -1,5 +1,7 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Quizzes" %>
+<% elsif params[:filter] == 'draft' %>
+  <% title "Draft Quizzes" %>
 <% else %>
   <% title "Quizzes" %>
 <% end %>

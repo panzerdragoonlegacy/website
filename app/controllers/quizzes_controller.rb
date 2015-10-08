@@ -10,7 +10,7 @@ class QuizzesController < ApplicationController
       @quizzes = policy_scope(Quiz.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
         order(:name).page(params[:page]))
-    elsif params[:drafts]
+    elsif params[:filter] == 'draft'
       @quizzes = policy_scope(Quiz.where(publish: false).order(:name).
         page(params[:page]))
     else

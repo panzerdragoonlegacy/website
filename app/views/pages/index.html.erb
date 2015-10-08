@@ -1,4 +1,8 @@
-<% title "Pages" %>
+<% if params[:filter] == 'draft' %>
+  <% title "Draft Pages" %>
+<% else %>
+  <% title "Pages" %>
+<% end %>
 
 <% if policy(Page).new? %>
   <ul class="administration">

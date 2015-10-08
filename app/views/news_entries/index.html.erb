@@ -1,5 +1,7 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s News Entries" %>
+<% elsif params[:filter] == 'draft' %>
+  <% title "Draft News Entries" %>
 <% else %>
   <% title "News Entries" %>
 <% end %>

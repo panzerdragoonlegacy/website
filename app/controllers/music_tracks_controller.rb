@@ -11,7 +11,7 @@ class MusicTracksController < ApplicationController
       @music_tracks = policy_scope(MusicTrack.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
         order(:name).page(params[:page]))
-    elsif params[:drafts]
+    elsif params[:filter] == 'draft'
       @music_tracks = policy_scope(MusicTrack.where(publish: false).
         order(:name).page(params[:page]))
     else

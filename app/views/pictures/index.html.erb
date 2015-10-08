@@ -1,5 +1,7 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Pictures" %>
+<% elsif params[:filter] == 'draft' %>
+  <% title "Draft Pictures" %>
 <% else %>
   <% title "Pictures" %>
 <% end %>
@@ -10,7 +12,7 @@
   </ul>
 <% end %>
 
-<% unless params[:contributor_profile_id] %>
+<% unless params[:contributor_profile_id] or params[:filter] %>
   <% if @category_groups.present? %>
     <h2>Picture Categories</h2>
     <%= render partial: 'site_map/category_groups', locals: {

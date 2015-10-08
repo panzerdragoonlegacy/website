@@ -2,7 +2,7 @@ class ChaptersController < ApplicationController
   before_action :load_chapter, except: [:index, :new, :create]
 
   def index
-    if params[:drafts]
+    if params[:filter] == 'draft'
       @chapter_count = policy_scope(Chapter.where(publish: false).
         page(params[:page])).count
       @prologues = policy_scope(Chapter.where(publish: false,

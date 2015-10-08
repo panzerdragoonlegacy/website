@@ -3,7 +3,7 @@ class EncyclopaediaEntriesController < ApplicationController
   before_action :load_encyclopaedia_entry, except: [:index, :new, :create]
 
   def index
-    if params[:drafts]
+    if params[:filter] == 'draft'
       @encyclopaedia_entries = policy_scope(EncyclopaediaEntry.where(
         publish: false).order(:name).page(params[:page]))
     else

@@ -1,5 +1,7 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Articles" %>
+<% elsif params[:filter] == 'draft' %>
+  <% title "Draft Articles" %>
 <% else %>
   <% title "Articles" %>
 <% end %>
@@ -10,7 +12,7 @@
   </ul>
 <% end %>
 
-<% unless params[:contributor_profile_id] %>
+<% unless params[:contributor_profile_id] or params[:filter] %>
   <% if @categories.present? %>
     <h2>Article Categories</h2>
     <ul class="categories">

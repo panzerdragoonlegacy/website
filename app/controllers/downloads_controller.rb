@@ -11,7 +11,7 @@ class DownloadsController < ApplicationController
       @downloads = policy_scope(Download.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
         order(:name).page(params[:page]))
-    elsif params[:drafts]
+    elsif params[:filter] == 'draft'
       @downloads = policy_scope(Download.where(publish: false).order(:name).
         page(params[:page]))
     else      

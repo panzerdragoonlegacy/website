@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :load_category, except: [:index, :new, :create]
 
   def index
-    if params[:drafts]
+    if params[:filter] == 'draft'
       @categories = policy_scope(Category.where(publish: false).order(:name).
         page(params[:page]))
     end
