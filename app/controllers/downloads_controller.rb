@@ -73,13 +73,7 @@ class DownloadsController < ApplicationController
 
   def download_params
     params.require(:download).permit(
-      :category_id,
-      :name,
-      :description,
-      :download,
-      :publish,
-      contributor_profile_ids: [],
-      encyclopaedia_entry_ids: []
+      policy(@download || :download).permitted_attributes
     )
   end
 
