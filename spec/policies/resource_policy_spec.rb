@@ -111,7 +111,7 @@ describe ResourcePolicy do
     end
 
     context "accessing resources in an unpublished category" do
-      context "accessing a published music rack" do
+      context "accessing a published resource" do
         let(:resource) {
           FactoryGirl.create(:published_resource_in_unpublished_category)
         }

@@ -55,6 +55,20 @@
     <p><%= f.link_to_add "Add illustration", :illustrations %></p>
   </div>
   <div>
+    <label>Contributors</label>
+    <div class="scroll_checkboxes">
+      <% for contributor_profile in ContributorProfile.order(:name) %>
+        <label>
+          <%= check_box_tag "encyclopaedia_entry[contributor_profile_ids][]", 
+            contributor_profile.id, 
+            @encyclopaedia_entry.contributor_profiles.include?(
+            contributor_profile) %> <%= contributor_profile.name %>
+        </label>
+        <br />
+      <% end %>
+    </div>
+  </div>
+  <div>
     <label>Related Articles</label>
     <div class="scroll_checkboxes">
       <% for article in Article.order(:name) %>
@@ -185,9 +199,11 @@
       <% end %>
     </div>
   </div>
-  <div>
-    <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
-  </div>
+  <% if policy(@encyclopaedia_entry).permitted_attributes.include? :publish %>
+    <div>
+      <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
+    </div>
+  <% end %>
   <div>
     <%= f.submit "Save and View" %>
     <%= f.submit "Save and Continue Editing", name: :continue_editing %>

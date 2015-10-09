@@ -125,7 +125,7 @@ describe PicturePolicy do
     end
 
     context "accessing pictures in an unpublished category" do
-      context "accessing a published music rack" do
+      context "accessing a published picture" do
         let(:picture) {
           FactoryGirl.create(:published_picture_in_unpublished_category)
         }

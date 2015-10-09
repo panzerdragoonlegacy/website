@@ -4,7 +4,9 @@ class EncyclopaediaEntry < ActiveRecord::Base
   include Sluggable
   include Syncable
 
-  has_one :saga, dependent: :destroy
+  has_one :saga, dependent: :destroy      
+  has_many :contributions, as: :contributable, dependent: :destroy
+  has_many :contributor_profiles, through: :contributions
   has_many :relations, dependent: :destroy
   has_many :articles, through: :relations,
     source: :relatable, source_type: 'Article'

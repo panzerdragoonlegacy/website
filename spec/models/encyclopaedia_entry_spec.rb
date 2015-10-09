@@ -25,6 +25,8 @@ RSpec.describe EncyclopaediaEntry, type: :model do
   describe "associations" do
     it { should belong_to(:category) }
     it { should have_one(:saga).dependent(:destroy) }
+    it { should have_many(:contributions).dependent(:destroy) }
+    it { should have_many(:contributor_profiles).through(:contributions) }
     it { should have_many(:illustrations).dependent(:destroy) }
     it { should have_many(:relations).dependent(:destroy) }
     it { should have_many(:articles) }

@@ -111,7 +111,7 @@ describe StoryPolicy do
     end
 
     context "accessing stories in an unpublished category" do
-      context "accessing a published music rack" do
+      context "accessing a published story" do
         let(:story) {
           FactoryGirl.create(:published_story_in_unpublished_category)
         }

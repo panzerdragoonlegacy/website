@@ -7,23 +7,30 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if policy(@encyclopaedia_entry).edit? &&
+<% if policy(@encyclopaedia_entry).new? or
+  policy(@encyclopaedia_entry).edit? or 
   policy(@encyclopaedia_entry).destroy? %>
   <ul class="administration">
-    <li>
-      <%= link_to 'New Encyclopaedia Entry',
-        new_encyclopaedia_entry_path(category: @encyclopaedia_entry.category)
-      %>
-    </li>
-    <li>
-      <%= link_to 'Edit Encyclopaedia Entry',
-        edit_encyclopaedia_entry_path(@encyclopaedia_entry) %>
-    </li>
-    <li>
-      <%= link_to 'Delete Encyclopaedia Entry', @encyclopaedia_entry, data: {
-        confirm: 'Are you sure you want to delete this encyclopaedia entry?' },
-        method: :delete %>
-    </li>
+    <% if policy(@encyclopaedia_entry).new? %>
+      <li>
+        <%= link_to 'New Encyclopaedia Entry',
+          new_encyclopaedia_entry_path(category: @encyclopaedia_entry.category)
+        %>
+      </li>
+    <% end %>
+    <% if policy(@encyclopaedia_entry).edit? %>
+      <li>
+        <%= link_to 'Edit Encyclopaedia Entry',
+          edit_encyclopaedia_entry_path(@encyclopaedia_entry) %>
+      </li>
+    <% end %>
+    <% if policy(@encyclopaedia_entry).destroy? %>
+      <li>
+        <%= link_to 'Delete Encyclopaedia Entry', @encyclopaedia_entry, data: {
+          confirm: 'Are you sure you want to delete this encyclopaedia entry?' },
+          method: :delete %>
+      </li>
+    <% end %>
   </ul>
 <% end %>
 

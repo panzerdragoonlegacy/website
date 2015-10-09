@@ -64,6 +64,7 @@ class EncyclopaediaEntriesController < ApplicationController
   end
 
   def update
+    params[:encyclopaedia_entry][:contributor_profile_ids] ||= []
     params[:encyclopaedia_entry][:article_ids] ||= []
     params[:encyclopaedia_entry][:download_ids] ||= []
     params[:encyclopaedia_entry][:link_ids] ||= []
@@ -96,23 +97,7 @@ class EncyclopaediaEntriesController < ApplicationController
 
   def encyclopaedia_entry_params
     params.require(:encyclopaedia_entry).permit(
-      :category_id,
-      :name,
-      :encyclopaedia_entry_picture,
-      :information,
-      :content,
-      :publish,
-      illustrations_attributes: [:id, :illustration, :_destroy],
-      article_ids: [],
-      download_ids: [],
-      link_ids: [],
-      music_track_ids: [],
-      picture_ids: [],
-      poem_ids: [],
-      quiz_ids: [],
-      resource_ids: [],
-      story_ids: [],
-      video_ids: []
+      policy(@encyclopaedia_entry || :encyclopaedia_entry).permitted_attributes
     )
   end
 

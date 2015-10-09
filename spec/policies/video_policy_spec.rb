@@ -111,7 +111,7 @@ describe VideoPolicy do
     end
 
     context "accessing videos in an unpublished category" do
-      context "accessing a published music rack" do
+      context "accessing a published video" do
         let(:video) {
           FactoryGirl.create(:published_video_in_unpublished_category)
         }
