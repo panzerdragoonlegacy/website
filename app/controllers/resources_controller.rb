@@ -75,13 +75,7 @@ class ResourcesController < ApplicationController
 
   def resource_params
     params.require(:resource).permit(
-      :category_id,
-      :name,
-      :content,
-      :publish,
-      contributor_profile_ids: [],
-      encyclopaedia_entry_ids: [],
-      illustrations_attributes: [:id, :illustration, :_destroy]
+      policy(@resource || :resource).permitted_attributes
     )
   end
 

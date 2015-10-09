@@ -63,9 +63,11 @@
       <% end %>
     </div>
   </div>
-  <div>
-    <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
-  </div>
+  <% if policy(@story).permitted_attributes.include? :publish %>
+    <div>
+      <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
+    </div>
+  <% end %>
   <div>
     <%= f.submit "Save and View" %>
     <%= f.submit "Save and Continue Editing", name: :continue_editing %>

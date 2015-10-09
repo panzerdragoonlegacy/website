@@ -82,14 +82,7 @@ class StoriesController < ApplicationController
 
   def story_params
     params.require(:story).permit(
-      :category_id,
-      :name,
-      :description,
-      :content,
-      :publish,
-      contributor_profile_ids: [],
-      encyclopaedia_entry_ids: [],
-      illustrations_attributes: [:id, :illustration, :_destroy]
+      policy(@story || :story).permitted_attributes
     )
   end
 

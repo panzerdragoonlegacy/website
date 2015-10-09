@@ -17,12 +17,57 @@ class ResourcePolicy < ApplicationPolicy
     if user
       return true if user.administrator
       if user.contributor_profile.present?
-        if record.contributions.first.contributor_profile_id == 
-          user.contributor_profile_id
+        if record.contributions.where(
+          contributor_profile_id: user.contributor_profile_id).count > 0
           return true
         end
       end
     end
     record.publish? and record.category.publish?
+  end
+
+  def new?
+    if user
+      return true if user.administrator or user.contributor_profile.present?
+    end
+  end
+
+  def create?
+    new?
+  end
+
+  def edit?
+    if user
+      return true if user.administrator
+      if user.contributor_profile.present?
+        if !record.publish and record.contributions.where(
+          contributor_profile_id: user.contributor_profile_id).count > 0
+          return true
+        end
+      end
+    end
+  end
+
+  def update?
+    edit?
+  end
+
+  def destroy?
+    edit?
+  end
+
+  def permitted_attributes
+    permitted_attributes = [
+      :category_id,
+      :name,
+      :content,
+      contributor_profile_ids: [],
+      encyclopaedia_entry_ids: [],
+      illustrations_attributes: [:id, :illustration, :_destroy]
+    ]
+    if user
+      permitted_attributes << :publish if user.administrator
+    end
+    permitted_attributes
   end
 end

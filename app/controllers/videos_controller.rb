@@ -75,16 +75,7 @@ class VideosController < ApplicationController
 
   def video_params
     params.require(:video).permit(
-      :category_id,
-      :name,
-      :description,
-      :information,
-      :mp4_video,
-      :webm_video,
-      :youtube_video_id,
-      :publish,
-      contributor_profile_ids: [],
-      encyclopaedia_entry_ids: []
+      policy(@video || :video).permitted_attributes
     )
   end
 

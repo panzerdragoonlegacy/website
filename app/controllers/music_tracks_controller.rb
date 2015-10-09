@@ -75,17 +75,7 @@ class MusicTracksController < ApplicationController
 
   def music_track_params
     params.require(:music_track).permit(
-      :category_id,
-      :track_number,
-      :name,
-      :description,
-      :information,
-      :mp3_music_track,
-      :ogg_music_track,
-      :flac_music_track,
-      :publish,
-      contributor_profile_ids: [],
-      encyclopaedia_entry_ids: []
+      policy(@music_track || :music_track).permitted_attributes
     )
   end
 

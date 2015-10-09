@@ -7,19 +7,28 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if policy(Chapter).new? && policy(@story).edit? && policy(@story).destroy? %>
+<% if policy(@story).new? or policy(@story).edit? or
+ policy(@story).destroy? or policy(Chapter).new? %>
   <ul class="administration">
-    <li>
-      <%= link_to 'New Story', new_story_path(category: @story.category) %>
-    </li>
-    <li><%= link_to 'New Chapter', new_chapter_path(story: @story) %></li>
-    <li><%= link_to 'Edit Story', edit_story_path(@story) %></li>
-    <li>
-      <%= link_to 'Delete Story', @story, data: {
-        confirm: 'Are you sure you want to delete this story? ALL chapters " +
-          "belonging to this story will be deleted.' },
-        method: :delete %>
-    </li>
+    <% if policy(@story).new? %>
+      <li>
+        <%= link_to 'New Story', new_story_path(category: @story.category) %>
+      </li>
+    <% end %>
+    <% if policy(Chapter).new? %>
+      <li><%= link_to 'New Chapter', new_chapter_path(story: @story) %></li>
+    <% end %>
+    <% if policy(@story).edit? %>
+      <li><%= link_to 'Edit Story', edit_story_path(@story) %></li>
+    <% end %>
+    <% if policy(@story),destroy? %>
+      <li>
+        <%= link_to 'Delete Story', @story, data: {
+          confirm: 'Are you sure you want to delete this story? ALL chapters " +
+            "belonging to this story will be deleted.' },
+          method: :delete %>
+      </li>
+    <% end %>
   </ul>
 <% end %>
 

@@ -7,17 +7,23 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if policy(@video).edit? && policy(@video).destroy? %>
+<% if policy(@video).new? or policy(@video).edit? or policy(@video).destroy? %>
   <ul class="administration">
-    <li>
-      <%= link_to 'New Video', new_video_path(category: @video.category) %>
-    </li>
-    <li><%= link_to 'Edit Video', edit_video_path(@video) %></li>
-    <li>
-      <%= link_to 'Delete Video', @video, data: {
-        confirm: 'Are you sure you want to delete this video?' },
-        method: :delete %>
-    </li>
+    <% if policy(@video).new? %>
+      <li>
+        <%= link_to 'New Video', new_video_path(category: @video.category) %>
+      </li>
+    <% end %>
+    <% if policy(@video).edit? %>
+      <li><%= link_to 'Edit Video', edit_video_path(@video) %></li>
+    <% end %>
+    <% if policy(@video).destroy? %>
+      <li>
+        <%= link_to 'Delete Video', @video, data: {
+          confirm: 'Are you sure you want to delete this video?' },
+          method: :delete %>
+      </li>
+    <% end %>
   </ul>
 <% end %>
 
