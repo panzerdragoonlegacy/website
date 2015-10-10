@@ -61,10 +61,7 @@ class NewsEntriesController < ApplicationController
 
   def news_entry_params
     params.require(:news_entry).permit(
-      :contributor_profile_id,
-      :name,
-      :content,
-      :publish
+      policy(@news_entry || :news_entry).permitted_attributes
     )
   end
 
