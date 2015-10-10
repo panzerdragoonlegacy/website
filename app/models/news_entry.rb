@@ -11,6 +11,16 @@ class NewsEntry < ActiveRecord::Base
   def publish_news_entry
     # The first time the news entry is published:
     if self.published_at.blank? && self.publish
+      self.post_news_entry_to_twitter
+      
+      # Set published_at field in the database to the current datetime:
+      self.published_at = DateTime.now
+    end
+  end
+
+  def post_news_entry_to_twitter
+    # Ensure that tweets aren't posted to Twitter when running RSpec:
+    if Rails.env == 'production'
       full_url = "http://www.thewilloftheancients.com/news/" + self.url
 
       # Get Twitter authentication details from secrets.yml
@@ -30,9 +40,6 @@ class NewsEntry < ActiveRecord::Base
       else
         client.update(self.name + ": " + full_url)
       end
-
-      # Set published_at field in the database to the current datetime:
-      self.published_at = DateTime.now
     end
   end
 end
