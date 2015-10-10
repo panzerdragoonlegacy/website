@@ -19,17 +19,16 @@
       subset of Markdown</a> to format the news entry's content)<br />
     <%= f.text_area :content, class: "data_entry" %>
   </div>
-
-  <div>
-    <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %><br />
-    (This news entry will be automatically posted to Twitter the first time
-      that it is published. The tweet will then be posted to Facebook
-      automatically by Twitter.)
-  </div>
   <% if policy(@news_entry).permitted_attributes.include? :publish %>
     <div>
-      <%= f.submit "Save and View" %>
-      <%= f.submit "Save and Continue Editing", name: :continue_editing %>
+      <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %><br />
+      (This news entry will be automatically posted to Twitter the first time
+        that it is published. The tweet will then be posted to Facebook
+        automatically by Twitter.)
     </div>
-  <% end %>
+  <% end %>    
+  <div>
+    <%= f.submit "Save and View" %>
+    <%= f.submit "Save and Continue Editing", name: :continue_editing %>
+  </div>
 <% end %>
