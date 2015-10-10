@@ -5,15 +5,21 @@
   <p class="unpublished">Unpublished</p>
 <% end %>
 
-<% if policy(@quiz).edit? && policy(@quiz).destroy? %>
+<% if policy(@quiz).new? or policy(@quiz).edit? or policy(@quiz).destroy? %>
   <ul class="administration">
-    <li><%= link_to 'New Poem', new_poem_path %></li>
-    <li><%= link_to 'Edit Quiz', edit_quiz_path(@quiz) %></li>
-    <li>
-      <%= link_to 'Delete Quiz', @quiz, data: {
-        confirm: 'Are you sure you want to delete this quiz?' },
-        method: :delete %>
-    </li>
+    <% if policy(@quiz).new? %>
+      <li><%= link_to 'New Poem', new_poem_path %></li>
+    <% end %>
+    <% if policy(@quiz).edit? %>
+      <li><%= link_to 'Edit Quiz', edit_quiz_path(@quiz) %></li>
+    <% end %>
+    <% if policy(@quiz).destroy? %>
+      <li>
+        <%= link_to 'Delete Quiz', @quiz, data: {
+          confirm: 'Are you sure you want to delete this quiz?' },
+          method: :delete %>
+      </li>
+    <% end %>
   </ul>
 <% end %>
 

@@ -84,16 +84,7 @@ class QuizzesController < ApplicationController
 
   def quiz_params
     params.require(:quiz).permit(
-      :name,
-      :description,
-      :publish,
-      quiz_questions_attributes: [
-        :content, quiz_answers_attributes: [
-          :content, :correct_answer
-        ]
-      ],
-      contributor_profile_ids: [],
-      encyclopaedia_entry_ids: []
+      policy(@quiz || :quiz).permitted_attributes
     )
   end
 

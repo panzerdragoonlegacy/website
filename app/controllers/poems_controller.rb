@@ -66,12 +66,7 @@ class PoemsController < ApplicationController
 
   def poem_params
     params.require(:poem).permit(
-      :name,
-      :description,
-      :content,
-      :publish,
-      contributor_profile_ids: [],
-      encyclopaedia_entry_ids: []
+      policy(@poem || :poem).permitted_attributes
     )
   end
 
