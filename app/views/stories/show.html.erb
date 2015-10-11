@@ -7,8 +7,8 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if policy(@story).new? or policy(@story).edit? or
- policy(@story).destroy? or policy(Chapter).new? %>
+<% if policy(@story).new? or policy(@story).edit? or policy(@story).destroy? 
+  or policy(Chapter).new? %>
   <ul class="administration">
     <% if policy(@story).new? %>
       <li>

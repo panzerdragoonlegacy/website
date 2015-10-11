@@ -7,8 +7,7 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if policy(@download).new? or
-  policy(@download).edit? or
+<% if policy(@download).new? or policy(@download).edit? or 
   policy(@download).destroy? %>
   <ul class="administration">
     <% if policy(@download).new? %>
