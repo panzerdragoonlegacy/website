@@ -35,7 +35,7 @@
 
 <h2>Contributed By:</h2>
 <ul>
-  <% @download.contributor_profile.each do |contributor_profile| %>
+  <% @download.contributor_profiles.each do |contributor_profile| %>
     <li><%= link_to contributor_profile.name, contributor_profile %></li>
   <% end %>
 </ul>

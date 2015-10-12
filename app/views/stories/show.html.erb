@@ -21,7 +21,7 @@
     <% if policy(@story).edit? %>
       <li><%= link_to 'Edit Story', edit_story_path(@story) %></li>
     <% end %>
-    <% if policy(@story),destroy? %>
+    <% if policy(@story).destroy? %>
       <li>
         <%= link_to 'Delete Story', @story, data: {
           confirm: 'Are you sure you want to delete this story? ALL chapters " +
