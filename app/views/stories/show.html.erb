@@ -47,9 +47,6 @@
     each do |prologue| %>
     <li>
       <%= link_to prologue.name, chapter_path(prologue) %>
-      <% unless prologue.publish %>
-         - <span class="unpublished">Unpublished</span>
-      <% end %>
     </li>
   <% end %>
   <% @story.chapters.where(chapter_type: :regular_chapter).order(:number).
@@ -62,18 +59,12 @@
         <%= link_to "Chapter " + regular_chapter.number.to_s,
           chapter_path(regular_chapter) %>
       <% end %>
-      <% unless regular_chapter.publish %>
-        - <span class="unpublished">Unpublished</span>
-      <% end %>
     </li>
   <% end %>
   <% @story.chapters.where(chapter_type: :epilogue).order(:number).
     each do |epilogue| %>
     <li>
       <%= link_to epilogue.name, chapter_path(epilogue) %>
-      <% unless epilogue.publish %>
-         - <span class="unpublished">Unpublished</span>
-      <% end %>
     </li>
   <% end %>
   </ul>
