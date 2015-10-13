@@ -40,10 +40,11 @@
 
 <%= raw illustrated_markdown_to_html @story.id, "Story", @story.content %>
 
-<% if @chapter_count > 0 %>
+<% if @story.chapters.count > 0 %>
   <h2>Table of Contents:</h2>
   <ul>
-  <% @prologues.each do |prologue| %>
+  <% @story.chapters.where(chapter_type: :prologue).order(:number).
+    each do |prologue| %>
     <li>
       <%= link_to prologue.name, chapter_path(prologue) %>
       <% unless prologue.publish %>
@@ -51,7 +52,8 @@
       <% end %>
     </li>
   <% end %>
-  <% @regular_chapters.each do |regular_chapter| %>
+  <% @story.chapters.where(chapter_type: :regular_chapter).order(:number).
+    each do |regular_chapter| %>
     <li>
       <% unless regular_chapter.name.blank? %>
         <%= link_to "Chapter " + regular_chapter.number.to_s + ": " +
@@ -65,7 +67,8 @@
       <% end %>
     </li>
   <% end %>
-  <% @epilogues.each do |epilogue| %>
+  <% @story.chapters.where(chapter_type: :epilogue).order(:number).
+    each do |epilogue| %>
     <li>
       <%= link_to epilogue.name, chapter_path(epilogue) %>
       <% unless epilogue.publish %>
