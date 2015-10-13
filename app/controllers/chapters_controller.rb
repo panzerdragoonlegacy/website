@@ -65,13 +65,13 @@ class ChaptersController < ApplicationController
   end
 
   def previous_and_next_chapters
-    all_chapters =  policy_scope(@chapter.story.chapters)
-    prologues = policy_scope(@chapter.story.chapters.where(
-      chapter_type: :prologue).order(:number))
-    regular_chapters = policy_scope(@chapter.story.chapters.where(
-      chapter_type: :regular_chapter).order(:number))
-    epilogues = policy_scope(@chapter.story.chapters.where(
-      chapter_type: :epilogue).order(:number))
+    all_chapters = @chapter.story.chapters
+    prologues = @chapter.story.chapters.where(
+      chapter_type: :prologue).order(:number)
+    regular_chapters = @chapter.story.chapters.where(
+      chapter_type: :regular_chapter).order(:number)
+    epilogues = @chapter.story.chapters.where(
+      chapter_type: :epilogue).order(:number)
 
     all_chapters.each do |chapter|
       if ((chapter.number == @chapter.number - 1) &&
