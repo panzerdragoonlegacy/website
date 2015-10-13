@@ -20,15 +20,6 @@ class StoriesController < ApplicationController
   end
 
   def show
-    @chapter_count = ChapterPolicy::Scope.new(current_user,
-      @story.chapters).resolve.count
-    @prologues = ChapterPolicy::Scope.new(current_user,
-      @story.chapters.where(chapter_type: :prologue).order(:number)).resolve
-    @regular_chapters = ChapterPolicy::Scope.new(current_user,
-      @story.chapters.where(chapter_type: :regular_chapter).order(
-      :number)).resolve
-    @epilogues = ChapterPolicy::Scope.new(current_user,
-      @story.chapters.where(chapter_type: :epilogue).order(:number)).resolve
     @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(current_user,
       @story.encyclopaedia_entries.order(:name)).resolve
   end

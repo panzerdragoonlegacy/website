@@ -7,15 +7,14 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if policy(@story).new? or policy(@story).edit? or policy(@story).destroy? or 
-  policy(Chapter.new).new? %>
+<% if policy(@story).new? or policy(@story).edit? or policy(@story).destroy? %>
   <ul class="administration">
     <% if policy(@story).new? %>
       <li>
         <%= link_to 'New Story', new_story_path(category: @story.category) %>
       </li>
     <% end %>
-    <% if policy(Chapter.new).new? %>
+    <% if policy(@story).edit? %>
       <li><%= link_to 'New Chapter', new_chapter_path(story: @story) %></li>
     <% end %>
     <% if policy(@story).edit? %>

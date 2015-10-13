@@ -43,10 +43,6 @@ module DraftsHelper
     policy_scope(Story.where(publish: false)).count
   end
 
-  def draft_chapter_count
-    policy_scope(Chapter.where(publish: false)).count
-  end
-
   def draft_video_count
     policy_scope(Video.where(publish: false)).count
   end
@@ -67,7 +63,6 @@ module DraftsHelper
     draft_quiz_count + 
     draft_resource_count +
     draft_story_count + 
-    draft_chapter_count +
     draft_video_count +
     draft_page_count
   end

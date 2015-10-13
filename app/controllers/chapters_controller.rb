@@ -1,18 +1,5 @@
 class ChaptersController < ApplicationController
-  before_action :load_chapter, except: [:index, :new, :create]
-
-  def index
-    if params[:filter] == 'draft'
-      @chapter_count = policy_scope(Chapter.where(publish: false).
-        page(params[:page])).count
-      @prologues = policy_scope(Chapter.where(publish: false,
-        chapter_type: :prologue).order(:number).page(params[:page]))
-      @regular_chapters = policy_scope(Chapter.where(publish: false,
-        chapter_type: :regular_chapter).order(:number).page(params[:page]))
-      @epilogues = policy_scope(Chapter.where(publish: false,
-        chapter_type: :epilogue).order(:number).page(params[:page]))
-    end
-  end
+  before_action :load_chapter, except: [:new, :create]
 
   def show
     previous_and_next_chapters
@@ -22,12 +9,12 @@ class ChaptersController < ApplicationController
     story = Story.find_by url: params[:story]
     raise "Story not found." unless story.present?
     @chapter = Chapter.new(story_id: story.id)
-    authorize @chapter
+    authorize @chapter.story
   end
 
   def create
     @chapter = Chapter.new(chapter_params)
-    authorize @chapter
+    authorize @chapter.story
     if @chapter.save
       flash[:notice] = "Successfully created chapter."
       if params[:continue_editing]
@@ -68,14 +55,13 @@ class ChaptersController < ApplicationController
       :number,
       :name,
       :content,
-      :publish,
       illustrations_attributes: [:id, :illustration, :_destroy]
     )
   end
 
   def load_chapter
     @chapter = Chapter.find_by url: params[:id]
-    authorize @chapter
+    authorize @chapter.story
   end
 
   def previous_and_next_chapters

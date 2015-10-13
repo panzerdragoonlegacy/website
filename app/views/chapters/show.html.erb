@@ -1,11 +1,7 @@
 <% title @chapter.story.name %>
 <% description @chapter.story.description %>
 
-<% unless @chapter.publish %>
-  <p class="unpublished">Unpublished</p>
-<% end %>
-
-<% if policy(@chapter).edit? && policy(@chapter).destroy? %>
+<% if policy(@chapter.story).edit? %>
   <ul class="administration">
     <li>
       <%= link_to 'New Chapter', new_chapter_path(story: @chapter.story) %>

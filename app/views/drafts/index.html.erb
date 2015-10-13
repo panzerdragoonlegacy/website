@@ -81,12 +81,6 @@
           stories_path(filter: 'draft') %>
       </li>
     <% end %>
-    <% if draft_chapter_count > 0 %>
-      <li>
-        <%= link_to pluralize(draft_chapter_count, 'chapter'), 
-          chapters_path(filter: 'draft') %>
-      </li>
-    <% end %>
     <% if draft_video_count > 0 %>
       <li>
         <%= link_to pluralize(draft_video_count, 'video'), 

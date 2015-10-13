@@ -7,7 +7,6 @@ RSpec.describe Chapter, type: :model do
     it { should respond_to(:name) }
     it { should respond_to(:url) }
     it { should respond_to(:content) }
-    it { should respond_to(:publish) }
     it { should respond_to(:created_at) }
     it { should respond_to(:updated_at) }
   end
