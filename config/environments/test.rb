@@ -45,9 +45,6 @@ Rails.application.configure do
   # by setting:
   config.active_record.raise_in_transactional_callbacks = true
 
-  # Set the test log to a maximum size of 100MB.
-  config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log", 1, 104857600)
-
   # Mail configuration.
   config.action_mailer.default_url_options = { host: 'example.com' }
 end

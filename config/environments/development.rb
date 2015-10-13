@@ -43,9 +43,6 @@ Rails.application.configure do
   # by setting:
   config.active_record.raise_in_transactional_callbacks = true
 
-  # Set the development log to a maximum size of 100MB.
-  config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log", 1, 104857600)
-
   # Mail configuration.
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
