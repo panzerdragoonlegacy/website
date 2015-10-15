@@ -4,7 +4,7 @@ class StoriesController < ApplicationController
 
   def index
     if params[:contributor_profile_id]
-      unless @contributor_profile_id = ContributorProfile.find_by(
+      unless @contributor_profile = ContributorProfile.find_by(
         url: params[:contributor_profile_id])
         raise "Contributor profile not found."
       end
