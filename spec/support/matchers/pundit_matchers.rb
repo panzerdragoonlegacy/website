@@ -14,7 +14,7 @@ RSpec::Matchers.define :permit_action do |action|
   end
 end
 
-RSpec::Matchers.define :permit_new_and_create do
+RSpec::Matchers.define :permit_new_and_create_actions do
   match do |policy|
     policy.new? and policy.create?
   end
@@ -30,7 +30,7 @@ RSpec::Matchers.define :permit_new_and_create do
   end
 end
 
-RSpec::Matchers.define :permit_edit_and_update do
+RSpec::Matchers.define :permit_edit_and_update_actions do
   match do |policy|
     policy.edit? and policy.update?
   end
@@ -78,7 +78,7 @@ RSpec::Matchers.define :forbid_action do |action|
   end
 end
 
-RSpec::Matchers.define :forbid_new_and_create do
+RSpec::Matchers.define :forbid_new_and_create_actions do
   match do |policy|
     !policy.new? and !policy.create?
   end
@@ -94,7 +94,7 @@ RSpec::Matchers.define :forbid_new_and_create do
   end
 end
 
-RSpec::Matchers.define :forbid_edit_and_update do
+RSpec::Matchers.define :forbid_edit_and_update_actions do
   match do |policy|
     !policy.edit? and !policy.update?
   end

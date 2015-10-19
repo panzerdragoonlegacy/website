@@ -13,7 +13,7 @@ describe EncyclopaediaEntryPolicy do
     context "creating a new encyclopaedia entry" do
       let(:encyclopaedia_entry) { EncyclopaediaEntry.new }
 
-      it { should forbid_new_and_create }
+      it { should forbid_new_and_create_actions }
       it { should forbid_mass_assignment_of(:publish) }
     end
 
@@ -30,7 +30,7 @@ describe EncyclopaediaEntryPolicy do
         end
 
         it { should permit_action(:show) }
-        it { should forbid_edit_and_update }
+        it { should forbid_edit_and_update_actions }
         it { should forbid_action(:destroy) }
         it { should forbid_mass_assignment_of(:publish) }
       end
@@ -47,7 +47,7 @@ describe EncyclopaediaEntryPolicy do
         end
 
         it { should forbid_action(:show) }
-        it { should forbid_edit_and_update }
+        it { should forbid_edit_and_update_actions }
         it { should forbid_action(:destroy) }
         it { should forbid_mass_assignment_of(:publish) }
       end
@@ -66,7 +66,7 @@ describe EncyclopaediaEntryPolicy do
         end
 
         it { should forbid_action(:show) }
-        it { should forbid_edit_and_update }
+        it { should forbid_edit_and_update_actions }
         it { should forbid_action(:destroy) }
         it { should forbid_mass_assignment_of(:publish) }
       end
@@ -83,7 +83,7 @@ describe EncyclopaediaEntryPolicy do
         end
 
         it { should forbid_action(:show) }
-        it { should forbid_edit_and_update }
+        it { should forbid_edit_and_update_actions }
         it { should forbid_action(:destroy) }
         it { should forbid_mass_assignment_of(:publish) }
       end
@@ -96,7 +96,7 @@ describe EncyclopaediaEntryPolicy do
     context "creating a new encyclopaedia entry" do
       let(:encyclopaedia_entry) { EncyclopaediaEntry.new }
 
-      it { should forbid_new_and_create }
+      it { should forbid_new_and_create_actions }
       it { should forbid_mass_assignment_of(:publish) }
     end
 
@@ -113,7 +113,7 @@ describe EncyclopaediaEntryPolicy do
         end
 
         it { should permit_action(:show) }
-        it { should forbid_edit_and_update }
+        it { should forbid_edit_and_update_actions }
         it { should forbid_action(:destroy) }
         it { should forbid_mass_assignment_of(:publish) }
       end
@@ -130,7 +130,7 @@ describe EncyclopaediaEntryPolicy do
         end
 
         it { should forbid_action(:show) }
-        it { should forbid_edit_and_update }
+        it { should forbid_edit_and_update_actions }
         it { should forbid_action(:destroy) }
         it { should forbid_mass_assignment_of(:publish) }
       end
@@ -149,7 +149,7 @@ describe EncyclopaediaEntryPolicy do
         end
 
         it { should forbid_action(:show) }
-        it { should forbid_edit_and_update }
+        it { should forbid_edit_and_update_actions }
         it { should forbid_action(:destroy) }
         it { should forbid_mass_assignment_of(:publish) }
       end
@@ -166,7 +166,7 @@ describe EncyclopaediaEntryPolicy do
         end
 
         it { should forbid_action(:show) }
-        it { should forbid_edit_and_update }
+        it { should forbid_edit_and_update_actions }
         it { should forbid_action(:destroy) }
         it { should forbid_mass_assignment_of(:publish) }
       end
@@ -187,7 +187,7 @@ describe EncyclopaediaEntryPolicy do
     context "creating a new encyclopaedia_entry" do
       let(:encyclopaedia_entry) { EncyclopaediaEntry.new }
 
-      it { should permit_new_and_create }
+      it { should permit_new_and_create_actions }
       it { should forbid_mass_assignment_of(:publish) }
     end
 
@@ -206,7 +206,7 @@ describe EncyclopaediaEntryPolicy do
           end
 
           it { should permit_action(:show) }
-          it { should forbid_edit_and_update }
+          it { should forbid_edit_and_update_actions }
           it { should forbid_action(:destroy) }
           it { should forbid_mass_assignment_of(:publish) }
         end
@@ -223,7 +223,7 @@ describe EncyclopaediaEntryPolicy do
           end
 
           it { should forbid_action(:show) }
-          it { should forbid_edit_and_update }
+          it { should forbid_edit_and_update_actions }
           it { should forbid_action(:destroy) }
           it { should forbid_mass_assignment_of(:publish) }
         end
@@ -245,7 +245,7 @@ describe EncyclopaediaEntryPolicy do
           end
 
           it { should permit_action(:show) }
-          it { should forbid_edit_and_update }
+          it { should forbid_edit_and_update_actions }
           it { should forbid_action(:destroy) }
           it { should forbid_mass_assignment_of(:publish) }
         end
@@ -265,7 +265,7 @@ describe EncyclopaediaEntryPolicy do
           end
 
           it { should permit_action(:show) }
-          it { should permit_edit_and_update }
+          it { should permit_edit_and_update_actions }
           it { should permit_action(:destroy) }
           it { should forbid_mass_assignment_of(:publish) }
         end
@@ -287,7 +287,7 @@ describe EncyclopaediaEntryPolicy do
           end
 
           it { should permit_action(:show) }
-          it { should forbid_edit_and_update }
+          it { should forbid_edit_and_update_actions }
           it { should forbid_action(:destroy) }
           it { should forbid_mass_assignment_of(:publish) }
         end
@@ -304,7 +304,7 @@ describe EncyclopaediaEntryPolicy do
           end
 
           it { should forbid_action(:show) }
-          it { should forbid_edit_and_update }
+          it { should forbid_edit_and_update_actions }
           it { should forbid_action(:destroy) }
           it { should forbid_mass_assignment_of(:publish) }
         end
@@ -326,7 +326,7 @@ describe EncyclopaediaEntryPolicy do
           end
 
           it { should permit_action(:show) }
-          it { should forbid_edit_and_update }
+          it { should forbid_edit_and_update_actions }
           it { should forbid_action(:destroy) }
           it { should forbid_mass_assignment_of(:publish) }
         end
@@ -346,7 +346,7 @@ describe EncyclopaediaEntryPolicy do
           end
 
           it { should permit_action(:show) }
-          it { should permit_edit_and_update }
+          it { should permit_edit_and_update_actions }
           it { should permit_action(:destroy) }
           it { should forbid_mass_assignment_of(:publish) }
         end
@@ -360,7 +360,7 @@ describe EncyclopaediaEntryPolicy do
     context "creating a new encyclopaedia entry" do
       let(:encyclopaedia_entry) { EncyclopaediaEntry.new }
 
-      it { should permit_new_and_create }
+      it { should permit_new_and_create_actions }
       it { should permit_mass_assignment_of(:publish) }
     end
 
@@ -377,7 +377,7 @@ describe EncyclopaediaEntryPolicy do
         end
 
         it { should permit_action(:show) }
-        it { should permit_edit_and_update }
+        it { should permit_edit_and_update_actions }
         it { should permit_action(:destroy) }
         it { should permit_mass_assignment_of(:publish) }
       end
@@ -394,7 +394,7 @@ describe EncyclopaediaEntryPolicy do
         end
 
         it { should permit_action(:show) }
-        it { should permit_edit_and_update }
+        it { should permit_edit_and_update_actions }
         it { should permit_action(:destroy) }
         it { should permit_mass_assignment_of(:publish) }
       end
@@ -413,7 +413,7 @@ describe EncyclopaediaEntryPolicy do
         end
 
         it { should permit_action(:show) }
-        it { should permit_edit_and_update }
+        it { should permit_edit_and_update_actions }
         it { should permit_action(:destroy) }
         it { should permit_mass_assignment_of(:publish) }
       end
@@ -430,7 +430,7 @@ describe EncyclopaediaEntryPolicy do
         end
 
         it { should permit_action(:show) }
-        it { should permit_edit_and_update }
+        it { should permit_edit_and_update_actions }
         it { should permit_action(:destroy) }
         it { should permit_mass_assignment_of(:publish) }
       end

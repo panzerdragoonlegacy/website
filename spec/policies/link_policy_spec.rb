@@ -20,8 +20,8 @@ describe LinkPolicy do
       end
 
       it { should permit_action(:show) }
-      it { should forbid_new_and_create }
-      it { should forbid_edit_and_update }
+      it { should forbid_new_and_create_actions }
+      it { should forbid_edit_and_update_actions }
       it { should forbid_action(:destroy) }
     end
     
@@ -35,8 +35,8 @@ describe LinkPolicy do
       end
 
       it { should forbid_action(:show) }
-      it { should forbid_new_and_create }
-      it { should forbid_edit_and_update }
+      it { should forbid_new_and_create_actions }
+      it { should forbid_edit_and_update_actions }
       it { should forbid_action(:destroy) }
     end
   end
@@ -54,8 +54,8 @@ describe LinkPolicy do
       end
 
       it { should permit_action(:show) }
-      it { should forbid_new_and_create }
-      it { should forbid_edit_and_update }
+      it { should forbid_new_and_create_actions }
+      it { should forbid_edit_and_update_actions }
       it { should forbid_action(:destroy) }
     end
 
@@ -69,8 +69,8 @@ describe LinkPolicy do
       end
 
       it { should forbid_action(:show) }
-      it { should forbid_new_and_create }
-      it { should forbid_edit_and_update }
+      it { should forbid_new_and_create_actions }
+      it { should forbid_edit_and_update_actions }
       it { should forbid_action(:destroy) }
     end
   end
@@ -97,8 +97,8 @@ describe LinkPolicy do
         end
 
         it { should permit_action(:show) }
-        it { should forbid_new_and_create }
-        it { should forbid_edit_and_update }
+        it { should forbid_new_and_create_actions }
+        it { should forbid_edit_and_update_actions }
         it { should forbid_action(:destroy) }
       end
 
@@ -117,8 +117,8 @@ describe LinkPolicy do
         end
 
         it { should permit_action(:show) }
-        it { should forbid_new_and_create }
-        it { should forbid_edit_and_update }
+        it { should forbid_new_and_create_actions }
+        it { should forbid_edit_and_update_actions }
         it { should forbid_action(:destroy) }
       end
     end
@@ -134,8 +134,8 @@ describe LinkPolicy do
         end
 
         it { should forbid_action(:show) }
-        it { should forbid_new_and_create }
-        it { should forbid_edit_and_update }
+        it { should forbid_new_and_create_actions }
+        it { should forbid_edit_and_update_actions }
         it { should forbid_action(:destroy) }
       end
 
@@ -154,8 +154,8 @@ describe LinkPolicy do
         end
 
         it { should forbid_action(:show) }
-        it { should forbid_new_and_create }
-        it { should forbid_edit_and_update }
+        it { should forbid_new_and_create_actions }
+        it { should forbid_edit_and_update_actions }
         it { should forbid_action(:destroy) }
       end
     end
@@ -174,8 +174,8 @@ describe LinkPolicy do
       end
 
       it { should permit_action(:show) }
-      it { should permit_new_and_create }
-      it { should permit_edit_and_update }
+      it { should permit_new_and_create_actions }
+      it { should permit_edit_and_update_actions }
       it { should permit_action(:destroy) }
     end
 
@@ -189,8 +189,8 @@ describe LinkPolicy do
       end
 
       it { should permit_action(:show) }
-      it { should permit_new_and_create }
-      it { should permit_edit_and_update }
+      it { should permit_new_and_create_actions }
+      it { should permit_edit_and_update_actions }
       it { should permit_action(:destroy) }
     end
   end

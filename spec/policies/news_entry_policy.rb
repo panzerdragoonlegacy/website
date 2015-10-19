@@ -13,7 +13,7 @@ describe NewsEntryPolicy do
     context "creating a new news entry" do
       let(:news_entry) { NewsEntry.new }
 
-      it { should forbid_new_and_create }
+      it { should forbid_new_and_create_actions }
       it { should forbid_mass_assignment_of(:publish) }
     end
 
@@ -25,7 +25,7 @@ describe NewsEntryPolicy do
       end
 
       it { should permit_action(:show) }
-      it { should forbid_edit_and_update }
+      it { should forbid_edit_and_update_actions }
       it { should forbid_action(:destroy) }
       it { should forbid_mass_assignment_of(:publish) }
     end
@@ -38,7 +38,7 @@ describe NewsEntryPolicy do
       end
 
       it { should forbid_action(:show) }
-      it { should forbid_edit_and_update }
+      it { should forbid_edit_and_update_actions }
       it { should forbid_action(:destroy) }
       it { should forbid_mass_assignment_of(:publish) }
     end
@@ -50,7 +50,7 @@ describe NewsEntryPolicy do
     context "creating a new news entry" do
       let(:news_entry) { NewsEntry.new }
 
-      it { should forbid_new_and_create }
+      it { should forbid_new_and_create_actions }
       it { should forbid_mass_assignment_of(:publish) }
     end
 
@@ -62,7 +62,7 @@ describe NewsEntryPolicy do
       end
 
       it { should permit_action(:show) }
-      it { should forbid_edit_and_update }
+      it { should forbid_edit_and_update_actions }
       it { should forbid_action(:destroy) }
       it { should forbid_mass_assignment_of(:publish) }
     end
@@ -75,7 +75,7 @@ describe NewsEntryPolicy do
       end
 
       it { should forbid_action(:show) }
-      it { should forbid_edit_and_update }
+      it { should forbid_edit_and_update_actions }
       it { should forbid_action(:destroy) }
       it { should forbid_mass_assignment_of(:publish) }
     end
@@ -95,7 +95,7 @@ describe NewsEntryPolicy do
     context "creating a new news entry" do
       let(:news_entry) { NewsEntry.new }
 
-      it { should permit_new_and_create }
+      it { should permit_new_and_create_actions }
       it { should forbid_mass_assignment_of(:publish) }
     end
 
@@ -108,7 +108,7 @@ describe NewsEntryPolicy do
         end
 
         it { should permit_action(:show) }
-        it { should forbid_edit_and_update }
+        it { should forbid_edit_and_update_actions }
         it { should forbid_action(:destroy) }
         it { should forbid_mass_assignment_of(:publish) }
       end
@@ -121,7 +121,7 @@ describe NewsEntryPolicy do
         end
 
         it { should forbid_action(:show) }
-        it { should forbid_edit_and_update }
+        it { should forbid_edit_and_update_actions }
         it { should forbid_action(:destroy) }
         it { should forbid_mass_assignment_of(:publish) }
       end
@@ -141,7 +141,7 @@ describe NewsEntryPolicy do
         end
 
         it { should permit_action(:show) }
-        it { should forbid_edit_and_update }
+        it { should forbid_edit_and_update_actions }
         it { should forbid_action(:destroy) }
         it { should forbid_mass_assignment_of(:publish) }
       end
@@ -159,7 +159,7 @@ describe NewsEntryPolicy do
         end
 
         it { should permit_action(:show) }
-        it { should permit_edit_and_update }
+        it { should permit_edit_and_update_actions }
         it { should permit_action(:destroy) }
         it { should forbid_mass_assignment_of(:publish) }
       end
@@ -172,7 +172,7 @@ describe NewsEntryPolicy do
     context "creating a new news entry" do
       let(:news_entry) { NewsEntry.new }
 
-      it { should permit_new_and_create }
+      it { should permit_new_and_create_actions }
       it { should permit_mass_assignment_of(:publish) }
     end
 
@@ -184,7 +184,7 @@ describe NewsEntryPolicy do
       end
 
       it { should permit_action(:show) }
-      it { should permit_edit_and_update }
+      it { should permit_edit_and_update_actions }
       it { should permit_action(:destroy) }
       it { should permit_mass_assignment_of(:publish) }
     end
@@ -197,7 +197,7 @@ describe NewsEntryPolicy do
       end
 
       it { should permit_action(:show) }
-      it { should permit_edit_and_update }
+      it { should permit_edit_and_update_actions }
       it { should permit_action(:destroy) }
       it { should permit_mass_assignment_of(:publish) }
     end
