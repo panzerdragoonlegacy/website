@@ -21,7 +21,7 @@ class NewsEntry < ActiveRecord::Base
   def post_news_entry_to_twitter
     # Ensure that tweets aren't posted to Twitter when running RSpec:
     if Rails.env == 'production'
-      full_url = "http://www.thewilloftheancients.com/news/" + self.url
+      full_url = "http://www.panzerdragoonlegacy.com/news/" + self.url
 
       # Get Twitter authentication details from secrets.yml
       client = Twitter::REST::Client.new do |config|

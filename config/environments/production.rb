@@ -93,7 +93,7 @@ Rails.application.configure do
   config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log", 1, 104857600)
 
   # Mail configuration.
-  config.action_mailer.default_url_options = { host: 'thewilloftheancients.com' }
+  config.action_mailer.default_url_options = { host: 'panzerdragoonlegacy.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false

@@ -1,8 +1,8 @@
-The Will of the Ancients
-========================
+Panzer Dragoon Legacy
+=====================
 
 A custom content management system for
-[thewilloftheancients.com](http://www.thewilloftheancients.com)
+[panzerdragoonlegacy.com](http://www.panzerdragoonlegacy.com)
 
 Installing the Project in Development
 -------------------------------------
@@ -14,8 +14,8 @@ You will also need to install ImageMagick for file attachments and PostgreSQL
 for the database. SQLite may be used in development for simplicity.
 
 ```
-git clone https://github.com/chrisalley/the-will-of-the-ancients.git
-cd the-will-of-the-ancients
+git clone https://github.com/chrisalley/panzer-dragoon-legacy.git
+cd panzer-dragoon-legacy
 cp config/examples/database.yml config/database.yml
 cp config/examples/secrets.yml config/secrets.yml
 bundle

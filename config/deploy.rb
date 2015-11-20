@@ -1,7 +1,7 @@
 require 'rvm/capistrano'
 require 'bundler/capistrano'
 
-set :application, "thewilloftheancients"
+set :application, "panzerdragoonlegacy"
 
 role :web, "178.62.191.241"                # Your HTTP server, Apache/etc
 role :app, "178.62.191.241"                # This may be the same as your `Web` server
@@ -12,7 +12,7 @@ set :deploy_to, "/home/thewilloftheancients/site"
 set :use_sudo, false
 
 set :scm, "git"
-set :repository,  "https://chrisalley@github.com/chrisalley/the-will-of-the-ancients.git"
+set :repository,  "https://chrisalley@github.com/chrisalley/panzer-dragoon-legacy.git"
 set :branch, "master"
 
 set :rails_env, "production"
