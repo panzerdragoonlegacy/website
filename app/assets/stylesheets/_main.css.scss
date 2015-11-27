@@ -1,29 +1,3 @@
-$link-colour-1: #B5B7B4;
-$link-colour-2: #A09682;
-$main-text-colour: #EEEEEE;
-$main-font-size: 13px;
-$good-text: #00FF44;
-$alert-text: #FFAA00;
-$bad-text: #FF2200;
-$border-properties: 1px solid #333333;
-$header-background-colour: #111111;
-$input-background-colour: #343434;
-
-@mixin caption-properties {
-  font-size: 11px;
-  margin-top: 0;
-  margin-left: 9px;
-  width: 280px;
-}
-
-@mixin gradients($direction, $colour-1, $colour-2) {
-  background: -webkit-linear-gradient($direction, $colour-1, $colour-2);
-  background: -moz-linear-gradient($direction, $colour-1, $colour-2);
-  background: -o-linear-gradient($direction, $colour-1, $colour-2);
-  background: -ms-linear-gradient($direction, $colour-1, $colour-2);
-  background: linear-gradient($direction, $colour-1, $colour-2);
-}
-
 a {
   color: $link-colour-1;
   text-decoration: none;

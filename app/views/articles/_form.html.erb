@@ -1,23 +1,38 @@
 <%= nested_form_for @article, html: { multipart: true } do |f| %>
-  <%= render "shared/error_messages", target: @article %>
+  <%= render 'shared/error_messages', target: @article %>
   <div>
-    <%= f.label :category_id, "Category" %><br />
-    <%= f.collection_select :category_id, @categories, :id, :name,
-      include_blank: false %>
+    <div>
+      <%= f.label :category_id, 'Category' %>
+    </div>
+    <div>
+      <%= f.collection_select :category_id, @categories, :id, :name,
+        { include_blank: true } %>
+    </div>
+  </div>
+    <div>
+    <div>
+      <%= f.label :contributor_profile_ids, 'Contributors' %>
+    </div>
+    <div>
+      <%= f.collection_select :contributor_profile_ids, 
+        ContributorProfile.order(:name), :id, :name, 
+        { selected: @article.contributor_profile_ids, include_blank: true }, 
+        { multiple: true } %>
+    </div>
   </div>
   <div>
-    <%= f.label :name %><br />
-    <%= f.text_field :name, size: 111 %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
   </div>
   <div>
-    <%= f.label :description %><br />
-    <%= f.text_area :description, rows: 3, cols: 80 %>
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: 3 %>
   </div>
   <div>
-    <%= f.label :content %><br />
-    (You may use a <a href="/markdown-syntax-guide" target="_blank">limited
-      subset of Markdown</a> to format the article's content)<br />
-    <%= f.text_area :content, class: "data_entry" %>
+    <%= f.label :content %>
+    <%= f.text_area :content, rows: 15, class: 'data_entry' %>
+    <p>(You may use a <a href="/markdown-syntax-guide" target="_blank">limited
+      subset of Markdown</a> to format the article's content)</p>
   </div>
   <div>
     <label>Illustrations</label>
@@ -41,39 +56,21 @@
     <p><%= f.link_to_add "Add illustration", :illustrations %></p>
   </div>
   <div>
-    <label>Contributors</label>
-    <div class="scroll_checkboxes">
-      <% for contributor_profile in ContributorProfile.order(:name) %>
-        <label>
-          <%= check_box_tag "article[contributor_profile_ids][]", 
-            contributor_profile.id, @article.contributor_profiles.include?(
-            contributor_profile) %> <%= contributor_profile.name %>
-        </label>
-        <br />
-      <% end %>
+    <div>
+      <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
     </div>
-  </div>
-  <div>
-    <label>Related Encyclopaedia Entries</label>
-    <div class="scroll_checkboxes">
-      <% for encyclopaedia_entry in EncyclopaediaEntry.order(:name) %>
-        <label>
-          <%= check_box_tag "article[encyclopaedia_entry_ids][]",
-            encyclopaedia_entry.id,
-            @article.encyclopaedia_entries.include?(encyclopaedia_entry) %>
-          <%= encyclopaedia_entry.name %>
-        </label>
-        <br />
-      <% end %>
+    <div>
+      <%= f.collection_select :encyclopaedia_entry_ids, 
+        EncyclopaediaEntry.order(:name), :id, :name, 
+        { selected: @article.encyclopaedia_entry_ids, include_blank: true }, 
+        { multiple: true } %>
     </div>
   </div>
   <% if policy(@article).permitted_attributes.include? :publish %>
-    <div>
-      <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
-    </div>
+    <%= f.check_box :publish %> <%= f.label :publish, 'Publish?' %>
   <% end %>
   <div>
-    <%= f.submit "Save and View" %>
-    <%= f.submit "Save and Continue Editing", name: :continue_editing %>
+    <%= f.submit 'Save and View' %>
+    <%= f.submit 'Save and Continue Editing', name: :continue_editing %>
   </div>
 <% end %>
