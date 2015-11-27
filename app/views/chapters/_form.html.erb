@@ -1,30 +1,51 @@
 <%= nested_form_for @chapter, html: { multipart: true } do |f| %>
-  <%= render "shared/error_messages", target: @chapter %>
+  <%= render 'shared/error_messages', target: @chapter %>
   <div>
-    <%= f.label :story_id, "Story" %><br />
-    <%= f.collection_select :story_id, Story.order(:name), :id, :name,
-      include_blank: false %>
+    <div>
+      <%= f.label :story_id, 'Story' %>
+    </div>
+    <div>
+      <%= f.collection_select :story_id, Story.order(:name), :id, :name %>
+    </div>
   </div>
   <div>
-    <%= f.label :chapter_type, "Chapter Type" %><br />
-    <%= f.collection_select :chapter_type, Chapter::CHAPTER_TYPES, :to_s,
-      :titleize %>
+    <div>
+      <%= f.label :chapter_type, 'Chapter Type' %>
+    </div>
+    <div>
+      <%= f.collection_select :chapter_type, Chapter::CHAPTER_TYPES, :to_s,
+        :titleize %>
+    </div>
   </div>
   <div>
-    <%= f.label :number, "Number" %><br />
-    (Enter 1 for the prologue or epilogue, 2 for a second prologue/epilogue.
-      Regular chapters are numbered as you would expect.)<br />
-    <%= f.text_field :number %>
+    <div>
+      <%= f.label :number, 'Number' %>
+    </div>
+    <div>
+      <p>
+        (Enter 1 for the prologue or epilogue, 2 for a second prologue/epilogue.
+        Regular chapters are numbered as you would expect.)
+      </p>
+      <%= f.number_field :number, { min: 1, max: 99 } %>
+    </div>
   </div>
   <div>
-    <%= f.label :name, "Name" %><br />
-    <%= f.text_field :name %>
+    <div>
+      <%= f.label :name, 'Name' %>
+    </div>
+    <div>
+      <%= f.text_field :name %>
+    </div>
   </div>
   <div>
-    <%= f.label :content, "Content" %><br />
-    (You may use a <a href="/markdown-syntax-guide" target="_blank">limited
-      subset of Markdown</a> to format the chapter's content)<br />
-    <%= f.text_area :content, class: "data_entry" %>
+    <div>
+      <%= f.label :content, 'Content' %>
+    </div>
+    <div>
+      <%= f.text_area :content, rows: 15, class: 'data_entry' %>
+      <p>(You may use a <a href="/markdown-syntax-guide" target="_blank">limited
+        subset of Markdown</a> to format the chapter's content)</p>
+    </div>
   </div>
   <div>
     <label>Illustrations</label>
@@ -49,7 +70,7 @@
     <p><%= f.link_to_add "Add illustration", :illustrations %></p>
   </div>
   <div>
-    <%= f.submit "Save and View" %>
-    <%= f.submit "Save and Continue Editing", name: :continue_editing %>
+    <%= f.submit 'Save and View' %>
+    <%= f.submit 'Save and Continue Editing', name: :continue_editing %>
   </div>
 <% end %>

@@ -1,82 +1,112 @@
 <%= form_for @music_track, html: { multipart: true } do |f| %>
-  <%= render "shared/error_messages", target: @music_track %>
+  <%= render 'shared/error_messages', target: @music_track %>
   <div>
-    <%= f.label :category_id, "Category" %><br />
-    <%= f.collection_select :category_id, @categories, :id, :name,
-      include_blank: false %>
+    <div>
+      <%= f.label :category_id, 'Category' %>
+    </div>
+    <div>
+      <%= f.collection_select :category_id, @categories, :id, :name,
+        { include_blank: true } %>
+    </div>
   </div>
   <div>
-    <%= f.label :mp3_music_track, "MP3 Music Track" %><br />
-    <% if @music_track.mp3_music_track? %>
-    File has already been uploaded. Replace file?<br />
-    <% end %>
-    <%= f.file_field :mp3_music_track %>
+    <div>
+      <%= f.label :contributor_profile_ids, 'Contributors' %>
+    </div>
+    <div>
+      <%= f.collection_select :contributor_profile_ids, 
+        ContributorProfile.order(:name), :id, :name, 
+        { selected: @music_track.contributor_profile_ids, include_blank: true }, 
+        { multiple: true } %>
+    </div>
   </div>
   <div>
-    <%= f.label :ogg_music_track, "Ogg Vorbis Music Track" %><br />
-    <% if @music_track.ogg_music_track? %>
-    File has already been uploaded. Replace file?<br />
-    <% end %>
-    <%= f.file_field :ogg_music_track %>
-  </div>
-  <div>
-    <%= f.label :flac_music_track, "FLAC Music Track (Optional)" %><br />
-    <% if @music_track.flac_music_track? %>
-    File has already been uploaded. Replace file?<br />
-    <% end %>
-    <%= f.file_field :flac_music_track %>
-  </div>
-  <div>
-    <%= f.label :track_number, "Track Number" %><br />
-    <%= f.text_field :track_number %>
-  </div>
-  <div>
-    <%= f.label :name, "Name" %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div>
-    <%= f.label :description, "Description" %><br />
-    <%= f.text_area :description, rows: 5 %>
-  </div>
-  <div>
-    <%= f.label :information, "Information" %><br />
-    (You may use a <a href="/markdown-syntax-guide" target="_blank">limited
-      subset of Markdown</a> to format the music track's information)<br />
-    <%= f.text_area :information, class: "data_entry" %>
-  </div>
-  <label>Contributors</label>
-  <div class="scroll_checkboxes">
-    <% for contributor_profile in ContributorProfile.order(:name) %>
-      <label>
-        <%= check_box_tag "music_track[contributor_profile_ids][]", 
-          contributor_profile.id,
-          @music_track.contributor_profiles.include?(contributor_profile) %>
-        <%= contributor_profile.name %>
-      </label>
-      <br />
-    <% end %>
-  </div>
-  <div>
-    <label>Related Encyclopaedia Entries</label>
-    <div class="scroll_checkboxes">
-      <% for encyclopaedia_entry in EncyclopaediaEntry.order(:name) %>
-        <label>
-          <%= check_box_tag "music_track[encyclopaedia_entry_ids][]",
-            encyclopaedia_entry.id,
-            @music_track.encyclopaedia_entries.include?(encyclopaedia_entry) %>
-          <%= encyclopaedia_entry.name %>
-        </label>
-        <br />
+    <div>
+      <%= f.label :mp3_music_track, 'MP3 Music Track' %>
+    </div>
+    <div>
+      <% if @music_track.mp3_music_track? %>
+        <p>File has already been uploaded. Replace file?</p>
       <% end %>
+      <%= f.file_field :mp3_music_track %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :ogg_music_track, 'Ogg Vorbis Music Track' %>
+    </div>
+    <div>
+      <% if @music_track.ogg_music_track? %>
+        <p>File has already been uploaded. Replace file?</p>
+      <% end %>
+      <%= f.file_field :ogg_music_track %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :flac_music_track, 'FLAC Music Track (optional)' %>
+    </div>
+    <div>
+      <% if @music_track.flac_music_track? %>
+        <p>File has already been uploaded. Replace file?</p>
+      <% end %>
+      <%= f.file_field :flac_music_track %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :track_number, 'Track Number' %>
+    </div>
+    <div>
+      <%= f.number_field :track_number, { min: 0, max: 50 } %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :name, 'Name' %>
+    </div>
+    <div>
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :description, 'Description' %>
+    </div>
+    <div>
+      <%= f.text_area :description, rows: 3 %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :information, 'Extra Information' %>
+    </div>
+    <div>
+      <%= f.text_area :information, rows: 10, class: 'data_entry' %>
+      <p>
+        You may use a <a href="/markdown-syntax-guide" target="_blank">limited
+        subset of Markdown</a> to format the music track's extra information)
+      </p>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
+    </div>
+    <div>
+      <%= f.collection_select :encyclopaedia_entry_ids, 
+        EncyclopaediaEntry.order(:name), :id, :name, 
+        { selected: @music_track.encyclopaedia_entry_ids, include_blank: true }, 
+        { multiple: true, class: 'ui fluid search dropdown' } %>
     </div>
   </div>
   <% if policy(@music_track).permitted_attributes.include? :publish %>
     <div>
-      <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
+      <%= f.check_box :publish %> <%= f.label :publish, 'Publish?' %>
     </div>
   <% end %>
   <div>
-    <%= f.submit "Save and View" %>
-    <%= f.submit "Save and Continue Editing", name: :continue_editing %>
+    <%= f.submit 'Save and View' %>
+    <%= f.submit 'Save and Continue Editing', name: :continue_editing %>
   </div>
 <% end %>

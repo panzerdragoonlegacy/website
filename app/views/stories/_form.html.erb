@@ -1,23 +1,52 @@
 <%= nested_form_for @story, html: { multipart: true } do |f| %>
-  <%= render "shared/error_messages", target: @story %>
+  <%= render 'shared/error_messages', target: @story %>
   <div>
-    <%= f.label :category_id, "Category" %><br />
-    <%= f.collection_select :category_id, @categories, :id, :name,
-      include_blank: false %>
+    <div>
+      <%= f.label :category_id, 'Category' %>
+    </div>
+    <div>
+      <%= f.collection_select :category_id, @categories, :id, :name,
+        { include_blank: true } %>
+    </div>
   </div>
   <div>
-    <%= f.label :name, "Name" %><br />
-    <%= f.text_field :name %>
+    <div>
+      <%= f.label :contributor_profile_ids, 'Contributors' %>
+    </div>
+    <div>
+      <%= f.collection_select :contributor_profile_ids, 
+        ContributorProfile.order(:name), :id, :name, 
+        { selected: @story.contributor_profile_ids, include_blank: true }, 
+        { multiple: true } %>
+    </div>
   </div>
   <div>
-    <%= f.label :description, "Description" %><br />
-    <%= f.text_area :description, rows: 3 %>
+    <div>
+      <%= f.label :name %>
+    </div>
+    <div>
+      <%= f.text_field :name %>
+    </div>
   </div>
   <div>
-    <%= f.label :content, "Content" %><br />
-    (You may use a <a href="/markdown-syntax-guide" target="_blank">limited
-      subset of Markdown</a> to format the story's content)<br />
-    <%= f.text_area :content, class: "data_entry" %>
+    <div>
+      <%= f.label :description %>
+    </div>
+    <div>
+      <%= f.text_area :description, rows: 3 %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :content %>
+    </div>
+    <div>
+      <%= f.text_area :content, rows: 15, class: 'data_entry' %>
+      <p>
+        (You may use a <a href="/markdown-syntax-guide" target="_blank">limited
+        subset of Markdown</a> to format the story's content)
+      </p>
+    </div>
   </div>
   <div>
     <label>Illustrations</label>
@@ -40,39 +69,24 @@
     <% end %>
     <p><%= f.link_to_add "Add illustration", :illustrations %></p>
   </div>
-  <label>Contributors</label>
-  <div class="scroll_checkboxes">
-    <% for contributor_profile in ContributorProfile.order(:name) %>
-      <label>
-        <%= check_box_tag "story[contributor_profile_ids][]", 
-          contributor_profile.id,
-          @story.contributor_profiles.include?(contributor_profile) %>
-        <%= contributor_profile.name %>
-      </label>
-      <br />
-    <% end %>
-  </div>
   <div>
-    <label>Related Encyclopaedia Entries</label>
-    <div class="scroll_checkboxes">
-      <% for encyclopaedia_entry in EncyclopaediaEntry.order(:name) %>
-        <label>
-          <%= check_box_tag "story[encyclopaedia_entry_ids][]",
-            encyclopaedia_entry.id,
-            @story.encyclopaedia_entries.include?(encyclopaedia_entry) %>
-          <%= encyclopaedia_entry.name %>
-        </label>
-        <br />
-      <% end %>
+    <div>
+      <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
+    </div>
+    <div>
+      <%= f.collection_select :encyclopaedia_entry_ids, 
+        EncyclopaediaEntry.order(:name), :id, :name, 
+        { selected: @story.encyclopaedia_entry_ids, include_blank: true }, 
+        { multiple: true } %>
     </div>
   </div>
   <% if policy(@story).permitted_attributes.include? :publish %>
     <div>
-      <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
+      <%= f.check_box :publish %> <%= f.label :publish, 'Publish?' %>
     </div>
   <% end %>
   <div>
-    <%= f.submit "Save and View" %>
-    <%= f.submit "Save and Continue Editing", name: :continue_editing %>
+    <%= f.submit 'Save and View' %>
+    <%= f.submit 'Save and Continue Editing', name: :continue_editing %>
   </div>
 <% end %>

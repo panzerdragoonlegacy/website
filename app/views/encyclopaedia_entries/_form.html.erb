@@ -1,37 +1,70 @@
 <%= nested_form_for @encyclopaedia_entry, html: { multipart: true } do |f| %>
-  <%= render "shared/error_messages", target: @encyclopaedia_entry %>
+  <%= render 'shared/error_messages', target: @encyclopaedia_entry %>
   <div>
-    <%= f.label :category_id, "Category" %><br />
-    <%= f.collection_select :category_id, @categories, :id, :name,
-      include_blank: false %>
+    <div>
+      <%= f.label :category_id, 'Category' %>
+    </div>
+    <div>
+      <%= f.collection_select :category_id, @categories, :id, :name,
+        { include_blank: true } %>
+    </div>
   </div>
   <div>
-    <%= f.label :encyclopaedia_entry_picture, "Encyclopaedia Entry Picture" %>
-    <br />
-    <% if @encyclopaedia_entry.encyclopaedia_entry_picture? %>
-    <%= image_tag(
-    @encyclopaedia_entry.encyclopaedia_entry_picture.url(:thumbnail)) %>
-    <br />
-    File has already been uploaded. Replace file?<br />
-    <% end %>
-    <%= f.file_field :encyclopaedia_entry_picture %>
+    <div>
+      <%= f.label :contributor_profile_ids, 'Contributors (optional)' %>
+    </div>
+    <div>
+      <%= f.collection_select :contributor_profile_ids, 
+        ContributorProfile.order(:name), :id, :name, 
+        { selected: @encyclopaedia_entry.contributor_profile_ids, 
+        include_blank: true }, { multiple: true } %>
+    </div>
   </div>
   <div>
-    <%= f.label :name, "Name" %><br />
-    <%= f.text_field :name %>
+    <div>
+      <%= f.label :encyclopaedia_entry_picture, 'Encyclopaedia Entry Picture' %>
+    </div>
+    <div>
+      <% if @encyclopaedia_entry.encyclopaedia_entry_picture? %>
+        <%= image_tag(
+          @encyclopaedia_entry.encyclopaedia_entry_picture.url(:thumbnail)) %>
+        <p>File has already been uploaded. Replace file?</p>
+      <% end %>
+      <%= f.file_field :encyclopaedia_entry_picture %>
+    </div>
   </div>
   <div>
-    <%= f.label :information, "Information Box" %><br />
-    (Use a <a href="/markdown-syntax-guide" target="_blank">Markdown
-      definition list</a> to format the encyclopaedia entry's information box)
-      <br />
-    <%= f.text_area :information, rows: 10 %>
+    <div>
+      <%= f.label :name, 'Name' %>
+    </div>
+    <div>
+      <%= f.text_field :name %>
+    </div>
   </div>
   <div>
-    <%= f.label :content, "Content" %><br />
-    (You may use a <a href="/markdown-syntax-guide" target="_blank">limited
-      subset of Markdown</a> to format the encyclopaedia entry's content)<br />
-    <%= f.text_area :content, class: "data_entry" %>
+    <div>
+      <%= f.label :information, 'Information Box' %>
+    </div>
+    <div>
+      <%= f.text_area :information, rows: 10 %>
+      <p>
+        (Use a <a href="/markdown-syntax-guide" target="_blank">Markdown
+        description list</a> to format the encyclopaedia entry's information 
+        box)
+      </p>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :content, 'Content' %>
+    </div>
+    <div>
+      <%= f.text_area :content, rows: 15, class: 'data_entry' %>
+      <p>
+        (You may use a <a href="/markdown-syntax-guide" target="_blank">limited
+        subset of Markdown</a> to format the encyclopaedia entry's content)
+      </p>
+    </div>
   </div>
   <div>
     <label>Illustrations</label>
@@ -55,157 +88,122 @@
     <p><%= f.link_to_add "Add illustration", :illustrations %></p>
   </div>
   <div>
-    <label>Contributors</label>
-    <div class="scroll_checkboxes">
-      <% for contributor_profile in ContributorProfile.order(:name) %>
-        <label>
-          <%= check_box_tag "encyclopaedia_entry[contributor_profile_ids][]", 
-            contributor_profile.id, 
-            @encyclopaedia_entry.contributor_profiles.include?(
-            contributor_profile) %> <%= contributor_profile.name %>
-        </label>
-        <br />
-      <% end %>
+    <div>
+      <%= f.label :article_ids, 'Related Articles' %>
+    </div>
+    <div>
+      <%= f.collection_select :article_ids, 
+        Article.order(:name), :id, :name, 
+        { selected: @encyclopaedia_entry.article_ids, include_blank: true }, 
+        { multiple: true } %>
     </div>
   </div>
   <div>
-    <label>Related Articles</label>
-    <div class="scroll_checkboxes">
-      <% for article in Article.order(:name) %>
-        <label>
-          <%= check_box_tag "encyclopaedia_entry[article_ids][]", article.id,
-            @encyclopaedia_entry.articles.include?(article) %>
-          <%= article.name %>
-        </label>
-        <br />
-      <% end %>
+    <div>
+      <%= f.label :download_ids, 'Related Downloads' %>
+    </div>
+    <div>
+      <%= f.collection_select :download_ids, 
+        Download.order(:name), :id, :name, 
+        { selected: @encyclopaedia_entry.download_ids, include_blank: true }, 
+        { multiple: true } %>
     </div>
   </div>
   <div>
-    <label>Related Downloads</label>
-    <div class="scroll_checkboxes">
-      <% for download in Download.order(:name) %>
-        <label>
-          <%= check_box_tag "encyclopaedia_entry[download_ids][]", download.id,
-            @encyclopaedia_entry.downloads.include?(download) %>
-          <%= download.name %>
-        </label>
-        <br />
-      <% end %>
+    <div>
+      <%= f.label :link_ids, 'Related Links' %>
+    </div>
+    <div>
+      <%= f.collection_select :link_ids, 
+        Link.order(:name), :id, :name, 
+        { selected: @encyclopaedia_entry.link_ids, include_blank: true }, 
+        { multiple: true } %>
     </div>
   </div>
   <div>
-    <label>Related Links</label>
-    <div class="scroll_checkboxes">
-      <% for link in Link.order(:name) %>
-        <label>
-          <%= check_box_tag "encyclopaedia_entry[link_ids][]", link.id,
-            @encyclopaedia_entry.links.include?(link) %>
-          <%= link.name %>
-        </label>
-        <br />
-      <% end %>
+    <div>
+      <%= f.label :music_track_ids, 'Related Music Tracks' %>
+    </div>
+    <div>
+      <%= f.collection_select :music_track_ids, 
+        MusicTrack.order(:name), :id, :name, 
+        { selected: @encyclopaedia_entry.music_track_ids, include_blank: true }, 
+        { multiple: true } %>
     </div>
   </div>
   <div>
-    <label>Related Music</label>
-    <div class="scroll_checkboxes">
-      <% for music_track in MusicTrack.order(:name) %>
-        <label>
-          <%= check_box_tag "encyclopaedia_entry[music_track_ids][]",
-            music_track.id,
-            @encyclopaedia_entry.music_tracks.include?(music_track) %>
-          <%= music_track.name %>
-        </label>
-        <br />
-      <% end %>
+    <div>
+      <%= f.label :picture_ids, 'Related Pictures' %>
+    </div>
+    <div>
+      <%= f.collection_select :picture_ids, 
+        Picture.order(:name), :id, :name, 
+        { selected: @encyclopaedia_entry.picture_ids, include_blank: true }, 
+        { multiple: true } %>
     </div>
   </div>
   <div>
-    <label>Related Pictures</label>
-    <div class="scroll_checkboxes">
-      <% for picture in Picture.order(:name) %>
-        <label>
-          <%= check_box_tag "encyclopaedia_entry[picture_ids][]", picture.id,
-            @encyclopaedia_entry.pictures.include?(picture) %>
-          <%= picture.name %>
-        </label>
-        <br />
-      <% end %>
+    <div>
+      <%= f.label :poem_ids, 'Related Poems' %>
+    </div>
+    <div>  
+      <%= f.collection_select :poem_ids, 
+        Poem.order(:name), :id, :name, 
+        { selected: @encyclopaedia_entry.poem_ids, include_blank: true }, 
+        { multiple: true } %>
     </div>
   </div>
   <div>
-    <label>Related Poems</label>
-    <div class="scroll_checkboxes">
-      <% for poem in Poem.order(:name) %>
-        <label>
-          <%= check_box_tag "encyclopaedia_entry[poem_ids][]", poem.id,
-            @encyclopaedia_entry.poems.include?(poem) %>
-          <%= poem.name %>
-        </label>
-        <br />
-      <% end %>
+    <div>
+      <%= f.label :quiz_ids, 'Related Quizzes' %>
+    </div>
+    <div>
+      <%= f.collection_select :quiz_ids, 
+        Quiz.order(:name), :id, :name, 
+        { selected: @encyclopaedia_entry.quiz_ids, include_blank: true }, 
+        { multiple: true } %>
     </div>
   </div>
   <div>
-    <label>Related Quizzes</label>
-    <div class="scroll_checkboxes">
-      <% for quiz in Quiz.order(:name) %>
-        <label>
-          <%= check_box_tag "encyclopaedia_entry[quiz_ids][]", quiz.id,
-            @encyclopaedia_entry.quizzes.include?(quiz) %>
-          <%= quiz.name %>
-        </label>
-        <br />
-      <% end %>
+    <div>
+      <%= f.label :resource_ids, 'Related Resources' %>
+    </div>
+    <div>
+      <%= f.collection_select :resource_ids, 
+        Resource.order(:name), :id, :name, 
+        { selected: @encyclopaedia_entry.resource_ids, include_blank: true }, 
+        { multiple: true } %>
     </div>
   </div>
   <div>
-    <label>Related Resources</label>
-    <div class="scroll_checkboxes">
-      <% for resource in Resource.order(:name) %>
-        <label>
-          <%= check_box_tag "encyclopaedia_entry[resource_ids][]", resource.id,
-            @encyclopaedia_entry.resources.include?(resource) %>
-          <%= resource.name %>
-        </label>
-        <br />
-      <% end %>
+    <div>
+      <%= f.label :story_ids, 'Related Stories' %>
+    </div>
+    <div>
+      <%= f.collection_select :story_ids, 
+        Story.order(:name), :id, :name, 
+        { selected: @encyclopaedia_entry.story_ids, include_blank: true }, 
+        { multiple: true } %>
     </div>
   </div>
   <div>
-    <label>Related Stories</label>
-    <div class="scroll_checkboxes">
-      <% for story in Story.order(:name) %>
-        <label>
-          <%= check_box_tag "encyclopaedia_entry[story_ids][]", story.id,
-            @encyclopaedia_entry.stories.include?(story) %>
-          <%= story.name %>
-        </label>
-        <br />
-      <% end %>
+    <div>
+      <%= f.label :video_ids, 'Related Videos' %>
     </div>
-  </div>
-  <div>
-    <label>Related Videos</label>
-    <div class="scroll_checkboxes">
-      <% for video in Video.order(:name) %>
-        <label>
-          <%= check_box_tag "encyclopaedia_entry[video_ids][]", video.id,
-            @encyclopaedia_entry.videos.include?(video) %>
-          <%= video.name %>
-        </label>
-        <br />
-      <% end %>
+    <div>
+      <%= f.collection_select :video_ids, 
+        Video.order(:name), :id, :name, 
+        { selected: @encyclopaedia_entry.video_ids, include_blank: true }, 
+        { multiple: true } %>
     </div>
   </div>
   <% if policy(@encyclopaedia_entry).permitted_attributes.include? :publish %>
     <div>
-      <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
+      <%= f.check_box :publish %> <%= f.label :publish, 'Publish?' %>
     </div>
   <% end %>
   <div>
-    <%= f.submit "Save and View" %>
-    <%= f.submit "Save and Continue Editing", name: :continue_editing %>
+    <%= f.submit 'Save and View' %>
+    <%= f.submit 'Save and Continue Editing', name: :continue_editing %>
   </div>
 <% end %>

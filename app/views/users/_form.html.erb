@@ -1,19 +1,27 @@
 <%= form_for @user do |f| %>
-  <%= render "shared/error_messages", target: @user %>
+  <%= render 'shared/error_messages', target: @user %>
   <div>
-    <%= f.label :email, "Email" %><br />
-    <%= f.text_field :email %>
+    <div>
+      <%= f.label :email, 'Email' %>
+    </div>
+    <div>
+      <%= f.text_field :email %>
+    </div>
   </div>
   <div>
-    <%= f.label :contributor_profile_id, "Contributor Profile" %><br />
-    <%= f.collection_select :contributor_profile_id, @contributor_profiles, 
-      :id, :name, include_blank: true %>
+    <div>
+      <%= f.label :contributor_profile_id, 'Contributor Profile' %>
+    </div>
+    <div>
+      <%= f.collection_select :contributor_profile_id, @contributor_profiles, 
+        :id, :name, { include_blank: true } %>
+    </div>
   </div>
   <div>
     <%= f.check_box :administrator %> 
-    <%= f.label :administrator, "Administrator? (Be Careful!)" %>
+    <%= f.label :administrator, 'Administrator? (Be Careful!)' %>
   </div>
   <div>
-    <%= f.submit "Save" %>
+    <%= f.submit 'Save' %>
   </div>
 <% end %>

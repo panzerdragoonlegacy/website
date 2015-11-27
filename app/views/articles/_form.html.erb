@@ -9,7 +9,7 @@
         { include_blank: true } %>
     </div>
   </div>
-    <div>
+  <div>
     <div>
       <%= f.label :contributor_profile_ids, 'Contributors' %>
     </div>
@@ -21,18 +21,32 @@
     </div>
   </div>
   <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <div>
+      <%= f.label :name %>
+    </div>
+    <div>
+      <%= f.text_field :name %>
+    </div>
   </div>
   <div>
-    <%= f.label :description %>
-    <%= f.text_area :description, rows: 3 %>
+    <div>
+      <%= f.label :description %>
+    </div>
+    <div>
+      <%= f.text_area :description, rows: 3 %>
+    </div>
   </div>
   <div>
-    <%= f.label :content %>
-    <%= f.text_area :content, rows: 15, class: 'data_entry' %>
-    <p>(You may use a <a href="/markdown-syntax-guide" target="_blank">limited
-      subset of Markdown</a> to format the article's content)</p>
+    <div>
+      <%= f.label :content %>
+    </div>
+    <div>
+      <%= f.text_area :content, rows: 15, class: 'data_entry' %>
+      <p>
+        (You may use a <a href="/markdown-syntax-guide" target="_blank">limited
+        subset of Markdown</a> to format the article's content)
+      </p>
+    </div>
   </div>
   <div>
     <label>Illustrations</label>
@@ -67,7 +81,9 @@
     </div>
   </div>
   <% if policy(@article).permitted_attributes.include? :publish %>
-    <%= f.check_box :publish %> <%= f.label :publish, 'Publish?' %>
+    <div>
+      <%= f.check_box :publish %> <%= f.label :publish, 'Publish?' %>
+    </div>
   <% end %>
   <div>
     <%= f.submit 'Save and View' %>

@@ -1,57 +1,82 @@
 <%= form_for @download, html: { multipart: true } do |f| %>
-  <%= render "shared/error_messages", target: @download %>
+  <%= render 'shared/error_messages', target: @download %>
   <div>
-    <%= f.label :category_id, "Category" %><br />
-    <%= f.collection_select :category_id, @categories, :id, :name,
-      include_blank: false %>
+    <div>
+      <%= f.label :category_id, 'Category' %>
+    </div>
+    <div>
+      <%= f.collection_select :category_id, @categories, :id, :name,
+        { include_blank: true } %>
+    </div>
   </div>
   <div>
-    <%= f.label :download, "Download" %><br />
-    <% if @download.download? %>
-    File has already been uploaded. Replace file?<br />
-    <% end %>
-    <%= f.file_field :download %>
+    <div>
+      <%= f.label :contributor_profile_ids, 'Contributors' %>
+    </div>
+    <div>  
+      <%= f.collection_select :contributor_profile_ids, 
+        ContributorProfile.order(:name), :id, :name, 
+        { selected: @download.contributor_profile_ids, include_blank: true }, 
+        { multiple: true } %>
+    </div>
   </div>
   <div>
-    <%= f.label :name, "Name" %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div>
-    <%= f.label :description, "Description" %><br />
-    <%= f.text_area :description, rows: 3 %>
-  </div>
-  <label>Contributors</label>
-  <div class="scroll_checkboxes">
-    <% for contributor_profile in ContributorProfile.order(:name) %>
-      <label>
-        <%= check_box_tag "download[contributor_profile_ids][]", 
-          contributor_profile.id, @download.contributor_profiles.include?(
-          contributor_profile) %> <%= contributor_profile.name %>
-      </label>
-      <br />
-    <% end %>
-  </div>
-  <div>
-    <label>Related Encyclopaedia Entries</label>
-    <div class="scroll_checkboxes">
-      <% for encyclopaedia_entry in EncyclopaediaEntry.order(:name) %>
-        <label>
-          <%= check_box_tag "download[encyclopaedia_entry_ids][]",
-            encyclopaedia_entry.id,
-            @download.encyclopaedia_entries.include?(encyclopaedia_entry)
-          %> <%= encyclopaedia_entry.name %>
-        </label>
-        <br />
+    <div>
+      <%= f.label :download, 'Download' %>
+    </div>
+    <div>
+      <% if @download.download? %>
+        <p>File has already been uploaded. Replace file?</p>
       <% end %>
+      <%= f.file_field :download %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :name, 'Name' %>
+    </div>
+    <div>
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :description, 'Description' %>
+    </div>
+    <div>
+      <%= f.text_area :description, rows: 3 %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :information, 'Extra Information' %>
+    </div>
+    <div>
+      <%= f.text_area :information, rows: 10 %>
+      <p>
+        (You may use a <a href="/markdown-syntax-guide" target="_blank">limited
+        subset of Markdown</a> to format the downloads's extra information)
+      </p>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
+    </div>
+    <div>
+      <%= f.collection_select :encyclopaedia_entry_ids, 
+        EncyclopaediaEntry.order(:name), :id, :name, 
+        { selected: @download.encyclopaedia_entry_ids, include_blank: true }, 
+        { multiple: true } %>
     </div>
   </div>
   <% if policy(@download).permitted_attributes.include? :publish %>
     <div>
-      <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
+      <%= f.check_box :publish %> <%= f.label :publish, 'Publish?' %>
     </div>
   <% end %>
   <div>
-    <%= f.submit "Save and View" %>
-    <%= f.submit "Save and Continue Editing", name: :continue_editing %>
+    <%= f.submit 'Save and View' %>
+    <%= f.submit 'Save and Continue Editing', name: :continue_editing %>
   </div>
 <% end %>

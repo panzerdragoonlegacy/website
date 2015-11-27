@@ -1,75 +1,101 @@
 <%= form_for @video, html: { multipart: true } do |f| %>
-  <%= render "shared/error_messages", target: @video %>
+  <%= render 'shared/error_messages', target: @video %>
   <div>
-    <%= f.label :category_id, "Category" %><br />
-    <%= f.collection_select :category_id, @categories, :id, :name,
-      include_blank: false %>
-  </div>
-  <div>
-    <%= f.label :mp4_video, "MP4 Video" %><br />
-    <% if @video.mp4_video? %>
-    File has already been uploaded. Replace file?<br />
-    <% end %>
-    <%= f.file_field :mp4_video %>
-  </div>
-  <div>
-    <%= f.label :webm_video, "WebM Video" %><br />
-    <% if @video.webm_video? %>
-    File has already been uploaded. Replace file?<br />
-    <% end %>
-    <%= f.file_field :webm_video %>
-  </div>
-  <div>
-    <%= f.label :youtube_video_id, "YouTube Video ID" %><br />
-    <%= f.text_field :youtube_video_id %>
-  </div>
-  <div>
-    <%= f.label :name, "Name" %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div>
-    <%= f.label :description, "Description" %><br />
-    <%= f.text_area :description, rows: 5 %>
-  </div>
-  <div>
-    <%= f.label :information, "Information" %><br />
-    (You may use a <a href="/markdown-syntax-guide" target="_blank">limited
-      subset of Markdown</a> to format the video's information)<br />
-    <%= f.text_area :information, class: "data_entry" %>
-  </div>
-  <label>Contributors</label>
-  <div class="scroll_checkboxes">
-    <% for contributor_profile in ContributorProfile.order(:name) %>
-      <label>
-        <%= check_box_tag "video[contributor_profile_ids][]", 
-          contributor_profile.id,
-          @video.contributor_profiles.include?(contributor_profile) %>
-        <%= contributor_profile.name %>
-      </label>
-      <br />
-    <% end %>
-  </div>
-  <div>
-    <label>Related Encyclopaedia Entries</label>
-    <div class="scroll_checkboxes">
-      <% for encyclopaedia_entry in EncyclopaediaEntry.order(:name) %>
-        <label>
-          <%= check_box_tag "video[encyclopaedia_entry_ids][]",
-            encyclopaedia_entry.id,
-            @video.encyclopaedia_entries.include?(encyclopaedia_entry) %>
-          <%= encyclopaedia_entry.name %>
-        </label>
-        <br />
-      <% end %>
+    <div>
+      <%= f.label :category_id, 'Category' %>
+    </div>
+    <div>
+      <%= f.collection_select :category_id, @categories, :id, :name,
+        { include_blank: true } %>
     </div>
   </div>
-  <% if policy(@story).permitted_attributes.include? :publish %>
+  <div>
     <div>
-      <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
+      <%= f.label :contributor_profile_ids, 'Contributors' %>
+    </div>
+    <div>
+      <%= f.collection_select :contributor_profile_ids, 
+        ContributorProfile.order(:name), :id, :name, 
+        { selected: @video.contributor_profile_ids, include_blank: true }, 
+        { multiple: true } %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :mp4_video, 'MP4 Video' %>
+    </div>
+    <div>
+      <% if @video.mp4_video? %>
+        <p>File has already been uploaded. Replace file?</p>
+      <% end %>
+      <%= f.file_field :mp4_video %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :webm_video, 'WebM Video' %>
+    </div>
+    <div>
+      <% if @video.webm_video? %>
+        <p>File has already been uploaded. Replace file?</p>
+      <% end %>
+      <%= f.file_field :webm_video %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :youtube_video_id, "YouTube Video ID" %>
+    </div>
+    <div>
+      <%= f.text_field :youtube_video_id %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :name, 'Name' %>
+    </div>
+    <div>
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :description, 'Description' %>
+    </div>
+    <div>
+      <%= f.text_area :description, rows: 3 %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :information, 'Extra Information' %>
+    </div>
+    <div>
+      <%= f.text_area :information, rows: 10, class: 'data_entry' %>
+      <p>
+        You may use a <a href="/markdown-syntax-guide" target="_blank">limited
+        subset of Markdown</a> to format the video's extra information)
+      </p>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
+    </div>
+    <div>
+      <%= f.collection_select :encyclopaedia_entry_ids, 
+        EncyclopaediaEntry.order(:name), :id, :name, 
+        { selected: @video.encyclopaedia_entry_ids, include_blank: true }, 
+        { multiple: true } %>
+    </div>
+  </div>
+  <% if policy(@video).permitted_attributes.include? :publish %>
+    <div>
+      <%= f.check_box :publish %> <%= f.label :publish, 'Publish?' %>
     </div>
   <% end %>
   <div>
-    <%= f.submit "Save and View" %>
-    <%= f.submit "Save and Continue Editing", name: :continue_editing %>
+    <%= f.submit 'Save and View' %>
+    <%= f.submit 'Save and Continue Editing', name: :continue_editing %>
   </div>
 <% end %>
