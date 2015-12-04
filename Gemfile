@@ -23,6 +23,7 @@ end
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'devise', '~> 3.5.2'
+gem 'font-awesome-rails', '~> 4.5.0.0'
 gem 'jquery-rails', '~> 3.1.0'
 gem 'kaminari', '~> 0.15.1'
 gem 'kramdown', '~> 1.3.3'

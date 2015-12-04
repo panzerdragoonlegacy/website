@@ -1,0 +1,18 @@
+ul#social_media_links {
+	float: right;
+	padding-top: 10px;
+	margin-right: 12px;
+
+  li {
+  	display: inline;
+    padding-right: 10px;
+
+    i {
+    	font-size: 30px;
+    }
+
+    a:hover {
+    	color: $main-text-colour;
+    }
+  }
+}

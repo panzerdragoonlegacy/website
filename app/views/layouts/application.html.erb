@@ -17,6 +17,7 @@
       <div id="header">
         <%= link_to image_tag("logo.png", id: "logo", 
           alt: "Panzer Dragoon Legacy"), root_url %>
+        <%= render 'layouts/social_media_links' %>
       </div>
       <div id="banner"></div>
       <div id="navigation">
@@ -37,16 +38,6 @@
       </div>
       <div id="main">
         <div id="aside">
-          <h3>Get Updates From...</h3>
-          <ul>
-            <li><%= link_to "Atom Web Feed", news_entries_url(:atom) %></li>
-            <li>
-              <a href="https://www.facebook.com/panzerdragoonlegacy">
-                Facebook
-              </a>
-            </li>
-            <li><a href="https://www.twitter.com/panzerlegacy">Twitter</a></li>
-          </ul>
           <% if @sagas.present? %>
             <h3>Browse by Saga</h3>
             <ul>
