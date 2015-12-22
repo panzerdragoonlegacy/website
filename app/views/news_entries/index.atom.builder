@@ -1,5 +1,5 @@
 atom_feed do |feed|
-  feed.title("The Will of the Ancients")
+  feed.title("Panzer Dragoon Legacy")
   feed.updated(@news_entries.first.created_at)
 
   @news_entries.each do |news_entry|
