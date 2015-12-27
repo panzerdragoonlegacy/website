@@ -42,7 +42,7 @@ Publishing Code Changes
 Before changes are committed, ensure that all automated tests are passing:
 
 ```
-rspec
+bin/rspec
 ```
 
 Once code changes are ready to be published, commit and push to the master
