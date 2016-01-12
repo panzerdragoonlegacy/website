@@ -4,19 +4,19 @@ class Picture < ActiveRecord::Base
   include Relatable
   include Sluggable
   include Syncable
-  
+
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
   validates :description, presence: true, length: { in: 2..250 }
 
-  has_attached_file :picture, 
-    styles: { 
-      mini_thumbnail: "75x75#", 
-      thumbnail: "150x150>", 
+  has_attached_file :picture,
+    styles: {
+      mini_thumbnail: "75x75#",
+      thumbnail: "150x150>",
       triple_thumbnail: "150x150#",
-      double_thumbnail: "240x240#", 
-      single_thumbnail: "486x486>", 
-      embedded: "625x625>" 
-    }, 
+      double_thumbnail: "238x238#", 
+      single_thumbnail: "486x486>",
+      embedded: "625x625>"
+    },
     path: ":rails_root/public/system/:attachment/:id/:style/:filename",
     url: "/system/:attachment/:id/:style/:filename"
 
