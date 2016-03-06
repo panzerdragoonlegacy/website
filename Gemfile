@@ -5,6 +5,7 @@ gem 'rails', '4.2.4'
 group :development do
   gem 'capistrano', '3.4.0'
   gem 'capistrano-bundler', '~> 1.1.4'
+  gem 'capistrano-rails', '~> 1.1.6'
   gem 'capistrano-rbenv', '~> 2.0.4'
   gem 'puma', '~> 3.1.0'
   gem 'spring', '~> 1.1.2'
