@@ -3,9 +3,10 @@ source 'http://rubygems.org'
 gem 'rails', '4.2.4'
 
 group :development do
-  gem 'capistrano', '2.15.5' # Out of date
+  gem 'capistrano', '3.4.0'
+  gem 'capistrano-bundler', '~> 1.1.4'
+  gem 'capistrano-rbenv', '~> 2.0.4'
   gem 'puma', '~> 2.9.1'
-  gem 'rvm-capistrano', '1.5.6', require: false
   gem 'spring', '~> 1.1.2'
   gem 'sqlite3', '~> 1.3.9'
   gem 'web-console', '~> 2.0.0'
