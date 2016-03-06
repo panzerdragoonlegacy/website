@@ -6,7 +6,7 @@ group :development do
   gem 'capistrano', '3.4.0'
   gem 'capistrano-bundler', '~> 1.1.4'
   gem 'capistrano-rbenv', '~> 2.0.4'
-  gem 'puma', '~> 2.9.1'
+  gem 'puma', '~> 3.1.0'
   gem 'spring', '~> 1.1.2'
   gem 'sqlite3', '~> 1.3.9'
   gem 'web-console', '~> 2.0.0'
