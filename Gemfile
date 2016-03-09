@@ -20,7 +20,7 @@ end
 
 group :test do
   gem 'factory_girl_rails', '~> 4.4.1'
-  gem 'pundit-matchers', '~> 1.0.1'
+  gem 'pundit-matchers', '~> 1.0.2'
   gem 'shoulda-matchers', '~> 2.8.0'
 end
 
