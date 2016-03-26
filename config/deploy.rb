@@ -48,7 +48,6 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml',
   'config/secrets.yml')
 
 namespace :deploy do
-
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
@@ -58,4 +57,18 @@ namespace :deploy do
     end
   end
 
+  desc "build missing paperclip styles"
+  task :build_missing_paperclip_styles do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, "paperclip:refresh:missing_styles"
+        end
+      end
+    end
+  end
+
+  # Note: You will need to temporarily increase the size of the Digital Ocean
+  # droplet from 512MB to 1GB of RAM in order for this step to succeed.
+  after :compile_assets, :build_missing_paperclip_styles
 end
