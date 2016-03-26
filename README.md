@@ -57,13 +57,13 @@ git push origin master
 Now deploy the changes from origin with Capistrano:
 
 ```
-cap deploy
+cap production deploy
 ```
 
 If there are database migrations to be applied, use:
 
 ```
-cap deploy:migrations
+cap production deploy:migrate
 ```
 
 Copyright
