@@ -114,11 +114,11 @@ Step-by-step instructions for setting up a development environment for the site.
    is no need to create a new user account. Also, the database can be created
    via rake, so the remaining steps for setting up PostgreSQL can be skipped.
 
-5. Create a user for the webapp:
+3. Create a user for the webapp:
 
    `CREATE USER panzerdragoonlegacy WITH ENCRYPTED PASSWORD 'PASSWORDHERE';`
 
- 4. Create databases for the development and test environments:
+4. Create databases for the development and test environments:
 
    `CREATE DATABASE panzerdragoonlegacy_dev;`
 
