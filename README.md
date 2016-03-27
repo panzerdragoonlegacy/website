@@ -8,10 +8,11 @@ Documentation
 -------------
 
 For instructions on setting up a development environment for the site, see
-DEVELOPMENT.md. To provision a VPS for the site's deployment, see PRODUCTION.md.
+[DEVELOPMENT.md](DEVELOPMENT.md). To provision a VPS for the site's deployment,
+see [PRODUCTION.md](PRODUCTION.md).
 
 For an overview of how to access and configure the site and related services,
-refer to OVERVIEW.md.
+refer to [OVERVIEW.md](OVERVIEW.md).
 
 Copyright
 ---------
