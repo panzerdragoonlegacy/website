@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '4.2.6'
+gem 'rake', '11.1.1'
 
 group :development do
   gem 'capistrano', '3.4.0'
