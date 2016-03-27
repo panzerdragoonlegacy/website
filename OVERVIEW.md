@@ -194,6 +194,6 @@ Both the main site and forum use Mailgun to send email.
 <http://www.mailgun.com>
 
 The account for this service is linked to the email address
-`support@panzerdragoonlegacy.com`. As with Twiiter, this email address can be
+`support@panzerdragoonlegacy.com`. As with Twitter, this email address can be
 reconfigured to redirect to another email address using the Namecheap control
 panel.
