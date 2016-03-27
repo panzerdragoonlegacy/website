@@ -9,7 +9,6 @@ group :development do
   gem 'capistrano-rbenv', '~> 2.0.4'
   gem 'puma', '~> 3.1.0'
   gem 'spring', '~> 1.1.2'
-  gem 'sqlite3', '~> 1.3.9'
   gem 'web-console', '~> 2.0.0'
 end
 
