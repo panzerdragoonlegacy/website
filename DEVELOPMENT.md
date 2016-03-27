@@ -127,11 +127,13 @@ Step-by-step instructions for setting up a development environment for the site.
 5. Give the new user full access to the new databases:
 
   `GRANT ALL PRIVILEGES ON DATABASE panzerdragoonlegacy_dev TO panzerdragoonlegacy;`
+
   `GRANT ALL PRIVILEGES ON DATABASE panzerdragoonlegacy_test TO panzerdragoonlegacy;`
 
 6. Set the owner of the new databases to the new user:
 
   `ALTER DATABASE panzerdragoonlegacy_dev OWNER TO panzerdragoonlegacy;`
+  
   `ALTER DATABASE panzerdragoonlegacy_test OWNER TO panzerdragoonlegacy;`
 
 7. Quit postgres:
