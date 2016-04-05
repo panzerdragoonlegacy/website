@@ -133,7 +133,7 @@ Step-by-step instructions for setting up a development environment for the site.
 6. Set the owner of the new databases to the new user:
 
   `ALTER DATABASE panzerdragoonlegacy_dev OWNER TO panzerdragoonlegacy;`
-  
+
   `ALTER DATABASE panzerdragoonlegacy_test OWNER TO panzerdragoonlegacy;`
 
 7. Quit postgres:
@@ -249,7 +249,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
   `git config --global user.name "Chris Alley"`
 
-  `git config --global user.email "chris@chrisalley.info`
+  `git config --global user.email "chris@chrisalley.info"`
 
 3. Once code changes are ready to be published, commit and push to the master
    branch (or create a pull request if you don't have permission):
