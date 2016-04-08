@@ -4,6 +4,11 @@ Step-by-step instructions for setting up a development environment for the site.
 
 ## Set Up the Virtual Machine
 
+These instructions are geared towards setting up the development environment in
+a Debian-based virtual machine (specifically Linux Mint). Alternatively,
+you may develop on another Unix-based operating system such as OSX, using
+Homebrew for package management instead of APT.
+
 1. Download Virtual Box from: https://www.virtualbox.org/wiki/Downloads
 
 2. Download Linux Mint from: https://linuxmint.com/download.php
