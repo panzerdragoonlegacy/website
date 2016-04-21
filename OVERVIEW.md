@@ -180,8 +180,10 @@ and can be reconfigured via the Namecheap control panel if need be.
 
 ### YouTube
 
-The YouTube account is still linked to the email
-`support@thewilloftheancients.com` and it is unclear how to change this.
+The YouTube account is owned by the Google account
+`panzerdragoonlegacy@gmail.com` for which a password reset email can be sent to
+`support@panzerdragoonlegacy.com`. The YouTube channel can be managed via the
+administrators personal Google account.
 
 ### Steam
 
