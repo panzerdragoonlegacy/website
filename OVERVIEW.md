@@ -58,7 +58,7 @@ other contributors can log in via this link:
 
 ##### Using the Command Line
 
-Ocassionally you may need to update the site's content without the constraints
+Occasionally you may need to update the site's content without the constraints
 of the web user interface. However, be warned that these constraints have been
 put in place for a reason! If you must use the command line, it is better to
 use Rails console rather than updating tables in PostgreSQL directly. This will
