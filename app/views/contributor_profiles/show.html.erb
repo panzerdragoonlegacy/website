@@ -3,7 +3,7 @@
 <% if policy(@contributor_profile).edit? %>
   <ul id="administration">
     <li>
-      <%= link_to 'Edit Contributor Profile', 
+      <%= link_to 'Edit Contributor Profile',
         edit_contributor_profile_path(@contributor_profile) %>
     </li>
   </ul>
@@ -19,7 +19,9 @@
 <% end %>
 
 <% unless @contributor_profile.avatar_file_name.blank? %>
-  <%= image_tag @contributor_profile.avatar.url(:embedded) %><br />
+  <div class="thumbnail">
+    <%= image_tag @contributor_profile.avatar.url(:embedded) %>
+  </div>
 <% end %>
 
 <% if user_signed_in? %>
@@ -31,28 +33,28 @@
   <% end %>
 <% end %>
 
-<% unless @contributor_profile.website.blank? and 
-  @contributor_profile.facebook_username.blank? and 
+<% unless @contributor_profile.website.blank? and
+  @contributor_profile.facebook_username.blank? and
   @contributor_profile.twitter_username.blank? %>
   <dl>
     <% unless @contributor_profile.website.blank? %>
       <dt>Website:</dt>
       <dd>
-        <%= link_to @contributor_profile.website, 
+        <%= link_to @contributor_profile.website,
           @contributor_profile.website %>
       </dd>
     <% end %>
     <% unless @contributor_profile.facebook_username.blank? %>
       <dt>Facebook Username:</dt>
       <dd>
-        <%= link_to @contributor_profile.facebook_username, 
+        <%= link_to @contributor_profile.facebook_username,
           "http://www.facebook.com/" + @contributor_profile.facebook_username %>
       </dd>
     <% end %>
     <% unless @contributor_profile.twitter_username.blank? %>
       <dt>Twitter Username:</dt>
       <dd>
-        <%= link_to @contributor_profile.twitter_username, 
+        <%= link_to @contributor_profile.twitter_username,
           "http://www.twitter.com/" + @contributor_profile.twitter_username %>
       </dd>
     <% end %>
@@ -64,7 +66,7 @@
   <ul>
     <% unless news_entry_count(@contributor_profile) == 0 %>
       <li>
-        <%= link_to(pluralize(news_entry_count(@contributor_profile), 
+        <%= link_to(pluralize(news_entry_count(@contributor_profile),
           'news entry'), contributor_profile_news_entries_path(
           @contributor_profile)) %>
       </li>
@@ -89,7 +91,7 @@
     <% end %>
     <% unless music_track_count(@contributor_profile) == 0 %>
       <li>
-        <%= link_to(pluralize(music_track_count(@contributor_profile), 
+        <%= link_to(pluralize(music_track_count(@contributor_profile),
           'music track'), contributor_profile_music_tracks_path(
           @contributor_profile)) %>
       </li>
