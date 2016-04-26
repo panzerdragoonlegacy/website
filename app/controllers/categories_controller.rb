@@ -46,7 +46,7 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    @category = Category.new
+    @category = Category.new(category_type: params[:category_type])
     authorize @category
   end
 
