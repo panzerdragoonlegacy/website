@@ -15,7 +15,7 @@
     <div id="overall">
       <%= render 'illustrations/popover' %>
       <div id="header">
-        <%= link_to image_tag("logo.png", id: "logo", 
+        <%= link_to image_tag("logo.png", id: "logo",
           alt: "Panzer Dragoon Legacy"), root_url %>
         <%= render 'layouts/social_media_links' %>
       </div>
@@ -68,6 +68,10 @@
             <% if current_user.administrator %>
               <h3>Administrator Resources</h3>
               <ul>
+                <li><%= link_to 'New Category', new_category_path %></li>
+                <li>
+                  <%= link_to 'New Category Group', new_category_group_path %>
+                </li>
                 <li><%= link_to 'Emoticons', emoticons_path %></li>
                 <li><%= link_to 'Pages', pages_path %></li>
                 <li><%= link_to 'Sagas', sagas_path %></li>
@@ -86,7 +90,7 @@
           <% if user_signed_in? %>
             <h3>Your Details</h3>
             <ul>
-              <li>Welcome  
+              <li>Welcome
                 <% if current_user.contributor_profile_id %>
                   <%= current_user.contributor_profile.name %>
                 <% else %>
@@ -94,7 +98,7 @@
                 <% end %>
               </li>
               <li><%= link_to "Edit Profile", edit_user_registration_path %>
-              <li><%= link_to "Log Out", destroy_user_session_path, 
+              <li><%= link_to "Log Out", destroy_user_session_path,
                 method: :delete %></li>
               <li><%= link_to "Drafts", drafts_path %></li>
             </ul>

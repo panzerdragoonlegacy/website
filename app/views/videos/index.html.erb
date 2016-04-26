@@ -6,9 +6,16 @@
   <% title "Videos" %>
 <% end %>
 
-<% if policy(Video).new? %>
+<% if policy(Category).new? or policy(Video).new? %>
   <ul class="administration">
-    <li><%= link_to 'New Video', new_video_path %></li>
+    <% if policy(Category).new? %>
+      <li>
+        <%= link_to 'New Category', new_category_path(category_type: :video) %>
+      </li>
+    <% end %>
+    <% if policy(Video).new? %>
+      <li><%= link_to 'New Video', new_video_path %></li>
+    <% end %>
   </ul>
 <% end %>
 

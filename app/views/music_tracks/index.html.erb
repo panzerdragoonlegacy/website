@@ -6,9 +6,17 @@
   <% title "Music Tracks" %>
 <% end %>
 
-<% if policy(MusicTrack).new? %>
+<% if policy(Category).new? or policy(MusicTrack).new? %>
   <ul class="administration">
-    <li><%= link_to 'New Music Track', new_music_track_path %></li>
+    <% if policy(Category).new? %>
+      <li>
+        <%= link_to 'New Category', new_category_path(
+          category_type: :music_track) %>
+      </li>
+    <% end %>
+    <% if policy(MusicTrack).new? %>
+      <li><%= link_to 'New Music Track', new_music_track_path %></li>
+    <% end %>
   </ul>
 <% end %>
 

@@ -5,9 +5,12 @@
   <p class="unpublished">Unpublished</p>
 <% end %>
 
-<% if policy(Category).new? or policy(@category).edit? or
-  policy(@category).destroy? %>
+<% if policy(CategoryGroup).new? or policy(Category).new? or
+  policy(@category).edit? or policy(@category).destroy? %>
   <ul class="administration">
+    <% if policy(CategoryGroup).new? %>
+      <li><%= link_to 'New Category Group', new_category_group_path %></li>
+    <% end %>
     <% if policy(Category).new? %>
       <li><%= link_to 'New Category', new_category_path %></li>
     <% end %>

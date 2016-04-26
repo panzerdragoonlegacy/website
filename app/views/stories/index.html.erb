@@ -6,9 +6,16 @@
   <% title "Stories" %>
 <% end %>
 
-<% if policy(Story).new? %>
+<% if policy(Category).new? or policy(Story).new? %>
   <ul class="administration">
-    <li><%= link_to 'New Story', new_story_path %></li>
+    <% if policy(Category).new? %>
+      <li>
+        <%= link_to 'New Category', new_category_path(category_type: :story) %>
+      </li>
+    <% end %>
+    <% if policy(Story).new? %>
+      <li><%= link_to 'New Story', new_story_path %></li>
+    <% end %>
   </ul>
 <% end %>
 

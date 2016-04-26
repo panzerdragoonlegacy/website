@@ -6,9 +6,26 @@
   <% title "Pictures" %>
 <% end %>
 
-<% if policy(Picture).new? %>
+<% if policy(CategoryGroup).new? or policy(Category).new? or
+  policy(Picture).new? %>
   <ul class="administration">
-    <li><%= link_to 'New Picture', new_picture_path %></li>
+    <% if policy(CategoryGroup).new? %>
+      <li>
+        <%= link_to 'New Category Group', new_category_group_path(
+          category_group_type: :picture) %>
+      </li>
+    <% end %>
+    <% if policy(Category).new? %>
+      <li>
+        <%= link_to 'New Category', new_category_path(
+          category_type: :picture) %>
+      </li>
+    <% end %>
+    <% if policy(Picture).new? %>
+      <li>
+        <%= link_to 'New Picture', new_picture_path %>
+      </li>
+    <% end %>
   </ul>
 <% end %>
 
