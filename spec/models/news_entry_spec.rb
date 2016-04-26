@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe NewsEntry, type: :model do
-  describe "fields" do
+  describe 'fields' do
     it { should respond_to(:name) }
     it { should respond_to(:url) }
     it { should respond_to(:content) }
@@ -13,14 +13,14 @@ RSpec.describe NewsEntry, type: :model do
     it { should respond_to(:published_at) }
   end
 
-  describe "validations" do
+  describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
     it { should validate_length_of(:name).is_at_least(2).is_at_most(55) }
     it { should validate_presence_of(:content) }
   end
 
-  describe "associations" do
+  describe 'associations' do
     it { should belong_to(:contributor_profile) }
   end
 end

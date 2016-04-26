@@ -3,7 +3,7 @@ FactoryGirl.define do
     factory :valid_link do
       sequence(:name) { |n| "Link #{n}" }
       sequence(:url) { |n| "http://www.example#{n}.com" }
-      description "Test Description"
+      description 'Test Description'
 
       category { FactoryGirl.create(:category) }
 

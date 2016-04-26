@@ -7,13 +7,13 @@ describe UserPolicy do
     UserPolicy::Scope.new(current_user, User.all).resolve
   }
 
-  context "being a visitor" do
+  context 'being a visitor' do
     let(:current_user) { nil }
-    
-    context "accessing a user" do
+
+    context 'accessing a user' do
       let(:user) { FactoryGirl.create(:registered_user) }
 
-      it "excludes user from resolved scope" do
+      it 'excludes user from resolved scope' do
         expect(resolved_scope).not_to include(user)
       end
 
@@ -24,13 +24,13 @@ describe UserPolicy do
     end
   end
 
-  context "being a registered user" do
+  context 'being a registered user' do
     let(:current_user) { FactoryGirl.create(:registered_user) }
-    
-    context "accessing a user" do
+
+    context 'accessing a user' do
       let(:user) { FactoryGirl.create(:registered_user) }
 
-      it "excludes user from resolved scope" do
+      it 'excludes user from resolved scope' do
         expect(resolved_scope).not_to include(user)
       end
 
@@ -41,13 +41,13 @@ describe UserPolicy do
     end
   end
 
-  context "being an administrator" do
+  context 'being an administrator' do
     let(:current_user) { FactoryGirl.create(:administrator) }
 
-    context "accessing a user" do
+    context 'accessing a user' do
       let(:user) { FactoryGirl.create(:registered_user) }
 
-      it "includes user in resolved scope" do
+      it 'includes user in resolved scope' do
         expect(resolved_scope).to include(user)
       end
 

@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :video do
     factory :valid_video do
       sequence(:name) { |n| "Video #{n}" }
-      description "Test Description"
+      description 'Test Description'
       mp4_video Rack::Test::UploadedFile.new(
         'spec/fixtures/video.mp4', 'video/mp4')
       webm_video Rack::Test::UploadedFile.new(

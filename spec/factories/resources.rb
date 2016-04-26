@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :resource do
     factory :valid_resource do
       sequence(:name) { |n| "Resource #{n}" }
-      content "Test Content"
+      content 'Test Content'
 
       category { FactoryGirl.create(:category) }
       contributor_profiles { [FactoryGirl.create(:contributor_profile)] }

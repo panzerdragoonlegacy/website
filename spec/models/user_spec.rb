@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe "fields" do
+  describe 'fields' do
     it { should respond_to(:email) }
     it { should respond_to(:encrypted_password) }
     it { should respond_to(:reset_password_token) }
@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
     it { should respond_to(:contributor_profile) }
   end
 
-  describe "associations" do
+  describe 'associations' do
     it { should belong_to(:contributor_profile) }
   end
 end

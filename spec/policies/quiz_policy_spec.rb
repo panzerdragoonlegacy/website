@@ -7,13 +7,13 @@ describe QuizPolicy do
     QuizPolicy::Scope.new(user, Quiz.all).resolve
   }
 
-  context "being a visitor" do
+  context 'being a visitor' do
     let(:user) { nil }
 
-    context "accessing a published quiz" do
+    context 'accessing a published quiz' do
       let(:quiz) { FactoryGirl.create(:published_quiz) }
 
-      it "includes quiz in resolved scope" do
+      it 'includes quiz in resolved scope' do
         expect(resolved_scope).to include(quiz)
       end
 
@@ -23,10 +23,10 @@ describe QuizPolicy do
       it { should forbid_mass_assignment_of(:publish) }
     end
 
-    context "accessing an unpublished quiz" do
+    context 'accessing an unpublished quiz' do
       let(:quiz) { FactoryGirl.create(:unpublished_quiz) }
 
-      it "excludes quiz from resolved scope" do
+      it 'excludes quiz from resolved scope' do
         expect(resolved_scope).not_to include(quiz)
       end
 
@@ -37,13 +37,13 @@ describe QuizPolicy do
     end
   end
 
-  context "being a registered user" do
+  context 'being a registered user' do
     let(:user) { FactoryGirl.create(:registered_user) }
 
-    context "accessing a published quiz" do
+    context 'accessing a published quiz' do
       let(:quiz) { FactoryGirl.create(:published_quiz) }
 
-      it "includes quiz in resolved scope" do
+      it 'includes quiz in resolved scope' do
         expect(resolved_scope).to include(quiz)
       end
 
@@ -53,10 +53,10 @@ describe QuizPolicy do
       it { should forbid_mass_assignment_of(:publish) }
     end
 
-    context "accessing an unpublished quiz" do
+    context 'accessing an unpublished quiz' do
       let(:quiz) { FactoryGirl.create(:unpublished_quiz) }
 
-      it "excludes quiz from resolved scope" do
+      it 'excludes quiz from resolved scope' do
         expect(resolved_scope).not_to include(quiz)
       end
 
@@ -67,22 +67,22 @@ describe QuizPolicy do
     end
   end
 
-  context "being a contributor" do
+  context 'being a contributor' do
     let(:contributor_profile) {
       FactoryGirl.create(:contributor_profile)
     }
     let(:user) {
       FactoryGirl.create(
-        :contributor, 
+        :contributor,
         contributor_profile: contributor_profile
       )
     }
 
-    context "accessing quizzes that the user does not contribute to" do
-      context "accessing a published quiz" do
+    context 'accessing quizzes that the user does not contribute to' do
+      context 'accessing a published quiz' do
         let(:quiz) { FactoryGirl.create(:published_quiz) }
 
-        it "includes quiz in resolved scope" do
+        it 'includes quiz in resolved scope' do
           expect(resolved_scope).to include(quiz)
         end
 
@@ -92,10 +92,10 @@ describe QuizPolicy do
         it { should forbid_mass_assignment_of(:publish) }
       end
 
-      context "accessing an unpublished quiz" do
+      context 'accessing an unpublished quiz' do
         let(:quiz) { FactoryGirl.create(:unpublished_quiz) }
 
-        it "excludes quiz from resolved scope" do
+        it 'excludes quiz from resolved scope' do
           expect(resolved_scope).not_to include(quiz)
         end
 
@@ -106,18 +106,18 @@ describe QuizPolicy do
       end
     end
 
-    context "accessing quizzes the user contributes to" do
-      context "accessing a published quiz" do
+    context 'accessing quizzes the user contributes to' do
+      context 'accessing a published quiz' do
         let(:quiz) {
           FactoryGirl.create(
-            :published_quiz, 
+            :published_quiz,
             contributions: [
               Contribution.new(contributor_profile: contributor_profile)
             ]
           )
         }
 
-        it "includes quiz in resolved scope" do
+        it 'includes quiz in resolved scope' do
           expect(resolved_scope).to include(quiz)
         end
 
@@ -127,17 +127,17 @@ describe QuizPolicy do
         it { should forbid_mass_assignment_of(:publish) }
       end
 
-      context "accessing an unpublished quiz" do
+      context 'accessing an unpublished quiz' do
         let(:quiz) {
           FactoryGirl.create(
-            :unpublished_quiz, 
+            :unpublished_quiz,
             contributions: [
               Contribution.new(contributor_profile: contributor_profile)
             ]
           )
         }
 
-        it "includes quiz in resolved scope" do
+        it 'includes quiz in resolved scope' do
           expect(resolved_scope).to include(quiz)
         end
 
@@ -147,15 +147,15 @@ describe QuizPolicy do
         it { should forbid_mass_assignment_of(:publish) }
       end
     end
-  end  
+  end
 
-  context "being an administrator" do
+  context 'being an administrator' do
     let(:user) { FactoryGirl.create(:administrator) }
 
-    context "accessing a published quiz" do
+    context 'accessing a published quiz' do
       let(:quiz) { FactoryGirl.create(:published_quiz) }
 
-      it "includes quiz in resolved scope" do
+      it 'includes quiz in resolved scope' do
         expect(resolved_scope).to include(quiz)
       end
 
@@ -165,10 +165,10 @@ describe QuizPolicy do
       it { should permit_mass_assignment_of(:publish) }
     end
 
-    context "accessing an unpublished quiz" do
+    context 'accessing an unpublished quiz' do
       let(:quiz) { FactoryGirl.create(:unpublished_quiz) }
 
-      it "includes quiz in resolved scope" do
+      it 'includes quiz in resolved scope' do
         expect(resolved_scope).to include(quiz)
       end
 

@@ -2,8 +2,8 @@ FactoryGirl.define do
   factory :article do
     factory :valid_article do
       sequence(:name) { |n| "Article #{n}" }
-      description "Test Description"
-      content "Test Content"
+      description 'Test Description'
+      content 'Test Content'
 
       category { FactoryGirl.create(:category) }
       contributor_profiles { [FactoryGirl.create(:contributor_profile)] }

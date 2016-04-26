@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Chapter, type: :model do
-  describe "fields" do
+  describe 'fields' do
     it { should respond_to(:chapter_type) }
     it { should respond_to(:number) }
     it { should respond_to(:name) }
@@ -11,25 +11,25 @@ RSpec.describe Chapter, type: :model do
     it { should respond_to(:updated_at) }
   end
 
-  pending describe "validations" do
+  pending describe 'validations' do
     it { should validate_presence_of(:number) }
     it { should validate_numericality_of(:number).is_greater_than(0).
       is_less_than(100) }
     it { should validate_presence_of(:content) }
   end
 
-  describe "associations" do
+  describe 'associations' do
     it { should belong_to(:story) }
     it { should have_many(:illustrations).dependent(:destroy) }
   end
 
-  describe "nested attributes" do
+  describe 'nested attributes' do
     it { should accept_nested_attributes_for(:illustrations).
       allow_destroy(true) }
   end
 
-  pending describe "methods" do
-    describe "#story_chapter_name" do
+  pending describe 'methods' do
+    describe '#story_chapter_name' do
 
     end
   end

@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :story do
     factory :valid_story do
       sequence(:name) { |n| "Story #{n}" }
-      description "Test Description"
+      description 'Test Description'
 
       category { FactoryGirl.create(:category) }
       contributor_profiles { [FactoryGirl.create(:contributor_profile)] }

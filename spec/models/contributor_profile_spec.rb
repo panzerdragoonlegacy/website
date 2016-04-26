@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ContributorProfile, type: :model do
-  describe "fields" do
+  describe 'fields' do
     it { should respond_to(:name) }
     it { should respond_to(:url) }
     it { should respond_to(:email_address) }
@@ -14,13 +14,13 @@ RSpec.describe ContributorProfile, type: :model do
     it { should respond_to(:updated_at) }
   end
 
-  describe "validations" do
+  describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
     it { should validate_length_of(:name).is_at_least(2).is_at_most(50) }
   end
 
-  describe "associations" do
+  describe 'associations' do
     it { should have_one(:user).dependent(:destroy) }
     it { should have_many(:news_entries).dependent(:destroy) }
     it { should have_many(:contributions).dependent(:destroy) }
@@ -36,7 +36,7 @@ RSpec.describe ContributorProfile, type: :model do
     it { should have_many(:videos) }
   end
 
-  describe "file attachment" do
+  describe 'file attachment' do
     it { should have_attached_file(:avatar) }
     it { should validate_attachment_content_type(:avatar).
       allowing('image/jpeg') }
@@ -44,8 +44,8 @@ RSpec.describe ContributorProfile, type: :model do
       less_than(5.megabytes) }
   end
 
-  pending describe "slug" do
-    it "generates a parameterised version of the name" do
+  pending describe 'slug' do
+    it 'generates a parameterised version of the name' do
     end
   end
 end

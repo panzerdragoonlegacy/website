@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Saga, type: :model do
-  describe "fields" do
+  describe 'fields' do
     it { should respond_to(:name) }
     it { should respond_to(:url) }
     it { should respond_to(:sequence_number) }
@@ -10,7 +10,7 @@ RSpec.describe Saga, type: :model do
     it { should respond_to(:updated_at) }
   end
 
-  describe "validations" do
+  describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
     it { should validate_length_of(:name).is_at_least(2).is_at_most(30) }
@@ -21,7 +21,7 @@ RSpec.describe Saga, type: :model do
     xit { should validate_uniqueness_of(:encyclopaedia_entry) }
   end
 
-  describe "associations" do
+  describe 'associations' do
     it { should belong_to(:encyclopaedia_entry) }
   end
 end

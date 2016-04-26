@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :music_track do
     factory :valid_music_track do
       sequence(:name) { |n| "Music Track #{n}" }
-      description "Test Description"
+      description 'Test Description'
       mp3_music_track Rack::Test::UploadedFile.new(
         'spec/fixtures/music_track.mp3', 'audio/mp3')
       ogg_music_track Rack::Test::UploadedFile.new(

@@ -7,23 +7,23 @@ describe ArticlePolicy do
     ArticlePolicy::Scope.new(user, Article.all).resolve
   }
 
-  context "being a visitor" do
+  context 'being a visitor' do
     let(:user) { nil }
 
-    context "creating a new article" do
+    context 'creating a new article' do
       let(:article) { Article.new }
 
       it { should forbid_new_and_create_actions }
       it { should forbid_mass_assignment_of(:publish) }
     end
 
-    context "accessing articles in a published category" do
-      context "accessing a published article" do
+    context 'accessing articles in a published category' do
+      context 'accessing a published article' do
         let(:article) {
           FactoryGirl.create(:published_article_in_published_category)
         }
 
-        it "includes article in resolved scope" do
+        it 'includes article in resolved scope' do
           expect(resolved_scope).to include(article)
         end
 
@@ -33,12 +33,12 @@ describe ArticlePolicy do
         it { should forbid_mass_assignment_of(:publish) }
       end
 
-      context "accessing an unpublished article" do
+      context 'accessing an unpublished article' do
         let(:article) {
           FactoryGirl.create(:unpublished_article_in_published_category)
         }
 
-        it "excludes article from resolved scope" do
+        it 'excludes article from resolved scope' do
           expect(resolved_scope).not_to include(article)
         end
 
@@ -48,14 +48,14 @@ describe ArticlePolicy do
         it { should forbid_mass_assignment_of(:publish) }
       end
     end
-    
-    context "accessing articles in an unpublished category" do
-      context "accessing a published article" do
+
+    context 'accessing articles in an unpublished category' do
+      context 'accessing a published article' do
         let(:article) {
           FactoryGirl.create(:published_article_in_unpublished_category)
         }
 
-        it "excludes article from resolved scope" do
+        it 'excludes article from resolved scope' do
           expect(resolved_scope).not_to include(article)
         end
 
@@ -65,12 +65,12 @@ describe ArticlePolicy do
         it { should forbid_mass_assignment_of(:publish) }
       end
 
-      context "accessing an unpublished article" do
+      context 'accessing an unpublished article' do
         let(:article) {
           FactoryGirl.create(:unpublished_article_in_unpublished_category)
         }
 
-        it "excludes article from resolved scope" do
+        it 'excludes article from resolved scope' do
           expect(resolved_scope).not_to include(article)
         end
 
@@ -82,23 +82,23 @@ describe ArticlePolicy do
     end
   end
 
-  context "being a registered user" do
+  context 'being a registered user' do
     let(:user) { FactoryGirl.create(:registered_user) }
 
-    context "creating a new article" do
+    context 'creating a new article' do
       let(:article) { Article.new }
 
       it { should forbid_new_and_create_actions }
       it { should forbid_mass_assignment_of(:publish) }
     end
 
-    context "accessing articles in a published category" do
-      context "accessing a published article" do
+    context 'accessing articles in a published category' do
+      context 'accessing a published article' do
         let(:article) {
           FactoryGirl.create(:published_article_in_published_category)
         }
 
-        it "includes article in resolved scope" do
+        it 'includes article in resolved scope' do
           expect(resolved_scope).to include(article)
         end
 
@@ -108,12 +108,12 @@ describe ArticlePolicy do
         it { should forbid_mass_assignment_of(:publish) }
       end
 
-      context "accessing an unpublished article" do
+      context 'accessing an unpublished article' do
         let(:article) {
           FactoryGirl.create(:unpublished_article_in_published_category)
         }
 
-        it "excludes article from resolved scope" do
+        it 'excludes article from resolved scope' do
           expect(resolved_scope).not_to include(article)
         end
 
@@ -124,13 +124,13 @@ describe ArticlePolicy do
       end
     end
 
-    context "accessing articles in an unpublished category" do
-      context "accessing a published article" do
+    context 'accessing articles in an unpublished category' do
+      context 'accessing a published article' do
         let(:article) {
           FactoryGirl.create(:published_article_in_unpublished_category)
         }
 
-        it "excludes article from resolved scope" do
+        it 'excludes article from resolved scope' do
           expect(resolved_scope).not_to include(article)
         end
 
@@ -140,12 +140,12 @@ describe ArticlePolicy do
         it { should forbid_mass_assignment_of(:publish) }
       end
 
-      context "accessing an unpublished article" do
+      context 'accessing an unpublished article' do
         let(:article) {
           FactoryGirl.create(:unpublished_article_in_unpublished_category)
         }
 
-        it "excludes article from resolved scope" do
+        it 'excludes article from resolved scope' do
           expect(resolved_scope).not_to include(article)
         end
 
@@ -157,32 +157,32 @@ describe ArticlePolicy do
     end
   end
 
-  context "being a contributor" do
+  context 'being a contributor' do
     let(:contributor_profile) {
       FactoryGirl.create(:contributor_profile)
     }
     let(:user) {
       FactoryGirl.create(
-        :contributor, 
+        :contributor,
         contributor_profile: contributor_profile
       )
     }
 
-    context "creating a new article" do
+    context 'creating a new article' do
       let(:article) { Article.new }
 
       it { should permit_new_and_create_actions }
       it { should forbid_mass_assignment_of(:publish) }
     end
 
-    context "accessing articles in a published category" do
-      context "accessing articles that the user does not contribute to" do
-        context "accessing a published article" do
+    context 'accessing articles in a published category' do
+      context 'accessing articles that the user does not contribute to' do
+        context 'accessing a published article' do
           let(:article) {
             FactoryGirl.create(:published_article_in_published_category)
           }
 
-          it "includes article in resolved scope" do
+          it 'includes article in resolved scope' do
             expect(resolved_scope).to include(article)
           end
 
@@ -192,12 +192,12 @@ describe ArticlePolicy do
           it { should forbid_mass_assignment_of(:publish) }
         end
 
-        context "accessing an unpublished article" do
+        context 'accessing an unpublished article' do
           let(:article) {
             FactoryGirl.create(:unpublished_article_in_published_category)
           }
 
-          it "excludes article from resolved scope" do
+          it 'excludes article from resolved scope' do
             expect(resolved_scope).not_to include(article)
           end
 
@@ -208,18 +208,18 @@ describe ArticlePolicy do
         end
       end
 
-      context "accessing articles the user contributes to" do
-        context "accessing a published article" do
+      context 'accessing articles the user contributes to' do
+        context 'accessing a published article' do
           let(:article) {
             FactoryGirl.create(
-              :published_article_in_published_category, 
+              :published_article_in_published_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
           }
 
-          it "includes article in resolved scope" do
+          it 'includes article in resolved scope' do
             expect(resolved_scope).to include(article)
           end
 
@@ -229,17 +229,17 @@ describe ArticlePolicy do
           it { should forbid_mass_assignment_of(:publish) }
         end
 
-        context "accessing an unpublished article" do
+        context 'accessing an unpublished article' do
           let(:article) {
             FactoryGirl.create(
-              :unpublished_article_in_published_category, 
+              :unpublished_article_in_published_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
           }
 
-          it "includes article in resolved scope" do
+          it 'includes article in resolved scope' do
             expect(resolved_scope).to include(article)
           end
 
@@ -251,14 +251,14 @@ describe ArticlePolicy do
       end
     end
 
-    context "accessing articles in an unpublished category" do
-      context "accessing articles that the user does not contribute to" do
-        context "accessing a published article" do
+    context 'accessing articles in an unpublished category' do
+      context 'accessing articles that the user does not contribute to' do
+        context 'accessing a published article' do
           let(:article) {
             FactoryGirl.create(:published_article_in_published_category)
           }
 
-          it "includes article in resolved scope" do
+          it 'includes article in resolved scope' do
             expect(resolved_scope).to include(article)
           end
 
@@ -268,12 +268,12 @@ describe ArticlePolicy do
           it { should forbid_mass_assignment_of(:publish) }
         end
 
-        context "accessing an unpublished article" do
+        context 'accessing an unpublished article' do
           let(:article) {
-            FactoryGirl.create(:unpublished_article_in_published_category) 
+            FactoryGirl.create(:unpublished_article_in_published_category)
           }
 
-          it "excludes article from resolved scope" do
+          it 'excludes article from resolved scope' do
             expect(resolved_scope).not_to include(article)
           end
 
@@ -284,18 +284,18 @@ describe ArticlePolicy do
         end
       end
 
-      context "accessing articles that the user contributes to" do
-        context "accessing a published article" do
+      context 'accessing articles that the user contributes to' do
+        context 'accessing a published article' do
           let(:article) {
             FactoryGirl.create(
-              :published_article_in_unpublished_category, 
+              :published_article_in_unpublished_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
           }
 
-          it "includes article in resolved scope" do
+          it 'includes article in resolved scope' do
             expect(resolved_scope).to include(article)
           end
 
@@ -305,17 +305,17 @@ describe ArticlePolicy do
           it { should forbid_mass_assignment_of(:publish) }
         end
 
-        context "accessing an unpublished article" do
+        context 'accessing an unpublished article' do
           let(:article) {
             FactoryGirl.create(
-              :unpublished_article_in_unpublished_category, 
+              :unpublished_article_in_unpublished_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
           }
 
-          it "includes article in resolved scope" do
+          it 'includes article in resolved scope' do
             expect(resolved_scope).to include(article)
           end
 
@@ -328,23 +328,23 @@ describe ArticlePolicy do
     end
   end
 
-  context "being an administrator" do
+  context 'being an administrator' do
     let(:user) { FactoryGirl.create(:administrator) }
 
-    context "creating a new article" do
+    context 'creating a new article' do
       let(:article) { Article.new }
 
       it { should permit_new_and_create_actions }
       it { should permit_mass_assignment_of(:publish) }
     end
 
-    context "accessing articles in a published category" do
-      context "accessing a published article" do
+    context 'accessing articles in a published category' do
+      context 'accessing a published article' do
         let(:article) {
           FactoryGirl.create(:published_article_in_published_category)
         }
 
-        it "includes article in resolved scope" do
+        it 'includes article in resolved scope' do
           expect(resolved_scope).to include(article)
         end
 
@@ -354,12 +354,12 @@ describe ArticlePolicy do
         it { should permit_mass_assignment_of(:publish) }
       end
 
-      context "accessing an unpublished article" do
+      context 'accessing an unpublished article' do
         let(:article) {
           FactoryGirl.create(:unpublished_article_in_published_category)
         }
 
-        it "includes article in resolved scope" do
+        it 'includes article in resolved scope' do
           expect(resolved_scope).to include(article)
         end
 
@@ -370,13 +370,13 @@ describe ArticlePolicy do
       end
     end
 
-    context "accessing articles in an unpublished category" do
-      context "accessing a published article" do
+    context 'accessing articles in an unpublished category' do
+      context 'accessing a published article' do
         let(:article) {
           FactoryGirl.create(:published_article_in_unpublished_category)
         }
 
-        it "includes article in resolved scope" do
+        it 'includes article in resolved scope' do
           expect(resolved_scope).to include(article)
         end
 
@@ -386,12 +386,12 @@ describe ArticlePolicy do
         it { should permit_mass_assignment_of(:publish) }
       end
 
-      context "accessing an unpublished article" do
+      context 'accessing an unpublished article' do
         let(:article) {
           FactoryGirl.create(:unpublished_article_in_unpublished_category)
         }
 
-        it "includes article in resolved scope" do
+        it 'includes article in resolved scope' do
           expect(resolved_scope).to include(article)
         end
 

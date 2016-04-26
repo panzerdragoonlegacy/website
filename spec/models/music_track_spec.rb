@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe MusicTrack, type: :model do
-  describe "fields" do
+  describe 'fields' do
     it { should respond_to(:track_number) }
     it { should respond_to(:name) }
     it { should respond_to(:url) }
@@ -16,7 +16,7 @@ RSpec.describe MusicTrack, type: :model do
     it { should respond_to(:updated_at) }
   end
 
-  describe "validations" do
+  describe 'validations' do
     it { should validate_presence_of(:track_number) }
     it { should validate_numericality_of(:track_number).
       is_greater_than_or_equal_to(0).is_less_than_or_equal_to(50) }
@@ -29,7 +29,7 @@ RSpec.describe MusicTrack, type: :model do
     it { should validate_presence_of(:category) }
   end
 
-  describe "associations" do
+  describe 'associations' do
     it { should belong_to(:category) }
     it { should have_many(:contributions).dependent(:destroy) }
     it { should have_many(:contributor_profiles).through(:contributions) }
@@ -37,7 +37,7 @@ RSpec.describe MusicTrack, type: :model do
     it { should have_many(:encyclopaedia_entries).through(:relations) }
   end
 
-  describe "file attachments" do
+  describe 'file attachments' do
     it { should have_attached_file(:mp3_music_track) }
     it { should validate_attachment_presence(:mp3_music_track) }
     it { should validate_attachment_content_type(:mp3_music_track).

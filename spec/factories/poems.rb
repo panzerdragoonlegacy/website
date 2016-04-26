@@ -2,8 +2,8 @@ FactoryGirl.define do
   factory :poem do
     factory :valid_poem do
       sequence(:name) { |n| "Poem #{n}" }
-      description "Test Poem"
-      content "Test Content"
+      description 'Test Description'
+      content 'Test Content'
 
       contributor_profiles { [FactoryGirl.create(:contributor_profile)] }
 

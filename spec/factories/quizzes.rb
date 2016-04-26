@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :quiz do
     factory :valid_quiz do
       sequence(:name) { |n| "Quiz #{n}" }
-      description "Test Quiz"
+      description 'Test Description'
 
       contributor_profiles { [FactoryGirl.create(:contributor_profile)] }
 

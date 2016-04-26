@@ -7,15 +7,15 @@ describe CategoryGroupPolicy do
     CategoryGroupPolicy::Scope.new(user, CategoryGroup.all).resolve
   }
 
-  context "being a visitor" do
+  context 'being a visitor' do
     let(:user) { nil }
-    
-    context "accessing a category group" do
+
+    context 'accessing a category group' do
       let(:category_group) {
-        FactoryGirl.create(:category_group) 
+        FactoryGirl.create(:category_group)
       }
 
-      it "includes category group in resolved scope" do
+      it 'includes category group in resolved scope' do
         expect(resolved_scope).to include(category_group)
       end
 
@@ -26,15 +26,15 @@ describe CategoryGroupPolicy do
     end
   end
 
-  context "being a registered user" do
+  context 'being a registered user' do
     let(:user) { FactoryGirl.create(:registered_user) }
 
-    context "accessing a category group" do
+    context 'accessing a category group' do
       let(:category_group) {
-        FactoryGirl.create(:category_group) 
+        FactoryGirl.create(:category_group)
       }
 
-      it "includes category group in resolved scope" do
+      it 'includes category group in resolved scope' do
         expect(resolved_scope).to include(category_group)
       end
 
@@ -45,15 +45,15 @@ describe CategoryGroupPolicy do
     end
   end
 
-  context "being an administrator" do
+  context 'being an administrator' do
     let(:user) { FactoryGirl.create(:administrator) }
 
-    context "accessing a category group" do
+    context 'accessing a category group' do
       let(:category_group) {
-        FactoryGirl.create(:category_group) 
+        FactoryGirl.create(:category_group)
       }
 
-      it "includes category group in resolved scope" do
+      it 'includes category group in resolved scope' do
         expect(resolved_scope).to include(category_group)
       end
 
@@ -61,11 +61,11 @@ describe CategoryGroupPolicy do
       it { should permit_new_and_create_actions }
       it { should permit_edit_and_update_actions }
 
-      context "category group has no children" do
+      context 'category group has no children' do
         it { should permit_action(:destroy) }
       end
 
-      context "category group has children" do
+      context 'category group has children' do
         before do
           category_group.categories << FactoryGirl.create(:category)
         end

@@ -7,15 +7,15 @@ describe ContributorProfilePolicy do
     ContributorProfilePolicy::Scope.new(user, ContributorProfile.all).resolve
   }
 
-  context "being a visitor" do
+  context 'being a visitor' do
     let(:user) { nil }
-    
-    context "accessing a contributor profile" do
+
+    context 'accessing a contributor profile' do
       let(:contributor_profile) {
-        FactoryGirl.create(:contributor_profile) 
+        FactoryGirl.create(:contributor_profile)
       }
 
-      it "includes contributor profile in resolved scope" do
+      it 'includes contributor profile in resolved scope' do
         expect(resolved_scope).to include(contributor_profile)
       end
 
@@ -26,15 +26,15 @@ describe ContributorProfilePolicy do
     end
   end
 
-  context "being a registered user" do
+  context 'being a registered user' do
     let(:user) { FactoryGirl.create(:registered_user) }
 
-    context "accessing a contributor profile" do
+    context 'accessing a contributor profile' do
       let(:contributor_profile) {
-        FactoryGirl.create(:contributor_profile) 
+        FactoryGirl.create(:contributor_profile)
       }
 
-      it "includes contributor profile in resolved scope" do
+      it 'includes contributor profile in resolved scope' do
         expect(resolved_scope).to include(contributor_profile)
       end
 
@@ -45,15 +45,15 @@ describe ContributorProfilePolicy do
     end
   end
 
-  context "being an administrator" do
+  context 'being an administrator' do
     let(:user) { FactoryGirl.create(:administrator) }
 
-    context "accessing a contributor profile" do
+    context 'accessing a contributor profile' do
       let(:contributor_profile) {
-        FactoryGirl.create(:contributor_profile) 
+        FactoryGirl.create(:contributor_profile)
       }
 
-      it "includes contributor profile in resolved scope" do
+      it 'includes contributor profile in resolved scope' do
         expect(resolved_scope).to include(contributor_profile)
       end
 

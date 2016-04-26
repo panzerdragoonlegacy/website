@@ -7,23 +7,23 @@ describe MusicTrackPolicy do
     MusicTrackPolicy::Scope.new(user, MusicTrack.all).resolve
   }
 
-  context "being a visitor" do
+  context 'being a visitor' do
     let(:user) { nil }
 
-    context "creating a new music track" do
+    context 'creating a new music track' do
       let(:music_track) { MusicTrack.new }
 
       it { should forbid_new_and_create_actions }
       it { should forbid_mass_assignment_of(:publish) }
     end
 
-    context "accessing music tracks in a published category" do
-      context "accessing a published music track" do
+    context 'accessing music tracks in a published category' do
+      context 'accessing a published music track' do
         let(:music_track) {
           FactoryGirl.create(:published_music_track_in_published_category)
         }
 
-        it "includes music track in resolved scope" do
+        it 'includes music track in resolved scope' do
           expect(resolved_scope).to include(music_track)
         end
 
@@ -33,12 +33,12 @@ describe MusicTrackPolicy do
         it { should forbid_mass_assignment_of(:publish) }
       end
 
-      context "accessing an unpublished music track" do
+      context 'accessing an unpublished music track' do
         let(:music_track) {
           FactoryGirl.create(:unpublished_music_track_in_published_category)
         }
 
-        it "excludes music track from resolved scope" do
+        it 'excludes music track from resolved scope' do
           expect(resolved_scope).not_to include(music_track)
         end
 
@@ -48,14 +48,14 @@ describe MusicTrackPolicy do
         it { should forbid_mass_assignment_of(:publish) }
       end
     end
-    
-    context "accessing music tracks in an unpublished category" do
-      context "accessing a published music track" do
+
+    context 'accessing music tracks in an unpublished category' do
+      context 'accessing a published music track' do
         let(:music_track) {
           FactoryGirl.create(:published_music_track_in_unpublished_category)
         }
 
-        it "excludes music track from resolved scope" do
+        it 'excludes music track from resolved scope' do
           expect(resolved_scope).not_to include(music_track)
         end
 
@@ -65,12 +65,12 @@ describe MusicTrackPolicy do
         it { should forbid_mass_assignment_of(:publish) }
       end
 
-      context "accessing an unpublished music track" do
+      context 'accessing an unpublished music track' do
         let(:music_track) {
           FactoryGirl.create(:unpublished_music_track_in_unpublished_category)
         }
 
-        it "excludes music track from resolved scope" do
+        it 'excludes music track from resolved scope' do
           expect(resolved_scope).not_to include(music_track)
         end
 
@@ -82,23 +82,23 @@ describe MusicTrackPolicy do
     end
   end
 
-  context "being a registered user" do
+  context 'being a registered user' do
     let(:user) { FactoryGirl.create(:registered_user) }
 
-    context "creating a new music track" do
+    context 'creating a new music track' do
       let(:music_track) { MusicTrack.new }
 
       it { should forbid_new_and_create_actions }
       it { should forbid_mass_assignment_of(:publish) }
     end
 
-    context "accessing music tracks in a published category" do
-      context "accessing a published music track" do
+    context 'accessing music tracks in a published category' do
+      context 'accessing a published music track' do
         let(:music_track) {
           FactoryGirl.create(:published_music_track_in_published_category)
         }
 
-        it "includes music track in resolved scope" do
+        it 'includes music track in resolved scope' do
           expect(resolved_scope).to include(music_track)
         end
 
@@ -108,12 +108,12 @@ describe MusicTrackPolicy do
         it { should forbid_mass_assignment_of(:publish) }
       end
 
-      context "accessing an unpublished music track" do
+      context 'accessing an unpublished music track' do
         let(:music_track) {
           FactoryGirl.create(:unpublished_music_track_in_published_category)
         }
 
-        it "excludes music track from resolved scope" do
+        it 'excludes music track from resolved scope' do
           expect(resolved_scope).not_to include(music_track)
         end
 
@@ -124,13 +124,13 @@ describe MusicTrackPolicy do
       end
     end
 
-    context "accessing music tracks in an unpublished category" do
-      context "accessing a published music track" do
+    context 'accessing music tracks in an unpublished category' do
+      context 'accessing a published music track' do
         let(:music_track) {
           FactoryGirl.create(:published_music_track_in_unpublished_category)
         }
 
-        it "excludes music track from resolved scope" do
+        it 'excludes music track from resolved scope' do
           expect(resolved_scope).not_to include(music_track)
         end
 
@@ -140,12 +140,12 @@ describe MusicTrackPolicy do
         it { should forbid_mass_assignment_of(:publish) }
       end
 
-      context "accessing an unpublished music track" do
+      context 'accessing an unpublished music track' do
         let(:music_track) {
           FactoryGirl.create(:unpublished_music_track_in_unpublished_category)
         }
 
-        it "excludes music track from resolved scope" do
+        it 'excludes music track from resolved scope' do
           expect(resolved_scope).not_to include(music_track)
         end
 
@@ -157,32 +157,32 @@ describe MusicTrackPolicy do
     end
   end
 
-  context "being a contributor" do
+  context 'being a contributor' do
     let(:contributor_profile) {
       FactoryGirl.create(:contributor_profile)
     }
     let(:user) {
       FactoryGirl.create(
-        :contributor, 
+        :contributor,
         contributor_profile: contributor_profile
       )
     }
 
-    context "creating a new music track" do
+    context 'creating a new music track' do
       let(:music_track) { MusicTrack.new }
 
       it { should permit_new_and_create_actions }
       it { should forbid_mass_assignment_of(:publish) }
     end
 
-    context "accessing music tracks in a published category" do
-      context "accessing music tracks that the user does not contribute to" do
-        context "accessing a published music track" do
+    context 'accessing music tracks in a published category' do
+      context 'accessing music tracks that the user does not contribute to' do
+        context 'accessing a published music track' do
           let(:music_track) {
             FactoryGirl.create(:published_music_track_in_published_category)
           }
 
-          it "includes music track in resolved scope" do
+          it 'includes music track in resolved scope' do
             expect(resolved_scope).to include(music_track)
           end
 
@@ -192,12 +192,12 @@ describe MusicTrackPolicy do
           it { should forbid_mass_assignment_of(:publish) }
         end
 
-        context "accessing an unpublished music track" do
+        context 'accessing an unpublished music track' do
           let(:music_track) {
             FactoryGirl.create(:unpublished_music_track_in_published_category)
           }
 
-          it "excludes music track from resolved scope" do
+          it 'excludes music track from resolved scope' do
             expect(resolved_scope).not_to include(music_track)
           end
 
@@ -208,18 +208,18 @@ describe MusicTrackPolicy do
         end
       end
 
-      context "accessing music tracks the user contributes to" do
-        context "accessing a published music track" do
+      context 'accessing music tracks the user contributes to' do
+        context 'accessing a published music track' do
           let(:music_track) {
             FactoryGirl.create(
-              :published_music_track_in_published_category, 
+              :published_music_track_in_published_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
           }
 
-          it "includes music track in resolved scope" do
+          it 'includes music track in resolved scope' do
             expect(resolved_scope).to include(music_track)
           end
 
@@ -229,17 +229,17 @@ describe MusicTrackPolicy do
           it { should forbid_mass_assignment_of(:publish) }
         end
 
-        context "accessing an unpublished music track" do
+        context 'accessing an unpublished music track' do
           let(:music_track) {
             FactoryGirl.create(
-              :unpublished_music_track_in_published_category, 
+              :unpublished_music_track_in_published_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
           }
 
-          it "includes music track in resolved scope" do
+          it 'includes music track in resolved scope' do
             expect(resolved_scope).to include(music_track)
           end
 
@@ -251,14 +251,14 @@ describe MusicTrackPolicy do
       end
     end
 
-    context "accessing music tracks in an unpublished category" do
-      context "accessing music tracks that the user does not contribute to" do
-        context "accessing a published music track" do
+    context 'accessing music tracks in an unpublished category' do
+      context 'accessing music tracks that the user does not contribute to' do
+        context 'accessing a published music track' do
           let(:music_track) {
             FactoryGirl.create(:published_music_track_in_published_category)
           }
 
-          it "includes music track in resolved scope" do
+          it 'includes music track in resolved scope' do
             expect(resolved_scope).to include(music_track)
           end
 
@@ -268,12 +268,12 @@ describe MusicTrackPolicy do
           it { should forbid_mass_assignment_of(:publish) }
         end
 
-        context "accessing an unpublished music track" do
+        context 'accessing an unpublished music track' do
           let(:music_track) {
-            FactoryGirl.create(:unpublished_music_track_in_published_category) 
+            FactoryGirl.create(:unpublished_music_track_in_published_category)
           }
 
-          it "excludes music track from resolved scope" do
+          it 'excludes music track from resolved scope' do
             expect(resolved_scope).not_to include(music_track)
           end
 
@@ -284,18 +284,18 @@ describe MusicTrackPolicy do
         end
       end
 
-      context "accessing music tracks that the user contributes to" do
-        context "accessing a published music track" do
+      context 'accessing music tracks that the user contributes to' do
+        context 'accessing a published music track' do
           let(:music_track) {
             FactoryGirl.create(
-              :published_music_track_in_unpublished_category, 
+              :published_music_track_in_unpublished_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
           }
 
-          it "includes music track in resolved scope" do
+          it 'includes music track in resolved scope' do
             expect(resolved_scope).to include(music_track)
           end
 
@@ -305,17 +305,17 @@ describe MusicTrackPolicy do
           it { should forbid_mass_assignment_of(:publish) }
         end
 
-        context "accessing an unpublished music track" do
+        context 'accessing an unpublished music track' do
           let(:music_track) {
             FactoryGirl.create(
-              :unpublished_music_track_in_unpublished_category, 
+              :unpublished_music_track_in_unpublished_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
           }
 
-          it "includes music track in resolved scope" do
+          it 'includes music track in resolved scope' do
             expect(resolved_scope).to include(music_track)
           end
 
@@ -328,23 +328,23 @@ describe MusicTrackPolicy do
     end
   end
 
-  context "being an administrator" do
+  context 'being an administrator' do
     let(:user) { FactoryGirl.create(:administrator) }
 
-    context "creating a new music track" do
+    context 'creating a new music track' do
       let(:music_track) { MusicTrack.new }
 
       it { should permit_new_and_create_actions }
       it { should permit_mass_assignment_of(:publish) }
     end
 
-    context "accessing music tracks in a published category" do
-      context "accessing a published music track" do
+    context 'accessing music tracks in a published category' do
+      context 'accessing a published music track' do
         let(:music_track) {
           FactoryGirl.create(:published_music_track_in_published_category)
         }
 
-        it "includes music track in resolved scope" do
+        it 'includes music track in resolved scope' do
           expect(resolved_scope).to include(music_track)
         end
 
@@ -354,12 +354,12 @@ describe MusicTrackPolicy do
         it { should permit_mass_assignment_of(:publish) }
       end
 
-      context "accessing an unpublished music track" do
+      context 'accessing an unpublished music track' do
         let(:music_track) {
           FactoryGirl.create(:unpublished_music_track_in_published_category)
         }
 
-        it "includes music track in resolved scope" do
+        it 'includes music track in resolved scope' do
           expect(resolved_scope).to include(music_track)
         end
 
@@ -370,13 +370,13 @@ describe MusicTrackPolicy do
       end
     end
 
-    context "accessing music tracks in an unpublished category" do
-      context "accessing a published music track" do
+    context 'accessing music tracks in an unpublished category' do
+      context 'accessing a published music track' do
         let(:music_track) {
           FactoryGirl.create(:published_music_track_in_unpublished_category)
         }
 
-        it "includes music track in resolved scope" do
+        it 'includes music track in resolved scope' do
           expect(resolved_scope).to include(music_track)
         end
 
@@ -386,12 +386,12 @@ describe MusicTrackPolicy do
         it { should permit_mass_assignment_of(:publish) }
       end
 
-      context "accessing an unpublished music track" do
+      context 'accessing an unpublished music track' do
         let(:music_track) {
           FactoryGirl.create(:unpublished_music_track_in_unpublished_category)
         }
 
-        it "includes music track in resolved scope" do
+        it 'includes music track in resolved scope' do
           expect(resolved_scope).to include(music_track)
         end
 
