@@ -18,8 +18,10 @@ RSpec.describe Emoticon, type: :model do
   describe 'file attachment' do
     it { should have_attached_file(:emoticon) }
     it { should validate_attachment_presence(:emoticon) }
-    it { should validate_attachment_content_type(:emoticon).
-      allowing('image/gif') }
+    it do
+      should validate_attachment_content_type(:emoticon)
+        .allowing('image/gif')
+    end
     it { should validate_attachment_size(:emoticon).less_than(1.megabyte) }
   end
 

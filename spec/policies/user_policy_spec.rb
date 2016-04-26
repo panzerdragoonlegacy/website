@@ -3,9 +3,9 @@ require 'rails_helper'
 describe UserPolicy do
   subject { UserPolicy.new(current_user, user) }
 
-  let(:resolved_scope) {
+  let(:resolved_scope) do
     UserPolicy::Scope.new(current_user, User.all).resolve
-  }
+  end
 
   context 'being a visitor' do
     let(:current_user) { nil }

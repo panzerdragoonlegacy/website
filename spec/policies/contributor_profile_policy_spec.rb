@@ -3,17 +3,17 @@ require 'rails_helper'
 describe ContributorProfilePolicy do
   subject { ContributorProfilePolicy.new(user, contributor_profile) }
 
-  let(:resolved_scope) {
+  let(:resolved_scope) do
     ContributorProfilePolicy::Scope.new(user, ContributorProfile.all).resolve
-  }
+  end
 
   context 'being a visitor' do
     let(:user) { nil }
 
     context 'accessing a contributor profile' do
-      let(:contributor_profile) {
+      let(:contributor_profile) do
         FactoryGirl.create(:contributor_profile)
-      }
+      end
 
       it 'includes contributor profile in resolved scope' do
         expect(resolved_scope).to include(contributor_profile)
@@ -30,9 +30,9 @@ describe ContributorProfilePolicy do
     let(:user) { FactoryGirl.create(:registered_user) }
 
     context 'accessing a contributor profile' do
-      let(:contributor_profile) {
+      let(:contributor_profile) do
         FactoryGirl.create(:contributor_profile)
-      }
+      end
 
       it 'includes contributor profile in resolved scope' do
         expect(resolved_scope).to include(contributor_profile)
@@ -49,9 +49,9 @@ describe ContributorProfilePolicy do
     let(:user) { FactoryGirl.create(:administrator) }
 
     context 'accessing a contributor profile' do
-      let(:contributor_profile) {
+      let(:contributor_profile) do
         FactoryGirl.create(:contributor_profile)
-      }
+      end
 
       it 'includes contributor profile in resolved scope' do
         expect(resolved_scope).to include(contributor_profile)

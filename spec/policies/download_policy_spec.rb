@@ -3,9 +3,9 @@ require 'rails_helper'
 describe DownloadPolicy do
   subject { DownloadPolicy.new(user, download) }
 
-  let(:resolved_scope) {
+  let(:resolved_scope) do
     DownloadPolicy::Scope.new(user, Download.all).resolve
-  }
+  end
 
   context 'being a visitor' do
     let(:user) { nil }
@@ -19,9 +19,9 @@ describe DownloadPolicy do
 
     context 'accessing downloads in a published category' do
       context 'accessing a published download' do
-        let(:download) {
+        let(:download) do
           FactoryGirl.create(:published_download_in_published_category)
-        }
+        end
 
         it 'includes download in resolved scope' do
           expect(resolved_scope).to include(download)
@@ -34,9 +34,9 @@ describe DownloadPolicy do
       end
 
       context 'accessing an unpublished download' do
-        let(:download) {
+        let(:download) do
           FactoryGirl.create(:unpublished_download_in_published_category)
-        }
+        end
 
         it 'excludes download from resolved scope' do
           expect(resolved_scope).not_to include(download)
@@ -51,9 +51,9 @@ describe DownloadPolicy do
 
     context 'accessing downloads in an unpublished category' do
       context 'accessing a published download' do
-        let(:download) {
+        let(:download) do
           FactoryGirl.create(:published_download_in_unpublished_category)
-        }
+        end
 
         it 'excludes download from resolved scope' do
           expect(resolved_scope).not_to include(download)
@@ -66,9 +66,9 @@ describe DownloadPolicy do
       end
 
       context 'accessing an unpublished download' do
-        let(:download) {
+        let(:download) do
           FactoryGirl.create(:unpublished_download_in_unpublished_category)
-        }
+        end
 
         it 'excludes download from resolved scope' do
           expect(resolved_scope).not_to include(download)
@@ -94,9 +94,9 @@ describe DownloadPolicy do
 
     context 'accessing downloads in a published category' do
       context 'accessing a published download' do
-        let(:download) {
+        let(:download) do
           FactoryGirl.create(:published_download_in_published_category)
-        }
+        end
 
         it 'includes download in resolved scope' do
           expect(resolved_scope).to include(download)
@@ -109,9 +109,9 @@ describe DownloadPolicy do
       end
 
       context 'accessing an unpublished download' do
-        let(:download) {
+        let(:download) do
           FactoryGirl.create(:unpublished_download_in_published_category)
-        }
+        end
 
         it 'excludes download from resolved scope' do
           expect(resolved_scope).not_to include(download)
@@ -126,9 +126,9 @@ describe DownloadPolicy do
 
     context 'accessing downloads in an unpublished category' do
       context 'accessing a published download' do
-        let(:download) {
+        let(:download) do
           FactoryGirl.create(:published_download_in_unpublished_category)
-        }
+        end
 
         it 'excludes download from resolved scope' do
           expect(resolved_scope).not_to include(download)
@@ -141,9 +141,9 @@ describe DownloadPolicy do
       end
 
       context 'accessing an unpublished download' do
-        let(:download) {
+        let(:download) do
           FactoryGirl.create(:unpublished_download_in_unpublished_category)
-        }
+        end
 
         it 'excludes download from resolved scope' do
           expect(resolved_scope).not_to include(download)
@@ -158,15 +158,15 @@ describe DownloadPolicy do
   end
 
   context 'being a contributor' do
-    let(:contributor_profile) {
+    let(:contributor_profile) do
       FactoryGirl.create(:contributor_profile)
-    }
-    let(:user) {
+    end
+    let(:user) do
       FactoryGirl.create(
         :contributor,
         contributor_profile: contributor_profile
       )
-    }
+    end
 
     context 'creating a new download' do
       let(:download) { Download.new }
@@ -178,9 +178,9 @@ describe DownloadPolicy do
     context 'accessing downloads in a published category' do
       context 'accessing downloads that the user does not contribute to' do
         context 'accessing a published download' do
-          let(:download) {
+          let(:download) do
             FactoryGirl.create(:published_download_in_published_category)
-          }
+          end
 
           it 'includes download in resolved scope' do
             expect(resolved_scope).to include(download)
@@ -193,9 +193,9 @@ describe DownloadPolicy do
         end
 
         context 'accessing an unpublished download' do
-          let(:download) {
+          let(:download) do
             FactoryGirl.create(:unpublished_download_in_published_category)
-          }
+          end
 
           it 'excludes download from resolved scope' do
             expect(resolved_scope).not_to include(download)
@@ -210,14 +210,14 @@ describe DownloadPolicy do
 
       context 'accessing downloads the user contributes to' do
         context 'accessing a published download' do
-          let(:download) {
+          let(:download) do
             FactoryGirl.create(
               :published_download_in_published_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
-          }
+          end
 
           it 'includes download in resolved scope' do
             expect(resolved_scope).to include(download)
@@ -230,14 +230,14 @@ describe DownloadPolicy do
         end
 
         context 'accessing an unpublished download' do
-          let(:download) {
+          let(:download) do
             FactoryGirl.create(
               :unpublished_download_in_published_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
-          }
+          end
 
           it 'includes download in resolved scope' do
             expect(resolved_scope).to include(download)
@@ -254,9 +254,9 @@ describe DownloadPolicy do
     context 'accessing downloads in an unpublished category' do
       context 'accessing downloads that the user does not contribute to' do
         context 'accessing a published download' do
-          let(:download) {
+          let(:download) do
             FactoryGirl.create(:published_download_in_published_category)
-          }
+          end
 
           it 'includes download in resolved scope' do
             expect(resolved_scope).to include(download)
@@ -269,9 +269,9 @@ describe DownloadPolicy do
         end
 
         context 'accessing an unpublished download' do
-          let(:download) {
+          let(:download) do
             FactoryGirl.create(:unpublished_download_in_published_category)
-          }
+          end
 
           it 'excludes download from resolved scope' do
             expect(resolved_scope).not_to include(download)
@@ -286,14 +286,14 @@ describe DownloadPolicy do
 
       context 'accessing downloads that the user contributes to' do
         context 'accessing a published download' do
-          let(:download) {
+          let(:download) do
             FactoryGirl.create(
               :published_download_in_unpublished_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
-          }
+          end
 
           it 'includes download in resolved scope' do
             expect(resolved_scope).to include(download)
@@ -306,14 +306,14 @@ describe DownloadPolicy do
         end
 
         context 'accessing an unpublished download' do
-          let(:download) {
+          let(:download) do
             FactoryGirl.create(
               :unpublished_download_in_unpublished_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
-          }
+          end
 
           it 'includes download in resolved scope' do
             expect(resolved_scope).to include(download)
@@ -340,9 +340,9 @@ describe DownloadPolicy do
 
     context 'accessing downloads in a published category' do
       context 'accessing a published download' do
-        let(:download) {
+        let(:download) do
           FactoryGirl.create(:published_download_in_published_category)
-        }
+        end
 
         it 'includes download in resolved scope' do
           expect(resolved_scope).to include(download)
@@ -355,9 +355,9 @@ describe DownloadPolicy do
       end
 
       context 'accessing an unpublished download' do
-        let(:download) {
+        let(:download) do
           FactoryGirl.create(:unpublished_download_in_published_category)
-        }
+        end
 
         it 'includes download in resolved scope' do
           expect(resolved_scope).to include(download)
@@ -372,9 +372,9 @@ describe DownloadPolicy do
 
     context 'accessing downloads in an unpublished category' do
       context 'accessing a published download' do
-        let(:download) {
+        let(:download) do
           FactoryGirl.create(:published_download_in_unpublished_category)
-        }
+        end
 
         it 'includes download in resolved scope' do
           expect(resolved_scope).to include(download)
@@ -387,9 +387,9 @@ describe DownloadPolicy do
       end
 
       context 'accessing an unpublished download' do
-        let(:download) {
+        let(:download) do
           FactoryGirl.create(:unpublished_download_in_unpublished_category)
-        }
+        end
 
         it 'includes download in resolved scope' do
           expect(resolved_scope).to include(download)

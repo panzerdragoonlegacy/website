@@ -18,7 +18,9 @@ RSpec.describe Picture, type: :model do
     it { should validate_uniqueness_of(:name) }
     it { should validate_length_of(:name).is_at_least(2).is_at_most(100) }
     it { should validate_presence_of(:description) }
-    it { should validate_length_of(:description).is_at_least(2).is_at_most(250) }
+    it do
+      should validate_length_of(:description).is_at_least(2).is_at_most(250)
+    end
     it { should validate_presence_of(:category) }
   end
 
@@ -33,10 +35,13 @@ RSpec.describe Picture, type: :model do
   describe 'file attachment' do
     it { should have_attached_file(:picture) }
     it { should validate_attachment_presence(:picture) }
-    it { should validate_attachment_content_type(:picture).
-      allowing('image/jpeg') }
-    it { should validate_attachment_size(:picture).
-      less_than(5.megabytes) }
+    it do
+      should validate_attachment_content_type(:picture)
+        .allowing('image/jpeg')
+    end
+    it do
+      should validate_attachment_size(:picture).less_than(5.megabytes)
+    end
   end
 
   describe 'callbacks' do

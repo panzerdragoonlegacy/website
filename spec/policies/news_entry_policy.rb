@@ -3,9 +3,9 @@ require 'rails_helper'
 describe NewsEntryPolicy do
   subject { NewsEntryPolicy.new(user, news_entry) }
 
-  let(:resolved_scope) {
+  let(:resolved_scope) do
     NewsEntryPolicy::Scope.new(user, NewsEntry.all).resolve
-  }
+  end
 
   context 'being a visitor' do
     let(:user) { nil }
@@ -82,15 +82,15 @@ describe NewsEntryPolicy do
   end
 
   context 'being a contributor' do
-    let(:contributor_profile) {
+    let(:contributor_profile) do
       FactoryGirl.create(:contributor_profile)
-    }
-    let(:user) {
+    end
+    let(:user) do
       FactoryGirl.create(
         :contributor,
         contributor_profile: contributor_profile
       )
-    }
+    end
 
     context 'creating a new news entry' do
       let(:news_entry) { NewsEntry.new }
@@ -129,12 +129,12 @@ describe NewsEntryPolicy do
 
     context 'accessing news entries the user contributes to' do
       context 'accessing a published news entry' do
-        let(:news_entry) {
+        let(:news_entry) do
           FactoryGirl.create(
             :published_news_entry,
             contributor_profile: contributor_profile
           )
-        }
+        end
 
         it 'includes news entry in resolved scope' do
           expect(resolved_scope).to include(news_entry)
@@ -147,12 +147,12 @@ describe NewsEntryPolicy do
       end
 
       context 'accessing an unpublished news entry' do
-        let(:news_entry) {
+        let(:news_entry) do
           FactoryGirl.create(
             :unpublished_news_entry,
             contributor_profile_id: contributor_profile.id
           )
-        }
+        end
 
         it 'includes news entry in resolved scope' do
           expect(resolved_scope).to include(news_entry)

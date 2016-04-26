@@ -18,14 +18,18 @@ RSpec.describe MusicTrack, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of(:track_number) }
-    it { should validate_numericality_of(:track_number).
-      is_greater_than_or_equal_to(0).is_less_than_or_equal_to(50) }
+    it do
+      should validate_numericality_of(:track_number)
+        .is_greater_than_or_equal_to(0).is_less_than_or_equal_to(50)
+    end
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
     it { should validate_length_of(:name).is_at_least(2).is_at_most(100) }
     it { should validate_presence_of(:description) }
-    it { should validate_length_of(:description).is_at_least(2).
-      is_at_most(250) }
+    it do
+      should validate_length_of(:description).is_at_least(2)
+        .is_at_most(250)
+    end
     it { should validate_presence_of(:category) }
   end
 
@@ -40,18 +44,28 @@ RSpec.describe MusicTrack, type: :model do
   describe 'file attachments' do
     it { should have_attached_file(:mp3_music_track) }
     it { should validate_attachment_presence(:mp3_music_track) }
-    it { should validate_attachment_content_type(:mp3_music_track).
-      allowing('audio/mp3') }
-    it { should validate_attachment_size(:mp3_music_track).
-      less_than(25.megabytes) }
+    it do
+      should validate_attachment_content_type(:mp3_music_track)
+        .allowing('audio/mp3')
+    end
+    it do
+      should validate_attachment_size(:mp3_music_track)
+        .less_than(25.megabytes)
+    end
     it { should have_attached_file(:ogg_music_track) }
     it { should validate_attachment_presence(:ogg_music_track) }
-    it { should validate_attachment_content_type(:ogg_music_track).
-      allowing('audio/ogg') }
-    it { should validate_attachment_size(:ogg_music_track).
-      less_than(25.megabytes) }
+    it do
+      should validate_attachment_content_type(:ogg_music_track)
+        .allowing('audio/ogg')
+    end
+    it do
+      should validate_attachment_size(:ogg_music_track)
+        .less_than(25.megabytes)
+    end
     it { should have_attached_file(:flac_music_track) }
-    it { should validate_attachment_size(:flac_music_track).
-      less_than(50.megabytes) }
+    it do
+      should validate_attachment_size(:flac_music_track)
+        .less_than(50.megabytes)
+    end
   end
 end

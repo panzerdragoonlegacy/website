@@ -18,9 +18,13 @@ RSpec.describe Video, type: :model do
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
-    it { should validate_length_of(:name).is_at_least(2).is_at_most(100) }
+    it do
+      should validate_length_of(:name).is_at_least(2).is_at_most(100)
+    end
     it { should validate_presence_of(:description) }
-    it { should validate_length_of(:description).is_at_least(2).is_at_most(250) }
+    it do
+      should validate_length_of(:description).is_at_least(2).is_at_most(250)
+    end
     it { should validate_presence_of(:category) }
   end
 
@@ -35,15 +39,22 @@ RSpec.describe Video, type: :model do
   describe 'file attachments' do
     it { should have_attached_file(:mp4_video) }
     it { should validate_attachment_presence(:mp4_video) }
-    it { should validate_attachment_content_type(:mp4_video).
-      allowing('video/mp4') }
-    it { should validate_attachment_size(:mp4_video).
-      less_than(200.megabytes) }
+    it do
+      should validate_attachment_content_type(:mp4_video)
+        .allowing('video/mp4')
+    end
+    it do
+      should validate_attachment_size(:mp4_video).less_than(200.megabytes)
+    end
     it { should have_attached_file(:webm_video) }
     it { should validate_attachment_presence(:webm_video) }
-    it { should validate_attachment_content_type(:webm_video).
-      allowing('video/webm') }
-    it { should validate_attachment_size(:webm_video).
-      less_than(200.megabytes) }
+    it do
+      should validate_attachment_content_type(:webm_video)
+        .allowing('video/webm')
+    end
+    it do
+      should validate_attachment_size(:webm_video)
+        .less_than(200.megabytes)
+    end
   end
 end

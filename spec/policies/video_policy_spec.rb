@@ -3,9 +3,9 @@ require 'rails_helper'
 describe VideoPolicy do
   subject { VideoPolicy.new(user, video) }
 
-  let(:resolved_scope) {
+  let(:resolved_scope) do
     VideoPolicy::Scope.new(user, Video.all).resolve
-  }
+  end
 
   context 'being a visitor' do
     let(:user) { nil }
@@ -19,9 +19,9 @@ describe VideoPolicy do
 
     context 'accessing videos in a published category' do
       context 'accessing a published video' do
-        let(:video) {
+        let(:video) do
           FactoryGirl.create(:published_video_in_published_category)
-        }
+        end
 
         it 'includes video in resolved scope' do
           expect(resolved_scope).to include(video)
@@ -34,9 +34,9 @@ describe VideoPolicy do
       end
 
       context 'accessing an unpublished video' do
-        let(:video) {
+        let(:video) do
           FactoryGirl.create(:unpublished_video_in_published_category)
-        }
+        end
 
         it 'excludes video from resolved scope' do
           expect(resolved_scope).not_to include(video)
@@ -51,9 +51,9 @@ describe VideoPolicy do
 
     context 'accessing videos in an unpublished category' do
       context 'accessing a published video' do
-        let(:video) {
+        let(:video) do
           FactoryGirl.create(:published_video_in_unpublished_category)
-        }
+        end
 
         it 'excludes video from resolved scope' do
           expect(resolved_scope).not_to include(video)
@@ -66,9 +66,9 @@ describe VideoPolicy do
       end
 
       context 'accessing an unpublished video' do
-        let(:video) {
+        let(:video) do
           FactoryGirl.create(:unpublished_video_in_unpublished_category)
-        }
+        end
 
         it 'excludes video from resolved scope' do
           expect(resolved_scope).not_to include(video)
@@ -94,9 +94,9 @@ describe VideoPolicy do
 
     context 'accessing videos in a published category' do
       context 'accessing a published video' do
-        let(:video) {
+        let(:video) do
           FactoryGirl.create(:published_video_in_published_category)
-        }
+        end
 
         it 'includes video in resolved scope' do
           expect(resolved_scope).to include(video)
@@ -109,9 +109,9 @@ describe VideoPolicy do
       end
 
       context 'accessing an unpublished video' do
-        let(:video) {
+        let(:video) do
           FactoryGirl.create(:unpublished_video_in_published_category)
-        }
+        end
 
         it 'excludes video from resolved scope' do
           expect(resolved_scope).not_to include(video)
@@ -126,9 +126,9 @@ describe VideoPolicy do
 
     context 'accessing videos in an unpublished category' do
       context 'accessing a published video' do
-        let(:video) {
+        let(:video) do
           FactoryGirl.create(:published_video_in_unpublished_category)
-        }
+        end
 
         it 'excludes video from resolved scope' do
           expect(resolved_scope).not_to include(video)
@@ -141,9 +141,9 @@ describe VideoPolicy do
       end
 
       context 'accessing an unpublished video' do
-        let(:video) {
+        let(:video) do
           FactoryGirl.create(:unpublished_video_in_unpublished_category)
-        }
+        end
 
         it 'excludes video from resolved scope' do
           expect(resolved_scope).not_to include(video)
@@ -158,15 +158,15 @@ describe VideoPolicy do
   end
 
   context 'being a contributor' do
-    let(:contributor_profile) {
+    let(:contributor_profile) do
       FactoryGirl.create(:contributor_profile)
-    }
-    let(:user) {
+    end
+    let(:user) do
       FactoryGirl.create(
         :contributor,
         contributor_profile: contributor_profile
       )
-    }
+    end
 
     context 'creating a new video' do
       let(:video) { Video.new }
@@ -178,9 +178,9 @@ describe VideoPolicy do
     context 'accessing videos in a published category' do
       context 'accessing videos that the user does not contribute to' do
         context 'accessing a published video' do
-          let(:video) {
+          let(:video) do
             FactoryGirl.create(:published_video_in_published_category)
-          }
+          end
 
           it 'includes video in resolved scope' do
             expect(resolved_scope).to include(video)
@@ -193,9 +193,9 @@ describe VideoPolicy do
         end
 
         context 'accessing an unpublished video' do
-          let(:video) {
+          let(:video) do
             FactoryGirl.create(:unpublished_video_in_published_category)
-          }
+          end
 
           it 'excludes video from resolved scope' do
             expect(resolved_scope).not_to include(video)
@@ -210,14 +210,14 @@ describe VideoPolicy do
 
       context 'accessing videos the user contributes to' do
         context 'accessing a published video' do
-          let(:video) {
+          let(:video) do
             FactoryGirl.create(
               :published_video_in_published_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
-          }
+          end
 
           it 'includes video in resolved scope' do
             expect(resolved_scope).to include(video)
@@ -230,14 +230,14 @@ describe VideoPolicy do
         end
 
         context 'accessing an unpublished video' do
-          let(:video) {
+          let(:video) do
             FactoryGirl.create(
               :unpublished_video_in_published_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
-          }
+          end
 
           it 'includes video in resolved scope' do
             expect(resolved_scope).to include(video)
@@ -254,9 +254,9 @@ describe VideoPolicy do
     context 'accessing videos in an unpublished category' do
       context 'accessing videos that the user does not contribute to' do
         context 'accessing a published video' do
-          let(:video) {
+          let(:video) do
             FactoryGirl.create(:published_video_in_published_category)
-          }
+          end
 
           it 'includes video in resolved scope' do
             expect(resolved_scope).to include(video)
@@ -269,9 +269,9 @@ describe VideoPolicy do
         end
 
         context 'accessing an unpublished video' do
-          let(:video) {
+          let(:video) do
             FactoryGirl.create(:unpublished_video_in_published_category)
-          }
+          end
 
           it 'excludes video from resolved scope' do
             expect(resolved_scope).not_to include(video)
@@ -286,14 +286,14 @@ describe VideoPolicy do
 
       context 'accessing videos that the user contributes to' do
         context 'accessing a published video' do
-          let(:video) {
+          let(:video) do
             FactoryGirl.create(
               :published_video_in_unpublished_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
-          }
+          end
 
           it 'includes video in resolved scope' do
             expect(resolved_scope).to include(video)
@@ -306,14 +306,14 @@ describe VideoPolicy do
         end
 
         context 'accessing an unpublished video' do
-          let(:video) {
+          let(:video) do
             FactoryGirl.create(
               :unpublished_video_in_unpublished_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
-          }
+          end
 
           it 'includes video in resolved scope' do
             expect(resolved_scope).to include(video)
@@ -340,9 +340,9 @@ describe VideoPolicy do
 
     context 'accessing videos in a published category' do
       context 'accessing a published video' do
-        let(:video) {
+        let(:video) do
           FactoryGirl.create(:published_video_in_published_category)
-        }
+        end
 
         it 'includes video in resolved scope' do
           expect(resolved_scope).to include(video)
@@ -355,9 +355,9 @@ describe VideoPolicy do
       end
 
       context 'accessing an unpublished video' do
-        let(:video) {
+        let(:video) do
           FactoryGirl.create(:unpublished_video_in_published_category)
-        }
+        end
 
         it 'includes video in resolved scope' do
           expect(resolved_scope).to include(video)
@@ -372,9 +372,9 @@ describe VideoPolicy do
 
     context 'accessing videos in an unpublished category' do
       context 'accessing a published video' do
-        let(:video) {
+        let(:video) do
           FactoryGirl.create(:published_video_in_unpublished_category)
-        }
+        end
 
         it 'includes video in resolved scope' do
           expect(resolved_scope).to include(video)
@@ -387,9 +387,9 @@ describe VideoPolicy do
       end
 
       context 'accessing an unpublished video' do
-        let(:video) {
+        let(:video) do
           FactoryGirl.create(:unpublished_video_in_unpublished_category)
-        }
+        end
 
         it 'includes video in resolved scope' do
           expect(resolved_scope).to include(video)

@@ -3,9 +3,9 @@ require 'rails_helper'
 describe PoemPolicy do
   subject { PoemPolicy.new(user, poem) }
 
-  let(:resolved_scope) {
+  let(:resolved_scope) do
     PoemPolicy::Scope.new(user, Poem.all).resolve
-  }
+  end
 
   context 'being a visitor' do
     let(:user) { nil }
@@ -82,15 +82,15 @@ describe PoemPolicy do
   end
 
   context 'being a contributor' do
-    let(:contributor_profile) {
+    let(:contributor_profile) do
       FactoryGirl.create(:contributor_profile)
-    }
-    let(:user) {
+    end
+    let(:user) do
       FactoryGirl.create(
         :contributor,
         contributor_profile: contributor_profile
       )
-    }
+    end
 
     context 'creating a new poem' do
       let(:poem) { Poem.new }
@@ -129,14 +129,14 @@ describe PoemPolicy do
 
     context 'accessing poems the user contributes to' do
       context 'accessing a published poem' do
-        let(:poem) {
+        let(:poem) do
           FactoryGirl.create(
             :published_poem,
             contributions: [
               Contribution.new(contributor_profile: contributor_profile)
             ]
           )
-        }
+        end
 
         it 'includes poem in resolved scope' do
           expect(resolved_scope).to include(poem)
@@ -149,14 +149,14 @@ describe PoemPolicy do
       end
 
       context 'accessing an unpublished poem' do
-        let(:poem) {
+        let(:poem) do
           FactoryGirl.create(
             :unpublished_poem,
             contributions: [
               Contribution.new(contributor_profile: contributor_profile)
             ]
           )
-        }
+        end
 
         it 'includes poem in resolved scope' do
           expect(resolved_scope).to include(poem)

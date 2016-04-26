@@ -14,10 +14,14 @@ RSpec.describe Illustration, type: :model do
   describe 'file attachment' do
     it { should have_attached_file(:illustration) }
     it { should validate_attachment_presence(:illustration) }
-    it { should validate_attachment_content_type(:illustration).
-      allowing('image/jpeg') }
-    it { should validate_attachment_size(:illustration).
-      less_than(5.megabytes) }
+    it do
+      should validate_attachment_content_type(:illustration)
+        .allowing('image/jpeg')
+    end
+    it do
+      should validate_attachment_size(:illustration)
+        .less_than(5.megabytes)
+    end
   end
 
   describe 'callbacks' do
@@ -26,8 +30,8 @@ RSpec.describe Illustration, type: :model do
         valid_illustration = FactoryGirl.build :valid_illustration
         valid_illustration.illustration_file_name = 'New File Name.jpg'
         valid_illustration.save
-        expect(valid_illustration.illustration_file_name).
-          to eq 'new-file-name.jpg'
+        expect(valid_illustration.illustration_file_name)
+          .to eq 'new-file-name.jpg'
       end
     end
   end

@@ -3,9 +3,9 @@ require 'rails_helper'
 describe PicturePolicy do
   subject { PicturePolicy.new(user, picture) }
 
-  let(:resolved_scope) {
+  let(:resolved_scope) do
     PicturePolicy::Scope.new(user, Picture.all).resolve
-  }
+  end
 
   context 'being a visitor' do
     let(:user) { nil }
@@ -19,9 +19,9 @@ describe PicturePolicy do
 
     context 'accessing pictures in a published category' do
       context 'accessing a published picture' do
-        let(:picture) {
+        let(:picture) do
           FactoryGirl.create(:published_picture_in_published_category)
-        }
+        end
 
         it 'includes picture in resolved scope' do
           expect(resolved_scope).to include(picture)
@@ -34,9 +34,9 @@ describe PicturePolicy do
       end
 
       context 'accessing an unpublished picture' do
-        let(:picture) {
+        let(:picture) do
           FactoryGirl.create(:unpublished_picture_in_published_category)
-        }
+        end
 
         it 'excludes picture from resolved scope' do
           expect(resolved_scope).not_to include(picture)
@@ -51,9 +51,9 @@ describe PicturePolicy do
 
     context 'accessing pictures in an unpublished category' do
       context 'accessing a published picture' do
-        let(:picture) {
+        let(:picture) do
           FactoryGirl.create(:published_picture_in_unpublished_category)
-        }
+        end
 
         it 'excludes picture from resolved scope' do
           expect(resolved_scope).not_to include(picture)
@@ -66,9 +66,9 @@ describe PicturePolicy do
       end
 
       context 'accessing an unpublished picture' do
-        let(:picture) {
+        let(:picture) do
           FactoryGirl.create(:unpublished_picture_in_unpublished_category)
-        }
+        end
 
         it 'excludes picture from resolved scope' do
           expect(resolved_scope).not_to include(picture)
@@ -94,9 +94,9 @@ describe PicturePolicy do
 
     context 'accessing pictures in a published category' do
       context 'accessing a published picture' do
-        let(:picture) {
+        let(:picture) do
           FactoryGirl.create(:published_picture_in_published_category)
-        }
+        end
 
         it 'includes picture in resolved scope' do
           expect(resolved_scope).to include(picture)
@@ -109,9 +109,9 @@ describe PicturePolicy do
       end
 
       context 'accessing an unpublished picture' do
-        let(:picture) {
+        let(:picture) do
           FactoryGirl.create(:unpublished_picture_in_published_category)
-        }
+        end
 
         it 'excludes picture from resolved scope' do
           expect(resolved_scope).not_to include(picture)
@@ -126,9 +126,9 @@ describe PicturePolicy do
 
     context 'accessing pictures in an unpublished category' do
       context 'accessing a published picture' do
-        let(:picture) {
+        let(:picture) do
           FactoryGirl.create(:published_picture_in_unpublished_category)
-        }
+        end
 
         it 'excludes picture from resolved scope' do
           expect(resolved_scope).not_to include(picture)
@@ -141,9 +141,9 @@ describe PicturePolicy do
       end
 
       context 'accessing an unpublished picture' do
-        let(:picture) {
+        let(:picture) do
           FactoryGirl.create(:unpublished_picture_in_unpublished_category)
-        }
+        end
 
         it 'excludes picture from resolved scope' do
           expect(resolved_scope).not_to include(picture)
@@ -158,15 +158,15 @@ describe PicturePolicy do
   end
 
   context 'being a contributor' do
-    let(:contributor_profile) {
+    let(:contributor_profile) do
       FactoryGirl.create(:contributor_profile)
-    }
-    let(:user) {
+    end
+    let(:user) do
       FactoryGirl.create(
         :contributor,
         contributor_profile: contributor_profile
       )
-    }
+    end
 
     context 'creating a new picture' do
       let(:picture) { Picture.new }
@@ -178,9 +178,9 @@ describe PicturePolicy do
     context 'accessing pictures in a published category' do
       context 'accessing pictures that the user does not contribute to' do
         context 'accessing a published picture' do
-          let(:picture) {
+          let(:picture) do
             FactoryGirl.create(:published_picture_in_published_category)
-          }
+          end
 
           it 'includes picture in resolved scope' do
             expect(resolved_scope).to include(picture)
@@ -193,9 +193,9 @@ describe PicturePolicy do
         end
 
         context 'accessing an unpublished picture' do
-          let(:picture) {
+          let(:picture) do
             FactoryGirl.create(:unpublished_picture_in_published_category)
-          }
+          end
 
           it 'excludes picture from resolved scope' do
             expect(resolved_scope).not_to include(picture)
@@ -210,14 +210,14 @@ describe PicturePolicy do
 
       context 'accessing pictures the user contributes to' do
         context 'accessing a published picture' do
-          let(:picture) {
+          let(:picture) do
             FactoryGirl.create(
               :published_picture_in_published_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
-          }
+          end
 
           it 'includes picture in resolved scope' do
             expect(resolved_scope).to include(picture)
@@ -230,14 +230,14 @@ describe PicturePolicy do
         end
 
         context 'accessing an unpublished picture' do
-          let(:picture) {
+          let(:picture) do
             FactoryGirl.create(
               :unpublished_picture_in_published_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
-          }
+          end
 
           it 'includes picture in resolved scope' do
             expect(resolved_scope).to include(picture)
@@ -254,9 +254,9 @@ describe PicturePolicy do
     context 'accessing pictures in an unpublished category' do
       context 'accessing pictures that the user does not contribute to' do
         context 'accessing a published picture' do
-          let(:picture) {
+          let(:picture) do
             FactoryGirl.create(:published_picture_in_published_category)
-          }
+          end
 
           it 'includes picture in resolved scope' do
             expect(resolved_scope).to include(picture)
@@ -269,9 +269,9 @@ describe PicturePolicy do
         end
 
         context 'accessing an unpublished picture' do
-          let(:picture) {
+          let(:picture) do
             FactoryGirl.create(:unpublished_picture_in_published_category)
-          }
+          end
 
           it 'excludes picture from resolved scope' do
             expect(resolved_scope).not_to include(picture)
@@ -286,14 +286,14 @@ describe PicturePolicy do
 
       context 'accessing pictures that the user contributes to' do
         context 'accessing a published picture' do
-          let(:picture) {
+          let(:picture) do
             FactoryGirl.create(
               :published_picture_in_unpublished_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
-          }
+          end
 
           it 'includes picture in resolved scope' do
             expect(resolved_scope).to include(picture)
@@ -306,14 +306,14 @@ describe PicturePolicy do
         end
 
         context 'accessing an unpublished picture' do
-          let(:picture) {
+          let(:picture) do
             FactoryGirl.create(
               :unpublished_picture_in_unpublished_category,
               contributions: [
                 Contribution.new(contributor_profile: contributor_profile)
               ]
             )
-          }
+          end
 
           it 'includes picture in resolved scope' do
             expect(resolved_scope).to include(picture)
@@ -340,9 +340,9 @@ describe PicturePolicy do
 
     context 'accessing pictures in a published category' do
       context 'accessing a published picture' do
-        let(:picture) {
+        let(:picture) do
           FactoryGirl.create(:published_picture_in_published_category)
-        }
+        end
 
         it 'includes picture in resolved scope' do
           expect(resolved_scope).to include(picture)
@@ -355,9 +355,9 @@ describe PicturePolicy do
       end
 
       context 'accessing an unpublished picture' do
-        let(:picture) {
+        let(:picture) do
           FactoryGirl.create(:unpublished_picture_in_published_category)
-        }
+        end
 
         it 'includes picture in resolved scope' do
           expect(resolved_scope).to include(picture)
@@ -372,9 +372,9 @@ describe PicturePolicy do
 
     context 'accessing pictures in an unpublished category' do
       context 'accessing a published picture' do
-        let(:picture) {
+        let(:picture) do
           FactoryGirl.create(:published_picture_in_unpublished_category)
-        }
+        end
 
         it 'includes picture in resolved scope' do
           expect(resolved_scope).to include(picture)
@@ -387,9 +387,9 @@ describe PicturePolicy do
       end
 
       context 'accessing an unpublished picture' do
-        let(:picture) {
+        let(:picture) do
           FactoryGirl.create(:unpublished_picture_in_unpublished_category)
-        }
+        end
 
         it 'includes picture in resolved scope' do
           expect(resolved_scope).to include(picture)

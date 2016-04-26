@@ -3,17 +3,17 @@ require 'rails_helper'
 describe CategoryGroupPolicy do
   subject { CategoryGroupPolicy.new(user, category_group) }
 
-  let(:resolved_scope) {
+  let(:resolved_scope) do
     CategoryGroupPolicy::Scope.new(user, CategoryGroup.all).resolve
-  }
+  end
 
   context 'being a visitor' do
     let(:user) { nil }
 
     context 'accessing a category group' do
-      let(:category_group) {
+      let(:category_group) do
         FactoryGirl.create(:category_group)
-      }
+      end
 
       it 'includes category group in resolved scope' do
         expect(resolved_scope).to include(category_group)
@@ -30,9 +30,9 @@ describe CategoryGroupPolicy do
     let(:user) { FactoryGirl.create(:registered_user) }
 
     context 'accessing a category group' do
-      let(:category_group) {
+      let(:category_group) do
         FactoryGirl.create(:category_group)
-      }
+      end
 
       it 'includes category group in resolved scope' do
         expect(resolved_scope).to include(category_group)
@@ -49,9 +49,9 @@ describe CategoryGroupPolicy do
     let(:user) { FactoryGirl.create(:administrator) }
 
     context 'accessing a category group' do
-      let(:category_group) {
+      let(:category_group) do
         FactoryGirl.create(:category_group)
-      }
+      end
 
       it 'includes category group in resolved scope' do
         expect(resolved_scope).to include(category_group)

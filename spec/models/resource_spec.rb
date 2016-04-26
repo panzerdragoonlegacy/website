@@ -29,6 +29,8 @@ RSpec.describe Resource, type: :model do
   end
 
   describe 'nested attributes' do
-    it { should accept_nested_attributes_for(:illustrations).allow_destroy(true) }
+    it do
+      should accept_nested_attributes_for(:illustrations).allow_destroy(true)
+    end
   end
 end

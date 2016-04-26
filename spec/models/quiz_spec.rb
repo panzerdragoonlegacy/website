@@ -15,7 +15,9 @@ RSpec.describe Quiz, type: :model do
     it { should validate_uniqueness_of(:name) }
     it { should validate_length_of(:name).is_at_least(2).is_at_most(100) }
     it { should validate_presence_of(:description) }
-    it { should validate_length_of(:description).is_at_least(2).is_at_most(250) }
+    it do
+      should validate_length_of(:description).is_at_least(2).is_at_most(250)
+    end
   end
 
   describe 'associations' do
@@ -27,6 +29,8 @@ RSpec.describe Quiz, type: :model do
   end
 
   describe 'nested attributes' do
-    it { should accept_nested_attributes_for(:quiz_questions).allow_destroy(true) }
+    it do
+      should accept_nested_attributes_for(:quiz_questions).allow_destroy(true)
+    end
   end
 end

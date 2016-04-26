@@ -38,10 +38,10 @@ RSpec.describe ContributorProfile, type: :model do
 
   describe 'file attachment' do
     it { should have_attached_file(:avatar) }
-    it { should validate_attachment_content_type(:avatar).
-      allowing('image/jpeg') }
-    it { should validate_attachment_size(:avatar).
-      less_than(5.megabytes) }
+    it do
+      should validate_attachment_content_type(:avatar).allowing('image/jpeg')
+    end
+    it { should validate_attachment_size(:avatar).less_than(5.megabytes) }
   end
 
   pending describe 'slug' do

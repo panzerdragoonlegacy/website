@@ -3,9 +3,9 @@ require 'rails_helper'
 describe QuizPolicy do
   subject { QuizPolicy.new(user, quiz) }
 
-  let(:resolved_scope) {
+  let(:resolved_scope) do
     QuizPolicy::Scope.new(user, Quiz.all).resolve
-  }
+  end
 
   context 'being a visitor' do
     let(:user) { nil }
@@ -68,15 +68,15 @@ describe QuizPolicy do
   end
 
   context 'being a contributor' do
-    let(:contributor_profile) {
+    let(:contributor_profile) do
       FactoryGirl.create(:contributor_profile)
-    }
-    let(:user) {
+    end
+    let(:user) do
       FactoryGirl.create(
         :contributor,
         contributor_profile: contributor_profile
       )
-    }
+    end
 
     context 'accessing quizzes that the user does not contribute to' do
       context 'accessing a published quiz' do
@@ -108,14 +108,14 @@ describe QuizPolicy do
 
     context 'accessing quizzes the user contributes to' do
       context 'accessing a published quiz' do
-        let(:quiz) {
+        let(:quiz) do
           FactoryGirl.create(
             :published_quiz,
             contributions: [
               Contribution.new(contributor_profile: contributor_profile)
             ]
           )
-        }
+        end
 
         it 'includes quiz in resolved scope' do
           expect(resolved_scope).to include(quiz)
@@ -128,14 +128,14 @@ describe QuizPolicy do
       end
 
       context 'accessing an unpublished quiz' do
-        let(:quiz) {
+        let(:quiz) do
           FactoryGirl.create(
             :unpublished_quiz,
             contributions: [
               Contribution.new(contributor_profile: contributor_profile)
             ]
           )
-        }
+        end
 
         it 'includes quiz in resolved scope' do
           expect(resolved_scope).to include(quiz)

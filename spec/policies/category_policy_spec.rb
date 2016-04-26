@@ -3,17 +3,17 @@ require 'rails_helper'
 describe CategoryPolicy do
   subject { CategoryPolicy.new(user, category) }
 
-  let(:resolved_scope) {
+  let(:resolved_scope) do
     CategoryPolicy::Scope.new(user, Category.all).resolve
-  }
+  end
 
   context 'being a visitor' do
     let(:user) { nil }
 
     context 'accessing a published category' do
-      let(:category) {
+      let(:category) do
         FactoryGirl.create(:published_category)
-      }
+      end
 
       it 'includes category in resolved scope' do
         expect(resolved_scope).to include(category)
@@ -26,9 +26,9 @@ describe CategoryPolicy do
     end
 
     context 'accessing an unpublished category' do
-      let(:category) {
+      let(:category) do
         FactoryGirl.create(:unpublished_category)
-      }
+      end
 
       it 'excludes category from resolved scope' do
         expect(resolved_scope).not_to include(category)
@@ -45,9 +45,9 @@ describe CategoryPolicy do
     let(:user) { FactoryGirl.create(:registered_user) }
 
     context 'accessing a published category' do
-      let(:category) {
+      let(:category) do
         FactoryGirl.create(:published_category)
-      }
+      end
 
       it 'includes category in resolved scope' do
         expect(resolved_scope).to include(category)
@@ -60,9 +60,9 @@ describe CategoryPolicy do
     end
 
     context 'accessing an unpublished category' do
-      let(:category) {
+      let(:category) do
         FactoryGirl.create(:unpublished_category)
-      }
+      end
 
       it 'excludes category from resolved scope' do
         expect(resolved_scope).not_to include(category)
@@ -79,9 +79,9 @@ describe CategoryPolicy do
     let(:user) { FactoryGirl.create(:administrator) }
 
     context 'accessing a published category' do
-      let(:category) {
+      let(:category) do
         FactoryGirl.create(:published_category)
-      }
+      end
 
       it 'includes category in resolved scope' do
         expect(resolved_scope).to include(category)
@@ -107,9 +107,9 @@ describe CategoryPolicy do
     end
 
     context 'accessing an unpublished category' do
-      let(:category) {
+      let(:category) do
         FactoryGirl.create(:unpublished_category)
-      }
+      end
 
       it 'includes category in resolved scope' do
         expect(resolved_scope).to include(category)
