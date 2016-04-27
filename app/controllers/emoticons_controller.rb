@@ -12,17 +12,17 @@ class EmoticonsController < ApplicationController
     @emoticon = Emoticon.new(emoticon_params)
     authorize @emoticon
     if @emoticon.save
-      redirect_to emoticons_path, notice: "Successfully created emoticon."
+      redirect_to emoticons_path, notice: 'Successfully created emoticon.'
     else
       render :new
     end
   end
 
-  def destroy    
+  def destroy
     @emoticon = Emoticon.find_by params[:id]
     authorize @emoticon
     @emoticon.destroy
-    redirect_to emoticons_path, notice: "Successfully destroyed emoticon."
+    redirect_to emoticons_path, notice: 'Successfully destroyed emoticon.'
   end
 
   private

@@ -40,7 +40,7 @@ class EncyclopaediaEntriesController < ApplicationController
   def new
     if params[:category]
       category = Category.find_by url: params[:category]
-      raise "Category not found." unless category.present?
+      raise 'Category not found.' unless category.present?
       @encyclopaedia_entry = EncyclopaediaEntry.new category: category
     else
       @encyclopaedia_entry = EncyclopaediaEntry.new
@@ -52,12 +52,8 @@ class EncyclopaediaEntriesController < ApplicationController
     @encyclopaedia_entry = EncyclopaediaEntry.new(encyclopaedia_entry_params)
     authorize @encyclopaedia_entry
     if @encyclopaedia_entry.save
-      flash[:notice] = "Successfully created encyclopaedia entry."
-      if params[:continue_editing]
-        redirect_to edit_encyclopaedia_entry_path(@encyclopaedia_entry)
-      else
-        redirect_to @encyclopaedia_entry
-      end
+      flash[:notice] = 'Successfully created encyclopaedia entry.'
+      redirect_to_encyclopaedia_entry
     else
       render :new
     end
@@ -76,12 +72,8 @@ class EncyclopaediaEntriesController < ApplicationController
     params[:encyclopaedia_entry][:story_ids] ||= []
     params[:encyclopaedia_entry][:video_ids] ||= []
     if @encyclopaedia_entry.update_attributes(encyclopaedia_entry_params)
-      flash[:notice] = "Successfully updated encyclopaedia entry."
-      if params[:continue_editing]
-        redirect_to edit_encyclopaedia_entry_path(@encyclopaedia_entry)
-      else
-        redirect_to @encyclopaedia_entry
-      end
+      flash[:notice] = 'Successfully updated encyclopaedia entry.'
+      redirect_to_encyclopaedia_entry
     else
       render :edit
     end
@@ -90,7 +82,7 @@ class EncyclopaediaEntriesController < ApplicationController
   def destroy
     @encyclopaedia_entry.destroy
     redirect_to(encyclopaedia_entries_path,
-      notice: "Successfully destroyed encyclopaedia entry.")
+      notice: 'Successfully destroyed encyclopaedia entry.')
   end
 
   private
@@ -109,5 +101,13 @@ class EncyclopaediaEntriesController < ApplicationController
   def load_encyclopaedia_entry
     @encyclopaedia_entry = EncyclopaediaEntry.find_by url: params[:id]
     authorize @encyclopaedia_entry
+  end
+
+  def redirect_to_encyclopaedia_entry
+    if params[:continue_editing]
+      redirect_to edit_encyclopaedia_entry_path(@encyclopaedia_entry)
+    else
+      redirect_to @encyclopaedia_entry
+    end
   end
 end

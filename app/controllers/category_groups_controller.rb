@@ -11,12 +11,8 @@ class CategoryGroupsController < ApplicationController
     @category_group = CategoryGroup.new(category_group_params)
     authorize @category_group
     if @category_group.save
-      flash[:notice] = "Successfully created category group."
-      if params[:continue_editing]
-        redirect_to edit_category_group_path(@category_group)
-      else
-        redirect_to site_map_path
-      end
+      flash[:notice] = 'Successfully created category group.'
+      redirect_to_category_group
     else
       render :new
     end
@@ -24,12 +20,8 @@ class CategoryGroupsController < ApplicationController
 
   def update
     if @category_group.update_attributes(category_group_params)
-      flash[:notice] = "Successfully updated category group."
-      if params[:continue_editing]
-        redirect_to edit_category_group_path(@category_group)
-      else
-        redirect_to site_map_path
-      end
+      flash[:notice] = 'Successfully updated category group.'
+      redirect_to_category_group
     else
       render :edit
     end
@@ -38,7 +30,7 @@ class CategoryGroupsController < ApplicationController
   def destroy
     @category_group.destroy
     redirect_to site_map_path,
-      notice: "Successfully destroyed category group."
+      notice: 'Successfully destroyed category group.'
   end
 
   private
@@ -53,5 +45,13 @@ class CategoryGroupsController < ApplicationController
   def load_category_group
     @category_group = CategoryGroup.find_by url: params[:id]
     authorize @category_group
+  end
+
+  def redirect_to_category_group
+    if params[:continue_editing]
+      redirect_to edit_category_group_path(@category_group)
+    else
+      redirect_to site_map_path
+    end
   end
 end

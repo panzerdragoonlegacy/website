@@ -6,7 +6,7 @@ class PicturesController < ApplicationController
     if params[:contributor_profile_id]
       unless @contributor_profile = ContributorProfile.find_by(
         url: params[:contributor_profile_id])
-        raise "Contributor profile not found."
+        raise 'Contributor profile not found.'
       end
       @pictures = policy_scope(Picture.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
@@ -29,7 +29,7 @@ class PicturesController < ApplicationController
   def new
     if params[:category]
       category = Category.find_by url: params[:category]
-      raise "Category not found." unless category.present?
+      raise 'Category not found.' unless category.present?
       @picture = Picture.new category: category
     else
       @picture = Picture.new
@@ -41,12 +41,8 @@ class PicturesController < ApplicationController
     @picture = Picture.new picture_params
     authorize @picture
     if @picture.save
-      flash[:notice] = "Successfully created picture."
-      if params[:continue_editing]
-        redirect_to edit_picture_path(@picture)
-      else
-        redirect_to @picture
-      end
+      flash[:notice] = 'Successfully created picture.'
+      redirect_to_picture
     else
       render :new
     end
@@ -55,12 +51,8 @@ class PicturesController < ApplicationController
   def update
     params[:picture][:contributor_profile_ids] ||= []
     if @picture.update_attributes picture_params
-      flash[:notice] = "Successfully updated picture."
-      if params[:continue_editing]
-        redirect_to edit_picture_path(@picture)
-      else
-        redirect_to @picture
-      end
+      flash[:notice] = 'Successfully updated picture.'
+      redirect_to_picture
     else
       render :edit
     end
@@ -68,7 +60,7 @@ class PicturesController < ApplicationController
 
   def destroy
     @picture.destroy
-    redirect_to pictures_path, notice: "Successfully destroyed picture."
+    redirect_to pictures_path, notice: 'Successfully destroyed picture.'
   end
 
   private
@@ -87,5 +79,13 @@ class PicturesController < ApplicationController
   def load_picture
     @picture = Picture.find_by url: params[:id]
     authorize @picture
+  end
+
+  def redirect_to_picture
+    if params[:continue_editing]
+      redirect_to edit_picture_path(@picture)
+    else
+      redirect_to @picture
+    end
   end
 end

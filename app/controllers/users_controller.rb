@@ -17,9 +17,9 @@ class UsersController < ApplicationController
     @user.password = random_password
     authorize @user
     if @user.save
-      flash[:notice] = "Successfully created user. A confirmation email was " +
-        "sent to #{@user.email}. The random password #{random_password} was " +
-        "generated which you can optionally provide to the user."
+      flash[:notice] = 'Successfully created user. A confirmation email was ' \
+        "sent to #{@user.email}. The random password #{random_password} was " \
+        'generated which you can optionally provide to the user.'
       redirect_to users_path
     else
       render :new
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      flash[:notice] = "Successfully updated user."
+      flash[:notice] = 'Successfully updated user.'
       redirect_to users_path
     else
       render :edit
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to users_path, notice: "Successfully destroyed user."
+    redirect_to users_path, notice: 'Successfully destroyed user.'
   end
 
   private
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   end
 
   def load_contributor_profiles
-    @contributor_profiles = ContributorProfilePolicy::Scope.new(current_user, 
+    @contributor_profiles = ContributorProfilePolicy::Scope.new(current_user,
       ContributorProfile.order(:name)).resolve
   end
 

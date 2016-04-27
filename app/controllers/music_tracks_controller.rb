@@ -6,7 +6,7 @@ class MusicTracksController < ApplicationController
     if params[:contributor_profile_id]
       unless @contributor_profile = ContributorProfile.find_by(
         url: params[:contributor_profile_id])
-        raise "Contributor profile not found."
+        raise 'Contributor profile not found.'
       end
       @music_tracks = policy_scope(MusicTrack.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
@@ -29,7 +29,7 @@ class MusicTracksController < ApplicationController
   def new
     if params[:category]
       category = Category.find_by url: params[:category]
-      raise "Category not found." unless category.present?
+      raise 'Category not found.' unless category.present?
       @music_track = MusicTrack.new category: category
     else
       @music_track = MusicTrack.new
@@ -41,12 +41,8 @@ class MusicTracksController < ApplicationController
     @music_track = MusicTrack.new(music_track_params)
     authorize @music_track
     if @music_track.save
-      flash[:notice] = "Successfully created music track."
-      if params[:continue_editing]
-        redirect_to edit_music_track_path(@music_track)
-      else
-        redirect_to @music_track
-      end
+      flash[:notice] = 'Successfully created music track.'
+      redirect_to_music_track
     else
       render :new
     end
@@ -55,12 +51,8 @@ class MusicTracksController < ApplicationController
   def update
     params[:music_track][:contributor_profile_ids] ||= []
     if @music_track.update_attributes(music_track_params)
-      flash[:notice] = "Successfully updated music track."
-      if params[:continue_editing]
-        redirect_to edit_music_track_path(@music_track)
-      else
-        redirect_to @music_track
-      end
+      flash[:notice] = 'Successfully updated music track.'
+      redirect_to_music_track
     else
       render :edit
     end
@@ -68,7 +60,7 @@ class MusicTracksController < ApplicationController
 
   def destroy
     @music_track.destroy
-    redirect_to music_tracks_path, notice: "Successfully destroyed music track."
+    redirect_to music_tracks_path, notice: 'Successfully destroyed music track.'
   end
 
   private
@@ -87,5 +79,13 @@ class MusicTracksController < ApplicationController
   def load_music_track
     @music_track = MusicTrack.find_by url: params[:id]
     authorize @music_track
+  end
+
+  def redirect_to_music_track
+    if params[:continue_editing]
+      redirect_to edit_music_track_path(@music_track)
+    else
+      redirect_to @music_track
+    end
   end
 end

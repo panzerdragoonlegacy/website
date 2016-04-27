@@ -15,12 +15,8 @@ class SagasController < ApplicationController
     @saga = Saga.new(saga_params)
     authorize @saga
     if @saga.save
-      flash[:notice] = "Successfully created saga."
-      if params[:continue_editing]
-        redirect_to edit_saga_path(@saga)
-      else
-        redirect_to sagas_path
-      end
+      flash[:notice] = 'Successfully created saga.'
+      redirect_to_saga
     else
       render :new
     end
@@ -28,12 +24,8 @@ class SagasController < ApplicationController
 
   def update
     if @saga.update_attributes(saga_params)
-      flash[:notice] = "Successfully updated saga."
-      if params[:continue_editing]
-        redirect_to edit_saga_path(@saga)
-      else
-        redirect_to sagas_path
-      end
+      flash[:notice] = 'Successfully updated saga.'
+      redirect_to_saga
     else
       render :edit
     end
@@ -41,7 +33,7 @@ class SagasController < ApplicationController
 
   def destroy
     @saga.destroy
-    redirect_to sagas_path, notice: "Successfully destroyed saga."
+    redirect_to sagas_path, notice: 'Successfully destroyed saga.'
   end
 
   private
@@ -61,5 +53,13 @@ class SagasController < ApplicationController
   def load_saga
     @saga = Saga.find_by url: params[:id]
     authorize @saga
+  end
+
+  def redirect_to_saga
+    if params[:continue_editing]
+      redirect_to edit_saga_path(@saga)
+    else
+      redirect_to sagas_path
+    end
   end
 end

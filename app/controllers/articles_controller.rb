@@ -6,8 +6,8 @@ class ArticlesController < ApplicationController
     if params[:contributor_profile_id]
       unless @contributor_profile = ContributorProfile.find_by(
         url: params[:contributor_profile_id])
-        raise "Contributor profile not found."
-      end  
+        raise 'Contributor profile not found.'
+      end
       @articles = policy_scope(Article.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
         order(:name).page(params[:page]))
@@ -27,7 +27,7 @@ class ArticlesController < ApplicationController
   def new
     if params[:category]
       category = Category.find_by url: params[:category]
-      raise "Category not found." unless category.present?
+      raise 'Category not found.' unless category.present?
       @article = Article.new category: category
     else
       @article = Article.new
@@ -39,12 +39,8 @@ class ArticlesController < ApplicationController
     @article = Article.new article_params
     authorize @article
     if @article.save
-      flash[:notice] = "Successfully created article."
-      if params[:continue_editing]
-        redirect_to edit_article_path(@article)
-      else
-        redirect_to @article
-      end
+      flash[:notice] = 'Successfully created article.'
+      redirect_to_article
     else
       render :new
     end
@@ -53,12 +49,8 @@ class ArticlesController < ApplicationController
   def update
     params[:article][:contributor_profile_ids] ||= []
     if @article.update_attributes article_params
-      flash[:notice] = "Successfully updated article."
-      if params[:continue_editing]
-        redirect_to edit_article_path(@article)
-      else
-        redirect_to @article
-      end
+      flash[:notice] = 'Successfully updated article.'
+      redirect_to_article
     else
       render :edit
     end
@@ -66,7 +58,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
-    redirect_to articles_path, notice: "Successfully destroyed article."
+    redirect_to articles_path, notice: 'Successfully destroyed article.'
   end
 
   private
@@ -85,5 +77,13 @@ class ArticlesController < ApplicationController
   def load_article
     @article = Article.find_by url: params[:id]
     authorize @article
+  end
+
+  def redirect_to_article
+    if params[:continue_editing]
+      redirect_to edit_article_path(@article)
+    else
+      redirect_to @article
+    end
   end
 end

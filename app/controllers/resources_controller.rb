@@ -6,7 +6,7 @@ class ResourcesController < ApplicationController
     if params[:contributor_profile_id]
       unless @contributor_profile = ContributorProfile.find_by(
         url: params[:contributor_profile_id])
-        raise "Contributor profile not found."
+        raise 'Contributor profile not found.'
       end
       @resources = policy_scope(Resource.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
@@ -29,7 +29,7 @@ class ResourcesController < ApplicationController
   def new
     if params[:category]
       category = Category.find_by url: params[:category]
-      raise "Category not found." unless category.present?
+      raise 'Category not found.' unless category.present?
       @resource = Resource.new category: category
     else
       @resource = Resource.new
@@ -41,12 +41,8 @@ class ResourcesController < ApplicationController
     @resource = Resource.new(resource_params)
     authorize @resource
     if @resource.save
-      flash[:notice] = "Successfully created resource."
-      if params[:continue_editing]
-        redirect_to edit_resource_path(@resource)
-      else
-        redirect_to @resource
-      end
+      flash[:notice] = 'Successfully created resource.'
+      redirect_to_resource
     else
       render :new
     end
@@ -55,12 +51,8 @@ class ResourcesController < ApplicationController
   def update
     params[:resource][:contributor_profile_ids] ||= []
     if @resource.update_attributes(resource_params)
-      flash[:notice] = "Successfully updated resource."
-      if params[:continue_editing]
-        redirect_to edit_resource_path(@resource)
-      else
-        redirect_to @resource
-      end
+      flash[:notice] = 'Successfully updated resource.'
+      redirect_to_resource
     else
       render :edit
     end
@@ -68,7 +60,7 @@ class ResourcesController < ApplicationController
 
   def destroy
     @resource.destroy
-    redirect_to resources_path, notice: "Successfully destroyed resource."
+    redirect_to resources_path, notice: 'Successfully destroyed resource.'
   end
 
   private
@@ -87,5 +79,13 @@ class ResourcesController < ApplicationController
   def load_resource
     @resource = Resource.find_by url: params[:id]
     authorize @resource
+  end
+
+  def redirect_to_resource
+    if params[:continue_editing]
+      redirect_to edit_resource_path(@resource)
+    else
+      redirect_to @resource
+    end
   end
 end

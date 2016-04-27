@@ -13,33 +13,33 @@ class CategoriesController < ApplicationController
 
   def show
     case @category.category_type
-    when "article"
+    when 'article'
       @articles = ArticlePolicy::Scope.new(current_user, Article.where(
         category_id: @category.id).order(:name).page(params[:page])).resolve
-    when "download"
+    when 'download'
       @downloads = DownloadPolicy::Scope.new(current_user, Download.where(
         category_id: @category.id).order(:name).page(params[:page])).resolve
-    when "encyclopaedia_entry"
+    when 'encyclopaedia_entry'
       @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
         current_user, EncyclopaediaEntry.where(category_id: @category.id
         ).order(:name).page(params[:page])).resolve
-    when "link"
+    when 'link'
       @links = LinkPolicy::Scope.new(current_user, Link.where(
         category_id: @category.id).order(:name).page(params[:page])).resolve
-    when "music_track"
+    when 'music_track'
       @music_tracks = MusicTrackPolicy::Scope.new(current_user,
         MusicTrack.where(category_id: @category.id).order(
         :track_number).order(:name).page(params[:page])).resolve
-    when "picture"
+    when 'picture'
       @pictures = PicturePolicy::Scope.new(current_user, Picture.where(
         category_id: @category.id).order(:name).page(params[:page])).resolve
-    when "resource"
+    when 'resource'
       @resources = ResourcePolicy::Scope.new(current_user, Resource.where(
         category_id: @category.id).order(:name).page(params[:page])).resolve
-    when "story"
+    when 'story'
       @stories = StoryPolicy::Scope.new(current_user, Story.where(
         category_id: @category.id).order(:name).page(params[:page])).resolve
-    when "video"
+    when 'video'
       @videos = VideoPolicy::Scope.new(current_user, Video.where(
         category_id: @category.id).order(:name).page(params[:page])).resolve
     end
@@ -54,12 +54,8 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     authorize @category
     if @category.save
-      flash[:notice] = "Successfully created category."
-      if params[:continue_editing]
-        redirect_to edit_category_path(@category)
-      else
-        redirect_to @category
-      end
+      flash[:notice] = 'Successfully created category.'
+      redirect_to_category
     else
       render :new
     end
@@ -67,12 +63,8 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update_attributes(category_params)
-      flash[:notice] = "Successfully updated category."
-      if params[:continue_editing]
-        redirect_to edit_category_path(@category)
-      else
-        redirect_to @category
-      end
+      flash[:notice] = 'Successfully updated category.'
+      redirect_to_category
     else
       render :edit
     end
@@ -80,7 +72,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    redirect_to site_map_path, notice: "Successfully destroyed category."
+    redirect_to site_map_path, notice: 'Successfully destroyed category.'
   end
 
   private
@@ -103,5 +95,13 @@ class CategoriesController < ApplicationController
   def load_category
     @category = Category.find_by url: params[:id]
     authorize @category
+  end
+
+  def redirect_to_category
+    if params[:continue_editing]
+      redirect_to edit_category_path(@category)
+    else
+      redirect_to @category
+    end
   end
 end

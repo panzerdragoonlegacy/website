@@ -6,7 +6,7 @@ class DownloadsController < ApplicationController
     if params[:contributor_profile_id]
       unless @contributor_profile = ContributorProfile.find_by(
         url: params[:contributor_profile_id])
-        raise "Contributor profile not found."
+        raise 'Contributor profile not found.'
       end
       @downloads = policy_scope(Download.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
@@ -14,7 +14,7 @@ class DownloadsController < ApplicationController
     elsif params[:filter] == 'draft'
       @downloads = policy_scope(Download.where(publish: false).order(:name).
         page(params[:page]))
-    else      
+    else
       @downloads = policy_scope(Download.order(:name).page(params[:page]))
     end
   end
@@ -27,7 +27,7 @@ class DownloadsController < ApplicationController
   def new
     if params[:category]
       category = Category.find_by url: params[:category]
-      raise "Category not found." unless category.present?
+      raise 'Category not found.' unless category.present?
       @download = Download.new category: category
     else
       @download = Download.new
@@ -39,12 +39,8 @@ class DownloadsController < ApplicationController
     @download = Download.new(download_params)
     authorize @download
     if @download.save
-      flash[:notice] = "Successfully created download."
-      if params[:continue_editing]
-        redirect_to edit_download_path(@download)
-      else
-        redirect_to(@download)
-      end
+      flash[:notice] = 'Successfully created download.'
+      redirect_to_download
     else
       render :new
     end
@@ -53,12 +49,8 @@ class DownloadsController < ApplicationController
   def update
     params[:download][:contributor_profile_ids] ||= []
     if @download.update_attributes(download_params)
-      flash[:notice] = "Successfully updated download."
-      if params[:continue_editing]
-        redirect_to edit_download_path(@download)
-      else
-        redirect_to @download
-      end
+      flash[:notice] = 'Successfully updated download.'
+      redirect_to_download
     else
       render :edit
     end
@@ -66,7 +58,7 @@ class DownloadsController < ApplicationController
 
   def destroy
     @download.destroy
-    redirect_to downloads_path, notice: "Successfully destroyed download."
+    redirect_to downloads_path, notice: 'Successfully destroyed download.'
   end
 
   private
@@ -85,5 +77,13 @@ class DownloadsController < ApplicationController
   def load_download
     @download = Download.find_by url: params[:id]
     authorize @download
+  end
+
+  def redirect_to_download
+    if params[:continue_editing]
+      redirect_to edit_download_path(@download)
+    else
+      redirect_to(@download)
+    end
   end
 end

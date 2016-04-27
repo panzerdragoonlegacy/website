@@ -15,8 +15,8 @@ class ContributorProfilesController < ApplicationController
     @contributor_profile = ContributorProfile.new(contributor_profile_params)
     authorize @contributor_profile
     if @contributor_profile.save
-      redirect_to(@contributor_profile, 
-        notice: "Successfully created contributor profile.")
+      flash[:notice] = 'Successfully created contributor profile.'
+      redirect_to_contributor_profile
     else
       render :new
     end
@@ -24,12 +24,8 @@ class ContributorProfilesController < ApplicationController
 
   def update
     if @contributor_profile.update_attributes(contributor_profile_params)
-      flash[:notice] = "Successfully updated contributor profile."
-      if params[:continue_editing]
-        redirect_to edit_contributor_profile_path(@contributor_profile)
-      else
-        redirect_to @contributor_profile
-      end
+      flash[:notice] = 'Successfully updated contributor profile.'
+      redirect_to_contributor_profile
     else
       render :edit
     end
@@ -37,8 +33,8 @@ class ContributorProfilesController < ApplicationController
 
   def destroy
     @contributor_profile.destroy
-    redirect_to(contributor_profiles_path, 
-      notice: "Successfully destroyed contributor profile.")
+    redirect_to(contributor_profiles_path,
+      notice: 'Successfully destroyed contributor profile.')
   end
 
   private
@@ -58,5 +54,13 @@ class ContributorProfilesController < ApplicationController
   def load_contributor_profile
     @contributor_profile = ContributorProfile.find_by url: params[:id]
     authorize @contributor_profile
+  end
+
+  def redirect_to_contributor_profile
+    if params[:continue_editing]
+      redirect_to edit_contributor_profile_path(@contributor_profile)
+    else
+      redirect_to @contributor_profile
+    end
   end
 end

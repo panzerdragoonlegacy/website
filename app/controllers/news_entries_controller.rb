@@ -5,16 +5,16 @@ class NewsEntriesController < ApplicationController
     if params[:contributor_profile_id]
       unless @contributor_profile = ContributorProfile.find_by(
         url: params[:contributor_profile_id])
-        raise "Contributor profile not found."
+        raise 'Contributor profile not found.'
       end
       @news_entries = policy_scope(NewsEntry.where(
         contributor_profile_id: @contributor_profile.id).order(
-        "created_at desc").page(params[:page]))
+        'created_at desc').page(params[:page]))
     elsif params[:filter] == 'draft'
       @news_entries = policy_scope(NewsEntry.where(publish: false).
-        order("created_at desc").page(params[:page]))
+        order('created_at desc').page(params[:page]))
     else
-      @news_entries = policy_scope(NewsEntry.order("created_at desc").page(
+      @news_entries = policy_scope(NewsEntry.order('created_at desc').page(
         params[:page]))
     end
   end
@@ -28,12 +28,8 @@ class NewsEntriesController < ApplicationController
     @news_entry = NewsEntry.new(news_entry_params)
     authorize @news_entry
     if @news_entry.save
-      flash[:notice] = "Successfully created news entry."
-      if params[:continue_editing]
-        redirect_to edit_news_entry_path(@news_entry)
-      else
-        redirect_to @news_entry
-      end
+      flash[:notice] = 'Successfully created news entry.'
+      redirect_to_news_entry
     else
       render :new
     end
@@ -41,12 +37,8 @@ class NewsEntriesController < ApplicationController
 
   def update
     if @news_entry.update_attributes(news_entry_params)
-      flash[:notice] = "Successfully updated news entry."
-      if params[:continue_editing]
-        redirect_to edit_news_entry_path(@news_entry)
-      else
-        redirect_to @news_entry
-      end
+      flash[:notice] = 'Successfully updated news entry.'
+      redirect_to_news_entry
     else
       render :edit
     end
@@ -54,7 +46,7 @@ class NewsEntriesController < ApplicationController
 
   def destroy
     @news_entry.destroy
-    redirect_to news_entries_path, notice: "Successfully destroyed news entry."
+    redirect_to news_entries_path, notice: 'Successfully destroyed news entry.'
   end
 
   private
@@ -68,5 +60,13 @@ class NewsEntriesController < ApplicationController
   def load_news_entry
     @news_entry = NewsEntry.find_by url: params[:id]
     authorize @news_entry
+  end
+
+  def redirect_to_news_entry
+    if params[:continue_editing]
+      redirect_to edit_news_entry_path(@news_entry)
+    else
+      redirect_to @news_entry
+    end
   end
 end

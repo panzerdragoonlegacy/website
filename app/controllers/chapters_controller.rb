@@ -7,7 +7,7 @@ class ChaptersController < ApplicationController
 
   def new
     story = Story.find_by url: params[:story]
-    raise "Story not found." unless story.present?
+    raise 'Story not found.' unless story.present?
     @chapter = Chapter.new(story_id: story.id)
     authorize @chapter.story
   end
@@ -16,12 +16,8 @@ class ChaptersController < ApplicationController
     @chapter = Chapter.new(chapter_params)
     authorize @chapter.story
     if @chapter.save
-      flash[:notice] = "Successfully created chapter."
-      if params[:continue_editing]
-        redirect_to edit_chapter_path(@chapter)
-      else
-        redirect_to @chapter
-      end
+      flash[:notice] = 'Successfully created chapter.'
+      redirect_to_chapter
     else
       render :new
     end
@@ -29,12 +25,8 @@ class ChaptersController < ApplicationController
 
   def update
     if @chapter.update_attributes(chapter_params)
-      flash[:notice] = "Successfully updated chapter."
-      if params[:continue_editing]
-        redirect_to edit_chapter_path(@chapter)
-      else
-        redirect_to @chapter
-      end
+      flash[:notice] = 'Successfully updated chapter.'
+      redirect_to_chapter
     else
       render :edit
     end
@@ -43,7 +35,7 @@ class ChaptersController < ApplicationController
   def destroy
     story = @chapter.story
     @chapter.destroy
-    redirect_to story_path(story), notice: "Successfully destroyed chapter."
+    redirect_to story_path(story), notice: 'Successfully destroyed chapter.'
   end
 
   private
@@ -94,6 +86,14 @@ class ChaptersController < ApplicationController
     end
     if (@chapter == epilogues.order(:number).first) && regular_chapters
       @previous_chapter = regular_chapters.last
+    end
+  end
+
+  def redirect_to_chapter
+    if params[:continue_editing]
+      redirect_to edit_chapter_path(@chapter)
+    else
+      redirect_to @chapter
     end
   end
 end

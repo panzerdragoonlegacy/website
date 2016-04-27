@@ -6,7 +6,7 @@ class StoriesController < ApplicationController
     if params[:contributor_profile_id]
       unless @contributor_profile = ContributorProfile.find_by(
         url: params[:contributor_profile_id])
-        raise "Contributor profile not found."
+        raise 'Contributor profile not found.'
       end
       @stories = policy_scope(Story.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
@@ -27,7 +27,7 @@ class StoriesController < ApplicationController
   def new
     if params[:category]
       category = Category.find_by url: params[:category]
-      raise "Category not found." unless category.present?
+      raise 'Category not found.' unless category.present?
       @story = Story.new category: category
     else
       @story = Story.new
@@ -39,12 +39,8 @@ class StoriesController < ApplicationController
     @story = Story.new(story_params)
     authorize @story
     if @story.save
-      flash[:notice] = "Successfully created story."
-      if params[:continue_editing]
-        redirect_to edit_story_path(@story)
-      else
-        redirect_to @story
-      end
+      flash[:notice] = 'Successfully created story.'
+      redirect_to_story
     else
       render :new
     end
@@ -53,12 +49,8 @@ class StoriesController < ApplicationController
   def update
     params[:story][:contributor_profile_ids] ||= []
     if @story.update_attributes(story_params)
-      flash[:notice] = "Successfully updated story."
-      if params[:continue_editing]
-        redirect_to edit_story_path(@story)
-      else
-        redirect_to @story
-      end
+      flash[:notice] = 'Successfully updated story.'
+      redirect_to_story
     else
       render :edit
     end
@@ -66,7 +58,7 @@ class StoriesController < ApplicationController
 
   def destroy
     @story.destroy
-    redirect_to stories_path, notice: "Successfully destroyed story."
+    redirect_to stories_path, notice: 'Successfully destroyed story.'
   end
 
   private
@@ -85,5 +77,13 @@ class StoriesController < ApplicationController
   def load_story
     @story = Story.find_by url: params[:id]
     authorize @story
+  end
+
+  def redirect_to_story
+    if params[:continue_editing]
+      redirect_to edit_story_path(@story)
+    else
+      redirect_to @story
+    end
   end
 end

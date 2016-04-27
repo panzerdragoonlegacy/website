@@ -5,7 +5,7 @@ class PoemsController < ApplicationController
     if params[:contributor_profile_id]
       unless @contributor_profile = ContributorProfile.find_by(
         url: params[:contributor_profile_id])
-        raise "Contributor profile not found."
+        raise 'Contributor profile not found.'
       end
       @poems = policy_scope(Poem.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
@@ -32,12 +32,8 @@ class PoemsController < ApplicationController
     @poem = Poem.new(poem_params)
     authorize @poem
     if @poem.save
-      flash[:notice] = "Successfully created poem."
-      if params[:continue_editing]
-        redirect_to edit_poem_path(@poem)
-      else
-        redirect_to @poem
-      end
+      flash[:notice] = 'Successfully created poem.'
+      redirect_to_poem
     else
       render :new
     end
@@ -46,12 +42,8 @@ class PoemsController < ApplicationController
   def update
     params[:poem][:contributor_profile_ids] ||= []
     if @poem.update_attributes(poem_params)
-      flash[:notice] = "Successfully updated poem."
-      if params[:continue_editing]
-        redirect_to edit_poem_path(@poem)
-      else
-        redirect_to @poem
-      end
+      flash[:notice] = 'Successfully updated poem.'
+      redirect_to_poem
     else
       render :edit
     end
@@ -59,7 +51,7 @@ class PoemsController < ApplicationController
 
   def destroy
     @poem.destroy
-    redirect_to poems_path, notice: "Successfully destroyed poem."
+    redirect_to poems_path, notice: 'Successfully destroyed poem.'
   end
 
   private
@@ -73,5 +65,13 @@ class PoemsController < ApplicationController
   def load_poem
     @poem = Poem.find_by url: params[:id]
     authorize @poem
+  end
+
+  def redirect_to_poem
+    if params[:continue_editing]
+      redirect_to edit_poem_path(@poem)
+    else
+      redirect_to @poem
+    end
   end
 end

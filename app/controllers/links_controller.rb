@@ -6,7 +6,7 @@ class LinksController < ApplicationController
     if params[:contributor_profile_id]
       unless @contributor_profile = ContributorProfile.find_by(
         url: params[:contributor_profile_id])
-        raise "Contributor profile not found."
+        raise 'Contributor profile not found.'
       end
       @links = policy_scope(Link.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
@@ -24,7 +24,7 @@ class LinksController < ApplicationController
   def new
     if params[:category]
       category = Category.find_by url: params[:category]
-      raise "Category not found." unless category.present?
+      raise 'Category not found.' unless category.present?
       @link = Link.new category: category
     else
       @link = Link.new
@@ -36,12 +36,8 @@ class LinksController < ApplicationController
     @link = Link.new(link_params)
     authorize @link
     if @link.save
-      flash[:notice] = "Successfully created link."
-      if params[:continue_editing]
-        redirect_to edit_link_path(@link)
-      else
-        redirect_to links_path
-      end
+      flash[:notice] = 'Successfully created link.'
+      redirect_to_link
     else
       render :new
     end
@@ -50,12 +46,8 @@ class LinksController < ApplicationController
   def update
     params[:link][:contributor_profile_ids] ||= []
     if @link.update_attributes(link_params)
-      flash[:notice] = "Successfully updated link."
-      if params[:continue_editing]
-        redirect_to edit_link_path(@link)
-      else
-        redirect_to links_path
-      end
+      flash[:notice] = 'Successfully updated link.'
+      redirect_to_link
     else
       render :edit
     end
@@ -63,7 +55,7 @@ class LinksController < ApplicationController
 
   def destroy
     @link.destroy
-    redirect_to links_path, notice: "Successfully destroyed link."
+    redirect_to links_path, notice: 'Successfully destroyed link.'
   end
 
   private
@@ -88,5 +80,13 @@ class LinksController < ApplicationController
   def load_link
     @link = Link.find params[:id]
     authorize @link
+  end
+
+  def redirect_to_link
+    if params[:continue_editing]
+      redirect_to edit_link_path(@link)
+    else
+      redirect_to links_path
+    end
   end
 end

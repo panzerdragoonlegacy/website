@@ -5,7 +5,7 @@ class QuizzesController < ApplicationController
     if params[:contributor_profile_id]
       unless @contributor_profile = ContributorProfile.find_by(
         url: params[:contributor_profile_id])
-        raise "Contributor profile not found."
+        raise 'Contributor profile not found.'
       end
       @quizzes = policy_scope(Quiz.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }).
@@ -22,7 +22,7 @@ class QuizzesController < ApplicationController
     if params[:commit]
       if params[:results]
         if params[:results].count < @quiz.quiz_questions.count
-          flash.now[:notice] = "You must fill out all questions."
+          flash.now[:notice] = 'You must fill out all questions.'
         else
           @show_results = true
         end
@@ -45,12 +45,8 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.new(quiz_params)
     authorize @quiz
     if @quiz.save
-      flash[:notice] = "Successfully created quiz."
-      if params[:continue_editing]
-        redirect_to edit_quiz_path(@quiz)
-      else
-        redirect_to @quiz
-      end
+      flash[:notice] = 'Successfully created quiz.'
+      redirect_to_quiz
     else
       render :new
     end
@@ -64,12 +60,8 @@ class QuizzesController < ApplicationController
   def update
     params[:quiz][:contributor_profile_ids] ||= []
     if @quiz.update_attributes(quiz_params)
-      flash[:notice] = "Successfully updated quiz."
-      if params[:continue_editing]
-        redirect_to edit_quiz_path(@quiz)
-      else
-        redirect_to @quiz
-      end
+      flash[:notice] = 'Successfully updated quiz.'
+      redirect_to_quiz
     else
       render :edit
     end
@@ -77,7 +69,7 @@ class QuizzesController < ApplicationController
 
   def destroy
     @quiz.destroy
-    redirect_to quizzes_path, notice: "Successfully destroyed quiz."
+    redirect_to quizzes_path, notice: 'Successfully destroyed quiz.'
   end
 
   private
@@ -91,5 +83,13 @@ class QuizzesController < ApplicationController
   def load_quiz
     @quiz = Quiz.find_by url: params[:id]
     authorize @quiz
+  end
+
+  def redirect_to_quiz
+    if params[:continue_editing]
+      redirect_to edit_quiz_path(@quiz)
+    else
+      redirect_to @quiz
+    end
   end
 end
