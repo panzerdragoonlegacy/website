@@ -13,17 +13,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    random_password = SecureRandom.uuid
-    @user.password = random_password
+    password = generate_and_assign_random_password
     authorize @user
-    if @user.save
-      flash[:notice] = 'Successfully created user. A confirmation email was ' \
-        "sent to #{@user.email}. The random password #{random_password} was " \
-        'generated which you can optionally provide to the user.'
-      redirect_to users_path
-    else
-      render :new
-    end
+    attempt_to_create_user(password)
   end
 
   def update
@@ -51,12 +43,31 @@ class UsersController < ApplicationController
   end
 
   def load_contributor_profiles
-    @contributor_profiles = ContributorProfilePolicy::Scope.new(current_user,
-      ContributorProfile.order(:name)).resolve
+    @contributor_profiles = ContributorProfilePolicy::Scope.new(
+      current_user,
+      ContributorProfile.order(:name)
+    ).resolve
   end
 
   def load_user
     @user = User.find params[:id]
     authorize @user
+  end
+
+  def generate_and_assign_random_password
+    random_password = SecureRandom.uuid
+    @user.password = random_password
+    random_password
+  end
+
+  def attempt_to_create_user(password)
+    if @user.save
+      flash[:notice] = 'Successfully created user. A confirmation email was ' \
+        "sent to #{@user.email}. The random password #{password} was " \
+        'generated which you can optionally provide to the user.'
+      redirect_to users_path
+    else
+      render :new
+    end
   end
 end

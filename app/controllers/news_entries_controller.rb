@@ -3,19 +3,13 @@ class NewsEntriesController < ApplicationController
 
   def index
     if params[:contributor_profile_id]
-      unless @contributor_profile = ContributorProfile.find_by(
-        url: params[:contributor_profile_id])
-        raise 'Contributor profile not found.'
-      end
-      @news_entries = policy_scope(NewsEntry.where(
-        contributor_profile_id: @contributor_profile.id).order(
-        'created_at desc').page(params[:page]))
+      load_contributors_news_entries
     elsif params[:filter] == 'draft'
-      @news_entries = policy_scope(NewsEntry.where(publish: false).
-        order('created_at desc').page(params[:page]))
+      load_draft_news_entries
     else
-      @news_entries = policy_scope(NewsEntry.order('created_at desc').page(
-        params[:page]))
+      @news_entries = policy_scope(
+        NewsEntry.order('created_at desc').page(params[:page])
+      )
     end
   end
 
@@ -60,6 +54,24 @@ class NewsEntriesController < ApplicationController
   def load_news_entry
     @news_entry = NewsEntry.find_by url: params[:id]
     authorize @news_entry
+  end
+
+  def load_contributors_news_entries
+    @contributor_profile = ContributorProfile.find_by(
+      url: params[:contributor_profile_id]
+    )
+    raise 'Contributor profile not found.' unless @contributor_profile
+    @news_entries = policy_scope(
+      NewsEntry.where(contributor_profile_id: @contributor_profile.id)
+        .order('created_at desc').page(params[:page])
+    )
+  end
+
+  def load_draft_news_entries
+    @news_entries = policy_scope(
+      NewsEntry.where(publish: false).order('created_at desc')
+        .page(params[:page])
+    )
   end
 
   def redirect_to_news_entry

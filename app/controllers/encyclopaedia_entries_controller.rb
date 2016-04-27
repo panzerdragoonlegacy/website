@@ -4,8 +4,7 @@ class EncyclopaediaEntriesController < ApplicationController
 
   def index
     if params[:filter] == 'draft'
-      @encyclopaedia_entries = policy_scope(EncyclopaediaEntry.where(
-        publish: false).order(:name).page(params[:page]))
+      load_draft_encyclopaedia_entries
     else
       @category_groups = policy_scope(CategoryGroup.where(
         category_group_type: :encyclopaedia_entry).order(:name))
@@ -101,6 +100,12 @@ class EncyclopaediaEntriesController < ApplicationController
   def load_encyclopaedia_entry
     @encyclopaedia_entry = EncyclopaediaEntry.find_by url: params[:id]
     authorize @encyclopaedia_entry
+  end
+
+  def load_draft_encyclopaedia_entries
+    @encyclopaedia_entries = policy_scope(
+      EncyclopaediaEntry.where(publish: false).order(:name).page(params[:page])
+    )
   end
 
   def redirect_to_encyclopaedia_entry

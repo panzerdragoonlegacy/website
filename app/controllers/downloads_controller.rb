@@ -4,24 +4,19 @@ class DownloadsController < ApplicationController
 
   def index
     if params[:contributor_profile_id]
-      unless @contributor_profile = ContributorProfile.find_by(
-        url: params[:contributor_profile_id])
-        raise 'Contributor profile not found.'
-      end
-      @downloads = policy_scope(Download.joins(:contributions).where(
-        contributions: { contributor_profile_id: @contributor_profile.id }).
-        order(:name).page(params[:page]))
+      load_contributors_downloads
     elsif params[:filter] == 'draft'
-      @downloads = policy_scope(Download.where(publish: false).order(:name).
-        page(params[:page]))
+      load_draft_downloads
     else
       @downloads = policy_scope(Download.order(:name).page(params[:page]))
     end
   end
 
   def show
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(current_user,
-      @download.encyclopaedia_entries.order(:name)).resolve
+    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
+      current_user,
+      @download.encyclopaedia_entries.order(:name)
+    ).resolve
   end
 
   def new
@@ -70,13 +65,33 @@ class DownloadsController < ApplicationController
   end
 
   def load_categories
-    @categories = CategoryPolicy::Scope.new(current_user,
-      Category.where(category_type: :download).order(:name)).resolve
+    @categories = CategoryPolicy::Scope.new(
+      current_user,
+      Category.where(category_type: :download).order(:name)
+    ).resolve
   end
 
   def load_download
     @download = Download.find_by url: params[:id]
     authorize @download
+  end
+
+  def load_contributors_downloads
+    @contributor_profile = ContributorProfile.find_by(
+      url: params[:contributor_profile_id]
+    )
+    raise 'Contributor profile not found.' unless @contributor_profile
+    @downloads = policy_scope(
+      Download.joins(:contributions).where(
+        contributions: { contributor_profile_id: @contributor_profile.id }
+      ).order(:name).page(params[:page])
+    )
+  end
+
+  def load_draft_downloads
+    @downloads = policy_scope(
+      Download.where(publish: false).order(:name).page(params[:page])
+    )
   end
 
   def redirect_to_download

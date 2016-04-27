@@ -4,26 +4,20 @@ class PicturesController < ApplicationController
 
   def index
     if params[:contributor_profile_id]
-      unless @contributor_profile = ContributorProfile.find_by(
-        url: params[:contributor_profile_id])
-        raise 'Contributor profile not found.'
-      end
-      @pictures = policy_scope(Picture.joins(:contributions).where(
-        contributions: { contributor_profile_id: @contributor_profile.id }).
-        order(:name).page(params[:page]))
+      load_contributors_pictures
     elsif params[:filter] == 'draft'
-      @pictures = policy_scope(Picture.where(publish: false).order(:name).
-        page(params[:page]))
+      load_draft_pictures
     else
-      @category_groups = policy_scope(CategoryGroup.where(
-        category_group_type: :picture).order(:name))
+      load_category_groups
       @pictures = policy_scope(Picture.order(:name).page(params[:page]))
     end
   end
 
   def show
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(current_user,
-      @picture.encyclopaedia_entries.order(:name)).resolve
+    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
+      current_user,
+      @picture.encyclopaedia_entries.order(:name)
+    ).resolve
   end
 
   def new
@@ -79,6 +73,30 @@ class PicturesController < ApplicationController
   def load_picture
     @picture = Picture.find_by url: params[:id]
     authorize @picture
+  end
+
+  def load_contributors_pictures
+    @contributor_profile = ContributorProfile.find_by(
+      url: params[:contributor_profile_id]
+    )
+    raise 'Contributor profile not found.' unless @contributor_profile
+    @pictures = policy_scope(
+      Picture.joins(:contributions).where(
+        contributions: { contributor_profile_id: @contributor_profile.id }
+      ).order(:name).page(params[:page])
+    )
+  end
+
+  def load_draft_pictures
+    @pictures = policy_scope(
+      Picture.where(publish: false).order(:name).page(params[:page])
+    )
+  end
+
+  def load_category_groups
+    @category_groups = policy_scope(
+      CategoryGroup.where(category_group_type: :picture).order(:name)
+    )
   end
 
   def redirect_to_picture

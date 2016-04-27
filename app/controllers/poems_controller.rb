@@ -3,24 +3,19 @@ class PoemsController < ApplicationController
 
   def index
     if params[:contributor_profile_id]
-      unless @contributor_profile = ContributorProfile.find_by(
-        url: params[:contributor_profile_id])
-        raise 'Contributor profile not found.'
-      end
-      @poems = policy_scope(Poem.joins(:contributions).where(
-        contributions: { contributor_profile_id: @contributor_profile.id }).
-        order(:name).page(params[:page]))
+      load_contributors_poems
     elsif params[:filter] == 'draft'
-      @poems = policy_scope(Poem.where(publish: false).order(:name).
-        page(params[:page]))
+      load_draft_poems
     else
       @poems = policy_scope(Poem.order(:name).page(params[:page]))
     end
   end
 
   def show
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(current_user,
-      @poem.encyclopaedia_entries.order(:name)).resolve
+    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
+      current_user,
+      @poem.encyclopaedia_entries.order(:name)
+    ).resolve
   end
 
   def new
@@ -65,6 +60,24 @@ class PoemsController < ApplicationController
   def load_poem
     @poem = Poem.find_by url: params[:id]
     authorize @poem
+  end
+
+  def load_contributors_poems
+    @contributor_profile = ContributorProfile.find_by(
+      url: params[:contributor_profile_id]
+    )
+    raise 'Contributor profile not found.' unless @contributor_profile
+    @poems = policy_scope(
+      Poem.joins(:contributions).where(
+        contributions: { contributor_profile_id: @contributor_profile.id }
+      ).order(:name).page(params[:page])
+    )
+  end
+
+  def load_draft_poems
+    @poems = policy_scope(
+      Poem.where(publish: false).order(:name).page(params[:page])
+    )
   end
 
   def redirect_to_poem

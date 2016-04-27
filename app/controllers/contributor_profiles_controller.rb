@@ -2,8 +2,9 @@ class ContributorProfilesController < ApplicationController
   before_action :load_contributor_profile, except: [:index, :new, :create]
 
   def index
-    @contributor_profiles = policy_scope(ContributorProfile.order(:name).page(
-      params[:page]))
+    @contributor_profiles = policy_scope(
+      ContributorProfile.order(:name).page(params[:page])
+    )
   end
 
   def new
@@ -33,8 +34,10 @@ class ContributorProfilesController < ApplicationController
 
   def destroy
     @contributor_profile.destroy
-    redirect_to(contributor_profiles_path,
-      notice: 'Successfully destroyed contributor profile.')
+    redirect_to(
+      contributor_profiles_path,
+      notice: 'Successfully destroyed contributor profile.'
+    )
   end
 
   private

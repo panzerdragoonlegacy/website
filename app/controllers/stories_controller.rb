@@ -4,24 +4,19 @@ class StoriesController < ApplicationController
 
   def index
     if params[:contributor_profile_id]
-      unless @contributor_profile = ContributorProfile.find_by(
-        url: params[:contributor_profile_id])
-        raise 'Contributor profile not found.'
-      end
-      @stories = policy_scope(Story.joins(:contributions).where(
-        contributions: { contributor_profile_id: @contributor_profile.id }).
-        order(:name).page(params[:page]))
+      load_contributors_stories
     elsif params[:filter] == 'draft'
-      @stories = policy_scope(Story.where(publish: false).order(:name).
-        page(params[:page]))
+      load_draft_stories
     else
       @stories = policy_scope(Story.order(:name).page(params[:page]))
     end
   end
 
   def show
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(current_user,
-      @story.encyclopaedia_entries.order(:name)).resolve
+    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
+      current_user,
+      @story.encyclopaedia_entries.order(:name)
+    ).resolve
   end
 
   def new
@@ -77,6 +72,24 @@ class StoriesController < ApplicationController
   def load_story
     @story = Story.find_by url: params[:id]
     authorize @story
+  end
+
+  def load_contributors_stories
+    @contributor_profile = ContributorProfile.find_by(
+      url: params[:contributor_profile_id]
+    )
+    raise 'Contributor profile not found.' unless @contributor_profile
+    @stories = policy_scope(
+      Story.joins(:contributions).where(
+        contributions: { contributor_profile_id: @contributor_profile.id }
+      ).order(:name).page(params[:page])
+    )
+  end
+
+  def load_draft_stories
+    @stories = policy_scope(
+      Story.where(publish: false).order(:name).page(params[:page])
+    )
   end
 
   def redirect_to_story

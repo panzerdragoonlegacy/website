@@ -4,26 +4,20 @@ class MusicTracksController < ApplicationController
 
   def index
     if params[:contributor_profile_id]
-      unless @contributor_profile = ContributorProfile.find_by(
-        url: params[:contributor_profile_id])
-        raise 'Contributor profile not found.'
-      end
-      @music_tracks = policy_scope(MusicTrack.joins(:contributions).where(
-        contributions: { contributor_profile_id: @contributor_profile.id }).
-        order(:name).page(params[:page]))
+      load_contributors_music_tracks
     elsif params[:filter] == 'draft'
-      @music_tracks = policy_scope(MusicTrack.where(publish: false).
-        order(:name).page(params[:page]))
+      load_draft_music_tracks
     else
-      @category_groups = policy_scope(CategoryGroup.where(
-        category_group_type: :music_track).order(:name))
+      load_category_groups
       @music_tracks = policy_scope(MusicTrack.order(:name).page(params[:page]))
     end
   end
 
   def show
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(current_user,
-      @music_track.encyclopaedia_entries.order(:name)).resolve
+    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
+      current_user,
+      @music_track.encyclopaedia_entries.order(:name)
+    ).resolve
   end
 
   def new
@@ -79,6 +73,30 @@ class MusicTracksController < ApplicationController
   def load_music_track
     @music_track = MusicTrack.find_by url: params[:id]
     authorize @music_track
+  end
+
+  def load_contributors_music_tracks
+    @contributor_profile = ContributorProfile.find_by(
+      url: params[:contributor_profile_id]
+    )
+    raise 'Contributor profile not found.' unless @contributor_profile
+    @music_tracks = policy_scope(
+      MusicTrack.joins(:contributions).where(
+        contributions: { contributor_profile_id: @contributor_profile.id }
+      ).order(:name).page(params[:page])
+    )
+  end
+
+  def load_draft_music_tracks
+    @music_tracks = policy_scope(
+      MusicTrack.where(publish: false).order(:name).page(params[:page])
+    )
+  end
+
+  def load_category_groups
+    @category_groups = policy_scope(
+      CategoryGroup.where(category_group_type: :music_track).order(:name)
+    )
   end
 
   def redirect_to_music_track

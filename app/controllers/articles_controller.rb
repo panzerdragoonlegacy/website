@@ -4,24 +4,19 @@ class ArticlesController < ApplicationController
 
   def index
     if params[:contributor_profile_id]
-      unless @contributor_profile = ContributorProfile.find_by(
-        url: params[:contributor_profile_id])
-        raise 'Contributor profile not found.'
-      end
-      @articles = policy_scope(Article.joins(:contributions).where(
-        contributions: { contributor_profile_id: @contributor_profile.id }).
-        order(:name).page(params[:page]))
+      load_contributors_articles
     elsif params[:filter] == 'draft'
-      @articles = policy_scope(Article.where(publish: false).order(:name).
-        page(params[:page]))
+      load_draft_articles
     else
       @articles = policy_scope(Article.order(:name).page(params[:page]))
     end
   end
 
   def show
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(current_user,
-      @article.encyclopaedia_entries.order(:name)).resolve
+    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
+      current_user,
+      @article.encyclopaedia_entries.order(:name)
+    ).resolve
   end
 
   def new
@@ -77,6 +72,21 @@ class ArticlesController < ApplicationController
   def load_article
     @article = Article.find_by url: params[:id]
     authorize @article
+  end
+
+  def load_contributors_articles
+    @contributor_profile = ContributorProfile.find_by(
+      url: params[:contributor_profile_id]
+    )
+    raise 'Contributor profile not found.' unless @contributor_profile
+    @articles = policy_scope(Article.joins(:contributions).where(
+      contributions: { contributor_profile_id: @contributor_profile.id })
+      .order(:name).page(params[:page]))
+  end
+
+  def load_draft_articles
+    @articles = policy_scope(Article.where(publish: false).order(:name)
+      .page(params[:page]))
   end
 
   def redirect_to_article

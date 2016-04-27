@@ -4,21 +4,17 @@ class LinksController < ApplicationController
 
   def index
     if params[:contributor_profile_id]
-      unless @contributor_profile = ContributorProfile.find_by(
-        url: params[:contributor_profile_id])
-        raise 'Contributor profile not found.'
-      end
-      @links = policy_scope(Link.joins(:contributions).where(
-        contributions: { contributor_profile_id: @contributor_profile.id }).
-        order(:name).page(params[:page]))
+      load_contributors_links
     else
       @links = policy_scope(Link.order(:name).page(params[:page]))
     end
   end
 
   def show
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(current_user,
-      @link.encyclopaedia_entries.order(:name)).resolve
+    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
+      current_user,
+      @link.encyclopaedia_entries.order(:name)
+    ).resolve
   end
 
   def new
@@ -73,13 +69,27 @@ class LinksController < ApplicationController
   end
 
   def load_categories
-    @categories = CategoryPolicy::Scope.new(current_user, Category.where(
-      category_type: :link).order(:name)).resolve
+    @categories = CategoryPolicy::Scope.new(
+      current_user,
+      Category.where(category_type: :link).order(:name)
+    ).resolve
   end
 
   def load_link
     @link = Link.find params[:id]
     authorize @link
+  end
+
+  def load_contributors_links
+    @contributor_profile = ContributorProfile.find_by(
+      url: params[:contributor_profile_id]
+    )
+    raise 'Contributor profile not found.' unless @contributor_profile
+    @links = policy_scope(
+      Link.joins(:contributions).where(
+        contributions: { contributor_profile_id: @contributor_profile.id }
+      ).order(:name).page(params[:page])
+    )
   end
 
   def redirect_to_link

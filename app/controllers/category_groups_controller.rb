@@ -29,8 +29,10 @@ class CategoryGroupsController < ApplicationController
 
   def destroy
     @category_group.destroy
-    redirect_to site_map_path,
+    redirect_to(
+      site_map_path,
       notice: 'Successfully destroyed category group.'
+    )
   end
 
   private

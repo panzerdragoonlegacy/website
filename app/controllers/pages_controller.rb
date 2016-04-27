@@ -3,8 +3,9 @@ class PagesController < ApplicationController
 
   def index
     if params[:filter] == 'draft'
-      @pages = policy_scope(Page.where(publish: false).order(:name).
-        page(params[:page]))
+      @pages = policy_scope(
+        Page.where(publish: false).order(:name).page(params[:page])
+      )
     else
       @pages = policy_scope(Page.order(:name).page(params[:page]))
     end
