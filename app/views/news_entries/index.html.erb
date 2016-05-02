@@ -32,7 +32,12 @@
         <div class="comment_details">
           <h2><%= link_to news_entry.name, news_entry %></h2>
           <p>
-            Published by <%= link_to news_entry.contributor_profile.name,
+            <% if news_entry.publish %>
+              Published by
+            <% else %>
+              Posted by
+            <% end %>
+            <%= link_to news_entry.contributor_profile.name,
               news_entry.contributor_profile %>
             <% if news_entry.publish %>
               <%= local_time_ago news_entry.published_at %>.

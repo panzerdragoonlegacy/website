@@ -33,8 +33,13 @@
       <% end %>
     </div>
     <div class="comment_details">
-      <p class="name_and_date">Published by
-        <%= link_to @news_entry.contributor_profile.name, 
+      <p class="name_and_date">
+        <% if @news_entry.publish %>
+          Published by
+        <% else %>
+          Posted by
+        <% end %>
+        <%= link_to @news_entry.contributor_profile.name,
           @news_entry.contributor_profile %>
         <% if @news_entry.publish %>
           <%= local_time_ago @news_entry.published_at %>.
