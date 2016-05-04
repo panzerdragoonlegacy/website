@@ -5,6 +5,7 @@ class NewsEntry < ActiveRecord::Base
 
   validates :name, presence: true, length: { in: 2..55 }, uniqueness: true
   validates :content, presence: true
+  validates :contributor_profile, presence: true
 
   before_save :publish_news_entry
 
@@ -12,7 +13,7 @@ class NewsEntry < ActiveRecord::Base
     # The first time the news entry is published:
     if self.published_at.blank? && self.publish
       self.post_news_entry_to_twitter
-      
+
       # Set published_at field in the database to the current datetime:
       self.published_at = DateTime.now
     end
@@ -25,12 +26,12 @@ class NewsEntry < ActiveRecord::Base
 
       # Get Twitter authentication details from secrets.yml
       client = Twitter::REST::Client.new do |config|
-        config.consumer_key = 
+        config.consumer_key =
           Rails.application.secrets.twitter["consumer_key"]
-        config.consumer_secret = 
+        config.consumer_secret =
           Rails.application.secrets.twitter["consumer_secret"]
         config.access_token = Rails.application.secrets.twitter["oauth_token"]
-        config.access_token_secret = 
+        config.access_token_secret =
           Rails.application.secrets.twitter["oauth_token_secret"]
       end
 
