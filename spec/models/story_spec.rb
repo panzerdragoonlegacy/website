@@ -84,4 +84,42 @@ RSpec.describe Story, type: :model do
       end
     end
   end
+
+  describe 'chapter slugs' do
+    let(:story) { FactoryGirl.create :valid_story, name: 'Old Story Name' }
+
+    context 'updating a story with a regular chapter' do
+      let(:chapter) do
+        FactoryGirl.create(
+          :regular_chapter,
+          name: 'Regular Chapter Name',
+          story: story
+        )
+      end
+
+      it 'synchronises the chapter slug with a parameterised version of the ' \
+        'updated story name as well as the chapter number and chapter name' do
+        story.name = 'New Story Name'
+        story.save
+        expect(chapter.url).to eq 'new-story-name-1-regular-chapter-name'
+      end
+    end
+
+    context 'updating a story with a chapter that is not a regular chapter' do
+      let(:chapter) do
+        FactoryGirl.create(
+          :prologue,
+          name: 'Prologue Name',
+          story: story
+        )
+      end
+
+      it 'synchronises the chapter slug with a parameterised version of the ' \
+        'updated story name as well as the chapter name when saved' do
+        story.name = 'New Story Name'
+        story.save
+        expect(chapter.url).to eq 'new-story-name-prologue-name'
+      end
+    end
+  end
 end
