@@ -86,20 +86,20 @@ RSpec.describe NewsEntry, type: :model do
     end
 
     context 'the published date is already set' do
-      let(:old_published_at) { DateTime.now }
+      let(:previously_set_published_at) { DateTime.now }
 
       context 'the publish flag is set' do
         let(:news_entry) do
           FactoryGirl.create(
             :valid_news_entry,
             publish: true,
-            published_at: old_published_at
+            published_at: previously_set_published_at
           )
         end
 
         it 'does not replace the published date when saved' do
           news_entry.save
-          expect(news_entry.published_at).to eq old_published_at
+          expect(news_entry.published_at).to eq previously_set_published_at
         end
 
         it 'publishes the news entry when saved' do
@@ -113,13 +113,13 @@ RSpec.describe NewsEntry, type: :model do
           FactoryGirl.create(
             :valid_news_entry,
             publish: false,
-            published_at: old_published_at
+            published_at: previously_set_published_at
           )
         end
 
         it 'does not replace the published date when saved' do
           news_entry.save
-          expect(news_entry.published_at).to eq old_published_at
+          expect(news_entry.published_at).to eq previously_set_published_at
         end
 
         it 'does not publish the news entry when saved' do
