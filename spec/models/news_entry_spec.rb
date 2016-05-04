@@ -57,12 +57,12 @@ RSpec.describe NewsEntry, type: :model do
           FactoryGirl.build :valid_news_entry, publish: true, published_at: nil
         end
 
-        it 'saving sets a new published date' do
+        it 'sets a new published date when saved' do
           news_entry.save
           expect(news_entry.published_at).not_to eq nil
         end
 
-        it 'saving publishes the news entry' do
+        it 'publishes the news entry when saved' do
           news_entry.save
           expect(news_entry.publish).to be true
         end
@@ -73,12 +73,12 @@ RSpec.describe NewsEntry, type: :model do
           FactoryGirl.build :valid_news_entry, publish: false, published_at: nil
         end
 
-        it 'saving does not set a published date' do
+        it 'does not set a published date when saved' do
           news_entry.save
           expect(news_entry.published_at).to eq nil
         end
 
-        it 'saving does not publish the news entry' do
+        it 'does not publish the news entry when saved' do
           news_entry.save
           expect(news_entry.publish).to be false
         end
@@ -97,12 +97,12 @@ RSpec.describe NewsEntry, type: :model do
           )
         end
 
-        it 'saving does not replace the published date' do
+        it 'does not replace the published date when saved' do
           news_entry.save
           expect(news_entry.published_at).to eq old_published_at
         end
 
-        it 'saving publishes the news entry' do
+        it 'publishes the news entry when saved' do
           news_entry.save
           expect(news_entry.publish).to be true
         end
@@ -117,12 +117,12 @@ RSpec.describe NewsEntry, type: :model do
           )
         end
 
-        it 'saving does not replace the published date' do
+        it 'does not replace the published date when saved' do
           news_entry.save
           expect(news_entry.published_at).to eq old_published_at
         end
 
-        it 'saving does not publish the news entry' do
+        it 'does not publish the news entry when saved' do
           news_entry.save
           expect(news_entry.publish).to be false
         end
