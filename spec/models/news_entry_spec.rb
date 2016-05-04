@@ -49,4 +49,84 @@ RSpec.describe NewsEntry, type: :model do
       end
     end
   end
+
+  describe 'publication of news entry' do
+    context 'the published date is not already set' do
+      context 'the publish flag is set' do
+        let(:news_entry) do
+          FactoryGirl.build :valid_news_entry, publish: true, published_at: nil
+        end
+
+        it 'saving sets a new published date' do
+          news_entry.save
+          expect(news_entry.published_at).not_to eq nil
+        end
+
+        it 'saving publishes the news entry' do
+          news_entry.save
+          expect(news_entry.publish).to be true
+        end
+      end
+
+      context 'the published flag is not set' do
+        let(:news_entry) do
+          FactoryGirl.build :valid_news_entry, publish: false, published_at: nil
+        end
+
+        it 'saving does not set a published date' do
+          news_entry.save
+          expect(news_entry.published_at).to eq nil
+        end
+
+        it 'saving does not publish the news entry' do
+          news_entry.save
+          expect(news_entry.publish).to be false
+        end
+      end
+    end
+
+    context 'the published date is already set' do
+      let(:old_published_at) { DateTime.now }
+
+      context 'the publish flag is set' do
+        let(:news_entry) do
+          FactoryGirl.create(
+            :valid_news_entry,
+            publish: true,
+            published_at: old_published_at
+          )
+        end
+
+        it 'saving does not replace the published date' do
+          news_entry.save
+          expect(news_entry.published_at).to eq old_published_at
+        end
+
+        it 'saving publishes the news entry' do
+          news_entry.save
+          expect(news_entry.publish).to be true
+        end
+      end
+
+      context 'the published flag is not set' do
+        let(:news_entry) do
+          FactoryGirl.create(
+            :valid_news_entry,
+            publish: false,
+            published_at: old_published_at
+          )
+        end
+
+        it 'saving does not replace the published date' do
+          news_entry.save
+          expect(news_entry.published_at).to eq old_published_at
+        end
+
+        it 'saving does not publish the news entry' do
+          news_entry.save
+          expect(news_entry.publish).to be false
+        end
+      end
+    end
+  end
 end
