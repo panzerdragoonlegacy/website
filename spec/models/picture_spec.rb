@@ -32,28 +32,31 @@ RSpec.describe Picture, type: :model do
     it { should validate_presence_of(:category) }
 
     describe 'validation of contributor profiles' do
-      before do
-        @contributor_profile = FactoryGirl.create :valid_contributor_profile
-        @picture = FactoryGirl.create :valid_picture
-      end
-
       context 'picture has less than one contributor profile' do
-        before do
-          @picture.contributor_profiles = []
+        let(:picture) do
+          FactoryGirl.build(
+            :valid_picture,
+            contributor_profiles: []
+          )
         end
 
         it 'should not be valid' do
-          expect(@picture).not_to be_valid
+          expect(picture).not_to be_valid
         end
       end
 
       context 'picture has at least one contributor profile' do
-        before do
-          @picture.contributor_profiles << @contributor_profile
+        let(:picture) do
+          FactoryGirl.build(
+            :valid_picture,
+            contributor_profiles: [
+              FactoryGirl.create(:valid_contributor_profile)
+            ]
+          )
         end
 
         it 'should be valid' do
-          expect(@picture).to be_valid
+          expect(picture).to be_valid
         end
       end
     end

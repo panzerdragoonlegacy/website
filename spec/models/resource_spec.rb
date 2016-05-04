@@ -34,28 +34,31 @@ RSpec.describe Resource, type: :model do
     it { should validate_presence_of(:category) }
 
     describe 'validation of contributor profiles' do
-      before do
-        @contributor_profile = FactoryGirl.create :valid_contributor_profile
-        @resource = FactoryGirl.create :valid_resource
-      end
-
       context 'resource has less than one contributor profile' do
-        before do
-          @resource.contributor_profiles = []
+        let(:resource) do
+          FactoryGirl.build(
+            :valid_resource,
+            contributor_profiles: []
+          )
         end
 
         it 'should not be valid' do
-          expect(@resource).not_to be_valid
+          expect(resource).not_to be_valid
         end
       end
 
       context 'resource has at least one contributor profile' do
-        before do
-          @resource.contributor_profiles << @contributor_profile
+        let(:resource) do
+          FactoryGirl.build(
+            :valid_resource,
+            contributor_profiles: [
+              FactoryGirl.create(:valid_contributor_profile)
+            ]
+          )
         end
 
         it 'should be valid' do
-          expect(@resource).to be_valid
+          expect(resource).to be_valid
         end
       end
     end

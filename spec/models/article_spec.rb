@@ -39,28 +39,31 @@ RSpec.describe Article, type: :model do
     it { should validate_presence_of(:category) }
 
     describe 'validation of contributor profiles' do
-      before do
-        @contributor_profile = FactoryGirl.create :valid_contributor_profile
-        @article = FactoryGirl.create :valid_article
-      end
-
       context 'article has less than one contributor profile' do
-        before do
-          @article.contributor_profiles = []
+        let(:article) do
+          FactoryGirl.build(
+            :valid_article,
+            contributor_profiles: []
+          )
         end
 
         it 'should not be valid' do
-          expect(@article).not_to be_valid
+          expect(article).not_to be_valid
         end
       end
 
       context 'article has at least one contributor profile' do
-        before do
-          @article.contributor_profiles << @contributor_profile
+        let(:article) do
+          FactoryGirl.build(
+            :valid_article,
+            contributor_profiles: [
+              FactoryGirl.create(:valid_contributor_profile)
+            ]
+          )
         end
 
         it 'should be valid' do
-          expect(@article).to be_valid
+          expect(article).to be_valid
         end
       end
     end

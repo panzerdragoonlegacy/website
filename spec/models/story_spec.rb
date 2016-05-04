@@ -33,28 +33,31 @@ RSpec.describe Story, type: :model do
     it { should validate_presence_of(:category) }
 
     describe 'validation of contributor profiles' do
-      before do
-        @contributor_profile = FactoryGirl.create :valid_contributor_profile
-        @story = FactoryGirl.create :valid_story
-      end
-
       context 'story has less than one contributor profile' do
-        before do
-          @story.contributor_profiles = []
+        let(:story) do
+          FactoryGirl.build(
+            :valid_story,
+            contributor_profiles: []
+          )
         end
 
         it 'should not be valid' do
-          expect(@story).not_to be_valid
+          expect(story).not_to be_valid
         end
       end
 
       context 'story has at least one contributor profile' do
-        before do
-          @story.contributor_profiles << @contributor_profile
+        let(:story) do
+          FactoryGirl.build(
+            :valid_story,
+            contributor_profiles: [
+              FactoryGirl.create(:valid_contributor_profile)
+            ]
+          )
         end
 
         it 'should be valid' do
-          expect(@story).to be_valid
+          expect(story).to be_valid
         end
       end
     end

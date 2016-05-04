@@ -41,28 +41,31 @@ RSpec.describe MusicTrack, type: :model do
     it { should validate_presence_of(:category) }
 
     describe 'validation of contributor profiles' do
-      before do
-        @contributor_profile = FactoryGirl.create :valid_contributor_profile
-        @music_track = FactoryGirl.create :valid_music_track
-      end
-
       context 'music track has less than one contributor profile' do
-        before do
-          @music_track.contributor_profiles = []
+        let(:music_track) do
+          FactoryGirl.build(
+            :valid_music_track,
+            contributor_profiles: []
+          )
         end
 
         it 'should not be valid' do
-          expect(@music_track).not_to be_valid
+          expect(music_track).not_to be_valid
         end
       end
 
       context 'music track has at least one contributor profile' do
-        before do
-          @music_track.contributor_profiles << @contributor_profile
+        let(:music_track) do
+          FactoryGirl.build(
+            :valid_music_track,
+            contributor_profiles: [
+              FactoryGirl.create(:valid_contributor_profile)
+            ]
+          )
         end
 
         it 'should be valid' do
-          expect(@music_track).to be_valid
+          expect(music_track).to be_valid
         end
       end
     end

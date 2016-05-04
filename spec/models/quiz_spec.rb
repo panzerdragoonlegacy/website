@@ -34,28 +34,31 @@ RSpec.describe Quiz, type: :model do
     end
 
     describe 'validation of contributor profiles' do
-      before do
-        @contributor_profile = FactoryGirl.create :valid_contributor_profile
-        @quiz = FactoryGirl.create :valid_quiz
-      end
-
       context 'quiz has less than one contributor profile' do
-        before do
-          @quiz.contributor_profiles = []
+        let(:quiz) do
+          FactoryGirl.build(
+            :valid_quiz,
+            contributor_profiles: []
+          )
         end
 
         it 'should not be valid' do
-          expect(@quiz).not_to be_valid
+          expect(quiz).not_to be_valid
         end
       end
 
       context 'quiz has at least one contributor profile' do
-        before do
-          @quiz.contributor_profiles << @contributor_profile
+        let(:quiz) do
+          FactoryGirl.build(
+            :valid_quiz,
+            contributor_profiles: [
+              FactoryGirl.create(:valid_contributor_profile)
+            ]
+          )
         end
 
         it 'should be valid' do
-          expect(@quiz).to be_valid
+          expect(quiz).to be_valid
         end
       end
     end

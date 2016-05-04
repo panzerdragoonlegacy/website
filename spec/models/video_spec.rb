@@ -36,28 +36,31 @@ RSpec.describe Video, type: :model do
     it { should validate_presence_of(:category) }
 
     describe 'validation of contributor profiles' do
-      before do
-        @contributor_profile = FactoryGirl.create :valid_contributor_profile
-        @video = FactoryGirl.create :valid_video
-      end
-
       context 'video has less than one contributor profile' do
-        before do
-          @video.contributor_profiles = []
+        let(:video) do
+          FactoryGirl.build(
+            :valid_video,
+            contributor_profiles: []
+          )
         end
 
         it 'should not be valid' do
-          expect(@video).not_to be_valid
+          expect(video).not_to be_valid
         end
       end
 
       context 'video has at least one contributor profile' do
-        before do
-          @video.contributor_profiles << @contributor_profile
+        let(:video) do
+          FactoryGirl.build(
+            :valid_video,
+            contributor_profiles: [
+              FactoryGirl.create(:valid_contributor_profile)
+            ]
+          )
         end
 
         it 'should be valid' do
-          expect(@video).to be_valid
+          expect(video).to be_valid
         end
       end
     end
