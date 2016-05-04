@@ -6,8 +6,8 @@ FactoryGirl.define do
       download Rack::Test::UploadedFile.new(
         'spec/fixtures/download.zip', 'application/zip')
 
-      category { FactoryGirl.create(:category) }
-      contributor_profiles { [FactoryGirl.create(:contributor_profile)] }
+      category { FactoryGirl.create(:valid_category) }
+      contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }
 
       factory :published_download_in_published_category do
         publish true

@@ -12,7 +12,7 @@ describe CategoryGroupPolicy do
 
     context 'accessing a category group' do
       let(:category_group) do
-        FactoryGirl.create(:category_group)
+        FactoryGirl.create(:valid_category_group)
       end
 
       it 'includes category group in resolved scope' do
@@ -31,7 +31,7 @@ describe CategoryGroupPolicy do
 
     context 'accessing a category group' do
       let(:category_group) do
-        FactoryGirl.create(:category_group)
+        FactoryGirl.create(:valid_category_group)
       end
 
       it 'includes category group in resolved scope' do
@@ -50,7 +50,7 @@ describe CategoryGroupPolicy do
 
     context 'accessing a category group' do
       let(:category_group) do
-        FactoryGirl.create(:category_group)
+        FactoryGirl.create(:valid_category_group)
       end
 
       it 'includes category group in resolved scope' do
@@ -67,7 +67,7 @@ describe CategoryGroupPolicy do
 
       context 'category group has children' do
         before do
-          category_group.categories << FactoryGirl.create(:category)
+          category_group.categories << FactoryGirl.create(:valid_category)
         end
 
         it { should forbid_action(:destroy) }

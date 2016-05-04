@@ -25,7 +25,7 @@ RSpec.describe Download, type: :model do
 
     describe 'validation of contributor profiles' do
       before do
-        @contributor_profile = FactoryGirl.create :contributor_profile
+        @contributor_profile = FactoryGirl.create :valid_contributor_profile
         @download = FactoryGirl.create :valid_download
       end
 
@@ -75,6 +75,31 @@ RSpec.describe Download, type: :model do
         valid_download = FactoryGirl.build :valid_download, name: 'New Name'
         valid_download.save
         expect(valid_download.download_file_name).to eq 'new-name.zip'
+      end
+    end
+  end
+
+  describe 'slug' do
+    context 'creating a new download' do
+      let(:download) do
+        FactoryGirl.build :valid_download, name: 'Download 1'
+      end
+
+      it 'generates a slug that is a parameterised version of the name' do
+        download.save
+        expect(download.url).to eq 'download-1'
+      end
+    end
+
+    context 'updating a download' do
+      let(:download) do
+        FactoryGirl.create :valid_download, name: 'Download 1'
+      end
+
+      it 'synchronises the slug with the updated name' do
+        download.name = 'Download 2'
+        download.save
+        expect(download.url).to eq 'download-2'
       end
     end
   end

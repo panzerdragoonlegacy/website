@@ -5,7 +5,7 @@ FactoryGirl.define do
       sequence(:url) { |n| "http://www.example#{n}.com" }
       description 'Test Description'
 
-      category { FactoryGirl.create(:category) }
+      category { FactoryGirl.create(:valid_category) }
 
       factory :link_in_published_category do
         category { FactoryGirl.create(:published_category) }

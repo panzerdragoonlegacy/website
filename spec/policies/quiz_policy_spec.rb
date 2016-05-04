@@ -69,7 +69,7 @@ describe QuizPolicy do
 
   context 'being a contributor' do
     let(:contributor_profile) do
-      FactoryGirl.create(:contributor_profile)
+      FactoryGirl.create(:valid_contributor_profile)
     end
     let(:user) do
       FactoryGirl.create(

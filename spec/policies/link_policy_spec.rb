@@ -70,7 +70,7 @@ describe LinkPolicy do
   end
 
   context 'being a contributor' do
-    let(:contributor_profile) { FactoryGirl.create(:contributor_profile) }
+    let(:contributor_profile) { FactoryGirl.create(:valid_contributor_profile) }
     let(:user) do
       FactoryGirl.create(
         :contributor,

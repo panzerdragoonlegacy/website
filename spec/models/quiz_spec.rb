@@ -21,7 +21,7 @@ RSpec.describe Quiz, type: :model do
 
     describe 'validation of contributor profiles' do
       before do
-        @contributor_profile = FactoryGirl.create :contributor_profile
+        @contributor_profile = FactoryGirl.create :valid_contributor_profile
         @quiz = FactoryGirl.create :valid_quiz
       end
 
@@ -58,6 +58,31 @@ RSpec.describe Quiz, type: :model do
   describe 'nested attributes' do
     it do
       should accept_nested_attributes_for(:quiz_questions).allow_destroy(true)
+    end
+  end
+
+  describe 'slug' do
+    context 'creating a new quiz' do
+      let(:quiz) do
+        FactoryGirl.build :valid_quiz, name: 'Quiz 1'
+      end
+
+      it 'generates a slug that is a parameterised version of the name' do
+        quiz.save
+        expect(quiz.url).to eq 'quiz-1'
+      end
+    end
+
+    context 'updating a quiz' do
+      let(:quiz) do
+        FactoryGirl.create :valid_quiz, name: 'Quiz 1'
+      end
+
+      it 'synchronises the slug with the updated name' do
+        quiz.name = 'Quiz 2'
+        quiz.save
+        expect(quiz.url).to eq 'quiz-2'
+      end
     end
   end
 end

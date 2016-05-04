@@ -4,8 +4,8 @@ FactoryGirl.define do
       sequence(:name) { |n| "Story #{n}" }
       description 'Test Description'
 
-      category { FactoryGirl.create(:category) }
-      contributor_profiles { [FactoryGirl.create(:contributor_profile)] }
+      category { FactoryGirl.create(:valid_category) }
+      contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }
 
       factory :published_story_in_published_category do
         publish true

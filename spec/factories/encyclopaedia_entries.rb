@@ -7,8 +7,8 @@ FactoryGirl.define do
       encyclopaedia_entry_picture Rack::Test::UploadedFile.new(
         'spec/fixtures/encyclopaedia-entry-picture.jpg', 'image/jpeg')
 
-      category { FactoryGirl.create(:category) }
-      contributor_profiles { [FactoryGirl.create(:contributor_profile)] }
+      category { FactoryGirl.create(:valid_category) }
+      contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }
 
       factory :published_encyclopaedia_entry_in_published_category do
         publish true

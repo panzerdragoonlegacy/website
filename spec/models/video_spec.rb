@@ -29,7 +29,7 @@ RSpec.describe Video, type: :model do
 
     describe 'validation of contributor profiles' do
       before do
-        @contributor_profile = FactoryGirl.create :contributor_profile
+        @contributor_profile = FactoryGirl.create :valid_contributor_profile
         @video = FactoryGirl.create :valid_video
       end
 
@@ -82,6 +82,31 @@ RSpec.describe Video, type: :model do
     it do
       should validate_attachment_size(:webm_video)
         .less_than(200.megabytes)
+    end
+  end
+
+  describe 'slug' do
+    context 'creating a new video' do
+      let(:video) do
+        FactoryGirl.build :valid_video, name: 'Video 1'
+      end
+
+      it 'generates a slug that is a parameterised version of the name' do
+        video.save
+        expect(video.url).to eq 'video-1'
+      end
+    end
+
+    context 'updating a story' do
+      let(:video) do
+        FactoryGirl.create :valid_video, name: 'Video 1'
+      end
+
+      it 'synchronises the slug with the updated name' do
+        video.name = 'Video 2'
+        video.save
+        expect(video.url).to eq 'video-2'
+      end
     end
   end
 end

@@ -8,8 +8,8 @@ FactoryGirl.define do
       ogg_music_track Rack::Test::UploadedFile.new(
         'spec/fixtures/music_track.ogg', 'audio/ogg')
 
-      category { FactoryGirl.create(:category) }
-      contributor_profiles { [FactoryGirl.create(:contributor_profile)] }
+      category { FactoryGirl.create(:valid_category) }
+      contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }
 
       factory :published_music_track_in_published_category do
         publish true

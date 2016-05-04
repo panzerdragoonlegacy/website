@@ -20,7 +20,7 @@ RSpec.describe Resource, type: :model do
 
     describe 'validation of contributor profiles' do
       before do
-        @contributor_profile = FactoryGirl.create :contributor_profile
+        @contributor_profile = FactoryGirl.create :valid_contributor_profile
         @resource = FactoryGirl.create :valid_resource
       end
 
@@ -58,6 +58,31 @@ RSpec.describe Resource, type: :model do
   describe 'nested attributes' do
     it do
       should accept_nested_attributes_for(:illustrations).allow_destroy(true)
+    end
+  end
+
+  describe 'slug' do
+    context 'creating a new resource' do
+      let(:resource) do
+        FactoryGirl.build :valid_resource, name: 'Resource 1'
+      end
+
+      it 'generates a slug that is a parameterised version of the name' do
+        resource.save
+        expect(resource.url).to eq 'resource-1'
+      end
+    end
+
+    context 'updating a resource' do
+      let(:resource) do
+        FactoryGirl.create :valid_resource, name: 'Resource 1'
+      end
+
+      it 'synchronises the slug with the updated name' do
+        resource.name = 'Resource 2'
+        resource.save
+        expect(resource.url).to eq 'resource-2'
+      end
     end
   end
 end

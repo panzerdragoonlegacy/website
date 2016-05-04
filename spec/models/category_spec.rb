@@ -23,7 +23,7 @@ RSpec.describe Category, type: :model do
 
     describe 'validation of category type reassignment' do
       before do
-        @category = FactoryGirl.create :category, category_type: :article
+        @category = FactoryGirl.create :valid_category, category_type: :article
         @article = FactoryGirl.create :valid_article
       end
 
@@ -66,10 +66,13 @@ RSpec.describe Category, type: :model do
       context 'category type is also a category group type' do
         before do
           @category_group = FactoryGirl.create(
-            :category_group,
+            :valid_category_group,
             category_group_type: :music_track
           )
-          @category = FactoryGirl.build :category, category_type: :music_track
+          @category = FactoryGirl.build(
+            :valid_category,
+            category_type: :music_track
+          )
         end
 
         context 'category group is present' do
@@ -83,7 +86,7 @@ RSpec.describe Category, type: :model do
           context "category type does not match the group's type" do
             it 'should not be valid' do
               different_category_group = FactoryGirl.create(
-                :category_group,
+                :valid_category_group,
                 category_group_type: :video
               )
               @category.category_group = different_category_group
@@ -102,12 +105,15 @@ RSpec.describe Category, type: :model do
 
       context 'category type is not a category group type' do
         before do
-          @category = FactoryGirl.build :category, category_type: :article
+          @category = FactoryGirl.build(
+             :valid_category,
+             category_type: :article
+          )
         end
 
         it 'should not validate if a category group is present' do
           category_group = FactoryGirl.create(
-            :category_group,
+            :valid_category_group,
             category_group_type: :music_track
           )
           @category.category_group = category_group
@@ -133,5 +139,30 @@ RSpec.describe Category, type: :model do
     it { should have_many(:resources).dependent(:destroy) }
     it { should have_many(:stories).dependent(:destroy) }
     it { should have_many(:videos).dependent(:destroy) }
+  end
+
+  describe 'slug' do
+    context 'creating a new category' do
+      let(:category) do
+        FactoryGirl.build :valid_category, name: 'Category 1'
+      end
+
+      it 'generates a slug that is a parameterised version of the name' do
+        category.save
+        expect(category.url).to eq 'category-1'
+      end
+    end
+
+    context 'updating a category' do
+      let(:category) do
+        FactoryGirl.create :valid_category, name: 'Category 1'
+      end
+
+      it 'synchronises the slug with the updated name' do
+        category.name = 'Category 2'
+        category.save
+        expect(category.url).to eq 'category-2'
+      end
+    end
   end
 end

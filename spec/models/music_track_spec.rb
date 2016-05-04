@@ -34,7 +34,7 @@ RSpec.describe MusicTrack, type: :model do
 
     describe 'validation of contributor profiles' do
       before do
-        @contributor_profile = FactoryGirl.create :contributor_profile
+        @contributor_profile = FactoryGirl.create :valid_contributor_profile
         @music_track = FactoryGirl.create :valid_music_track
       end
 
@@ -93,6 +93,31 @@ RSpec.describe MusicTrack, type: :model do
     it do
       should validate_attachment_size(:flac_music_track)
         .less_than(50.megabytes)
+    end
+  end
+
+  describe 'slug' do
+    context 'creating a new music track' do
+      let(:music_track) do
+        FactoryGirl.build :valid_music_track, name: 'Music Track 1'
+      end
+
+      it 'generates a slug that is a parameterised version of the name' do
+        music_track.save
+        expect(music_track.url).to eq 'music-track-1'
+      end
+    end
+
+    context 'updating a music track' do
+      let(:music_track) do
+        FactoryGirl.create :valid_music_track, name: 'Music Track 1'
+      end
+
+      it 'synchronises the slug with the updated name' do
+        music_track.name = 'Music Track 2'
+        music_track.save
+        expect(music_track.url).to eq 'music-track-2'
+      end
     end
   end
 end

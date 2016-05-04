@@ -24,7 +24,7 @@ RSpec.describe Story, type: :model do
 
     describe 'validation of contributor profiles' do
       before do
-        @contributor_profile = FactoryGirl.create :contributor_profile
+        @contributor_profile = FactoryGirl.create :valid_contributor_profile
         @story = FactoryGirl.create :valid_story
       end
 
@@ -58,5 +58,30 @@ RSpec.describe Story, type: :model do
     it { should have_many(:illustrations).dependent(:destroy) }
     it { should have_many(:relations).dependent(:destroy) }
     it { should have_many(:encyclopaedia_entries).through(:relations) }
+  end
+
+  describe 'slug' do
+    context 'creating a new story' do
+      let(:story) do
+        FactoryGirl.build :valid_story, name: 'Story 1'
+      end
+
+      it 'generates a slug that is a parameterised version of the name' do
+        story.save
+        expect(story.url).to eq 'story-1'
+      end
+    end
+
+    context 'updating a story' do
+      let(:story) do
+        FactoryGirl.create :valid_story, name: 'Story 1'
+      end
+
+      it 'synchronises the slug with the updated name' do
+        story.name = 'Story 2'
+        story.save
+        expect(story.url).to eq 'story-2'
+      end
+    end
   end
 end

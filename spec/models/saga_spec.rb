@@ -26,4 +26,29 @@ RSpec.describe Saga, type: :model do
   describe 'associations' do
     it { should belong_to(:encyclopaedia_entry) }
   end
+
+  describe 'slug' do
+    context 'creating a new saga' do
+      let(:saga) do
+        FactoryGirl.build :valid_saga, name: 'Saga 1'
+      end
+
+      it 'generates a slug that is a parameterised version of the name' do
+        saga.save
+        expect(saga.url).to eq 'saga-1'
+      end
+    end
+
+    context 'updating a saga' do
+      let(:saga) do
+        FactoryGirl.create :valid_saga, name: 'Saga 1'
+      end
+
+      it 'synchronises the slug with the updated name' do
+        saga.name = 'Saga 2'
+        saga.save
+        expect(saga.url).to eq 'saga-2'
+      end
+    end
+  end
 end

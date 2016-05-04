@@ -26,4 +26,29 @@ RSpec.describe Page, type: :model do
       should accept_nested_attributes_for(:illustrations).allow_destroy(true)
     end
   end
+
+  describe 'slug' do
+    context 'creating a new page' do
+      let(:page) do
+        FactoryGirl.build :valid_page, name: 'Page 1'
+      end
+
+      it 'generates a slug that is a parameterised version of the name' do
+        page.save
+        expect(page.url).to eq 'page-1'
+      end
+    end
+
+    context 'updating a page' do
+      let(:page) do
+        FactoryGirl.create :valid_page, name: 'Page 1'
+      end
+
+      it 'synchronises the slug with the updated name' do
+        page.name = 'Page 2'
+        page.save
+        expect(page.url).to eq 'page-2'
+      end
+    end
+  end
 end

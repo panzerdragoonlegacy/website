@@ -8,8 +8,8 @@ FactoryGirl.define do
       webm_video Rack::Test::UploadedFile.new(
         'spec/fixtures/video.webm', 'video/webm')
 
-      category { FactoryGirl.create(:category) }
-      contributor_profiles { [FactoryGirl.create(:contributor_profile)] }
+      category { FactoryGirl.create(:valid_category) }
+      contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }
 
       factory :published_video_in_published_category do
         publish true

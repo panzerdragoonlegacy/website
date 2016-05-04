@@ -72,4 +72,29 @@ RSpec.describe EncyclopaediaEntry, type: :model do
       end
     end
   end
+
+  describe 'slug' do
+    context 'creating a new encyclopaedia entry' do
+      let(:encyclopaedia_entry) do
+        FactoryGirl.build :valid_encyclopaedia_entry, name: 'Entry 1'
+      end
+
+      it 'generates a slug that is a parameterised version of the name' do
+        encyclopaedia_entry.save
+        expect(encyclopaedia_entry.url).to eq 'entry-1'
+      end
+    end
+
+    context 'updating an encyclopaedia entry' do
+      let(:encyclopaedia_entry) do
+        FactoryGirl.create :valid_encyclopaedia_entry, name: 'Entry 1'
+      end
+
+      it 'synchronises the slug with the updated name' do
+        encyclopaedia_entry.name = 'Entry 2'
+        encyclopaedia_entry.save
+        expect(encyclopaedia_entry.url).to eq 'entry-2'
+      end
+    end
+  end
 end

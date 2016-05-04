@@ -4,7 +4,7 @@ FactoryGirl.define do
       sequence(:name) { |n| "Quiz #{n}" }
       description 'Test Description'
 
-      contributor_profiles { [FactoryGirl.create(:contributor_profile)] }
+      contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }
 
       factory :published_quiz do
         publish true

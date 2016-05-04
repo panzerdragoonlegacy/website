@@ -25,7 +25,7 @@ RSpec.describe Article, type: :model do
 
     describe 'validation of contributor profiles' do
       before do
-        @contributor_profile = FactoryGirl.create :contributor_profile
+        @contributor_profile = FactoryGirl.create :valid_contributor_profile
         @article = FactoryGirl.create :valid_article
       end
 
@@ -66,8 +66,24 @@ RSpec.describe Article, type: :model do
     end
   end
 
-  pending describe 'slug' do
-    it 'generates a parameterised version of the name' do
+  describe 'slug' do
+    context 'creating a new article' do
+      let(:article) { FactoryGirl.build :valid_article, name: 'Article 1' }
+
+      it 'generates a slug that is a parameterised version of the name' do
+        article.save
+        expect(article.url).to eq 'article-1'
+      end
+    end
+
+    context 'updating an article' do
+      let(:article) { FactoryGirl.create :valid_article, name: 'Article 1' }
+
+      it 'synchronises the slug with the updated name' do
+        article.name = 'Article 2'
+        article.save
+        expect(article.url).to eq 'article-2'
+      end
     end
   end
 end

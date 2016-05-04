@@ -4,8 +4,8 @@ FactoryGirl.define do
       sequence(:name) { |n| "Resource #{n}" }
       content 'Test Content'
 
-      category { FactoryGirl.create(:category) }
-      contributor_profiles { [FactoryGirl.create(:contributor_profile)] }
+      category { FactoryGirl.create(:valid_category) }
+      contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }
 
       factory :published_resource_in_published_category do
         publish true

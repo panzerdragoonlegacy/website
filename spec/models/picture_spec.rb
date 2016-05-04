@@ -25,7 +25,7 @@ RSpec.describe Picture, type: :model do
 
     describe 'validation of contributor profiles' do
       before do
-        @contributor_profile = FactoryGirl.create :contributor_profile
+        @contributor_profile = FactoryGirl.create :valid_contributor_profile
         @picture = FactoryGirl.create :valid_picture
       end
 
@@ -77,6 +77,31 @@ RSpec.describe Picture, type: :model do
         valid_picture = FactoryGirl.build :valid_picture, name: 'New Name'
         valid_picture.save
         expect(valid_picture.picture_file_name).to eq 'new-name.jpg'
+      end
+    end
+  end
+
+  describe 'slug' do
+    context 'creating a new picture' do
+      let(:picture) do
+        FactoryGirl.build :valid_picture, name: 'Picture 1'
+      end
+
+      it 'generates a slug that is a parameterised version of the name' do
+        picture.save
+        expect(picture.url).to eq 'picture-1'
+      end
+    end
+
+    context 'updating a picture' do
+      let(:picture) do
+        FactoryGirl.create :valid_picture, name: 'Picture 1'
+      end
+
+      it 'synchronises the slug with the updated name' do
+        picture.name = 'Picture 2'
+        picture.save
+        expect(picture.url).to eq 'picture-2'
       end
     end
   end

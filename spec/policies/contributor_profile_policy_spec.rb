@@ -12,7 +12,7 @@ describe ContributorProfilePolicy do
 
     context 'accessing a contributor profile' do
       let(:contributor_profile) do
-        FactoryGirl.create(:contributor_profile)
+        FactoryGirl.create(:valid_contributor_profile)
       end
 
       it 'includes contributor profile in resolved scope' do
@@ -31,7 +31,7 @@ describe ContributorProfilePolicy do
 
     context 'accessing a contributor profile' do
       let(:contributor_profile) do
-        FactoryGirl.create(:contributor_profile)
+        FactoryGirl.create(:valid_contributor_profile)
       end
 
       it 'includes contributor profile in resolved scope' do
@@ -50,7 +50,7 @@ describe ContributorProfilePolicy do
 
     context 'accessing a contributor profile' do
       let(:contributor_profile) do
-        FactoryGirl.create(:contributor_profile)
+        FactoryGirl.create(:valid_contributor_profile)
       end
 
       it 'includes contributor profile in resolved scope' do

@@ -5,7 +5,7 @@ FactoryGirl.define do
       description 'Test Description'
       content 'Test Content'
 
-      contributor_profiles { [FactoryGirl.create(:contributor_profile)] }
+      contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }
 
       factory :published_poem do
         publish true

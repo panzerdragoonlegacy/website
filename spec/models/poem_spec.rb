@@ -23,7 +23,7 @@ RSpec.describe Poem, type: :model do
 
     describe 'validation of contributor profiles' do
       before do
-        @contributor_profile = FactoryGirl.create :contributor_profile
+        @contributor_profile = FactoryGirl.create :valid_contributor_profile
         @poem = FactoryGirl.create :valid_poem
       end
 
@@ -54,5 +54,30 @@ RSpec.describe Poem, type: :model do
     it { should have_many(:contributor_profiles).through(:contributions) }
     it { should have_many(:relations).dependent(:destroy) }
     it { should have_many(:encyclopaedia_entries).through(:relations) }
+  end
+
+  describe 'slug' do
+    context 'creating a new poem' do
+      let(:poem) do
+        FactoryGirl.build :valid_poem, name: 'Poem 1'
+      end
+
+      it 'generates a slug that is a parameterised version of the name' do
+        poem.save
+        expect(poem.url).to eq 'poem-1'
+      end
+    end
+
+    context 'updating a poem' do
+      let(:poem) do
+        FactoryGirl.create :valid_poem, name: 'Poem 1'
+      end
+
+      it 'synchronises the slug with the updated name' do
+        poem.name = 'Poem 2'
+        poem.save
+        expect(poem.url).to eq 'poem-2'
+      end
+    end
   end
 end

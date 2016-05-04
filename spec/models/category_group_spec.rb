@@ -18,4 +18,29 @@ RSpec.describe CategoryGroup, type: :model do
   describe 'associations' do
     it { should have_many(:categories).dependent(:destroy) }
   end
+
+  describe 'slug' do
+    context 'creating a new category group' do
+      let(:category_group) do
+        FactoryGirl.build :valid_category_group, name: 'Category Group 1'
+      end
+
+      it 'generates a slug that is a parameterised version of the name' do
+        category_group.save
+        expect(category_group.url).to eq 'category-group-1'
+      end
+    end
+
+    context 'updating a category group' do
+      let(:category_group) do
+        FactoryGirl.create :valid_category_group, name: 'Category Group 1'
+      end
+
+      it 'synchronises the slug with the updated name' do
+        category_group.name = 'Category Group 2'
+        category_group.save
+        expect(category_group.url).to eq 'category-group-2'
+      end
+    end
+  end
 end
