@@ -17,6 +17,33 @@ RSpec.describe Resource, type: :model do
     it { should validate_length_of(:name).is_at_least(2).is_at_most(100) }
     it { should validate_presence_of(:content) }
     it { should validate_presence_of(:category) }
+
+    describe 'validation of contributor profiles' do
+      before do
+        @contributor_profile = FactoryGirl.create :contributor_profile
+        @resource = FactoryGirl.create :valid_resource
+      end
+
+      context 'resource has less than one contributor profile' do
+        before do
+          @resource.contributor_profiles = []
+        end
+
+        it 'should not be valid' do
+          expect(@resource).not_to be_valid
+        end
+      end
+
+      context 'resource has at least one contributor profile' do
+        before do
+          @resource.contributor_profiles << @contributor_profile
+        end
+
+        it 'should be valid' do
+          expect(@resource).to be_valid
+        end
+      end
+    end
   end
 
   describe 'associations' do

@@ -20,6 +20,33 @@ RSpec.describe Poem, type: :model do
       should validate_length_of(:description).is_at_least(2).is_at_most(250)
     end
     it { should validate_presence_of(:content) }
+
+    describe 'validation of contributor profiles' do
+      before do
+        @contributor_profile = FactoryGirl.create :contributor_profile
+        @poem = FactoryGirl.create :valid_poem
+      end
+
+      context 'poem has less than one contributor profile' do
+        before do
+          @poem.contributor_profiles = []
+        end
+
+        it 'should not be valid' do
+          expect(@poem).not_to be_valid
+        end
+      end
+
+      context 'poem has at least one contributor profile' do
+        before do
+          @poem.contributor_profiles << @contributor_profile
+        end
+
+        it 'should be valid' do
+          expect(@poem).to be_valid
+        end
+      end
+    end
   end
 
   describe 'associations' do

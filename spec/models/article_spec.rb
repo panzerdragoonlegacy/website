@@ -22,6 +22,33 @@ RSpec.describe Article, type: :model do
     end
     it { should validate_presence_of(:content) }
     it { should validate_presence_of(:category) }
+
+    describe 'validation of contributor profiles' do
+      before do
+        @contributor_profile = FactoryGirl.create :contributor_profile
+        @article = FactoryGirl.create :valid_article
+      end
+
+      context 'article has less than one contributor profile' do
+        before do
+          @article.contributor_profiles = []
+        end
+
+        it 'should not be valid' do
+          expect(@article).not_to be_valid
+        end
+      end
+
+      context 'article has at least one contributor profile' do
+        before do
+          @article.contributor_profiles << @contributor_profile
+        end
+
+        it 'should be valid' do
+          expect(@article).to be_valid
+        end
+      end
+    end
   end
 
   describe 'associations' do
@@ -36,11 +63,6 @@ RSpec.describe Article, type: :model do
   describe 'nested attributes' do
     it do
       should accept_nested_attributes_for(:illustrations).allow_destroy(true)
-    end
-  end
-
-  pending describe 'association validations' do
-    it 'has at least one contributor profile' do
     end
   end
 

@@ -18,6 +18,33 @@ RSpec.describe Quiz, type: :model do
     it do
       should validate_length_of(:description).is_at_least(2).is_at_most(250)
     end
+
+    describe 'validation of contributor profiles' do
+      before do
+        @contributor_profile = FactoryGirl.create :contributor_profile
+        @quiz = FactoryGirl.create :valid_quiz
+      end
+
+      context 'quiz has less than one contributor profile' do
+        before do
+          @quiz.contributor_profiles = []
+        end
+
+        it 'should not be valid' do
+          expect(@quiz).not_to be_valid
+        end
+      end
+
+      context 'quiz has at least one contributor profile' do
+        before do
+          @quiz.contributor_profiles << @contributor_profile
+        end
+
+        it 'should be valid' do
+          expect(@quiz).to be_valid
+        end
+      end
+    end
   end
 
   describe 'associations' do

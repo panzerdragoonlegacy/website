@@ -22,6 +22,33 @@ RSpec.describe Picture, type: :model do
       should validate_length_of(:description).is_at_least(2).is_at_most(250)
     end
     it { should validate_presence_of(:category) }
+
+    describe 'validation of contributor profiles' do
+      before do
+        @contributor_profile = FactoryGirl.create :contributor_profile
+        @picture = FactoryGirl.create :valid_picture
+      end
+
+      context 'picture has less than one contributor profile' do
+        before do
+          @picture.contributor_profiles = []
+        end
+
+        it 'should not be valid' do
+          expect(@picture).not_to be_valid
+        end
+      end
+
+      context 'picture has at least one contributor profile' do
+        before do
+          @picture.contributor_profiles << @contributor_profile
+        end
+
+        it 'should be valid' do
+          expect(@picture).to be_valid
+        end
+      end
+    end
   end
 
   describe 'associations' do

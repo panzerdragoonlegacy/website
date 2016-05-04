@@ -26,6 +26,33 @@ RSpec.describe Video, type: :model do
       should validate_length_of(:description).is_at_least(2).is_at_most(250)
     end
     it { should validate_presence_of(:category) }
+
+    describe 'validation of contributor profiles' do
+      before do
+        @contributor_profile = FactoryGirl.create :contributor_profile
+        @video = FactoryGirl.create :valid_video
+      end
+
+      context 'video has less than one contributor profile' do
+        before do
+          @video.contributor_profiles = []
+        end
+
+        it 'should not be valid' do
+          expect(@video).not_to be_valid
+        end
+      end
+
+      context 'video has at least one contributor profile' do
+        before do
+          @video.contributor_profiles << @contributor_profile
+        end
+
+        it 'should be valid' do
+          expect(@video).to be_valid
+        end
+      end
+    end
   end
 
   describe 'associations' do
