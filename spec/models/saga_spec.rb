@@ -24,7 +24,101 @@ RSpec.describe Saga, type: :model do
         .is_less_than(100)
     end
     it { should validate_presence_of(:encyclopaedia_entry) }
-    xit { should validate_uniqueness_of(:encyclopaedia_entry) }
+
+    describe 'validation of encyclopaedia entry' do
+      context 'creating a new saga' do
+        before do
+          @encyclopaedia_entry = FactoryGirl.create(:valid_encyclopaedia_entry)
+        end
+
+        context 'encyclopaedia entry is associated with another saga' do
+          before do
+            @another_saga = FactoryGirl.create(
+              :valid_saga,
+              encyclopaedia_entry: @encyclopaedia_entry
+            )
+            @saga = FactoryGirl.build(
+              :valid_saga,
+              encyclopaedia_entry: @encyclopaedia_entry
+            )
+          end
+
+          it 'should not be valid' do
+            expect(@saga).not_to be_valid
+          end
+        end
+
+        context 'encyclopaedia entry is not associated with another saga' do
+          before do
+            @saga = FactoryGirl.build(
+              :valid_saga,
+              encyclopaedia_entry: @encyclopaedia_entry
+            )
+          end
+
+          it 'should be valid' do
+            expect(@saga).to be_valid
+          end
+        end
+      end
+
+      context 'updating an existing saga with a new encyclopaedia entry' do
+        before do
+          @old_encyclopaedia_entry = FactoryGirl.create(
+            :valid_encyclopaedia_entry
+          )
+          @new_encyclopaedia_entry = FactoryGirl.create(
+            :valid_encyclopaedia_entry
+          )
+        end
+
+        context 'new encyclopaedia entry is associated with another saga' do
+          before do
+            @another_saga = FactoryGirl.create(
+              :valid_saga,
+              encyclopaedia_entry: @new_encyclopaedia_entry
+            )
+            @saga = FactoryGirl.create(
+              :valid_saga,
+              encyclopaedia_entry: @old_encyclopaedia_entry
+            )
+          end
+
+          it 'should not be valid' do
+            @saga.encyclopaedia_entry = @new_encyclopaedia_entry
+            expect(@saga).not_to be_valid
+          end
+        end
+
+        context 'new encyclopaedia entry is not associated with another saga' do
+          before do
+            @saga = FactoryGirl.create(
+              :valid_saga,
+              encyclopaedia_entry: @old_encyclopaedia_entry
+            )
+          end
+
+          it 'should be valid' do
+            @saga.encyclopaedia_entry = @new_encyclopaedia_entry
+            expect(@saga).to be_valid
+          end
+        end
+
+        context 'new encyclopaedia entry is already associated with the saga' do
+          before do
+            @saga = FactoryGirl.create(
+              :valid_saga,
+              encyclopaedia_entry: @new_encyclopaedia_entry
+            )
+          end
+
+          it 'should be valid' do
+            @saga.encyclopaedia_entry = @new_encyclopaedia_entry
+            expect(@saga).to be_valid
+          end
+        end
+      end
+    end
   end
 
   describe 'slug' do
