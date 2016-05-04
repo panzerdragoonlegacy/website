@@ -10,6 +10,10 @@ RSpec.describe Saga, type: :model do
     it { should respond_to(:updated_at) }
   end
 
+  describe 'associations' do
+    it { should belong_to(:encyclopaedia_entry) }
+  end
+
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
@@ -21,10 +25,6 @@ RSpec.describe Saga, type: :model do
     end
     it { should validate_presence_of(:encyclopaedia_entry) }
     xit { should validate_uniqueness_of(:encyclopaedia_entry) }
-  end
-
-  describe 'associations' do
-    it { should belong_to(:encyclopaedia_entry) }
   end
 
   describe 'slug' do

@@ -9,14 +9,14 @@ RSpec.describe CategoryGroup, type: :model do
     it { should respond_to(:updated_at) }
   end
 
+  describe 'associations' do
+    it { should have_many(:categories).dependent(:destroy) }
+  end
+
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
     it { should validate_length_of(:name).is_at_least(2).is_at_most(100) }
-  end
-
-  describe 'associations' do
-    it { should have_many(:categories).dependent(:destroy) }
   end
 
   describe 'slug' do

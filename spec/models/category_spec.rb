@@ -11,6 +11,19 @@ RSpec.describe Category, type: :model do
     it { should respond_to(:updated_at) }
   end
 
+  describe 'associations' do
+    it { should belong_to(:category_group) }
+    it { should have_many(:articles).dependent(:destroy) }
+    it { should have_many(:downloads).dependent(:destroy) }
+    it { should have_many(:encyclopaedia_entries).dependent(:destroy) }
+    it { should have_many(:links).dependent(:destroy) }
+    it { should have_many(:music_tracks).dependent(:destroy) }
+    it { should have_many(:pictures).dependent(:destroy) }
+    it { should have_many(:resources).dependent(:destroy) }
+    it { should have_many(:stories).dependent(:destroy) }
+    it { should have_many(:videos).dependent(:destroy) }
+  end
+
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
@@ -126,19 +139,6 @@ RSpec.describe Category, type: :model do
         end
       end
     end
-  end
-
-  describe 'associations' do
-    it { should belong_to(:category_group) }
-    it { should have_many(:articles).dependent(:destroy) }
-    it { should have_many(:downloads).dependent(:destroy) }
-    it { should have_many(:encyclopaedia_entries).dependent(:destroy) }
-    it { should have_many(:links).dependent(:destroy) }
-    it { should have_many(:music_tracks).dependent(:destroy) }
-    it { should have_many(:pictures).dependent(:destroy) }
-    it { should have_many(:resources).dependent(:destroy) }
-    it { should have_many(:stories).dependent(:destroy) }
-    it { should have_many(:videos).dependent(:destroy) }
   end
 
   describe 'slug' do

@@ -13,15 +13,6 @@ RSpec.describe EncyclopaediaEntry, type: :model do
     it { should respond_to(:updated_at) }
   end
 
-  describe 'validations' do
-    it { should validate_presence_of(:name) }
-    it { should validate_uniqueness_of(:name) }
-    it { should validate_length_of(:name).is_at_least(2).is_at_most(100) }
-    it { should validate_presence_of(:information) }
-    it { should validate_presence_of(:content) }
-    it { should validate_presence_of(:category) }
-  end
-
   describe 'associations' do
     it { should belong_to(:category) }
     it { should have_one(:saga).dependent(:destroy) }
@@ -46,6 +37,15 @@ RSpec.describe EncyclopaediaEntry, type: :model do
       should accept_nested_attributes_for(:illustrations)
         .allow_destroy(true)
     end
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+    it { should validate_uniqueness_of(:name) }
+    it { should validate_length_of(:name).is_at_least(2).is_at_most(100) }
+    it { should validate_presence_of(:information) }
+    it { should validate_presence_of(:content) }
+    it { should validate_presence_of(:category) }
   end
 
   describe 'file attachment' do

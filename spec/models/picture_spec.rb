@@ -13,6 +13,14 @@ RSpec.describe Picture, type: :model do
     it { should respond_to(:updated_at) }
   end
 
+  describe 'associations' do
+    it { should belong_to(:category) }
+    it { should have_many(:contributions).dependent(:destroy) }
+    it { should have_many(:contributor_profiles).through(:contributions) }
+    it { should have_many(:relations).dependent(:destroy) }
+    it { should have_many(:encyclopaedia_entries).through(:relations) }
+  end
+
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
@@ -49,14 +57,6 @@ RSpec.describe Picture, type: :model do
         end
       end
     end
-  end
-
-  describe 'associations' do
-    it { should belong_to(:category) }
-    it { should have_many(:contributions).dependent(:destroy) }
-    it { should have_many(:contributor_profiles).through(:contributions) }
-    it { should have_many(:relations).dependent(:destroy) }
-    it { should have_many(:encyclopaedia_entries).through(:relations) }
   end
 
   describe 'file attachment' do

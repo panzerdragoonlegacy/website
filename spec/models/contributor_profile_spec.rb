@@ -14,12 +14,6 @@ RSpec.describe ContributorProfile, type: :model do
     it { should respond_to(:updated_at) }
   end
 
-  describe 'validations' do
-    it { should validate_presence_of(:name) }
-    it { should validate_uniqueness_of(:name) }
-    it { should validate_length_of(:name).is_at_least(2).is_at_most(50) }
-  end
-
   describe 'associations' do
     it { should have_one(:user).dependent(:destroy) }
     it { should have_many(:news_entries).dependent(:destroy) }
@@ -34,6 +28,12 @@ RSpec.describe ContributorProfile, type: :model do
     it { should have_many(:resources) }
     it { should have_many(:stories) }
     it { should have_many(:videos) }
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+    it { should validate_uniqueness_of(:name) }
+    it { should validate_length_of(:name).is_at_least(2).is_at_most(50) }
   end
 
   describe 'file attachment' do
