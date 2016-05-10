@@ -22,7 +22,7 @@ RSpec.describe Chapter, type: :model do
     end
   end
 
-  pending describe 'validations' do
+  describe 'validations' do
     it { should validate_presence_of(:number) }
     it do
       should validate_numericality_of(:number).is_greater_than(0)

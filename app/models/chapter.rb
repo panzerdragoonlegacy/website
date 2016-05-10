@@ -21,20 +21,24 @@ class Chapter < ActiveRecord::Base
   private
 
   def validate_presence_of_name
-    if chapter_type != :regular_chapter && self.name.blank?
+    if self.chapter_type != :regular_chapter.to_s && self.name.blank?
       self.errors.add(name, 'must be present for prologues and epilogues.')
     end
   end
 
   def story_chapter_name
-    if self.chapter_type == :regular_chapter.to_s
-      if self.name.blank?
-        return self.story.name + "-" + self.number.to_s
+    # A chapter should always belong to a story; this check is here so that the
+    # validation Shoulda Matchers can pass without presence of a story.
+    if self.story
+      if self.chapter_type == :regular_chapter.to_s
+        if self.name.blank?
+          return self.story.name + "-" + self.number.to_s
+        else
+          return self.story.name + "-" + self.number.to_s + "-" + self.name
+        end
       else
-        return self.story.name + "-" + self.number.to_s + "-" + self.name
+        return self.story.name + "-" + self.name
       end
-    else
-      return self.story.name + "-" + self.name
     end
   end
 end
