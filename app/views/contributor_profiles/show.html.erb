@@ -9,60 +9,67 @@
   </ul>
 <% end %>
 
-<% if @contributor_profile.discourse_username.present? %>
-  <p>
-    <%= link_to "View Forum Profile",
-      "http://discuss.panzerdragoonlegacy.com/users/" +
-      "#{@contributor_profile.discourse_username.to_s.downcase}"
-    %>
-  </p>
-<% end %>
-
-<% unless @contributor_profile.avatar_file_name.blank? %>
-  <div class="thumbnail">
-    <%= image_tag @contributor_profile.avatar.url(:thumbnail) %>
+<% unless @contributor_profile.avatar_file_name.blank? &&
+  @contributor_profile.email_address.blank? &&
+  @contributor_profile.discourse_username.blank? &&
+  @contributor_profile.website.blank? &&
+  @contributor_profile.facebook_username.blank? &&
+  @contributor_profile.twitter_username.blank? %>
+  <div id="information">
+    <% unless @contributor_profile.avatar_file_name.blank? %>
+      <%= image_tag @contributor_profile.avatar.url(:embedded) %><br />
+    <% end %>
+    <% unless @contributor_profile.email_address.blank? &&
+      @contributor_profile.discourse_username.blank? &&
+      @contributor_profile.website.blank? &&
+      @contributor_profile.facebook_username.blank? &&
+      @contributor_profile.twitter_username.blank? %>
+      <dl>
+        <% if @contributor_profile.email_address.present? && user_signed_in? %>
+          <% if current_user.administrator %>
+            <dt>Email Address</dt>
+            <dd><%= @contributor_profile.email_address %></dd>
+          <% end %>
+        <% end %>
+        <% unless @contributor_profile.discourse_username.blank? %>
+          <dt>Forum Profile</dt>
+          <dd>
+            <%= link_to @contributor_profile.discourse_username,
+              "http://discuss.panzerdragoonlegacy.com/users/" +
+              @contributor_profile.discourse_username.to_s.downcase
+            %>
+          </dd>
+        <% end %>
+        <% unless @contributor_profile.website.blank? %>
+          <dt>Website</dt>
+          <dd>
+            <%= link_to @contributor_profile.website,
+              @contributor_profile.website %>
+          </dd>
+        <% end %>
+        <% unless @contributor_profile.facebook_username.blank? %>
+          <dt>Facebook</dt>
+          <dd>
+            <%= link_to @contributor_profile.facebook_username,
+              "http://www.facebook.com/" +
+              @contributor_profile.facebook_username %>
+          </dd>
+        <% end %>
+        <% unless @contributor_profile.twitter_username.blank? %>
+          <dt>Twitter</dt>
+          <dd>
+            <%= link_to @contributor_profile.twitter_username,
+              "http://www.twitter.com/" +
+              @contributor_profile.twitter_username %>
+          </dd>
+        <% end %>
+      </dl>
+    <% end %>
   </div>
 <% end %>
 
-<% if user_signed_in? %>
-  <% if current_user.administrator %>
-    <dl>
-      <dt>Email Address (only administrators can see this):</dt>
-      <dd><%= @contributor_profile.email_address %></dd>
-    </dl>
-  <% end %>
-<% end %>
-
-<% unless @contributor_profile.website.blank? and
-  @contributor_profile.facebook_username.blank? and
-  @contributor_profile.twitter_username.blank? %>
-  <dl>
-    <% unless @contributor_profile.website.blank? %>
-      <dt>Website:</dt>
-      <dd>
-        <%= link_to @contributor_profile.website,
-          @contributor_profile.website %>
-      </dd>
-    <% end %>
-    <% unless @contributor_profile.facebook_username.blank? %>
-      <dt>Facebook Username:</dt>
-      <dd>
-        <%= link_to @contributor_profile.facebook_username,
-          "http://www.facebook.com/" + @contributor_profile.facebook_username %>
-      </dd>
-    <% end %>
-    <% unless @contributor_profile.twitter_username.blank? %>
-      <dt>Twitter Username:</dt>
-      <dd>
-        <%= link_to @contributor_profile.twitter_username,
-          "http://www.twitter.com/" + @contributor_profile.twitter_username %>
-      </dd>
-    <% end %>
-  </dl>
-<% end %>
-
 <% unless website_contributions_count(@contributor_profile) == 0 %>
-  <h2>Website Contributions</h2>
+  <h4>Website Contributions</h4>
   <ul>
     <% unless news_entry_count(@contributor_profile) == 0 %>
       <li>
@@ -135,6 +142,6 @@
   </ul>
   <p>Total: <%= pluralize(website_contributions_count(@contributor_profile),
     'website contribution') %>.</p>
-<% end%>
+<% end %>
 
 <p class="links"><%= link_to 'Contributors', contributor_profiles_path %></p>
