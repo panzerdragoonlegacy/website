@@ -20,7 +20,7 @@
 
 <% unless @contributor_profile.avatar_file_name.blank? %>
   <div class="thumbnail">
-    <%= image_tag @contributor_profile.avatar.url(:embedded) %>
+    <%= image_tag @contributor_profile.avatar.url(:thumbnail) %>
   </div>
 <% end %>
 
