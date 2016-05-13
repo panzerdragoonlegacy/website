@@ -27,8 +27,11 @@
       <dl>
         <% if @contributor_profile.email_address.present? && user_signed_in? %>
           <% if current_user.administrator %>
-            <dt>Email Address</dt>
-            <dd><%= @contributor_profile.email_address %></dd>
+            <dt>Email</dt>
+            <dd>
+              <%= mail_to @contributor_profile.email_address,
+                'Send Email' %>
+            </dd>
           <% end %>
         <% end %>
         <% unless @contributor_profile.discourse_username.blank? %>
@@ -43,8 +46,7 @@
         <% unless @contributor_profile.website.blank? %>
           <dt>Website</dt>
           <dd>
-            <%= link_to @contributor_profile.website,
-              @contributor_profile.website %>
+            <%= link_to 'Visit Website', @contributor_profile.website %>
           </dd>
         <% end %>
         <% unless @contributor_profile.facebook_username.blank? %>
