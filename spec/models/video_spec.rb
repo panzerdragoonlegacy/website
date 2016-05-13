@@ -100,7 +100,7 @@ RSpec.describe Video, type: :model do
       end
     end
 
-    context 'updating a story' do
+    context 'updating a video' do
       let(:video) do
         FactoryGirl.create :valid_video, name: 'Video 1'
       end
