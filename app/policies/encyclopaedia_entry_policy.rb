@@ -24,12 +24,12 @@ class EncyclopaediaEntryPolicy < ApplicationPolicy
         end
       end
     end
-    record.publish? and record.category.publish?
+    record.publish? && record.category.publish?
   end
 
   def new?
     if user
-      return true if user.administrator? or user.contributor_profile.present?
+      return true if user.administrator? || user.contributor_profile.present?
     end
   end
 
@@ -41,7 +41,7 @@ class EncyclopaediaEntryPolicy < ApplicationPolicy
     if user
       return true if user.administrator?
       if user.contributor_profile.present?
-        if !record.publish and record.contributions.where(
+        if !record.publish && record.contributions.where(
           contributor_profile_id: user.contributor_profile_id).count > 0
           return true
         end

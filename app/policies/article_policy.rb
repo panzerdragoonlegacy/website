@@ -24,7 +24,7 @@ class ArticlePolicy < ApplicationPolicy
         end
       end
     end
-    record.publish? and record.category.publish?
+    record.publish? && record.category.publish?
   end
 
   def new?
@@ -41,7 +41,7 @@ class ArticlePolicy < ApplicationPolicy
     if user
       return true if user.administrator?
       if user.contributor_profile.present?
-        if !record.publish and record.contributions.where(
+        if !record.publish && record.contributions.where(
           contributor_profile_id: user.contributor_profile_id).count > 0
           return true
         end
