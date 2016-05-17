@@ -16,80 +16,87 @@
   <ul>
     <% if draft_news_entry_count > 0 %>
       <li>
-        <%= link_to pluralize(draft_news_entry_count, 'news entry'), 
+        <%= link_to pluralize(draft_news_entry_count, 'news entry'),
           news_entries_path(filter: 'draft') %>
       </li>
     <% end %>
     <% if draft_category_count > 0 %>
       <li>
-        <%= link_to pluralize(draft_category_count, 'category'), 
+        <%= link_to pluralize(draft_category_count, 'category'),
           categories_path(filter: 'draft') %>
       </li>
     <% end %>
     <% if draft_encyclopaedia_entry_count > 0 %>
       <li>
         <%= link_to(pluralize(
-          draft_encyclopaedia_entry_count, 'encyclopaedia entry'),  
+          draft_encyclopaedia_entry_count, 'encyclopaedia entry'),
           encyclopaedia_entries_path(filter: 'draft')) %>
+      </li>
+    <% end %>
+    <% if draft_contributor_profile_count > 0 %>
+      <li>
+        <%= link_to(pluralize(
+          draft_contributor_profile_count, 'contributor_profile'),
+          contributor_profiles_path(filter: 'draft')) %>
       </li>
     <% end %>
     <% if draft_article_count > 0 %>
       <li>
-        <%= link_to pluralize(draft_article_count, 'article'), 
+        <%= link_to pluralize(draft_article_count, 'article'),
           articles_path(filter: 'draft') %>
       </li>
     <% end %>
     <% if draft_download_count > 0 %>
       <li>
-        <%= link_to pluralize(draft_download_count, 'download'), 
+        <%= link_to pluralize(draft_download_count, 'download'),
           downloads_path(filter: 'draft') %>
       </li>
     <% end %>
     <% if draft_music_track_count > 0 %>
       <li>
-        <%= link_to pluralize(draft_music_track_count, 'music track'), 
+        <%= link_to pluralize(draft_music_track_count, 'music track'),
           music_tracks_path(filter: 'draft') %>
       </li>
     <% end %>
     <% if draft_picture_count > 0 %>
       <li>
-        <%= link_to pluralize(draft_picture_count, 'picture'), 
+        <%= link_to pluralize(draft_picture_count, 'picture'),
           pictures_path(filter: 'draft') %>
       </li>
     <% end %>
     <% if draft_poem_count > 0 %>
       <li>
-        <%= link_to pluralize(draft_poem_count, 'poem'), 
+        <%= link_to pluralize(draft_poem_count, 'poem'),
           poems_path(filter: 'draft') %>
       </li>
     <% end %>
     <% if draft_quiz_count > 0 %>
       <li>
-        <%= link_to pluralize(draft_quiz_count, 'quiz'), 
+        <%= link_to pluralize(draft_quiz_count, 'quiz'),
           quizzes_path(filter: 'draft') %>
       </li>
     <% end %>
     <% if draft_resource_count > 0 %>
       <li>
-        <%= link_to pluralize(draft_resource_count, 'resource'), 
+        <%= link_to pluralize(draft_resource_count, 'resource'),
           resources_path(filter: 'draft') %>
       </li>
     <% end %>
     <% if draft_story_count > 0 %>
       <li>
-        <%= link_to pluralize(draft_story_count, 'story'), 
+        <%= link_to pluralize(draft_story_count, 'story'),
           stories_path(filter: 'draft') %>
       </li>
     <% end %>
     <% if draft_video_count > 0 %>
       <li>
-        <%= link_to pluralize(draft_video_count, 'video'), 
+        <%= link_to pluralize(draft_video_count, 'video'),
           videos_path(filter: 'draft') %>
       </li>
     <% end %>
     <% if draft_page_count > 0 %>
       <li>
-        <%= link_to pluralize(draft_page_count, 'page'), 
+        <%= link_to pluralize(draft_page_count, 'page'),
           pages_path(filter: 'draft') %>
       </li>
     <% end %>

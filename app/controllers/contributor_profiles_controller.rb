@@ -2,9 +2,13 @@ class ContributorProfilesController < ApplicationController
   before_action :load_contributor_profile, except: [:index, :new, :create]
 
   def index
-    @contributor_profiles = policy_scope(
-      ContributorProfile.order(:name).page(params[:page])
-    )
+    if params[:filter] == 'draft'
+      load_draft_contributor_profiles
+    else
+      @contributor_profiles = policy_scope(
+        ContributorProfile.order(:name).page(params[:page])
+      )
+    end
   end
 
   def new
@@ -51,6 +55,12 @@ class ContributorProfilesController < ApplicationController
   def load_contributor_profile
     @contributor_profile = ContributorProfile.find_by url: params[:id]
     authorize @contributor_profile
+  end
+
+  def load_draft_contributor_profiles
+    @contributor_profiles = policy_scope(
+      ContributorProfile.where(publish: false).order(:name).page(params[:page])
+    )
   end
 
   def redirect_to_contributor_profile

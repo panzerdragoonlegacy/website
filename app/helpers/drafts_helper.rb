@@ -11,6 +11,10 @@ module DraftsHelper
     policy_scope(EncyclopaediaEntry.where(publish: false)).count
   end
 
+  def draft_contributor_profile_count
+    policy_scope(ContributorProfile.where(publish: false)).count
+  end
+
   def draft_article_count
     policy_scope(Article.where(publish: false)).count
   end
@@ -52,17 +56,18 @@ module DraftsHelper
   end
 
   def draft_count
-    draft_news_entry_count + 
+    draft_news_entry_count +
     draft_category_count +
     draft_encyclopaedia_entry_count +
+    draft_contributor_profile_count +
     draft_article_count +
-    draft_download_count + 
-    draft_music_track_count + 
+    draft_download_count +
+    draft_music_track_count +
     draft_picture_count +
-    draft_poem_count + 
-    draft_quiz_count + 
+    draft_poem_count +
+    draft_quiz_count +
     draft_resource_count +
-    draft_story_count + 
+    draft_story_count +
     draft_video_count +
     draft_page_count
   end
