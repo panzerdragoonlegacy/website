@@ -2,10 +2,10 @@ class QuizPolicy < ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
     def resolve
       if user
-        return scope if user.administrator
+        return scope if user.administrator?
         if user.contributor_profile.present?
           return scope.joins(:contributions).where("quizzes.publish = 't' OR " +
-            "contributions.contributor_profile_id = ?", 
+            "contributions.contributor_profile_id = ?",
             user.contributor_profile_id)
         end
       end
@@ -15,7 +15,7 @@ class QuizPolicy < ApplicationPolicy
 
   def show?
     if user
-      return true if user.administrator
+      return true if user.administrator?
       if user.contributor_profile.present?
         if record.contributions.where(
           contributor_profile_id: user.contributor_profile_id).count > 0
@@ -28,7 +28,7 @@ class QuizPolicy < ApplicationPolicy
 
   def new?
     if user
-      return true if user.administrator or user.contributor_profile.present?
+      return true if user.administrator? || user.contributor_profile.present?
     end
   end
 
@@ -38,9 +38,9 @@ class QuizPolicy < ApplicationPolicy
 
   def edit?
     if user
-      return true if user.administrator
+      return true if user.administrator?
       if user.contributor_profile.present?
-        if !record.publish and record.contributions.where(
+        if !record.publish && record.contributions.where(
           contributor_profile_id: user.contributor_profile_id).count > 0
           return true
         end
@@ -69,7 +69,7 @@ class QuizPolicy < ApplicationPolicy
       encyclopaedia_entry_ids: []
     ]
     if user
-      permitted_attributes << :publish if user.administrator
+      permitted_attributes << :publish if user.administrator?
     end
     permitted_attributes
   end

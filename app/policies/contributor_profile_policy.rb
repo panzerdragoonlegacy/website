@@ -20,7 +20,7 @@ class ContributorProfilePolicy < ApplicationPolicy
 
   def edit?
     if user
-      return true if user.administrator || !record.publish?
+      return true if user.administrator? || !record.publish?
     end
   end
 
@@ -43,7 +43,7 @@ class ContributorProfilePolicy < ApplicationPolicy
       :twitter_username
     ]
     if user
-      permitted_attributes << :publish if user.administrator
+      permitted_attributes << :publish if user.administrator?
     end
     permitted_attributes
   end

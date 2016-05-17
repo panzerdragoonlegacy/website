@@ -2,7 +2,7 @@ class UserPolicy < ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
     def resolve
       if user
-        return scope if user.administrator
+        return scope if user.administrator?
       end
       []
     end
@@ -10,7 +10,7 @@ class UserPolicy < ApplicationPolicy
 
   def show?
     if user
-      return true if user.administrator
+      return true if user.administrator?
     end
   end
 end

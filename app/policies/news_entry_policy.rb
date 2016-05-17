@@ -2,11 +2,11 @@ class NewsEntryPolicy < ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
     def resolve
       if user
-        return scope if user.administrator
+        return scope if user.administrator?
         if user.contributor_profile.present?
           return scope.where(
             "news_entries.publish = 't' OR " +
-            "news_entries.contributor_profile_id = ?", 
+            "news_entries.contributor_profile_id = ?",
             user.contributor_profile_id)
         end
       end
@@ -16,7 +16,7 @@ class NewsEntryPolicy < ApplicationPolicy
 
   def show?
     if user
-      return true if user.administrator
+      return true if user.administrator?
       if user.contributor_profile.present?
         if record.contributor_profile_id == user.contributor_profile_id
           return true
@@ -28,7 +28,7 @@ class NewsEntryPolicy < ApplicationPolicy
 
   def new?
     if user
-      return true if user.administrator or user.contributor_profile.present?
+      return true if user.administrator? || user.contributor_profile.present?
     end
   end
 
@@ -38,9 +38,9 @@ class NewsEntryPolicy < ApplicationPolicy
 
   def edit?
     if user
-      return true if user.administrator
+      return true if user.administrator?
       if user.contributor_profile.present?
-        if !record.publish and (record.contributor_profile_id == 
+        if !record.publish && (record.contributor_profile_id ==
           user.contributor_profile_id)
           return true
         end
@@ -63,7 +63,7 @@ class NewsEntryPolicy < ApplicationPolicy
       :content
     ]
     if user
-      permitted_attributes << :publish if user.administrator
+      permitted_attributes << :publish if user.administrator?
     end
     permitted_attributes
   end

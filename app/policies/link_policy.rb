@@ -2,7 +2,7 @@ class LinkPolicy < ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
     def resolve
       if user
-        return scope if user.administrator
+        return scope if user.administrator?
       end
       scope.joins(:category).where(categories: { publish: true })
     end
@@ -10,7 +10,7 @@ class LinkPolicy < ApplicationPolicy
 
   def show?
     if user
-      return true if user.administrator
+      return true if user.administrator?
     end
     record.category.publish?
   end
