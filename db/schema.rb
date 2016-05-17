@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151013130833) do
+ActiveRecord::Schema.define(version: 20160517121058) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "articles", force: :cascade do |t|
     t.string   "name"
@@ -73,9 +76,10 @@ ActiveRecord::Schema.define(version: 20151013130833) do
     t.string   "website"
     t.string   "facebook_username"
     t.string   "twitter_username"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "discourse_username"
+    t.boolean  "publish",             default: false
   end
 
   create_table "downloads", force: :cascade do |t|
@@ -261,7 +265,7 @@ ActiveRecord::Schema.define(version: 20151013130833) do
     t.datetime "updated_at",                         null: false
   end
 
-  add_index "sagas", ["encyclopaedia_entry_id"], name: "index_sagas_on_encyclopaedia_entry_id"
+  add_index "sagas", ["encyclopaedia_entry_id"], name: "index_sagas_on_encyclopaedia_entry_id", using: :btree
 
   create_table "stories", force: :cascade do |t|
     t.string   "name"
@@ -298,10 +302,10 @@ ActiveRecord::Schema.define(version: 20151013130833) do
     t.integer  "contributor_profile_id"
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "videos", force: :cascade do |t|
     t.string   "name"

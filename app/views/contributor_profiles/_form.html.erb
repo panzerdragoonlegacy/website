@@ -4,7 +4,7 @@
     <div>
       <%= f.label :name %>
     </div>
-    <div>  
+    <div>
       <%= f.text_field :name %>
     </div>
   </div>
@@ -61,6 +61,11 @@
       <%= f.text_field :twitter_username %>
     </div>
   </div>
+  <% if policy(@contributor_profile).permitted_attributes.include? :publish %>
+    <div>
+      <%= f.check_box :publish %> <%= f.label :publish, 'Publish?' %>
+    </div>
+  <% end %>
   <div>
     <%= f.submit 'Save and View' %>
     <%= f.submit 'Save and Continue Editing', name: :continue_editing %>

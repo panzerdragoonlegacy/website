@@ -1,5 +1,9 @@
 <% title @contributor_profile.name %>
 
+<% unless @contributor_profile.publish %>
+  <p class="unpublished">Unpublished</p>
+<% end %>
+
 <% if policy(@contributor_profile).edit? %>
   <ul id="administration">
     <li>

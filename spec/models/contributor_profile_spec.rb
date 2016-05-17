@@ -10,6 +10,7 @@ RSpec.describe ContributorProfile, type: :model do
     it { should respond_to(:facebook_username) }
     it { should respond_to(:twitter_username) }
     it { should respond_to(:discourse_username) }
+    it { should respond_to(:publish) }
     it { should respond_to(:created_at) }
     it { should respond_to(:updated_at) }
   end

@@ -44,13 +44,7 @@ class ContributorProfilesController < ApplicationController
 
   def contributor_profile_params
     params.require(:contributor_profile).permit(
-      :name,
-      :email_address,
-      :discourse_username,
-      :avatar,
-      :website,
-      :facebook_username,
-      :twitter_username
+      policy(@contributor_profile || :contributor_profile).permitted_attributes
     )
   end
 

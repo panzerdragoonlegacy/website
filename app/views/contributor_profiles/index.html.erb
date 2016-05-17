@@ -21,6 +21,9 @@
         </div>
         <div class="comment_details">
           <h2><%= link_to contributor_profile.name, contributor_profile %></h2>
+          <% unless contributor_profile.publish %>
+            <p class="unpublished">Unpublished</p>
+          <% end %>
           <p>
             <%= pluralize(website_contributions_count(contributor_profile),
               'website contribution')
