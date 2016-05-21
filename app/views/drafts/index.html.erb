@@ -36,7 +36,7 @@
     <% if draft_contributor_profile_count > 0 %>
       <li>
         <%= link_to(pluralize(
-          draft_contributor_profile_count, 'contributor_profile'),
+          draft_contributor_profile_count, 'contributor profile'),
           contributor_profiles_path(filter: 'draft')) %>
       </li>
     <% end %>
