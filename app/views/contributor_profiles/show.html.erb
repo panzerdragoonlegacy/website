@@ -13,66 +13,62 @@
   </ul>
 <% end %>
 
-<% unless @contributor_profile.avatar_file_name.blank? &&
-  @contributor_profile.email_address.blank? &&
-  @contributor_profile.discourse_username.blank? &&
-  @contributor_profile.website.blank? &&
-  @contributor_profile.facebook_username.blank? &&
-  @contributor_profile.twitter_username.blank? %>
-  <div id="information">
-    <% unless @contributor_profile.avatar_file_name.blank? %>
-      <%= image_tag @contributor_profile.avatar.url(:embedded) %><br />
-    <% end %>
-    <% unless @contributor_profile.email_address.blank? &&
-      @contributor_profile.discourse_username.blank? &&
-      @contributor_profile.website.blank? &&
-      @contributor_profile.facebook_username.blank? &&
-      @contributor_profile.twitter_username.blank? %>
-      <dl>
-        <% if @contributor_profile.email_address.present? && user_signed_in? %>
-          <% if current_user.administrator %>
-            <dt>Email</dt>
-            <dd>
-              <%= mail_to @contributor_profile.email_address,
-                'Send Email' %>
-            </dd>
-          <% end %>
-        <% end %>
-        <% unless @contributor_profile.discourse_username.blank? %>
-          <dt>Forum Profile</dt>
+<div id="information">
+  <% if @contributor_profile.avatar_file_name.blank? %>
+    <%= image_tag("sorry-no-image-embedded.jpg", alt: "Sorry No Image",
+      width: "280", height: "280") %><br />
+  <% else %>
+    <%= image_tag @contributor_profile.avatar.url(:embedded) %><br />
+  <% end %>
+  <% unless @contributor_profile.email_address.blank? &&
+    @contributor_profile.discourse_username.blank? &&
+    @contributor_profile.website.blank? &&
+    @contributor_profile.facebook_username.blank? &&
+    @contributor_profile.twitter_username.blank? %>
+    <dl>
+      <% if @contributor_profile.email_address.present? && user_signed_in? %>
+        <% if current_user.administrator %>
+          <dt>Email</dt>
           <dd>
-            <%= link_to @contributor_profile.discourse_username,
-              "http://discuss.panzerdragoonlegacy.com/users/" +
-              @contributor_profile.discourse_username.to_s.downcase
-            %>
+            <%= mail_to @contributor_profile.email_address,
+              'Send Email' %>
           </dd>
         <% end %>
-        <% unless @contributor_profile.website.blank? %>
-          <dt>Website</dt>
-          <dd>
-            <%= link_to 'Visit Website', @contributor_profile.website %>
-          </dd>
-        <% end %>
-        <% unless @contributor_profile.facebook_username.blank? %>
-          <dt>Facebook</dt>
-          <dd>
-            <%= link_to @contributor_profile.facebook_username,
-              "http://www.facebook.com/" +
-              @contributor_profile.facebook_username %>
-          </dd>
-        <% end %>
-        <% unless @contributor_profile.twitter_username.blank? %>
-          <dt>Twitter</dt>
-          <dd>
-            <%= link_to @contributor_profile.twitter_username,
-              "http://www.twitter.com/" +
-              @contributor_profile.twitter_username %>
-          </dd>
-        <% end %>
-      </dl>
-    <% end %>
-  </div>
-<% end %>
+      <% end %>
+      <% unless @contributor_profile.discourse_username.blank? %>
+        <dt>Forum Profile</dt>
+        <dd>
+          <%= link_to @contributor_profile.discourse_username,
+            "http://discuss.panzerdragoonlegacy.com/users/" +
+            @contributor_profile.discourse_username.to_s.downcase
+          %>
+        </dd>
+      <% end %>
+      <% unless @contributor_profile.website.blank? %>
+        <dt>Website</dt>
+        <dd>
+          <%= link_to 'Visit Website', @contributor_profile.website %>
+        </dd>
+      <% end %>
+      <% unless @contributor_profile.facebook_username.blank? %>
+        <dt>Facebook</dt>
+        <dd>
+          <%= link_to @contributor_profile.facebook_username,
+            "http://www.facebook.com/" +
+            @contributor_profile.facebook_username %>
+        </dd>
+      <% end %>
+      <% unless @contributor_profile.twitter_username.blank? %>
+        <dt>Twitter</dt>
+        <dd>
+          <%= link_to @contributor_profile.twitter_username,
+            "http://www.twitter.com/" +
+            @contributor_profile.twitter_username %>
+        </dd>
+      <% end %>
+    </dl>
+  <% end %>
+</div>
 
 <% unless website_contributions_count(@contributor_profile) == 0 %>
   <h4>Website Contributions</h4>
