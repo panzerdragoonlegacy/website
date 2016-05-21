@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   before_action :load_user, except: [:index, :new, :create]
 
   def index
-    @users = policy_scope(User.order(:email).page(params[:page]))
+    @users = policy_scope(User.order(administrator: :desc).order(:email).page(
+      params[:page]))
   end
 
   def new
