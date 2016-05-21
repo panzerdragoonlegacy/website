@@ -8,7 +8,7 @@
 <% end %>
 
 <% if policy(@encyclopaedia_entry).new? or
-  policy(@encyclopaedia_entry).edit? or 
+  policy(@encyclopaedia_entry).edit? or
   policy(@encyclopaedia_entry).destroy? %>
   <ul class="administration">
     <% if policy(@encyclopaedia_entry).new? %>
@@ -36,8 +36,8 @@
 
 <div id="information">
   <% if @encyclopaedia_entry.encyclopaedia_entry_picture_file_name.blank? %>
-    <%= image_tag("default-encyclopaedia-entry-picture-embedded.jpg",
-      alt: "Sorry No Image", width: "280", height: "280") %><br />
+    <%= image_tag("sorry-no-image-embedded.jpg", alt: "Sorry No Image",
+      width: "280", height: "280") %><br />
   <% else %>
     <%= encyclopaedia_entry_picture_tag @encyclopaedia_entry, :embedded %><br />
   <% end %>
