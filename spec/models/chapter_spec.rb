@@ -2,33 +2,34 @@ require 'rails_helper'
 
 RSpec.describe Chapter, type: :model do
   describe 'fields' do
-    it { should respond_to(:chapter_type) }
-    it { should respond_to(:number) }
-    it { should respond_to(:name) }
-    it { should respond_to(:url) }
-    it { should respond_to(:content) }
-    it { should respond_to(:created_at) }
-    it { should respond_to(:updated_at) }
+    it { is_expected.to respond_to(:chapter_type) }
+    it { is_expected.to respond_to(:number) }
+    it { is_expected.to respond_to(:name) }
+    it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:content) }
+    it { is_expected.to respond_to(:created_at) }
+    it { is_expected.to respond_to(:updated_at) }
   end
 
   describe 'associations' do
-    it { should belong_to(:story) }
-    it { should have_many(:illustrations).dependent(:destroy) }
+    it { is_expected.to belong_to(:story) }
+    it { is_expected.to have_many(:illustrations).dependent(:destroy) }
   end
 
   describe 'nested attributes' do
     it do
-      should accept_nested_attributes_for(:illustrations).allow_destroy(true)
+      is_expected.to accept_nested_attributes_for(:illustrations)
+        .allow_destroy(true)
     end
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:number) }
+    it { is_expected.to validate_presence_of(:number) }
     it do
-      should validate_numericality_of(:number).is_greater_than(0)
+      is_expected.to validate_numericality_of(:number).is_greater_than(0)
         .is_less_than(100)
     end
-    it { should validate_presence_of(:content) }
+    it { is_expected.to validate_presence_of(:content) }
   end
 
   describe 'slug' do

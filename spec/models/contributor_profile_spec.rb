@@ -2,47 +2,52 @@ require 'rails_helper'
 
 RSpec.describe ContributorProfile, type: :model do
   describe 'fields' do
-    it { should respond_to(:name) }
-    it { should respond_to(:url) }
-    it { should respond_to(:email_address) }
-    it { should respond_to(:avatar) }
-    it { should respond_to(:website) }
-    it { should respond_to(:facebook_username) }
-    it { should respond_to(:twitter_username) }
-    it { should respond_to(:discourse_username) }
-    it { should respond_to(:publish) }
-    it { should respond_to(:created_at) }
-    it { should respond_to(:updated_at) }
+    it { is_expected.to respond_to(:name) }
+    it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:email_address) }
+    it { is_expected.to respond_to(:avatar) }
+    it { is_expected.to respond_to(:website) }
+    it { is_expected.to respond_to(:facebook_username) }
+    it { is_expected.to respond_to(:twitter_username) }
+    it { is_expected.to respond_to(:discourse_username) }
+    it { is_expected.to respond_to(:publish) }
+    it { is_expected.to respond_to(:created_at) }
+    it { is_expected.to respond_to(:updated_at) }
   end
 
   describe 'associations' do
-    it { should have_one(:user).dependent(:destroy) }
-    it { should have_many(:news_entries).dependent(:destroy) }
-    it { should have_many(:contributions).dependent(:destroy) }
-    it { should have_many(:articles) }
-    it { should have_many(:downloads) }
-    it { should have_many(:links) }
-    it { should have_many(:music_tracks) }
-    it { should have_many(:pictures) }
-    it { should have_many(:poems) }
-    it { should have_many(:quizzes) }
-    it { should have_many(:resources) }
-    it { should have_many(:stories) }
-    it { should have_many(:videos) }
+    it { is_expected.to have_one(:user).dependent(:destroy) }
+    it { is_expected.to have_many(:news_entries).dependent(:destroy) }
+    it { is_expected.to have_many(:contributions).dependent(:destroy) }
+    it { is_expected.to have_many(:articles) }
+    it { is_expected.to have_many(:downloads) }
+    it { is_expected.to have_many(:links) }
+    it { is_expected.to have_many(:music_tracks) }
+    it { is_expected.to have_many(:pictures) }
+    it { is_expected.to have_many(:poems) }
+    it { is_expected.to have_many(:quizzes) }
+    it { is_expected.to have_many(:resources) }
+    it { is_expected.to have_many(:stories) }
+    it { is_expected.to have_many(:videos) }
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:name) }
-    it { should validate_uniqueness_of(:name) }
-    it { should validate_length_of(:name).is_at_least(2).is_at_most(50) }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_uniqueness_of(:name) }
+    it do
+      is_expected.to validate_length_of(:name).is_at_least(2).is_at_most(50)
+    end
   end
 
   describe 'file attachment' do
-    it { should have_attached_file(:avatar) }
+    it { is_expected.to have_attached_file(:avatar) }
     it do
-      should validate_attachment_content_type(:avatar).allowing('image/jpeg')
+      is_expected.to validate_attachment_content_type(:avatar)
+        .allowing('image/jpeg')
     end
-    it { should validate_attachment_size(:avatar).less_than(5.megabytes) }
+    it do
+      is_expected.to validate_attachment_size(:avatar).less_than(5.megabytes)
+    end
   end
 
   describe 'slug' do

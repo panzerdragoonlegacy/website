@@ -2,38 +2,41 @@ require 'rails_helper'
 
 RSpec.describe Video, type: :model do
   describe 'fields' do
-    it { should respond_to(:name) }
-    it { should respond_to(:url) }
-    it { should respond_to(:description) }
-    it { should respond_to(:information) }
-    it { should respond_to(:mp4_video_file_name) }
-    it { should respond_to(:webm_video_file_name) }
-    it { should respond_to(:youtube_video_id) }
-    it { should respond_to(:publish) }
-    it { should respond_to(:category) }
-    it { should respond_to(:created_at) }
-    it { should respond_to(:updated_at) }
+    it { is_expected.to respond_to(:name) }
+    it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:description) }
+    it { is_expected.to respond_to(:information) }
+    it { is_expected.to respond_to(:mp4_video_file_name) }
+    it { is_expected.to respond_to(:webm_video_file_name) }
+    it { is_expected.to respond_to(:youtube_video_id) }
+    it { is_expected.to respond_to(:publish) }
+    it { is_expected.to respond_to(:category) }
+    it { is_expected.to respond_to(:created_at) }
+    it { is_expected.to respond_to(:updated_at) }
   end
 
   describe 'associations' do
-    it { should belong_to(:category) }
-    it { should have_many(:contributions).dependent(:destroy) }
-    it { should have_many(:contributor_profiles).through(:contributions) }
-    it { should have_many(:relations).dependent(:destroy) }
-    it { should have_many(:encyclopaedia_entries).through(:relations) }
+    it { is_expected.to belong_to(:category) }
+    it { is_expected.to have_many(:contributions).dependent(:destroy) }
+    it do
+      is_expected.to have_many(:contributor_profiles).through(:contributions)
+    end
+    it { is_expected.to have_many(:relations).dependent(:destroy) }
+    it { is_expected.to have_many(:encyclopaedia_entries).through(:relations) }
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:name) }
-    it { should validate_uniqueness_of(:name) }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_uniqueness_of(:name) }
     it do
-      should validate_length_of(:name).is_at_least(2).is_at_most(100)
+      is_expected.to validate_length_of(:name).is_at_least(2).is_at_most(100)
     end
-    it { should validate_presence_of(:description) }
+    it { is_expected.to validate_presence_of(:description) }
     it do
-      should validate_length_of(:description).is_at_least(2).is_at_most(250)
+      is_expected.to validate_length_of(:description).is_at_least(2)
+        .is_at_most(250)
     end
-    it { should validate_presence_of(:category) }
+    it { is_expected.to validate_presence_of(:category) }
 
     describe 'validation of contributor profiles' do
       context 'video has less than one contributor profile' do
@@ -67,23 +70,23 @@ RSpec.describe Video, type: :model do
   end
 
   describe 'file attachments' do
-    it { should have_attached_file(:mp4_video) }
-    it { should validate_attachment_presence(:mp4_video) }
+    it { is_expected.to have_attached_file(:mp4_video) }
+    it { is_expected.to validate_attachment_presence(:mp4_video) }
     it do
-      should validate_attachment_content_type(:mp4_video)
+      is_expected.to validate_attachment_content_type(:mp4_video)
         .allowing('video/mp4')
     end
     it do
-      should validate_attachment_size(:mp4_video).less_than(200.megabytes)
+      is_expected.to validate_attachment_size(:mp4_video).less_than(200.megabytes)
     end
-    it { should have_attached_file(:webm_video) }
-    it { should validate_attachment_presence(:webm_video) }
+    it { is_expected.to have_attached_file(:webm_video) }
+    it { is_expected.to validate_attachment_presence(:webm_video) }
     it do
-      should validate_attachment_content_type(:webm_video)
+      is_expected.to validate_attachment_content_type(:webm_video)
         .allowing('video/webm')
     end
     it do
-      should validate_attachment_size(:webm_video)
+      is_expected.to validate_attachment_size(:webm_video)
         .less_than(200.megabytes)
     end
   end

@@ -2,34 +2,37 @@ require 'rails_helper'
 
 RSpec.describe Download, type: :model do
   describe 'fields' do
-    it { should respond_to(:name) }
-    it { should respond_to(:url) }
-    it { should respond_to(:description) }
-    it { should respond_to(:information) }
-    it { should respond_to(:download) }
-    it { should respond_to(:publish) }
-    it { should respond_to(:category) }
-    it { should respond_to(:created_at) }
-    it { should respond_to(:updated_at) }
+    it { is_expected.to respond_to(:name) }
+    it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:description) }
+    it { is_expected.to respond_to(:information) }
+    it { is_expected.to respond_to(:download) }
+    it { is_expected.to respond_to(:publish) }
+    it { is_expected.to respond_to(:category) }
+    it { is_expected.to respond_to(:created_at) }
+    it { is_expected.to respond_to(:updated_at) }
   end
 
   describe 'associations' do
-    it { should belong_to(:category) }
-    it { should have_many(:contributions).dependent(:destroy) }
-    it { should have_many(:contributor_profiles).through(:contributions) }
-    it { should have_many(:relations).dependent(:destroy) }
-    it { should have_many(:encyclopaedia_entries).through(:relations) }
+    it { is_expected.to belong_to(:category) }
+    it { is_expected.to have_many(:contributions).dependent(:destroy) }
+    it { is_expected.to have_many(:contributor_profiles).through(:contributions) }
+    it { is_expected.to have_many(:relations).dependent(:destroy) }
+    it { is_expected.to have_many(:encyclopaedia_entries).through(:relations) }
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:name) }
-    it { should validate_uniqueness_of(:name) }
-    it { should validate_length_of(:name).is_at_least(2).is_at_most(100) }
-    it { should validate_presence_of(:description) }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_uniqueness_of(:name) }
     it do
-      should validate_length_of(:description).is_at_least(2).is_at_most(250)
+      is_expected.to validate_length_of(:name).is_at_least(2).is_at_most(100)
     end
-    it { should validate_presence_of(:category) }
+    it { is_expected.to validate_presence_of(:description) }
+    it do
+      is_expected.to validate_length_of(:description).is_at_least(2)
+        .is_at_most(250)
+    end
+    it { is_expected.to validate_presence_of(:category) }
 
     describe 'validation of contributor profiles' do
       context 'download has less than one contributor profile' do
@@ -63,13 +66,13 @@ RSpec.describe Download, type: :model do
   end
 
   describe 'file attachment' do
-    it { should have_attached_file(:download) }
-    it { should validate_attachment_presence(:download) }
+    it { is_expected.to have_attached_file(:download) }
+    it { is_expected.to validate_attachment_presence(:download) }
     it do
-      should validate_attachment_content_type(:download)
+      is_expected.to validate_attachment_content_type(:download)
         .allowing('application/zip')
     end
-    it { should validate_attachment_size(:download).less_than(100.megabytes) }
+    it { is_expected.to validate_attachment_size(:download).less_than(100.megabytes) }
   end
 
   describe 'callbacks' do

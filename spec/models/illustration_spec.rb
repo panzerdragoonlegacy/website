@@ -2,24 +2,24 @@ require 'rails_helper'
 
 RSpec.describe Illustration, type: :model do
   describe 'fields' do
-    it { should respond_to(:illustration) }
-    it { should respond_to(:created_at) }
-    it { should respond_to(:updated_at) }
+    it { is_expected.to respond_to(:illustration) }
+    it { is_expected.to respond_to(:created_at) }
+    it { is_expected.to respond_to(:updated_at) }
   end
 
   describe 'associations' do
-    it { should belong_to(:illustratable) }
+    it { is_expected.to belong_to(:illustratable) }
   end
 
   describe 'file attachment' do
-    it { should have_attached_file(:illustration) }
-    it { should validate_attachment_presence(:illustration) }
+    it { is_expected.to have_attached_file(:illustration) }
+    it { is_expected.to validate_attachment_presence(:illustration) }
     it do
-      should validate_attachment_content_type(:illustration)
+      is_expected.to validate_attachment_content_type(:illustration)
         .allowing('image/jpeg')
     end
     it do
-      should validate_attachment_size(:illustration)
+      is_expected.to validate_attachment_size(:illustration)
         .less_than(5.megabytes)
     end
   end

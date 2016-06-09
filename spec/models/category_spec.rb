@@ -2,37 +2,40 @@ require 'rails_helper'
 
 RSpec.describe Category, type: :model do
   describe 'fields' do
-    it { should respond_to(:name) }
-    it { should respond_to(:url) }
-    it { should respond_to(:description) }
-    it { should respond_to(:category_type) }
-    it { should respond_to(:publish) }
-    it { should respond_to(:created_at) }
-    it { should respond_to(:updated_at) }
+    it { is_expected.to respond_to(:name) }
+    it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:description) }
+    it { is_expected.to respond_to(:category_type) }
+    it { is_expected.to respond_to(:publish) }
+    it { is_expected.to respond_to(:created_at) }
+    it { is_expected.to respond_to(:updated_at) }
   end
 
   describe 'associations' do
-    it { should belong_to(:category_group) }
-    it { should have_many(:articles).dependent(:destroy) }
-    it { should have_many(:downloads).dependent(:destroy) }
-    it { should have_many(:encyclopaedia_entries).dependent(:destroy) }
-    it { should have_many(:links).dependent(:destroy) }
-    it { should have_many(:music_tracks).dependent(:destroy) }
-    it { should have_many(:pictures).dependent(:destroy) }
-    it { should have_many(:resources).dependent(:destroy) }
-    it { should have_many(:stories).dependent(:destroy) }
-    it { should have_many(:videos).dependent(:destroy) }
+    it { is_expected.to belong_to(:category_group) }
+    it { is_expected.to have_many(:articles).dependent(:destroy) }
+    it { is_expected.to have_many(:downloads).dependent(:destroy) }
+    it { is_expected.to have_many(:encyclopaedia_entries).dependent(:destroy) }
+    it { is_expected.to have_many(:links).dependent(:destroy) }
+    it { is_expected.to have_many(:music_tracks).dependent(:destroy) }
+    it { is_expected.to have_many(:pictures).dependent(:destroy) }
+    it { is_expected.to have_many(:resources).dependent(:destroy) }
+    it { is_expected.to have_many(:stories).dependent(:destroy) }
+    it { is_expected.to have_many(:videos).dependent(:destroy) }
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:name) }
-    it { should validate_uniqueness_of(:name) }
-    it { should validate_length_of(:name).is_at_least(2).is_at_most(100) }
-    it { should validate_presence_of(:description) }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_uniqueness_of(:name) }
     it do
-      should validate_length_of(:description).is_at_least(2).is_at_most(250)
+      is_expected.to validate_length_of(:name).is_at_least(2).is_at_most(100)
     end
-    it { should validate_presence_of(:category_type) }
+    it { is_expected.to validate_presence_of(:description) }
+    it do
+      is_expected.to validate_length_of(:description).is_at_least(2)
+        .is_at_most(250)
+    end
+    it { is_expected.to validate_presence_of(:category_type) }
 
     describe 'validation of category type reassignment' do
       before do

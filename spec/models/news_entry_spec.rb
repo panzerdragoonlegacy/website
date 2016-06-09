@@ -2,27 +2,29 @@ require 'rails_helper'
 
 RSpec.describe NewsEntry, type: :model do
   describe 'fields' do
-    it { should respond_to(:name) }
-    it { should respond_to(:url) }
-    it { should respond_to(:content) }
-    it { should respond_to(:short_url) }
-    it { should respond_to(:publish) }
-    it { should respond_to(:contributor_profile) }
-    it { should respond_to(:created_at) }
-    it { should respond_to(:updated_at) }
-    it { should respond_to(:published_at) }
+    it { is_expected.to respond_to(:name) }
+    it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:content) }
+    it { is_expected.to respond_to(:short_url) }
+    it { is_expected.to respond_to(:publish) }
+    it { is_expected.to respond_to(:contributor_profile) }
+    it { is_expected.to respond_to(:created_at) }
+    it { is_expected.to respond_to(:updated_at) }
+    it { is_expected.to respond_to(:published_at) }
   end
 
   describe 'associations' do
-    it { should belong_to(:contributor_profile) }
+    it { is_expected.to belong_to(:contributor_profile) }
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:name) }
-    it { should validate_uniqueness_of(:name) }
-    it { should validate_length_of(:name).is_at_least(2).is_at_most(55) }
-    it { should validate_presence_of(:content) }
-    it { should validate_presence_of(:contributor_profile) }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_uniqueness_of(:name) }
+    it do
+      is_expected.to validate_length_of(:name).is_at_least(2).is_at_most(55)
+    end
+    it { is_expected.to validate_presence_of(:content) }
+    it { is_expected.to validate_presence_of(:contributor_profile) }
   end
 
   describe 'slug' do
