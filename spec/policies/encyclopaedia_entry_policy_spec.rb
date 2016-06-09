@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe EncyclopaediaEntryPolicy do
-  subject { EncyclopaediaEntryPolicy.new(user, encyclopaedia_entry) }
+  subject { described_class.new(user, encyclopaedia_entry) }
 
   let(:resolved_scope) do
-    EncyclopaediaEntryPolicy::Scope.new(user, EncyclopaediaEntry.all).resolve
+    described_class::Scope.new(user, EncyclopaediaEntry.all).resolve
   end
 
   context 'being a visitor' do
@@ -13,8 +13,8 @@ describe EncyclopaediaEntryPolicy do
     context 'creating a new encyclopaedia entry' do
       let(:encyclopaedia_entry) { EncyclopaediaEntry.new }
 
-      it { should forbid_new_and_create_actions }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing encyclopaedia entries in a published category' do
@@ -29,10 +29,10 @@ describe EncyclopaediaEntryPolicy do
           expect(resolved_scope).to include(encyclopaedia_entry)
         end
 
-        it { should permit_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished encyclopaedia entry' do
@@ -46,10 +46,10 @@ describe EncyclopaediaEntryPolicy do
           expect(resolved_scope).not_to include(encyclopaedia_entry)
         end
 
-        it { should forbid_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
 
@@ -65,10 +65,10 @@ describe EncyclopaediaEntryPolicy do
           expect(resolved_scope).not_to include(encyclopaedia_entry)
         end
 
-        it { should forbid_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished encyclopaedia entry' do
@@ -82,10 +82,10 @@ describe EncyclopaediaEntryPolicy do
           expect(resolved_scope).not_to include(encyclopaedia_entry)
         end
 
-        it { should forbid_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
   end
@@ -96,8 +96,8 @@ describe EncyclopaediaEntryPolicy do
     context 'creating a new encyclopaedia entry' do
       let(:encyclopaedia_entry) { EncyclopaediaEntry.new }
 
-      it { should forbid_new_and_create_actions }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing encyclopaedia entries in a published category' do
@@ -112,10 +112,10 @@ describe EncyclopaediaEntryPolicy do
           expect(resolved_scope).to include(encyclopaedia_entry)
         end
 
-        it { should permit_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished encyclopaedia entry' do
@@ -129,10 +129,10 @@ describe EncyclopaediaEntryPolicy do
           expect(resolved_scope).not_to include(encyclopaedia_entry)
         end
 
-        it { should forbid_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
 
@@ -148,10 +148,10 @@ describe EncyclopaediaEntryPolicy do
           expect(resolved_scope).not_to include(encyclopaedia_entry)
         end
 
-        it { should forbid_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished encyclopaedia entry' do
@@ -165,10 +165,10 @@ describe EncyclopaediaEntryPolicy do
           expect(resolved_scope).not_to include(encyclopaedia_entry)
         end
 
-        it { should forbid_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
   end
@@ -187,8 +187,8 @@ describe EncyclopaediaEntryPolicy do
     context 'creating a new encyclopaedia_entry' do
       let(:encyclopaedia_entry) { EncyclopaediaEntry.new }
 
-      it { should permit_new_and_create_actions }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to permit_new_and_create_actions }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing encyclopaedia entries in a published category' do
@@ -205,10 +205,10 @@ describe EncyclopaediaEntryPolicy do
             expect(resolved_scope).to include(encyclopaedia_entry)
           end
 
-          it { should permit_action(:show) }
-          it { should forbid_edit_and_update_actions }
-          it { should forbid_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
 
         context 'accessing an unpublished encyclopaedia entry' do
@@ -222,10 +222,10 @@ describe EncyclopaediaEntryPolicy do
             expect(resolved_scope).not_to include(encyclopaedia_entry)
           end
 
-          it { should forbid_action(:show) }
-          it { should forbid_edit_and_update_actions }
-          it { should forbid_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to forbid_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
       end
 
@@ -244,10 +244,10 @@ describe EncyclopaediaEntryPolicy do
             expect(resolved_scope).to include(encyclopaedia_entry)
           end
 
-          it { should permit_action(:show) }
-          it { should forbid_edit_and_update_actions }
-          it { should forbid_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
 
         context 'accessing an unpublished encyclopaedia entry' do
@@ -264,10 +264,10 @@ describe EncyclopaediaEntryPolicy do
             expect(resolved_scope).to include(encyclopaedia_entry)
           end
 
-          it { should permit_action(:show) }
-          it { should permit_edit_and_update_actions }
-          it { should permit_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to permit_edit_and_update_actions }
+          it { is_expected.to permit_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
       end
     end
@@ -286,10 +286,10 @@ describe EncyclopaediaEntryPolicy do
             expect(resolved_scope).to include(encyclopaedia_entry)
           end
 
-          it { should permit_action(:show) }
-          it { should forbid_edit_and_update_actions }
-          it { should forbid_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
 
         context 'accessing an unpublished encyclopaedia entry' do
@@ -303,10 +303,10 @@ describe EncyclopaediaEntryPolicy do
             expect(resolved_scope).not_to include(encyclopaedia_entry)
           end
 
-          it { should forbid_action(:show) }
-          it { should forbid_edit_and_update_actions }
-          it { should forbid_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to forbid_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
       end
 
@@ -325,10 +325,10 @@ describe EncyclopaediaEntryPolicy do
             expect(resolved_scope).to include(encyclopaedia_entry)
           end
 
-          it { should permit_action(:show) }
-          it { should forbid_edit_and_update_actions }
-          it { should forbid_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
 
         context 'accessing an unpublished encyclopaedia entry' do
@@ -345,10 +345,10 @@ describe EncyclopaediaEntryPolicy do
             expect(resolved_scope).to include(encyclopaedia_entry)
           end
 
-          it { should permit_action(:show) }
-          it { should permit_edit_and_update_actions }
-          it { should permit_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to permit_edit_and_update_actions }
+          it { is_expected.to permit_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
       end
     end
@@ -360,8 +360,8 @@ describe EncyclopaediaEntryPolicy do
     context 'creating a new encyclopaedia entry' do
       let(:encyclopaedia_entry) { EncyclopaediaEntry.new }
 
-      it { should permit_new_and_create_actions }
-      it { should permit_mass_assignment_of(:publish) }
+      it { is_expected.to permit_new_and_create_actions }
+      it { is_expected.to permit_mass_assignment_of(:publish) }
     end
 
     context 'accessing encyclopaedia entries in a published category' do
@@ -376,10 +376,10 @@ describe EncyclopaediaEntryPolicy do
           expect(resolved_scope).to include(encyclopaedia_entry)
         end
 
-        it { should permit_action(:show) }
-        it { should permit_edit_and_update_actions }
-        it { should permit_action(:destroy) }
-        it { should permit_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to permit_edit_and_update_actions }
+        it { is_expected.to permit_action(:destroy) }
+        it { is_expected.to permit_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished encyclopaedia entry' do
@@ -393,10 +393,10 @@ describe EncyclopaediaEntryPolicy do
           expect(resolved_scope).to include(encyclopaedia_entry)
         end
 
-        it { should permit_action(:show) }
-        it { should permit_edit_and_update_actions }
-        it { should permit_action(:destroy) }
-        it { should permit_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to permit_edit_and_update_actions }
+        it { is_expected.to permit_action(:destroy) }
+        it { is_expected.to permit_mass_assignment_of(:publish) }
       end
     end
 
@@ -412,10 +412,10 @@ describe EncyclopaediaEntryPolicy do
           expect(resolved_scope).to include(encyclopaedia_entry)
         end
 
-        it { should permit_action(:show) }
-        it { should permit_edit_and_update_actions }
-        it { should permit_action(:destroy) }
-        it { should permit_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to permit_edit_and_update_actions }
+        it { is_expected.to permit_action(:destroy) }
+        it { is_expected.to permit_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished encyclopaedia entry' do
@@ -429,10 +429,10 @@ describe EncyclopaediaEntryPolicy do
           expect(resolved_scope).to include(encyclopaedia_entry)
         end
 
-        it { should permit_action(:show) }
-        it { should permit_edit_and_update_actions }
-        it { should permit_action(:destroy) }
-        it { should permit_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to permit_edit_and_update_actions }
+        it { is_expected.to permit_action(:destroy) }
+        it { is_expected.to permit_mass_assignment_of(:publish) }
       end
     end
   end

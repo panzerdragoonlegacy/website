@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe CategoryPolicy do
-  subject { CategoryPolicy.new(user, category) }
+  subject { described_class.new(user, category) }
 
   let(:resolved_scope) do
-    CategoryPolicy::Scope.new(user, Category.all).resolve
+    described_class::Scope.new(user, Category.all).resolve
   end
 
   context 'being a visitor' do
@@ -19,10 +19,10 @@ describe CategoryPolicy do
         expect(resolved_scope).to include(category)
       end
 
-      it { should permit_action(:show) }
-      it { should forbid_new_and_create_actions }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
     end
 
     context 'accessing an unpublished category' do
@@ -34,10 +34,10 @@ describe CategoryPolicy do
         expect(resolved_scope).not_to include(category)
       end
 
-      it { should forbid_action(:show) }
-      it { should forbid_new_and_create_actions }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
+      it { is_expected.to forbid_action(:show) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
     end
   end
 
@@ -53,10 +53,10 @@ describe CategoryPolicy do
         expect(resolved_scope).to include(category)
       end
 
-      it { should permit_action(:show) }
-      it { should forbid_new_and_create_actions }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
     end
 
     context 'accessing an unpublished category' do
@@ -68,10 +68,10 @@ describe CategoryPolicy do
         expect(resolved_scope).not_to include(category)
       end
 
-      it { should forbid_action(:show) }
-      it { should forbid_new_and_create_actions }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
+      it { is_expected.to forbid_action(:show) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
     end
   end
 
@@ -87,9 +87,9 @@ describe CategoryPolicy do
         expect(resolved_scope).to include(category)
       end
 
-      it { should permit_action(:show) }
-      it { should permit_new_and_create_actions }
-      it { should permit_edit_and_update_actions }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to permit_new_and_create_actions }
+      it { is_expected.to permit_edit_and_update_actions }
 
       context 'category has no children' do
         it { should permit_action(:destroy) }
@@ -102,7 +102,7 @@ describe CategoryPolicy do
           )
         end
 
-        it { should forbid_action(:destroy) }
+        it { is_expected.to forbid_action(:destroy) }
       end
     end
 
@@ -115,9 +115,9 @@ describe CategoryPolicy do
         expect(resolved_scope).to include(category)
       end
 
-      it { should permit_action(:show) }
-      it { should permit_new_and_create_actions }
-      it { should permit_edit_and_update_actions }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to permit_new_and_create_actions }
+      it { is_expected.to permit_edit_and_update_actions }
 
       context 'category has no children' do
         it { should permit_action(:destroy) }
@@ -130,7 +130,7 @@ describe CategoryPolicy do
           )
         end
 
-        it { should forbid_action(:destroy) }
+        it { is_expected.to forbid_action(:destroy) }
       end
     end
   end

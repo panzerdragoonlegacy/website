@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe PoemPolicy do
-  subject { PoemPolicy.new(user, poem) }
+  subject { described_class.new(user, poem) }
 
   let(:resolved_scope) do
-    PoemPolicy::Scope.new(user, Poem.all).resolve
+    described_class::Scope.new(user, Poem.all).resolve
   end
 
   context 'being a visitor' do
@@ -13,8 +13,8 @@ describe PoemPolicy do
     context 'creating a new poem' do
       let(:poem) { Poem.new }
 
-      it { should forbid_new_and_create_actions }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing a published poem' do
@@ -24,10 +24,10 @@ describe PoemPolicy do
         expect(resolved_scope).to include(poem)
       end
 
-      it { should permit_action(:show) }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing an unpublished poem' do
@@ -37,10 +37,10 @@ describe PoemPolicy do
         expect(resolved_scope).not_to include(poem)
       end
 
-      it { should forbid_action(:show) }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_action(:show) }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end
 
@@ -50,8 +50,8 @@ describe PoemPolicy do
     context 'creating a new poem' do
       let(:poem) { Poem.new }
 
-      it { should forbid_new_and_create_actions }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing a published poem' do
@@ -61,10 +61,10 @@ describe PoemPolicy do
         expect(resolved_scope).to include(poem)
       end
 
-      it { should permit_action(:show) }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing an unpublished poem' do
@@ -74,10 +74,10 @@ describe PoemPolicy do
         expect(resolved_scope).not_to include(poem)
       end
 
-      it { should forbid_action(:show) }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_action(:show) }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end
 
@@ -95,8 +95,8 @@ describe PoemPolicy do
     context 'creating a new poem' do
       let(:poem) { Poem.new }
 
-      it { should permit_new_and_create_actions }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to permit_new_and_create_actions }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing poems that the user does not contribute to' do
@@ -107,10 +107,10 @@ describe PoemPolicy do
           expect(resolved_scope).to include(poem)
         end
 
-        it { should permit_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished poem' do
@@ -120,10 +120,10 @@ describe PoemPolicy do
           expect(resolved_scope).not_to include(poem)
         end
 
-        it { should forbid_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
 
@@ -142,10 +142,10 @@ describe PoemPolicy do
           expect(resolved_scope).to include(poem)
         end
 
-        it { should permit_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished poem' do
@@ -162,10 +162,10 @@ describe PoemPolicy do
           expect(resolved_scope).to include(poem)
         end
 
-        it { should permit_action(:show) }
-        it { should permit_edit_and_update_actions }
-        it { should permit_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to permit_edit_and_update_actions }
+        it { is_expected.to permit_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
   end
@@ -176,8 +176,8 @@ describe PoemPolicy do
     context 'creating a new poem' do
       let(:poem) { Poem.new }
 
-      it { should permit_new_and_create_actions }
-      it { should permit_mass_assignment_of(:publish) }
+      it { is_expected.to permit_new_and_create_actions }
+      it { is_expected.to permit_mass_assignment_of(:publish) }
     end
 
     context 'accessing a published poem' do
@@ -187,10 +187,10 @@ describe PoemPolicy do
         expect(resolved_scope).to include(poem)
       end
 
-      it { should permit_action(:show) }
-      it { should permit_edit_and_update_actions }
-      it { should permit_action(:destroy) }
-      it { should permit_mass_assignment_of(:publish) }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to permit_edit_and_update_actions }
+      it { is_expected.to permit_action(:destroy) }
+      it { is_expected.to permit_mass_assignment_of(:publish) }
     end
 
     context 'accessing an unpublished poem' do
@@ -200,10 +200,10 @@ describe PoemPolicy do
         expect(resolved_scope).to include(poem)
       end
 
-      it { should permit_action(:show) }
-      it { should permit_edit_and_update_actions }
-      it { should permit_action(:destroy) }
-      it { should permit_mass_assignment_of(:publish) }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to permit_edit_and_update_actions }
+      it { is_expected.to permit_action(:destroy) }
+      it { is_expected.to permit_mass_assignment_of(:publish) }
     end
   end
 end

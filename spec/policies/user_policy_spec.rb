@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe UserPolicy do
-  subject { UserPolicy.new(current_user, user) }
+  subject { described_class.new(current_user, user) }
 
   let(:resolved_scope) do
-    UserPolicy::Scope.new(current_user, User.all).resolve
+    described_class::Scope.new(current_user, User.all).resolve
   end
 
   context 'being a visitor' do
@@ -17,10 +17,10 @@ describe UserPolicy do
         expect(resolved_scope).not_to include(user)
       end
 
-      it { should forbid_action(:show) }
-      it { should forbid_new_and_create_actions }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
+      it { is_expected.to forbid_action(:show) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
     end
   end
 
@@ -34,10 +34,10 @@ describe UserPolicy do
         expect(resolved_scope).not_to include(user)
       end
 
-      it { should forbid_action(:show) }
-      it { should forbid_new_and_create_actions }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
+      it { is_expected.to forbid_action(:show) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
     end
   end
 
@@ -51,10 +51,10 @@ describe UserPolicy do
         expect(resolved_scope).to include(user)
       end
 
-      it { should permit_action(:show) }
-      it { should permit_new_and_create_actions }
-      it { should permit_edit_and_update_actions }
-      it { should permit_action(:destroy) }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to permit_new_and_create_actions }
+      it { is_expected.to permit_edit_and_update_actions }
+      it { is_expected.to permit_action(:destroy) }
     end
   end
 end

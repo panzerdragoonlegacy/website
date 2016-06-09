@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe NewsEntryPolicy do
-  subject { NewsEntryPolicy.new(user, news_entry) }
+  subject { described_class.new(user, news_entry) }
 
   let(:resolved_scope) do
-    NewsEntryPolicy::Scope.new(user, NewsEntry.all).resolve
+    described_class::Scope.new(user, NewsEntry.all).resolve
   end
 
   context 'being a visitor' do
@@ -13,8 +13,8 @@ describe NewsEntryPolicy do
     context 'creating a new news entry' do
       let(:news_entry) { NewsEntry.new }
 
-      it { should forbid_new_and_create_actions }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing a published news entry' do
@@ -24,10 +24,10 @@ describe NewsEntryPolicy do
         expect(resolved_scope).to include(news_entry)
       end
 
-      it { should permit_action(:show) }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing an unpublished news entry' do
@@ -37,10 +37,10 @@ describe NewsEntryPolicy do
         expect(resolved_scope).not_to include(news_entry)
       end
 
-      it { should forbid_action(:show) }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_action(:show) }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end
 
@@ -50,8 +50,8 @@ describe NewsEntryPolicy do
     context 'creating a new news entry' do
       let(:news_entry) { NewsEntry.new }
 
-      it { should forbid_new_and_create_actions }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing a published news entry' do
@@ -61,10 +61,10 @@ describe NewsEntryPolicy do
         expect(resolved_scope).to include(news_entry)
       end
 
-      it { should permit_action(:show) }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing an unpublished news entry' do
@@ -74,10 +74,10 @@ describe NewsEntryPolicy do
         expect(resolved_scope).not_to include(news_entry)
       end
 
-      it { should forbid_action(:show) }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_action(:show) }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end
 
@@ -95,8 +95,8 @@ describe NewsEntryPolicy do
     context 'creating a new news entry' do
       let(:news_entry) { NewsEntry.new }
 
-      it { should permit_new_and_create_actions }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to permit_new_and_create_actions }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing news entries that the user does not contribute to' do
@@ -107,10 +107,10 @@ describe NewsEntryPolicy do
           expect(resolved_scope).to include(news_entry)
         end
 
-        it { should permit_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished news entry' do
@@ -120,10 +120,10 @@ describe NewsEntryPolicy do
           expect(resolved_scope).not_to include(news_entry)
         end
 
-        it { should forbid_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
 
@@ -140,10 +140,10 @@ describe NewsEntryPolicy do
           expect(resolved_scope).to include(news_entry)
         end
 
-        it { should permit_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished news entry' do
@@ -158,10 +158,10 @@ describe NewsEntryPolicy do
           expect(resolved_scope).to include(news_entry)
         end
 
-        it { should permit_action(:show) }
-        it { should permit_edit_and_update_actions }
-        it { should permit_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to permit_edit_and_update_actions }
+        it { is_expected.to permit_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
   end
@@ -172,8 +172,8 @@ describe NewsEntryPolicy do
     context 'creating a new news entry' do
       let(:news_entry) { NewsEntry.new }
 
-      it { should permit_new_and_create_actions }
-      it { should permit_mass_assignment_of(:publish) }
+      it { is_expected.to permit_new_and_create_actions }
+      it { is_expected.to permit_mass_assignment_of(:publish) }
     end
 
     context 'accessing a published news entry' do
@@ -183,10 +183,10 @@ describe NewsEntryPolicy do
         expect(resolved_scope).to include(news_entry)
       end
 
-      it { should permit_action(:show) }
-      it { should permit_edit_and_update_actions }
-      it { should permit_action(:destroy) }
-      it { should permit_mass_assignment_of(:publish) }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to permit_edit_and_update_actions }
+      it { is_expected.to permit_action(:destroy) }
+      it { is_expected.to permit_mass_assignment_of(:publish) }
     end
 
     context 'accessing an unpublished news entry' do
@@ -196,10 +196,10 @@ describe NewsEntryPolicy do
         expect(resolved_scope).to include(news_entry)
       end
 
-      it { should permit_action(:show) }
-      it { should permit_edit_and_update_actions }
-      it { should permit_action(:destroy) }
-      it { should permit_mass_assignment_of(:publish) }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to permit_edit_and_update_actions }
+      it { is_expected.to permit_action(:destroy) }
+      it { is_expected.to permit_mass_assignment_of(:publish) }
     end
   end
 end

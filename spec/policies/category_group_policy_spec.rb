@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe CategoryGroupPolicy do
-  subject { CategoryGroupPolicy.new(user, category_group) }
+  subject { described_class.new(user, category_group) }
 
   let(:resolved_scope) do
-    CategoryGroupPolicy::Scope.new(user, CategoryGroup.all).resolve
+    described_class::Scope.new(user, CategoryGroup.all).resolve
   end
 
   context 'being a visitor' do
@@ -19,10 +19,10 @@ describe CategoryGroupPolicy do
         expect(resolved_scope).to include(category_group)
       end
 
-      it { should permit_action(:show) }
-      it { should forbid_new_and_create_actions }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
     end
   end
 
@@ -38,10 +38,10 @@ describe CategoryGroupPolicy do
         expect(resolved_scope).to include(category_group)
       end
 
-      it { should permit_action(:show) }
-      it { should forbid_new_and_create_actions }
-      it { should forbid_edit_and_update_actions }
-      it { should forbid_action(:destroy) }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:destroy) }
     end
   end
 
@@ -57,9 +57,9 @@ describe CategoryGroupPolicy do
         expect(resolved_scope).to include(category_group)
       end
 
-      it { should permit_action(:show) }
-      it { should permit_new_and_create_actions }
-      it { should permit_edit_and_update_actions }
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to permit_new_and_create_actions }
+      it { is_expected.to permit_edit_and_update_actions }
 
       context 'category group has no children' do
         it { should permit_action(:destroy) }
@@ -70,7 +70,7 @@ describe CategoryGroupPolicy do
           category_group.categories << FactoryGirl.create(:valid_category)
         end
 
-        it { should forbid_action(:destroy) }
+        it { is_expected.to forbid_action(:destroy) }
       end
     end
   end

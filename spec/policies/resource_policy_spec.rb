@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe ResourcePolicy do
-  subject { ResourcePolicy.new(user, resource) }
+  subject { described_class.new(user, resource) }
 
   let(:resolved_scope) do
-    ResourcePolicy::Scope.new(user, Resource.all).resolve
+    described_class::Scope.new(user, Resource.all).resolve
   end
 
   context 'being a visitor' do
@@ -13,8 +13,8 @@ describe ResourcePolicy do
     context 'creating a new resource' do
       let(:resource) { Resource.new }
 
-      it { should forbid_new_and_create_actions }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing resources in a published category' do
@@ -27,10 +27,10 @@ describe ResourcePolicy do
           expect(resolved_scope).to include(resource)
         end
 
-        it { should permit_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished resource' do
@@ -42,10 +42,10 @@ describe ResourcePolicy do
           expect(resolved_scope).not_to include(resource)
         end
 
-        it { should forbid_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
 
@@ -59,10 +59,10 @@ describe ResourcePolicy do
           expect(resolved_scope).not_to include(resource)
         end
 
-        it { should forbid_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished resource' do
@@ -74,10 +74,10 @@ describe ResourcePolicy do
           expect(resolved_scope).not_to include(resource)
         end
 
-        it { should forbid_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
   end
@@ -88,8 +88,8 @@ describe ResourcePolicy do
     context 'creating a new resource' do
       let(:resource) { Resource.new }
 
-      it { should forbid_new_and_create_actions }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_new_and_create_actions }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing resources in a published category' do
@@ -102,10 +102,10 @@ describe ResourcePolicy do
           expect(resolved_scope).to include(resource)
         end
 
-        it { should permit_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished resource' do
@@ -117,10 +117,10 @@ describe ResourcePolicy do
           expect(resolved_scope).not_to include(resource)
         end
 
-        it { should forbid_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
 
@@ -134,10 +134,10 @@ describe ResourcePolicy do
           expect(resolved_scope).not_to include(resource)
         end
 
-        it { should forbid_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished resource' do
@@ -149,10 +149,10 @@ describe ResourcePolicy do
           expect(resolved_scope).not_to include(resource)
         end
 
-        it { should forbid_action(:show) }
-        it { should forbid_edit_and_update_actions }
-        it { should forbid_action(:destroy) }
-        it { should forbid_mass_assignment_of(:publish) }
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
   end
@@ -171,8 +171,8 @@ describe ResourcePolicy do
     context 'creating a new resource' do
       let(:resource) { Resource.new }
 
-      it { should permit_new_and_create_actions }
-      it { should forbid_mass_assignment_of(:publish) }
+      it { is_expected.to permit_new_and_create_actions }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing resources in a published category' do
@@ -186,10 +186,10 @@ describe ResourcePolicy do
             expect(resolved_scope).to include(resource)
           end
 
-          it { should permit_action(:show) }
-          it { should forbid_edit_and_update_actions }
-          it { should forbid_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
 
         context 'accessing an unpublished resource' do
@@ -201,10 +201,10 @@ describe ResourcePolicy do
             expect(resolved_scope).not_to include(resource)
           end
 
-          it { should forbid_action(:show) }
-          it { should forbid_edit_and_update_actions }
-          it { should forbid_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to forbid_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
       end
 
@@ -223,10 +223,10 @@ describe ResourcePolicy do
             expect(resolved_scope).to include(resource)
           end
 
-          it { should permit_action(:show) }
-          it { should forbid_edit_and_update_actions }
-          it { should forbid_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
 
         context 'accessing an unpublished resource' do
@@ -243,10 +243,10 @@ describe ResourcePolicy do
             expect(resolved_scope).to include(resource)
           end
 
-          it { should permit_action(:show) }
-          it { should permit_edit_and_update_actions }
-          it { should permit_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to permit_edit_and_update_actions }
+          it { is_expected.to permit_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
       end
     end
@@ -262,10 +262,10 @@ describe ResourcePolicy do
             expect(resolved_scope).to include(resource)
           end
 
-          it { should permit_action(:show) }
-          it { should forbid_edit_and_update_actions }
-          it { should forbid_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
 
         context 'accessing an unpublished resource' do
@@ -277,10 +277,10 @@ describe ResourcePolicy do
             expect(resolved_scope).not_to include(resource)
           end
 
-          it { should forbid_action(:show) }
-          it { should forbid_edit_and_update_actions }
-          it { should forbid_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to forbid_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
       end
 
@@ -299,10 +299,10 @@ describe ResourcePolicy do
             expect(resolved_scope).to include(resource)
           end
 
-          it { should permit_action(:show) }
-          it { should forbid_edit_and_update_actions }
-          it { should forbid_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
 
         context 'accessing an unpublished resource' do
@@ -319,10 +319,10 @@ describe ResourcePolicy do
             expect(resolved_scope).to include(resource)
           end
 
-          it { should permit_action(:show) }
-          it { should permit_edit_and_update_actions }
-          it { should permit_action(:destroy) }
-          it { should forbid_mass_assignment_of(:publish) }
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to permit_edit_and_update_actions }
+          it { is_expected.to permit_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
       end
     end
@@ -334,8 +334,8 @@ describe ResourcePolicy do
     context 'creating a new resource' do
       let(:resource) { Resource.new }
 
-      it { should permit_new_and_create_actions }
-      it { should permit_mass_assignment_of(:publish) }
+      it { is_expected.to permit_new_and_create_actions }
+      it { is_expected.to permit_mass_assignment_of(:publish) }
     end
 
     context 'accessing resources in a published category' do
@@ -348,10 +348,10 @@ describe ResourcePolicy do
           expect(resolved_scope).to include(resource)
         end
 
-        it { should permit_action(:show) }
-        it { should permit_edit_and_update_actions }
-        it { should permit_action(:destroy) }
-        it { should permit_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to permit_edit_and_update_actions }
+        it { is_expected.to permit_action(:destroy) }
+        it { is_expected.to permit_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished resource' do
@@ -363,10 +363,10 @@ describe ResourcePolicy do
           expect(resolved_scope).to include(resource)
         end
 
-        it { should permit_action(:show) }
-        it { should permit_edit_and_update_actions }
-        it { should permit_action(:destroy) }
-        it { should permit_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to permit_edit_and_update_actions }
+        it { is_expected.to permit_action(:destroy) }
+        it { is_expected.to permit_mass_assignment_of(:publish) }
       end
     end
 
@@ -380,10 +380,10 @@ describe ResourcePolicy do
           expect(resolved_scope).to include(resource)
         end
 
-        it { should permit_action(:show) }
-        it { should permit_edit_and_update_actions }
-        it { should permit_action(:destroy) }
-        it { should permit_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to permit_edit_and_update_actions }
+        it { is_expected.to permit_action(:destroy) }
+        it { is_expected.to permit_mass_assignment_of(:publish) }
       end
 
       context 'accessing an unpublished resource' do
@@ -395,10 +395,10 @@ describe ResourcePolicy do
           expect(resolved_scope).to include(resource)
         end
 
-        it { should permit_action(:show) }
-        it { should permit_edit_and_update_actions }
-        it { should permit_action(:destroy) }
-        it { should permit_mass_assignment_of(:publish) }
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to permit_edit_and_update_actions }
+        it { is_expected.to permit_action(:destroy) }
+        it { is_expected.to permit_mass_assignment_of(:publish) }
       end
     end
   end
