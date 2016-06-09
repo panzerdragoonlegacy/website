@@ -92,7 +92,7 @@ describe CategoryPolicy do
       it { is_expected.to permit_edit_and_update_actions }
 
       context 'category has no children' do
-        it { should permit_action(:destroy) }
+        it { is_expected.to permit_action(:destroy) }
       end
 
       context 'category has children' do
@@ -120,7 +120,7 @@ describe CategoryPolicy do
       it { is_expected.to permit_edit_and_update_actions }
 
       context 'category has no children' do
-        it { should permit_action(:destroy) }
+        it { is_expected.to permit_action(:destroy) }
       end
 
       context 'category has children' do
