@@ -21,7 +21,7 @@ end
 
 group :test do
   gem 'factory_girl_rails', '~> 4.4.1'
-  gem 'pundit-matchers', '~> 1.0.2'
+  gem 'pundit-matchers', '~> 1.1.0'
   gem 'shoulda-matchers', '~> 2.8.0'
 end
 
@@ -37,7 +37,7 @@ gem 'nokogiri', '1.6.6.2'
 gem 'nested_form', '~> 0.3.2'
 gem 'paperclip', '~> 4.3.1'
 gem 'pg', '~> 0.17.1'
-gem 'pundit', '~> 1.0.1'
+gem 'pundit', '~> 1.1.0'
 gem 'rails_autolink', '~> 1.1.5'
 gem 'sanitize', '~> 3.1.0'
 gem 'sass-rails', '~> 4.0.3'
