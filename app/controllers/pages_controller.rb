@@ -45,10 +45,7 @@ class PagesController < ApplicationController
 
   def page_params
     params.require(:page).permit(
-      :name,
-      :content,
-      :publish,
-      illustrations_attributes: [:id, :illustration, :_destroy]
+      policy(@page || :page).permitted_attributes
     )
   end
 

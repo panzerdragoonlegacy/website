@@ -14,4 +14,16 @@ class PagePolicy < ApplicationPolicy
     end
     record.publish?
   end
+
+  def permitted_attributes
+    permitted_attributes = [
+      :name,
+      :content,
+      illustrations_attributes: [:id, :illustration, :_destroy]
+    ]
+    if user
+      permitted_attributes << :publish if user.administrator?
+    end
+    permitted_attributes
+  end
 end
