@@ -20,4 +20,17 @@ class CategoryPolicy < ApplicationPolicy
       return true if user.administrator?
     end
   end
+
+  def permitted_attributes
+    permitted_attributes = [
+      :category_type,
+      :category_group_id,
+      :name,
+      :description
+    ]
+    if user
+      permitted_attributes << :publish if user.administrator?
+    end
+    permitted_attributes
+  end
 end

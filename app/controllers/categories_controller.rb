@@ -68,11 +68,7 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(
-      :category_type,
-      :category_group_id,
-      :name,
-      :description,
-      :publish
+      policy(@category || :category).permitted_attributes
     )
   end
 

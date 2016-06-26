@@ -23,6 +23,7 @@ describe CategoryPolicy do
       it { is_expected.to forbid_new_and_create_actions }
       it { is_expected.to forbid_edit_and_update_actions }
       it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing an unpublished category' do
@@ -38,6 +39,7 @@ describe CategoryPolicy do
       it { is_expected.to forbid_new_and_create_actions }
       it { is_expected.to forbid_edit_and_update_actions }
       it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end
 
@@ -57,6 +59,7 @@ describe CategoryPolicy do
       it { is_expected.to forbid_new_and_create_actions }
       it { is_expected.to forbid_edit_and_update_actions }
       it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
     context 'accessing an unpublished category' do
@@ -72,6 +75,7 @@ describe CategoryPolicy do
       it { is_expected.to forbid_new_and_create_actions }
       it { is_expected.to forbid_edit_and_update_actions }
       it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end
 
@@ -90,6 +94,8 @@ describe CategoryPolicy do
       it { is_expected.to permit_action(:show) }
       it { is_expected.to permit_new_and_create_actions }
       it { is_expected.to permit_edit_and_update_actions }
+      it { is_expected.to permit_mass_assignment_of(:publish) }
+
 
       context 'category has no children' do
         it { is_expected.to permit_action(:destroy) }
@@ -118,6 +124,7 @@ describe CategoryPolicy do
       it { is_expected.to permit_action(:show) }
       it { is_expected.to permit_new_and_create_actions }
       it { is_expected.to permit_edit_and_update_actions }
+      it { is_expected.to permit_mass_assignment_of(:publish) }
 
       context 'category has no children' do
         it { is_expected.to permit_action(:destroy) }
