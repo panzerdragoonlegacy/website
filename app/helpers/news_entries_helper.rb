@@ -48,8 +48,8 @@ module NewsEntriesHelper
         tag.parent.name = 'audio'
         tag.parent.set_attribute('controls', 'controls')
 
-        music_track_url = file_name.sub('.mp3', '')
-        if music_track = MusicTrack.where(url: music_track_url).first
+        music_track_id = file_name.split('-')[0].to_i
+        if music_track = MusicTrack.where(id: music_track_id).first
           mp3_source_tag = html.create_element('source')
           ogg_source_tag = html.create_element('source')
           p_tag = html.create_element('p')
@@ -74,8 +74,8 @@ module NewsEntriesHelper
         tag.parent.set_attribute('width', '486')
         tag.parent.set_attribute('controls', 'controls')
 
-        video_url = file_name.sub('.mp4', '')
-        if video = Video.where(url: video_url).first
+        video_id = file_name.split('-')[0].to_i
+        if video = Video.where(id: video_id).first
           mp4_source_tag = html.create_element('source')
           webm_source_tag = html.create_element('source')
           p_tag = html.create_element('p')
@@ -113,8 +113,9 @@ module NewsEntriesHelper
     # thumbnail.
     html.css('img').each do |img|
       file_name = img.get_attribute('src')
-      picture_url = file_name.sub('.jpg', '')
-      if picture = Picture.where(url: picture_url).first
+      picture_id = file_name.split('-')[0].to_i
+      picture = Picture.find(picture_id) unless picture_id == 0
+      if picture
         if img_count == 1
           img.set_attribute('src', picture.picture.url(:single_thumbnail))
           image_file = Paperclip::Geometry.from_file(picture.picture.path(
@@ -137,7 +138,9 @@ module NewsEntriesHelper
         img.set_attribute('alt', picture.name)
 
         # Sets the parent link's href attribute.
-        img.parent.set_attribute('href', '/pictures/' + picture_url)
+        img.parent.set_attribute(
+          'href', "/pictures/#{picture.id.to_s}-#{picture.url}"
+        )
 
       else
         img.set_attribute('src', '')
