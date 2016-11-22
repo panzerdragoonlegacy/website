@@ -6,7 +6,7 @@ class Download < ActiveRecord::Base
   include Relatable
   include Syncable
 
-  validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
+  validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }
 
   has_attached_file :download,
@@ -24,6 +24,6 @@ class Download < ActiveRecord::Base
   end
 
   def to_param
-    id.to_s + '-' + url 
+    id.to_s + '-' + url
   end
 end

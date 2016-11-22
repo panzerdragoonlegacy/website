@@ -6,7 +6,7 @@ class Picture < ActiveRecord::Base
   include Relatable
   include Syncable
 
-  validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
+  validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }
 
   has_attached_file :picture,
@@ -30,7 +30,7 @@ class Picture < ActiveRecord::Base
   def sync_file_name
     sync_file_name_of :picture, file_name: "#{self.name.to_url}.jpg"
   end
-  
+
   def to_param
     id.to_s + '-' + url
   end

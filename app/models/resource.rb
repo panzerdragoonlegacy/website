@@ -6,7 +6,7 @@ class Resource < ActiveRecord::Base
   include Illustratable
   include Relatable
 
-  validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
+  validates :name, presence: true, length: { in: 2..100 }
   validates :content, presence: true
 
   def to_param

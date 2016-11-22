@@ -6,7 +6,7 @@ class Video < ActiveRecord::Base
   include Relatable
   include Syncable
 
-  validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
+  validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }
 
   has_attached_file :mp4_video,

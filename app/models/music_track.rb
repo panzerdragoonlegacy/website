@@ -12,7 +12,7 @@ class MusicTrack < ActiveRecord::Base
       greater_than_or_equal_to: 0,
       less_than_or_equal_to: 50
     }
-  validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
+  validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }
 
   has_attached_file :mp3_music_track,

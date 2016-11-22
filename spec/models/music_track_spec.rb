@@ -33,7 +33,6 @@ RSpec.describe MusicTrack, type: :model do
         .is_greater_than_or_equal_to(0).is_less_than_or_equal_to(50)
     end
     it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_uniqueness_of(:name) }
     it do
       is_expected.to validate_length_of(:name).is_at_least(2).is_at_most(100)
     end
