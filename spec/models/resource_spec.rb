@@ -75,9 +75,9 @@ RSpec.describe Resource, type: :model do
         FactoryGirl.build :valid_resource, name: 'Resource 1'
       end
 
-      it 'generates a slug that is a parameterised version of the name' do
+      it 'sets the slug to be a parameterised version of the id + name' do
         resource.save
-        expect(resource.url).to eq 'resource-1'
+        expect(resource.to_param).to eq resource.id.to_s + '-resource-1'
       end
     end
 
@@ -86,10 +86,11 @@ RSpec.describe Resource, type: :model do
         FactoryGirl.create :valid_resource, name: 'Resource 1'
       end
 
-      it 'synchronises the slug with the updated name' do
+      it 'sets the slug to be a parameterised version of the id + updated ' \
+        'name' do
         resource.name = 'Resource 2'
         resource.save
-        expect(resource.url).to eq 'resource-2'
+        expect(resource.to_param).to eq resource.id.to_s + '-resource-2'
       end
     end
   end

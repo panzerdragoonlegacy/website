@@ -1,10 +1,15 @@
 class Resource < ActiveRecord::Base
+  acts_as_url :name, sync_url: true
+
   include Categorisable
   include Contributable
   include Illustratable
   include Relatable
-  include Sluggable
-    
+
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
   validates :content, presence: true
+
+  def to_param
+    id.to_s + '-' + url
+  end
 end
