@@ -71,7 +71,7 @@ class MusicTracksController < ApplicationController
   end
 
   def load_music_track
-    @music_track = MusicTrack.find_by url: params[:id]
+    @music_track = MusicTrack.find params[:id]
     authorize @music_track
   end
 

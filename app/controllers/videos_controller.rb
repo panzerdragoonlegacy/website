@@ -71,7 +71,7 @@ class VideosController < ApplicationController
   end
 
   def load_video
-    @video = Video.find_by url: params[:id]
+    @video = Video.find params[:id]
     authorize @video
   end
 

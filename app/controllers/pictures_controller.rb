@@ -71,7 +71,7 @@ class PicturesController < ApplicationController
   end
 
   def load_picture
-    @picture = Picture.find_by url: params[:id]
+    @picture = Picture.find params[:id]
     authorize @picture
   end
 

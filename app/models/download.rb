@@ -1,8 +1,9 @@
 class Download < ActiveRecord::Base
-  include Categorisable  
+  acts_as_url :name, sync_url: true
+
+  include Categorisable
   include Contributable
   include Relatable
-  include Sluggable
   include Syncable
 
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
@@ -15,10 +16,14 @@ class Download < ActiveRecord::Base
   validates_attachment :download, presence: true,
     content_type: { content_type: "application/zip" },
     size: { in: 0..100.megabytes }
-  
+
   before_save :sync_file_name
 
   def sync_file_name
     sync_file_name_of :download, file_name: "#{self.name.to_url}.zip"
+  end
+
+  def to_param
+    id.to_s + '-' + url 
   end
 end

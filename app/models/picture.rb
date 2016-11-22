@@ -1,8 +1,9 @@
 class Picture < ActiveRecord::Base
+  acts_as_url :name, sync_url: true
+
   include Categorisable
   include Contributable
   include Relatable
-  include Sluggable
   include Syncable
 
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
@@ -13,7 +14,7 @@ class Picture < ActiveRecord::Base
       mini_thumbnail: "75x75#",
       thumbnail: "150x150>",
       triple_thumbnail: "150x150#",
-      double_thumbnail: "238x238#", 
+      double_thumbnail: "238x238#",
       single_thumbnail: "486x486>",
       embedded: "625x625>"
     },
@@ -28,5 +29,9 @@ class Picture < ActiveRecord::Base
 
   def sync_file_name
     sync_file_name_of :picture, file_name: "#{self.name.to_url}.jpg"
+  end
+  
+  def to_param
+    id.to_s + '-' + url
   end
 end

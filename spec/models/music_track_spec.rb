@@ -109,9 +109,11 @@ RSpec.describe MusicTrack, type: :model do
         FactoryGirl.build :valid_music_track, name: 'Music Track 1'
       end
 
-      it 'generates a slug that is a parameterised version of the name' do
+      it 'sets the slug to be a parameterised version of the id + name' do
         music_track.save
-        expect(music_track.url).to eq 'music-track-1'
+        expect(music_track.to_param).to eq(
+          music_track.id.to_s + '-music-track-1'
+        )
       end
     end
 
@@ -120,10 +122,13 @@ RSpec.describe MusicTrack, type: :model do
         FactoryGirl.create :valid_music_track, name: 'Music Track 1'
       end
 
-      it 'synchronises the slug with the updated name' do
+      it 'sets the slug to be a parameterised version of the id + updated ' \
+        'name' do
         music_track.name = 'Music Track 2'
         music_track.save
-        expect(music_track.url).to eq 'music-track-2'
+        expect(music_track.to_param).to eq(
+          music_track.id.to_s + '-music-track-2'
+        )
       end
     end
   end

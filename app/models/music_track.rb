@@ -1,15 +1,16 @@
 class MusicTrack < ActiveRecord::Base
+  acts_as_url :name, sync_url: true
+
   include Categorisable
   include Contributable
   include Relatable
-  include Sluggable
   include Syncable
-    
+
   validates :track_number, presence: true,
-    numericality: { 
-      only_integer: true, 
-      greater_than_or_equal_to: 0, 
-      less_than_or_equal_to: 50 
+    numericality: {
+      only_integer: true,
+      greater_than_or_equal_to: 0,
+      less_than_or_equal_to: 50
     }
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
   validates :description, presence: true, length: { in: 2..250 }
@@ -42,5 +43,9 @@ class MusicTrack < ActiveRecord::Base
     sync_file_name_of :mp3_music_track, file_name: "#{self.name.to_url}.mp3"
     sync_file_name_of :ogg_music_track, file_name: "#{self.name.to_url}.ogg"
     sync_file_name_of :flac_music_track, file_name: "#{self.name.to_url}.flac"
+  end
+
+  def to_param
+    id.to_s + '-' + url
   end
 end

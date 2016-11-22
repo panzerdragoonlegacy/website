@@ -97,9 +97,9 @@ RSpec.describe Video, type: :model do
         FactoryGirl.build :valid_video, name: 'Video 1'
       end
 
-      it 'generates a slug that is a parameterised version of the name' do
+      it 'sets the slug to be a parameterised version of the id + name' do
         video.save
-        expect(video.url).to eq 'video-1'
+        expect(video.to_param).to eq video.id.to_s + '-video-1'
       end
     end
 
@@ -108,10 +108,11 @@ RSpec.describe Video, type: :model do
         FactoryGirl.create :valid_video, name: 'Video 1'
       end
 
-      it 'synchronises the slug with the updated name' do
+      it 'sets the slug to be a parameterised version of the id + updated ' \
+        'name' do
         video.name = 'Video 2'
         video.save
-        expect(video.url).to eq 'video-2'
+        expect(video.to_param).to eq video.id.to_s + '-video-2'
       end
     end
   end

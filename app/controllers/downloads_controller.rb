@@ -72,7 +72,7 @@ class DownloadsController < ApplicationController
   end
 
   def load_download
-    @download = Download.find_by url: params[:id]
+    @download = Download.find params[:id]
     authorize @download
   end
 

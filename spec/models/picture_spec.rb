@@ -95,9 +95,9 @@ RSpec.describe Picture, type: :model do
         FactoryGirl.build :valid_picture, name: 'Picture 1'
       end
 
-      it 'generates a slug that is a parameterised version of the name' do
+      it 'sets the slug to be a parameterised version of the id + name' do
         picture.save
-        expect(picture.url).to eq 'picture-1'
+        expect(picture.to_param).to eq picture.id.to_s + '-picture-1'
       end
     end
 
@@ -106,10 +106,11 @@ RSpec.describe Picture, type: :model do
         FactoryGirl.create :valid_picture, name: 'Picture 1'
       end
 
-      it 'synchronises the slug with the updated name' do
+      it 'sets the slug to be a parameterised version of the id + updated ' \
+        'name' do
         picture.name = 'Picture 2'
         picture.save
-        expect(picture.url).to eq 'picture-2'
+        expect(picture.to_param).to eq picture.id.to_s + '-picture-2'
       end
     end
   end

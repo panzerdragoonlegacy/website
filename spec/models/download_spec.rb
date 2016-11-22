@@ -91,9 +91,9 @@ RSpec.describe Download, type: :model do
         FactoryGirl.build :valid_download, name: 'Download 1'
       end
 
-      it 'generates a slug that is a parameterised version of the name' do
+      it 'sets the slug to be a parameterised version of the id + name' do
         download.save
-        expect(download.url).to eq 'download-1'
+        expect(download.to_param).to eq download.id.to_s + '-download-1'
       end
     end
 
@@ -102,10 +102,11 @@ RSpec.describe Download, type: :model do
         FactoryGirl.create :valid_download, name: 'Download 1'
       end
 
-      it 'synchronises the slug with the updated name' do
+      it 'sets the slug to be a parameterised version of the id + updated ' \
+        'name' do
         download.name = 'Download 2'
         download.save
-        expect(download.url).to eq 'download-2'
+        expect(download.to_param).to eq download.id.to_s + '-download-2'
       end
     end
   end
