@@ -15,9 +15,7 @@ class PicturesController < ApplicationController
   end
 
   def show
-    if @picture.id_of_picture_to_replace.present?
-      @picture_to_replace = Picture.find(@picture.id_of_picture_to_replace)
-    end
+    load_picture_to_replace
     @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
       current_user,
       @picture.encyclopaedia_entries.order(:name)
@@ -83,6 +81,12 @@ class PicturesController < ApplicationController
   def load_picture
     @picture = Picture.find params[:id]
     authorize @picture
+  end
+
+  def load_picture_to_replace
+    if @picture.id_of_picture_to_replace.present?
+      @picture_to_replace = Picture.find(@picture.id_of_picture_to_replace)
+    end
   end
 
   def load_contributors_pictures

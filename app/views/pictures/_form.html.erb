@@ -2,19 +2,6 @@
   <%= render 'shared/error_messages', target: @picture %>
   <div>
     <div>
-      <%= f.label :id_of_picture_to_replace, 'Picture to Replace' %>
-    </div>
-    <div>
-      <%= f.collection_select :id_of_picture_to_replace,
-        @replaceable_pictures,
-        :id,
-        :name_and_id,
-        { include_blank: true }
-      %>
-    </div>
-  </div>
-  <div>
-    <div>
       <%= f.label :category_id, 'Category' %>
     </div>
     <div>
@@ -88,10 +75,27 @@
         { multiple: true } %>
     </div>
   </div>
+  <div>
+    <div>
+      <%= f.label :id_of_picture_to_replace, 'Picture to Replace' %>
+    </div>
+    <div>
+      <%= f.collection_select :id_of_picture_to_replace,
+        @replaceable_pictures,
+        :id,
+        :name_and_id,
+        { include_blank: true }
+      %>
+    </div>
+  </div>
   <% if policy(@picture).permitted_attributes.include? :publish %>
     <div>
       <%= f.check_box :publish %> <%= f.label :publish, 'Publish?' %>
     </div>
+    <p class="unpublished">
+      Warning: if a Picture to Replace is set, that picture
+      will be deleted when this picture is published.
+    </p>
   <% end %>
   <div>
     <%= f.submit 'Save and View' %>
