@@ -26,6 +26,7 @@ class Picture < ActiveRecord::Base
     size: { in: 0..5.megabytes }
 
   before_save :sync_file_name
+  before_save :replace_picture
 
   def sync_file_name
     sync_file_name_of :picture, file_name: "#{self.name.to_url}.jpg"
@@ -37,5 +38,13 @@ class Picture < ActiveRecord::Base
 
   def name_and_id
     "#{name} (#{id.to_s})"
+  end
+
+  def replace_picture
+    if self.publish && self.id_of_picture_to_replace.present?
+      picture_to_replace = Picture.find(id_of_picture_to_replace)
+      picture_to_replace.destroy
+      self.id_of_picture_to_replace = nil
+    end
   end
 end

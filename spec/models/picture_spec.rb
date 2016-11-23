@@ -86,6 +86,34 @@ RSpec.describe Picture, type: :model do
         valid_picture.save
         expect(valid_picture.picture_file_name).to eq 'new-name.jpg'
       end
+
+      describe 'replacement of picture' do
+        before do
+          @picture_to_replace = FactoryGirl.create :valid_picture
+          @picture_to_replace_id = @picture_to_replace.id
+          @replacement_picture = FactoryGirl.create :valid_picture
+          @replacement_picture.id_of_picture_to_replace = @picture_to_replace.id
+          @replacement_picture.save
+        end
+
+        context 'the picture is set to be published' do
+          it 'deletes the specified picture to replace' do
+            @replacement_picture.publish = true
+            @replacement_picture.save
+            expect(Picture.where(id: @picture_to_replace_id)).to eq []
+          end
+        end
+
+        context 'the picture is not set to be published' do
+          it 'does not delete the specified picture to replace' do
+            @replacement_picture.publish = false
+            @replacement_picture.save
+            expect(
+              Picture.where(id: @picture_to_replace_id)
+            ).to eq([@picture_to_replace])
+          end
+        end
+      end
     end
   end
 
