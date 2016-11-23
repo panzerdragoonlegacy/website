@@ -9,6 +9,7 @@ RSpec.describe Picture, type: :model do
     it { is_expected.to respond_to(:picture) }
     it { is_expected.to respond_to(:publish) }
     it { is_expected.to respond_to(:category) }
+    it { is_expected.to respond_to(:id_of_picture_to_replace) }
     it { is_expected.to respond_to(:created_at) }
     it { is_expected.to respond_to(:updated_at) }
   end

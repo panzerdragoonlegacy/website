@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122104942) do
+ActiveRecord::Schema.define(version: 20161123101755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,10 +198,11 @@ ActiveRecord::Schema.define(version: 20161122104942) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
-    t.boolean  "publish",              default: false
+    t.boolean  "publish",                  default: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "id_of_picture_to_replace"
   end
 
   create_table "poems", force: :cascade do |t|

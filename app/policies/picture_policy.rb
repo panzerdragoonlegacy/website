@@ -59,6 +59,7 @@ class PicturePolicy < ApplicationPolicy
 
   def permitted_attributes
     permitted_attributes = [
+      :id_of_picture_to_replace,
       :category_id,
       :name,
       :description,

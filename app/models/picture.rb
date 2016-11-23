@@ -34,4 +34,8 @@ class Picture < ActiveRecord::Base
   def to_param
     id.to_s + '-' + url
   end
+
+  def name_and_id
+    "#{name} (#{id.to_s})"
+  end
 end

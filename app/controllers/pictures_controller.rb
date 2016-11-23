@@ -1,4 +1,5 @@
 class PicturesController < ApplicationController
+  before_action :load_replaceable_pictures, except: [:index, :show, :destroy]
   before_action :load_categories, except: [:index, :show, :destroy]
   before_action :load_picture, except: [:index, :new, :create]
 
@@ -14,6 +15,9 @@ class PicturesController < ApplicationController
   end
 
   def show
+    if @picture.id_of_picture_to_replace.present?
+      @picture_to_replace = Picture.find(@picture.id_of_picture_to_replace)
+    end
     @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
       current_user,
       @picture.encyclopaedia_entries.order(:name)
@@ -63,6 +67,12 @@ class PicturesController < ApplicationController
     params.require(:picture).permit(
       policy(@picture || :picture).permitted_attributes
     )
+  end
+
+  def load_replaceable_pictures
+    @replaceable_pictures = PicturePolicy::Scope.new(
+      current_user, Picture.where(publish: true).order(:name)
+    ).resolve
   end
 
   def load_categories

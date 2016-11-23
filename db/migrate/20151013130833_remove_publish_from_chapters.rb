@@ -1,5 +1,5 @@
 class RemovePublishFromChapters < ActiveRecord::Migration
-   def up
+  def up
     remove_column :chapters, :publish
   end
 

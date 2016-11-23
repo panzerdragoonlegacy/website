@@ -2,6 +2,19 @@
   <%= render 'shared/error_messages', target: @picture %>
   <div>
     <div>
+      <%= f.label :id_of_picture_to_replace, 'Picture to Replace' %>
+    </div>
+    <div>
+      <%= f.collection_select :id_of_picture_to_replace,
+        @replaceable_pictures,
+        :id,
+        :name_and_id,
+        { include_blank: true }
+      %>
+    </div>
+  </div>
+  <div>
+    <div>
       <%= f.label :category_id, 'Category' %>
     </div>
     <div>
@@ -14,9 +27,9 @@
       <%= f.label :contributor_profile_ids, 'Contributors' %>
     </div>
     <div>
-      <%= f.collection_select :contributor_profile_ids, 
-        ContributorProfile.order(:name), :id, :name, 
-        { selected: @picture.contributor_profile_ids, include_blank: true }, 
+      <%= f.collection_select :contributor_profile_ids,
+        ContributorProfile.order(:name), :id, :name,
+        { selected: @picture.contributor_profile_ids, include_blank: true },
         { multiple: true } %>
     </div>
   </div>
@@ -69,9 +82,9 @@
       <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
     </div>
     <div>
-      <%= f.collection_select :encyclopaedia_entry_ids, 
-        EncyclopaediaEntry.order(:name), :id, :name, 
-        { selected: @picture.encyclopaedia_entry_ids, include_blank: true }, 
+      <%= f.collection_select :encyclopaedia_entry_ids,
+        EncyclopaediaEntry.order(:name), :id, :name,
+        { selected: @picture.encyclopaedia_entry_ids, include_blank: true },
         { multiple: true } %>
     </div>
   </div>

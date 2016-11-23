@@ -7,7 +7,7 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if policy(@picture).new? or policy(@picture).edit? or 
+<% if policy(@picture).new? or policy(@picture).edit? or
   policy(@picture).destroy? %>
   <ul class="administration">
     <% if policy(@picture).new? %>
@@ -30,6 +30,18 @@
       </li>
     <% end %>
   </ul>
+<% end %>
+
+<% if @picture_to_replace %>
+  <h2>Picture to Replace:</h2>
+  <%=
+    link_to picture_tag(
+      @picture_to_replace, :thumbnail
+    ), @picture_to_replace
+  %>
+  <p class="unpublished">
+    <%= @picture_to_replace.name_and_id %> will be replaced when
+    <%= @picture.name_and_id %> is published.</p>
 <% end %>
 
 <h2>Contributed By:</h2>
