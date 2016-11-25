@@ -75,27 +75,25 @@
         { multiple: true } %>
     </div>
   </div>
-  <div>
+  <% unless @picture.publish %>
     <div>
-      <%= f.label :id_of_picture_to_replace, 'Picture to Replace' %>
+      <div>
+        <%= f.label :id_of_picture_to_replace, 'Picture to Replace' %>
+      </div>
+      <div>
+        <%= f.collection_select :id_of_picture_to_replace,
+          @replaceable_pictures,
+          :id,
+          :name_and_id,
+          { include_blank: true }
+        %>
+      </div>
     </div>
-    <div>
-      <%= f.collection_select :id_of_picture_to_replace,
-        @replaceable_pictures,
-        :id,
-        :name_and_id,
-        { include_blank: true }
-      %>
-    </div>
-  </div>
+  <% end %>
   <% if policy(@picture).permitted_attributes.include? :publish %>
     <div>
       <%= f.check_box :publish %> <%= f.label :publish, 'Publish?' %>
     </div>
-    <p class="unpublished">
-      Warning: if a Picture to Replace is set, that picture
-      will be deleted when this picture is published.
-    </p>
   <% end %>
   <div>
     <%= f.submit 'Save and View' %>
