@@ -4,7 +4,7 @@ class EncyclopaediaEntry < ActiveRecord::Base
   include Sluggable
   include Syncable
 
-  has_one :saga, dependent: :destroy      
+  has_one :saga, dependent: :destroy
   has_many :contributions, as: :contributable, dependent: :destroy
   has_many :contributor_profiles, through: :contributions
   has_many :relations, dependent: :destroy
@@ -35,6 +35,7 @@ class EncyclopaediaEntry < ActiveRecord::Base
 
   has_attached_file :encyclopaedia_entry_picture,
     styles: {
+      mini_thumbnail: "25x25#",
       thumbnail: "150x150",
       embedded: "280x280>"
     },

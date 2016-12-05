@@ -1,14 +1,24 @@
 <% unless @encyclopaedia_entries.count == 0 %>
   <h2>Related Encyclopaedia Entries</h2>
-  <ul>
+  <ul class="thumbnail_and_name_list">
     <% @encyclopaedia_entries.each do |encyclopaedia_entry| %>
       <li>
-        <%= link_to encyclopaedia_entry.name, encyclopaedia_entry %>
-        <% if !encyclopaedia_entry.publish %>
-           - <span class="unpublished">Unpublished</span>
-        <% elsif !encyclopaedia_entry.category.publish %>
-           - <span class="unpublished">Published in Unpublished Category</span>
-        <% end %>
+        <%=
+          link_to(
+            show_encyclopaedia_entry_picture(
+              encyclopaedia_entry, :mini_thumbnail
+            ),
+            encyclopaedia_entry
+          )
+        %>
+        <h3>
+          <%= link_to encyclopaedia_entry.name, encyclopaedia_entry %>
+          <% if !encyclopaedia_entry.publish %>
+             - <span class="unpublished">Unpublished</span>
+          <% elsif !encyclopaedia_entry.category.publish %>
+             - <span class="unpublished">Published in Unpublished Category</span>
+          <% end %>
+        </h3>
       </li>
     <% end %>
   </ul>

@@ -7,7 +7,7 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if policy(@article).new? or policy(@article).edit? or 
+<% if policy(@article).new? or policy(@article).edit? or
   policy(@article).destroy? %>
   <ul class="administration">
     <% if policy(@article).new? %>
@@ -33,9 +33,17 @@
 <% end %>
 
 <h2>Written By:</h2>
-<ul>
+<ul class="thumbnail_and_name_list">
   <% @article.contributor_profiles.each do |contributor_profile| %>
-    <li><%= link_to contributor_profile.name, contributor_profile %></li>
+    <li>
+      <%=
+        link_to(
+          show_avatar(contributor_profile, :mini_thumbnail),
+          contributor_profile
+        )
+      %>
+      <h3><%= link_to contributor_profile.name, contributor_profile %></h3>
+    </li>
   <% end %>
 </ul>
 

@@ -29,7 +29,11 @@ class ContributorProfile < ActiveRecord::Base
   validates :name, presence: true, length: { in: 2..50 }, uniqueness: true
 
   has_attached_file :avatar,
-    styles: { thumbnail: "75x75#", embedded: "280x280#" },
+    styles: {
+      mini_thumbnail: "25x25#", 
+      thumbnail: "75x75#",
+      embedded: "280x280#"
+    },
     path: ":rails_root/public/system/:attachment/:id/:style/:avatar_filename",
     url: "/system/:attachment/:id/:style/:avatar_filename"
 

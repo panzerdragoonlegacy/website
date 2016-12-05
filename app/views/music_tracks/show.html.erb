@@ -34,9 +34,17 @@
 <% end %>
 
 <h2>Contributed By:</h2>
-<ul>
+<ul class="thumbnail_and_name_list">
   <% @music_track.contributor_profiles.each do |contributor_profile| %>
-    <li><%= link_to contributor_profile.name, contributor_profile %></li>
+    <li>
+      <%=
+        link_to(
+          show_avatar(contributor_profile, :mini_thumbnail),
+          contributor_profile
+        )
+      %>
+      <h3><%= link_to contributor_profile.name, contributor_profile %></h3>
+    </li>
   <% end %>
 </ul>
 
