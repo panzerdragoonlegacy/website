@@ -14,16 +14,7 @@ module LoadableForChapter
           @previous_chapter = chapter
         end
       end
-      handle_loading_prologue_previous_chapters
-    end
-
-    def handle_loading_prologue_previous_chapters
-      if @chapter == regular_chapters.order(:number).first && prologues
-        @previous_chapter = prologues.last
-      end
-      if @chapter == epilogues.order(:number).first && regular_chapters
-        @previous_chapter = regular_chapters.last
-      end
+      load_prologue_previous_chapter
     end
 
     def load_next_chapter
@@ -33,10 +24,19 @@ module LoadableForChapter
           @next_chapter = chapter
         end
       end
-      handle_loading_epilogue_next_chapters
+      load_epilogue_next_chapter
     end
 
-    def handle_loading_epilogue_next_chapters
+    def load_prologue_previous_chapter
+      if @chapter == regular_chapters.order(:number).first && prologues
+        @previous_chapter = prologues.last
+      end
+      if @chapter == epilogues.order(:number).first && regular_chapters
+        @previous_chapter = regular_chapters.last
+      end
+    end
+
+    def load_epilogue_next_chapter
       if @chapter == prologues.order(:number).last && regular_chapters
         @next_chapter = regular_chapters.first
       end
