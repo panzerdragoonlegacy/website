@@ -1,4 +1,4 @@
-<%= form_for @album, html: { multipart: true } do |f| %>
+<%= nested_form_for @album, html: { multipart: true } do |f| %>
   <%= render 'shared/error_messages', target: @album %>
   <div>
     <div>
@@ -7,6 +7,10 @@
     <div>
       <%= f.collection_select :category_id, @categories, :id, :name,
         { include_blank: true } %>
+      <p class="unpublished">
+        Warning: changing the album's category will move every picture in the
+        album to that category.
+      </p>
     </div>
   </div>
   <div>
@@ -18,6 +22,10 @@
         ContributorProfile.order(:name), :id, :name,
         { selected: @album.contributor_profile_ids, include_blank: true },
         { multiple: true } %>
+      <p>
+        Pictures in the album with no contributors will inherit the album's
+        contributors.
+      </p>
     </div>
   </div>
   <div>
@@ -26,6 +34,10 @@
     </div>
     <div>
       <%= f.text_field :name %>
+      <p>
+        Pictures in the album with blank names will inherit the album's
+        name.
+      </p>
     </div>
   </div>
   <div>
@@ -34,10 +46,45 @@
     </div>
     <div>
       <%= f.text_area :description, rows: 3 %>
+      <p>
+        Pictures in the album with blank descriptions will inherit the album's
+        description.
+      </p>
     </div>
   </div>
   <div>
-    <%= f.submit 'Save and View' %>
+    <label>Pictures</label>
+    <%= f.fields_for :pictures do |picture_form| %>
+      <div class="illustration">
+        <div>
+          <%= picture_form.label :name, 'Name' %>
+        </div>
+        <div>
+          <%= picture_form.text_field :name, class: 'child_input' %>
+        </div>
+        <div>
+          <%= picture_form.label :description, 'Description' %>
+        </div>
+        <div>
+          <%= picture_form.text_area :description, class: 'child_input' %>
+        </div>
+        <div>
+          <%= picture_form.label :picture, 'Picture' %>
+        </div>
+        <div>
+          <% if picture_form.object.picture_file_name.blank? %>
+            <%= picture_form.file_field :picture %>
+          <% else %>
+            <%= image_tag picture_form.object.picture.url(:thumbnail) %>
+          <% end %>
+        </div>
+        <%= picture_form.link_to_remove "Delete Picture" %><br />
+      </div>
+    <% end %>
+    <p><%= f.link_to_add "Add New Picture", :pictures %></p>
+  </div>
+  <div>
+    <%= f.submit 'Save' %>
     <%= f.submit 'Save and Continue Editing', name: :continue_editing %>
   </div>
 <% end %>

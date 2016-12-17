@@ -18,7 +18,8 @@ class AlbumsController < ApplicationController
   end
 
   def create
-    @album = Album.new album_params
+    the_params = synchronised_params(album_params)
+    @album = Album.new the_params
     authorize @album
     if @album.save
       flash[:notice] = 'Successfully created album.'
@@ -30,7 +31,8 @@ class AlbumsController < ApplicationController
 
   def update
     params[:album][:contributor_profile_ids] ||= []
-    if @album.update_attributes album_params
+    the_params = synchronised_params(album_params)
+    if @album.update_attributes the_params
       flash[:notice] = 'Successfully updated album.'
       redirect_to_album_or_category
     else
@@ -61,6 +63,26 @@ class AlbumsController < ApplicationController
   def load_album
     @album = Album.find params[:id]
     authorize @album
+  end
+
+  def synchronised_params(the_params)
+    the_params['pictures_attributes'].each do |key, value|
+      the_params['pictures_attributes'][key]['category_id'] =
+        the_params['category_id']
+      if value['name'].blank?
+        the_params['pictures_attributes'][key]['name'] =
+          the_params['name']
+      end
+      if value['description'].blank?
+        the_params['pictures_attributes'][key]['description'] =
+          the_params['description']
+      end
+      if value['contributor_profile_ids'].blank?
+        the_params['pictures_attributes'][key]['contributor_profile_ids'] =
+          the_params['contributor_profile_ids']
+      end
+    end
+    the_params
   end
 
   def redirect_to_album_or_category

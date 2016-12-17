@@ -57,7 +57,16 @@ class AlbumPolicy < ApplicationPolicy
       :category_id,
       :name,
       :description,
-      contributor_profile_ids: []
+      contributor_profile_ids: [],
+      pictures_attributes: [
+        :id,
+        :category_id,
+        :name,
+        :description,
+        :contributor_profile_ids,
+        :picture,
+        :_destroy
+      ]
     ]
     permitted_attributes
   end

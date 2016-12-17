@@ -19,6 +19,12 @@ RSpec.describe Album, type: :model do
     it { is_expected.to have_many(:pictures).dependent(:destroy) }
   end
 
+  describe 'nested attributes' do
+    it do
+      is_expected.to accept_nested_attributes_for(:pictures).allow_destroy(true)
+    end
+  end
+
   describe 'validations' do
     it { is_expected.to validate_presence_of(:name) }
     it do

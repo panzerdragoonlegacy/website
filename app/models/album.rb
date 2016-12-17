@@ -6,6 +6,11 @@ class Album < ActiveRecord::Base
   include Syncable
 
   has_many :pictures, dependent: :destroy
+  accepts_nested_attributes_for(
+    :pictures,
+    reject_if: :all_blank,
+    allow_destroy: true
+  )
 
   validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }

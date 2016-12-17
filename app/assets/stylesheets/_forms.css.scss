@@ -4,9 +4,9 @@ label {
   font-size: 16px;
 }
 
-input[type="text"], 
-input[type="email"], 
-input[type="password"], 
+input[type="text"],
+input[type="email"],
+input[type="password"],
 input[type="number"] {
   border-radius: 10px;
   border: 0;
@@ -17,6 +17,12 @@ input[type="number"] {
   background-color: $input-background-colour;
   color: $main-text-colour;
   border: $border-properties;
+}
+
+input[type="text"].child_input {
+  background-color: #252525;
+  width: 580px;
+  margin-bottom: 10px;
 }
 
 textarea {
@@ -30,6 +36,13 @@ textarea {
   color: $main-text-colour;
   margin-bottom: -5px;
   border: $border-properties;
+}
+
+textarea.child_input {
+  background-color: #252525;
+  width: 580px;
+  height: 100px;
+  margin-bottom: 10px;
 }
 
 textarea.data_entry {
