@@ -9,27 +9,32 @@ class Picture < ActiveRecord::Base
   validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }
 
-  has_attached_file :picture,
+  has_attached_file(
+    :picture,
     styles: {
-      mini_thumbnail: "75x75#",
-      thumbnail: "150x150>",
-      triple_thumbnail: "150x150#",
-      double_thumbnail: "238x238#",
-      single_thumbnail: "486x486>",
-      embedded: "625x625>"
+      mini_thumbnail: '75x75#',
+      thumbnail: '150x150>',
+      triple_thumbnail: '150x150#',
+      double_thumbnail: '238x238#',
+      single_thumbnail: '486x486>',
+      embedded: '625x625>'
     },
-    path: ":rails_root/public/system/:attachment/:id/:style/:filename",
-    url: "/system/:attachment/:id/:style/:filename"
+    path: ':rails_root/public/system/:attachment/:id/:style/:filename',
+    url: '/system/:attachment/:id/:style/:filename'
+  )
 
-  validates_attachment :picture, presence: true,
-    content_type: { content_type: "image/jpeg" },
+  validates_attachment(
+    :picture,
+    presence: true,
+    content_type: { content_type: 'image/jpeg' },
     size: { in: 0..5.megabytes }
+  )
 
   before_save :sync_file_name
   before_save :replace_picture
 
   def sync_file_name
-    sync_file_name_of :picture, file_name: "#{self.name.to_url}.jpg"
+    sync_file_name_of :picture, file_name: "#{name.to_url}.jpg"
   end
 
   def to_param
@@ -37,14 +42,13 @@ class Picture < ActiveRecord::Base
   end
 
   def name_and_id
-    "#{name} (#{id.to_s})"
+    "#{name} (#{id})"
   end
 
   def replace_picture
-    if self.publish && self.id_of_picture_to_replace.present?
+    if publish && id_of_picture_to_replace.present?
       picture_to_replace = Picture.find(id_of_picture_to_replace)
       picture_to_replace.destroy
-      self.id_of_picture_to_replace = nil
     end
   end
 end

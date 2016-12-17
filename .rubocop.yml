@@ -1,7 +1,9 @@
 AllCops:
   Excludes:
     - db/schema.rb
+Style/FrozenStringLiteralComment:
+  Enabled: false
 Rails:
   Enabled: true
 Documentation:
-    Enabled: false
+  Enabled: false

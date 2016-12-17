@@ -14,8 +14,6 @@ class Story < ActiveRecord::Base
 
   # Updates chapter urls based on the (potentially) changed story url.
   def update_chapter_urls
-    self.chapters.each do |chapter|
-      chapter.save
-    end
+    chapters.each(&:save)
   end
 end
