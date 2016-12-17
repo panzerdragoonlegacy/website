@@ -10,11 +10,24 @@ class Album < ActiveRecord::Base
   validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }
 
+  after_save :update_picture_categories
+
   def to_param
     id.to_s + '-' + url
   end
 
   def name_and_id
     "#{name} (#{id})"
+  end
+
+  private
+
+  def update_picture_categories
+    pictures.each do |picture|
+      if picture.category != category
+        picture.category = category
+        picture.save
+      end
+    end
   end
 end

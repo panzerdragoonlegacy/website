@@ -62,6 +62,36 @@ RSpec.describe Album, type: :model do
     end
   end
 
+  describe 'callbacks' do
+    context 'after save' do
+      describe 'synchronisation of album and picture categories' do
+        before do
+          category = FactoryGirl.create :valid_picture_category
+          @album = FactoryGirl.create :valid_album, category: category
+          @picture = FactoryGirl.create :valid_picture, category: category
+          @album.pictures << @picture
+        end
+
+        context 'album category has changed' do
+          it "updates the album's pictures to match the album's category" do
+            different_category = FactoryGirl.create :valid_picture_category
+            @album.category = different_category
+            @album.save
+            expect(@picture.category).to eq different_category
+          end
+        end
+
+        context 'album category has not changed' do
+          it "does not update the album's pictures" do
+            picture_last_updated_at = @picture.updated_at
+            @album.save
+            expect(@picture.updated_at).to eq picture_last_updated_at
+          end
+        end
+      end
+    end
+  end
+
   describe 'slug' do
     context 'creating a new album' do
       let(:album) do
