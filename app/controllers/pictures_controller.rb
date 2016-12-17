@@ -19,6 +19,7 @@ class PicturesController < ApplicationController
 
   def show
     load_picture_to_replace
+    load_other_pictures_in_album
     @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
       current_user,
       @picture.encyclopaedia_entries.order(:name)
