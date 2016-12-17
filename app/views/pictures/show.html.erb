@@ -82,7 +82,7 @@
 <% if @other_pictures_in_album %>
   <% unless @other_pictures_in_album.count == 0 %>
     <h2>Other Pictures in this Album</h2>
-    <div id="related_pictures">
+    <div id="other_pictures_in_album">
       <% @other_pictures_in_album.each do |picture| %>
         <%= link_to image_tag(picture.picture.url(:mini_thumbnail),
           alt: picture.name, width: "75", height: "75"), picture %>

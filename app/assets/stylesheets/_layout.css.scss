@@ -154,6 +154,19 @@ body {
             margin-bottom: -8px;
           }
         }
+
+        div#other_pictures_in_album {
+          margin-top: 20px;
+          padding-bottom: 8px;
+          text-align: left;
+
+          a img {
+            border-radius: 5px;
+            border: 1px solid #333333;
+            margin-bottom: -0px;
+            margin-right: 4px;
+          }
+        }
       }
     }
 
