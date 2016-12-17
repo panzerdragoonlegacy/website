@@ -66,20 +66,22 @@ class AlbumsController < ApplicationController
   end
 
   def synchronised_params(the_params)
-    the_params['pictures_attributes'].each do |key, value|
-      the_params['pictures_attributes'][key]['category_id'] =
-        the_params['category_id']
-      if value['name'].blank?
-        the_params['pictures_attributes'][key]['name'] =
-          the_params['name']
-      end
-      if value['description'].blank?
-        the_params['pictures_attributes'][key]['description'] =
-          the_params['description']
-      end
-      if value['contributor_profile_ids'].blank?
-        the_params['pictures_attributes'][key]['contributor_profile_ids'] =
-          the_params['contributor_profile_ids']
+    if the_params['pictures_attributes']
+      the_params['pictures_attributes'].each do |key, value|
+        the_params['pictures_attributes'][key]['category_id'] =
+          the_params['category_id']
+        if value['name'].blank?
+          the_params['pictures_attributes'][key]['name'] =
+            the_params['name']
+        end
+        if value['description'].blank?
+          the_params['pictures_attributes'][key]['description'] =
+            the_params['description']
+        end
+        if value['contributor_profile_ids'].blank?
+          the_params['pictures_attributes'][key]['contributor_profile_ids'] =
+            the_params['contributor_profile_ids']
+        end
       end
     end
     the_params
