@@ -4,8 +4,9 @@ class CategoriesController < ApplicationController
 
   def index
     if params[:filter] == 'draft'
-      @categories = policy_scope(Category.where(publish: false).order(:name)
-        .page(params[:page]))
+      @categories = policy_scope(
+        Category.where(publish: false).order(:name).page(params[:page])
+      )
     else
       redirect_to site_map_path
     end
@@ -85,26 +86,32 @@ class CategoriesController < ApplicationController
   end
 
   def load_category_articles
-    @articles = ArticlePolicy::Scope.new(current_user, Article.where(
-      category_id: @category.id).order(:name).page(params[:page])).resolve
+    @articles = ArticlePolicy::Scope.new(
+      current_user,
+      Article.where(category_id: @category.id).order(:name).page(params[:page])
+    ).resolve
   end
 
   def load_category_downloads
-    @downloads = DownloadPolicy::Scope.new(current_user, Download.where(
-      category_id: @category.id).order(:name).page(params[:page])).resolve
+    @downloads = DownloadPolicy::Scope.new(
+      current_user,
+      Download.where(category_id: @category.id).order(:name).page(params[:page])
+    ).resolve
   end
 
   def load_category_encyclopaedia_entries
     @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
       current_user,
-      EncyclopaediaEntry.where(category_id: @category.id).order(:name)
-        .page(params[:page])
+      EncyclopaediaEntry.where(category_id: @category.id)
+        .order(:name).page(params[:page])
     ).resolve
   end
 
   def load_category_links
-    @links = LinkPolicy::Scope.new(current_user, Link.where(
-      category_id: @category.id).order(:name).page(params[:page])).resolve
+    @links = LinkPolicy::Scope.new(
+      current_user,
+      Link.where(category_id: @category.id).order(:name).page(params[:page])
+    ).resolve
   end
 
   def load_category_music_tracks
@@ -116,23 +123,31 @@ class CategoriesController < ApplicationController
   end
 
   def load_category_pictures
-    @pictures = PicturePolicy::Scope.new(current_user, Picture.where(
-      category_id: @category.id).order(:name).page(params[:page])).resolve
+    @pictures = PicturePolicy::Scope.new(
+      current_user,
+      Picture.where(category_id: @category.id).order(:name).page(params[:page])
+    ).resolve
   end
 
   def load_category_resources
-    @resources = ResourcePolicy::Scope.new(current_user, Resource.where(
-      category_id: @category.id).order(:name).page(params[:page])).resolve
+    @resources = ResourcePolicy::Scope.new(
+      current_user,
+      Resource.where(category_id: @category.id).order(:name).page(params[:page])
+    ).resolve
   end
 
   def load_category_stories
-    @stories = StoryPolicy::Scope.new(current_user, Story.where(
-      category_id: @category.id).order(:name).page(params[:page])).resolve
+    @stories = StoryPolicy::Scope.new(
+      current_user,
+      Story.where(category_id: @category.id).order(:name).page(params[:page])
+    ).resolve
   end
 
   def load_category_videos
-    @videos = VideoPolicy::Scope.new(current_user, Video.where(
-      category_id: @category.id).order(:name).page(params[:page])).resolve
+    @videos = VideoPolicy::Scope.new(
+      current_user,
+      Video.where(category_id: @category.id).order(:name).page(params[:page])
+    ).resolve
   end
 
   def redirect_to_category

@@ -85,8 +85,10 @@ class EncyclopaediaEntriesController < ApplicationController
   end
 
   def load_categories
-    @categories = CategoryPolicy::Scope.new(current_user, Category.where(
-      category_type: :encyclopaedia_entry).order(:name)).resolve
+    @categories = CategoryPolicy::Scope.new(
+      current_user,
+      Category.where(category_type: :encyclopaedia_entry).order(:name)
+    ).resolve
   end
 
   def load_encyclopaedia_entry

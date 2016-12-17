@@ -69,13 +69,16 @@ class PicturesController < ApplicationController
 
   def load_replaceable_pictures
     @replaceable_pictures = PicturePolicy::Scope.new(
-      current_user, Picture.where(publish: true).order(:name)
+      current_user,
+      Picture.where(publish: true).order(:name)
     ).resolve
   end
 
   def load_categories
-    @categories = CategoryPolicy::Scope.new(current_user, Category.where(
-      category_type: :picture).order(:name)).resolve
+    @categories = CategoryPolicy::Scope.new(
+      current_user,
+      Category.where(category_type: :picture).order(:name)
+    ).resolve
   end
 
   def load_picture

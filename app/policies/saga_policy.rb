@@ -4,8 +4,9 @@ class SagaPolicy < ApplicationPolicy
       if user
         return scope if user.administrator?
       end
-      scope.joins(:encyclopaedia_entry).where(encyclopaedia_entries: {
-        publish: true })
+      scope.joins(:encyclopaedia_entry).where(
+        encyclopaedia_entries: { publish: true }
+      )
     end
   end
 end

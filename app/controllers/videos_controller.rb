@@ -66,8 +66,10 @@ class VideosController < ApplicationController
   end
 
   def load_categories
-    @categories = CategoryPolicy::Scope.new(current_user, Category.where(
-      category_type: :video).order(:name)).resolve
+    @categories = CategoryPolicy::Scope.new(
+      current_user,
+      Category.where(category_type: :video).order(:name)
+    ).resolve
   end
 
   def load_video

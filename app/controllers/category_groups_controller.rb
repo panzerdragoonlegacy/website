@@ -2,8 +2,9 @@ class CategoryGroupsController < ApplicationController
   before_action :load_category_group, except: [:new, :create]
 
   def new
-    @category_group = CategoryGroup.new(category_group_type:
-      params[:category_group_type])
+    @category_group = CategoryGroup.new(
+      category_group_type: params[:category_group_type]
+    )
     authorize @category_group
   end
 

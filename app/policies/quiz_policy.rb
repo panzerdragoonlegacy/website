@@ -6,7 +6,8 @@ class QuizPolicy < ApplicationPolicy
         if user.contributor_profile.present?
           return scope.joins(:contributions).where("quizzes.publish = 't' OR " +
             "contributions.contributor_profile_id = ?",
-            user.contributor_profile_id)
+            user.contributor_profile_id
+          )
         end
       end
       scope.where(publish: true)
@@ -18,7 +19,8 @@ class QuizPolicy < ApplicationPolicy
       return true if user.administrator?
       if user.contributor_profile.present?
         if record.contributions.where(
-          contributor_profile_id: user.contributor_profile_id).count > 0
+          contributor_profile_id: user.contributor_profile_id
+        ).count > 0
           return true
         end
       end
@@ -41,7 +43,8 @@ class QuizPolicy < ApplicationPolicy
       return true if user.administrator?
       if user.contributor_profile.present?
         if !record.publish && record.contributions.where(
-          contributor_profile_id: user.contributor_profile_id).count > 0
+          contributor_profile_id: user.contributor_profile_id
+        ).count > 0
           return true
         end
       end

@@ -52,9 +52,7 @@ class PoemsController < ApplicationController
   private
 
   def poem_params
-    params.require(:poem).permit(
-      policy(@poem || :poem).permitted_attributes
-    )
+    params.require(:poem).permit(policy(@poem || :poem).permitted_attributes)
   end
 
   def load_poem
