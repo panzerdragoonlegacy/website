@@ -31,10 +31,10 @@ class Chapter < ActiveRecord::Base
     # validation Shoulda Matchers can pass without presence of a story.
     if self.story
       if self.chapter_type == :regular_chapter.to_s
-        return self.story.name + "-" + self.number.to_s if self.name.blank?
-        return self.story.name + "-" + self.number.to_s + "-" + self.name
+        return "#{self.story.name}-#{self.number.to_s}" if self.name.blank?
+        return "#{self.story.name}-#{self.number.to_s}-#{self.name}"
       end
-      return self.story.name + "-" + self.name
+      return "#{self.story.name}-#{self.name}"
     end
   end
 end
