@@ -31,8 +31,7 @@ module LoadableForChapter
   def load_previous_chapter_in_end_cases
     if @chapter == regular_chapters.order(:number).first && prologues
       @previous_chapter = prologues.last
-    end
-    if @chapter == epilogues.order(:number).first && regular_chapters
+    elsif @chapter == epilogues.order(:number).first && regular_chapters
       @previous_chapter = regular_chapters.last
     end
   end
@@ -40,8 +39,7 @@ module LoadableForChapter
   def load_next_chapter_in_end_cases
     if @chapter == prologues.order(:number).last && regular_chapters
       @next_chapter = regular_chapters.first
-    end
-    if @chapter == regular_chapters.order(:number).last && epilogues
+    elsif @chapter == regular_chapters.order(:number).last && epilogues
       @next_chapter = epilogues.first
     end
   end
