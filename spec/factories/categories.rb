@@ -5,6 +5,11 @@ FactoryGirl.define do
       description 'Test Description'
       category_type :article
 
+      factory :valid_picture_category do
+        category_type :picture
+        category_group { FactoryGirl.create(:valid_picture_category_group) }
+      end
+
       factory :published_category do
         publish true
       end

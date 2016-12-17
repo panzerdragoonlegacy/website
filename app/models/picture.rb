@@ -32,6 +32,7 @@ class Picture < ActiveRecord::Base
     size: { in: 0..5.megabytes }
   )
 
+  before_validation :validate_category_and_album_category_match
   before_save :sync_file_name
   before_save :replace_picture
 
@@ -45,6 +46,17 @@ class Picture < ActiveRecord::Base
 
   def name_and_id
     "#{name} (#{id})"
+  end
+
+  private
+
+  def validate_category_and_album_category_match
+    if album.present?
+      if album.category != category
+        errors.add(:category, 'does not match the category of the ' \
+          "picture's album.")
+      end
+    end
   end
 
   def replace_picture

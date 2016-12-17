@@ -3,7 +3,7 @@ FactoryGirl.define do
     factory :valid_album do
       sequence(:name) { |n| "Album #{n}" }
       description 'Test Description'
-      category { FactoryGirl.create(:valid_category) }
+      category { FactoryGirl.create(:valid_picture_category) }
       contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }
     end
   end
