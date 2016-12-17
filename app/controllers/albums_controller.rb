@@ -1,6 +1,10 @@
 class AlbumsController < ApplicationController
-  before_action :load_categories, except: [:destroy]
-  before_action :load_album, except: [:new, :create]
+  before_action :load_categories, except: [:index, :destroy]
+  before_action :load_album, except: [:index, :new, :create]
+
+  def index
+    @albums = policy_scope(Album.order(:name).page(params[:page]))
+  end
 
   def new
     if params[:category]
