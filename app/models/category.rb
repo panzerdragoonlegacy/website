@@ -29,37 +29,36 @@ class Category < ActiveRecord::Base
   def validate_category_type_reassignment
     if self.persisted?
       persisted_category = Category.find self.id
-      if self.category_type != persisted_category.category_type
-        if self.send(persisted_category.category_type.pluralize).present?
-          self.errors.add(persisted_category.category_type, 'category type ' +
-            'cannot be reassigned while the category contains items.')
-        end
+      if self.category_type != persisted_category.category_type &&
+        self.send(persisted_category.category_type.pluralize).present?
+        self.errors.add(persisted_category.category_type, 'category type ' \
+          'cannot be reassigned while the category contains items.')
       end
     end
   end
 
   def validate_presence_of_category_group
-    if self.category_type.in?(CategoryGroup::CATEGORY_GROUP_TYPES)
-      if self.category_group.blank?
-        self.errors.add(category_type, 'categories must belong to a ' +
-          'category group.')
-      end
-    else
-      if self.category_group.present?
-        self.errors.add(category_type, 'categories must not belong to a ' +
-          'category group.')
-      end
+    if category_is_groupable && self.category_group.blank?
+      self.errors.add(category_type, 'categories must belong to a category ' \
+        'group.')
+    end
+    if !category_is_groupable && self.category_group.present?
+      self.errors.add(category_type, 'categories must not belong to a ' \
+        'category group.')
     end
   end
 
   def validate_category_and_category_group_type_match
-    if self.category_type.in?(CategoryGroup::CATEGORY_GROUP_TYPES)
-      if self.category_group.present? and self.category_type.present?
-        if self.category_group.category_group_type != self.category_type
-          self.errors.add(category_type, 'categories must belong to a ' +
-            'category group with a matching category type/category group type.')
-        end
+    if category_is_groupable && self.category_group.present?
+      if self.category_group.category_group_type != self.category_type
+        self.errors.add(category_type, 'categories must belong to a ' \
+          'category group with a matching type.')
       end
     end
+  end
+
+  def category_is_groupable
+    return false if self.category_type.blank?
+    self.category_type.in?(CategoryGroup::CATEGORY_GROUP_TYPES)
   end
 end
