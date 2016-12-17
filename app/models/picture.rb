@@ -6,6 +6,8 @@ class Picture < ActiveRecord::Base
   include Relatable
   include Syncable
 
+  belongs_to :album
+
   validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }
 
