@@ -11,6 +11,15 @@
   </div>
   <div>
     <div>
+      <%= f.label :album_id, 'Album' %>
+    </div>
+    <div>
+      <%= f.collection_select :album_id, @albums, :id, :name,
+        { include_blank: true } %>
+    </div>
+  </div>
+  <div>
+    <div>
       <%= f.label :contributor_profile_ids, 'Contributors' %>
     </div>
     <div>

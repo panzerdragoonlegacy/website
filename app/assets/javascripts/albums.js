@@ -1,2 +1,6 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+$(document).on('ready page:load', function() {
+  $('#album_category_id').select2();
+  $('#album_contributor_profile_ids').select2({
+    tags: true
+  });
+});

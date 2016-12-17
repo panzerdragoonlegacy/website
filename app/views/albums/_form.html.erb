@@ -1,0 +1,43 @@
+<%= form_for @album, html: { multipart: true } do |f| %>
+  <%= render 'shared/error_messages', target: @album %>
+  <div>
+    <div>
+      <%= f.label :category_id, 'Category' %>
+    </div>
+    <div>
+      <%= f.collection_select :category_id, @categories, :id, :name,
+        { include_blank: true } %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :contributor_profile_ids, 'Contributors' %>
+    </div>
+    <div>
+      <%= f.collection_select :contributor_profile_ids,
+        ContributorProfile.order(:name), :id, :name,
+        { selected: @album.contributor_profile_ids, include_blank: true },
+        { multiple: true } %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :name, 'Name' %>
+    </div>
+    <div>
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :description, 'Description' %>
+    </div>
+    <div>
+      <%= f.text_area :description, rows: 3 %>
+    </div>
+  </div>
+  <div>
+    <%= f.submit 'Save and View' %>
+    <%= f.submit 'Save and Continue Editing', name: :continue_editing %>
+  </div>
+<% end %>

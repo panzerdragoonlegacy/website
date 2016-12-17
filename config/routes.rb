@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :albums
   devise_for :users, path: "", path_names: {
     sign_in: "log-in",
     sign_out: "log-out",
@@ -34,6 +33,7 @@ Rails.application.routes.draw do
   resources :downloads
   resources :links
   resources :music_tracks, path: 'music'
+  resources :albums
   resources :pictures
   resources :poems
   resources :quizzes

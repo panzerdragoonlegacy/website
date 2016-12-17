@@ -107,12 +107,20 @@
 
 <% if @pictures %>
   <h2>Pictures in this Category</h2>
-  <% if policy(Picture).new? %>
+  <% if policy(Picture).new? || policy(Album).new? %>
     <ul class="administration">
-      <li>
-        <%= link_to 'New Picture',
-          new_picture_path(category: @category) %>
-      </li>
+      <% if policy(Picture).new? %>
+        <li>
+          <%= link_to 'New Picture',
+            new_picture_path(category: @category) %>
+        </li>
+      <% end %>
+      <% if policy(Album).new? %>
+        <li>
+          <%= link_to 'New Album',
+            new_album_path(category: @category) %>
+        </li>
+      <% end %>
     </ul>
   <% end %>
   <%= render 'pictures/list' %>

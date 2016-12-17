@@ -17,6 +17,10 @@ module LoadableForPicture
     ).resolve
   end
 
+  def load_albums
+    @albums = AlbumPolicy::Scope.new(current_user, Album.order(:name)).resolve
+  end
+
   def load_picture
     @picture = Picture.find params[:id]
     authorize @picture

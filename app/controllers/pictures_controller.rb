@@ -3,6 +3,7 @@ class PicturesController < ApplicationController
 
   before_action :load_replaceable_pictures, except: [:index, :show, :destroy]
   before_action :load_categories, except: [:index, :show, :destroy]
+  before_action :load_albums, except: [:index, :show, :destroy]
   before_action :load_picture, except: [:index, :new, :create]
 
   def index

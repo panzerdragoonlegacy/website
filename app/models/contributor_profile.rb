@@ -30,6 +30,12 @@ class ContributorProfile < ActiveRecord::Base
     source_type: 'MusicTrack'
   )
   has_many(
+    :albums,
+    through: :contributions,
+    source: :contributable,
+    source_type: 'Album'
+  )
+  has_many(
     :pictures,
     through: :contributions,
     source: :contributable,

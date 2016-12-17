@@ -23,6 +23,7 @@ RSpec.describe ContributorProfile, type: :model do
     it { is_expected.to have_many(:downloads) }
     it { is_expected.to have_many(:links) }
     it { is_expected.to have_many(:music_tracks) }
+    it { is_expected.to have_many(:albums) }
     it { is_expected.to have_many(:pictures) }
     it { is_expected.to have_many(:poems) }
     it { is_expected.to have_many(:quizzes) }

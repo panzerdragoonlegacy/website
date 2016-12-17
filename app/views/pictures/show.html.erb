@@ -22,6 +22,14 @@
           edit_picture_path(@picture) %>
       </li>
     <% end %>
+    <% if @picture.album %>
+      <% if policy(@picture.album).edit? %>
+        <li>
+          <%= link_to "Edit Picture's Album",
+            edit_album_path(@picture.album) %>
+        </li>
+      <% end %>
+    <% end %>
     <% if policy(@picture).destroy? %>
       <li>
         <%= link_to 'Delete Picture', @picture, data: {

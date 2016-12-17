@@ -1,32 +1,22 @@
-class PicturePolicy < ApplicationPolicy
+class AlbumPolicy < ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
     def resolve
       if user
         return scope if user.administrator?
         if user.contributor_profile.present?
           return scope.joins(:category, :contributions).where(
-            "(pictures.publish = 't' AND categories.publish = 't') OR " +
+            "categories.publish = 't' OR " +
             "contributions.contributor_profile_id = ?",
             user.contributor_profile_id
           )
         end
       end
-      scope.joins(:category).where(publish: true, categories: { publish: true })
+      scope.joins(:category).where(categories: { publish: true })
     end
   end
 
   def show?
-    if user
-      return true if user.administrator?
-      if user.contributor_profile.present?
-        if record.contributions.where(
-          contributor_profile_id: user.contributor_profile_id
-        ).count > 0
-          return true
-        end
-      end
-    end
-    record.publish? && record.category.publish?
+    false # An album is never shown directly.
   end
 
   def new?
@@ -43,7 +33,7 @@ class PicturePolicy < ApplicationPolicy
     if user
       return true if user.administrator?
       if user.contributor_profile.present?
-        if !record.publish and record.contributions.where(
+        if record.contributions.where(
           contributor_profile_id: user.contributor_profile_id
         ).count > 0
           return true
@@ -57,24 +47,18 @@ class PicturePolicy < ApplicationPolicy
   end
 
   def destroy?
-    edit?
+    if record.pictures.blank?
+      edit?
+    end
   end
 
   def permitted_attributes
     permitted_attributes = [
-      :id_of_picture_to_replace,
       :category_id,
-      :album_id,
       :name,
       :description,
-      :information,
-      :picture,
-      contributor_profile_ids: [],
-      encyclopaedia_entry_ids: []
+      contributor_profile_ids: []
     ]
-    if user
-      permitted_attributes << :publish if user.administrator?
-    end
     permitted_attributes
   end
 end
