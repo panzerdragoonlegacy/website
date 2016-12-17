@@ -13,22 +13,16 @@ class Saga < ActiveRecord::Base
   private
 
   def validate_encyclopaedia_entry
-    encyclopaedia_entry_is_already_associated = false
-    if self.encyclopaedia_entry
-      if Saga.where(encyclopaedia_entry: self.encyclopaedia_entry).count > 0
-        if self.persisted?
-          persisted_saga = Saga.find(self.id)
-          unless persisted_saga.encyclopaedia_entry == self.encyclopaedia_entry
-            encyclopaedia_entry_is_already_associated = true
-          end
-        else
-          encyclopaedia_entry_is_already_associated = true
-        end
-      end
-      if encyclopaedia_entry_is_already_associated
-        self.errors.add(encyclopaedia_entry.name, 'is already associated ' \
-          'with another saga.')
-      end
+    if self.encyclopaedia_entry && encyclopaedia_entry_already_associated
+      self.errors.add(encyclopaedia_entry.name, 'is already associated with ' \
+        'another saga.')
+    end
+  end
+
+  def encyclopaedia_entry_already_associated
+    if Saga.where(encyclopaedia_entry: self.encyclopaedia_entry).count > 0
+      return true unless self.persisted?
+      true if Saga.find(self.id).encyclopaedia_entry != self.encyclopaedia_entry
     end
   end
 end
