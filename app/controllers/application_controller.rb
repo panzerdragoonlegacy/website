@@ -5,17 +5,17 @@ class ApplicationController < ActionController::Base
 
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  #after_filter :verify_authorized, except: :index
-  #after_filter :verify_policy_scoped, only: :index
+  # after_filter :verify_authorized, except: :index
+  # after_filter :verify_policy_scoped, only: :index
 
-  before_filter :sagas
-  before_filter :partner_sites
+  before_action :sagas
+  before_action :partner_sites
 
   private
 
   def user_not_authorized
-    flash[:alert] = "You are not authorized to perform this action."
-    redirect_to(request.referrer || root_path)
+    flash[:alert] = 'You are not authorized to perform this action.'
+    redirect_to(request.referer || root_path)
   end
 
   def sagas

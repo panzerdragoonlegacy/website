@@ -1,4 +1,6 @@
 class CategoriesController < ApplicationController
+  include LoadableForCategory
+
   before_action :load_category_groups, except: [:index, :show, :destroy]
   before_action :load_category, except: [:index, :new, :create]
 
@@ -13,26 +15,15 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    case @category.category_type
-    when 'article'
-      load_category_articles
-    when 'download'
-      load_category_downloads
-    when 'encyclopaedia_entry'
-      load_category_encyclopaedia_entries
-    when 'link'
-      load_category_links
-    when 'music_track'
-      load_category_music_tracks
-    when 'picture'
-      load_category_pictures
-    when 'resource'
-      load_category_resources
-    when 'story'
-      load_category_stories
-    when 'video'
-      load_category_videos
-    end
+    load_category_articles
+    load_category_downloads
+    load_category_encyclopaedia_entries
+    load_category_links
+    load_category_music_tracks
+    load_category_pictures
+    load_category_resources
+    load_category_stories
+    load_category_videos
   end
 
   def new
@@ -71,83 +62,6 @@ class CategoriesController < ApplicationController
     params.require(:category).permit(
       policy(@category || :category).permitted_attributes
     )
-  end
-
-  def load_category_groups
-    @category_groups = CategoryGroupPolicy::Scope.new(
-      current_user,
-      CategoryGroup.order(:name)
-    ).resolve
-  end
-
-  def load_category
-    @category = Category.find_by url: params[:id]
-    authorize @category
-  end
-
-  def load_category_articles
-    @articles = ArticlePolicy::Scope.new(
-      current_user,
-      Article.where(category_id: @category.id).order(:name).page(params[:page])
-    ).resolve
-  end
-
-  def load_category_downloads
-    @downloads = DownloadPolicy::Scope.new(
-      current_user,
-      Download.where(category_id: @category.id).order(:name).page(params[:page])
-    ).resolve
-  end
-
-  def load_category_encyclopaedia_entries
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
-      current_user,
-      EncyclopaediaEntry.where(category_id: @category.id)
-        .order(:name).page(params[:page])
-    ).resolve
-  end
-
-  def load_category_links
-    @links = LinkPolicy::Scope.new(
-      current_user,
-      Link.where(category_id: @category.id).order(:name).page(params[:page])
-    ).resolve
-  end
-
-  def load_category_music_tracks
-    @music_tracks = MusicTrackPolicy::Scope.new(
-      current_user,
-      MusicTrack.where(category_id: @category.id).order(:track_number)
-        .order(:name).page(params[:page])
-    ).resolve
-  end
-
-  def load_category_pictures
-    @pictures = PicturePolicy::Scope.new(
-      current_user,
-      Picture.where(category_id: @category.id).order(:name).page(params[:page])
-    ).resolve
-  end
-
-  def load_category_resources
-    @resources = ResourcePolicy::Scope.new(
-      current_user,
-      Resource.where(category_id: @category.id).order(:name).page(params[:page])
-    ).resolve
-  end
-
-  def load_category_stories
-    @stories = StoryPolicy::Scope.new(
-      current_user,
-      Story.where(category_id: @category.id).order(:name).page(params[:page])
-    ).resolve
-  end
-
-  def load_category_videos
-    @videos = VideoPolicy::Scope.new(
-      current_user,
-      Video.where(category_id: @category.id).order(:name).page(params[:page])
-    ).resolve
   end
 
   def redirect_to_category
