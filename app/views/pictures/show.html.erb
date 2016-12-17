@@ -10,16 +10,16 @@
 <% if policy(@picture).new? or policy(@picture).edit? or
   policy(@picture).destroy? %>
   <ul class="administration">
+    <% if policy(Album).new? %>
+      <li>
+        <%= link_to 'New Album',
+          new_album_path(category: @picture.category) %>
+      </li>
+    <% end %>
     <% if policy(@picture).new? %>
       <li>
         <%= link_to 'New Picture',
           new_picture_path(category: @picture.category) %>
-      </li>
-    <% end %>
-    <% if policy(@picture).edit? %>
-      <li>
-        <%= link_to 'Edit Picture',
-          edit_picture_path(@picture) %>
       </li>
     <% end %>
     <% if @picture.album %>
@@ -29,6 +29,12 @@
             edit_album_path(@picture.album) %>
         </li>
       <% end %>
+    <% end %>
+    <% if policy(@picture).edit? %>
+      <li>
+        <%= link_to 'Edit Picture',
+          edit_picture_path(@picture) %>
+      </li>
     <% end %>
     <% if policy(@picture).destroy? %>
       <li>

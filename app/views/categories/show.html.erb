@@ -109,16 +109,16 @@
   <h2>Pictures in this Category</h2>
   <% if policy(Picture).new? || policy(Album).new? %>
     <ul class="administration">
-      <% if policy(Picture).new? %>
-        <li>
-          <%= link_to 'New Picture',
-            new_picture_path(category: @category) %>
-        </li>
-      <% end %>
       <% if policy(Album).new? %>
         <li>
           <%= link_to 'New Album',
             new_album_path(category: @category) %>
+        </li>
+      <% end %>
+      <% if policy(Picture).new? %>
+        <li>
+          <%= link_to 'New Picture',
+            new_picture_path(category: @category) %>
         </li>
       <% end %>
     </ul>

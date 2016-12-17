@@ -21,10 +21,22 @@
           category_type: :picture) %>
       </li>
     <% end %>
+    <% if policy(Album).new? %>
+      <li>
+        <%= link_to 'New Album', new_album_path %>
+      </li>
+    <% end %>
     <% if policy(Picture).new? %>
       <li>
         <%= link_to 'New Picture', new_picture_path %>
       </li>
+    <% end %>
+    <% if current_user %>
+      <% if current_user.contributor_profile %>
+        <li>
+          <%= link_to 'List of Albums', albums_path %>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 <% end %>
