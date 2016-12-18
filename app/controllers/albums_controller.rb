@@ -82,6 +82,8 @@ class AlbumsController < ApplicationController
           the_params['pictures_attributes'][key]['contributor_profile_ids'] =
             the_params['contributor_profile_ids']
         end
+        the_params['pictures_attributes'][key]['publish'] =
+          the_params['publish']
       end
     end
     the_params

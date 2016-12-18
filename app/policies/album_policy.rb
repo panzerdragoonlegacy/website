@@ -68,6 +68,9 @@ class AlbumPolicy < ApplicationPolicy
         :_destroy
       ]
     ]
+    if user
+      permitted_attributes << :publish if user.administrator?
+    end
     permitted_attributes
   end
 end
