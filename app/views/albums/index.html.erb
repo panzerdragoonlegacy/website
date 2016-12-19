@@ -17,7 +17,7 @@
     <% @albums.each do |album| %>
       <tr>
         <td><%= album.name %></th>
-        <td><%= album.category.name %></td>
+        <td><%= link_to album.category.name, album.category %></td>
         <td>
           <% if album.pictures.count > 0 %>
             <%= fa_icon('check') %>
