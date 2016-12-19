@@ -74,6 +74,10 @@ class AlbumsController < ApplicationController
           the_params['pictures_attributes'][key]['description'] =
             the_params['description']
         end
+        if value['information'].blank?
+          the_params['pictures_attributes'][key]['information'] =
+            the_params['information']
+        end
         if value['contributor_profile_ids'].blank?
           the_params['pictures_attributes'][key]['contributor_profile_ids'] =
             the_params['contributor_profile_ids']

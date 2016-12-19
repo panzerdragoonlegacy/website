@@ -53,6 +53,18 @@
     </div>
   </div>
   <div>
+    <div>
+      <%= f.label :information, 'Extra Information' %>
+    </div>
+    <div>
+      <%= f.text_area :information, rows: 3 %>
+      <p>
+        Pictures in the album with blank extra information will inherit the
+        album's extra information.
+      </p>
+    </div>
+  </div>
+  <div>
     <label>Pictures</label>
     <%= f.fields_for :pictures do |picture_form| %>
       <div class="illustration">
@@ -69,14 +81,20 @@
           <%= picture_form.text_area :description, class: 'child_input' %>
         </div>
         <div>
+          <%= picture_form.label :information, 'Extra Information' %>
+        </div>
+        <div>
+          <%= picture_form.text_area :information, class: 'child_input' %>
+        </div>
+        <div>
           <%= picture_form.label :picture, 'Picture' %>
         </div>
         <div>
-          <% if picture_form.object.picture_file_name.blank? %>
-            <%= picture_form.file_field :picture %>
-          <% else %>
+          <% if picture_form.object.picture_file_name.present? %>
             <%= image_tag picture_form.object.picture.url(:thumbnail) %>
+            <p>File has already been uploaded. Replace file?</p>
           <% end %>
+          <%= picture_form.file_field :picture %>
         </div>
         <%= picture_form.link_to_remove "Delete Picture" %><br />
       </div>

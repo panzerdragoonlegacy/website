@@ -5,6 +5,7 @@ RSpec.describe Album, type: :model do
     it { is_expected.to respond_to(:name) }
     it { is_expected.to respond_to(:url) }
     it { is_expected.to respond_to(:description) }
+    it { is_expected.to respond_to(:information) }
     it { is_expected.to respond_to(:publish) }
     it { is_expected.to respond_to(:category) }
     it { is_expected.to respond_to(:created_at) }

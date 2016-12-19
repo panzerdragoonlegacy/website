@@ -67,12 +67,14 @@ class AlbumPolicy < ApplicationPolicy
       :category_id,
       :name,
       :description,
+      :information,
       contributor_profile_ids: [],
       pictures_attributes: [
         :id,
         :category_id,
         :name,
         :description,
+        :information,
         :contributor_profile_ids,
         :picture,
         :_destroy
