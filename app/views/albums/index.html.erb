@@ -9,6 +9,7 @@
 <% if @albums %>
   <table>
     <tr>
+      <th>Published</th>
       <th>Name</th>
       <th>Category</th>
       <th>Has Pictures</th>
@@ -16,6 +17,9 @@
     </tr>
     <% @albums.each do |album| %>
       <tr>
+        <td>
+          <%= album.publish? ? fa_icon('check') : fa_icon('close') %>
+        </td>
         <td><%= album.name %></th>
         <td><%= link_to album.category.name, album.category %></td>
         <td>

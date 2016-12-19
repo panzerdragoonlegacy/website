@@ -27,6 +27,10 @@ module DraftsHelper
     policy_scope(MusicTrack.where(publish: false)).count
   end
 
+  def draft_album_count
+    policy_scope(Album.where(publish: false)).count
+  end
+
   def draft_picture_count
     policy_scope(Picture.where(publish: false)).count
   end
@@ -63,6 +67,7 @@ module DraftsHelper
     draft_article_count +
     draft_download_count +
     draft_music_track_count +
+    draft_album_count +
     draft_picture_count +
     draft_poem_count +
     draft_quiz_count +

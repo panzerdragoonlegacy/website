@@ -3,7 +3,13 @@ class AlbumsController < ApplicationController
   before_action :load_album, except: [:index, :new, :create]
 
   def index
-    @albums = policy_scope(Album.order(:name).page(params[:page]))
+    if params[:contributor_profile_id]
+      load_contributors_drafts
+    elsif params[:filter] == 'draft'
+      load_draft_albums
+    else
+      @albums = policy_scope(Album.order(:name).page(params[:page]))
+    end
   end
 
   def new
@@ -63,6 +69,24 @@ class AlbumsController < ApplicationController
   def load_album
     @album = Album.find params[:id]
     authorize @album
+  end
+
+  def load_contributors_albums
+    @contributor_profile = ContributorProfile.find_by(
+      url: params[:contributor_profile_id]
+    )
+    raise 'Contributor profile not found.' unless @contributor_profile
+    @albums = policy_scope(
+      Album.joins(:contributions).where(
+        contributions: { contributor_profile_id: @contributor_profile.id }
+      ).order(:name).page(params[:page])
+    )
+  end
+
+  def load_draft_albums
+    @albums = policy_scope(
+      Album.where(publish: false).order(:name).page(params[:page])
+    )
   end
 
   def synchronised_params(the_params)

@@ -58,6 +58,12 @@
           music_tracks_path(filter: 'draft') %>
       </li>
     <% end %>
+    <% if draft_album_count > 0 %>
+      <li>
+        <%= link_to pluralize(draft_album_count, 'album'),
+          albums_path(filter: 'draft') %>
+      </li>
+    <% end %>
     <% if draft_picture_count > 0 %>
       <li>
         <%= link_to pluralize(draft_picture_count, 'picture'),
