@@ -5,18 +5,28 @@ class AlbumPolicy < ApplicationPolicy
         return scope if user.administrator?
         if user.contributor_profile.present?
           return scope.joins(:category, :contributions).where(
-            "categories.publish = 't' OR " +
+            "(albums.publish = 't' AND categories.publish = 't') OR " +
             "contributions.contributor_profile_id = ?",
             user.contributor_profile_id
           )
         end
       end
-      scope.joins(:category).where(categories: { publish: true })
+      scope.joins(:category).where(publish: true, categories: { publish: true })
     end
   end
 
   def show?
-    false # An album is never shown directly.
+    if user
+      return true if user.administrator?
+      if user.contributor_profile.present?
+        if record.contributions.where(
+          contributor_profile_id: user.contributor_profile_id
+        ).count > 0
+          return true
+        end
+      end
+    end
+    record.publish? && record.category.publish?
   end
 
   def new?
@@ -33,7 +43,7 @@ class AlbumPolicy < ApplicationPolicy
     if user
       return true if user.administrator?
       if user.contributor_profile.present?
-        if record.contributions.where(
+        if !record.publish and record.contributions.where(
           contributor_profile_id: user.contributor_profile_id
         ).count > 0
           return true

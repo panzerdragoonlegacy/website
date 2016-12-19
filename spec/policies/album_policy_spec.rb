@@ -10,38 +10,150 @@ describe AlbumPolicy do
   context 'being a visitor' do
     let(:user) { nil }
 
-    context 'accessing an album' do
-      let(:album) do
-        FactoryGirl.create(:valid_album)
-      end
+    context 'creating a new album' do
+      let(:album) { Album.new }
 
-      it 'excludes album from resolved scope' do
-        expect(resolved_scope).not_to include(album)
-      end
-
-      it { is_expected.to forbid_action(:show) }
       it { is_expected.to forbid_new_and_create_actions }
-      it { is_expected.to forbid_edit_and_update_actions }
-      it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
+    end
+
+    context 'accessing albums in a published category' do
+      context 'accessing a published album' do
+        let(:album) do
+          FactoryGirl.create(:published_album_in_published_category)
+        end
+
+        it 'includes album in resolved scope' do
+          expect(resolved_scope).to include(album)
+        end
+
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      end
+
+      context 'accessing an unpublished album' do
+        let(:album) do
+          FactoryGirl.create(:unpublished_album_in_published_category)
+        end
+
+        it 'excludes album from resolved scope' do
+          expect(resolved_scope).not_to include(album)
+        end
+
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      end
+    end
+
+    context 'accessing albums in an unpublished category' do
+      context 'accessing a published album' do
+        let(:album) do
+          FactoryGirl.create(:published_album_in_unpublished_category)
+        end
+
+        it 'excludes album from resolved scope' do
+          expect(resolved_scope).not_to include(album)
+        end
+
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      end
+
+      context 'accessing an unpublished album' do
+        let(:album) do
+          FactoryGirl.create(:unpublished_album_in_unpublished_category)
+        end
+
+        it 'excludes album from resolved scope' do
+          expect(resolved_scope).not_to include(album)
+        end
+
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      end
     end
   end
 
   context 'being a registered user' do
     let(:user) { FactoryGirl.create(:registered_user) }
 
-    context 'accessing an album' do
-      let(:album) do
-        FactoryGirl.create(:valid_album)
-      end
+    context 'creating a new album' do
+      let(:album) { Album.new }
 
-      it 'excludes album from resolved scope' do
-        expect(resolved_scope).not_to include(album)
-      end
-
-      it { is_expected.to forbid_action(:show) }
       it { is_expected.to forbid_new_and_create_actions }
-      it { is_expected.to forbid_edit_and_update_actions }
-      it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
+    end
+
+    context 'accessing albums in a published category' do
+      context 'accessing a published album' do
+        let(:album) do
+          FactoryGirl.create(:published_album_in_published_category)
+        end
+
+        it 'includes album in resolved scope' do
+          expect(resolved_scope).to include(album)
+        end
+
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      end
+
+      context 'accessing an unpublished album' do
+        let(:album) do
+          FactoryGirl.create(:unpublished_album_in_published_category)
+        end
+
+        it 'excludes album from resolved scope' do
+          expect(resolved_scope).not_to include(album)
+        end
+
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      end
+    end
+
+    context 'accessing albums in an unpublished category' do
+      context 'accessing a published album' do
+        let(:album) do
+          FactoryGirl.create(:published_album_in_unpublished_category)
+        end
+
+        it 'excludes album from resolved scope' do
+          expect(resolved_scope).not_to include(album)
+        end
+
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      end
+
+      context 'accessing an unpublished album' do
+        let(:album) do
+          FactoryGirl.create(:unpublished_album_in_unpublished_category)
+        end
+
+        it 'excludes album from resolved scope' do
+          expect(resolved_scope).not_to include(album)
+        end
+
+        it { is_expected.to forbid_action(:show) }
+        it { is_expected.to forbid_edit_and_update_actions }
+        it { is_expected.to forbid_action(:destroy) }
+        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      end
     end
   end
 
@@ -60,47 +172,158 @@ describe AlbumPolicy do
       let(:album) { Album.new }
 
       it { is_expected.to permit_new_and_create_actions }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
-    context 'accessing albums that the user does not contribute to' do
-      let(:album) { FactoryGirl.create(:valid_album) }
+    context 'accessing albums in a published category' do
+      context 'accessing albums that the user does not contribute to' do
+        context 'accessing a published album' do
+          let(:album) do
+            FactoryGirl.create(:published_album_in_published_category)
+          end
 
-      it 'excludes album from resolved scope' do
-        expect(resolved_scope).not_to include(album)
-      end
+          it 'includes album in resolved scope' do
+            expect(resolved_scope).to include(album)
+          end
 
-      it { is_expected.to forbid_action(:show) }
-      it { is_expected.to forbid_edit_and_update_actions }
-      it { is_expected.to forbid_action(:destroy) }
-    end
-
-    context 'accessing albums that the user contributes to' do
-      let(:album) do
-        FactoryGirl.create(
-          :valid_album,
-          contributions: [
-            Contribution.new(contributor_profile: contributor_profile)
-          ]
-        )
-      end
-
-      it 'includes album in resolved scope' do
-        expect(resolved_scope).to include(album)
-      end
-
-      it { is_expected.to forbid_action(:show) }
-      it { is_expected.to permit_edit_and_update_actions }
-
-      context 'album has no children' do
-        it { is_expected.to permit_action(:destroy) }
-      end
-
-      context 'album has children' do
-        before do
-          album.pictures << FactoryGirl.create(:valid_picture)
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
 
-        it { is_expected.to forbid_action(:destroy) }
+        context 'accessing an unpublished album' do
+          let(:album) do
+            FactoryGirl.create(:unpublished_album_in_published_category)
+          end
+
+          it 'excludes album from resolved scope' do
+            expect(resolved_scope).not_to include(album)
+          end
+
+          it { is_expected.to forbid_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
+        end
+      end
+
+      context 'accessing albums the user contributes to' do
+        context 'accessing a published album' do
+          let(:album) do
+            FactoryGirl.create(
+              :published_album_in_published_category,
+              contributions: [
+                Contribution.new(contributor_profile: contributor_profile)
+              ]
+            )
+          end
+
+          it 'includes album in resolved scope' do
+            expect(resolved_scope).to include(album)
+          end
+
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
+        end
+
+        context 'accessing an unpublished album' do
+          let(:album) do
+            FactoryGirl.create(
+              :unpublished_album_in_published_category,
+              contributions: [
+                Contribution.new(contributor_profile: contributor_profile)
+              ]
+            )
+          end
+
+          it 'includes album in resolved scope' do
+            expect(resolved_scope).to include(album)
+          end
+
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to permit_edit_and_update_actions }
+          it { is_expected.to permit_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
+        end
+      end
+    end
+
+    context 'accessing albums in an unpublished category' do
+      context 'accessing albums that the user does not contribute to' do
+        context 'accessing a published album' do
+          let(:album) do
+            FactoryGirl.create(:published_album_in_published_category)
+          end
+
+          it 'includes album in resolved scope' do
+            expect(resolved_scope).to include(album)
+          end
+
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
+        end
+
+        context 'accessing an unpublished album' do
+          let(:album) do
+            FactoryGirl.create(:unpublished_album_in_published_category)
+          end
+
+          it 'excludes album from resolved scope' do
+            expect(resolved_scope).not_to include(album)
+          end
+
+          it { is_expected.to forbid_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
+        end
+      end
+
+      context 'accessing albums that the user contributes to' do
+        context 'accessing a published album' do
+          let(:album) do
+            FactoryGirl.create(
+              :published_album_in_unpublished_category,
+              contributions: [
+                Contribution.new(contributor_profile: contributor_profile)
+              ]
+            )
+          end
+
+          it 'includes album in resolved scope' do
+            expect(resolved_scope).to include(album)
+          end
+
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to forbid_edit_and_update_actions }
+          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
+        end
+
+        context 'accessing an unpublished album' do
+          let(:album) do
+            FactoryGirl.create(
+              :unpublished_album_in_unpublished_category,
+              contributions: [
+                Contribution.new(contributor_profile: contributor_profile)
+              ]
+            )
+          end
+
+          it 'includes album in resolved scope' do
+            expect(resolved_scope).to include(album)
+          end
+
+          it { is_expected.to permit_action(:show) }
+          it { is_expected.to permit_edit_and_update_actions }
+          it { is_expected.to permit_action(:destroy) }
+          it { is_expected.to forbid_mass_assignment_of(:publish) }
+        end
       end
     end
   end
@@ -109,31 +332,121 @@ describe AlbumPolicy do
     let(:user) { FactoryGirl.create(:administrator) }
 
     context 'creating a new album' do
-      let(:album) { Poem.new }
+      let(:album) { Album.new }
 
+      it { is_expected.to permit_new_and_create_actions }
+      it { is_expected.to permit_mass_assignment_of(:publish) }
     end
 
-    context 'accessing an album' do
-      let(:album) { FactoryGirl.create(:valid_album) }
-
-      it 'includes album in resolved scope' do
-        expect(resolved_scope).to include(album)
-      end
-
-      it { is_expected.to forbid_action(:show) }
-      it { is_expected.to permit_new_and_create_actions }
-      it { is_expected.to permit_edit_and_update_actions }
-
-      context 'album has no children' do
-        it { is_expected.to permit_action(:destroy) }
-      end
-
-      context 'album has children' do
-        before do
-          album.pictures << FactoryGirl.create(:valid_picture)
+    context 'accessing albums in a published category' do
+      context 'accessing a published album' do
+        let(:album) do
+          FactoryGirl.create(:published_album_in_published_category)
         end
 
-        it { is_expected.to forbid_action(:destroy) }
+        it 'includes album in resolved scope' do
+          expect(resolved_scope).to include(album)
+        end
+
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to permit_edit_and_update_actions }
+
+        context 'album has no children' do
+          it { is_expected.to permit_action(:destroy) }
+        end
+
+        context 'album has children' do
+          before do
+            album.pictures << FactoryGirl.create(:valid_picture)
+          end
+
+          it { is_expected.to forbid_action(:destroy) }
+        end
+
+        it { is_expected.to permit_mass_assignment_of(:publish) }
+      end
+
+      context 'accessing an unpublished album' do
+        let(:album) do
+          FactoryGirl.create(:unpublished_album_in_published_category)
+        end
+
+        it 'includes album in resolved scope' do
+          expect(resolved_scope).to include(album)
+        end
+
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to permit_edit_and_update_actions }
+
+        context 'album has no children' do
+          it { is_expected.to permit_action(:destroy) }
+        end
+
+        context 'album has children' do
+          before do
+            album.pictures << FactoryGirl.create(:valid_picture)
+          end
+
+          it { is_expected.to forbid_action(:destroy) }
+        end
+
+        it { is_expected.to permit_mass_assignment_of(:publish) }
+      end
+    end
+
+    context 'accessing albums in an unpublished category' do
+      context 'accessing a published album' do
+        let(:album) do
+          FactoryGirl.create(:published_album_in_unpublished_category)
+        end
+
+        it 'includes album in resolved scope' do
+          expect(resolved_scope).to include(album)
+        end
+
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to permit_edit_and_update_actions }
+
+        context 'album has no children' do
+          it { is_expected.to permit_action(:destroy) }
+        end
+
+        context 'album has children' do
+          before do
+            album.pictures << FactoryGirl.create(:valid_picture)
+          end
+
+          it { is_expected.to forbid_action(:destroy) }
+        end
+
+        it { is_expected.to permit_mass_assignment_of(:publish) }
+      end
+
+      context 'accessing an unpublished album' do
+        let(:album) do
+          FactoryGirl.create(:unpublished_album_in_unpublished_category)
+        end
+
+        it 'includes album in resolved scope' do
+          expect(resolved_scope).to include(album)
+        end
+
+        it { is_expected.to permit_action(:show) }
+        it { is_expected.to permit_edit_and_update_actions }
+
+        context 'album has no children' do
+          it { is_expected.to permit_action(:destroy) }
+        end
+
+        context 'album has children' do
+          before do
+            album.pictures << FactoryGirl.create(:valid_picture)
+          end
+
+          it { is_expected.to forbid_action(:destroy) }
+        end
+
+        it { is_expected.to permit_mass_assignment_of(:publish) }
       end
     end
   end
