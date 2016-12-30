@@ -21,8 +21,10 @@ class Category < ActiveRecord::Base
     article
     download
     encyclopaedia_entry
-    link music_track
-    picture resource
+    link
+    music_track
+    picture
+    resource
     story
     video
   ).freeze
