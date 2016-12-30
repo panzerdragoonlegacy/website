@@ -85,7 +85,7 @@ module ApplicationHelper
           "\n\n" + line
         contents_added = true
       end
-      updated_markdown += line 
+      updated_markdown += line
     end
 
     # Converts Markdown syntax to html tags using Kramdown.

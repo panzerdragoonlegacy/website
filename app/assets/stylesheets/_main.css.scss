@@ -58,6 +58,10 @@ ul#contributors {
 div#resources {
   margin-top: 20px;
   width: 623px;
+
+  img {
+    margin-top: 0;
+  }
 }
 
 div.resource {
@@ -68,6 +72,16 @@ div.resource {
   overflow: auto;
   background-color: $input-background-colour;
   @include gradients(bottom, #343434, #454545);
+
+  h1 {
+    padding-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 0;
+  }
+
+  img {
+    margin-top: 20px;
+  }
 
   li {
     font-size: 12px;
@@ -83,6 +97,7 @@ div.thumbnail {
   padding-top: 20px;
 
   img {
+    margin-top: 0;
     text-align: center;
     border-radius: 5px;
     border: $border-properties;
@@ -109,6 +124,7 @@ div.comment_thumbnail {
   padding-top: 20px;
 
   img {
+    margin-top: -3px;
     text-align: center;
     border-radius: 5px;
     border: $border-properties;

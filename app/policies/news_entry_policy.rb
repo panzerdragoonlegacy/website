@@ -62,6 +62,7 @@ class NewsEntryPolicy < ApplicationPolicy
     permitted_attributes = [
       :contributor_profile_id,
       :name,
+      :news_entry_picture,
       :content
     ]
     if user

@@ -1,4 +1,28 @@
 module NewsEntriesHelper
+  def show_news_entry_picture(news_entry, style)
+    img_tag_width = '0'
+    img_tag_height = '0'
+    news_entry.send(
+      'news_entry_picture'
+    ).options[:styles].each do |key, value|
+      if key == style
+        img_tag_width = value.split('x')[0]
+        img_tag_height = value.split('x')[1].split('#')[0]
+      end
+    end
+    if news_entry.news_entry_picture.present?
+      image_file = Paperclip::Geometry.from_file(
+        news_entry.news_entry_picture.path(style)
+      )
+      image_tag(
+        news_entry.news_entry_picture.url(style),
+        alt: news_entry.name,
+        width: image_file.width.to_i.to_s,
+        height: image_file.height.to_i.to_s
+      )
+    end
+  end
+
   def news_entry_markdown_to_html(markdown_text)
     require 'rails_autolink'
     require 'kramdown'
