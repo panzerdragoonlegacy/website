@@ -5,6 +5,7 @@ RSpec.describe NewsEntry, type: :model do
     it { is_expected.to respond_to(:name) }
     it { is_expected.to respond_to(:url) }
     it { is_expected.to respond_to(:content) }
+    it { is_expected.to respond_to(:news_entry_picture) }
     it { is_expected.to respond_to(:short_url) }
     it { is_expected.to respond_to(:publish) }
     it { is_expected.to respond_to(:contributor_profile) }
@@ -25,6 +26,34 @@ RSpec.describe NewsEntry, type: :model do
     end
     it { is_expected.to validate_presence_of(:content) }
     it { is_expected.to validate_presence_of(:contributor_profile) }
+  end
+
+  describe 'file attachment' do
+    it { is_expected.to have_attached_file(:news_entry_picture) }
+    it do
+      is_expected.to validate_attachment_presence(:news_entry_picture)
+    end
+    it do
+      is_expected.to validate_attachment_content_type(
+        :news_entry_picture
+      ).allowing('image/jpeg')
+    end
+    it do
+      is_expected.to validate_attachment_size(:news_entry_picture)
+        .less_than(5.megabytes)
+    end
+  end
+
+  describe 'callbacks' do
+    context 'before save' do
+      it "sets the entry's picture file name to match the entry's name" do
+        valid_news_entry = FactoryGirl.build :valid_news_entry
+        valid_news_entry.name = 'New Name'
+        valid_news_entry.save
+        expect(valid_news_entry.news_entry_picture_file_name)
+          .to eq 'new-name.jpg'
+      end
+    end
   end
 
   describe 'slug' do

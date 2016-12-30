@@ -1,5 +1,6 @@
 class NewsEntry < ActiveRecord::Base
   include Sluggable
+  include Syncable
 
   belongs_to :contributor_profile
 
@@ -7,7 +8,26 @@ class NewsEntry < ActiveRecord::Base
   validates :content, presence: true
   validates :contributor_profile, presence: true
 
+  has_attached_file(
+    :news_entry_picture,
+    styles: {
+      embedded: '280x280>'
+    },
+    path: ':rails_root/public/system/:attachment/:id/:style/:filename',
+    url: '/system/:attachment/:id/:style/:filename'
+  )
+
+  validates_attachment(
+    :news_entry_picture,
+    presence: true,
+    content_type: { content_type: 'image/jpeg' },
+    size: { in: 0..5.megabytes }
+  )
+
   before_save :publish_news_entry
+  before_save :sync_file_name
+
+  private
 
   def publish_news_entry
     # The first time the news entry is published:
@@ -44,5 +64,12 @@ class NewsEntry < ActiveRecord::Base
           Rails.application.secrets.twitter['oauth_token_secret']
       end
     twitter_client
+  end
+
+  def sync_file_name
+    sync_file_name_of(
+      :news_entry_picture,
+      file_name: "#{name.to_url}.jpg"
+    )
   end
 end
