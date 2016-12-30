@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230083113) do
+ActiveRecord::Schema.define(version: 20161230091912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,7 +189,6 @@ ActiveRecord::Schema.define(version: 20161230083113) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "published_at"
-    t.string   "short_url",                       limit: 255
     t.boolean  "publish",                                     default: false
     t.string   "news_entry_picture_file_name"
     t.string   "news_entry_picture_content_type"
