@@ -133,8 +133,8 @@ module NewsEntriesHelper
       img_count = img_count + 1
     end
 
-    # Sets correct id, src, width, and height attributes for the picture mini
-    # thumbnail.
+    # Sets correct id, src, width, and height attributes for the picture's
+    # thumbnails.
     html.css('img').each do |img|
       file_name = img.get_attribute('src')
       picture_id = file_name.split('-')[0].to_i
@@ -153,9 +153,9 @@ module NewsEntriesHelper
           image_file = Paperclip::Geometry.from_file(picture.picture.path(
             :triple_thumbnail))
         else
-          img.set_attribute('src', picture.picture.url(:mini_thumbnail))
+          img.set_attribute('src', picture.picture.url(:news_entry_thumbnail))
           image_file = Paperclip::Geometry.from_file(picture.picture.path(
-            :mini_thumbnail))
+            :news_entry_thumbnail))
         end
         img.set_attribute('width', image_file.width.to_i.to_s)
         img.set_attribute('height', image_file.height.to_i.to_s)

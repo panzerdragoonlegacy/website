@@ -15,6 +15,7 @@ class Picture < ActiveRecord::Base
     :picture,
     styles: {
       mini_thumbnail: '75x75#',
+      news_entry_thumbnail: '100x100#',
       thumbnail: '150x150>',
       triple_thumbnail: '150x150#',
       double_thumbnail: '238x238#',

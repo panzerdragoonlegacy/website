@@ -146,6 +146,12 @@ div.comment_details {
     margin-bottom: 0;
   }
 
+  img {
+    margin-top: 0;
+    padding: 1px;
+    border-radius: 0;
+  }
+
   audio {
     margin-top: 20px;
   }
@@ -162,12 +168,6 @@ div.comment_details {
     margin-top: 20px;
     padding-bottom: 8px;
     text-align: center;
-
-    a img {
-      border-radius: 5px;
-      border: $border-properties;
-      margin-bottom: -8px;
-    }
   }
 }
 
