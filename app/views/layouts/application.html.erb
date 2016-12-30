@@ -115,7 +115,9 @@
         </div>
         <div id="content">
           <% flash.each do |name, msg| %>
-            <%= content_tag :div, msg, id: "flash_#{name}" %>
+            <% unless name.to_s == 'timedout' %>
+              <%= content_tag :div, msg, id: "flash_#{name}" %>
+            <% end %>
           <% end %>
           <% if yield(:title).present? %>
             <h1><%= yield(:title) %></h1>
