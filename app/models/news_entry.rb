@@ -19,7 +19,6 @@ class NewsEntry < ActiveRecord::Base
 
   validates_attachment(
     :news_entry_picture,
-    presence: true,
     content_type: { content_type: 'image/jpeg' },
     size: { in: 0..5.megabytes }
   )

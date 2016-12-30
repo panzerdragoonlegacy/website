@@ -30,9 +30,6 @@ RSpec.describe NewsEntry, type: :model do
   describe 'file attachment' do
     it { is_expected.to have_attached_file(:news_entry_picture) }
     it do
-      is_expected.to validate_attachment_presence(:news_entry_picture)
-    end
-    it do
       is_expected.to validate_attachment_content_type(
         :news_entry_picture
       ).allowing('image/jpeg')
