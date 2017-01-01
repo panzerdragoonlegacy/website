@@ -8,7 +8,7 @@ class NewsEntriesController < ApplicationController
       load_draft_news_entries
     else
       @news_entries = policy_scope(
-        NewsEntry.order('created_at desc').page(params[:page])
+        NewsEntry.order('published_at desc').page(params[:page])
       )
     end
   end
