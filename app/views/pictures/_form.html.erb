@@ -14,7 +14,7 @@
       <%= f.label :album_id, 'Album' %>
     </div>
     <div>
-      <%= f.collection_select :album_id, @albums, :id, :name,
+      <%= f.collection_select :album_id, @albums, :id, :name_and_id,
         { include_blank: true } %>
     </div>
   </div>
