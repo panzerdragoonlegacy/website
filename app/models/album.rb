@@ -3,6 +3,7 @@ class Album < ActiveRecord::Base
 
   include Categorisable
   include Contributable
+  include Relatable
   include Syncable
 
   has_many :pictures, dependent: :destroy

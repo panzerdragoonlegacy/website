@@ -69,6 +69,7 @@ class AlbumPolicy < ApplicationPolicy
       :description,
       :information,
       contributor_profile_ids: [],
+      encyclopaedia_entry_ids: [],
       pictures_attributes: [
         :id,
         :category_id,
@@ -76,6 +77,7 @@ class AlbumPolicy < ApplicationPolicy
         :description,
         :information,
         :contributor_profile_ids,
+        :encyclopaedia_entry_ids,
         :picture,
         :_destroy
       ]

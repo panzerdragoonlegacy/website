@@ -18,6 +18,8 @@ RSpec.describe Album, type: :model do
     it do
       is_expected.to have_many(:contributor_profiles).through(:contributions)
     end
+    it { is_expected.to have_many(:relations).dependent(:destroy) }
+    it { is_expected.to have_many(:encyclopaedia_entries).through(:relations) }
     it { is_expected.to have_many(:pictures).dependent(:destroy) }
   end
 

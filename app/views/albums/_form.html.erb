@@ -65,6 +65,21 @@
     </div>
   </div>
   <div>
+    <div>
+      <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
+    </div>
+    <div>
+      <%= f.collection_select :encyclopaedia_entry_ids,
+        EncyclopaediaEntry.order(:name), :id, :name,
+        { selected: @album.encyclopaedia_entry_ids, include_blank: true },
+        { multiple: true } %>
+      <p>
+        Pictures in the album with no related encyclopaedia entries will
+        inherit the album's related encyclopaedia entries.
+      </p>
+    </div>
+  </div>
+  <div>
     <label>Pictures</label>
     <%= f.fields_for :pictures do |picture_form| %>
       <div class="illustration">

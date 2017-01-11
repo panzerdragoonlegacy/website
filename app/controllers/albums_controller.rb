@@ -39,6 +39,7 @@ class AlbumsController < ApplicationController
 
   def update
     params[:album][:contributor_profile_ids] ||= []
+    params[:album][:encyclopaedia_entry_ids] ||= []
     the_params = synchronised_params(album_params)
     if @album.update_attributes the_params
       flash[:notice] = 'Successfully updated album.'
@@ -81,6 +82,10 @@ class AlbumsController < ApplicationController
         if value['contributor_profile_ids'].blank?
           the_params['pictures_attributes'][key]['contributor_profile_ids'] =
             the_params['contributor_profile_ids']
+        end
+        if value['encyclopaedia_entry_ids'].blank?
+          the_params['pictures_attributes'][key]['encyclopaedia_entry_ids'] =
+            the_params['encyclopaedia_entry_ids']
         end
         the_params['pictures_attributes'][key]['publish'] =
           the_params['publish']
