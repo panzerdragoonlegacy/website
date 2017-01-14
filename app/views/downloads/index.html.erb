@@ -6,12 +6,13 @@
   <% title "Downloads" %>
 <% end %>
 
-<% if policy(Category).new? or policy(Download).new? %>
+<% if policy(Category).new? || policy(Download).new? %>
   <ul class="administration">
     <% if policy(Category).new? %>
       <li>
-        <%= link_to 'New Category', new_category_path(
-          category_type: :download) %>
+        <%= link_to 'New Category',
+          new_category_path(category_type: :download)
+        %>
       </li>
     <% end %>
     <% if policy(Download).new? %>
@@ -20,7 +21,7 @@
   </ul>
 <% end %>
 
-<% unless params[:contributor_profile_id] or params[:filter] %>
+<% unless params[:contributor_profile_id] || params[:filter] %>
   <% if @categories.present? %>
     <h2>Download Categories</h2>
     <ul class="categories">

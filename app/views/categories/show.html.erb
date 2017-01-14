@@ -5,8 +5,11 @@
   <p class="unpublished">Unpublished</p>
 <% end %>
 
-<% if policy(CategoryGroup).new? or policy(Category).new? or
-  policy(@category).edit? or policy(@category).destroy? %>
+<% if policy(CategoryGroup).new? ||
+  policy(Category).new? ||
+  policy(@category).edit? ||
+  policy(@category).destroy?
+%>
   <ul class="administration">
     <% if policy(CategoryGroup).new? %>
       <li><%= link_to 'New Category Group', new_category_group_path %></li>
@@ -19,7 +22,8 @@
     <% end %>
     <% if policy(@category).destroy? %>
       <li>
-        <%= link_to 'Delete Category', @category,
+        <%= link_to 'Delete Category',
+          @category,
           data: { confirm: 'Are you sure you want to delete this category?' },
           method: :delete
         %>

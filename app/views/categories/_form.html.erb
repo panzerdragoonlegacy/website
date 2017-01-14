@@ -5,8 +5,11 @@
       <%= f.label :category_type, 'Category Type' %>
     </div>
     <div>
-      <%= f.collection_select :category_type, Category::CATEGORY_TYPES,
-        :to_s, :titleize %>
+      <%= f.collection_select :category_type,
+        Category::CATEGORY_TYPES,
+        :to_s,
+        :titleize
+      %>
     </div>
   </div>
   <div>
@@ -14,8 +17,12 @@
       <%= f.label :category_group_id, 'Category Group' %>
     </div>
     <div>
-      <%= f.collection_select :category_group_id, @category_groups, :id, :name,
-        { include_blank: true } %>
+      <%= f.collection_select :category_group_id,
+        @category_groups,
+        :id,
+        :name,
+        { include_blank: true }
+      %>
     </div>
   </div>
   <div>

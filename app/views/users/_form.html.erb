@@ -13,12 +13,16 @@
       <%= f.label :contributor_profile_id, 'Contributor Profile' %>
     </div>
     <div>
-      <%= f.collection_select :contributor_profile_id, @contributor_profiles, 
-        :id, :name, { include_blank: true } %>
+      <%= f.collection_select :contributor_profile_id,
+        @contributor_profiles,
+        :id,
+        :name,
+        { include_blank: true }
+      %>
     </div>
   </div>
   <div>
-    <%= f.check_box :administrator %> 
+    <%= f.check_box :administrator %>
     <%= f.label :administrator, 'Administrator? (Be Careful!)' %>
   </div>
   <div>

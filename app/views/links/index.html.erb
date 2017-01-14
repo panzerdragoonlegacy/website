@@ -4,7 +4,7 @@
   <% title "Links" %>
 <% end %>
 
-<% if policy(Category).new? or policy(Link).new? %>
+<% if policy(Category).new? || policy(Link).new? %>
   <ul class="administration">
     <% if policy(Category).new? %>
       <li>

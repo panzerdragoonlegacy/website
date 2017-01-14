@@ -5,7 +5,7 @@
   <p class="unpublished">Unpublished</p>
 <% end %>
 
-<% if policy(@poem).new? or policy(@poem).edit? or policy(@poem).destroy? %>
+<% if policy(@poem).new? || policy(@poem).edit? || policy(@poem).destroy? %>
   <ul class="administration">
     <% if policy(@poem).new? %>
       <li><%= link_to 'New Poem', new_poem_path %></li>
@@ -15,9 +15,11 @@
     <% end %>
     <% if policy(@poem).destroy? %>
       <li>
-        <%= link_to 'Delete Poem', @poem, data: {
-          confirm: 'Are you sure you want to delete this poem?' },
-          method: :delete %>
+        <%= link_to 'Delete Poem',
+          @poem,
+          data: { confirm: 'Are you sure you want to delete this poem?' },
+          method: :delete
+        %>
       </li>
     <% end %>
   </ul>

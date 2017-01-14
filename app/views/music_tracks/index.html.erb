@@ -6,8 +6,10 @@
   <% title "Music Tracks" %>
 <% end %>
 
-<% if policy(CategoryGroup).new? or policy(Category).new? or
-  policy(MusicTrack).new? %>
+<% if policy(CategoryGroup).new? ||
+  policy(Category).new? ||
+  policy(MusicTrack).new?
+%>
   <ul class="administration">
     <% if policy(CategoryGroup).new? %>
       <li>
@@ -27,7 +29,7 @@
   </ul>
 <% end %>
 
-<% unless params[:contributor_profile_id] or params[:filter] %>
+<% unless params[:contributor_profile_id] || params[:filter] %>
   <% if @category_groups.present? %>
     <h2>Music Categories</h2>
     <%= render partial: 'site_map/category_groups', locals: {

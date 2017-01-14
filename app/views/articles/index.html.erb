@@ -6,12 +6,14 @@
   <% title "Articles" %>
 <% end %>
 
-<% if policy(Category).new? or policy(Article).new? %>
+<% if policy(Category).new? || policy(Article).new? %>
   <ul class="administration">
     <% if policy(Category).new? %>
       <li>
-        <%= link_to 'New Category', new_category_path(
-          category_type: :article) %>
+        <%= link_to 'New Category',
+          new_category_path(
+          category_type: :article)
+        %>
       </li>
     <% end %>
     <% if policy(Article).new? %>
@@ -20,7 +22,7 @@
   </ul>
 <% end %>
 
-<% unless params[:contributor_profile_id] or params[:filter] %>
+<% unless params[:contributor_profile_id] || params[:filter] %>
   <% if @categories.present? %>
     <h2>Article Categories</h2>
     <ul class="categories">

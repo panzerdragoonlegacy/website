@@ -10,9 +10,11 @@
     <li><%= link_to 'New Page', new_page_path %></li>
     <li><%= link_to 'Edit Page', edit_page_path(@page) %></li>
     <li>
-      <%= link_to 'Delete Page', @page, data: {
-        confirm: 'Are you sure you want to delete this page?' },
-        method: :delete %>
+      <%= link_to 'Delete Page',
+        @page,
+        data: { confirm: 'Are you sure you want to delete this page?' },
+        method: :delete
+      %>
     </li>
   </ul>
 <% end %>

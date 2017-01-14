@@ -4,7 +4,7 @@
   <% title "Categories" %>
 <% end %>
 
-<% if policy(CategoryGroup).new? or policy(Category).new? %>
+<% if policy(CategoryGroup).new? || policy(Category).new? %>
   <ul class="administration">
     <% if policy(CategoryGroup).new? %>
       <li><%= link_to 'New Category Group', new_category_group_path %></li>

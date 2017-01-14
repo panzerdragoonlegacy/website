@@ -5,8 +5,12 @@
       <%= f.label :category_id, 'Category' %>
     </div>
     <div>
-      <%= f.collection_select :category_id, @categories, :id, :name,
-        { include_blank: true } %>
+      <%= f.collection_select :category_id,
+        @categories,
+        :id,
+        :name,
+        { include_blank: true }
+      %>
       <p class="unpublished">
         Warning: changing the album's category will move every picture in the
         album to that category.
@@ -19,9 +23,12 @@
     </div>
     <div>
       <%= f.collection_select :contributor_profile_ids,
-        ContributorProfile.order(:name), :id, :name,
+        ContributorProfile.order(:name),
+        :id,
+        :name,
         { selected: @album.contributor_profile_ids, include_blank: true },
-        { multiple: true } %>
+        { multiple: true }
+      %>
       <p>
         Pictures in the album with no contributors will inherit the album's
         contributors.
@@ -70,9 +77,12 @@
     </div>
     <div>
       <%= f.collection_select :encyclopaedia_entry_ids,
-        EncyclopaediaEntry.order(:name), :id, :name,
+        EncyclopaediaEntry.order(:name),
+        :id,
+        :name,
         { selected: @album.encyclopaedia_entry_ids, include_blank: true },
-        { multiple: true } %>
+        { multiple: true }
+      %>
       <p>
         Pictures in the album with no related encyclopaedia entries will
         inherit the album's related encyclopaedia entries.

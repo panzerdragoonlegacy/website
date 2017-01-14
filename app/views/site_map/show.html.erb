@@ -1,6 +1,6 @@
 <% title "Site Map" %>
 
-<% if policy(CategoryGroup).new? or policy(Category).new? %>
+<% if policy(CategoryGroup).new? || policy(Category).new? %>
   <ul class="administration">
     <% if policy(CategoryGroup).new? %>
       <li><%= link_to 'New Category Group', new_category_group_path %></li>
@@ -14,33 +14,39 @@
 <ul>
   <li>
     <h2><%= link_to "Articles", articles_path %></h2>
-    <%= render partial: 'categories', locals: {
-      categories: @article_categories } %>
+    <%= render partial: 'categories',
+      locals: { categories: @article_categories }
+    %>
   </li>
   <li>
     <h2><%= link_to "Downloads", downloads_path %></h2>
-    <%= render partial: 'categories', locals: {
-      categories: @download_categories } %>
+    <%= render partial: 'categories',
+      locals: { categories: @download_categories }
+    %>
   </li>
   <li>
     <h2><%= link_to "Encyclopaedia", encyclopaedia_entries_path %></h2>
-    <%= render partial: 'category_groups', locals: {
-      category_groups: @encyclopaedia_entry_category_groups } %>
+    <%= render partial: 'category_groups',
+      locals: { category_groups: @encyclopaedia_entry_category_groups }
+    %>
   </li>
   <li>
     <h2><%= link_to "Links", links_path %></h2>
-    <%= render partial: 'categories', locals: {
-      categories: @link_categories } %>
+    <%= render partial: 'categories',
+      locals: { categories: @link_categories }
+    %>
   </li>
   <li>
     <h2><%= link_to "Music", music_tracks_path %></h2>
-    <%= render partial: 'category_groups', locals: {
-      category_groups: @music_track_category_groups } %>
+    <%= render partial: 'category_groups',
+      locals: { category_groups: @music_track_category_groups }
+    %>
   </li>
   <li>
     <h2><%= link_to "Pictures", pictures_path %></h2>
-    <%= render partial: 'category_groups', locals: {
-      category_groups: @picture_category_groups } %>
+    <%= render partial: 'category_groups',
+      locals: { category_groups: @picture_category_groups }
+    %>
   </li>
   <li>
     <h2><%= link_to "Poems", poems_path %></h2>
@@ -50,17 +56,20 @@
   </li>
   <li>
     <h2><%= link_to "Resources", resources_path %></h2>
-    <%= render partial: 'category_groups', locals: {
-      category_groups: @resource_category_groups } %>
+    <%= render partial: 'category_groups',
+      locals: { category_groups: @resource_category_groups }
+    %>
   </li>
   <li>
     <h2><%= link_to "Stories", stories_path %></h2>
-    <%= render partial: 'categories', locals: {
-      categories: @story_categories } %>
+    <%= render partial: 'categories',
+      locals: { categories: @story_categories }
+    %>
   </li>
   <li>
     <h2><%= link_to "Videos", videos_path %></h2>
-    <%= render partial: 'category_groups', locals: {
-      category_groups: @video_category_groups } %>
+    <%= render partial: 'category_groups',
+      locals: { category_groups: @video_category_groups }
+    %>
   </li>
 </ul>

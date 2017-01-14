@@ -4,27 +4,34 @@
       <% if policy(category_group).show? %>
         <li>
           <h3><%= category_group.name %></h3>
-          <% if policy(category_group).edit? or policy(category_group).destroy? %>
+          <% if policy(category_group).edit? ||
+            policy(category_group).destroy?
+          %>
             <ul class="administration">
               <% if policy(category_group).edit? %>
                 <li>
-                  <%= link_to 'Edit Category Group', edit_category_group_path(
-                    category_group) %>
+                  <%= link_to 'Edit Category Group',
+                    edit_category_group_path(category_group)
+                  %>
                 </li>
               <% end %>
               <% if policy(category_group).destroy? %>
                 <li>
-                  <%= link_to 'Delete Category Group', category_group,
-                    data: { confirm: "Are you sure you want to delete the " +
-                      "category group '#{category_group.name}'?" },
+                  <%= link_to 'Delete Category Group',
+                    category_group,
+                    data: {
+                      confirm: "Are you sure you want to delete the " \
+                        "category group '#{category_group.name}'?"
+                    },
                     method: :delete
                   %>
                 </li>
               <% end %>
             </ul>
           <% end %>
-          <%= render partial: 'site_map/categories', locals: {
-            categories: category_group.categories.order(:name) } %>
+          <%= render partial: 'site_map/categories',
+            locals: { categories: category_group.categories.order(:name) }
+          %>
         </li>
       <% end %>
     <% end %>

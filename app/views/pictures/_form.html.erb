@@ -5,8 +5,12 @@
       <%= f.label :category_id, 'Category' %>
     </div>
     <div>
-      <%= f.collection_select :category_id, @categories, :id, :name,
-        { include_blank: true } %>
+      <%= f.collection_select :category_id,
+        @categories,
+        :id,
+        :name,
+        { include_blank: true }
+      %>
     </div>
   </div>
   <div>
@@ -14,8 +18,12 @@
       <%= f.label :album_id, 'Album' %>
     </div>
     <div>
-      <%= f.collection_select :album_id, @albums, :id, :name_and_id,
-        { include_blank: true } %>
+      <%= f.collection_select :album_id,
+        @albums,
+        :id,
+        :name_and_id,
+        { include_blank: true }
+      %>
     </div>
   </div>
   <div>
@@ -24,9 +32,12 @@
     </div>
     <div>
       <%= f.collection_select :contributor_profile_ids,
-        ContributorProfile.order(:name), :id, :name,
+        ContributorProfile.order(:name),
+        :id,
+        :name,
         { selected: @picture.contributor_profile_ids, include_blank: true },
-        { multiple: true } %>
+        { multiple: true }
+      %>
     </div>
   </div>
   <div>
@@ -79,9 +90,12 @@
     </div>
     <div>
       <%= f.collection_select :encyclopaedia_entry_ids,
-        EncyclopaediaEntry.order(:name), :id, :name,
+        EncyclopaediaEntry.order(:name),
+        :id,
+        :name,
         { selected: @picture.encyclopaedia_entry_ids, include_blank: true },
-        { multiple: true } %>
+        { multiple: true }
+      %>
     </div>
   </div>
   <% unless @picture.publish %>

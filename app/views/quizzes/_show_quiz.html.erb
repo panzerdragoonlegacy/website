@@ -6,8 +6,9 @@
       <% for quiz_answer in quiz_question.quiz_answers %>
         <li>
           <%= radio_button_tag "results[" + quiz_question.id.to_s + "]",
-            quiz_answer.id.to_s, checked = chosen_answer(
-            quiz_question, quiz_answer) %>
+            quiz_answer.id.to_s,
+            checked = chosen_answer(quiz_question, quiz_answer)
+          %>
           <%= quiz_answer.content %>
         </li>
       <% end %>

@@ -1,4 +1,4 @@
-<%= form_for @news_entry, html: { class: 'ui form' } do |f| %>
+<%= form_for @news_entry do |f| %>
   <%= render "shared/error_messages", target: @news_entry %>
   <div>
     <div>
@@ -6,7 +6,11 @@
     </div>
     <div>
       <%= f.collection_select :contributor_profile_id,
-        ContributorProfile.order(:name), :id, :name, { include_blank: false } %>
+        ContributorProfile.order(:name),
+        :id,
+        :name,
+        { include_blank: false }
+      %>
     </div>
   </div>
   <div>

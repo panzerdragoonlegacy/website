@@ -5,8 +5,12 @@
       <%= f.label :category_id, 'Category' %>
     </div>
     <div>
-      <%= f.collection_select :category_id, @categories, :id, :name,
-        { include_blank: true } %>
+      <%= f.collection_select :category_id,
+        @categories,
+        :id,
+        :name,
+        { include_blank: true }
+      %>
     </div>
   </div>
   <div>
@@ -14,10 +18,16 @@
       <%= f.label :contributor_profile_ids, 'Contributors (optional)' %>
     </div>
     <div>
-      <%= f.collection_select :contributor_profile_ids, 
-        ContributorProfile.order(:name), :id, :name, 
-        { selected: @encyclopaedia_entry.contributor_profile_ids, 
-        include_blank: true }, { multiple: true } %>
+      <%= f.collection_select :contributor_profile_ids,
+        ContributorProfile.order(:name),
+        :id,
+        :name,
+        {
+          selected: @encyclopaedia_entry.contributor_profile_ids,
+          include_blank: true
+        },
+        { multiple: true }
+      %>
     </div>
   </div>
   <div>
@@ -49,7 +59,7 @@
       <%= f.text_area :information, rows: 10 %>
       <p>
         (Use a <a href="/markdown-syntax-guide" target="_blank">Markdown
-        description list</a> to format the encyclopaedia entry's information 
+        description list</a> to format the encyclopaedia entry's information
         box)
       </p>
     </div>
@@ -92,10 +102,13 @@
       <%= f.label :article_ids, 'Related Articles' %>
     </div>
     <div>
-      <%= f.collection_select :article_ids, 
-        Article.order(:name), :id, :name, 
-        { selected: @encyclopaedia_entry.article_ids, include_blank: true }, 
-        { multiple: true } %>
+      <%= f.collection_select :article_ids,
+        Article.order(:name),
+        :id,
+        :name,
+        { selected: @encyclopaedia_entry.article_ids, include_blank: true },
+        { multiple: true }
+      %>
     </div>
   </div>
   <div>
@@ -103,10 +116,13 @@
       <%= f.label :download_ids, 'Related Downloads' %>
     </div>
     <div>
-      <%= f.collection_select :download_ids, 
-        Download.order(:name), :id, :name, 
-        { selected: @encyclopaedia_entry.download_ids, include_blank: true }, 
-        { multiple: true } %>
+      <%= f.collection_select :download_ids,
+        Download.order(:name),
+        :id,
+        :name,
+        { selected: @encyclopaedia_entry.download_ids, include_blank: true },
+        { multiple: true }
+      %>
     </div>
   </div>
   <div>
@@ -114,10 +130,13 @@
       <%= f.label :link_ids, 'Related Links' %>
     </div>
     <div>
-      <%= f.collection_select :link_ids, 
-        Link.order(:name), :id, :name, 
-        { selected: @encyclopaedia_entry.link_ids, include_blank: true }, 
-        { multiple: true } %>
+      <%= f.collection_select :link_ids,
+        Link.order(:name),
+        :id,
+        :name,
+        { selected: @encyclopaedia_entry.link_ids, include_blank: true },
+        { multiple: true }
+      %>
     </div>
   </div>
   <div>
@@ -125,10 +144,13 @@
       <%= f.label :music_track_ids, 'Related Music Tracks' %>
     </div>
     <div>
-      <%= f.collection_select :music_track_ids, 
-        MusicTrack.order(:name), :id, :name, 
-        { selected: @encyclopaedia_entry.music_track_ids, include_blank: true }, 
-        { multiple: true } %>
+      <%= f.collection_select :music_track_ids,
+        MusicTrack.order(:name),
+        :id,
+        :name,
+        { selected: @encyclopaedia_entry.music_track_ids, include_blank: true },
+        { multiple: true }
+      %>
     </div>
   </div>
   <div>
@@ -136,21 +158,27 @@
       <%= f.label :picture_ids, 'Related Pictures' %>
     </div>
     <div>
-      <%= f.collection_select :picture_ids, 
-        Picture.order(:name), :id, :name, 
-        { selected: @encyclopaedia_entry.picture_ids, include_blank: true }, 
-        { multiple: true } %>
+      <%= f.collection_select :picture_ids,
+        Picture.order(:name),
+        :id,
+        :name,
+        { selected: @encyclopaedia_entry.picture_ids, include_blank: true },
+        { multiple: true }
+      %>
     </div>
   </div>
   <div>
     <div>
       <%= f.label :poem_ids, 'Related Poems' %>
     </div>
-    <div>  
-      <%= f.collection_select :poem_ids, 
-        Poem.order(:name), :id, :name, 
-        { selected: @encyclopaedia_entry.poem_ids, include_blank: true }, 
-        { multiple: true } %>
+    <div>
+      <%= f.collection_select :poem_ids,
+        Poem.order(:name),
+        :id,
+        :name,
+        { selected: @encyclopaedia_entry.poem_ids, include_blank: true },
+        { multiple: true }
+      %>
     </div>
   </div>
   <div>
@@ -158,10 +186,13 @@
       <%= f.label :quiz_ids, 'Related Quizzes' %>
     </div>
     <div>
-      <%= f.collection_select :quiz_ids, 
-        Quiz.order(:name), :id, :name, 
-        { selected: @encyclopaedia_entry.quiz_ids, include_blank: true }, 
-        { multiple: true } %>
+      <%= f.collection_select :quiz_ids,
+        Quiz.order(:name),
+        :id,
+        :name,
+        { selected: @encyclopaedia_entry.quiz_ids, include_blank: true },
+        { multiple: true }
+      %>
     </div>
   </div>
   <div>
@@ -169,10 +200,13 @@
       <%= f.label :resource_ids, 'Related Resources' %>
     </div>
     <div>
-      <%= f.collection_select :resource_ids, 
-        Resource.order(:name), :id, :name, 
-        { selected: @encyclopaedia_entry.resource_ids, include_blank: true }, 
-        { multiple: true } %>
+      <%= f.collection_select :resource_ids,
+        Resource.order(:name),
+        :id,
+        :name,
+        { selected: @encyclopaedia_entry.resource_ids, include_blank: true },
+        { multiple: true }
+      %>
     </div>
   </div>
   <div>
@@ -180,10 +214,13 @@
       <%= f.label :story_ids, 'Related Stories' %>
     </div>
     <div>
-      <%= f.collection_select :story_ids, 
-        Story.order(:name), :id, :name, 
-        { selected: @encyclopaedia_entry.story_ids, include_blank: true }, 
-        { multiple: true } %>
+      <%= f.collection_select :story_ids,
+        Story.order(:name),
+        :id,
+        :name,
+        { selected: @encyclopaedia_entry.story_ids, include_blank: true },
+        { multiple: true }
+      %>
     </div>
   </div>
   <div>
@@ -191,10 +228,13 @@
       <%= f.label :video_ids, 'Related Videos' %>
     </div>
     <div>
-      <%= f.collection_select :video_ids, 
-        Video.order(:name), :id, :name, 
-        { selected: @encyclopaedia_entry.video_ids, include_blank: true }, 
-        { multiple: true } %>
+      <%= f.collection_select :video_ids,
+        Video.order(:name),
+        :id,
+        :name,
+        { selected: @encyclopaedia_entry.video_ids, include_blank: true },
+        { multiple: true }
+      %>
     </div>
   </div>
   <% if policy(@encyclopaedia_entry).permitted_attributes.include? :publish %>

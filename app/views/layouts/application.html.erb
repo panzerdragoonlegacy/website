@@ -18,8 +18,16 @@
     <div id="overall">
       <%= render 'illustrations/popover' %>
       <div id="header">
-        <%= link_to image_tag("logo.png", id: "logo",
-          alt: "Panzer Dragoon Legacy"), root_url %>
+        <%=
+          link_to(
+            image_tag(
+              "logo.png",
+              id: "logo",
+              alt: "Panzer Dragoon Legacy"
+            ),
+            root_url
+          )
+        %>
         <%= render 'layouts/social_media_links' %>
       </div>
       <div id="banner"></div>
@@ -48,7 +56,8 @@
                 <% if policy(saga.encyclopaedia_entry).show? %>
                   <li>
                     <%= link_to saga.name,
-                      encyclopaedia_entry_path(saga.encyclopaedia_entry) %>
+                      encyclopaedia_entry_path(saga.encyclopaedia_entry)
+                    %>
                   </li>
                 <% end %>
               <% end %>

@@ -22,10 +22,14 @@
     <% end %>
     <% if policy(@story).destroy? %>
       <li>
-        <%= link_to 'Delete Story', @story, data: {
-          confirm: 'Are you sure you want to delete this story? ALL chapters " +
-            "belonging to this story will be deleted.' },
-          method: :delete %>
+        <%= link_to 'Delete Story',
+          @story,
+          data: {
+            confirm: 'Are you sure you want to delete this story? ALL ' \
+              'chapters belonging to this story will be deleted.'
+          },
+          method: :delete
+        %>
       </li>
     <% end %>
   </ul>

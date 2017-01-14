@@ -6,7 +6,10 @@
     </div>
     <div>
       <%= f.collection_select :category_group_type,
-        CategoryGroup::CATEGORY_GROUP_TYPES, :to_s, :titleize %>
+        CategoryGroup::CATEGORY_GROUP_TYPES,
+        :to_s,
+        :titleize
+      %>
     </div>
   </div>
   <div>

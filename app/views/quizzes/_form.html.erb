@@ -5,10 +5,13 @@
       <%= f.label :contributor_profile_ids, 'Contributors' %>
     </div>
     <div>
-      <%= f.collection_select :contributor_profile_ids, 
-        ContributorProfile.order(:name), :id, :name, 
-        { selected: @quiz.contributor_profile_ids, include_blank: true }, 
-        { multiple: true } %>
+      <%= f.collection_select :contributor_profile_ids,
+        ContributorProfile.order(:name),
+        :id,
+        :name,
+        { selected: @quiz.contributor_profile_ids, include_blank: true },
+        { multiple: true }
+      %>
     </div>
   </div>
   <div>
@@ -41,10 +44,13 @@
       <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
     </div>
     <div>
-      <%= f.collection_select :encyclopaedia_entry_ids, 
-        EncyclopaediaEntry.order(:name), :id, :name, 
-        { selected: @quiz.encyclopaedia_entry_ids, include_blank: true }, 
-        { multiple: true } %>
+      <%= f.collection_select :encyclopaedia_entry_ids,
+        EncyclopaediaEntry.order(:name),
+        :id,
+        :name,
+        { selected: @quiz.encyclopaedia_entry_ids, include_blank: true },
+        { multiple: true }
+      %>
     </div>
   </div>
   <% if policy(@quiz).permitted_attributes.include? :publish %>

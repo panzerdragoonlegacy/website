@@ -4,8 +4,10 @@
   <% title "Encyclopaedia" %>
 <% end %>
 
-<% if policy(CategoryGroup).new? or policy(Category).new? or
-  policy(EncyclopaediaEntry).new? %>
+<% if policy(CategoryGroup).new? ||
+  policy(Category).new? ||
+  policy(EncyclopaediaEntry).new?
+%>
   <ul class="administration">
     <% if policy(CategoryGroup).new? %>
       <li>
@@ -29,8 +31,9 @@
 
 <% if @category_groups.present? %>
   <h2>Encyclopaedia Categories</h2>
-  <%= render partial: 'site_map/category_groups', locals: {
-    category_groups: @category_groups } %>
+  <%= render partial: 'site_map/category_groups',
+    locals: { category_groups: @category_groups }
+  %>
 <% end %>
 
 <% if @encyclopaedia_entries.present? %>

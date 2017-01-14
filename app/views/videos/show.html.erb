@@ -7,7 +7,7 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if policy(@video).new? or policy(@video).edit? or policy(@video).destroy? %>
+<% if policy(@video).new? || policy(@video).edit? || policy(@video).destroy? %>
   <ul class="administration">
     <% if policy(@video).new? %>
       <li>
@@ -19,9 +19,11 @@
     <% end %>
     <% if policy(@video).destroy? %>
       <li>
-        <%= link_to 'Delete Video', @video, data: {
-          confirm: 'Are you sure you want to delete this video?' },
-          method: :delete %>
+        <%= link_to 'Delete Video',
+          @video,
+          data: { confirm: 'Are you sure you want to delete this video?' },
+          method: :delete
+        %>
       </li>
     <% end %>
   </ul>
@@ -56,8 +58,9 @@
 
 <p>
   <% unless @video.youtube_video_id.blank? %>
-    Watch Video: <%= link_to "YouTube", "http://www.youtube.com/watch?v=" +
-      @video.youtube_video_id  %>.
+    Watch Video: <%= link_to "YouTube",
+      "http://www.youtube.com/watch?v=" + @video.youtube_video_id
+    %>.
   <% end %>
   Download Video: <%= link_to "MP4", @video.mp4_video.url %> |
   <%= link_to "WebM", @video.webm_video.url %>

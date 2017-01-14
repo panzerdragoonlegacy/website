@@ -6,19 +6,23 @@
   <% title "Pictures" %>
 <% end %>
 
-<% if policy(CategoryGroup).new? or policy(Category).new? or
-  policy(Picture).new? %>
+<% if policy(CategoryGroup).new? ||
+  policy(Category).new? ||
+  policy(Picture).new?
+%>
   <ul class="administration">
     <% if policy(CategoryGroup).new? %>
       <li>
-        <%= link_to 'New Category Group', new_category_group_path(
-          category_group_type: :picture) %>
+        <%= link_to 'New Category Group',
+          new_category_group_path(category_group_type: :picture)
+        %>
       </li>
     <% end %>
     <% if policy(Category).new? %>
       <li>
-        <%= link_to 'New Category', new_category_path(
-          category_type: :picture) %>
+        <%= link_to 'New Category',
+          new_category_path(category_type: :picture)
+        %>
       </li>
     <% end %>
     <% if policy(Album).new? %>
@@ -41,12 +45,12 @@
   </ul>
 <% end %>
 
-<% unless params[:contributor_profile_id] or params[:filter] %>
+<% unless params[:contributor_profile_id] || params[:filter] %>
   <% if @category_groups.present? %>
     <h2>Picture Categories</h2>
-    <%= render partial: 'site_map/category_groups', locals: {
-      category_groups: @category_groups } %>
-    </ul>
+    <%= render partial: 'site_map/category_groups',
+      locals: { category_groups: @category_groups }
+    %>
   <% end %>
   <% if @pictures.present? %>
     <h2>All Pictures</h2>

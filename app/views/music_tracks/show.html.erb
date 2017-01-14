@@ -7,9 +7,10 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if policy(@music_track).new? or
-  policy(@music_track).edit? or
-  policy(@music_track).destroy? %>
+<% if policy(@music_track).new? ||
+  policy(@music_track).edit? ||
+  policy(@music_track).destroy?
+%>
   <ul class="administration">
     <% if policy(@music_track).new? %>
       <li>
@@ -25,9 +26,13 @@
     <% end %>
     <% if policy(@music_track).destroy? %>
       <li>
-        <%= link_to 'Delete Music Track', @music_track, data: {
-          confirm: 'Are you sure you want to delete this music track?' },
-          method: :delete %>
+        <%= link_to 'Delete Music Track',
+          @music_track,
+          data: {
+            confirm: 'Are you sure you want to delete this music track?'
+          },
+          method: :delete
+        %>
       </li>
     <% end %>
   </ul>

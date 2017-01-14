@@ -7,13 +7,16 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if policy(@article).new? or policy(@article).edit? or
-  policy(@article).destroy? %>
+<% if policy(@article).new? ||
+  policy(@article).edit? ||
+  policy(@article).destroy?
+%>
   <ul class="administration">
     <% if policy(@article).new? %>
       <li>
         <%= link_to 'New Article',
-          new_article_path(category: @article.category) %>
+          new_article_path(category: @article.category)
+        %>
       </li>
     <% end %>
     <% if policy(@article).edit? %>
@@ -23,7 +26,8 @@
     <% end %>
     <% if policy(@article).destroy? %>
       <li>
-        <%= link_to 'Delete Article', @article,
+        <%= link_to 'Delete Article',
+          @article,
           data: { confirm: 'Are you sure you want to delete this article?' },
           method: :delete
         %>
