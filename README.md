@@ -4,6 +4,10 @@ Panzer Dragoon Legacy
 A custom content management system for
 [panzerdragoonlegacy.com](http://www.panzerdragoonlegacy.com)
 
+As of February 2017, Panzer Dragoon Legacy is powered by Ruby on Rails 4.2.
+There are no plans to upgrade to a later version of Rails until Shoulda
+Matchers supports Rails 5.
+
 Documentation
 -------------
 
