@@ -22,4 +22,4 @@ Copyright
 ---------
 
 Source code and other assets in this repository are provided for demonstration
-purposes only. Source code files in this repository are © 2016 Chris Alley.
+purposes only. Source code files in this repository are © 2017 Chris Alley.
