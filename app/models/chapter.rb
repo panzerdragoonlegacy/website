@@ -31,7 +31,8 @@ class Chapter < ActiveRecord::Base
 
   def story_chapter_name
     # A chapter should always belong to a story; this check is here so that the
-    # validation Shoulda Matchers can pass without presence of a story.
+    # Shoulda Matchers validation specs can pass without the presence of a
+    # story.
     if story
       if chapter_type == :regular_chapter.to_s
         return "#{story.name} #{number}" if name.blank?
