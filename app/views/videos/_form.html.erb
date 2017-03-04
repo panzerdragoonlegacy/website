@@ -5,11 +5,14 @@
       <%= f.label :category_id, 'Category' %>
     </div>
     <div>
-      <%= f.collection_select :category_id,
-        @categories,
-        :id,
-        :name,
-        { include_blank: true }
+      <%=
+        f.collection_select(
+          :category_id,
+          @categories,
+          :id,
+          :name,
+          { include_blank: true }
+        )
       %>
     </div>
   </div>
@@ -18,12 +21,15 @@
       <%= f.label :contributor_profile_ids, 'Contributors' %>
     </div>
     <div>
-      <%= f.collection_select :contributor_profile_ids,
-        ContributorProfile.order(:name),
-        :id,
-        :name,
-        { selected: @video.contributor_profile_ids, include_blank: true },
-        { multiple: true }
+      <%=
+        f.collection_select(
+          :contributor_profile_ids,
+          ContributorProfile.order(:name),
+          :id,
+          :name,
+          { selected: @video.contributor_profile_ids, include_blank: true },
+          { multiple: true }
+        )
       %>
     </div>
   </div>
@@ -90,12 +96,15 @@
       <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
     </div>
     <div>
-      <%= f.collection_select :encyclopaedia_entry_ids,
-        EncyclopaediaEntry.order(:name),
-        :id,
-        :name,
-        { selected: @video.encyclopaedia_entry_ids, include_blank: true },
-        { multiple: true }
+      <%=
+        f.collection_select(
+          :encyclopaedia_entry_ids,
+          EncyclopaediaEntry.order(:name),
+          :id,
+          :name,
+          { selected: @video.encyclopaedia_entry_ids, include_blank: true },
+          { multiple: true }
+        )
       %>
     </div>
   </div>

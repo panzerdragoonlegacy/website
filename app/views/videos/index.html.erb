@@ -1,9 +1,9 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Videos" %>
 <% elsif params[:filter] == 'draft' %>
-  <% title "Draft Videos" %>
+  <% title 'Draft Videos' %>
 <% else %>
-  <% title "Videos" %>
+  <% title 'Videos' %>
 <% end %>
 
 <% if policy(CategoryGroup).new? ||
@@ -13,8 +13,12 @@
   <ul class="administration">
     <% if policy(CategoryGroup).new? %>
       <li>
-        <%= link_to 'New Category Group', new_category_group_path(
-          category_group_type: :video) %>
+        <%=
+          link_to(
+            'New Category Group',
+            new_category_group_path(category_group_type: :video)
+          )
+        %>
       </li>
     <% end %>
     <% if policy(Category).new? %>
@@ -31,8 +35,11 @@
 <% unless params[:contributor_profile_id] %>
   <% if @category_groups.present? %>
     <h2>Video Categories</h2>
-    <%= render partial: 'site_map/category_groups',
-      locals: { category_groups: @category_groups }
+    <%=
+      render(
+        partial: 'site_map/category_groups',
+        locals: { category_groups: @category_groups }
+      )
     %>
   <% end %>
   <% if @videos.present? %>
