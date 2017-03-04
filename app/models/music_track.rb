@@ -42,7 +42,6 @@ class MusicTrack < ActiveRecord::Base
   )
   validates_attachment(
     :ogg_music_track,
-    presence: true,
     content_type: { content_type: 'audio/ogg' },
     size: { in: 0..25.megabytes }
   )

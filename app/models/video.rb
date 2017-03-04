@@ -28,7 +28,6 @@ class Video < ActiveRecord::Base
   )
   validates_attachment(
     :webm_video,
-    presence: true,
     content_type: { content_type: 'video/webm' },
     size: { in: 0..200.megabytes }
   )

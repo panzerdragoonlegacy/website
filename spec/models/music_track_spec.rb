@@ -86,7 +86,6 @@ RSpec.describe MusicTrack, type: :model do
         .less_than(25.megabytes)
     end
     it { is_expected.to have_attached_file(:ogg_music_track) }
-    it { is_expected.to validate_attachment_presence(:ogg_music_track) }
     it do
       is_expected.to validate_attachment_content_type(:ogg_music_track)
         .allowing('audio/ogg')
