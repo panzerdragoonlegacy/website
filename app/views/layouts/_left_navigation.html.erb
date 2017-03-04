@@ -5,8 +5,10 @@
       <% @sagas.each do |saga| %>
         <% if policy(saga.encyclopaedia_entry).show? %>
           <li>
-            <%= link_to saga.name,
-              encyclopaedia_entry_path(saga.encyclopaedia_entry)
+            <%=
+              link_to(
+                saga.name, encyclopaedia_entry_path(saga.encyclopaedia_entry)
+              )
             %>
           </li>
         <% end %>
@@ -15,16 +17,16 @@
   <% end %>
   <h3>Browse by Media Type</h3>
   <ul>
-    <li><%= link_to "Articles", articles_path %></li>
-    <li><%= link_to "Downloads", downloads_path %></li>
-    <li><%= link_to "Links", links_path %></li>
-    <li><%= link_to "Music", music_tracks_path %></li>
-    <li><%= link_to "Pictures", pictures_path %></li>
-    <li><%= link_to "Poems", poems_path %></li>
-    <li><%= link_to "Quizzes", quizzes_path %></li>
-    <li><%= link_to "Resources", resources_path %></li>
-    <li><%= link_to "Stories", stories_path %></li>
-    <li><%= link_to "Videos", videos_path %></li>
+    <li><%= link_to 'Articles', articles_path %></li>
+    <li><%= link_to 'Downloads', downloads_path %></li>
+    <li><%= link_to 'Links', links_path %></li>
+    <li><%= link_to 'Music', music_tracks_path %></li>
+    <li><%= link_to 'Pictures', pictures_path %></li>
+    <li><%= link_to 'Poems', poems_path %></li>
+    <li><%= link_to 'Quizzes', quizzes_path %></li>
+    <li><%= link_to 'Resources', resources_path %></li>
+    <li><%= link_to 'Stories', stories_path %></li>
+    <li><%= link_to 'Videos', videos_path %></li>
   </ul>
   <% if current_user %>
     <% if current_user.administrator %>
@@ -60,15 +62,16 @@
           <%= current_user.email %>
         <% end %>
       </li>
-      <li><%= link_to "Edit Profile", edit_user_registration_path %>
-      <li><%= link_to "Log Out", destroy_user_session_path,
-        method: :delete %></li>
-      <li><%= link_to "Drafts", drafts_path %></li>
+      <li><%= link_to 'Edit Profile', edit_user_registration_path %>
+      <li>
+        <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
+      </li>
+      <li><%= link_to 'Drafts', drafts_path %></li>
     </ul>
   <% else %>
     <h3>Contributor Access</h3>
     <ul>
-      <li><%= link_to "Log In", new_user_session_path %></li>
+      <li><%= link_to 'Log In', new_user_session_path %></li>
     </ul>
   <% end %>
 </div>

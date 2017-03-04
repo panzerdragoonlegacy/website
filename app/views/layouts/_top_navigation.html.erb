@@ -1,16 +1,13 @@
 <div id="navigation">
-  <%= form_tag searches_path, method: :post, id: "search" do %>
-    <%= text_field_tag :query, nil, placeholder: "Search..." %>
+  <%= form_tag searches_path, method: :post, id: 'search' do %>
+    <%= text_field_tag :query, nil, placeholder: 'Search...' %>
   <% end %>
   <ul>
-    <li><%= link_to "Latest News", root_url %></li>
-    <li><%= link_to "Site Map", site_map_path %></li>
-    <li><%= link_to "Encyclopaedia", encyclopaedia_entries_path %></li>
-    <li>
-      <%= link_to "Forum",
-        "http://discuss.panzerdragoonlegacy.com" %>
-    </li>
-    <li><%= link_to "Contributors", contributor_profiles_path %></li>
-    <li><%= link_to "How to Contribute", "/how-to-contribute" %></li>
+    <li><%= link_to 'Latest News', root_url %></li>
+    <li><%= link_to 'Site Map', site_map_path %></li>
+    <li><%= link_to 'Encyclopaedia', encyclopaedia_entries_path %></li>
+    <li><%= link_to 'Forum', 'http://discuss.panzerdragoonlegacy.com' %></li>
+    <li><%= link_to 'Contributors', contributor_profiles_path %></li>
+    <li><%= link_to 'How to Contribute', '/how-to-contribute' %></li>
   </ul>
 </div>
