@@ -3,7 +3,7 @@
 <% elsif params[:filter] == 'draft' %>
   <% title "Draft News Entries" %>
 <% elsif policy(NewsEntry).new? %>
-  <% title "Latest News" %>
+  <% title "News" %>
 <% end %>
 
 <% if policy(NewsEntry).new? %>
