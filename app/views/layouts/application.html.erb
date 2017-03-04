@@ -17,111 +17,10 @@
   <body>
     <div id="overall">
       <%= render 'illustrations/popover' %>
-      <div id="header">
-        <%=
-          link_to(
-            image_tag(
-              "logo.png",
-              id: "logo",
-              alt: "Panzer Dragoon Legacy"
-            ),
-            root_url
-          )
-        %>
-        <%= render 'layouts/social_media_links' %>
-      </div>
-      <div id="banner"></div>
-      <div id="navigation">
-        <%= form_tag searches_path, method: :post, id: "search" do %>
-          <%= text_field_tag :query, nil, placeholder: "Search..." %>
-        <% end %>
-        <ul>
-          <li><%= link_to "Latest News", root_url %></li>
-          <li><%= link_to "Site Map", site_map_path %></li>
-          <li><%= link_to "Encyclopaedia", encyclopaedia_entries_path %></li>
-          <li>
-            <%= link_to "Forum",
-              "http://discuss.panzerdragoonlegacy.com" %>
-          </li>
-          <li><%= link_to "Contributors", contributor_profiles_path %></li>
-          <li><%= link_to "How to Contribute", "/how-to-contribute" %></li>
-        </ul>
-      </div>
+      <%= render 'layouts/header' %>
+      <%= render 'layouts/top_navigation' %>
       <div id="main">
-        <div id="aside">
-          <% if @sagas.present? %>
-            <h3>Browse by Saga</h3>
-            <ul>
-              <% @sagas.each do |saga| %>
-                <% if policy(saga.encyclopaedia_entry).show? %>
-                  <li>
-                    <%= link_to saga.name,
-                      encyclopaedia_entry_path(saga.encyclopaedia_entry)
-                    %>
-                  </li>
-                <% end %>
-              <% end %>
-            </ul>
-          <% end %>
-          <h3>Browse by Media Type</h3>
-          <ul>
-            <li><%= link_to "Articles", articles_path %></li>
-            <li><%= link_to "Downloads", downloads_path %></li>
-            <li><%= link_to "Links", links_path %></li>
-            <li><%= link_to "Music", music_tracks_path %></li>
-            <li><%= link_to "Pictures", pictures_path %></li>
-            <li><%= link_to "Poems", poems_path %></li>
-            <li><%= link_to "Quizzes", quizzes_path %></li>
-            <li><%= link_to "Resources", resources_path %></li>
-            <li><%= link_to "Stories", stories_path %></li>
-            <li><%= link_to "Videos", videos_path %></li>
-          </ul>
-          <% if current_user %>
-            <% if current_user.administrator %>
-              <h3>Administrator Resources</h3>
-              <ul>
-                <li><%= link_to 'New Category', new_category_path %></li>
-                <li>
-                  <%= link_to 'New Category Group', new_category_group_path %>
-                </li>
-                <li><%= link_to 'Albums', albums_path %></li>
-                <li><%= link_to 'Emoticons', emoticons_path %></li>
-                <li><%= link_to 'Pages', pages_path %></li>
-                <li><%= link_to 'Sagas', sagas_path %></li>
-                <li><%= link_to 'Users', users_path %></li>
-              </ul>
-            <% end %>
-          <% end %>
-          <% if @partner_sites.present? %>
-            <h3>Partner Sites</h3>
-            <ul>
-              <% @partner_sites.each do |partner_site| %>
-                <li><%= link_to partner_site.name, partner_site.url %></li>
-              <% end %>
-            </ul>
-          <% end %>
-          <% if user_signed_in? %>
-            <h3>Your Details</h3>
-            <ul>
-              <li>Welcome
-                <% if current_user.contributor_profile_id %>
-                  <%= current_user.contributor_profile.name %>
-                <% else %>
-                  <%= current_user.email %>
-                <% end %>
-              </li>
-              <li><%= link_to "Edit Profile", edit_user_registration_path %>
-              <li><%= link_to "Log Out", destroy_user_session_path,
-                method: :delete %></li>
-              <li><%= link_to "Drafts", drafts_path %></li>
-            </ul>
-          <% else %>
-            <h3>Contributor Access</h3>
-            <ul>
-              <li><%= link_to "Log In", new_user_session_path %></li>
-            </ul>
-          <% end %>
-        </div>
+        <%= render 'layouts/left_navigation' %>
         <div id="content">
           <% flash.each do |name, msg| %>
             <% unless name.to_s == 'timedout' %>
@@ -134,15 +33,7 @@
           <%= yield %>
         </div>
       </div>
-      <div id="footer">
-        <ul>
-          <li><%= link_to "About the Site", "/about-the-site" %></li>
-          <li><%= link_to "How to Contribute", "/how-to-contribute" %></li>
-          <li>
-            <%= link_to "Copyright Information", "/copyright-information" %>
-          </li>
-        </ul>
-      </div>
+      <%= render 'layouts/footer' %>
     </div>
   </body>
 </html>

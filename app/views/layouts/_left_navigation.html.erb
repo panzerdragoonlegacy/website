@@ -1,0 +1,74 @@
+<div id="aside">
+  <% if @sagas.present? %>
+    <h3>Browse by Saga</h3>
+    <ul>
+      <% @sagas.each do |saga| %>
+        <% if policy(saga.encyclopaedia_entry).show? %>
+          <li>
+            <%= link_to saga.name,
+              encyclopaedia_entry_path(saga.encyclopaedia_entry)
+            %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+  <h3>Browse by Media Type</h3>
+  <ul>
+    <li><%= link_to "Articles", articles_path %></li>
+    <li><%= link_to "Downloads", downloads_path %></li>
+    <li><%= link_to "Links", links_path %></li>
+    <li><%= link_to "Music", music_tracks_path %></li>
+    <li><%= link_to "Pictures", pictures_path %></li>
+    <li><%= link_to "Poems", poems_path %></li>
+    <li><%= link_to "Quizzes", quizzes_path %></li>
+    <li><%= link_to "Resources", resources_path %></li>
+    <li><%= link_to "Stories", stories_path %></li>
+    <li><%= link_to "Videos", videos_path %></li>
+  </ul>
+  <% if current_user %>
+    <% if current_user.administrator %>
+      <h3>Administrator Resources</h3>
+      <ul>
+        <li><%= link_to 'New Category', new_category_path %></li>
+        <li>
+          <%= link_to 'New Category Group', new_category_group_path %>
+        </li>
+        <li><%= link_to 'Albums', albums_path %></li>
+        <li><%= link_to 'Emoticons', emoticons_path %></li>
+        <li><%= link_to 'Pages', pages_path %></li>
+        <li><%= link_to 'Sagas', sagas_path %></li>
+        <li><%= link_to 'Users', users_path %></li>
+      </ul>
+    <% end %>
+  <% end %>
+  <% if @partner_sites.present? %>
+    <h3>Partner Sites</h3>
+    <ul>
+      <% @partner_sites.each do |partner_site| %>
+        <li><%= link_to partner_site.name, partner_site.url %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% if user_signed_in? %>
+    <h3>Your Details</h3>
+    <ul>
+      <li>Welcome
+        <% if current_user.contributor_profile_id %>
+          <%= current_user.contributor_profile.name %>
+        <% else %>
+          <%= current_user.email %>
+        <% end %>
+      </li>
+      <li><%= link_to "Edit Profile", edit_user_registration_path %>
+      <li><%= link_to "Log Out", destroy_user_session_path,
+        method: :delete %></li>
+      <li><%= link_to "Drafts", drafts_path %></li>
+    </ul>
+  <% else %>
+    <h3>Contributor Access</h3>
+    <ul>
+      <li><%= link_to "Log In", new_user_session_path %></li>
+    </ul>
+  <% end %>
+</div>
