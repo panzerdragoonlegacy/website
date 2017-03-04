@@ -46,7 +46,9 @@
 
 <video width="620" height="349" controls="true" autobuffer="true">
   <source type="video/mp4" src="<%= @video.mp4_video.url %>" />
-  <source type="video/webm" src="<%= @video.webm_video.url %>" />
+  <% if @video.webm_video.present? %>
+    <source type="video/webm" src="<%= @video.webm_video.url %>" />
+  <% end %>
   Your browser does not support the <code>video</code> element.
 </video>
 
@@ -62,8 +64,10 @@
       "http://www.youtube.com/watch?v=" + @video.youtube_video_id
     %>.
   <% end %>
-  Download Video: <%= link_to "MP4", @video.mp4_video.url %> |
-  <%= link_to "WebM", @video.webm_video.url %>
+  Download Video: <%= link_to "MP4", @video.mp4_video.url %>
+  <% if @video.webm_video.present? %>
+     | <%= link_to "WebM", @video.webm_video.url %>
+  <% end %>
 </p>
 
 <%= render partial: 'shared/related_encyclopaedia_entries' %>
