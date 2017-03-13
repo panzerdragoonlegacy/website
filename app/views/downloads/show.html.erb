@@ -61,6 +61,10 @@
 
 <p><%= @download.description %></p>
 
+<% unless @download.information.blank? %>
+  <%= raw markdown_to_html @download.information %>
+<% end %>
+
 <%= link_to 'Download File', @download.download.url %>
 
 <%= render partial: 'shared/related_encyclopaedia_entries' %>
