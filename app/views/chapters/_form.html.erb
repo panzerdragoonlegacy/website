@@ -2,7 +2,7 @@
   <%= render 'shared/error_messages', target: @chapter %>
   <div>
     <div>
-      <%= f.label :story_id, 'Story' %>
+      <%= f.label :story_id, 'Story*' %>
     </div>
     <div>
       <%= f.collection_select :story_id, Story.order(:name), :id, :name %>
@@ -10,7 +10,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :chapter_type, 'Chapter Type' %>
+      <%= f.label :chapter_type, 'Chapter Type*' %>
     </div>
     <div>
       <%= f.collection_select :chapter_type,
@@ -22,7 +22,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :number, 'Number' %>
+      <%= f.label :number, 'Number*' %>
     </div>
     <div>
       <p>
@@ -34,7 +34,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :name, 'Name' %>
+      <%= f.label :name, 'Name*' %>
     </div>
     <div>
       <%= f.text_field :name %>
@@ -42,7 +42,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :content, 'Content' %>
+      <%= f.label :content, 'Content*' %>
     </div>
     <div>
       <%= f.text_area :content, rows: 15, class: 'data_entry' %>

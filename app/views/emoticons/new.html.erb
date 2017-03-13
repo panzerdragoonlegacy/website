@@ -3,7 +3,7 @@
 <%= form_for @emoticon, html: { multipart: true } do |f| %>
   <%= render "shared/error_messages", target: @emoticon %>
   <div>
-    <%= f.label :emoticon, "Emoticon" %><br />
+    <%= f.label :emoticon, 'Emoticon*' %><br />
     (Should be an 18x18 transparent gif)<br />
     <% if @emoticon.emoticon? %>
       <%= image_tag @emoticon.emoticon.url %><br />
@@ -12,10 +12,10 @@
     <%= f.file_field :emoticon %>
   </div>
   <div>
-    <%= f.label :name, "Name" %><br />
+    <%= f.label :name, 'Name*' %><br />
     <%= f.text_field :name %>
   </div>
   <div>
-    <%= f.submit "Save" %>
+    <%= f.submit 'Save' %>
   </div>
 <% end %>

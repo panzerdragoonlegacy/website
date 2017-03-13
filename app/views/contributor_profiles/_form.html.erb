@@ -2,7 +2,7 @@
   <%= render 'shared/error_messages', target: @contributor_profile %>
   <div>
     <div>
-      <%= f.label :name %>
+      <%= f.label :name, 'Name*' %>
     </div>
     <div>
       <%= f.text_field :name %>
@@ -29,7 +29,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :avatar, "Avatar" %>
+      <%= f.label :avatar, 'Avatar' %>
     </div>
     <div>
       <% if @contributor_profile.avatar? %>

@@ -2,7 +2,7 @@
   <%= render 'shared/error_messages', target: @saga %>
   <div>
     <div>
-      <%= f.label :encyclopaedia_entry_id, 'Encyclopaedia Entry' %>
+      <%= f.label :encyclopaedia_entry_id, 'Encyclopaedia Entry*' %>
     </div>
     <div>
       <%= f.collection_select :encyclopaedia_entry_id,
@@ -15,7 +15,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :sequence_number, 'Sequence Number' %>
+      <%= f.label :sequence_number, 'Sequence Number*' %>
     </div>
     <div>
       <%= f.number_field :sequence_number, { min: 1, max: 99 } %>
@@ -23,7 +23,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :name, 'Name' %>
+      <%= f.label :name, 'Name*' %>
     </div>
     <div>
       <%= f.text_field :name %>

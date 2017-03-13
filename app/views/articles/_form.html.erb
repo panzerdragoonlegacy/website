@@ -2,7 +2,7 @@
   <%= render 'shared/error_messages', target: @article %>
   <div>
     <div>
-      <%= f.label :category_id, 'Category' %>
+      <%= f.label :category_id, 'Category*' %>
     </div>
     <div>
       <%= f.collection_select :category_id,
@@ -15,7 +15,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :contributor_profile_ids, 'Contributors' %>
+      <%= f.label :contributor_profile_ids, 'Contributors*' %>
     </div>
     <div>
       <%= f.collection_select :contributor_profile_ids,
@@ -29,7 +29,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :name %>
+      <%= f.label :name, 'Name*' %>
     </div>
     <div>
       <%= f.text_field :name %>
@@ -37,7 +37,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :description %>
+      <%= f.label :description, 'Description*' %>
     </div>
     <div>
       <%= f.text_area :description, rows: 3 %>
@@ -45,7 +45,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :content %>
+      <%= f.label :content, 'Content*' %>
     </div>
     <div>
       <%= f.text_area :content, rows: 15, class: 'data_entry' %>

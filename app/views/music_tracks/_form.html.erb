@@ -2,7 +2,7 @@
   <%= render 'shared/error_messages', target: @music_track %>
   <div>
     <div>
-      <%= f.label :category_id, 'Category' %>
+      <%= f.label :category_id, 'Category*' %>
     </div>
     <div>
       <%= f.collection_select :category_id,
@@ -15,7 +15,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :contributor_profile_ids, 'Contributors' %>
+      <%= f.label :contributor_profile_ids, 'Contributors*' %>
     </div>
     <div>
       <%= f.collection_select :contributor_profile_ids,
@@ -29,7 +29,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :mp3_music_track, 'MP3 Music Track' %>
+      <%= f.label :mp3_music_track, 'MP3 Music Track*' %>
     </div>
     <div>
       <% if @music_track.mp3_music_track? %>
@@ -62,7 +62,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :track_number, 'Track Number' %>
+      <%= f.label :track_number, 'Track Number*' %>
     </div>
     <div>
       <%= f.number_field :track_number, { min: 0, max: 50 } %>
@@ -70,7 +70,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :name, 'Name' %>
+      <%= f.label :name, 'Name*' %>
     </div>
     <div>
       <%= f.text_field :name %>
@@ -78,7 +78,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :description, 'Description' %>
+      <%= f.label :description, 'Description*' %>
     </div>
     <div>
       <%= f.text_area :description, rows: 3 %>

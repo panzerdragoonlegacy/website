@@ -2,7 +2,7 @@
   <%= render 'shared/error_messages', target: @user %>
   <div>
     <div>
-      <%= f.label :email, 'Email' %>
+      <%= f.label :email, 'Email*' %>
     </div>
     <div>
       <%= f.text_field :email %>
@@ -10,7 +10,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :contributor_profile_id, 'Contributor Profile' %>
+      <%= f.label :contributor_profile_id, 'Contributor Profile*' %>
     </div>
     <div>
       <%= f.collection_select :contributor_profile_id,

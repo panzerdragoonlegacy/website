@@ -2,7 +2,7 @@
   <%= render "shared/error_messages", target: @category_group %>
   <div>
     <div>
-      <%= f.label :category_group_type, "Category Group Type" %>
+      <%= f.label :category_group_type, 'Category Group Type*' %>
     </div>
     <div>
       <%= f.collection_select :category_group_type,
@@ -14,7 +14,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :name, "Name" %>
+      <%= f.label :name, 'Name*' %>
     </div>
     <div>
       <%= f.text_field :name %>

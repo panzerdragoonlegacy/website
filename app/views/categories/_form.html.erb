@@ -2,7 +2,7 @@
   <%= render 'shared/error_messages', target: @category %>
   <div>
     <div>
-      <%= f.label :category_type, 'Category Type' %>
+      <%= f.label :category_type, 'Category Type*' %>
     </div>
     <div>
       <%= f.collection_select :category_type,
@@ -14,7 +14,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :category_group_id, 'Category Group' %>
+      <%= f.label :category_group_id, 'Category Group*' %>
     </div>
     <div>
       <%= f.collection_select :category_group_id,
@@ -27,7 +27,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :name, 'Name' %>
+      <%= f.label :name, 'Name*' %>
     </div>
     <div>
       <%= f.text_field :name %>
@@ -35,7 +35,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :description, 'Description' %>
+      <%= f.label :description, 'Description*' %>
     </div>
     <div>
       <%= f.text_area :description, rows: 3 %>

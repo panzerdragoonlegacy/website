@@ -2,7 +2,7 @@
   <%= render 'shared/error_messages', target: @encyclopaedia_entry %>
   <div>
     <div>
-      <%= f.label :category_id, 'Category' %>
+      <%= f.label :category_id, 'Category*' %>
     </div>
     <div>
       <%= f.collection_select :category_id,
@@ -15,7 +15,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :contributor_profile_ids, 'Contributors (optional)' %>
+      <%= f.label :contributor_profile_ids, 'Contributors' %>
     </div>
     <div>
       <%= f.collection_select :contributor_profile_ids,
@@ -32,7 +32,11 @@
   </div>
   <div>
     <div>
-      <%= f.label :encyclopaedia_entry_picture, 'Encyclopaedia Entry Picture' %>
+      <%=
+        f.label(
+          :encyclopaedia_entry_picture, 'Encyclopaedia Entry Picture*'
+        )
+      %>
     </div>
     <div>
       <% if @encyclopaedia_entry.encyclopaedia_entry_picture? %>
@@ -45,7 +49,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :name, 'Name' %>
+      <%= f.label :name, 'Name*' %>
     </div>
     <div>
       <%= f.text_field :name %>
@@ -53,7 +57,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :information, 'Information Box' %>
+      <%= f.label :information, 'Information Box*' %>
     </div>
     <div>
       <%= f.text_area :information, rows: 10 %>
@@ -66,7 +70,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :content, 'Content' %>
+      <%= f.label :content, 'Content*' %>
     </div>
     <div>
       <%= f.text_area :content, rows: 15, class: 'data_entry' %>
