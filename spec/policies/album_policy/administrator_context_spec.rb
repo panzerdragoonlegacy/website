@@ -27,8 +27,7 @@ describe AlbumPolicy do
           expect(resolved_scope).to include(album)
         end
 
-        it { is_expected.to permit_action(:show) }
-        it { is_expected.to permit_edit_and_update_actions }
+        it { is_expected.to permit_actions([:show, :edit, :update]) }
 
         context 'album has no children' do
           it { is_expected.to permit_action(:destroy) }
@@ -54,8 +53,7 @@ describe AlbumPolicy do
           expect(resolved_scope).to include(album)
         end
 
-        it { is_expected.to permit_action(:show) }
-        it { is_expected.to permit_edit_and_update_actions }
+        it { is_expected.to permit_actions([:show, :edit, :update]) }
 
         context 'album has no children' do
           it { is_expected.to permit_action(:destroy) }
@@ -83,8 +81,7 @@ describe AlbumPolicy do
           expect(resolved_scope).to include(album)
         end
 
-        it { is_expected.to permit_action(:show) }
-        it { is_expected.to permit_edit_and_update_actions }
+        it { is_expected.to permit_actions([:show, :edit, :update]) }
 
         context 'album has no children' do
           it { is_expected.to permit_action(:destroy) }
@@ -110,8 +107,7 @@ describe AlbumPolicy do
           expect(resolved_scope).to include(album)
         end
 
-        it { is_expected.to permit_action(:show) }
-        it { is_expected.to permit_edit_and_update_actions }
+        it { is_expected.to permit_actions([:show, :edit, :update]) }
 
         context 'album has no children' do
           it { is_expected.to permit_action(:destroy) }

@@ -19,11 +19,10 @@ describe CategoryPolicy do
         expect(resolved_scope).to include(category)
       end
 
-      it { is_expected.to permit_action(:show) }
-      it { is_expected.to permit_new_and_create_actions }
-      it { is_expected.to permit_edit_and_update_actions }
+      it do
+        is_expected.to permit_actions([:show, :new, :create, :edit, :update])
+      end
       it { is_expected.to permit_mass_assignment_of(:publish) }
-
 
       context 'category has no children' do
         it { is_expected.to permit_action(:destroy) }
@@ -49,9 +48,9 @@ describe CategoryPolicy do
         expect(resolved_scope).to include(category)
       end
 
-      it { is_expected.to permit_action(:show) }
-      it { is_expected.to permit_new_and_create_actions }
-      it { is_expected.to permit_edit_and_update_actions }
+      it do
+        is_expected.to permit_actions([:show, :new, :create, :edit, :update])
+      end
       it { is_expected.to permit_mass_assignment_of(:publish) }
 
       context 'category has no children' do

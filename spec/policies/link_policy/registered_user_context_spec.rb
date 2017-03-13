@@ -20,9 +20,10 @@ describe LinkPolicy do
       end
 
       it { is_expected.to permit_action(:show) }
-      it { is_expected.to forbid_new_and_create_actions }
-      it { is_expected.to forbid_edit_and_update_actions }
-      it { is_expected.to forbid_action(:destroy) }
+
+      it do
+        is_expected.to forbid_actions([:new, :create, :edit, :update, :destroy])
+      end
     end
 
     context 'accessing a link in an unpublished category' do
@@ -32,10 +33,11 @@ describe LinkPolicy do
         expect(resolved_scope).not_to include(link)
       end
 
-      it { is_expected.to forbid_action(:show) }
-      it { is_expected.to forbid_new_and_create_actions }
-      it { is_expected.to forbid_edit_and_update_actions }
-      it { is_expected.to forbid_action(:destroy) }
+      it do
+        is_expected.to forbid_actions(
+          [:show, :new, :create, :edit, :update, :destroy]
+        )
+      end
     end
   end
 end

@@ -51,9 +51,9 @@ describe ArticlePolicy do
             expect(resolved_scope).not_to include(article)
           end
 
-          it { is_expected.to forbid_action(:show) }
-          it { is_expected.to forbid_edit_and_update_actions }
-          it { is_expected.to forbid_action(:destroy) }
+          it do
+            is_expected.to forbid_actions([:show, :edit, :update, :destroy])
+          end
           it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
       end
@@ -74,8 +74,7 @@ describe ArticlePolicy do
           end
 
           it { is_expected.to permit_action(:show) }
-          it { is_expected.to forbid_edit_and_update_actions }
-          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
           it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
 
@@ -93,9 +92,9 @@ describe ArticlePolicy do
             expect(resolved_scope).to include(article)
           end
 
-          it { is_expected.to permit_action(:show) }
-          it { is_expected.to permit_edit_and_update_actions }
-          it { is_expected.to permit_action(:destroy) }
+          it do
+            is_expected.to permit_actions([:show, :edit, :update, :destroy])
+          end
           it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
       end
@@ -113,8 +112,7 @@ describe ArticlePolicy do
           end
 
           it { is_expected.to permit_action(:show) }
-          it { is_expected.to forbid_edit_and_update_actions }
-          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
           it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
 
@@ -127,9 +125,9 @@ describe ArticlePolicy do
             expect(resolved_scope).not_to include(article)
           end
 
-          it { is_expected.to forbid_action(:show) }
-          it { is_expected.to forbid_edit_and_update_actions }
-          it { is_expected.to forbid_action(:destroy) }
+          it do
+            is_expected.to forbid_actions([:show, :edit, :update, :destroy])
+          end
           it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
       end
@@ -150,8 +148,7 @@ describe ArticlePolicy do
           end
 
           it { is_expected.to permit_action(:show) }
-          it { is_expected.to forbid_edit_and_update_actions }
-          it { is_expected.to forbid_action(:destroy) }
+          it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
           it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
 
@@ -169,9 +166,9 @@ describe ArticlePolicy do
             expect(resolved_scope).to include(article)
           end
 
-          it { is_expected.to permit_action(:show) }
-          it { is_expected.to permit_edit_and_update_actions }
-          it { is_expected.to permit_action(:destroy) }
+          it do
+            is_expected.to permit_actions([:show, :edit, :update, :destroy])
+          end
           it { is_expected.to forbid_mass_assignment_of(:publish) }
         end
       end

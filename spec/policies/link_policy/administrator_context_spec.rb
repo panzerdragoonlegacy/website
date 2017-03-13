@@ -17,9 +17,7 @@ describe LinkPolicy do
         expect(resolved_scope).to include(link)
       end
 
-      it { is_expected.to permit_action(:show) }
-      it { is_expected.to permit_new_and_create_actions }
-      it { is_expected.to permit_edit_and_update_actions }
+      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
       it { is_expected.to permit_action(:destroy) }
     end
 
@@ -30,9 +28,7 @@ describe LinkPolicy do
         expect(resolved_scope).to include(link)
       end
 
-      it { is_expected.to permit_action(:show) }
-      it { is_expected.to permit_new_and_create_actions }
-      it { is_expected.to permit_edit_and_update_actions }
+      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
       it { is_expected.to permit_action(:destroy) }
     end
   end

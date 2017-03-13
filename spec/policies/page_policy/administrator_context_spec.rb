@@ -26,9 +26,7 @@ describe PagePolicy do
         expect(resolved_scope).to include(page)
       end
 
-      it { is_expected.to permit_action(:show) }
-      it { is_expected.to permit_edit_and_update_actions }
-      it { is_expected.to permit_action(:destroy) }
+      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
       it { is_expected.to permit_mass_assignment_of(:publish) }
     end
 
@@ -41,9 +39,7 @@ describe PagePolicy do
         expect(resolved_scope).to include(page)
       end
 
-      it { is_expected.to permit_action(:show) }
-      it { is_expected.to permit_edit_and_update_actions }
-      it { is_expected.to permit_action(:destroy) }
+      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
       it { is_expected.to permit_mass_assignment_of(:publish) }
     end
   end

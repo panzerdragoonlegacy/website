@@ -25,8 +25,7 @@ describe PoemPolicy do
       end
 
       it { is_expected.to permit_action(:show) }
-      it { is_expected.to forbid_edit_and_update_actions }
-      it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
       it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
@@ -37,9 +36,7 @@ describe PoemPolicy do
         expect(resolved_scope).not_to include(poem)
       end
 
-      it { is_expected.to forbid_action(:show) }
-      it { is_expected.to forbid_edit_and_update_actions }
-      it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to forbid_actions([:show, :edit, :update, :destroy]) }
       it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end

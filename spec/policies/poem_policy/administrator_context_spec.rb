@@ -6,7 +6,7 @@ describe PoemPolicy do
   let(:resolved_scope) do
     described_class::Scope.new(user, Poem.all).resolve
   end
-  
+
   context 'being an administrator' do
     let(:user) { FactoryGirl.create(:administrator) }
 
@@ -24,9 +24,7 @@ describe PoemPolicy do
         expect(resolved_scope).to include(poem)
       end
 
-      it { is_expected.to permit_action(:show) }
-      it { is_expected.to permit_edit_and_update_actions }
-      it { is_expected.to permit_action(:destroy) }
+      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
       it { is_expected.to permit_mass_assignment_of(:publish) }
     end
 
@@ -37,9 +35,7 @@ describe PoemPolicy do
         expect(resolved_scope).to include(poem)
       end
 
-      it { is_expected.to permit_action(:show) }
-      it { is_expected.to permit_edit_and_update_actions }
-      it { is_expected.to permit_action(:destroy) }
+      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
       it { is_expected.to permit_mass_assignment_of(:publish) }
     end
   end

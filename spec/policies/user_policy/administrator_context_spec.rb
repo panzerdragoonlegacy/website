@@ -17,10 +17,11 @@ describe UserPolicy do
         expect(resolved_scope).to include(user)
       end
 
-      it { is_expected.to permit_action(:show) }
-      it { is_expected.to permit_new_and_create_actions }
-      it { is_expected.to permit_edit_and_update_actions }
-      it { is_expected.to permit_action(:destroy) }
+      it do
+        is_expected.to permit_actions(
+          [:show, :new, :create, :edit, :update, :destroy]
+        )
+      end
     end
   end
 end
