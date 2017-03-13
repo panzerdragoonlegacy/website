@@ -1,7 +1,7 @@
 <% if params[:filter] == 'draft' %>
-  <% title "Draft Categories" %>
+  <% title 'Draft Categories' %>
 <% else %>
-  <% title "Categories" %>
+  <% title 'Categories' %>
 <% end %>
 
 <% if policy(CategoryGroup).new? || policy(Category).new? %>

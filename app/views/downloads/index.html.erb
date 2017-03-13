@@ -1,17 +1,17 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Downloads" %>
 <% elsif params[:filter] == 'draft' %>
-  <% title "Draft Downloads" %>
+  <% title 'Draft Downloads' %>
 <% else %>
-  <% title "Downloads" %>
+  <% title 'Downloads' %>
 <% end %>
 
 <% if policy(Category).new? || policy(Download).new? %>
   <ul class="administration">
     <% if policy(Category).new? %>
       <li>
-        <%= link_to 'New Category',
-          new_category_path(category_type: :download)
+        <%=
+          link_to 'New Category', new_category_path(category_type: :download)
         %>
       </li>
     <% end %>

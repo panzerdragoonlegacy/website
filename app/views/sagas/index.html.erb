@@ -16,8 +16,14 @@
             <ul class="administration">
               <li><%= link_to 'Edit Saga', edit_saga_path(saga) %></li>
               <li>
-                <%= link_to 'Delete Saga', saga, data: {
-                  confirm: 'Are you sure?' }, method: :delete %>
+                <%=
+                  link_to(
+                    'Delete Saga',
+                    saga,
+                    data: { confirm: 'Are you sure?' },
+                    method: :delete
+                  )
+                %>
               </li>
             </ul>
           <% end %>

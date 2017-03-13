@@ -1,9 +1,9 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Poems" %>
 <% elsif params[:filter] == 'draft' %>
-  <% title "Draft Poems" %>
+  <% title 'Draft Poems' %>
 <% else %>
-  <% title "Poems" %>
+  <% title 'Poems' %>
 <% end %>
 
 <% if policy(Poem).new? %>

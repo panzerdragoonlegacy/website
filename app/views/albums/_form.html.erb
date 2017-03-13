@@ -5,11 +5,14 @@
       <%= f.label :category_id, 'Category*' %>
     </div>
     <div>
-      <%= f.collection_select :category_id,
-        @categories,
-        :id,
-        :name,
-        { include_blank: true }
+      <%=
+        f.collection_select(
+          :category_id,
+          @categories,
+          :id,
+          :name,
+          { include_blank: true }
+        )
       %>
       <p class="unpublished">
         Warning: changing the album's category will move every picture in the
@@ -22,12 +25,15 @@
       <%= f.label :contributor_profile_ids, 'Contributors*' %>
     </div>
     <div>
-      <%= f.collection_select :contributor_profile_ids,
-        ContributorProfile.order(:name),
-        :id,
-        :name,
-        { selected: @album.contributor_profile_ids, include_blank: true },
-        { multiple: true }
+      <%=
+        f.collection_select(
+          :contributor_profile_ids,
+          ContributorProfile.order(:name),
+          :id,
+          :name,
+          { selected: @album.contributor_profile_ids, include_blank: true },
+          { multiple: true }
+        )
       %>
       <p>
         Pictures in the album with no contributors will inherit the album's
@@ -76,12 +82,15 @@
       <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
     </div>
     <div>
-      <%= f.collection_select :encyclopaedia_entry_ids,
-        EncyclopaediaEntry.order(:name),
-        :id,
-        :name,
-        { selected: @album.encyclopaedia_entry_ids, include_blank: true },
-        { multiple: true }
+      <%=
+        f.collection_select(
+          :encyclopaedia_entry_ids,
+          EncyclopaediaEntry.order(:name),
+          :id,
+          :name,
+          { selected: @album.encyclopaedia_entry_ids, include_blank: true },
+          { multiple: true }
+        )
       %>
       <p>
         Pictures in the album with no related encyclopaedia entries will
@@ -121,10 +130,10 @@
           <% end %>
           <%= picture_form.file_field :picture %>
         </div>
-        <%= picture_form.link_to_remove "Delete Picture" %><br />
+        <%= picture_form.link_to_remove 'Delete Picture' %><br />
       </div>
     <% end %>
-    <p><%= f.link_to_add "Add New Picture", :pictures %></p>
+    <p><%= f.link_to_add 'Add New Picture', :pictures %></p>
   </div>
   <% if policy(@album).permitted_attributes.include? :publish %>
     <div>

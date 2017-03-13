@@ -1,9 +1,12 @@
 <% title @news_entry.name %>
 <% description truncated_text(@news_entry.content) %>
 
-<% if policy(@news_entry).new? ||
-  policy(@news_entry).edit? ||
-  policy(@news_entry).destroy?
+<%
+  if (
+    policy(@news_entry).new? ||
+    policy(@news_entry).edit? ||
+    policy(@news_entry).destroy?
+  )
 %>
   <ul class="administration">
     <% if policy(@news_entry).new? %>
@@ -16,12 +19,15 @@
     <% end %>
     <% if policy(@news_entry).destroy? %>
       <li>
-        <%= link_to 'Delete News Entry',
-          @news_entry,
-          data: {
-            confirm: 'Are you sure you want to delete this news entry?'
-          },
-          method: :delete
+        <%=
+          link_to(
+            'Delete News Entry',
+            @news_entry,
+            data: {
+              confirm: 'Are you sure you want to delete this news entry?'
+            },
+            method: :delete
+          )
         %>
       </li>
     <% end %>
@@ -30,10 +36,10 @@
 
 <div id="resources">
   <div class="resource">
-    <%= show_news_entry_picture(@news_entry, :embedded) %>
+    <%= show_news_entry_picture @news_entry, :embedded %>
     <div class="comment_thumbnail">
       <% if @news_entry.contributor_profile.avatar_file_name.blank? %>
-        <%= image_tag("default-avatar.jpg") %>
+        <%= image_tag 'default-avatar.jpg' %>
       <% else %>
         <%= image_tag @news_entry.contributor_profile.avatar.url(:thumbnail) %>
         <br />

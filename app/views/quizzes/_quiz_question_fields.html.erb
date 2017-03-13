@@ -1,15 +1,15 @@
-<div>  
+<div>
   <div>
-	  <%= f.label :content, "Question" %>
+	  <%= f.label :content, 'Question' %>
 	</div>
 	<div>
 	  <%= f.text_area :content, rows: 3 %>
 	</div>
   <div>
-	  <%= f.link_to_remove "Remove Question" %>
+	  <%= f.link_to_remove 'Remove Question' %>
 	</div>
 	<div>
 	  <%= f.fields_for :quiz_answers %>
-  	<%= f.link_to_add "Add Answer", :quiz_answers %>
+  	<%= f.link_to_add 'Add Answer', :quiz_answers %>
   </div>
 </div>

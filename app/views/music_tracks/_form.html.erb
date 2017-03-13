@@ -5,11 +5,14 @@
       <%= f.label :category_id, 'Category*' %>
     </div>
     <div>
-      <%= f.collection_select :category_id,
-        @categories,
-        :id,
-        :name,
-        { include_blank: true }
+      <%=
+        f.collection_select(
+          :category_id,
+          @categories,
+          :id,
+          :name,
+          { include_blank: true }
+        )
       %>
     </div>
   </div>
@@ -18,12 +21,18 @@
       <%= f.label :contributor_profile_ids, 'Contributors*' %>
     </div>
     <div>
-      <%= f.collection_select :contributor_profile_ids,
-        ContributorProfile.order(:name),
-        :id,
-        :name,
-        { selected: @music_track.contributor_profile_ids, include_blank: true },
-        { multiple: true }
+      <%=
+        f.collection_select(
+          :contributor_profile_ids,
+          ContributorProfile.order(:name),
+          :id,
+          :name,
+          {
+            selected: @music_track.contributor_profile_ids,
+            include_blank: true
+          },
+          { multiple: true }
+        )
       %>
     </div>
   </div>
@@ -51,7 +60,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :flac_music_track, 'FLAC Music Track (optional)' %>
+      <%= f.label :flac_music_track, 'FLAC Music Track' %>
     </div>
     <div>
       <% if @music_track.flac_music_track? %>
@@ -101,12 +110,18 @@
       <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
     </div>
     <div>
-      <%= f.collection_select :encyclopaedia_entry_ids,
-        EncyclopaediaEntry.order(:name),
-        :id,
-        :name,
-        { selected: @music_track.encyclopaedia_entry_ids, include_blank: true },
-        { multiple: true }
+      <%=
+        f.collection_select(
+          :encyclopaedia_entry_ids,
+          EncyclopaediaEntry.order(:name),
+          :id,
+          :name,
+          {
+            selected: @music_track.encyclopaedia_entry_ids,
+            include_blank: true
+          },
+          { multiple: true }
+        )
       %>
     </div>
   </div>

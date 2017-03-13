@@ -5,8 +5,9 @@
         <div class="details">
           <h2>
             <% unless music_track.track_number == 0 %>
-              <%= music_track.track_number.to_s + ". " %>
-            <% end %><%= link_to music_track.name, music_track %>
+              <%= "#{music_track.track_number.to_s}. " %>
+            <% end %>
+            <%= link_to music_track.name, music_track %>
           </h2>
           <% unless music_track.publish %>
             <p class="unpublished">Unpublished</p>

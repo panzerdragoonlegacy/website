@@ -15,10 +15,13 @@
     <% end %>
     <% if policy(@quiz).destroy? %>
       <li>
-        <%= link_to 'Delete Quiz',
-          @quiz,
-          data: { confirm: 'Are you sure you want to delete this quiz?' },
-          method: :delete
+        <%=
+          link_to(
+            'Delete Quiz',
+            @quiz,
+            data: { confirm: 'Are you sure you want to delete this quiz?' },
+            method: :delete
+          )
         %>
       </li>
     <% end %>

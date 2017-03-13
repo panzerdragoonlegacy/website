@@ -7,34 +7,48 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if policy(@encyclopaedia_entry).new? ||
-  policy(@encyclopaedia_entry).edit? ||
-  policy(@encyclopaedia_entry).destroy?
+<%
+  if (
+    policy(@encyclopaedia_entry).new? ||
+    policy(@encyclopaedia_entry).edit? ||
+    policy(@encyclopaedia_entry).destroy?
+  )
 %>
   <ul class="administration">
     <% if policy(@encyclopaedia_entry).new? %>
       <li>
-        <%= link_to 'New Encyclopaedia Entry',
-          new_encyclopaedia_entry_path(category: @encyclopaedia_entry.category)
+        <%=
+          link_to(
+            'New Encyclopaedia Entry',
+            new_encyclopaedia_entry_path(
+              category: @encyclopaedia_entry.category
+            )
+          )
         %>
       </li>
     <% end %>
     <% if policy(@encyclopaedia_entry).edit? %>
       <li>
-        <%= link_to 'Edit Encyclopaedia Entry',
-          edit_encyclopaedia_entry_path(@encyclopaedia_entry)
+        <%=
+          link_to(
+            'Edit Encyclopaedia Entry',
+            edit_encyclopaedia_entry_path(@encyclopaedia_entry)
+          )
         %>
       </li>
     <% end %>
     <% if policy(@encyclopaedia_entry).destroy? %>
       <li>
-        <%= link_to 'Delete Encyclopaedia Entry',
-          @encyclopaedia_entry,
-          data: {
-            confirm: 'Are you sure you want to delete this encyclopaedia ' \
-              'entry?'
-          },
-          method: :delete
+        <%=
+          link_to(
+            'Delete Encyclopaedia Entry',
+            @encyclopaedia_entry,
+            data: {
+              confirm: 'Are you sure you want to delete this encyclopaedia ' \
+                'entry?'
+            },
+            method: :delete
+          )
         %>
       </li>
     <% end %>
@@ -46,8 +60,13 @@
   <%= raw markdown_to_html @encyclopaedia_entry.information %>
 </div>
 
-<%= raw illustrated_markdown_to_html @encyclopaedia_entry.id,
-  "EncyclopaediaEntry", @encyclopaedia_entry.content %>
+<%=
+  raw(
+    illustrated_markdown_to_html @encyclopaedia_entry.id,
+    'EncyclopaediaEntry',
+    @encyclopaedia_entry.content
+  )
+%>
 
 <% unless @articles.count == 0 %>
   <h2>Related Articles</h2>
@@ -110,8 +129,8 @@
         link_to(
           image_tag(picture.picture.url(:mini_thumbnail),
             alt: picture.name,
-            width: "75",
-            height: "75"
+            width: '75',
+            height: '75'
           ),
           picture
         )
@@ -193,7 +212,10 @@
 
 <p class="links">
   <%= link_to 'Encyclopaedia', encyclopaedia_entries_path %> |
-  <%= link_to @encyclopaedia_entry.category.name,
-    category_path(@encyclopaedia_entry.category)
+  <%=
+    link_to(
+      @encyclopaedia_entry.category.name,
+      category_path(@encyclopaedia_entry.category)
+    )
   %>
 </p>

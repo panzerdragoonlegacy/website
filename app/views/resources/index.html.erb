@@ -1,27 +1,36 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Resources" %>
 <% elsif params[:filter] == 'draft' %>
-  <% title "Draft Resources" %>
+  <% title 'Draft Resources' %>
 <% else %>
-  <% title "Resources" %>
+  <% title 'Resources' %>
 <% end %>
 
-<% if policy(CategoryGroup).new? ||
-  policy(Category).new? ||
-  policy(Resource).new?
+<%
+  if (
+    policy(CategoryGroup).new? ||
+    policy(Category).new? ||
+    policy(Resource).new?
+  )
 %>
   <ul class="administration">
     <% if policy(CategoryGroup).new? %>
       <li>
-        <%= link_to 'New Category Group',
-          new_category_group_path(category_group_type: :resource)
+        <%=
+          link_to(
+            'New Category Group',
+            new_category_group_path(category_group_type: :resource)
+          )
         %>
       </li>
     <% end %>
     <% if policy(Category).new? %>
       <li>
-        <%= link_to 'New Category',
-          new_category_path(category_type: :resource)
+        <%=
+          link_to(
+            'New Category',
+            new_category_path(category_type: :resource)
+          )
         %>
       </li>
     <% end %>
@@ -36,8 +45,11 @@
 <% unless params[:contributor_profile_id] || params[:filter] %>
   <% if @category_groups.present? %>
     <h2>Resource Categories</h2>
-    <%= render partial: 'site_map/category_groups',
-      locals: { category_groups: @category_groups }
+    <%=
+      render(
+        partial: 'site_map/category_groups',
+        locals: { category_groups: @category_groups }
+      )
     %>
   <% end %>
   <% if @resources.present? %>

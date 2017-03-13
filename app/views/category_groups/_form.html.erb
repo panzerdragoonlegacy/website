@@ -1,14 +1,17 @@
 <%= form_for @category_group do |f| %>
-  <%= render "shared/error_messages", target: @category_group %>
+  <%= render 'shared/error_messages', target: @category_group %>
   <div>
     <div>
       <%= f.label :category_group_type, 'Category Group Type*' %>
     </div>
     <div>
-      <%= f.collection_select :category_group_type,
-        CategoryGroup::CATEGORY_GROUP_TYPES,
-        :to_s,
-        :titleize
+      <%=
+        f.collection_select(
+          :category_group_type,
+          CategoryGroup::CATEGORY_GROUP_TYPES,
+          :to_s,
+          :titleize
+        )
       %>
     </div>
   </div>
@@ -21,7 +24,7 @@
     </div>
   </div>
   <div>
-    <%= f.submit "Save" %>
-    <%= f.submit "Save and Continue Editing", name: :continue_editing %>
+    <%= f.submit 'Save' %>
+    <%= f.submit 'Save and Continue Editing', name: :continue_editing %>
   </div>
 <% end %>

@@ -1,9 +1,9 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s News Entries" %>
 <% elsif params[:filter] == 'draft' %>
-  <% title "Draft News Entries" %>
+  <% title 'Draft News Entries' %>
 <% elsif policy(NewsEntry).new? %>
-  <% title "News" %>
+  <% title 'News' %>
 <% end %>
 
 <% if policy(NewsEntry).new? %>
@@ -22,9 +22,7 @@
           <%= image_tag("default-avatar.jpg") %>
         <% else %>
           <%=
-            image_tag(
-              news_entry.contributor_profile.avatar.url(:thumbnail)
-            )
+            image_tag news_entry.contributor_profile.avatar.url(:thumbnail)
           %>
           <br />
         <% end %>
@@ -36,8 +34,11 @@
           <% else %>
             Posted by
           <% end %>
-          <%= link_to news_entry.contributor_profile.name,
-            news_entry.contributor_profile
+          <%=
+            link_to(
+              news_entry.contributor_profile.name,
+              news_entry.contributor_profile
+            )
           %>
           <% if news_entry.publish %>
             <%= local_time_ago news_entry.published_at %>.

@@ -16,7 +16,9 @@
           <% if !encyclopaedia_entry.publish %>
              - <span class="unpublished">Unpublished</span>
           <% elsif !encyclopaedia_entry.category.publish %>
-             - <span class="unpublished">Published in Unpublished Category</span>
+             - <span class="unpublished">
+                 Published in Unpublished Category
+               </span>
           <% end %>
         </h3>
       </li>

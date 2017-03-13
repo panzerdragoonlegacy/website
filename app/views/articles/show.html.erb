@@ -7,15 +7,20 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if policy(@article).new? ||
-  policy(@article).edit? ||
-  policy(@article).destroy?
+<%
+  if (
+    policy(@article).new? ||
+    policy(@article).edit? ||
+    policy(@article).destroy?
+  )
 %>
   <ul class="administration">
     <% if policy(@article).new? %>
       <li>
-        <%= link_to 'New Article',
-          new_article_path(category: @article.category)
+        <%=
+          link_to(
+            'New Article', new_article_path(category: @article.category)
+          )
         %>
       </li>
     <% end %>
@@ -26,10 +31,13 @@
     <% end %>
     <% if policy(@article).destroy? %>
       <li>
-        <%= link_to 'Delete Article',
-          @article,
-          data: { confirm: 'Are you sure you want to delete this article?' },
-          method: :delete
+        <%=
+          link_to(
+            'Delete Article',
+            @article,
+            data: { confirm: 'Are you sure you want to delete this article?' },
+            method: :delete
+          )
         %>
       </li>
     <% end %>
@@ -53,7 +61,7 @@
 
 <p id="description"><%= @article.description %></p>
 
-<%= raw illustrated_markdown_to_html @article.id, "Article", @article.content %>
+<%= raw illustrated_markdown_to_html @article.id, 'Article', @article.content %>
 
 <%= render partial: 'shared/related_encyclopaedia_entries' %>
 

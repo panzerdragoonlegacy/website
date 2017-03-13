@@ -7,31 +7,45 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if policy(@music_track).new? ||
-  policy(@music_track).edit? ||
-  policy(@music_track).destroy?
+<%
+  if (
+    policy(@music_track).new? ||
+    policy(@music_track).edit? ||
+    policy(@music_track).destroy?
+  )
 %>
   <ul class="administration">
     <% if policy(@music_track).new? %>
       <li>
-        <%= link_to 'New Music Track',
-          new_music_track_path(category: @music_track.category) %>
+        <%=
+          link_to(
+            'New Music Track',
+            new_music_track_path(category: @music_track.category)
+          )
+        %>
       </li>
     <% end %>
     <% if policy(@music_track).edit? %>
       <li>
-        <%= link_to 'Edit Music Track',
-          edit_music_track_path(@music_track) %>
+        <%=
+          link_to(
+            'Edit Music Track',
+            edit_music_track_path(@music_track)
+          )
+        %>
       </li>
     <% end %>
     <% if policy(@music_track).destroy? %>
       <li>
-        <%= link_to 'Delete Music Track',
-          @music_track,
-          data: {
-            confirm: 'Are you sure you want to delete this music track?'
-          },
-          method: :delete
+        <%=
+          link_to(
+            'Delete Music Track',
+            @music_track,
+            data: {
+              confirm: 'Are you sure you want to delete this music track?'
+            },
+            method: :delete
+          )
         %>
       </li>
     <% end %>
@@ -72,12 +86,12 @@
     Track <%= @music_track.track_number.to_s %> of
     <%= @music_track.category.music_tracks.count %>.
   <% end %>
-  Download Music Track: <%= link_to "MP3", @music_track.mp3_music_track.url %>
+  Download Music Track: <%= link_to 'MP3', @music_track.mp3_music_track.url %>
   <% if @music_track.ogg_music_track.present? %>
-     | <%= link_to "Ogg Vorbis", @music_track.ogg_music_track.url %>
+     | <%= link_to 'Ogg Vorbis', @music_track.ogg_music_track.url %>
   <% end %>
   <% if @music_track.flac_music_track.present? %>
-     | <%= link_to "FLAC", @music_track.flac_music_track.url %>
+     | <%= link_to 'FLAC', @music_track.flac_music_track.url %>
   <% end %>
 </p>
 
@@ -85,6 +99,9 @@
 
 <p class="links">
   <%= link_to 'Music', music_tracks_path %> |
-  <%= link_to @music_track.category.name,
-    category_path(@music_track.category) %>
+  <%=
+    link_to(
+      @music_track.category.name, category_path(@music_track.category)
+    )
+  %>
 </p>

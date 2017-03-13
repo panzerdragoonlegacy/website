@@ -5,9 +5,12 @@
     <ul>
       <% for quiz_answer in quiz_question.quiz_answers %>
         <li>
-          <%= radio_button_tag "results[" + quiz_question.id.to_s + "]",
-            quiz_answer.id.to_s,
-            checked = chosen_answer(quiz_question, quiz_answer)
+          <%=
+            radio_button_tag(
+              "results[#{quiz_question.id.to_s}]",
+              quiz_answer.id.to_s,
+              checked = chosen_answer(quiz_question, quiz_answer)
+            )
           %>
           <%= quiz_answer.content %>
         </li>
@@ -15,7 +18,7 @@
     </ul>
     <% end %>
   </ol>
-  <%= submit_tag "View Your Score" %>
+  <%= submit_tag 'View Your Score' %>
 <% end %>
 
 <%= render partial: 'shared/related_encyclopaedia_entries' %>

@@ -3,8 +3,14 @@
     <% @prologues.each do |prologue| %>
       <div class="resource">
         <div class="details">
-          <h2><%= link_to prologue.story.name + ": " + prologue.name,
-            chapter_path(prologue) %></h2>
+          <h2>
+            <%=
+              link_to(
+                "#{prologue.story.name}: #{prologue.name}",
+                chapter_path(prologue)
+              )
+            %>
+          </h2>
           <% unless prologue.publish %>
             <p class="unpublished">Unpublished</p>
           <% end %>
@@ -17,15 +23,22 @@
         <div class="details">
           <% if regular_chapter.name.present? %>
             <h2>
-              <%= link_to regular_chapter.story.name + ": " + "Chapter " +
-                regular_chapter.number.to_s + ": " + regular_chapter.name,
-                chapter_path(regular_chapter)
+              <%=
+                link_to(
+                  "#{regular_chapter.story.name}: Chapter " +
+                    "#{regular_chapter.number.to_s}: #{regular_chapter.name}",
+                  chapter_path(regular_chapter)
+                )
               %>
             </h2>
           <% else %>
             <h2>
-              <%= link_to regular_chapter.story.name + ": " + "Chapter " +
-                regular_chapter.number.to_s, chapter_path(regular_chapter)
+              <%=
+                link_to(
+                  "#{regular_chapter.story.name}: Chapter " +
+                    "#{regular_chapter.number.to_s}",
+                  chapter_path(regular_chapter)
+                )
               %>
             </h2>
           <% end %>
@@ -40,8 +53,11 @@
       <div class="resource">
         <div class="details">
           <h2>
-            <%= link_to epilogue.story.name + ": " + epilogue.name,
-              chapter_path(epilogue)
+            <%=
+              link_to(
+                "#{epilogue.story.name}: #{epilogue.name}",
+                chapter_path(epilogue)
+              )
             %>
           </h2>
           <% unless epilogue.publish %>

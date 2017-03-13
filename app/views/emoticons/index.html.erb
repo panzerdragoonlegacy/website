@@ -15,8 +15,13 @@
           <% if policy(emoticon).destroy? %>
             <ul class="administration">
               <li>
-                <%= link_to 'Delete Emoticon', emoticon, data: {
-                  confirm: 'Are you sure?' }, method: :delete %>
+                <%=
+                  link_to(
+                    'Delete Emoticon',
+                    emoticon, data: { confirm: 'Are you sure?' },
+                    method: :delete
+                  )
+                %>
               </li>
             </ul>
           <% end %>

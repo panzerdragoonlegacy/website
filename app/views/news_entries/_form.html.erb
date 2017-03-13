@@ -5,11 +5,14 @@
       <%= f.label :contributor_profile_id, "Author" %>
     </div>
     <div>
-      <%= f.collection_select :contributor_profile_id,
-        ContributorProfile.order(:name),
-        :id,
-        :name,
-        { include_blank: false }
+      <%=
+        f.collection_select(
+          :contributor_profile_id,
+          ContributorProfile.order(:name),
+          :id,
+          :name,
+          { include_blank: false }
+        )
       %>
     </div>
   </div>
@@ -19,8 +22,9 @@
     </div>
     <div>
       <% if @news_entry.news_entry_picture? %>
-        <%= image_tag(
-          @news_entry.news_entry_picture.url(:embedded)) %>
+        <%=
+          image_tag @news_entry.news_entry_picture.url(:embedded)
+        %>
         <p>File has already been uploaded. Replace file?</p>
       <% end %>
       <%= f.file_field :news_entry_picture %>

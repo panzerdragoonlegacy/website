@@ -13,11 +13,14 @@
       <%= f.label :contributor_profile_id, 'Contributor Profile*' %>
     </div>
     <div>
-      <%= f.collection_select :contributor_profile_id,
-        @contributor_profiles,
-        :id,
-        :name,
-        { include_blank: true }
+      <%=
+        f.collection_select(
+          :contributor_profile_id,
+          @contributor_profiles,
+          :id,
+          :name,
+          { include_blank: true }
+        )
       %>
     </div>
   </div>

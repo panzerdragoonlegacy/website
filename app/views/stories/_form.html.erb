@@ -5,11 +5,14 @@
       <%= f.label :category_id, 'Category*' %>
     </div>
     <div>
-      <%= f.collection_select :category_id,
-        @categories,
-        :id,
-        :name,
-        { include_blank: true }
+      <%=
+        f.collection_select(
+          :category_id,
+          @categories,
+          :id,
+          :name,
+          { include_blank: true }
+        )
       %>
     </div>
   </div>
@@ -18,12 +21,15 @@
       <%= f.label :contributor_profile_ids, 'Contributors*' %>
     </div>
     <div>
-      <%= f.collection_select :contributor_profile_ids,
-        ContributorProfile.order(:name),
-        :id,
-        :name,
-        { selected: @story.contributor_profile_ids, include_blank: true },
-        { multiple: true }
+      <%=
+        f.collection_select(
+          :contributor_profile_ids,
+          ContributorProfile.order(:name),
+          :id,
+          :name,
+          { selected: @story.contributor_profile_ids, include_blank: true },
+          { multiple: true }
+        )
       %>
     </div>
   </div>
@@ -59,34 +65,42 @@
     <label>Illustrations</label>
     <%= f.fields_for :illustrations do |illustration_form| %>
       <div class="illustration">
-      <% if illustration_form.object.illustration_file_name.blank? %>
-        <%= illustration_form.file_field :illustration %>
-      <% else %>
-        <%= image_tag illustration_form.object.illustration.url(:embedded) %>
-        <br />
-        <button class="insert_tag">Insert Markdown Tag</button><br />
-        Filename: <%= illustration_form.object.illustration_file_name %><br />
-        <%= link_to "Popover Image",
-          illustration_form.object.illustration.url(:popover) %> |
-        <%= link_to "Original Image",
-          illustration_form.object.illustration.url %> |
-      <% end %>
-      <%= illustration_form.link_to_remove "Remove illustration" %><br />
+        <% if illustration_form.object.illustration_file_name.blank? %>
+          <%= illustration_form.file_field :illustration %>
+        <% else %>
+          <%= image_tag illustration_form.object.illustration.url(:embedded) %>
+          <br />
+          <button class="insert_tag">Insert Markdown Tag</button><br />
+          Filename: <%= illustration_form.object.illustration_file_name %><br />
+          <%=
+            link_to(
+              'Popover Image',
+              illustration_form.object.illustration.url(:popover)
+            )
+          %> |
+          <%=
+            link_to 'Original Image', illustration_form.object.illustration.url
+          %> |
+        <% end %>
+        <%= illustration_form.link_to_remove 'Remove Illustration' %><br />
       </div>
     <% end %>
-    <p><%= f.link_to_add "Add illustration", :illustrations %></p>
+    <p><%= f.link_to_add 'Add Illustration', :illustrations %></p>
   </div>
   <div>
     <div>
       <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
     </div>
     <div>
-      <%= f.collection_select :encyclopaedia_entry_ids,
-        EncyclopaediaEntry.order(:name),
-        :id,
-        :name,
-        { selected: @story.encyclopaedia_entry_ids, include_blank: true },
-        { multiple: true }
+      <%=
+        f.collection_select(
+          :encyclopaedia_entry_ids,
+          EncyclopaediaEntry.order(:name),
+          :id,
+          :name,
+          { selected: @story.encyclopaedia_entry_ids, include_blank: true },
+          { multiple: true }
+        )
       %>
     </div>
   </div>

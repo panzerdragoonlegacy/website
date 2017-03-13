@@ -1,7 +1,7 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Links" %>
 <% else %>
-  <% title "Links" %>
+  <% title 'Links' %>
 <% end %>
 
 <% if policy(Category).new? || policy(Link).new? %>
