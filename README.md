@@ -21,5 +21,8 @@ refer to [OVERVIEW.md](OVERVIEW.md).
 Copyright
 ---------
 
-Source code and other assets in this repository are provided for demonstration
-purposes only. Source code files in this repository are © 2017 Chris Alley.
+ Source code files in this repository are © 2017 Chris Alley and are freely
+ available under the terms of the MIT license.
+
+However image assets and the Panzer Dragoon trademark are the property of SEGA
+and are provided for demonstration purposes only.
