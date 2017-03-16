@@ -63,8 +63,8 @@
   </div>
   <div>
     <label>Illustrations</label>
-    <%= f.fields_for :illustrations do |illustration_form| %>
-      <%= render 'illustration_fields', f: illustration_form %>
+    <%= f.fields_for :illustrations do |illustration_fields| %>
+      <%= render 'illustration_fields', f: illustration_fields %>
     <% end %>
     <p><%= link_to_add_association 'Add Illustration', f, :illustrations %></p>
   </div>
