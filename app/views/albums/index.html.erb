@@ -36,10 +36,15 @@
         </td>
         <td>
           <% if policy(album).destroy? %>
-            <%= link_to 'Delete',
-              album,
-              data: { confirm: 'Are you sure you want to delete this album?' },
-              method: :delete
+            <%=
+              link_to(
+                'Delete',
+                album,
+                data: {
+                  confirm: 'Are you sure you want to delete this album?'
+                },
+                method: :delete
+              )
             %>
           <% end %>
         </td>
