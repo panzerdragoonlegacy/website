@@ -1,4 +1,4 @@
-<%= nested_form_for @quiz do |f| %>
+<%= form_for @quiz do |f| %>
   <%= render 'shared/error_messages', target: @quiz %>
   <div>
     <div>
@@ -38,8 +38,10 @@
       <label>Questions</label>
     </div>
     <div>
-      <%= f.fields_for :quiz_questions %>
-      <%= f.link_to_add "Add Question", :quiz_questions %>
+      <%= f.fields_for :quiz_questions do |quiz_question_fields| %>
+        <%= render 'quiz_question_fields', f: quiz_question_fields %>
+      <% end %>
+      <p><%= link_to_add_association 'Add Question', f, :quiz_questions %></p>
     </div>
   </div>
   <div>

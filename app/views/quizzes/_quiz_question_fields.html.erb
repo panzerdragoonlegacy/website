@@ -1,4 +1,4 @@
-<div>
+<div class="nested-fields">
   <div>
 	  <%= f.label :content, 'Question' %>
 	</div>
@@ -6,10 +6,12 @@
 	  <%= f.text_area :content, rows: 3 %>
 	</div>
   <div>
-	  <%= f.link_to_remove 'Remove Question' %>
+    <%= link_to_remove_association 'Remove Question', f %><br />
 	</div>
 	<div>
-	  <%= f.fields_for :quiz_answers %>
-  	<%= f.link_to_add 'Add Answer', :quiz_answers %>
+    <%= f.fields_for :quiz_answers do |quiz_answer_fields| %>
+      <%= render 'quiz_answer_fields', f: quiz_answer_fields %>
+    <% end %>
+    <p><%= link_to_add_association 'Add Answer', f, :quiz_answers %></p>
   </div>
 </div>

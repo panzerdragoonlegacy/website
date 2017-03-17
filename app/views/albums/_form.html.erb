@@ -1,4 +1,4 @@
-<%= nested_form_for @album, html: { multipart: true } do |f| %>
+<%= form_for @album, html: { multipart: true } do |f| %>
   <%= render 'shared/error_messages', target: @album %>
   <div>
     <div>
@@ -100,40 +100,10 @@
   </div>
   <div>
     <label>Pictures</label>
-    <%= f.fields_for :pictures do |picture_form| %>
-      <div class="illustration">
-        <div>
-          <%= picture_form.label :name, 'Name' %>
-        </div>
-        <div>
-          <%= picture_form.text_field :name, class: 'child_input' %>
-        </div>
-        <div>
-          <%= picture_form.label :description, 'Description' %>
-        </div>
-        <div>
-          <%= picture_form.text_area :description, class: 'child_input' %>
-        </div>
-        <div>
-          <%= picture_form.label :information, 'Extra Information' %>
-        </div>
-        <div>
-          <%= picture_form.text_area :information, class: 'child_input' %>
-        </div>
-        <div>
-          <%= picture_form.label :picture, 'Picture' %>
-        </div>
-        <div>
-          <% if picture_form.object.picture_file_name.present? %>
-            <%= image_tag picture_form.object.picture.url(:thumbnail) %>
-            <p>File has already been uploaded. Replace file?</p>
-          <% end %>
-          <%= picture_form.file_field :picture %>
-        </div>
-        <%= picture_form.link_to_remove 'Delete Picture' %><br />
-      </div>
+    <%= f.fields_for :pictures do |picture_fields| %>
+      <%= render 'picture_fields', f: picture_fields %>
     <% end %>
-    <p><%= f.link_to_add 'Add New Picture', :pictures %></p>
+    <p><%= link_to_add_association 'Add Picture', f, :pictures %></p>
   </div>
   <% if policy(@album).permitted_attributes.include? :publish %>
     <div>

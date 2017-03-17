@@ -1,4 +1,4 @@
-<%= nested_form_for @resource, html: { multipart: true } do |f| %>
+<%= form_for @resource, html: { multipart: true } do |f| %>
   <%= render 'shared/error_messages', target: @resource %>
   <div>
     <div>
@@ -55,30 +55,10 @@
   </div>
   <div>
     <label>Illustrations</label>
-    <%= f.fields_for :illustrations do |illustration_form| %>
-      <div class="illustration">
-        <% if illustration_form.object.illustration_file_name.blank? %>
-          <%= illustration_form.file_field :illustration %>
-        <% else %>
-          <%= image_tag illustration_form.object.illustration.url(:embedded) %>
-          <br />
-          <button class="insert_tag">Insert Markdown Tag</button><br />
-          Filename: <%= illustration_form.object.illustration_file_name %><br />
-          <%=
-            link_to(
-              'Popover Image',
-              illustration_form.object.illustration.url(:popover)
-            )
-          %> |
-          <%=
-            link_to 'Original Image', illustration_form.object.illustration.url
-          %> |
-        <% end %>
-        <%= illustration_form.link_to_remove 'Remove Illustration' %>
-        <br />
-      </div>
+    <%= f.fields_for :illustrations do |illustration_fields| %>
+      <%= render 'illustration_fields', f: illustration_fields %>
     <% end %>
-    <p><%= f.link_to_add "Add Illustration", :illustrations %></p>
+    <p><%= link_to_add_association 'Add Illustration', f, :illustrations %></p>
   </div>
   <div>
     <div>

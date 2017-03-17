@@ -1,8 +1,8 @@
-<div>
+<div class="nested-fields">
   <%= f.label :content, 'Answer' %>
   <%= f.text_field :content, rows: 3 %>
   <%= f.label :correct, 'Correct Answer?' %>
   <%= f.radio_button :correct_answer, :true %> Yes
   <%= f.radio_button :correct_answer, :false %> No
-  <%= f.link_to_remove 'Remove Answer' %>
+  <%= link_to_remove_association 'Remove Answer', f %>
 </div>
