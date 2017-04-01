@@ -1,5 +1,5 @@
 <%= form_for @news_entry do |f| %>
-  <%= render "shared/error_messages", target: @news_entry %>
+  <%= render 'shared/error_messages', target: @news_entry %>
   <div>
     <div>
       <%= f.label :contributor_profile_id, 'Author*' %>
@@ -22,9 +22,7 @@
     </div>
     <div>
       <% if @news_entry.news_entry_picture? %>
-        <%=
-          image_tag @news_entry.news_entry_picture.url(:embedded)
-        %>
+        <%= image_tag @news_entry.news_entry_picture.url(:embedded) %>
         <p>File has already been uploaded. Replace file?</p>
       <% end %>
       <%= f.file_field :news_entry_picture %>
