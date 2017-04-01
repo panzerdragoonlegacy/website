@@ -2,7 +2,7 @@
   <%= render 'shared/error_messages', target: @picture %>
   <div>
     <div>
-      <%= f.label :category_id, 'Category' %>
+      <%= f.label :category_id, 'Category*' %>
     </div>
     <div>
       <%=
@@ -34,7 +34,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :contributor_profile_ids, 'Contributors' %>
+      <%= f.label :contributor_profile_ids, 'Contributors*' %>
     </div>
     <div>
       <%=
@@ -51,7 +51,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :picture, 'Picture' %>
+      <%= f.label :picture, 'Picture*' %>
     </div>
     <div>
       <% if @picture.picture? %>
@@ -63,7 +63,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :name, 'Name' %>
+      <%= f.label :name, 'Name*' %>
     </div>
     <div>
       <%= f.text_field :name %>
@@ -75,7 +75,7 @@
   </div>
   <div>
     <div>
-      <%= f.label :description, 'Description' %>
+      <%= f.label :description, 'Description*' %>
     </div>
     <div>
       <%= f.text_area :description, rows: 3 %>
