@@ -81,7 +81,7 @@ module NewsEntriesHelper
           tag.replace(mp3_source_tag)
           mp3_source_tag['type'] = 'audio/mp3'
           mp3_source_tag['src'] = music_track.mp3_music_track.url
-          mp3_source_tag.add_next_sibling(p_source_tag)
+          mp3_source_tag.add_next_sibling(p_tag)
           p_tag.content = 'Your browser does not support the audio element.'
         end
       end
