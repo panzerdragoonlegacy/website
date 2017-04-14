@@ -77,10 +77,6 @@ RSpec.describe MusicTrack, type: :model do
     it { is_expected.to have_attached_file(:mp3_music_track) }
     it { is_expected.to validate_attachment_presence(:mp3_music_track) }
     it do
-      is_expected.to validate_attachment_content_type(:mp3_music_track)
-        .allowing('audio/mp3')
-    end
-    it do
       is_expected.to validate_attachment_size(:mp3_music_track)
         .less_than(25.megabytes)
     end

@@ -71,11 +71,8 @@ RSpec.describe Video, type: :model do
     it { is_expected.to have_attached_file(:mp4_video) }
     it { is_expected.to validate_attachment_presence(:mp4_video) }
     it do
-      is_expected.to validate_attachment_content_type(:mp4_video)
-        .allowing('video/mp4')
-    end
-    it do
-      is_expected.to validate_attachment_size(:mp4_video).less_than(200.megabytes)
+      is_expected.to validate_attachment_size(:mp4_video)
+         .less_than(200.megabytes)
     end
   end
 

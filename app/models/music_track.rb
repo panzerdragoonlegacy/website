@@ -32,12 +32,12 @@ class MusicTrack < ActiveRecord::Base
   validates_attachment(
     :mp3_music_track,
     presence: true,
-    content_type: { content_type: 'audio/mp3' },
     size: { in: 0..25.megabytes }
   )
   validates_attachment :flac_music_track, size: { in: 0..50.megabytes }
 
-  # There was an issue specifying a content type for FLAC files.
+  # There were issues specifying content types.
+  do_not_validate_attachment_file_type :mp3_music_track
   do_not_validate_attachment_file_type :flac_music_track
 
   before_save :sync_file_names
