@@ -8,7 +8,6 @@ RSpec.describe MusicTrack, type: :model do
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:information) }
     it { is_expected.to respond_to(:mp3_music_track) }
-    it { is_expected.to respond_to(:ogg_music_track) }
     it { is_expected.to respond_to(:flac_music_track) }
     it { is_expected.to respond_to(:publish) }
     it { is_expected.to respond_to(:category) }
@@ -83,15 +82,6 @@ RSpec.describe MusicTrack, type: :model do
     end
     it do
       is_expected.to validate_attachment_size(:mp3_music_track)
-        .less_than(25.megabytes)
-    end
-    it { is_expected.to have_attached_file(:ogg_music_track) }
-    it do
-      is_expected.to validate_attachment_content_type(:ogg_music_track)
-        .allowing('audio/ogg')
-    end
-    it do
-      is_expected.to validate_attachment_size(:ogg_music_track)
         .less_than(25.megabytes)
     end
     it { is_expected.to have_attached_file(:flac_music_track) }

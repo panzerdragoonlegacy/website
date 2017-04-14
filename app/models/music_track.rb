@@ -24,11 +24,6 @@ class MusicTrack < ActiveRecord::Base
     url: '/system/:attachment/:id/:style/:filename'
   )
   has_attached_file(
-    :ogg_music_track,
-    path: ':rails_root/public/system/:attachment/:id/:style/:filename',
-    url: '/system/:attachment/:id/:style/:filename'
-  )
-  has_attached_file(
     :flac_music_track,
     path: ':rails_root/public/system/:attachment/:id/:style/:filename',
     url: '/system/:attachment/:id/:style/:filename'
@@ -40,11 +35,6 @@ class MusicTrack < ActiveRecord::Base
     content_type: { content_type: 'audio/mp3' },
     size: { in: 0..25.megabytes }
   )
-  validates_attachment(
-    :ogg_music_track,
-    content_type: { content_type: 'audio/ogg' },
-    size: { in: 0..25.megabytes }
-  )
   validates_attachment :flac_music_track, size: { in: 0..50.megabytes }
 
   # There was an issue specifying a content type for FLAC files.
@@ -54,7 +44,6 @@ class MusicTrack < ActiveRecord::Base
 
   def sync_file_names
     sync_file_name_of :mp3_music_track, file_name: "#{name.to_url}.mp3"
-    sync_file_name_of :ogg_music_track, file_name: "#{name.to_url}.ogg"
     sync_file_name_of :flac_music_track, file_name: "#{name.to_url}.flac"
   end
 

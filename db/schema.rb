@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230091912) do
+ActiveRecord::Schema.define(version: 20170414004000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,10 +166,6 @@ ActiveRecord::Schema.define(version: 20161230091912) do
     t.string   "mp3_music_track_content_type",  limit: 255
     t.integer  "mp3_music_track_file_size"
     t.datetime "mp3_music_track_updated_at"
-    t.string   "ogg_music_track_file_name",     limit: 255
-    t.string   "ogg_music_track_content_type",  limit: 255
-    t.integer  "ogg_music_track_file_size"
-    t.datetime "ogg_music_track_updated_at"
     t.boolean  "publish",                                   default: false
     t.integer  "category_id"
     t.datetime "created_at"
@@ -326,23 +322,19 @@ ActiveRecord::Schema.define(version: 20161230091912) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "videos", force: :cascade do |t|
-    t.string   "name",                    limit: 255
-    t.string   "url",                     limit: 255
-    t.string   "description",             limit: 255
+    t.string   "name",                   limit: 255
+    t.string   "url",                    limit: 255
+    t.string   "description",            limit: 255
     t.text     "information"
-    t.string   "mp4_video_file_name",     limit: 255
-    t.string   "mp4_video_content_type",  limit: 255
+    t.string   "mp4_video_file_name",    limit: 255
+    t.string   "mp4_video_content_type", limit: 255
     t.integer  "mp4_video_file_size"
     t.datetime "mp4_video_updated_at"
-    t.string   "webm_video_file_name",    limit: 255
-    t.string   "webm_video_content_type", limit: 255
-    t.integer  "webm_video_file_size"
-    t.datetime "webm_video_updated_at"
-    t.boolean  "publish",                             default: false
+    t.boolean  "publish",                            default: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "youtube_video_id",        limit: 255
+    t.string   "youtube_video_id",       limit: 255
   end
 
   add_foreign_key "albums", "categories"

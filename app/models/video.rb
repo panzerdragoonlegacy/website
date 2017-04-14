@@ -14,11 +14,6 @@ class Video < ActiveRecord::Base
     path: ':rails_root/public/system/:attachment/:id/:style/:filename',
     url: '/system/:attachment/:id/:style/:filename'
   )
-  has_attached_file(
-    :webm_video,
-    path: ':rails_root/public/system/:attachment/:id/:style/:filename',
-    url: '/system/:attachment/:id/:style/:filename'
-  )
 
   validates_attachment(
     :mp4_video,
@@ -26,17 +21,11 @@ class Video < ActiveRecord::Base
     content_type: { content_type: 'video/mp4' },
     size: { in: 0..200.megabytes }
   )
-  validates_attachment(
-    :webm_video,
-    content_type: { content_type: 'video/webm' },
-    size: { in: 0..200.megabytes }
-  )
 
   before_save :sync_file_names
 
   def sync_file_names
     sync_file_name_of :mp4_video, file_name: "#{name.to_url}.mp4"
-    sync_file_name_of :webm_video, file_name: "#{name.to_url}.webm"
   end
 
   def to_param

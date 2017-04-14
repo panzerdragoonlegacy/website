@@ -75,17 +75,13 @@ module NewsEntriesHelper
         music_track_id = file_name.split('-')[0].to_i
         if music_track = MusicTrack.where(id: music_track_id).first
           mp3_source_tag = html.create_element('source')
-          ogg_source_tag = html.create_element('source')
           p_tag = html.create_element('p')
 
           # Replace img tag with source tags.
           tag.replace(mp3_source_tag)
           mp3_source_tag['type'] = 'audio/mp3'
           mp3_source_tag['src'] = music_track.mp3_music_track.url
-          mp3_source_tag.add_next_sibling(ogg_source_tag)
-          ogg_source_tag['type'] = 'audio/ogg'
-          ogg_source_tag['src'] = music_track.ogg_music_track.url
-          ogg_source_tag.add_next_sibling(p_tag)
+          mp3_source_tag.add_next_sibling(p_source_tag)
           p_tag.content = 'Your browser does not support the audio element.'
         end
       end
@@ -101,17 +97,13 @@ module NewsEntriesHelper
         video_id = file_name.split('-')[0].to_i
         if video = Video.where(id: video_id).first
           mp4_source_tag = html.create_element('source')
-          webm_source_tag = html.create_element('source')
           p_tag = html.create_element('p')
 
           # Replace img tag with source tags.
           tag.replace(mp4_source_tag)
           mp4_source_tag['type'] = 'video/mp4'
           mp4_source_tag['src'] = video.mp4_video.url
-          mp4_source_tag.add_next_sibling(webm_source_tag)
-          webm_source_tag['type'] = 'video/webm'
-          webm_source_tag['src'] = video.webm_video.url
-          webm_source_tag.add_next_sibling(p_tag)
+          mp4_source_tag.add_next_sibling(p_tag)
           p_tag.content = 'Your browser does not support the video element.'
         end
       end

@@ -5,8 +5,6 @@ FactoryGirl.define do
       description 'Test Description'
       mp3_music_track Rack::Test::UploadedFile.new(
         'spec/fixtures/music_track.mp3', 'audio/mp3')
-      ogg_music_track Rack::Test::UploadedFile.new(
-        'spec/fixtures/music_track.ogg', 'audio/ogg')
 
       category { FactoryGirl.create(:valid_category) }
       contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }

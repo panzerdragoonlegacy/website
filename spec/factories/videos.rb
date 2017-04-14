@@ -5,8 +5,6 @@ FactoryGirl.define do
       description 'Test Description'
       mp4_video Rack::Test::UploadedFile.new(
         'spec/fixtures/video.mp4', 'video/mp4')
-      webm_video Rack::Test::UploadedFile.new(
-        'spec/fixtures/video.webm', 'video/webm')
 
       category { FactoryGirl.create(:valid_category) }
       contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }

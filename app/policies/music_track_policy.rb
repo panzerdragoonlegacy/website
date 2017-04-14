@@ -68,7 +68,6 @@ class MusicTrackPolicy < ApplicationPolicy
       :description,
       :information,
       :mp3_music_track,
-      :ogg_music_track,
       :flac_music_track,
       contributor_profile_ids: [],
       encyclopaedia_entry_ids: []

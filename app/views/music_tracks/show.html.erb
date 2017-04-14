@@ -69,9 +69,6 @@
 
 <audio controls="true" autobuffer="true">
   <source type="audio/mp3" src="<%= @music_track.mp3_music_track.url %>" />
-  <% if @music_track.ogg_music_track %>
-    <source type="audio/ogg" src="<%= @music_track.ogg_music_track.url %>" />
-  <% end %>
   Your browser does not support the <code>audio</code> element.
 </audio>
 
@@ -87,9 +84,6 @@
     <%= @music_track.category.music_tracks.count %>.
   <% end %>
   Download Music Track: <%= link_to 'MP3', @music_track.mp3_music_track.url %>
-  <% if @music_track.ogg_music_track.present? %>
-     | <%= link_to 'Ogg Vorbis', @music_track.ogg_music_track.url %>
-  <% end %>
   <% if @music_track.flac_music_track.present? %>
      | <%= link_to 'FLAC', @music_track.flac_music_track.url %>
   <% end %>
