@@ -5,8 +5,8 @@ class VideoPolicy < ApplicationPolicy
         return scope if user.administrator?
         if user.contributor_profile.present?
           return scope.joins(:contributions).where(
-            "videos.publish = 't'" +
-            " OR contributions.contributor_profile_id = ?",
+            "videos.publish = 't'" \
+              " OR contributions.contributor_profile_id = ?",
             user.contributor_profile_id
           )
         end

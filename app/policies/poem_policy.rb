@@ -4,8 +4,9 @@ class PoemPolicy < ApplicationPolicy
       if user
         return scope if user.administrator?
         if user.contributor_profile.present?
-          return scope.joins(:contributions).where("poems.publish = 't' OR " +
-            "contributions.contributor_profile_id = ?",
+          return scope.joins(:contributions).where(
+            "poems.publish = 't' OR " \
+              "contributions.contributor_profile_id = ?",
             user.contributor_profile_id
           )
         end
@@ -42,9 +43,11 @@ class PoemPolicy < ApplicationPolicy
     if user
       return true if user.administrator?
       if user.contributor_profile.present?
-        if !record.publish and record.contributions.where(
-          contributor_profile_id: user.contributor_profile_id
-        ).count > 0
+        if (
+          !record.publish and record.contributions.where(
+            contributor_profile_id: user.contributor_profile_id
+          ).count > 0
+        )
           return true
         end
       end

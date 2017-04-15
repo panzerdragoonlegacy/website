@@ -5,8 +5,8 @@ class NewsEntryPolicy < ApplicationPolicy
         return scope if user.administrator?
         if user.contributor_profile.present?
           return scope.where(
-            "news_entries.publish = 't' OR " +
-            "news_entries.contributor_profile_id = ?",
+            "news_entries.publish = 't' OR " \
+              "news_entries.contributor_profile_id = ?",
             user.contributor_profile_id
           )
         end
@@ -41,7 +41,8 @@ class NewsEntryPolicy < ApplicationPolicy
     if user
       return true if user.administrator?
       if user.contributor_profile.present?
-        if !record.publish && (
+        if (
+          !record.publish &&
           record.contributor_profile_id == user.contributor_profile_id
         )
           return true

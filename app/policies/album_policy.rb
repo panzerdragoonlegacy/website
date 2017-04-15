@@ -5,8 +5,8 @@ class AlbumPolicy < ApplicationPolicy
         return scope if user.administrator?
         if user.contributor_profile.present?
           return scope.joins(:category, :contributions).where(
-            "(albums.publish = 't' AND categories.publish = 't') OR " +
-            "contributions.contributor_profile_id = ?",
+            "(albums.publish = 't' AND categories.publish = 't') OR " \
+              "contributions.contributor_profile_id = ?",
             user.contributor_profile_id
           )
         end

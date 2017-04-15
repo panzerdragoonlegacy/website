@@ -5,8 +5,8 @@ class ResourcePolicy < ApplicationPolicy
         return scope if user.administrator?
         if user.contributor_profile.present?
           return scope.joins(:contributions).where(
-            "resources.publish = 't'" +
-            " OR contributions.contributor_profile_id = ?",
+            "resources.publish = 't'" \
+              " OR contributions.contributor_profile_id = ?",
             user.contributor_profile_id
           )
         end
@@ -43,9 +43,12 @@ class ResourcePolicy < ApplicationPolicy
     if user
       return true if user.administrator?
       if user.contributor_profile.present?
-        if !record.publish && record.contributions.where(
-          contributor_profile_id: user.contributor_profile_id
-        ).count > 0
+        if (
+          !record.publish &&
+          record.contributions.where(
+            contributor_profile_id: user.contributor_profile_id
+          ).count > 0
+        )
           return true
         end
       end

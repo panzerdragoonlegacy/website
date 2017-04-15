@@ -5,8 +5,8 @@ class DownloadPolicy < ApplicationPolicy
         return scope if user.administrator?
         if user.contributor_profile.present?
           return scope.joins(:category, :contributions).where(
-            "(downloads.publish = 't' AND categories.publish = 't') OR " +
-            "contributions.contributor_profile_id = ?",
+            "(downloads.publish = 't' AND categories.publish = 't') OR " \
+              "contributions.contributor_profile_id = ?",
             user.contributor_profile_id
           )
         end
@@ -26,7 +26,7 @@ class DownloadPolicy < ApplicationPolicy
         end
       end
     end
-    record.publish? and record.category.publish?
+    record.publish? && record.category.publish?
   end
 
   def new?
