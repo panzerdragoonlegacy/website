@@ -1,0 +1,18 @@
+<h2>Articles in this Category</h2>
+<% if policy(Article).new? %>
+  <ul class="administration">
+    <li>
+      <%=
+        link_to(
+          'New Article',
+          new_article_path(category: @category)
+        )
+      %>
+    </li>
+  </ul>
+<% end %>
+<%= render 'articles/list' %>
+<p>
+  <%= link_to 'Site Map', site_map_path %> |
+  <%= link_to 'Articles', articles_path %>
+</p>

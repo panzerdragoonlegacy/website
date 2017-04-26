@@ -1,0 +1,18 @@
+<h2>Resources in this Category</h2>
+<% if policy(Resource).new? %>
+  <ul class="administration">
+    <li>
+      <%=
+        link_to(
+          'New Resource',
+          new_resource_path(category: @category)
+        )
+      %>
+    </li>
+  </ul>
+<% end %>
+<%= render 'resources/list' %>
+<p>
+  <%= link_to 'Site Map', site_map_path %> |
+  <%= link_to 'Resources', resources_path %>
+</p>

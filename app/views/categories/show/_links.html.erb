@@ -1,0 +1,13 @@
+<h2>Links in this Category</h2>
+<% if policy(Link).new? %>
+  <ul class="administration">
+    <li>
+      <%= link_to 'New Link', new_link_path(category: @category) %>
+    </li>
+  </ul>
+<% end %>
+<%= render 'links/list' %>
+<p>
+  <%= link_to 'Site Map', site_map_path %> |
+  <%= link_to 'Links', links_path %>
+</p>

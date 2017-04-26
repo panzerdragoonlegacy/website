@@ -1,0 +1,18 @@
+<h2>Encyclopaedia Entries in this Category</h2>
+<% if policy(EncyclopaediaEntry).new? %>
+  <ul class="administration">
+    <li>
+      <%=
+        link_to(
+          'New Encyclopaedia Entry',
+          new_encyclopaedia_entry_path(category: @category)
+        )
+      %>
+    </li>
+  </ul>
+<% end %>
+<%= render 'encyclopaedia_entries/list' %>
+<p>
+  <%= link_to 'Site Map', site_map_path %> |
+  <%= link_to 'Encyclopaedia', encyclopaedia_entries_path %>
+</p>

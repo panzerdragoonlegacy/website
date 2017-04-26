@@ -1,0 +1,13 @@
+<h2>Videos in this Category</h2>
+<% if policy(Video).new? %>
+  <ul class="administration">
+    <li>
+      <%= link_to 'New Video', new_video_path(category: @category) %>
+    </li>
+  </ul>
+<% end %>
+<%= render 'videos/list' %>
+<p>
+  <%= link_to 'Site Map', site_map_path %> |
+  <%= link_to 'Videos', videos_path %>
+</p>

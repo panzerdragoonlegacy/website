@@ -1,0 +1,17 @@
+<h2>Music Tracks in this Category</h2>
+<% if policy(MusicTrack).new? %>
+  <ul class="administration">
+    <li>
+      <%=
+        link_to(
+          'New Music Track', new_music_track_path(category: @category)
+        )
+      %>
+    </li>
+  </ul>
+<% end %>
+<%= render 'music_tracks/list' %>
+<p>
+  <%= link_to 'Site Map', site_map_path %> |
+  <%= link_to 'Music', music_tracks_path %>
+</p>

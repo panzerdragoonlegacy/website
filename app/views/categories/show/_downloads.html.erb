@@ -1,0 +1,18 @@
+<h2>Downloads in this Category</h2>
+<% if policy(Download).new? %>
+  <ul class="administration">
+    <li>
+      <%=
+        link_to(
+          'New Download',
+          new_download_path(category: @category)
+        )
+      %>
+    </li>
+  </ul>
+<% end %>
+<%= render 'downloads/list' %>
+<p>
+  <%= link_to 'Site Map', site_map_path %> |
+  <%= link_to 'Downloads', downloads_path %>
+</p>
