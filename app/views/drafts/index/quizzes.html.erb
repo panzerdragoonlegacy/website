@@ -1,0 +1,9 @@
+<% if draft_quiz_count > 0 %>
+  <li>
+    <%=
+      link_to(
+        pluralize(draft_quiz_count, 'quiz'), quizzes_path(filter: 'draft')
+      )
+    %>
+  </li>
+<% end %>

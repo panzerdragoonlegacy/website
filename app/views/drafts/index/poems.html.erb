@@ -1,0 +1,9 @@
+<% if draft_poem_count > 0 %>
+  <li>
+    <%=
+      link_to(
+        pluralize(draft_poem_count, 'poem'), poems_path(filter: 'draft')
+      )
+    %>
+  </li>
+<% end %>

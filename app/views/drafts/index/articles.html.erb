@@ -1,0 +1,10 @@
+<% if draft_article_count > 0 %>
+  <li>
+    <%=
+      link_to(
+        pluralize(draft_article_count, 'article'),
+        articles_path(filter: 'draft')
+      )
+    %>
+  </li>
+<% end %>

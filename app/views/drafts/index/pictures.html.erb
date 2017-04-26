@@ -1,0 +1,10 @@
+<% if draft_picture_count > 0 %>
+  <li>
+    <%=
+      link_to(
+        pluralize(draft_picture_count, 'picture'),
+        pictures_path(filter: 'draft')
+      )
+    %>
+  </li>
+<% end %>
