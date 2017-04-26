@@ -1,0 +1,8 @@
+<% unless @links.count == 0 %>
+  <h2>Related Links</h2>
+  <ul>
+    <% @links.each do |link| %>
+      <li><%= link_to link.name, link.url %></li>
+    <% end %>
+  </ul>
+<% end %>

@@ -68,147 +68,16 @@
   )
 %>
 
-<% unless @articles.count == 0 %>
-  <h2>Related Articles</h2>
-  <ul>
-    <% @articles.each do |article| %>
-      <li>
-        <%= link_to article.name, article %>
-        <% if !article.publish %>
-           - <span class="unpublished">Unpublished</span>
-        <% elsif !article.category.publish %>
-           - <span class="unpublished">Published in Unpublished Category</span>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-<% unless @downloads.count == 0 %>
-  <h2>Related Downloads</h2>
-  <ul>
-    <% @downloads.each do |download| %>
-      <li>
-        <%= link_to download.name, download %>
-        <% if !download.publish %>
-           - <span class="unpublished">Unpublished</span>
-        <% elsif !download.category.publish %>
-           - <span class="unpublished">Published in Unpublished Category</span>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-<% unless @links.count == 0 %>
-  <h2>Related Links</h2>
-  <ul>
-    <% @links.each do |link| %>
-      <li><%= link_to link.name, link.url %></li>
-    <% end %>
-  </ul>
-<% end %>
-<% unless @music_tracks.count == 0 %>
-  <h2>Related Music</h2>
-  <ul>
-    <% @music_tracks.each do |music_track| %>
-      <li>
-        <%= link_to music_track.name, music_track %>
-        <% if !music_track.publish %>
-           - <span class="unpublished">Unpublished</span>
-        <% elsif !music_track.category.publish %>
-           - <span class="unpublished">Published in Unpublished Category</span>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-<% unless @pictures.count == 0 %>
-  <h2>Related Pictures</h2>
-  <div id="related_pictures">
-    <% @pictures.each do |picture| %>
-      <%=
-        link_to(
-          image_tag(picture.picture.url(:mini_thumbnail),
-            alt: picture.name,
-            width: '75',
-            height: '75'
-          ),
-          picture
-        )
-      %>
-    <% end %>
-  </div>
-<% end %>
-<% unless @poems.count == 0 %>
-  <h2>Related Poems</h2>
-  <ul>
-    <% @poems.each do |poem| %>
-      <li>
-        <%= link_to poem.name, poem %>
-        <% unless poem.publish %>
-           - <span class="unpublished">Unpublished</span>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-<% unless @quizzes.count == 0 %>
-  <h2>Related Quizzes</h2>
-  <ul>
-    <% @quizzes.each do |quiz| %>
-      <li>
-        <%= link_to quiz.name, quiz %>
-        <% unless quiz.publish %>
-           - <span class="unpublished">Unpublished</span>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-<% unless @resources.count == 0 %>
-  <h2>Related Resources</h2>
-  <ul>
-    <% @resources.each do |resource| %>
-      <li>
-        <%= link_to resource.name, resource %>
-        <% if !resource.publish %>
-           - <span class="unpublished">Unpublished</span>
-        <% elsif !resource.category.publish %>
-           - <span class="unpublished">Published in Unpublished Category</span>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-<% unless @stories.count == 0 %>
-  <h2>Related Stories</h2>
-  <ul>
-    <% @stories.each do |story| %>
-      <li>
-        <%= link_to story.name, story %>
-        <% if !story.publish %>
-           - <span class="unpublished">Unpublished</span>
-        <% elsif !story.category.publish %>
-           - <span class="unpublished">Published in Unpublished Category</span>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-<% unless @videos.count == 0 %>
-  <h2>Related Videos</h2>
-  <ul>
-    <% @videos.each do |video| %>
-      <li>
-        <%= link_to video.name, video %>
-        <% if !video.publish %>
-           - <span class="unpublished">Unpublished</span>
-        <% elsif !video.category.publish %>
-           - <span class="unpublished">Published in Unpublished Category</span>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render 'encyclopaedia_entries/show/articles' %>
+<%= render 'encyclopaedia_entries/show/downloads' %>
+<%= render 'encyclopaedia_entries/show/links' %>
+<%= render 'encyclopaedia_entries/show/music_tracks' %>
+<%= render 'encyclopaedia_entries/show/pictures' %>
+<%= render 'encyclopaedia_entries/show/poems' %>
+<%= render 'encyclopaedia_entries/show/quizzes' %>
+<%= render 'encyclopaedia_entries/show/resources' %>
+<%= render 'encyclopaedia_entries/show/stories' %>
+<%= render 'encyclopaedia_entries/show/videos' %>
 
 <p class="links">
   <%= link_to 'Encyclopaedia', encyclopaedia_entries_path %> |

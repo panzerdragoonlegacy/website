@@ -1,0 +1,17 @@
+<% unless @pictures.count == 0 %>
+  <h2>Related Pictures</h2>
+  <div id="related_pictures">
+    <% @pictures.each do |picture| %>
+      <%=
+        link_to(
+          image_tag(picture.picture.url(:mini_thumbnail),
+            alt: picture.name,
+            width: '75',
+            height: '75'
+          ),
+          picture
+        )
+      %>
+    <% end %>
+  </div>
+<% end %>
