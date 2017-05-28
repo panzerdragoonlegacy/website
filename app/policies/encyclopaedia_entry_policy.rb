@@ -49,14 +49,27 @@ class EncyclopaediaEntryPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = [
+    permitted_attributes = encyclopaedia_entry_attributes
+    permitted_attributes << :publish if user && user.administrator?
+    permitted_attributes
+  end
+
+  private
+
+  def encyclopaedia_entry_attributes
+    related_id_attributes + [
       :category_id,
       :name,
       :encyclopaedia_entry_picture,
       :information,
       :content,
       contributor_profile_ids: [],
-      illustrations_attributes: [:id, :illustration, :_destroy],
+      illustrations_attributes: [:id, :illustration, :_destroy]
+    ]
+  end
+
+  def related_id_attributes
+    [
       article_ids: [],
       download_ids: [],
       link_ids: [],
@@ -68,9 +81,5 @@ class EncyclopaediaEntryPolicy < ApplicationPolicy
       story_ids: [],
       video_ids: []
     ]
-    if user
-      permitted_attributes << :publish if user.administrator?
-    end
-    permitted_attributes
   end
 end

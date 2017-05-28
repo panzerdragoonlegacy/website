@@ -49,28 +49,37 @@ class AlbumPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = [
+    permitted_attributes = album_attributes
+    permitted_attributes << :publish if user && user.administrator?
+    permitted_attributes
+  end
+
+  private
+
+  def album_attributes
+    shared_attributes + [
+      contributor_profile_ids: [],
+      encyclopaedia_entry_ids: [],
+      pictures_attributes: pictures_attributes
+    ]
+  end
+
+  def pictures_attributes
+    shared_attributes + [
+      :id,
+      :contributor_profile_ids,
+      :encyclopaedia_entry_ids,
+      :picture,
+      :_destroy
+    ]
+  end
+
+  def shared_attributes
+    [
       :category_id,
       :name,
       :description,
-      :information,
-      contributor_profile_ids: [],
-      encyclopaedia_entry_ids: [],
-      pictures_attributes: [
-        :id,
-        :category_id,
-        :name,
-        :description,
-        :information,
-        :contributor_profile_ids,
-        :encyclopaedia_entry_ids,
-        :picture,
-        :_destroy
-      ]
+      :information
     ]
-    if user
-      permitted_attributes << :publish if user.administrator?
-    end
-    permitted_attributes
   end
 end

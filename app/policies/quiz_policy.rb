@@ -49,20 +49,28 @@ class QuizPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = [
+    permitted_attributes = quiz_attributes
+    permitted_attributes << :publish if user && user.administrator?
+    permitted_attributes
+  end
+
+  private
+
+  def quiz_attributes
+    [
       :name,
       :description,
-      quiz_questions_attributes: [
-        :content, quiz_answers_attributes: [
-          :content, :correct_answer
-        ]
-      ],
+      quiz_questions_attributes: quiz_questions_attributes,
       contributor_profile_ids: [],
       encyclopaedia_entry_ids: []
     ]
-    if user
-      permitted_attributes << :publish if user.administrator?
-    end
-    permitted_attributes
+  end
+
+  def quiz_questions_attributes
+    [:content, quiz_answers_attributes: quiz_answers_attributes]
+  end
+
+  def quiz_answers_attributes
+    [:content, :correct_answer]
   end
 end

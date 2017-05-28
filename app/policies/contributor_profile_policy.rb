@@ -31,7 +31,15 @@ class ContributorProfilePolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = [
+    permitted_attributes = contributor_profile_attributes
+    permitted_attributes << :publish if user && user.administrator?
+    permitted_attributes
+  end
+
+  private
+
+  def contributor_profile_attributes
+    [
       :name,
       :email_address,
       :discourse_username,
@@ -40,9 +48,5 @@ class ContributorProfilePolicy < ApplicationPolicy
       :facebook_username,
       :twitter_username
     ]
-    if user
-      permitted_attributes << :publish if user.administrator?
-    end
-    permitted_attributes
   end
 end

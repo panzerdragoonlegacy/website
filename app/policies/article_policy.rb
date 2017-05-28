@@ -49,7 +49,15 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = [
+    permitted_attributes = article_attributes
+    permitted_attributes << :publish if user && user.administrator?
+    permitted_attributes
+  end
+
+  private
+
+  def article_attributes
+    [
       :category_id,
       :name,
       :description,
@@ -58,9 +66,5 @@ class ArticlePolicy < ApplicationPolicy
       encyclopaedia_entry_ids: [],
       illustrations_attributes: [:id, :illustration, :_destroy]
     ]
-    if user
-      permitted_attributes << :publish if user.administrator?
-    end
-    permitted_attributes
   end
 end

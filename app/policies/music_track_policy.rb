@@ -49,7 +49,15 @@ class MusicTrackPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = [
+    permitted_attributes = music_track_attributes
+    permitted_attributes << :publish if user && user.administrator?
+    permitted_attributes
+  end
+
+  private
+
+  def music_track_attributes
+    [
       :category_id,
       :track_number,
       :name,
@@ -60,9 +68,5 @@ class MusicTrackPolicy < ApplicationPolicy
       contributor_profile_ids: [],
       encyclopaedia_entry_ids: []
     ]
-    if user
-      permitted_attributes << :publish if user.administrator?
-    end
-    permitted_attributes
   end
 end

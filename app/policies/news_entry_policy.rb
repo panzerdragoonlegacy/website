@@ -49,15 +49,8 @@ class NewsEntryPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = [
-      :contributor_profile_id,
-      :name,
-      :news_entry_picture,
-      :content
-    ]
-    if user
-      permitted_attributes << :publish if user.administrator?
-    end
+    permitted_attributes = news_entry_attributes
+    permitted_attributes << :publish if user && user.administrator?
     permitted_attributes
   end
 
@@ -69,5 +62,14 @@ class NewsEntryPolicy < ApplicationPolicy
         return true
       end
     end
+  end
+
+  def news_entry_attributes
+    [
+      :contributor_profile_id,
+      :name,
+      :news_entry_picture,
+      :content
+    ]
   end
 end

@@ -49,7 +49,15 @@ class DownloadPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = [
+    permitted_attributes = download_attributes
+    permitted_attributes << :publish if user && user.administrator?
+    permitted_attributes
+  end
+
+  private
+
+  def download_attributes
+    [
       :category_id,
       :name,
       :description,
@@ -58,9 +66,5 @@ class DownloadPolicy < ApplicationPolicy
       contributor_profile_ids: [],
       encyclopaedia_entry_ids: []
     ]
-    if user
-      permitted_attributes << :publish if user.administrator?
-    end
-    permitted_attributes
   end
 end
