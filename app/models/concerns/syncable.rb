@@ -2,7 +2,7 @@ module Syncable
   extend ActiveSupport::Concern
 
   private
-  
+
   def sync_file_name_of(attachment, file_name: attachment_file_name)
     if send(attachment).present?
       if file_name != self["#{attachment}_file_name"] && persisted?
