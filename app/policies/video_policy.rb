@@ -12,8 +12,7 @@ class VideoPolicy < ApplicationPolicy
 
     def scope_user_contributes_to
       scope.joins(:contributions).where(
-        'videos.publish = true' \
-          ' OR contributions.contributor_profile_id = ?',
+        'videos.publish = true OR contributions.contributor_profile_id = ?',
         user.contributor_profile_id
       )
     end
