@@ -45,9 +45,7 @@ class AlbumPolicy < ApplicationPolicy
   end
 
   def destroy?
-    if record.pictures.blank?
-      edit?
-    end
+    edit? if record.pictures.blank?
   end
 
   def permitted_attributes

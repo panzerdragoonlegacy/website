@@ -19,9 +19,7 @@ class ContributorProfilePolicy < ApplicationPolicy
   end
 
   def edit?
-    if user
-      return true if user.administrator? || !record.publish?
-    end
+    return true if user && (user.administrator? || !record.publish?)
   end
 
   def update?
