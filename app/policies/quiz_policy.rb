@@ -28,9 +28,7 @@ class QuizPolicy < ApplicationPolicy
   end
 
   def new?
-    if user
-      return true if user.administrator? || user.contributor_profile.present?
-    end
+    can_contribute?
   end
 
   def create?

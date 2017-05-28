@@ -9,9 +9,7 @@ class LinkPolicy < ApplicationPolicy
   end
 
   def show?
-    if user
-      return true if user.administrator?
-    end
+    return true if user && user.administrator?
     record.category.publish?
   end
 end

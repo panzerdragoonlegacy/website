@@ -21,6 +21,10 @@ class ApplicationPolicy < Struct.new(:user, :record)
 
   private
 
+  def can_contribute?
+    user && (user.administrator? || user.contributor_profile)
+  end
+
   def user_contributes_to_record?
     if user.contributor_profile.present?
       if record.contributions.where(
