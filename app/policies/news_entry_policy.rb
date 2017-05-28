@@ -18,11 +18,7 @@ class NewsEntryPolicy < ApplicationPolicy
   def show?
     if user
       return true if user.administrator?
-      if user.contributor_profile.present?
-        if record.contributor_profile_id == user.contributor_profile_id
-          return true
-        end
-      end
+      return true if user_authors_record?
     end
     record.publish?
   end
@@ -40,14 +36,7 @@ class NewsEntryPolicy < ApplicationPolicy
   def edit?
     if user
       return true if user.administrator?
-      if user.contributor_profile.present?
-        if (
-          !record.publish &&
-          record.contributor_profile_id == user.contributor_profile_id
-        )
-          return true
-        end
-      end
+      return true if user_authors_record? && !record.publish
     end
   end
 
@@ -70,5 +59,15 @@ class NewsEntryPolicy < ApplicationPolicy
       permitted_attributes << :publish if user.administrator?
     end
     permitted_attributes
+  end
+
+  private
+
+  def user_authors_record?
+    if user.contributor_profile.present?
+      if record.contributor_profile_id == user.contributor_profile_id
+        return true
+      end
+    end
   end
 end

@@ -18,13 +18,7 @@ class VideoPolicy < ApplicationPolicy
   def show?
     if user
       return true if user.administrator?
-      if user.contributor_profile.present?
-        if record.contributions.where(
-          contributor_profile_id: user.contributor_profile_id
-        ).count > 0
-          return true
-        end
-      end
+      return true if user_contributes_to_record?
     end
     record.publish? && record.category.publish?
   end
@@ -42,13 +36,7 @@ class VideoPolicy < ApplicationPolicy
   def edit?
     if user
       return true if user.administrator?
-      if user.contributor_profile.present?
-        if !record.publish && record.contributions.where(
-          contributor_profile_id: user.contributor_profile_id
-        ).count > 0
-          return true
-        end
-      end
+      return true if user_contributes_to_record? && !record.publish
     end
   end
 
