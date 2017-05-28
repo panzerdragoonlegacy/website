@@ -3,15 +3,19 @@ class StoryPolicy < ApplicationPolicy
     def resolve
       if user
         return scope if user.administrator?
-        if user.contributor_profile.present?
-          return scope.joins(:contributions).where(
-            "stories.publish = 't'" \
-              " OR contributions.contributor_profile_id = ?",
-            user.contributor_profile_id
-          )
-        end
+        return scope_user_contributes_to if user.contributor_profile
       end
       scope.joins(:category).where(publish: true, categories: { publish: true })
+    end
+
+    private
+
+    def scope_user_contributes_to
+      scope.joins(:contributions).where(
+        'stories.publish = true' \
+          ' OR contributions.contributor_profile_id = ?',
+        user.contributor_profile_id
+      )
     end
   end
 

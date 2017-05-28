@@ -4,7 +4,7 @@ class PagePolicy < ApplicationPolicy
       if user
         return scope if user.administrator?
       end
-      scope.where(publish: true)
+      scope.where publish: true
     end
   end
 

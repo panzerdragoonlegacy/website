@@ -3,15 +3,19 @@ class NewsEntryPolicy < ApplicationPolicy
     def resolve
       if user
         return scope if user.administrator?
-        if user.contributor_profile.present?
-          return scope.where(
-            "news_entries.publish = 't' OR " \
-              "news_entries.contributor_profile_id = ?",
-            user.contributor_profile_id
-          )
-        end
+        return scope_user_contributes_to if user.contributor_profile
       end
-      scope.where(publish: true)
+      scope.where publish: true
+    end
+
+    private
+
+    def scope_user_contributes_to
+      scope.where(
+        'news_entries.publish = true OR ' \
+          'news_entries.contributor_profile_id = ?',
+        user.contributor_profile_id
+      )
     end
   end
 

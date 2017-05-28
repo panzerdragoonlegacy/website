@@ -3,15 +3,19 @@ class DownloadPolicy < ApplicationPolicy
     def resolve
       if user
         return scope if user.administrator?
-        if user.contributor_profile.present?
-          return scope.joins(:category, :contributions).where(
-            "(downloads.publish = 't' AND categories.publish = 't') OR " \
-              "contributions.contributor_profile_id = ?",
-            user.contributor_profile_id
-          )
-        end
+        return scope_user_contributes_to if user.contributor_profile
       end
       scope.joins(:category).where(publish: true, categories: { publish: true })
+    end
+
+    private
+
+    def scope_user_contributes_to
+      scope.joins(:category, :contributions).where(
+        '(downloads.publish = true AND categories.publish = true) OR ' \
+          'contributions.contributor_profile_id = ?',
+        user.contributor_profile_id
+      )
     end
   end
 

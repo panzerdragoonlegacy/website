@@ -2,7 +2,7 @@ class ContributorProfilePolicy < ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
     def resolve
       return scope if user
-      scope.where(publish: true)
+      scope.where publish: true
     end
   end
 
