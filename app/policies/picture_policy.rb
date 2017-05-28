@@ -1,5 +1,12 @@
 class PicturePolicy < ApplicationPolicy
-  class Scope < Struct.new(:user, :scope)
+  class Scope
+    attr_reader :user, :scope
+
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
     def resolve
       if user
         return scope if user.administrator?

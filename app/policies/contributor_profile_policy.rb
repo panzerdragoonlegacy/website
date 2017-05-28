@@ -1,5 +1,12 @@
 class ContributorProfilePolicy < ApplicationPolicy
-  class Scope < Struct.new(:user, :scope)
+  class Scope
+    attr_reader :user, :scope
+
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
     def resolve
       return scope if user
       scope.where publish: true
