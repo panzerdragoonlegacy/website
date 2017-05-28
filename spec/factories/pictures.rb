@@ -4,7 +4,8 @@ FactoryGirl.define do
       sequence(:name) { |n| "Picture #{n}" }
       description 'Test Description'
       picture Rack::Test::UploadedFile.new(
-        'spec/fixtures/picture.jpg', 'image/jpeg')
+        'spec/fixtures/picture.jpg', 'image/jpeg'
+      )
 
       category { FactoryGirl.create(:valid_category) }
       contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }

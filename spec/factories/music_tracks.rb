@@ -4,7 +4,8 @@ FactoryGirl.define do
       sequence(:name) { |n| "Music Track #{n}" }
       description 'Test Description'
       mp3_music_track Rack::Test::UploadedFile.new(
-        'spec/fixtures/music_track.mp3', 'audio/mp3')
+        'spec/fixtures/music_track.mp3', 'audio/mp3'
+      )
 
       category { FactoryGirl.create(:valid_category) }
       contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }

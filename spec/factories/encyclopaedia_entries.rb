@@ -5,7 +5,8 @@ FactoryGirl.define do
       information 'Test Information'
       content 'Test Content'
       encyclopaedia_entry_picture Rack::Test::UploadedFile.new(
-        'spec/fixtures/encyclopaedia-entry-picture.jpg', 'image/jpeg')
+        'spec/fixtures/encyclopaedia-entry-picture.jpg', 'image/jpeg'
+      )
 
       category { FactoryGirl.create(:valid_category) }
       contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }

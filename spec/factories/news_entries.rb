@@ -4,7 +4,8 @@ FactoryGirl.define do
       sequence(:name) { |n| "News Entry #{n}" }
       content 'Test Content'
       news_entry_picture Rack::Test::UploadedFile.new(
-        'spec/fixtures/news-entry-picture.jpg', 'image/jpeg')
+        'spec/fixtures/news-entry-picture.jpg', 'image/jpeg'
+      )
 
       contributor_profile { FactoryGirl.create(:valid_contributor_profile) }
 

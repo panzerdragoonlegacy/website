@@ -4,7 +4,7 @@ FactoryGirl.define do
       sequence(:email) { |n| "testuser#{n}@example.com" }
       password '1234567A'
       password_confirmation '1234567A'
-      confirmed_at Time.now
+      confirmed_at Time.zone.now
 
       factory :contributor do
         contributor_profile { FactoryGirl.create(:contributor_profile) }

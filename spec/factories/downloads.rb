@@ -4,7 +4,8 @@ FactoryGirl.define do
       sequence(:name) { |n| "Download #{n}" }
       description 'Test Description'
       download Rack::Test::UploadedFile.new(
-        'spec/fixtures/download.zip', 'application/zip')
+        'spec/fixtures/download.zip', 'application/zip'
+      )
 
       category { FactoryGirl.create(:valid_category) }
       contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }

@@ -4,7 +4,8 @@ FactoryGirl.define do
       sequence(:name) { |n| "Video #{n}" }
       description 'Test Description'
       mp4_video Rack::Test::UploadedFile.new(
-        'spec/fixtures/video.mp4', 'video/mp4')
+        'spec/fixtures/video.mp4', 'video/mp4'
+      )
 
       category { FactoryGirl.create(:valid_category) }
       contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }
