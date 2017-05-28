@@ -35,10 +35,14 @@ class Chapter < ActiveRecord::Base
     # story.
     if story
       if chapter_type == :regular_chapter.to_s
-        return "#{story.name} #{number}" if name.blank?
-        return "#{story.name} #{number} #{name}"
+        return "#{story.name} #{numbered_chapter_name}"
       end
-      return "#{story.name} #{name}"
+      "#{story.name} #{name}"
     end
+  end
+
+  def numbered_chapter_name
+    return number.to_s if name.blank?
+    "#{number} #{name}"
   end
 end
