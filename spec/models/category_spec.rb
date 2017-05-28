@@ -122,8 +122,8 @@ RSpec.describe Category, type: :model do
       context 'category type is not a category group type' do
         before do
           @category = FactoryGirl.build(
-             :valid_category,
-             category_type: :article
+            :valid_category,
+            category_type: :article
           )
         end
 

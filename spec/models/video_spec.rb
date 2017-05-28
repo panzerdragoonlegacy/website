@@ -72,7 +72,7 @@ RSpec.describe Video, type: :model do
     it { is_expected.to validate_attachment_presence(:mp4_video) }
     it do
       is_expected.to validate_attachment_size(:mp4_video)
-         .less_than(200.megabytes)
+        .less_than(200.megabytes)
     end
   end
 

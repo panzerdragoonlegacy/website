@@ -15,7 +15,9 @@ RSpec.describe Article, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:category) }
     it { is_expected.to have_many(:contributions).dependent(:destroy) }
-    it { is_expected.to have_many(:contributor_profiles).through(:contributions) }
+    it do
+      is_expected.to have_many(:contributor_profiles).through(:contributions)
+    end
     it { is_expected.to have_many(:illustrations).dependent(:destroy) }
     it { is_expected.to have_many(:relations).dependent(:destroy) }
     it { is_expected.to have_many(:encyclopaedia_entries).through(:relations) }

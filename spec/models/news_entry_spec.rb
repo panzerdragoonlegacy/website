@@ -113,7 +113,7 @@ RSpec.describe NewsEntry, type: :model do
     end
 
     context 'the published date is already set' do
-      let(:previously_set_published_at) { DateTime.now }
+      let(:previously_set_published_at) { DateTime.zone.now }
 
       context 'the publish flag is set' do
         let(:news_entry) do
