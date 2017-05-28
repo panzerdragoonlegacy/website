@@ -40,16 +40,13 @@ class NewsEntry < ActiveRecord::Base
 
   def publish_to_twitter
     # Ensure that tweets aren't posted to Twitter when running RSpec:
-    if Rails.env == 'production'
-      full_url = "http://www.panzerdragoonlegacy.com/news/#{url}"
+    twitter_client.update generate_tweet if Rails.env == 'production'
+  end
 
-      # Post the status update field + short URL to Twitter:
-      if name[-1] == '?' || name[-1] == '!'
-        twitter_client.update "#{name} #{full_url}"
-      else
-        twitter_client.update "#{name}: #{full_url}"
-      end
-    end
+  def generate_tweet
+    full_url = "http://www.panzerdragoonlegacy.com/news/#{url}"
+    return "#{name} #{full_url}" if name[-1] == '?' || name[-1] == '!'
+    "#{name}: #{full_url}"
   end
 
   def twitter_client
