@@ -49,14 +49,14 @@ class ResourcePolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = resource_attributes
+    permitted_attributes = attributes_except_publish
     permitted_attributes << :publish if user && user.administrator?
     permitted_attributes
   end
 
   private
 
-  def resource_attributes
+  def attributes_except_publish
     [
       :category_id,
       :name,

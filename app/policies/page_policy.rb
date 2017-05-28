@@ -16,14 +16,14 @@ class PagePolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = page_attributes
+    permitted_attributes = attributes_except_publish
     permitted_attributes << :publish if user && user.administrator?
     permitted_attributes
   end
 
   private
 
-  def page_attributes
+  def attributes_except_publish
     [
       :name,
       :content,

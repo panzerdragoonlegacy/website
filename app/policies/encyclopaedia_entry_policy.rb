@@ -49,14 +49,14 @@ class EncyclopaediaEntryPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = encyclopaedia_entry_attributes
+    permitted_attributes = attributes_except_publish
     permitted_attributes << :publish if user && user.administrator?
     permitted_attributes
   end
 
   private
 
-  def encyclopaedia_entry_attributes
+  def attributes_except_publish
     related_id_attributes + [
       :category_id,
       :name,

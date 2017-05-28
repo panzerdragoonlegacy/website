@@ -49,24 +49,29 @@ class MusicTrackPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = music_track_attributes
+    permitted_attributes = attributes_except_publish
     permitted_attributes << :publish if user && user.administrator?
     permitted_attributes
   end
 
   private
 
-  def music_track_attributes
-    [
+  def attributes_except_publish
+    file_attributes + [
       :category_id,
       :track_number,
       :name,
       :description,
       :information,
-      :mp3_music_track,
-      :flac_music_track,
       contributor_profile_ids: [],
       encyclopaedia_entry_ids: []
+    ]
+  end
+
+  def file_attributes
+    [
+      :mp3_music_track,
+      :flac_music_track
     ]
   end
 end

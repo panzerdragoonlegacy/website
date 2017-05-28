@@ -49,24 +49,29 @@ class PicturePolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = picture_attributes
+    permitted_attributes = attributes_except_publish
     permitted_attributes << :publish if user && user.administrator?
     permitted_attributes
   end
 
   private
 
-  def picture_attributes
-    [
-      :id_of_picture_to_replace,
+  def attributes_except_publish
+    file_attributes + [
       :category_id,
       :album_id,
       :name,
       :description,
       :information,
-      :picture,
       contributor_profile_ids: [],
       encyclopaedia_entry_ids: []
+    ]
+  end
+
+  def file_attributes
+    [
+      :id_of_picture_to_replace,
+      :picture
     ]
   end
 end

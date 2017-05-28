@@ -31,14 +31,14 @@ class ContributorProfilePolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = contributor_profile_attributes
+    permitted_attributes = attributes_except_publish
     permitted_attributes << :publish if user && user.administrator?
     permitted_attributes
   end
 
   private
 
-  def contributor_profile_attributes
+  def attributes_except_publish
     [
       :name,
       :email_address,

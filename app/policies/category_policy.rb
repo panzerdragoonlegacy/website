@@ -22,14 +22,14 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = category_attributes
+    permitted_attributes = attributes_except_publish
     permitted_attributes << :publish if user && user.administrator?
     permitted_attributes
   end
 
   private
 
-  def category_attributes
+  def attributes_except_publish
     [
       :category_type,
       :category_group_id,

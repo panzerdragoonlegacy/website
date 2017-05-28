@@ -49,14 +49,14 @@ class PoemPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_attributes = poem_attributes
+    permitted_attributes = attributes_except_publish
     permitted_attributes << :publish if user && user.administrator?
     permitted_attributes
   end
 
   private
 
-  def poem_attributes
+  def attributes_except_publish
     [
       :name,
       :description,
