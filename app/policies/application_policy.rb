@@ -33,12 +33,8 @@ class ApplicationPolicy
   end
 
   def user_contributes_to_record?
-    if user.contributor_profile.present?
-      if record.contributions.where(
-        contributor_profile_id: user.contributor_profile_id
-      ).count > 0
-        return true
-      end
-    end
+    user.contributor_profile && record.contributions.where(
+      contributor_profile_id: user.contributor_profile_id
+    ).count > 0
   end
 end
