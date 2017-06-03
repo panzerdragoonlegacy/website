@@ -7,36 +7,34 @@ describe NewsEntryPolicy do
     described_class::Scope.new(user, NewsEntry.all).resolve
   end
 
-  context 'being an administrator' do
-    let(:user) { FactoryGirl.create(:administrator) }
+  let(:user) { FactoryGirl.create(:administrator) }
 
-    context 'creating a new news entry' do
-      let(:news_entry) { NewsEntry.new }
+  context 'administrator creating a new news entry' do
+    let(:news_entry) { NewsEntry.new }
 
-      it { is_expected.to permit_new_and_create_actions }
-      it { is_expected.to permit_mass_assignment_of(:publish) }
+    it { is_expected.to permit_new_and_create_actions }
+    it { is_expected.to permit_mass_assignment_of(:publish) }
+  end
+
+  context 'administrator accessing a published news entry' do
+    let(:news_entry) { FactoryGirl.create(:published_news_entry) }
+
+    it 'includes news entry in resolved scope' do
+      expect(resolved_scope).to include(news_entry)
     end
 
-    context 'accessing a published news entry' do
-      let(:news_entry) { FactoryGirl.create(:published_news_entry) }
+    it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+    it { is_expected.to permit_mass_assignment_of(:publish) }
+  end
 
-      it 'includes news entry in resolved scope' do
-        expect(resolved_scope).to include(news_entry)
-      end
+  context 'administrator accessing an unpublished news entry' do
+    let(:news_entry) { FactoryGirl.create(:unpublished_news_entry) }
 
-      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
-      it { is_expected.to permit_mass_assignment_of(:publish) }
+    it 'includes news entry in resolved scope' do
+      expect(resolved_scope).to include(news_entry)
     end
 
-    context 'accessing an unpublished news entry' do
-      let(:news_entry) { FactoryGirl.create(:unpublished_news_entry) }
-
-      it 'includes news entry in resolved scope' do
-        expect(resolved_scope).to include(news_entry)
-      end
-
-      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
-      it { is_expected.to permit_mass_assignment_of(:publish) }
-    end
+    it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+    it { is_expected.to permit_mass_assignment_of(:publish) }
   end
 end

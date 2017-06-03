@@ -7,30 +7,28 @@ describe QuizPolicy do
     described_class::Scope.new(user, Quiz.all).resolve
   end
 
-  context 'being a registered user' do
-    let(:user) { FactoryGirl.create(:registered_user) }
+  let(:user) { FactoryGirl.create(:registered_user) }
 
-    context 'accessing a published quiz' do
-      let(:quiz) { FactoryGirl.create(:published_quiz) }
+  context 'registered user accessing a published quiz' do
+    let(:quiz) { FactoryGirl.create(:published_quiz) }
 
-      it 'includes quiz in resolved scope' do
-        expect(resolved_scope).to include(quiz)
-      end
-
-      it { is_expected.to permit_action(:show) }
-      it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
+    it 'includes quiz in resolved scope' do
+      expect(resolved_scope).to include(quiz)
     end
 
-    context 'accessing an unpublished quiz' do
-      let(:quiz) { FactoryGirl.create(:unpublished_quiz) }
+    it { is_expected.to permit_action(:show) }
+    it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
+    it { is_expected.to forbid_mass_assignment_of(:publish) }
+  end
 
-      it 'excludes quiz from resolved scope' do
-        expect(resolved_scope).not_to include(quiz)
-      end
+  context 'registered user accessing an unpublished quiz' do
+    let(:quiz) { FactoryGirl.create(:unpublished_quiz) }
 
-      it { is_expected.to forbid_actions([:show, :edit, :update, :destroy]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
+    it 'excludes quiz from resolved scope' do
+      expect(resolved_scope).not_to include(quiz)
     end
+
+    it { is_expected.to forbid_actions([:show, :edit, :update, :destroy]) }
+    it { is_expected.to forbid_mass_assignment_of(:publish) }
   end
 end

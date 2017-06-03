@@ -7,40 +7,38 @@ describe ContributorProfilePolicy do
     described_class::Scope.new(user, ContributorProfile.all).resolve
   end
 
-  context 'being an administrator' do
-    let(:user) { FactoryGirl.create(:administrator) }
+  let(:user) { FactoryGirl.create(:administrator) }
 
-    context 'creating a new contributor profile' do
-      let(:contributor_profile) { ContributorProfile.new }
+  context 'administrator creating a new contributor profile' do
+    let(:contributor_profile) { ContributorProfile.new }
 
-      it { is_expected.to permit_new_and_create_actions }
-      it { is_expected.to permit_mass_assignment_of(:publish) }
+    it { is_expected.to permit_new_and_create_actions }
+    it { is_expected.to permit_mass_assignment_of(:publish) }
+  end
+
+  context 'administrator accessing a published contributor profile' do
+    let(:contributor_profile) do
+      FactoryGirl.create(:published_contributor_profile)
     end
 
-    context 'accessing a published contributor profile' do
-      let(:contributor_profile) do
-        FactoryGirl.create(:published_contributor_profile)
-      end
-
-      it 'includes contributor profile in resolved scope' do
-        expect(resolved_scope).to include(contributor_profile)
-      end
-
-      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
-      it { is_expected.to permit_mass_assignment_of(:publish) }
+    it 'includes contributor profile in resolved scope' do
+      expect(resolved_scope).to include(contributor_profile)
     end
 
-    context 'accessing an unpublished contributor profile' do
-      let(:contributor_profile) do
-        FactoryGirl.create(:unpublished_contributor_profile)
-      end
+    it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+    it { is_expected.to permit_mass_assignment_of(:publish) }
+  end
 
-      it 'includes contributor profile in resolved scope' do
-        expect(resolved_scope).to include(contributor_profile)
-      end
-
-      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
-      it { is_expected.to permit_mass_assignment_of(:publish) }
+  context 'administrator accessing an unpublished contributor profile' do
+    let(:contributor_profile) do
+      FactoryGirl.create(:unpublished_contributor_profile)
     end
+
+    it 'includes contributor profile in resolved scope' do
+      expect(resolved_scope).to include(contributor_profile)
+    end
+
+    it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+    it { is_expected.to permit_mass_assignment_of(:publish) }
   end
 end

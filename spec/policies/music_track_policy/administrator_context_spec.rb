@@ -7,70 +7,68 @@ describe MusicTrackPolicy do
     described_class::Scope.new(user, MusicTrack.all).resolve
   end
 
-  context 'being an administrator' do
-    let(:user) { FactoryGirl.create(:administrator) }
+  let(:user) { FactoryGirl.create(:administrator) }
 
-    context 'creating a new music track' do
-      let(:music_track) { MusicTrack.new }
+  context 'administrator creating a new music track' do
+    let(:music_track) { MusicTrack.new }
 
-      it { is_expected.to permit_new_and_create_actions }
+    it { is_expected.to permit_new_and_create_actions }
+    it { is_expected.to permit_mass_assignment_of(:publish) }
+  end
+
+  context 'administrator accessing music tracks in a published category' do
+    context 'accessing a published music track' do
+      let(:music_track) do
+        FactoryGirl.create(:published_music_track_in_published_category)
+      end
+
+      it 'includes music track in resolved scope' do
+        expect(resolved_scope).to include(music_track)
+      end
+
+      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
       it { is_expected.to permit_mass_assignment_of(:publish) }
     end
 
-    context 'accessing music tracks in a published category' do
-      context 'accessing a published music track' do
-        let(:music_track) do
-          FactoryGirl.create(:published_music_track_in_published_category)
-        end
-
-        it 'includes music track in resolved scope' do
-          expect(resolved_scope).to include(music_track)
-        end
-
-        it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
-        it { is_expected.to permit_mass_assignment_of(:publish) }
+    context 'accessing an unpublished music track' do
+      let(:music_track) do
+        FactoryGirl.create(:unpublished_music_track_in_published_category)
       end
 
-      context 'accessing an unpublished music track' do
-        let(:music_track) do
-          FactoryGirl.create(:unpublished_music_track_in_published_category)
-        end
-
-        it 'includes music track in resolved scope' do
-          expect(resolved_scope).to include(music_track)
-        end
-
-        it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
-        it { is_expected.to permit_mass_assignment_of(:publish) }
+      it 'includes music track in resolved scope' do
+        expect(resolved_scope).to include(music_track)
       end
+
+      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to permit_mass_assignment_of(:publish) }
+    end
+  end
+
+  context 'administrator accessing music tracks in an unpublished category' do
+    context 'accessing a published music track' do
+      let(:music_track) do
+        FactoryGirl.create(:published_music_track_in_unpublished_category)
+      end
+
+      it 'includes music track in resolved scope' do
+        expect(resolved_scope).to include(music_track)
+      end
+
+      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to permit_mass_assignment_of(:publish) }
     end
 
-    context 'accessing music tracks in an unpublished category' do
-      context 'accessing a published music track' do
-        let(:music_track) do
-          FactoryGirl.create(:published_music_track_in_unpublished_category)
-        end
-
-        it 'includes music track in resolved scope' do
-          expect(resolved_scope).to include(music_track)
-        end
-
-        it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
-        it { is_expected.to permit_mass_assignment_of(:publish) }
+    context 'accessing an unpublished music track' do
+      let(:music_track) do
+        FactoryGirl.create(:unpublished_music_track_in_unpublished_category)
       end
 
-      context 'accessing an unpublished music track' do
-        let(:music_track) do
-          FactoryGirl.create(:unpublished_music_track_in_unpublished_category)
-        end
-
-        it 'includes music track in resolved scope' do
-          expect(resolved_scope).to include(music_track)
-        end
-
-        it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
-        it { is_expected.to permit_mass_assignment_of(:publish) }
+      it 'includes music track in resolved scope' do
+        expect(resolved_scope).to include(music_track)
       end
+
+      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to permit_mass_assignment_of(:publish) }
     end
   end
 end

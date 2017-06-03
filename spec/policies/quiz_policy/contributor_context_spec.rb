@@ -7,79 +7,78 @@ describe QuizPolicy do
     described_class::Scope.new(user, Quiz.all).resolve
   end
 
-  context 'being a contributor' do
-    let(:contributor_profile) do
-      FactoryGirl.create(:valid_contributor_profile)
-    end
-    let(:user) do
-      FactoryGirl.create(
-        :contributor,
-        contributor_profile: contributor_profile
-      )
-    end
+  let(:contributor_profile) do
+    FactoryGirl.create(:valid_contributor_profile)
+  end
+  let(:user) do
+    FactoryGirl.create(
+      :contributor,
+      contributor_profile: contributor_profile
+    )
+  end
 
-    context 'accessing quizzes that the user does not contribute to' do
-      context 'accessing a published quiz' do
-        let(:quiz) { FactoryGirl.create(:published_quiz) }
+  context 'contributor accessing quizzes that the user does not contribute ' \
+          'to' do
+    context 'accessing a published quiz' do
+      let(:quiz) { FactoryGirl.create(:published_quiz) }
 
-        it 'includes quiz in resolved scope' do
-          expect(resolved_scope).to include(quiz)
-        end
-
-        it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it 'includes quiz in resolved scope' do
+        expect(resolved_scope).to include(quiz)
       end
 
-      context 'accessing an unpublished quiz' do
-        let(:quiz) { FactoryGirl.create(:unpublished_quiz) }
-
-        it 'excludes quiz from resolved scope' do
-          expect(resolved_scope).not_to include(quiz)
-        end
-
-        it { is_expected.to forbid_actions([:show, :edit, :update, :destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
-      end
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
-    context 'accessing quizzes the user contributes to' do
-      context 'accessing a published quiz' do
-        let(:quiz) do
-          FactoryGirl.create(
-            :published_quiz,
-            contributions: [
-              Contribution.new(contributor_profile: contributor_profile)
-            ]
-          )
-        end
+    context 'accessing an unpublished quiz' do
+      let(:quiz) { FactoryGirl.create(:unpublished_quiz) }
 
-        it 'includes quiz in resolved scope' do
-          expect(resolved_scope).to include(quiz)
-        end
-
-        it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it 'excludes quiz from resolved scope' do
+        expect(resolved_scope).not_to include(quiz)
       end
 
-      context 'accessing an unpublished quiz' do
-        let(:quiz) do
-          FactoryGirl.create(
-            :unpublished_quiz,
-            contributions: [
-              Contribution.new(contributor_profile: contributor_profile)
-            ]
-          )
-        end
+      it { is_expected.to forbid_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
+    end
+  end
 
-        it 'includes quiz in resolved scope' do
-          expect(resolved_scope).to include(quiz)
-        end
-
-        it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
+  context 'contributor accessing quizzes the user contributes to' do
+    context 'accessing a published quiz' do
+      let(:quiz) do
+        FactoryGirl.create(
+          :published_quiz,
+          contributions: [
+            Contribution.new(contributor_profile: contributor_profile)
+          ]
+        )
       end
+
+      it 'includes quiz in resolved scope' do
+        expect(resolved_scope).to include(quiz)
+      end
+
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
+    end
+
+    context 'accessing an unpublished quiz' do
+      let(:quiz) do
+        FactoryGirl.create(
+          :unpublished_quiz,
+          contributions: [
+            Contribution.new(contributor_profile: contributor_profile)
+          ]
+        )
+      end
+
+      it 'includes quiz in resolved scope' do
+        expect(resolved_scope).to include(quiz)
+      end
+
+      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end
 end
