@@ -69,7 +69,7 @@ div.resource {
   border-radius: 10px;
   margin-bottom: 25px;
   padding-bottom: 25px;
-  overflow: auto;
+  overflow-x: hidden;
   background-color: $input-background-colour;
   @include gradients(bottom, #343434, #454545);
 
