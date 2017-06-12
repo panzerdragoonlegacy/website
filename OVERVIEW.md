@@ -86,14 +86,14 @@ file extension .mp4. The file will need to be smaller than 200 megabytes.
 4. Submit the New Video form.
 
 5. Log into damon using SSH and go to the following location:
-`/home/panzerdragoonlegacy/panzerdragoonlegacy/shared/public/system`
+`/home/panzerdragoonlegacy/panzerdragoonlegacy/shared/public/system/mp4_videos`
 
-6. You will see a directory called `mp4_videos`. In this directory there will be
-a list of subdirectories. The placeholder video file should be located in the
-directory with the highest number as its name (the ID of the most recent video
-record created), in a subdirectory called `original`.
+6. In the `mp4_videos` directory there will be a number of subdirectories. The
+placeholder video file should be located in the directory with the highest
+number as its name (the ID of the most recent video record created), in a
+subdirectory called `original`.
 
-7. Check that the .mp4 file names match the url of the video record, then
+7. Check that the .mp4 file name matches the url of the video record, then
 replace the placeholder file with the real video file. The file names must be
 identical.
 
