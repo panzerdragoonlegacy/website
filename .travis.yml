@@ -7,3 +7,7 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
   - cp config/secrets.yml.travis config/secrets.yml
+notifications:
+  email:
+    on_failure: always
+    on_success: never
