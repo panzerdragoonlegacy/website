@@ -80,28 +80,24 @@ to start creating a new video record.
 2. In the name field, enter the name that you want to use for the video. Also,
 add an appropriate description, category, and (optionally) a YouTube video ID.
 
-3. Choose a couple of placeholder video files from your computer for the MP4
-Video and WebM Video fields with the file extensions .mp4 and .webm. The files
-will need to be smaller than 200 megabytes.
+3. Choose a placeholder video file from your computer for the MP4 Video with the
+file extension .mp4. The file will need to be smaller than 200 megabytes.
 
 4. Submit the New Video form.
 
 5. Log into damon using SSH and go to the following location:
 `/home/panzerdragoonlegacy/panzerdragoonlegacy/shared/public/system`
 
-6. You will see two directories called `mp4_videos` and `webm_videos`. In each
-of these directories there will be a list of subdirectories. The placeholder
-video files should be located in the directory with the highest number as its
-name (the ID of the most recent video record created), in a subdirectory called
-`original`.
+6. You will see a directory called `mp4_videos`. In this directory there will be
+a list of subdirectories. The placeholder video file should be located in the
+directory with the highest number as its name (the ID of the most recent video
+record created), in a subdirectory called `original`.
 
-7. Check that the .mp4 and .webm file names match the url of the video record,
-then replace the placeholder files with the real video files. The file names
-must be identical.
+7. Check that the .mp4 file names match the url of the video record, then
+replace the placeholder file with the real video file. The file names must be
+identical.
 
-8. Go to the video's page and check that the correct videos are playing. Test
-the video in both Firefox and Safari/Internet Explorer to ensure that both the
-MP4 and WebM versions are working.
+8. Go to the video's page and check that the correct video is playing.
 
 #### Updating the Site's Software
 
