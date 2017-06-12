@@ -1,6 +1,8 @@
 Panzer Dragoon Legacy
 =====================
 
+[![Build Status][travis-badge]][travis]
+
 A custom content management system for
 [panzerdragoonlegacy.com](http://www.panzerdragoonlegacy.com)
 
@@ -26,3 +28,6 @@ Copyright
 
 However image assets and the Panzer Dragoon trademark are the property of SEGA
 and are provided for demonstration purposes only.
+
+[travis-badge]: http://img.shields.io/travis/chrisalley/panzer-dragoon-legacy/master.svg
+[travis]: http://travis-ci.org/chrisalley/panzer-dragoon-legacy
