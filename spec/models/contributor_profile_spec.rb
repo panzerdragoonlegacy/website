@@ -4,6 +4,7 @@ RSpec.describe ContributorProfile, type: :model do
   describe 'fields' do
     it { is_expected.to respond_to(:name) }
     it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:email_address) }
     it { is_expected.to respond_to(:avatar) }
     it { is_expected.to respond_to(:website) }
