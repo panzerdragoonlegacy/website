@@ -48,6 +48,7 @@ class ContributorProfilePolicy < ApplicationPolicy
   def attributes_except_publish
     [
       :name,
+      :description,
       :email_address,
       :discourse_username,
       :avatar,

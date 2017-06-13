@@ -10,6 +10,14 @@
   </div>
   <div>
     <div>
+      <%= f.label :description, 'Description' %>
+    </div>
+    <div>
+      <%= f.text_area :description, rows: 3 %>
+    </div>
+  </div>
+  <div>
+    <div>
       <%=
         f.label(
           :email_address,
