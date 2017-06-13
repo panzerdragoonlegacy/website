@@ -32,6 +32,9 @@
               )
             %>
           </p>
+          <% if contributor_profile.description.present? %>
+            <p><%= truncated_text contributor_profile.description %></p>
+          <% end %>
         </div>
       </div>
     <% end %>
