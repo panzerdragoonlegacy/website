@@ -6,6 +6,11 @@
 <% elsif !@picture.category.publish %>
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
+<% if !@picture.publish || !@picture.category.publish %>
+  <p class="unpublished">Markdown to embed in news entry:
+    <code>![](<%= @picture.id %>-<%= @picture.url %>.jpg)</code>
+  </p>
+<% end %>
 
 <%
   if (

@@ -30,22 +30,22 @@ ActiveRecord::Schema.define(version: 20170613120805) do
   add_index "albums", ["category_id"], name: "index_albums_on_category_id", using: :btree
 
   create_table "articles", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "url",         limit: 255
-    t.string   "description", limit: 255
+    t.string   "name"
+    t.string   "url"
+    t.string   "description"
     t.text     "content"
-    t.boolean  "publish",                 default: false
+    t.boolean  "publish",     default: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name",              limit: 255
-    t.string   "url",               limit: 255
-    t.string   "description",       limit: 255
-    t.string   "category_type",     limit: 255
-    t.boolean  "publish",                       default: false
+    t.string   "name"
+    t.string   "url"
+    t.string   "description"
+    t.string   "category_type"
+    t.boolean  "publish",           default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_group_id"
@@ -61,10 +61,10 @@ ActiveRecord::Schema.define(version: 20170613120805) do
 
   create_table "chapters", force: :cascade do |t|
     t.integer  "story_id"
-    t.string   "chapter_type", limit: 255, default: "regular_chapter"
-    t.integer  "number",                   default: 1
-    t.string   "name",         limit: 255
-    t.string   "url",          limit: 255
+    t.string   "chapter_type", default: "regular_chapter"
+    t.integer  "number",       default: 1
+    t.string   "name"
+    t.string   "url"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -73,49 +73,49 @@ ActiveRecord::Schema.define(version: 20170613120805) do
   create_table "contributions", force: :cascade do |t|
     t.integer  "contributor_profile_id"
     t.integer  "contributable_id"
-    t.string   "contributable_type",     limit: 255
+    t.string   "contributable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "contributor_profiles", force: :cascade do |t|
-    t.string   "name",                limit: 255
-    t.string   "url",                 limit: 255
-    t.string   "email_address",       limit: 255
-    t.string   "avatar_file_name",    limit: 255
-    t.string   "avatar_content_type", limit: 255
+    t.string   "name"
+    t.string   "url"
+    t.string   "email_address"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.string   "website",             limit: 255
-    t.string   "facebook_username",   limit: 255
-    t.string   "twitter_username",    limit: 255
+    t.string   "website"
+    t.string   "facebook_username"
+    t.string   "twitter_username"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "discourse_username"
-    t.boolean  "publish",                         default: false
+    t.boolean  "publish",             default: false
     t.string   "description"
   end
 
   create_table "downloads", force: :cascade do |t|
-    t.string   "name",                  limit: 255
-    t.string   "url",                   limit: 255
-    t.string   "description",           limit: 255
+    t.string   "name"
+    t.string   "url"
+    t.string   "description"
     t.text     "information"
-    t.string   "download_file_name",    limit: 255
-    t.string   "download_content_type", limit: 255
+    t.string   "download_file_name"
+    t.string   "download_content_type"
     t.integer  "download_file_size"
     t.datetime "download_updated_at"
-    t.boolean  "publish",                           default: false
+    t.boolean  "publish",               default: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "emoticons", force: :cascade do |t|
-    t.string   "name",                  limit: 255
-    t.string   "code",                  limit: 255
-    t.string   "emoticon_file_name",    limit: 255
-    t.string   "emoticon_content_type", limit: 255
+    t.string   "name"
+    t.string   "code"
+    t.string   "emoticon_file_name"
+    t.string   "emoticon_content_type"
     t.integer  "emoticon_file_size"
     t.datetime "emoticon_updated_at"
     t.datetime "created_at"
@@ -123,26 +123,25 @@ ActiveRecord::Schema.define(version: 20170613120805) do
   end
 
   create_table "encyclopaedia_entries", force: :cascade do |t|
-    t.string   "name",                                     limit: 255
-    t.string   "url",                                      limit: 255
+    t.string   "name"
+    t.string   "url"
     t.text     "information"
     t.text     "content"
-    t.string   "encyclopaedia_entry_picture_file_name",    limit: 255
-    t.string   "encyclopaedia_entry_picture_content_type", limit: 255
+    t.string   "encyclopaedia_entry_picture_file_name"
+    t.string   "encyclopaedia_entry_picture_content_type"
     t.integer  "encyclopaedia_entry_picture_file_size"
     t.datetime "encyclopaedia_entry_picture_updated_at"
-    t.boolean  "publish",                                              default: false
+    t.boolean  "publish",                                  default: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "wikia_url"
   end
 
   create_table "illustrations", force: :cascade do |t|
     t.integer  "illustratable_id"
-    t.string   "illustratable_type",        limit: 255
-    t.string   "illustration_file_name",    limit: 255
-    t.string   "illustration_content_type", limit: 255
+    t.string   "illustratable_type"
+    t.string   "illustration_file_name"
+    t.string   "illustration_content_type"
     t.integer  "illustration_file_size"
     t.datetime "illustration_updated_at"
     t.datetime "created_at"
@@ -150,44 +149,44 @@ ActiveRecord::Schema.define(version: 20170613120805) do
   end
 
   create_table "links", force: :cascade do |t|
-    t.string   "name",         limit: 255
-    t.string   "url",          limit: 255
-    t.string   "description",  limit: 255
+    t.string   "name"
+    t.string   "url"
+    t.string   "description"
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "partner_site",             default: false
+    t.boolean  "partner_site", default: false
   end
 
   create_table "music_tracks", force: :cascade do |t|
-    t.string   "name",                          limit: 255
-    t.string   "url",                           limit: 255
-    t.string   "description",                   limit: 255
+    t.string   "name"
+    t.string   "url"
+    t.string   "description"
     t.text     "information"
-    t.string   "mp3_music_track_file_name",     limit: 255
-    t.string   "mp3_music_track_content_type",  limit: 255
+    t.string   "mp3_music_track_file_name"
+    t.string   "mp3_music_track_content_type"
     t.integer  "mp3_music_track_file_size"
     t.datetime "mp3_music_track_updated_at"
-    t.boolean  "publish",                                   default: false
+    t.boolean  "publish",                       default: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "track_number",                              default: 0
-    t.string   "flac_music_track_file_name",    limit: 255
-    t.string   "flac_music_track_content_type", limit: 255
+    t.integer  "track_number",                  default: 0
+    t.string   "flac_music_track_file_name"
+    t.string   "flac_music_track_content_type"
     t.integer  "flac_music_track_file_size"
     t.datetime "flac_music_track_updated_at"
   end
 
   create_table "news_entries", force: :cascade do |t|
-    t.string   "name",                            limit: 255
-    t.string   "url",                             limit: 255
+    t.string   "name"
+    t.string   "url"
     t.text     "content"
     t.integer  "contributor_profile_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "published_at"
-    t.boolean  "publish",                                     default: false
+    t.boolean  "publish",                         default: false
     t.string   "news_entry_picture_file_name"
     t.string   "news_entry_picture_content_type"
     t.integer  "news_entry_picture_file_size"
@@ -195,24 +194,24 @@ ActiveRecord::Schema.define(version: 20170613120805) do
   end
 
   create_table "pages", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "url",        limit: 255
+    t.string   "name"
+    t.string   "url"
     t.text     "content"
-    t.boolean  "publish",                default: false
+    t.boolean  "publish",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "pictures", force: :cascade do |t|
-    t.string   "name",                     limit: 255
-    t.string   "url",                      limit: 255
-    t.string   "description",              limit: 255
+    t.string   "name"
+    t.string   "url"
+    t.string   "description"
     t.text     "information"
-    t.string   "picture_file_name",        limit: 255
-    t.string   "picture_content_type",     limit: 255
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
-    t.boolean  "publish",                              default: false
+    t.boolean  "publish",                  default: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -221,11 +220,11 @@ ActiveRecord::Schema.define(version: 20170613120805) do
   end
 
   create_table "poems", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "url",         limit: 255
-    t.string   "description", limit: 255
+    t.string   "name"
+    t.string   "url"
+    t.string   "description"
     t.text     "content"
-    t.boolean  "publish",                 default: false
+    t.boolean  "publish",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -246,10 +245,10 @@ ActiveRecord::Schema.define(version: 20170613120805) do
   end
 
   create_table "quizzes", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "url",         limit: 255
-    t.string   "description", limit: 255
-    t.boolean  "publish",                 default: false
+    t.string   "name"
+    t.string   "url"
+    t.string   "description"
+    t.boolean  "publish",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -257,16 +256,16 @@ ActiveRecord::Schema.define(version: 20170613120805) do
   create_table "relations", force: :cascade do |t|
     t.integer  "encyclopaedia_entry_id"
     t.integer  "relatable_id"
-    t.string   "relatable_type",         limit: 255
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.string   "relatable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "resources", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "url",         limit: 255
+    t.string   "name"
+    t.string   "url"
     t.text     "content"
-    t.boolean  "publish",                 default: false
+    t.boolean  "publish",     default: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -284,11 +283,11 @@ ActiveRecord::Schema.define(version: 20170613120805) do
   add_index "sagas", ["encyclopaedia_entry_id"], name: "index_sagas_on_encyclopaedia_entry_id", using: :btree
 
   create_table "stories", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "url",         limit: 255
-    t.string   "description", limit: 255
+    t.string   "name"
+    t.string   "url"
+    t.string   "description"
     t.text     "content"
-    t.boolean  "publish",                 default: false
+    t.boolean  "publish",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_id"
@@ -324,19 +323,19 @@ ActiveRecord::Schema.define(version: 20170613120805) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "videos", force: :cascade do |t|
-    t.string   "name",                   limit: 255
-    t.string   "url",                    limit: 255
-    t.string   "description",            limit: 255
+    t.string   "name"
+    t.string   "url"
+    t.string   "description"
     t.text     "information"
-    t.string   "mp4_video_file_name",    limit: 255
-    t.string   "mp4_video_content_type", limit: 255
+    t.string   "mp4_video_file_name"
+    t.string   "mp4_video_content_type"
     t.integer  "mp4_video_file_size"
     t.datetime "mp4_video_updated_at"
-    t.boolean  "publish",                            default: false
+    t.boolean  "publish",                default: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "youtube_video_id",       limit: 255
+    t.string   "youtube_video_id"
   end
 
   add_foreign_key "albums", "categories"

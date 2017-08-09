@@ -6,6 +6,11 @@
 <% elsif !@video.category.publish %>
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
+<% if !@video.publish || !@video.category.publish %>
+  <p class="unpublished">Markdown to embed in news entry:
+    <code>![](<%= @video.id %>-<%= @video.url %>.mp4)</code>
+  </p>
+<% end %>
 
 <% if policy(@video).new? || policy(@video).edit? || policy(@video).destroy? %>
   <ul class="administration">
