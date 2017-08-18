@@ -6,7 +6,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 These instructions are geared towards setting up the development environment in
 a Debian-based virtual machine (specifically Linux Mint). Alternatively,
-you may develop on another Unix-based operating system such as OSX, using
+you may develop on another Unix-based operating system such as macOS, using
 Homebrew for package management instead of APT.
 
 1. Download Virtual Box from: https://www.virtualbox.org/wiki/Downloads
@@ -52,7 +52,7 @@ Homebrew for package management instead of APT.
 
    `echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc`
 
-   Note: on OSX, use .bash_profile instead of .bashrc
+   Note: on macOS, use .bash_profile instead of .bashrc
 
 3. Initialise rbenv:
 
@@ -115,9 +115,10 @@ Homebrew for package management instead of APT.
 
    `sudo -u postgres psql`
 
-   Note: on OSX you can use the user postgres with the password postgres; there
-   is no need to create a new user account. Also, the database can be created
-   via rake, so the remaining steps for setting up PostgreSQL can be skipped.
+   Note: on macOS you can use the user postgres with the password postgres;
+   there is no need to create a new user account. Also, the database can be
+   created via rake, so the remaining steps for setting up PostgreSQL can be
+   skipped.
 
 3. Create a user for the webapp:
 
@@ -196,7 +197,8 @@ Homebrew for package management instead of APT.
 
    `bundle exec rake db:schema:load`
 
-   Note: on OSX, first run `bundle exec rake db:create` to create the database.
+   Note: on macOS, first run `bundle exec rake db:create` to create the
+   database.
 
 7. Start the development server:
 
