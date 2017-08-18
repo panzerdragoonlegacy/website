@@ -6,54 +6,54 @@ Step-by-step instructions for setting up the site on a VPS.
 
 1. Add the user account with a suitable password:
 
-  `sudo adduser chrisalley`
+   `sudo adduser chrisalley`
 
 2. If appropriate, give the user sudo access (only if needed). The webapp user
    `panzerdragoonlegacy` should not be added to this group:
 
-  `sudo adduser chrisalley sudo`
+   `sudo adduser chrisalley sudo`
 
 3. Switch to the new user:
 
-  `sudo su chrisalley`
+   `sudo su chrisalley`
 
 4. Create new public and private SSH keys for the user:
 
-  `ssh-keygen -t rsa`
+   `ssh-keygen -t rsa`
 
 5. Create other files for SSH:
 
-  `touch ~/.ssh/authorized_keys`
+   `touch ~/.ssh/authorized_keys`
 
-  `touch ~/.ssh/known_hosts`
+   `touch ~/.ssh/known_hosts`
 
-  `touch ~/.ssh/config`
+   `touch ~/.ssh/config`
 
 6. On chrisalley's local machine, copy his SSH public key:
 
-  `cat ~/.ssh/id_rsa.pub`
+   `cat ~/.ssh/id_rsa.pub`
 
 7. Back on the server, open authorized_keys and paste in chrisalley's public
    key:
 
-  `vim ~/.ssh/authorized_keys`
+   `vim ~/.ssh/authorized_keys`
 
 8. If not done already, set the server to only allow key-based authentication.
    Open `sshd_config`:
 
-  `sudo vim /etc/ssh/sshd_config`
+   `sudo vim /etc/ssh/sshd_config`
 
 8. Add the following line and save the file:
 
-  `PasswordAuthentication no`
+   `PasswordAuthentication no`
 
 9. Restart the SSH service to apply the change:
 
-  `sudo restart ssh`
+   `sudo restart ssh`
 
-12. Test that key based authentication works for the new user!
+10. Test that key based authentication works for the new user!
 
-13. Repeat the steps any other admin users and for the web app user
+11. Repeat the steps any other admin users and for the web app user
     `panzerdragoonlegacy` which we will use to deploy the app. For the web app
     user, skip step (2) where we added the user to the sudoers group.
 
@@ -67,7 +67,7 @@ Step-by-step instructions for setting up the site on a VPS.
 
    `sudo su panzerdragoonlegacy`
 
-2. Install rbenv and ruby-build for the `panzerdragoonlegacy` user:
+3. Install rbenv and ruby-build for the `panzerdragoonlegacy` user:
 
    ```
    git clone https://github.com/rbenv/rbenv.git ~/.rbenv
@@ -79,29 +79,29 @@ Step-by-step instructions for setting up the site on a VPS.
    echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bash_profile
    ```
 
-3. Restart the terminal for the changes to come into effect:
+4. Restart the terminal for the changes to come into effect:
 
-4. Install the ruby version in the Rails app's `.ruby_version` file:
+5. Install the ruby version in the Rails app's `.ruby_version` file:
 
-    `rbenv install -v 2.3.0`
+   `rbenv install -v 2.3.0`
 
-5. Set this ruby version to be the global ruby:
+6. Set this ruby version to be the global ruby:
 
-    `rbenv global 2.3.0`
+   `rbenv global 2.3.0`
 
-6. Prevent rubygems from creating local documentation for gems:
+7. Prevent rubygems from creating local documentation for gems:
 
-    `echo "gem: --no-document" > ~/.gemrc`
+   `echo "gem: --no-document" > ~/.gemrc`
 
-7. Install Bundler:
+8. Install Bundler:
 
-    `gem install bundler`
+   `gem install bundler`
 
-8. Install Rails:
+9. Install Rails:
 
-    `gem install rails`
+   `gem install rails`
 
-9. Rehash rbenv to install shims for Rails:
+10. Rehash rbenv to install shims for Rails:
 
     `rbenv rehash`
 
@@ -119,11 +119,11 @@ Step-by-step instructions for setting up the site on a VPS.
 
 1. Install PostgreSQL:
 
-  `sudo apt-get install postgresql postgresql-contrib libpq-dev`
+   `sudo apt-get install postgresql postgresql-contrib libpq-dev`
 
 2. Log in to PostgreSQL:
 
-  `sudo -u postgres psql`
+   `sudo -u postgres psql`
 
 3. Create a user for the webapp:
 
@@ -305,9 +305,9 @@ Step-by-step instructions for setting up the site on a VPS.
 
 5. Commit the changes:
 
-    `git add -A`
+   `git add -A`
 
-    `git commit -am "Add unicorn to the project"`
+   `git commit -am "Add unicorn to the project"`
 
 ## Configure Unicorn on the Server
 
