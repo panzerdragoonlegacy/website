@@ -109,11 +109,11 @@ Homebrew for package management instead of APT.
 
 1. Install PostgreSQL:
 
- `sudo apt-get install postgresql postgresql-contrib libpq-dev`
+   `sudo apt-get install postgresql postgresql-contrib libpq-dev`
 
 2. Log in to PostgreSQL:
 
-  `sudo -u postgres psql`
+   `sudo -u postgres psql`
 
    Note: on OSX you can use the user postgres with the password postgres; there
    is no need to create a new user account. Also, the database can be created
@@ -131,19 +131,19 @@ Homebrew for package management instead of APT.
 
 5. Give the new user full access to the new databases:
 
-  `GRANT ALL PRIVILEGES ON DATABASE panzerdragoonlegacy_dev TO panzerdragoonlegacy;`
+   `GRANT ALL PRIVILEGES ON DATABASE panzerdragoonlegacy_dev TO panzerdragoonlegacy;`
 
-  `GRANT ALL PRIVILEGES ON DATABASE panzerdragoonlegacy_test TO panzerdragoonlegacy;`
+   `GRANT ALL PRIVILEGES ON DATABASE panzerdragoonlegacy_test TO panzerdragoonlegacy;`
 
 6. Set the owner of the new databases to the new user:
 
-  `ALTER DATABASE panzerdragoonlegacy_dev OWNER TO panzerdragoonlegacy;`
+   `ALTER DATABASE panzerdragoonlegacy_dev OWNER TO panzerdragoonlegacy;`
 
-  `ALTER DATABASE panzerdragoonlegacy_test OWNER TO panzerdragoonlegacy;`
+   `ALTER DATABASE panzerdragoonlegacy_test OWNER TO panzerdragoonlegacy;`
 
 7. Quit postgres:
 
-  `\q`
+   `\q`
 
 ## Set Up the Rails App
 
@@ -252,9 +252,9 @@ Homebrew for package management instead of APT.
 2. If you haven't done so already, add your name and email address to git's
    configuration:
 
-  `git config --global user.name "Chris Alley"`
+   `git config --global user.name "Chris Alley"`
 
-  `git config --global user.email "chris@chrisalley.info"`
+   `git config --global user.email "chris@chrisalley.info"`
 
 3. Once code changes are ready to be published, commit and push to the master
    branch (or create a pull request if you don't have permission):
