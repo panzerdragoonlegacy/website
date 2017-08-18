@@ -466,7 +466,7 @@ Step-by-step instructions for setting up the site on a VPS.
 3. Create a dump of the database as a tar file, pasting in the password from
    `database.yml` when prompted:
 
-  `pg_dump thewilloftheancients > db.sql`
+   `pg_dump thewilloftheancients > db.sql`
 
 4. On the new server, log in as the web app user:
 
@@ -534,4 +534,3 @@ Step-by-step instructions for setting up the site on a VPS.
 11. Remove the database dump:
 
     `rm ~/db.sql`
-    
