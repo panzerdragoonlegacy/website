@@ -497,9 +497,9 @@ Step-by-step instructions for setting up the site on a VPS.
    `cat ~/panzerdragoonlegacy/shared/config/database.yml`
 
 10. Restore the database from the dump, pasting the password from
-   `database.yml` when prompted:
+    `database.yml` when prompted:
 
-   `psql -d panzerdragoonlegacy -f db.sql`
+    `psql -d panzerdragoonlegacy -f db.sql`
 
     Note: if the database was backed up as a differently named role you may
     need to temporarily create this role on the new server in order for the
