@@ -179,7 +179,7 @@ and can be reconfigured via the Namecheap control panel if need be.
 The YouTube account is owned by the Google account
 `panzerdragoonlegacy@gmail.com` for which a password reset email can be sent to
 `support@panzerdragoonlegacy.com`. The YouTube channel can be managed via the
-administrators personal Google account.
+administrator's personal Google account.
 
 ### Steam
 
