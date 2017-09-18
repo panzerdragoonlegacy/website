@@ -163,29 +163,17 @@ module NewsEntriesHelper
       end
     end
 
-    # Convert paragraphs to embedded YouTube videos if they contain links to
-    # YouTube videos:
+    # Convert links to embedded oneboxes
+    require 'onebox'
     html.css('p').each do |tag|
-      link = tag.content
-      if (link =~ /(.):\/\/www.youtube.com\/embed\/(.)/) or
-        (link =~ /(.):\/\/www.youtube.com\/watch\?v=(.)/) or
-        (link =~ /(.):\/\/youtu.be\/(.)/)
+      url = tag.content
+      next unless (url =~ /http:\/\/(.)/) || (url =~ /https:\/\/(.)/)
+      preview = Onebox.preview(url)
 
-        # Get video ID which comes after the last ?v= or / in the URL:
-        if link =~ /(.)watch\?v=(.)/
-          video_id = link.split('?v=')[-1]
-        else
-          video_id = link.split('/')[-1]
-        end
-
-        # Replace surrounding paragraph with YouTube iframe:
-        tag.name = 'iframe'
-        tag.set_attribute('width', '486')
-        tag.set_attribute('height', '320')
-        tag.set_attribute('src', 'https://www.youtube.com/embed/' + video_id)
-        tag.set_attribute('frameborder', '0')
-        tag.set_attribute('allowfullscreen', '')
-      end
+      new_node = html.create_element 'div'
+      new_node['class'] = 'onebox'
+      new_node.inner_html = preview.to_s
+      tag.replace new_node
     end
 
     # Converts nokogiri variable to html.
