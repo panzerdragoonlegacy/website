@@ -38,7 +38,7 @@ class PicturesController < ApplicationController
   end
 
   def create
-    make_current_user_a_contributor
+    make_current_user_a_contributor unless current_user.administrator?
     @picture = Picture.new picture_params
     authorize @picture
     if @picture.save
@@ -51,7 +51,7 @@ class PicturesController < ApplicationController
 
   def update
     params[:picture][:contributor_profile_ids] ||= []
-    make_current_user_a_contributor
+    make_current_user_a_contributor unless current_user.administrator?
     if @picture.update_attributes picture_params
       flash[:notice] = 'Successfully updated picture.'
       redirect_to_picture
