@@ -57,7 +57,10 @@
         <% if @news_entry.publish %>
           <%= local_time_ago @news_entry.published_at %>.
         <% else %>
-          - <span class="unpublished">Unpublished</span>
+          - <span class="unpublished">
+            This news entry is not published. Please inform an administrator
+            when it and any linked or embedded content is ready to be published.
+          </span>
         <% end %>
       </p>
       <%= raw news_entry_markdown_to_html @news_entry.content %>

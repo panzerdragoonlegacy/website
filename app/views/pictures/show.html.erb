@@ -2,12 +2,16 @@
 <% description @picture.description %>
 
 <% if !@picture.publish %>
-  <p class="unpublished">Unpublished</p>
+  <p class="unpublished">
+    This picture is not published. Please inform an administrator when it and
+    the associated news entry are ready to be published.
+  </p>
 <% elsif !@picture.category.publish %>
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 <% if !@picture.publish || !@picture.category.publish %>
-  <p class="unpublished">Markdown to embed in news entry:
+  <p class="unpublished">
+    Use this Markdown to embed the picture in a news entry:
     <code>![](<%= @picture.id %>-<%= @picture.url %>.jpg)</code>
   </p>
 <% end %>

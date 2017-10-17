@@ -2,12 +2,16 @@
 <% description @music_track.description %>
 
 <% if !@music_track.publish %>
-  <p class="unpublished">Unpublished</p>
+  <p class="unpublished">
+    This music track is not published. Please inform an administrator when it
+    and the associated news entry are ready to be published.
+  </p>
 <% elsif !@music_track.category.publish %>
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 <% if !@music_track.publish || !@music_track.category.publish %>
-  <p class="unpublished">Markdown to embed in news entry:
+  <p class="unpublished">
+    Use this Markdown to embed the music track in a news entry:
     <code>![](<%= @music_track.id %>-<%= @music_track.url %>.mp3)</code>
   </p>
 <% end %>

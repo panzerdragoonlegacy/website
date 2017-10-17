@@ -2,7 +2,10 @@
 <% description truncated_text(@resource.content) %>
 
 <% if !@resource.publish %>
-  <p class="unpublished">Unpublished</p>
+  <p class="unpublished">
+    This resource is not published. Please inform an administrator when it and
+    the associated news entry are ready to be published.
+  </p>
 <% elsif !@resource.category.publish %>
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>

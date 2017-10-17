@@ -2,7 +2,10 @@
 <% description truncated_text(@encyclopaedia_entry.content) %>
 
 <% if !@encyclopaedia_entry.publish %>
-  <p class="unpublished">Unpublished</p>
+  <p class="unpublished">
+    This encyclopaedia entry is not published. Please inform an administrator
+    when it and the associated news entry are ready to be published.
+  </p>
 <% elsif !@encyclopaedia_entry.category.publish %>
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>

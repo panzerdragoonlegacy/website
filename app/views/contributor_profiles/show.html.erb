@@ -1,7 +1,10 @@
 <% title @contributor_profile.name %>
 
 <% unless @contributor_profile.publish %>
-  <p class="unpublished">Unpublished</p>
+  <p class="unpublished">
+    This contributor profile is not published. Please inform an administrator
+    when it and the associated news entry are ready to be published.
+  </p>
 <% end %>
 
 <% if policy(@contributor_profile).edit? %>

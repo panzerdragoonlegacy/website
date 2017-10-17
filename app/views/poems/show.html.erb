@@ -2,7 +2,10 @@
 <% description @poem.description %>
 
 <% unless @poem.publish %>
-  <p class="unpublished">Unpublished</p>
+  <p class="unpublished">
+    This poem is not published. Please inform an administrator when it and the
+    associated news entry are ready to be published.
+  </p>
 <% end %>
 
 <% if policy(@poem).new? || policy(@poem).edit? || policy(@poem).destroy? %>

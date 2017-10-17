@@ -2,7 +2,10 @@
 <% description @story.description %>
 
 <% if !@story.publish %>
-  <p class="unpublished">Unpublished</p>
+  <p class="unpublished">
+    This story is not published. Please inform an administrator when it and the
+    associated news entry are ready to be published.
+  </p>
 <% elsif !@story.category.publish %>
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
