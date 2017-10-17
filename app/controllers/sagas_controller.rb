@@ -12,7 +12,7 @@ class SagasController < ApplicationController
   end
 
   def create
-    @saga = Saga.new(saga_params)
+    @saga = Saga.new saga_params
     authorize @saga
     if @saga.save
       flash[:notice] = 'Successfully created saga.'
@@ -23,7 +23,7 @@ class SagasController < ApplicationController
   end
 
   def update
-    if @saga.update_attributes(saga_params)
+    if @saga.update_attributes saga_params
       flash[:notice] = 'Successfully updated saga.'
       redirect_to_saga
     else

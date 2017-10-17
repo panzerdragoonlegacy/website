@@ -1,20 +1,24 @@
 <%= form_for @news_entry do |f| %>
   <%= render 'shared/error_messages', target: @news_entry %>
   <div>
-    <div>
-      <%= f.label :contributor_profile_id, 'Author*' %>
-    </div>
-    <div>
-      <%=
-        f.collection_select(
-          :contributor_profile_id,
-          ContributorProfile.order(:name),
-          :id,
-          :name,
-          { include_blank: false }
-        )
-      %>
-    </div>
+    <% if policy(@news_entry).permitted_attributes.include?(
+      :contributor_profile_id
+    ) %>
+      <div>
+        <%= f.label :contributor_profile_id, 'Author*' %>
+      </div>
+      <div>
+        <%=
+          f.collection_select(
+            :contributor_profile_id,
+            ContributorProfile.order(:name),
+            :id,
+            :name,
+            { include_blank: false }
+          )
+        %>
+      </div>
+    <% end %>
   </div>
   <div>
     <div>

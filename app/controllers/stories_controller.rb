@@ -31,7 +31,8 @@ class StoriesController < ApplicationController
   end
 
   def create
-    @story = Story.new(story_params)
+    make_current_user_a_contributor unless current_user.administrator?
+    @story = Story.new story_params
     authorize @story
     if @story.save
       flash[:notice] = 'Successfully created story.'
@@ -43,7 +44,8 @@ class StoriesController < ApplicationController
 
   def update
     params[:story][:contributor_profile_ids] ||= []
-    if @story.update_attributes(story_params)
+    make_current_user_a_contributor unless current_user.administrator?
+    if @story.update_attributes story_params
       flash[:notice] = 'Successfully updated story.'
       redirect_to_story
     else
@@ -99,6 +101,15 @@ class StoriesController < ApplicationController
       redirect_to edit_story_path(@story)
     else
       redirect_to @story
+    end
+  end
+
+  def make_current_user_a_contributor
+    unless current_user.contributor_profile_id.to_s.in?(
+      params[:story][:contributor_profile_ids]
+    )
+      params[:story][:contributor_profile_ids] <<
+        current_user.contributor_profile_id
     end
   end
 end

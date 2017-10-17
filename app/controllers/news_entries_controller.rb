@@ -19,7 +19,8 @@ class NewsEntriesController < ApplicationController
   end
 
   def create
-    @news_entry = NewsEntry.new(news_entry_params)
+    @news_entry = NewsEntry.new news_entry_params
+    make_current_user_the_contributor
     authorize @news_entry
     if @news_entry.save
       flash[:notice] = 'Successfully created news entry.'
@@ -30,7 +31,7 @@ class NewsEntriesController < ApplicationController
   end
 
   def update
-    if @news_entry.update_attributes(news_entry_params)
+    if @news_entry.update_attributes news_entry_params
       flash[:notice] = 'Successfully updated news entry.'
       redirect_to_news_entry
     else
@@ -79,6 +80,13 @@ class NewsEntriesController < ApplicationController
       redirect_to edit_news_entry_path(@news_entry)
     else
       redirect_to @news_entry
+    end
+  end
+
+  def make_current_user_the_contributor
+    return if current_user.administrator?
+    unless current_user.contributor_profile == @news_entry.contributor_profile
+      @news_entry.contributor_profile_id = current_user.contributor_profile_id
     end
   end
 end

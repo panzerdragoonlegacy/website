@@ -40,7 +40,8 @@ class EncyclopaediaEntriesController < ApplicationController
   end
 
   def create
-    @encyclopaedia_entry = EncyclopaediaEntry.new(encyclopaedia_entry_params)
+    make_current_user_a_contributor unless current_user.administrator?
+    @encyclopaedia_entry = EncyclopaediaEntry.new encyclopaedia_entry_params
     authorize @encyclopaedia_entry
     if @encyclopaedia_entry.save
       flash[:notice] = 'Successfully created encyclopaedia entry.'
@@ -52,6 +53,7 @@ class EncyclopaediaEntriesController < ApplicationController
 
   def update
     clear_empty_id_arrays
+    make_current_user_a_contributor unless current_user.administrator?
     if @encyclopaedia_entry.update_attributes(encyclopaedia_entry_params)
       flash[:notice] = 'Successfully updated encyclopaedia entry.'
       redirect_to_encyclopaedia_entry
@@ -95,6 +97,15 @@ class EncyclopaediaEntriesController < ApplicationController
       redirect_to edit_encyclopaedia_entry_path(@encyclopaedia_entry)
     else
       redirect_to @encyclopaedia_entry
+    end
+  end
+
+  def make_current_user_a_contributor
+    unless current_user.contributor_profile_id.to_s.in?(
+      params[:encyclopaedia_entry][:contributor_profile_ids]
+    )
+      params[:encyclopaedia_entry][:contributor_profile_ids] <<
+        current_user.contributor_profile_id
     end
   end
 end

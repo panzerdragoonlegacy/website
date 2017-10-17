@@ -32,7 +32,8 @@ class VideosController < ApplicationController
   end
 
   def create
-    @video = Video.new(video_params)
+    make_current_user_a_contributor unless current_user.administrator?
+    @video = Video.new video_params
     authorize @video
     if @video.save
       flash[:notice] = 'Successfully created video.'
@@ -44,7 +45,8 @@ class VideosController < ApplicationController
 
   def update
     params[:video][:contributor_profile_ids] ||= []
-    if @video.update_attributes(video_params)
+    make_current_user_a_contributor unless current_user.administrator?
+    if @video.update_attributes video_params
       flash[:notice] = 'Successfully updated video.'
       redirect_to_video
     else
@@ -106,6 +108,15 @@ class VideosController < ApplicationController
       redirect_to edit_video_path(@video)
     else
       redirect_to @video
+    end
+  end
+
+  def make_current_user_a_contributor
+    unless current_user.contributor_profile_id.to_s.in?(
+      params[:video][:contributor_profile_ids]
+    )
+      params[:video][:contributor_profile_ids] <<
+        current_user.contributor_profile_id
     end
   end
 end

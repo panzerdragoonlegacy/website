@@ -32,7 +32,8 @@ class ResourcesController < ApplicationController
   end
 
   def create
-    @resource = Resource.new(resource_params)
+    make_current_user_a_contributor unless current_user.administrator?
+    @resource = Resource.new resource_params
     authorize @resource
     if @resource.save
       flash[:notice] = 'Successfully created resource.'
@@ -44,7 +45,8 @@ class ResourcesController < ApplicationController
 
   def update
     params[:resource][:contributor_profile_ids] ||= []
-    if @resource.update_attributes(resource_params)
+    make_current_user_a_contributor unless current_user.administrator?
+    if @resource.update_attributes resource_params
       flash[:notice] = 'Successfully updated resource.'
       redirect_to_resource
     else
@@ -106,6 +108,15 @@ class ResourcesController < ApplicationController
       redirect_to edit_resource_path(@resource)
     else
       redirect_to @resource
+    end
+  end
+
+  def make_current_user_a_contributor
+    unless current_user.contributor_profile_id.to_s.in?(
+      params[:resource][:contributor_profile_ids]
+    )
+      params[:resource][:contributor_profile_ids] <<
+        current_user.contributor_profile_id
     end
   end
 end

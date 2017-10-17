@@ -31,7 +31,8 @@ class DownloadsController < ApplicationController
   end
 
   def create
-    @download = Download.new(download_params)
+    make_current_user_a_contributor unless current_user.administrator?
+    @download = Download.new download_params
     authorize @download
     if @download.save
       flash[:notice] = 'Successfully created download.'
@@ -43,7 +44,8 @@ class DownloadsController < ApplicationController
 
   def update
     params[:download][:contributor_profile_ids] ||= []
-    if @download.update_attributes(download_params)
+    make_current_user_a_contributor unless current_user.administrator?
+    if @download.update_attributes download_params
       flash[:notice] = 'Successfully updated download.'
       redirect_to_download
     else
@@ -99,6 +101,15 @@ class DownloadsController < ApplicationController
       redirect_to edit_download_path(@download)
     else
       redirect_to(@download)
+    end
+  end
+
+  def make_current_user_a_contributor
+    unless current_user.contributor_profile_id.to_s.in?(
+      params[:download][:contributor_profile_ids]
+    )
+      params[:download][:contributor_profile_ids] <<
+        current_user.contributor_profile_id
     end
   end
 end

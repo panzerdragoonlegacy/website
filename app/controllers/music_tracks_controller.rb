@@ -32,7 +32,8 @@ class MusicTracksController < ApplicationController
   end
 
   def create
-    @music_track = MusicTrack.new(music_track_params)
+    make_current_user_a_contributor unless current_user.administrator?
+    @music_track = MusicTrack.new music_track_params
     authorize @music_track
     if @music_track.save
       flash[:notice] = 'Successfully created music track.'
@@ -44,7 +45,8 @@ class MusicTracksController < ApplicationController
 
   def update
     params[:music_track][:contributor_profile_ids] ||= []
-    if @music_track.update_attributes(music_track_params)
+    make_current_user_a_contributor unless current_user.administrator?
+    if @music_track.update_attributes music_track_params
       flash[:notice] = 'Successfully updated music track.'
       redirect_to_music_track
     else
@@ -106,6 +108,15 @@ class MusicTracksController < ApplicationController
       redirect_to edit_music_track_path(@music_track)
     else
       redirect_to @music_track
+    end
+  end
+
+  def make_current_user_a_contributor
+    unless current_user.contributor_profile_id.to_s.in?(
+      params[:music_track][:contributor_profile_ids]
+    )
+      params[:music_track][:contributor_profile_ids] <<
+        current_user.contributor_profile_id
     end
   end
 end

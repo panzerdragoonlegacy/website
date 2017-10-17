@@ -31,7 +31,8 @@ class QuizzesController < ApplicationController
   end
 
   def create
-    @quiz = Quiz.new(quiz_params)
+    make_current_user_a_contributor unless current_user.administrator?
+    @quiz = Quiz.new quiz_params
     authorize @quiz
     if @quiz.save
       flash[:notice] = 'Successfully created quiz.'
@@ -48,7 +49,8 @@ class QuizzesController < ApplicationController
 
   def update
     params[:quiz][:contributor_profile_ids] ||= []
-    if @quiz.update_attributes(quiz_params)
+    make_current_user_a_contributor unless current_user.administrator?
+    if @quiz.update_attributes quiz_params
       flash[:notice] = 'Successfully updated quiz.'
       redirect_to_quiz
     else
@@ -105,6 +107,15 @@ class QuizzesController < ApplicationController
       flash.now[:notice] = 'You must fill out all questions.'
     else
       @show_results = true
+    end
+  end
+
+  def make_current_user_a_contributor
+    unless current_user.contributor_profile_id.to_s.in?(
+      params[:quiz][:contributor_profile_ids]
+    )
+      params[:quiz][:contributor_profile_ids] <<
+        current_user.contributor_profile_id
     end
   end
 end

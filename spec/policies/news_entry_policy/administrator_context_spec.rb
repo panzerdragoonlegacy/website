@@ -14,6 +14,7 @@ describe NewsEntryPolicy do
 
     it { is_expected.to permit_new_and_create_actions }
     it { is_expected.to permit_mass_assignment_of(:publish) }
+    it { is_expected.to permit_mass_assignment_of(:contributor_profile_id) }
   end
 
   context 'administrator accessing a published news entry' do
@@ -25,6 +26,7 @@ describe NewsEntryPolicy do
 
     it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
     it { is_expected.to permit_mass_assignment_of(:publish) }
+    it { is_expected.to permit_mass_assignment_of(:contributor_profile_id) }
   end
 
   context 'administrator accessing an unpublished news entry' do
@@ -36,5 +38,6 @@ describe NewsEntryPolicy do
 
     it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
     it { is_expected.to permit_mass_assignment_of(:publish) }
+    it { is_expected.to permit_mass_assignment_of(:contributor_profile_id) }
   end
 end

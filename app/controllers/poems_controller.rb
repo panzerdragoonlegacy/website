@@ -24,7 +24,8 @@ class PoemsController < ApplicationController
   end
 
   def create
-    @poem = Poem.new(poem_params)
+    make_current_user_a_contributor unless current_user.administrator?
+    @poem = Poem.new poem_params
     authorize @poem
     if @poem.save
       flash[:notice] = 'Successfully created poem.'
@@ -36,7 +37,8 @@ class PoemsController < ApplicationController
 
   def update
     params[:poem][:contributor_profile_ids] ||= []
-    if @poem.update_attributes(poem_params)
+    make_current_user_a_contributor unless current_user.administrator?
+    if @poem.update_attributes poem_params
       flash[:notice] = 'Successfully updated poem.'
       redirect_to_poem
     else
@@ -83,6 +85,15 @@ class PoemsController < ApplicationController
       redirect_to edit_poem_path(@poem)
     else
       redirect_to @poem
+    end
+  end
+
+  def make_current_user_a_contributor
+    unless current_user.contributor_profile_id.to_s.in?(
+      params[:poem][:contributor_profile_ids]
+    )
+      params[:poem][:contributor_profile_ids] <<
+        current_user.contributor_profile_id
     end
   end
 end

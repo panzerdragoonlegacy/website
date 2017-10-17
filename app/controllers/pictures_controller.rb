@@ -38,6 +38,7 @@ class PicturesController < ApplicationController
   end
 
   def create
+    make_current_user_a_contributor
     @picture = Picture.new picture_params
     authorize @picture
     if @picture.save
@@ -50,6 +51,7 @@ class PicturesController < ApplicationController
 
   def update
     params[:picture][:contributor_profile_ids] ||= []
+    make_current_user_a_contributor
     if @picture.update_attributes picture_params
       flash[:notice] = 'Successfully updated picture.'
       redirect_to_picture
@@ -76,6 +78,15 @@ class PicturesController < ApplicationController
       redirect_to edit_picture_path(@picture)
     else
       redirect_to @picture
+    end
+  end
+
+  def make_current_user_a_contributor
+    unless current_user.contributor_profile_id.to_s.in?(
+      params[:picture][:contributor_profile_ids]
+    )
+      params[:picture][:contributor_profile_ids] <<
+        current_user.contributor_profile_id
     end
   end
 end

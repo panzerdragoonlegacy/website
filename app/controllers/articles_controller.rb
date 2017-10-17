@@ -31,6 +31,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    make_current_user_a_contributor unless current_user.administrator?
     @article = Article.new article_params
     authorize @article
     if @article.save
@@ -43,6 +44,7 @@ class ArticlesController < ApplicationController
 
   def update
     params[:article][:contributor_profile_ids] ||= []
+    make_current_user_a_contributor unless current_user.administrator?
     if @article.update_attributes article_params
       flash[:notice] = 'Successfully updated article.'
       redirect_to_article
@@ -98,6 +100,15 @@ class ArticlesController < ApplicationController
       redirect_to edit_article_path(@article)
     else
       redirect_to @article
+    end
+  end
+
+  def make_current_user_a_contributor
+    unless current_user.contributor_profile_id.to_s.in?(
+      params[:article][:contributor_profile_ids]
+    )
+      params[:article][:contributor_profile_ids] <<
+        current_user.contributor_profile_id
     end
   end
 end
