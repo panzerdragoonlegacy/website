@@ -117,6 +117,11 @@
   <% if policy(@music_track).permitted_attributes.include? :publish %>
     <div>
       <%= f.check_box :publish %> <%= f.label :publish, 'Publish?' %>
+      <p class="unpublished">
+        Before publishing, ensure that the metadata saved in the MP3 and FLAC
+        files has been cleaned up. Often these are submitted with incorrect or
+        incomplete metadata.
+      </p>
     </div>
   <% end %>
   <div>
