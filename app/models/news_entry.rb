@@ -4,7 +4,7 @@ class NewsEntry < ActiveRecord::Base
 
   belongs_to :contributor_profile
 
-  validates :name, presence: true, length: { in: 2..55 }, uniqueness: true
+  validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
   validates :content, presence: true
   validates :contributor_profile, presence: true
 
