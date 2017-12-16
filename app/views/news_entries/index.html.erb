@@ -15,7 +15,9 @@
 <% if @news_entries %>
   <% @news_entries.each do |news_entry| %>
     <div class="resource">
-      <h1><%= link_to news_entry.name, news_entry %></h1>
+      <h2 class="news_entry_index_heading">
+        <%= link_to news_entry.name, news_entry %>
+      </h2>
       <%= show_news_entry_picture(news_entry, :embedded) %>
       <div class="comment_thumbnail">
         <% if news_entry.contributor_profile.avatar_file_name.blank? %>

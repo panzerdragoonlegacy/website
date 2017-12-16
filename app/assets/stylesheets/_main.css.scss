@@ -73,12 +73,6 @@ div.resource {
   background-color: $input-background-colour;
   @include gradients(bottom, #343434, #454545);
 
-  h1 {
-    padding-top: 20px;
-    margin-left: 20px;
-    margin-bottom: -4px;
-  }
-
   img {
     margin-top: 20px;
   }
