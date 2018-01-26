@@ -28,7 +28,7 @@ do not have access to billing details.
 The site and forums are hosted on two virtual servers:
 
 * 188.166.22.249 damon (hosts the main site)
-* 178.62.191.140 viaman (hosts the forum)
+* 188.166.107.168 paet (hosts the forum)
 
 Administrators can access these servers using SSH key based authentication only.
 There is no FTP access enabled. The root password for each server can be reset
