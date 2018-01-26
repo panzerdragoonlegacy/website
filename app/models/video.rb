@@ -18,7 +18,7 @@ class Video < ActiveRecord::Base
   validates_attachment(
     :mp4_video,
     presence: true,
-    size: { in: 0..200.megabytes }
+    size: { in: 0..500.megabytes }
   )
 
   # There were issues specifying content types.

@@ -19,7 +19,7 @@ class Download < ActiveRecord::Base
     :download,
     presence: true,
     content_type: { content_type: 'application/zip' },
-    size: { in: 0..100.megabytes }
+    size: { in: 0..500.megabytes }
   )
 
   before_save :sync_file_name

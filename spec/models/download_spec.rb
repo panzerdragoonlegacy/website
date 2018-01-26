@@ -75,7 +75,7 @@ RSpec.describe Download, type: :model do
     end
     it do
       is_expected.to validate_attachment_size(:download)
-        .less_than(100.megabytes)
+        .less_than(500.megabytes)
     end
   end
 
