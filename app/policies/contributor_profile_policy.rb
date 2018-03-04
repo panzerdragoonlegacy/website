@@ -52,7 +52,8 @@ class ContributorProfilePolicy < ApplicationPolicy
       :email_address,
       :discourse_username,
       :avatar,
-      :website,
+      :website_name,
+      :website_url,
       :facebook_username,
       :twitter_username
     ]

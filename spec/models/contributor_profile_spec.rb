@@ -7,7 +7,8 @@ RSpec.describe ContributorProfile, type: :model do
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:email_address) }
     it { is_expected.to respond_to(:avatar) }
-    it { is_expected.to respond_to(:website) }
+    it { is_expected.to respond_to(:website_name) }
+    it { is_expected.to respond_to(:website_url) }
     it { is_expected.to respond_to(:facebook_username) }
     it { is_expected.to respond_to(:twitter_username) }
     it { is_expected.to respond_to(:discourse_username) }

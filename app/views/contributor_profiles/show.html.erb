@@ -38,7 +38,7 @@
     unless (
       @contributor_profile.email_address.blank? &&
       @contributor_profile.discourse_username.blank? &&
-      @contributor_profile.website.blank? &&
+      @contributor_profile.website_url.blank? &&
       @contributor_profile.facebook_username.blank? &&
       @contributor_profile.twitter_username.blank?
     )
@@ -64,10 +64,19 @@
           %>
         </dd>
       <% end %>
-      <% unless @contributor_profile.website.blank? %>
+      <% unless @contributor_profile.website_url.blank? %>
         <dt>Website</dt>
         <dd>
-          <%= link_to 'Visit Website', @contributor_profile.website %>
+          <% if @contributor_profile.website_name.present? %>
+            <%=
+              link_to(
+                @contributor_profile.website_name,
+                @contributor_profile.website_url
+              )
+            %>
+          <% else %>
+            <%= link_to 'Visit Website', @contributor_profile.website_url %>
+          <% end %>
         </dd>
       <% end %>
       <% unless @contributor_profile.facebook_username.blank? %>

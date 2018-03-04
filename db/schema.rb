@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170613120805) do
+ActiveRecord::Schema.define(version: 20180304021741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20170613120805) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.string   "website"
+    t.string   "website_url"
     t.string   "facebook_username"
     t.string   "twitter_username"
     t.datetime "created_at"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20170613120805) do
     t.string   "discourse_username"
     t.boolean  "publish",             default: false
     t.string   "description"
+    t.string   "website_name"
   end
 
   create_table "downloads", force: :cascade do |t|
