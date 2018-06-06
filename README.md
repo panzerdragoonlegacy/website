@@ -4,9 +4,8 @@ Panzer Dragoon Legacy
 [![Build Status][travis-badge]][travis]
 
 A custom content management system for
-[panzerdragoonlegacy.com](http://www.panzerdragoonlegacy.com). Currently being
-replaced with an off-the-shelf system. Code is provided here for demonstration
-purposes.
+[panzerdragoonlegacy.com](http://www.panzerdragoonlegacy.com). Code is provided
+here for demonstration purposes.
 
 Documentation
 -------------
