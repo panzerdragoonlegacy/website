@@ -1,0 +1,97 @@
+<%= form_for [:admin, @article], html: { multipart: true } do |f| %>
+  <%= render 'shared/error_messages', target: @article %>
+  <div>
+    <div>
+      <%= f.label :category_id, 'Category*' %>
+    </div>
+    <div>
+      <%=
+        f.collection_select(
+          :category_id,
+          @categories,
+          :id,
+          :name,
+          { include_blank: true }
+        )
+      %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :contributor_profile_ids, 'Contributors*' %>
+    </div>
+    <div>
+      <%=
+        f.collection_select(
+          :contributor_profile_ids,
+          ContributorProfile.order(:name),
+          :id,
+          :name,
+          { selected: @article.contributor_profile_ids, include_blank: true },
+          { multiple: true }
+        )
+      %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :name, 'Name*' %>
+    </div>
+    <div>
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :description, 'Description*' %>
+    </div>
+    <div>
+      <%= f.text_area :description, rows: 3 %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= f.label :content, 'Content*' %>
+    </div>
+    <div>
+      <%= f.text_area :content, rows: 15, class: 'data_entry' %>
+      <p>
+        (You may use a <a href="/markdown-syntax-guide" target="_blank">limited
+        subset of Markdown</a> to format the article's content)
+      </p>
+    </div>
+  </div>
+  <div>
+    <label>Illustrations</label>
+    <%= f.fields_for :illustrations do |illustration_fields| %>
+      <%= render 'illustration_fields', f: illustration_fields %>
+    <% end %>
+    <p><%= link_to_add_association 'Add Illustration', f, :illustrations %></p>
+  </div>
+  <div>
+    <div>
+      <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
+    </div>
+    <div>
+      <%=
+        f.collection_select(
+          :encyclopaedia_entry_ids,
+          EncyclopaediaEntry.order(:name),
+          :id,
+          :name,
+          { selected: @article.encyclopaedia_entry_ids, include_blank: true },
+          { multiple: true }
+        )
+      %>
+    </div>
+  </div>
+  <% if policy(@article).permitted_attributes.include? :publish %>
+    <div>
+      <%= f.check_box :publish %> <%= f.label :publish, 'Publish?' %>
+    </div>
+  <% end %>
+  <div>
+    <%= f.submit 'Save and View' %>
+    <%= f.submit 'Save and Continue Editing', name: :continue_editing %>
+  </div>
+<% end %>
