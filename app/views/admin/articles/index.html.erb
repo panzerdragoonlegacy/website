@@ -19,13 +19,27 @@
     <tbody>
       <% @articles.each do |article| %>
         <tr>
-          <td><%= article.name %></td>
+          <td><%= link_to article.name, article_path(article) %></td>
           <td><%= article.description %></td>
-          <td><%= article.category.name %></td>
+          <td>
+            <%=
+              link_to(
+                article.category.name,
+                category_path(article.category)
+              )
+            %>
+          </td>
           <td>
             <ul>
               <% article.contributor_profiles.each do |contributor_profile| %>
-                <li><%= contributor_profile.name %></li>
+                <li>
+                  <%=
+                    link_to(
+                      contributor_profile.name,
+                      contributor_profile_path(contributor_profile)
+                    )
+                  %>
+                </li>
               <% end %>
             </ul>
           </td>
