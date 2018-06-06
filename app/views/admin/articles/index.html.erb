@@ -29,9 +29,26 @@
               <% end %>
             </ul>
           </td>
-          <td><%= link_to 'Edit', edit_admin_article_path(article) %></td>
-          <td>Delete</td>
-        </tr>        
+          <td>
+            <% if policy(article).edit? %>
+              <%= link_to 'Edit', edit_admin_article_path(article) %>
+            <% end %>
+          </td>
+          <td>
+            <% if policy(article).destroy? %>
+              <%=
+                link_to(
+                  'Delete',
+                  [:admin, article],
+                  data: {
+                    confirm: 'Are you sure you want to delete this article?'
+                  },
+                  method: :delete
+                )
+              %>
+            <% end %>
+          </td>
+        </tr>
       <% end %>
     </tbody>
   </table>

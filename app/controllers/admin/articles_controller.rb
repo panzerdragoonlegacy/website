@@ -41,6 +41,11 @@ class Admin::ArticlesController < ApplicationController
     end
   end
 
+  def destroy
+    @article.destroy
+    redirect_to admin_articles_path, notice: 'Successfully destroyed article.'
+  end
+
   private
 
   def article_params
