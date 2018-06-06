@@ -71,7 +71,7 @@ div.resource {
   padding-bottom: 25px;
   overflow-x: hidden;
   background-color: $input-background-colour;
-  @include gradients(bottom, #343434, #454545);
+  background: linear-gradient(to top, #343434, #454545);
 
   img {
     margin-top: 20px;

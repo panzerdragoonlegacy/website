@@ -4,11 +4,3 @@
   margin-left: 9px;
   width: 280px;
 }
-
-@mixin gradients($direction, $colour-1, $colour-2) {
-  background: -webkit-linear-gradient($direction, $colour-1, $colour-2);
-  background: -moz-linear-gradient($direction, $colour-1, $colour-2);
-  background: -o-linear-gradient($direction, $colour-1, $colour-2);
-  background: -ms-linear-gradient($direction, $colour-1, $colour-2);
-  background: linear-gradient($direction, $colour-1, $colour-2);
-}

@@ -7,7 +7,7 @@ div#information {
   margin-bottom: 25px;
   border: $border-properties;
   background-color: $input-background-colour;
-  @include gradients(bottom, #343434, #454545); 
+  background: linear-gradient(to top, #343434, #454545);
 
   img {
     border-radius: 10px;
@@ -48,7 +48,7 @@ div.left {
   margin-bottom: 25px;
   border: $border-properties;
   background-color: #343434;
-  @include gradients(bottom, #343434, #454545);
+  background: linear-gradient(to top#343434, #454545);
   padding-bottom: 10px;
 
   img {
@@ -71,7 +71,7 @@ div.right {
   margin-bottom: 25px;
   border: $border-properties;
   background-color: $input-background-colour;
-  @include gradients(bottom, #343434, #454545);
+  background: linear-gradient(to top, #343434, #454545);
   padding-bottom: 10px;
   
   img {
@@ -98,7 +98,7 @@ div.sidebysideleft {
   padding-bottom: 10px;
   border: $border-properties;
   background-color: $input-background-colour;
-  @include gradients(bottom, #343434, #454545); 
+  background: linear-gradient(to top, #343434, #454545); 
 
   img {
     padding: 9px;
@@ -118,7 +118,7 @@ div.sidebysideright {
   padding-bottom: 10px;
   border: $border-properties;
   background-color: $input-background-colour;
-  @include gradients(bottom, #343434, #454545);
+  background: linear-gradient(to top, #343434, #454545);
   
   img {
     padding: 9px;
@@ -133,7 +133,7 @@ div.sidebysideright {
 div#popover_illustration {
   border: $border-properties;
   background-color: $input-background-colour;
-  @include gradients(bottom, #343434, #454545);
+  background: linear-gradient(to top, #343434, #454545);
   display: none;
   position: fixed;
   border-radius: 10px;
