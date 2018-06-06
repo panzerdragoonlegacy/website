@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   }
   resources :users
 
+  namespace :admin do
+    resources :home, path: '/'
+  end
+
   resources :searches
   resources :news_entries, path: 'news'
   get 'site-map', to: 'site_map#show', as: :site_map
