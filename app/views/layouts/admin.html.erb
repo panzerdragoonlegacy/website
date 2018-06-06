@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Panzer Dragoon Legacy Admin Panel
+      <% if yield(:title).present? %> - <%= yield(:title) %><% end %>
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="content">
+      <% flash.each do |name, msg| %>
+        <% unless name.to_s == 'timedout' %>
+          <%= content_tag :div, msg, id: "flash_#{name}" %>
+        <% end %>
+      <% end %>
+      <% if yield(:title).present? %>
+        <h1><%= yield(:title) %></h1>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
+</html>
