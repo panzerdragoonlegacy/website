@@ -1,0 +1,36 @@
+<% title 'Articles' %>
+
+<% if @articles %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Category</th>
+        <th scope="col">Contributors</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @articles.each do |article| %>
+        <tr>
+          <td><%= article.name %></td>
+          <td><%= article.description %></td>
+          <td><%= article.category.name %></td>
+          <td>
+            <ul>
+              <% article.contributor_profiles.each do |contributor_profile| %>
+                <li><%= contributor_profile.name %></li>
+              <% end %>
+            </ul>
+          </td>
+          <td>Edit</td>
+          <td>Delete</td>
+        </tr>        
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= paginate @articles %>

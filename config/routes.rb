@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   resources :users
 
   namespace :admin do
-    resources :home, path: '/'
+    get '/', to: 'home#index'
+    resources :articles
   end
 
   resources :searches
