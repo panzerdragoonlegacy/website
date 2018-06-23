@@ -3,13 +3,23 @@
   style="width: 390px; margin-bottom: 20px;"
 >
   <% if f.object.illustration_file_name.blank? %>
-   <div class="card-body">
-      <h3 class="card-title">New Illustration</h3>
-      <%= f.file_field :illustration %>
-   </div>
-  <% else %>
-    <%= image_tag f.object.illustration.url, class: 'card-img-top' %>
     <div class="card-body">
+      <h3 class="card-title">New Illustration</h3>
+      <div class="alert alert-warning" role="alert">
+        <%= render 'shared/image_type_warning' %>
+      </div>
+      <%= f.file_field :illustration %>
+    </div>
+  <% else %>
+    <% if is_jpeg(f.object.illustration.url) %>
+      <%= image_tag f.object.illustration.url, class: 'card-img-top' %>
+    <% end %>
+    <div class="card-body">
+      <% unless is_jpeg(f.object.illustration.url) %>
+        <div class="alert alert-danger" role="alert">
+          <%= render 'shared/image_type_warning' %>
+        </div>
+      <% end %>
       <p class="card-title"><%= f.object.illustration_file_name %></p>
       <a class="btn btn-secondary insert_tag" href="#" role="button">
         Insert Markdown Tag
