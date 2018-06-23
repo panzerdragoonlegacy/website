@@ -1,0 +1,13 @@
+<div class="form-group">
+  <%= f.label :id_of_picture_to_replace, 'Picture to Replace' %>
+  <%=
+    f.collection_select(
+      :id_of_picture_to_replace,
+      @replaceable_pictures,
+      :id,
+      :name_and_id,
+      { include_blank: true },
+      { class: 'form-control' }
+    )
+  %>
+</div>

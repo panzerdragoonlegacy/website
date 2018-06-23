@@ -1,0 +1,76 @@
+<% title 'Pictures' %>
+
+<%=
+  render(
+    partial: 'admin/shared/table/new_button',
+    locals: {
+      resource: Picture,
+      resource_name: 'Picture',
+      path: new_admin_picture_path
+    }
+  )
+%>
+
+<% if @pictures %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"><%= link_to_sort 'name' %></th>
+        <th scope="col"><%= link_to_sort 'description' %></th>
+        <th scope="col">Category</th>
+        <th scope="col">Contributors</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @pictures.each do |picture| %>
+        <tr>
+          <%=
+            render(
+              partial: 'admin/shared/table/name',
+              locals: {
+                resource: picture, path: picture_path(picture)
+              }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/description',
+              locals: { resource: picture }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/category',
+              locals: { category: picture.category }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/contributor_profiles',
+              locals: { contributor_profiles: picture.contributor_profiles }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/edit_button',
+              locals: {
+                resource: picture,
+                path: edit_admin_picture_path(picture)
+              }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/delete_button',
+              locals: { resource: picture, resource_name: 'picture' }
+            )
+          %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= paginate @pictures, views_prefix: 'admin' %>

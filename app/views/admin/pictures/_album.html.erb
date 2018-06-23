@@ -1,0 +1,13 @@
+<div class="form-group">
+  <%= f.label :album_id, 'Album' %>
+  <%=
+    f.collection_select(
+      :album_id,
+      albums,
+      :id,
+      :name_and_id,
+      { include_blank: true },
+      { class: 'form-control' }
+    )
+  %>
+</div>
