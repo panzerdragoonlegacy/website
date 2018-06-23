@@ -1,4 +1,5 @@
 class Admin::LinksController < ApplicationController
+  include Sortable
   layout 'admin'
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_link, except: [:index, :new, :create]
@@ -87,9 +88,5 @@ class Admin::LinksController < ApplicationController
 
   def sort_column
     Link.column_names.include?(params[:sort]) ? params[:sort] : 'name'
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ?  params[:direction] : 'asc'
   end
 end

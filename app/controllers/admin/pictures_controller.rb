@@ -1,5 +1,6 @@
 class Admin::PicturesController < ApplicationController
   include LoadableForPicture
+  include Sortable
   layout 'admin'
   before_action :load_replaceable_pictures, except: [:index, :destroy]
   before_action :load_albums, except: [:index, :destroy]
@@ -79,9 +80,5 @@ class Admin::PicturesController < ApplicationController
 
   def sort_column
     Picture.column_names.include?(params[:sort]) ? params[:sort] : 'name'
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ?  params[:direction] : 'asc'
   end
 end

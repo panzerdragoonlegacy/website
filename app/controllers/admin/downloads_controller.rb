@@ -1,4 +1,5 @@
 class Admin::DownloadsController < ApplicationController
+  include Sortable
   layout 'admin'
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_download, except: [:index, :new, :create]
@@ -87,9 +88,5 @@ class Admin::DownloadsController < ApplicationController
 
   def sort_column
     Download.column_names.include?(params[:sort]) ? params[:sort] : 'name'
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ?  params[:direction] : 'asc'
   end
 end

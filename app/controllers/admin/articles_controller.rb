@@ -1,4 +1,5 @@
 class Admin::ArticlesController < ApplicationController
+  include Sortable
   layout 'admin'
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_article, except: [:index, :new, :create]
@@ -75,7 +76,7 @@ class Admin::ArticlesController < ApplicationController
       redirect_to @article
     end
   end
-
+  
   def make_current_user_a_contributor
     unless current_user.contributor_profile_id.to_s.in?(
       params[:article][:contributor_profile_ids]
@@ -87,9 +88,5 @@ class Admin::ArticlesController < ApplicationController
 
   def sort_column
     Article.column_names.include?(params[:sort]) ? params[:sort] : 'name'
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ?  params[:direction] : 'asc'
   end
 end
