@@ -1,4 +1,5 @@
 class Admin::MusicTracksController < ApplicationController
+  include LoadableForMusicTrack
   include Sortable
   layout 'admin'
   before_action :load_categories, except: [:show, :destroy]
@@ -59,17 +60,6 @@ class Admin::MusicTracksController < ApplicationController
     params.require(:music_track).permit(
       policy(@music_track || :music_track).permitted_attributes
     )
-  end
-
-  def load_categories
-    @categories = CategoryPolicy::Scope.new(
-      current_user, Category.where(category_type: :music_track).order(:name)
-    ).resolve
-  end
-
-  def load_music_track
-    @music_track = MusicTrack.find_by id: params[:id]
-    authorize @music_track
   end
 
   def redirect_to_music_track

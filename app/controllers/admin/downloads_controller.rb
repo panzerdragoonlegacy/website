@@ -1,4 +1,5 @@
 class Admin::DownloadsController < ApplicationController
+  include LoadableForDownload
   include Sortable
   layout 'admin'
   before_action :load_categories, except: [:show, :destroy]
@@ -56,17 +57,6 @@ class Admin::DownloadsController < ApplicationController
     params.require(:download).permit(
       policy(@download || :download).permitted_attributes
     )
-  end
-
-  def load_categories
-    @categories = CategoryPolicy::Scope.new(
-      current_user, Category.where(category_type: :download).order(:name)
-    ).resolve
-  end
-
-  def load_download
-    @download = Download.find_by id: params[:id]
-    authorize @download
   end
 
   def redirect_to_download

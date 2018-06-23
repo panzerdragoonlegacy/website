@@ -1,4 +1,5 @@
 class Admin::LinksController < ApplicationController
+  include LoadableForLink
   include Sortable
   layout 'admin'
   before_action :load_categories, except: [:show, :destroy]
@@ -56,17 +57,6 @@ class Admin::LinksController < ApplicationController
     params.require(:link).permit(
       policy(@link || :link).permitted_attributes
     )
-  end
-
-  def load_categories
-    @categories = CategoryPolicy::Scope.new(
-      current_user, Category.where(category_type: :link).order(:name)
-    ).resolve
-  end
-
-  def load_link
-    @link = Link.find_by id: params[:id]
-    authorize @link
   end
 
   def redirect_to_link

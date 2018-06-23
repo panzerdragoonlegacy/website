@@ -1,7 +1,8 @@
 class Admin::ArticlesController < ApplicationController
+  include LoadableForArticle
   include Sortable
   layout 'admin'
-  before_action :load_categories, except: [:show, :destroy]
+  before_action :load_categories, except: [:destroy]
   before_action :load_article, except: [:index, :new, :create]
   helper_method :sort_column, :sort_direction
 
@@ -56,17 +57,6 @@ class Admin::ArticlesController < ApplicationController
     params.require(:article).permit(
       policy(@article || :article).permitted_attributes
     )
-  end
-
-  def load_categories
-    @categories = CategoryPolicy::Scope.new(
-      current_user, Category.where(category_type: :article).order(:name)
-    ).resolve
-  end
-
-  def load_article
-    @article = Article.find_by url: params[:id]
-    authorize @article
   end
 
   def redirect_to_article
