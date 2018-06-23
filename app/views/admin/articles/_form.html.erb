@@ -1,99 +1,31 @@
 <%= form_for [:admin, @article], html: { multipart: true } do |f| %>
   <%= render 'shared/error_messages', target: @article %>
-  <div class="form-group">
-    <%= f.label :category_id, 'Category*' %>
-    <%=
-      f.collection_select(
-        :category_id,
-        @categories,
-        :id,
-        :name,
-        { include_blank: true },
-        { class: 'form-control' }
-      )
-    %>
-  </div>
-  <div class="form-group">
-    <%= f.label :contributor_profile_ids, 'Contributors*' %>
-    <%=
-      f.collection_select(
-        :contributor_profile_ids,
-        ContributorProfile.order(:name),
-        :id,
-        :name,
-        { selected: @article.contributor_profile_ids, include_blank: true },
-        { multiple: true, class: 'form-control' }
-      )
-    %>
-  </div>
-  <div class="form-group">
-    <%= f.label :name, 'Name*' %>
-    <%= f.text_field :name, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :description, 'Description*' %>
-    <%= f.text_area :description, rows: 3, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :content, 'Content*' %>
-    <%= f.text_area :content, rows: 15, class: 'data_entry form-control' %>
-    <small>
-      <%=
-        image_tag(
-          'markdown-mark.png',
-          alt: 'Markdown Mark',
-          width: '30px',
-          height: '18px'
-        )
-      %>
-      You may use a <a href="/markdown-syntax-guide" target="_blank">limited
-      subset of Markdown</a> to format the page's content.
-    </small>
-  </div>
-  <div class="form-group">
-    <label>Illustrations</label>
-    <%= f.fields_for :illustrations do |illustration_fields| %>
-      <%= render 'illustration_fields', f: illustration_fields %>
-    <% end %>
-    <p>
-      <%=
-        link_to_add_association(
-          'Add Illustration',
-          f,
-          :illustrations,
-          role: 'button',
-          class: 'btn btn-success'
-        )
-      %>
-    </p>
-  </div>
-  <div class="form-group">
-    <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
-    <%=
-      f.collection_select(
-        :encyclopaedia_entry_ids,
-        EncyclopaediaEntry.order(:name),
-        :id,
-        :name,
-        { selected: @article.encyclopaedia_entry_ids, include_blank: true },
-        { multiple: true, class: 'form-control' }
-      )
-    %>
-  </div>
-  <% if policy(@article).permitted_attributes.include? :publish %>
-    <div class="form-group form-check">
-      <%= f.check_box :publish, class: 'form-check-input' %>
-      <%= f.label :publish, 'Publish?', class: 'form-check-label' %>
-    </div>
-  <% end %>
-  <div>
-    <%= f.submit 'Save and View', class: 'btn btn-primary' %>
-    <%=
-      f.submit(
-        'Save and Continue Editing',
-        name: :continue_editing,
-        class: 'btn btn-primary'
-      )
-    %>
-  </div>
+  <%=
+    render(
+      partial: 'admin/components/category',
+      locals: { f: f, categories: @categories }
+    )
+  %>
+  <%=
+    render(
+      partial: 'admin/components/contributors',
+      locals: {
+        f: f, contributor_profile_ids: @article.contributor_profile_ids
+      }
+    )
+  %>
+  <%= render partial: 'admin/components/name', locals: { f: f } %>
+  <%= render partial: 'admin/components/description', locals: { f: f } %>
+  <%= render partial: 'admin/components/content', locals: { f: f } %>
+  <%= render partial: 'admin/components/illustrations', locals: { f: f } %>
+  <%=
+    render(
+      partial: 'admin/components/encyclopaedia_entries',
+      locals: {
+        f: f, encyclopaedia_entry_ids: @article.encyclopaedia_entry_ids
+      }
+    )
+  %>
+  <%= render partial: 'admin/components/publish', locals: { f: f } %>
+  <%= render partial: 'admin/components/save_buttons', locals: { f: f } %>
 <% end %>

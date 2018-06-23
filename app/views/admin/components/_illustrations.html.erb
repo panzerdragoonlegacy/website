@@ -1,0 +1,23 @@
+<div class="form-group">
+  <label>Illustrations</label>
+  <%= f.fields_for :illustrations do |illustration| %>
+    <%=
+      render(
+        partial: 'admin/components/illustration',
+        locals: { f: illustration }
+      )
+    %>
+  <% end %>
+  <p>
+    <%=
+      link_to_add_association(
+        'Add Illustration',
+        f,
+        :illustrations,
+        role: 'button',
+        class: 'btn btn-success',
+        partial: 'admin/components/illustration'
+      )
+    %>
+  </p>
+</div>

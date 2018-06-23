@@ -1,0 +1,13 @@
+<div class="form-group">
+  <%= f.label :contributor_profile_ids, 'Contributors*' %>
+  <%=
+    f.collection_select(
+      :contributor_profile_ids,
+      ContributorProfile.order(:name),
+      :id,
+      :name,
+      { selected: contributor_profile_ids, include_blank: true },
+      { multiple: true, class: 'form-control' }
+    )
+  %>
+</div>
