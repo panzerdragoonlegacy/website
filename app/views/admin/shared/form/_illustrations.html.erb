@@ -3,7 +3,7 @@
   <%= f.fields_for :illustrations do |illustration| %>
     <%=
       render(
-        partial: 'admin/components/illustration',
+        partial: 'admin/shared/form/illustration',
         locals: { f: illustration }
       )
     %>
@@ -16,7 +16,7 @@
         :illustrations,
         role: 'button',
         class: 'btn btn-success',
-        partial: 'admin/components/illustration'
+        partial: 'admin/shared/form/illustration'
       )
     %>
   </p>
