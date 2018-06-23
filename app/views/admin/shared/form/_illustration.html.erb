@@ -6,7 +6,7 @@
     <div class="card-body">
       <h3 class="card-title">New Illustration</h3>
       <div class="alert alert-warning" role="alert">
-        <%= render 'shared/image_type_warning' %>
+        <%= render 'admin/shared/form/image_type_warning' %>
       </div>
       <%= f.file_field :illustration %>
     </div>
@@ -17,7 +17,7 @@
     <div class="card-body">
       <% unless is_jpeg(f.object.illustration.url) %>
         <div class="alert alert-danger" role="alert">
-          <%= render 'shared/image_type_warning' %>
+          <%= render 'admim/shared/form/image_type_warning' %>
         </div>
       <% end %>
       <p class="card-title"><%= f.object.illustration_file_name %></p>
