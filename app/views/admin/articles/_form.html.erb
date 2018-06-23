@@ -1,97 +1,91 @@
 <%= form_for [:admin, @article], html: { multipart: true } do |f| %>
   <%= render 'shared/error_messages', target: @article %>
-  <div>
-    <div>
-      <%= f.label :category_id, 'Category*' %>
-    </div>
-    <div>
-      <%=
-        f.collection_select(
-          :category_id,
-          @categories,
-          :id,
-          :name,
-          { include_blank: true }
-        )
-      %>
-    </div>
+  <div class="form-group">
+    <%= f.label :category_id, 'Category*' %>
+    <%=
+      f.collection_select(
+        :category_id,
+        @categories,
+        :id,
+        :name,
+        { include_blank: true },
+        { class: 'form-control' }
+      )
+    %>
   </div>
-  <div>
-    <div>
-      <%= f.label :contributor_profile_ids, 'Contributors*' %>
-    </div>
-    <div>
-      <%=
-        f.collection_select(
-          :contributor_profile_ids,
-          ContributorProfile.order(:name),
-          :id,
-          :name,
-          { selected: @article.contributor_profile_ids, include_blank: true },
-          { multiple: true }
-        )
-      %>
-    </div>
+  <div class="form-group">
+    <%= f.label :contributor_profile_ids, 'Contributors*' %>
+    <%=
+      f.collection_select(
+        :contributor_profile_ids,
+        ContributorProfile.order(:name),
+        :id,
+        :name,
+        { selected: @article.contributor_profile_ids, include_blank: true },
+        { multiple: true, class: 'form-control' }
+      )
+    %>
   </div>
-  <div>
-    <div>
-      <%= f.label :name, 'Name*' %>
-    </div>
-    <div>
-      <%= f.text_field :name %>
-    </div>
+  <div class="form-group">
+    <%= f.label :name, 'Name*' %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
-  <div>
-    <div>
-      <%= f.label :description, 'Description*' %>
-    </div>
-    <div>
-      <%= f.text_area :description, rows: 3 %>
-    </div>
+  <div class="form-group">
+    <%= f.label :description, 'Description*' %>
+    <%= f.text_area :description, rows: 3, class: 'form-control' %>
   </div>
-  <div>
-    <div>
-      <%= f.label :content, 'Content*' %>
-    </div>
-    <div>
-      <%= f.text_area :content, rows: 15, class: 'data_entry' %>
-      <p>
-        (You may use a <a href="/markdown-syntax-guide" target="_blank">limited
-        subset of Markdown</a> to format the article's content)
-      </p>
-    </div>
+  <div class="form-group">
+    <%= f.label :content, 'Content*' %>
+    <%= f.text_area :content, rows: 15, class: 'data_entry form-control' %>
+    <p>
+      (You may use a <a href="/markdown-syntax-guide" target="_blank">limited
+      subset of Markdown</a> to format the article's content)
+    </p>
   </div>
-  <div>
+  <div class="form-group">
     <label>Illustrations</label>
     <%= f.fields_for :illustrations do |illustration_fields| %>
       <%= render 'illustration_fields', f: illustration_fields %>
     <% end %>
-    <p><%= link_to_add_association 'Add Illustration', f, :illustrations %></p>
-  </div>
-  <div>
-    <div>
-      <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
-    </div>
-    <div>
+    <p>
       <%=
-        f.collection_select(
-          :encyclopaedia_entry_ids,
-          EncyclopaediaEntry.order(:name),
-          :id,
-          :name,
-          { selected: @article.encyclopaedia_entry_ids, include_blank: true },
-          { multiple: true }
+        link_to_add_association(
+          'Add Illustration',
+          f,
+          :illustrations,
+          role: 'button',
+          class: 'btn btn-success'
         )
       %>
-    </div>
+    </p>
+  </div>
+  <div class="form-group">
+    <%= f.label :encyclopaedia_entry_ids, 'Related Encyclopaedia Entries' %>
+    <%=
+      f.collection_select(
+        :encyclopaedia_entry_ids,
+        EncyclopaediaEntry.order(:name),
+        :id,
+        :name,
+        { selected: @article.encyclopaedia_entry_ids, include_blank: true },
+        { multiple: true, class: 'form-control' }
+      )
+    %>
   </div>
   <% if policy(@article).permitted_attributes.include? :publish %>
-    <div>
-      <%= f.check_box :publish %> <%= f.label :publish, 'Publish?' %>
+    <div class="form-group form-check">
+      <%= f.check_box :publish, class: 'form-check-input' %>
+      <%= f.label :publish, 'Publish?', class: 'form-check-label' %>
     </div>
   <% end %>
   <div>
-    <%= f.submit 'Save and View' %>
-    <%= f.submit 'Save and Continue Editing', name: :continue_editing %>
+    <%= f.submit 'Save and View', class: 'btn btn-primary' %>
+    <%=
+      f.submit(
+        'Save and Continue Editing',
+        name: :continue_editing,
+        class: 'btn btn-primary'
+      )
+    %>
   </div>
 <% end %>

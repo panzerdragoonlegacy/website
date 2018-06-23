@@ -1,14 +1,27 @@
-<div class="illustration nested-fields">
+<div
+  class="nested-fields card"
+  style="width: 390px; margin-bottom: 20px;"
+>
   <% if f.object.illustration_file_name.blank? %>
-    <%= f.file_field :illustration %>
+   <div class="card-body">
+      <h3 class="card-title">New Illustration</h3>
+      <%= f.file_field :illustration %>
+   </div>
   <% else %>
-    <%= image_tag f.object.illustration.url(:embedded) %>
-    <a class="btn btn-secondary insert_tag" href="#" role="button">
-      Insert Markdown Tag
-    </a>
-    <p>Filename: <%= f.object.illustration_file_name %></p>
-    <%= link_to 'Popover Image', f.object.illustration.url(:popover) %> |
-    <%= link_to 'Original Image', f.object.illustration.url %> |
+    <%= image_tag f.object.illustration.url, class: 'card-img-top' %>
+    <div class="card-body">
+      <p class="card-title"><%= f.object.illustration_file_name %></p>
+      <a class="btn btn-secondary insert_tag" href="#" role="button">
+        Insert Markdown Tag
+      </a>
+      <%=
+        link_to_remove_association(
+          'Remove Illustration',
+          f,
+          role: 'button',
+          class: 'btn btn-danger'
+        )
+      %>
+    </div>
   <% end %>
-  <%= link_to_remove_association 'Remove Illustration', f %><br />
 </div>

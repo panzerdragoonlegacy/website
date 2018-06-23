@@ -101,9 +101,9 @@ $(document).on('ready page:load', function() {
     });
 
     $(".insert_tag").click(function (event) {
-      // Get parent element and then get its child elements of type "img" to retrieve their image text 
+      // Get grandparent element and then get its child elements of type "img" to retrieve their image text
       // this makes sure we get the image element that resides in the same parent div of the button we clicked.
-      var imageText = $(this).parent().children("img").attr('src').split('/').pop();
+      var imageText = $(this).parent().parent().children("img").attr('src').split('/').pop();
 
       // Removes question mark and numbers from after the .jpg. 
       imageText = imageText.substring(0, imageText.indexOf("jpg") + "jpg".length);
