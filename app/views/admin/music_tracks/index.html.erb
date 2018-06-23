@@ -1,0 +1,76 @@
+<% title 'Music Tracks' %>
+
+<%=
+  render(
+    partial: 'admin/shared/table/new_button',
+    locals: {
+      resource: MusicTrack,
+      resource_name: 'Music Track',
+      path: new_admin_music_track_path
+    }
+  )
+%>
+
+<% if @music_tracks %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"><%= link_to_sort 'name' %></th>
+        <th scope="col"><%= link_to_sort 'description' %></th>
+        <th scope="col">Category</th>
+        <th scope="col">Contributors</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @music_tracks.each do |music_track| %>
+        <tr>
+          <%=
+            render(
+              partial: 'admin/shared/table/name',
+              locals: {
+                resource: music_track, path: music_track_path(music_track)
+              }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/description',
+              locals: { resource: music_track }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/category',
+              locals: { category: music_track.category }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/contributor_profiles',
+              locals: { contributor_profiles: music_track.contributor_profiles }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/edit_button',
+              locals: {
+                resource: music_track,
+                path: edit_admin_music_track_path(music_track)
+              }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/delete_button',
+              locals: { resource: music_track, resource_name: 'music track' }
+            )
+          %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= paginate @music_tracks, views_prefix: 'admin' %>

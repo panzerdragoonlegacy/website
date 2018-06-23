@@ -1,0 +1,9 @@
+<div class="form-group">
+  <%= f.label :track_number, 'Track Number*' %>
+  <%=
+    f.number_field(
+      :track_number,
+      { min: 0, max: 50, class: 'form-control' }
+    )
+  %>
+</div>

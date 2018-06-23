@@ -6,7 +6,7 @@ class Admin::DownloadsController < ApplicationController
 
   def index
     @downloads = policy_scope(
-      Article.order(sort_column + ' ' + sort_direction).page(params[:page])
+      Download.order(sort_column + ' ' + sort_direction).page(params[:page])
     )
   end
 

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :articles
     resources :downloads
     resources :links
+    resources :music_tracks, path: 'music-tracks'
   end
 
   resources :searches

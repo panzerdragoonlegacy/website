@@ -1,0 +1,13 @@
+<div class="form-group">
+  <%= f.label :mp3_music_track, 'MP3 Music Track*' %>
+  <div class="alert alert-warning" role="alert">
+    <small>
+      MP3 Music Track files must be of type MP3 (.mp3). Other formats are not
+      supported and will prevent this form from being saved.
+    </small>
+  </div>
+  <% if @music_track.mp3_music_track? %>
+    <p>File has already been uploaded. Replace file?</p>
+  <% end %>
+  <%= f.file_field :mp3_music_track, class: 'form-control' %>
+</div>
