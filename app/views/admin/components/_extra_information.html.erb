@@ -1,0 +1,16 @@
+<div class="form-group">
+  <%= f.label :information, 'Extra Information' %>
+  <%= f.text_area :information, rows: 10, class: 'form-control' %>
+  <small>
+    <%=
+      image_tag(
+        'markdown-mark.png',
+        alt: 'Markdown Mark',
+        width: '30px',
+        height: '18px'
+      )
+    %>
+    You may use a <a href="/markdown-syntax-guide" target="_blank">limited
+    subset of Markdown</a> to format the page's extra information.
+  </small>
+</div>

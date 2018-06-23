@@ -1,5 +1,5 @@
-<%= form_for [:admin, @article], html: { multipart: true } do |f| %>
-  <%= render 'shared/error_messages', target: @article %>
+<%= form_for [:admin, @download], html: { multipart: true } do |f| %>
+  <%= render 'shared/error_messages', target: @download %>
   <%=
     render(
       partial: 'admin/components/category',
@@ -10,23 +10,23 @@
     render(
       partial: 'admin/components/contributors',
       locals: {
-        f: f, contributor_profile_ids: @article.contributor_profile_ids
+        f: f, contributor_profile_ids: @download.contributor_profile_ids
       }
     )
   %>
+  <%= render 'download', f: f %>
   <%= render partial: 'admin/components/name', locals: { f: f } %>
   <%= render partial: 'admin/components/description', locals: { f: f } %>
-  <%= render partial: 'admin/components/content', locals: { f: f } %>
-  <%= render partial: 'admin/components/illustrations', locals: { f: f } %>
+  <%= render partial: 'admin/components/extra_information', locals: { f: f } %>
   <%=
     render(
       partial: 'admin/components/encyclopaedia_entries',
       locals: {
-        f: f, encyclopaedia_entry_ids: @article.encyclopaedia_entry_ids
+        f: f, encyclopaedia_entry_ids: @download.encyclopaedia_entry_ids
       }
     )
   %>
-  <% if policy(@article).permitted_attributes.include? :publish %>
+  <% if policy(@download).permitted_attributes.include? :publish %>
     <%= render partial: 'admin/components/publish', locals: { f: f } %>
   <% end %>
   <%= render partial: 'admin/components/save_buttons', locals: { f: f } %>
