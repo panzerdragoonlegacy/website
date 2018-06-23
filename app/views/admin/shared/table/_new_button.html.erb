@@ -1,0 +1,11 @@
+
+<% if policy(resource).new? %>
+  <%=
+    link_to(
+      "New #{resource_name}",
+      path,
+      class: 'btn btn-primary mb-3',
+      role: 'button'
+    )
+  %>
+<% end %>

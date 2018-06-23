@@ -1,15 +1,13 @@
 <% title 'Articles' %>
 
-<% if policy(Article).new? %>
-  <%=
-    link_to(
-      'New Article',
-      new_admin_article_path,
-      class: 'btn btn-primary mb-3',
-      role: 'button'
-    )
-  %>
-<% end %>
+<%=
+  render(
+    partial: 'admin/shared/table/new_button',
+    locals: {
+      resource: Article, resource_name: 'Article', path: new_admin_article_path
+    }
+  )
+%>
 
 <% if @articles %>
   <table class="table">
@@ -26,58 +24,44 @@
     <tbody>
       <% @articles.each do |article| %>
         <tr>
-          <td><%= link_to article.name, article_path(article) %></td>
-          <td><%= article.description %></td>
-          <td>
-            <%=
-              link_to(
-                article.category.name,
-                category_path(article.category)
-              )
-            %>
-          </td>
-          <td>
-            <ul>
-              <% article.contributor_profiles.each do |contributor_profile| %>
-                <li>
-                  <%=
-                    link_to(
-                      contributor_profile.name,
-                      contributor_profile_path(contributor_profile)
-                    )
-                  %>
-                </li>
-              <% end %>
-            </ul>
-          </td>
-          <td>
-            <% if policy(article).edit? %>
-              <%=
-                link_to(
-                  'Edit',
-                  edit_admin_article_path(article),
-                  class: 'btn btn-warning',
-                  role: 'button'
-                )
-               %>
-            <% end %>
-          </td>
-          <td>
-            <% if policy(article).destroy? %>
-              <%=
-                link_to(
-                  'Delete',
-                  [:admin, article],
-                  data: {
-                    confirm: 'Are you sure you want to delete this article?'
-                  },
-                  method: :delete,
-                  class: 'btn btn-danger',
-                  role: 'button'
-                )
-              %>
-            <% end %>
-          </td>
+          <%=
+            render(
+              partial: 'admin/shared/table/name',
+              locals: { resource: article, path: article_path(article) }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/description',
+              locals: { resource: article }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/category',
+              locals: { category: article.category }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/contributor_profiles',
+              locals: { contributor_profiles: article.contributor_profiles }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/edit_button',
+              locals: {
+                resource: article, path: edit_admin_article_path(article)
+              }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/delete_button',
+              locals: { resource: article, resource_name: 'article' }
+            )
+          %>
         </tr>
       <% end %>
     </tbody>

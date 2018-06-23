@@ -1,0 +1,16 @@
+<td>
+  <% if policy(resource).destroy? %>
+    <%=
+      link_to(
+        'Delete',
+        [:admin, resource],
+        data: {
+          confirm: "Are you sure you want to delete this #{resource_name}?"
+        },
+        method: :delete,
+        class: 'btn btn-danger',
+        role: 'button'
+      )
+    %>
+  <% end %>
+</td>

@@ -1,0 +1,12 @@
+<td>
+  <% if policy(resource).edit? %>
+    <%=
+      link_to(
+        'Edit',
+        path,
+        class: 'btn btn-warning',
+        role: 'button'
+      )
+      %>
+  <% end %>
+</td>

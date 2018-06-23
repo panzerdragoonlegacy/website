@@ -1,0 +1,14 @@
+<td>
+  <ul>
+    <% contributor_profiles.each do |contributor_profile| %>
+      <li>
+        <%=
+          link_to(
+            contributor_profile.name,
+            contributor_profile_path(contributor_profile)
+          )
+        %>
+      </li>
+    <% end %>
+  </ul>
+</td>
