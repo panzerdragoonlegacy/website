@@ -1,20 +1,10 @@
-class LinksController < ApplicationController
+class Admin::LinksController < ApplicationController
+  layout 'admin'
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_link, except: [:index, :new, :create]
 
   def index
-    if params[:contributor_profile_id]
-      load_contributors_links
-    else
-      @links = policy_scope(Link.order(:name).page(params[:page]))
-    end
-  end
-
-  def show
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
-      current_user,
-      @link.encyclopaedia_entries.order(:name)
-    ).resolve
+    @links = policy_scope(Link.order(:name).page(params[:page]))
   end
 
   def new
@@ -53,46 +43,33 @@ class LinksController < ApplicationController
 
   def destroy
     @link.destroy
-    redirect_to links_path, notice: 'Successfully destroyed link.'
+    redirect_to admin_links_path, notice: 'Successfully destroyed link.'
   end
 
   private
 
   def link_params
-    pparams.require(:link).permit(
+    params.require(:link).permit(
       policy(@link || :link).permitted_attributes
     )
   end
 
   def load_categories
     @categories = CategoryPolicy::Scope.new(
-      current_user,
-      Category.where(category_type: :link).order(:name)
+      current_user, Category.where(category_type: :link).order(:name)
     ).resolve
   end
 
   def load_link
-    @link = Link.find params[:id]
+    @link = Link.find_by id: params[:id]
     authorize @link
-  end
-
-  def load_contributors_links
-    @contributor_profile = ContributorProfile.find_by(
-      url: params[:contributor_profile_id]
-    )
-    raise 'Contributor profile not found.' unless @contributor_profile
-    @links = policy_scope(
-      Link.joins(:contributions).where(
-        contributions: { contributor_profile_id: @contributor_profile.id }
-      ).order(:name).page(params[:page])
-    )
   end
 
   def redirect_to_link
     if params[:continue_editing]
-      redirect_to edit_link_path(@link)
+      redirect_to edit_admin_link_path(@link)
     else
-      redirect_to links_path
+      redirect_to admin_links_path
     end
   end
 

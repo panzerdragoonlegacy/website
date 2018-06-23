@@ -19,4 +19,16 @@ class LinkPolicy < ApplicationPolicy
     return true if user && user.administrator?
     record.category.publish?
   end
+
+  def permitted_attributes
+    [
+      :category_id,
+      :name,
+      :url,
+      :partner_site,
+      :description,
+      contributor_profile_ids: [],
+      encyclopaedia_entry_ids: []
+    ]
+  end
 end

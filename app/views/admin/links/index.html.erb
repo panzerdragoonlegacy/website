@@ -1,0 +1,66 @@
+<% title 'Links' %>
+
+<%=
+  render(
+    partial: 'admin/shared/table/new_button',
+    locals: {
+      resource: Link, resource_name: 'Link', path: new_admin_link_path
+    }
+  )
+%>
+
+<% if @links %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Category</th>
+        <th scope="col">Contributors</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @links.each do |link| %>
+        <tr>
+          <td><%= link_to link.name, link.url %></td>
+          <%=
+            render(
+              partial: 'admin/shared/table/description',
+              locals: { resource: link }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/category',
+              locals: { category: link.category }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/contributor_profiles',
+              locals: { contributor_profiles: link.contributor_profiles }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/edit_button',
+              locals: {
+                resource: link, path: edit_admin_link_path(link)
+              }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/delete_button',
+              locals: { resource: link, resource_name: 'link' }
+            )
+          %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= paginate @links, views_prefix: 'admin' %>
