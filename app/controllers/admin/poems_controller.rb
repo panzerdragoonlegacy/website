@@ -1,22 +1,14 @@
-class PoemsController < ApplicationController
+class Admin::PoemsController < ApplicationController
   include LoadableForPoem
+  include Sortable
+  layout 'admin'
   before_action :load_poem, except: [:index, :new, :create]
+  helper_method :sort_column, :sort_direction
 
   def index
-    if params[:contributor_profile_id]
-      load_contributors_poems
-    elsif params[:filter] == 'draft'
-      load_draft_poems
-    else
-      @poems = policy_scope(Poem.order(:name).page(params[:page]))
-    end
-  end
-
-  def show
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
-      current_user,
-      @poem.encyclopaedia_entries.order(:name)
-    ).resolve
+    @poems = policy_scope(
+      Poem.order(sort_column + ' ' + sort_direction).page(params[:page])
+    )
   end
 
   def new
@@ -49,23 +41,25 @@ class PoemsController < ApplicationController
 
   def destroy
     @poem.destroy
-    redirect_to poems_path, notice: 'Successfully destroyed poem.'
+    redirect_to admin_poems_path, notice: 'Successfully destroyed poem.'
   end
 
   private
 
   def poem_params
-    params.require(:poem).permit(policy(@poem || :poem).permitted_attributes)
+    params.require(:poem).permit(
+      policy(@poem || :poem).permitted_attributes
+    )
   end
 
   def redirect_to_poem
     if params[:continue_editing]
-      redirect_to edit_poem_path(@poem)
+      redirect_to edit_admin_poem_path(@poem)
     else
       redirect_to @poem
     end
   end
-
+  
   def make_current_user_a_contributor
     unless current_user.contributor_profile_id.to_s.in?(
       params[:poem][:contributor_profile_ids]
@@ -73,5 +67,9 @@ class PoemsController < ApplicationController
       params[:poem][:contributor_profile_ids] <<
         current_user.contributor_profile_id
     end
+  end
+
+  def sort_column
+    Poem.column_names.include?(params[:sort]) ? params[:sort] : 'name'
   end
 end

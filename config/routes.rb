@@ -9,10 +9,13 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/', to: 'home#index'
+    
     resources :articles
     resources :encyclopaedia_entries
     resources :news_entries
     resources :pages
+    resources :poems
+
     resources :downloads
     resources :links
     resources :music_tracks, path: 'music-tracks'
