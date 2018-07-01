@@ -15,6 +15,7 @@
   <table class="table">
     <thead>
       <tr>
+        <th scope="col"></th>
         <th scope="col"><%= link_to_sort 'name' %></th>
         <th scope="col"><%= link_to_sort 'description' %></th>
         <th scope="col">Category</th>
@@ -29,6 +30,9 @@
     <tbody>
       <% @pictures.each do |picture| %>
         <tr>
+          <td>
+            <%= link_to picture_tag(picture, :thumbnail), picture %>
+          </td>
           <%=
             render(
               partial: 'admin/shared/table/name',
