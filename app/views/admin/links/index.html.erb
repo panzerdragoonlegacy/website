@@ -14,7 +14,6 @@
     <thead>
       <tr>
         <th scope="col"><%= link_to_sort 'name' %></th>
-        <th scope="col"><%= link_to_sort 'description' %></th>
         <th scope="col">Category</th>
         <th scope="col">Contributors</th>
         <th scope="col"><%= link_to_sort 'created_at', 'Created' %></th>
@@ -27,12 +26,6 @@
       <% @links.each do |link| %>
         <tr>
           <td><%= link_to link.name, link.url %></td>
-          <%=
-            render(
-              partial: 'admin/shared/table/description',
-              locals: { resource: link }
-            )
-          %>
           <%=
             render(
               partial: 'admin/shared/table/category',

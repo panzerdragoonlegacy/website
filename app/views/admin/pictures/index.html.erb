@@ -17,7 +17,6 @@
       <tr>
         <th scope="col"></th>
         <th scope="col"><%= link_to_sort 'name' %></th>
-        <th scope="col"><%= link_to_sort 'description' %></th>
         <th scope="col">Category</th>
         <th scope="col">Contributors</th>
         <th scope="col"><%= link_to_sort 'created_at', 'Created' %></th>
@@ -39,12 +38,6 @@
               locals: {
                 resource: picture, path: picture_path(picture)
               }
-            )
-          %>
-          <%=
-            render(
-              partial: 'admin/shared/table/description',
-              locals: { resource: picture }
             )
           %>
           <%=

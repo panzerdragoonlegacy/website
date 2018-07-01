@@ -16,7 +16,6 @@
     <thead>
       <tr>
         <th scope="col"><%= link_to_sort 'name' %></th>
-        <th scope="col"><%= link_to_sort 'description' %></th>
         <th scope="col">Category</th>
         <th scope="col">Contributors</th>
         <th scope="col"><%= link_to_sort 'created_at', 'Created' %></th>
@@ -35,12 +34,6 @@
               locals: {
                 resource: music_track, path: music_track_path(music_track)
               }
-            )
-          %>
-          <%=
-            render(
-              partial: 'admin/shared/table/description',
-              locals: { resource: music_track }
             )
           %>
           <%=

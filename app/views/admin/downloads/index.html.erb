@@ -16,7 +16,6 @@
     <thead>
       <tr>
         <th scope="col"><%= link_to_sort 'name' %></th>
-        <th scope="col"><%= link_to_sort 'description' %></th>
         <th scope="col">Category</th>
         <th scope="col">Contributors</th>
         <th scope="col"><%= link_to_sort 'created_at', 'Created' %></th>
@@ -33,12 +32,6 @@
             render(
               partial: 'admin/shared/table/name',
               locals: { resource: download, path: download_path(download) }
-            )
-          %>
-          <%=
-            render(
-              partial: 'admin/shared/table/description',
-              locals: { resource: download }
             )
           %>
           <%=
