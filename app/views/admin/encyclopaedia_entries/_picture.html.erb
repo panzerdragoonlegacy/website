@@ -1,0 +1,10 @@
+<div class="form-group">
+  <%= f.label :encyclopaedia_entry_picture, 'Encyclopaedia Entry Picture*' %>
+  <div class="alert alert-warning" role="alert">
+    <%= render 'admin/shared/form/image_type_warning' %>
+  </div>
+  <% if encyclopaedia_entry.encyclopaedia_entry_picture? %>
+    <p>File has already been uploaded. Replace file?</p>
+  <% end %>
+  <%= f.file_field :encyclopaedia_entry_picture, class: 'form-control' %>
+</div>
