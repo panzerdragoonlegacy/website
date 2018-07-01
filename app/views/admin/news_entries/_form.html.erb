@@ -1,0 +1,24 @@
+<%= form_for [:admin, @news_entry], html: { multipart: true } do |f| %>
+  <%= render 'admin/shared/form/error_messages', target: @news_entry %>
+  <%=
+    render(
+      partial: 'author',
+      locals: { f: f, contributor_profiles: @contributor_profiles }
+    )
+  %>
+  <%=
+    render(
+      partial: 'picture',
+      locals: {
+        f: f,
+        news_entry: @news_entry
+      }
+    )
+  %>
+  <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
+  <%= render partial: 'admin/shared/form/content', locals: { f: f } %>
+  <% if policy(@news_entry).permitted_attributes.include? :publish %>
+    <%= render partial: 'admin/shared/form/publish', locals: { f: f } %>
+  <% end %>
+  <%= render partial: 'admin/shared/form/save_buttons', locals: { f: f } %>
+<% end %>

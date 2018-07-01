@@ -1,0 +1,106 @@
+<% title 'News Entries' %>
+
+<% if policy(NewsEntry).new? %>
+  <%=
+    link_to(
+      'New News Entry',
+      new_admin_news_entry_path,
+      class: 'btn btn-primary mb-3',
+      role: 'button'
+    )
+  %>
+<% end %>
+
+<% if @news_entries %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col"><%= link_to_sort 'name' %></th>
+        <th scope="col">Author</th>
+        <th scope="col"><%= link_to_sort 'created_at', 'Created' %></th>
+        <th scope="col"><%= link_to_sort 'updated_at', 'Modified' %></th>
+        <th scope="col"><%= link_to_sort 'updated_at', 'First Published' %></th>
+        <th scope="col"><%= link_to_sort 'publish', 'Published' %></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @news_entries.each do |news_entry| %>
+        <tr>
+          <td>
+            <% if news_entry.news_entry_picture.present? %>
+              <%=
+                link_to(
+                  show_news_entry_picture(
+                    news_entry, :thumbnail
+                  ),
+                  news_entry
+                )
+              %>
+            <% end %>
+          </td>
+          <%=
+            render(
+              partial: 'admin/shared/table/name',
+              locals: {
+                resource: news_entry,
+                path: news_entry_path(news_entry)
+              }
+            )
+          %>
+          <td>
+            <%=
+              link_to(
+                news_entry.contributor_profile.name,
+                contributor_profile_path(news_entry.contributor_profile)
+              )
+            %>
+          </td>
+          <%=
+            render(
+              partial: 'admin/shared/table/created_at',
+              locals: { resource: news_entry }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/updated_at',
+              locals: { resource: news_entry }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/published_at',
+              locals: { resource: news_entry }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/published',
+              locals: { resource: news_entry }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/edit_button',
+              locals: {
+                resource: news_entry,
+                path: edit_admin_news_entry_path(news_entry)
+              }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/delete_button',
+              locals: { resource: news_entry, resource_name: 'news_entry' }
+            )
+          %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= paginate @news_entries, views_prefix: 'admin' %>

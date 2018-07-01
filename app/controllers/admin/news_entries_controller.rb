@@ -1,27 +1,30 @@
-class NewsEntriesController < ApplicationController
+class Admin::NewsEntriesController < ApplicationController
   include LoadableForNewsEntry
+  include Sortable
+  layout 'admin'
   before_action :load_news_entry, except: [:index, :new, :create]
+  helper_method :sort_column, :sort_direction
 
   def index
-    if params[:contributor_profile_id]
-      load_contributors_news_entries
-    elsif params[:filter] == 'draft'
-      load_draft_news_entries
-    else
-      @news_entries = policy_scope(
-        NewsEntry.order('published_at desc').page(params[:page])
-      )
-    end
+    @news_entries = policy_scope(
+      NewsEntry.order(sort_column + ' ' + sort_direction).page(params[:page])
+    )
   end
 
   def new
-    @news_entry = NewsEntry.new
+    if params[:category]
+      category = Category.find_by url: params[:category]
+      raise 'Category not found.' unless category.present?
+      @news_entry = NewsEntry.new category: category
+    else
+      @news_entry = NewsEntry.new
+    end
     authorize @news_entry
   end
 
   def create
-    @news_entry = NewsEntry.new news_entry_params
     make_current_user_the_contributor
+    @news_entry = NewsEntry.new news_entry_params
     authorize @news_entry
     if @news_entry.save
       flash[:notice] = 'Successfully created news entry.'
@@ -32,6 +35,7 @@ class NewsEntriesController < ApplicationController
   end
 
   def update
+    params[:news_entry][:contributor_profile_ids] ||= []
     if @news_entry.update_attributes news_entry_params
       flash[:notice] = 'Successfully updated news entry.'
       redirect_to_news_entry
@@ -42,7 +46,10 @@ class NewsEntriesController < ApplicationController
 
   def destroy
     @news_entry.destroy
-    redirect_to news_entries_path, notice: 'Successfully destroyed news entry.'
+    redirect_to(
+      admin_news_entries_path,
+      notice: 'Successfully destroyed news entry.'
+    )
   end
 
   private
@@ -55,16 +62,20 @@ class NewsEntriesController < ApplicationController
 
   def redirect_to_news_entry
     if params[:continue_editing]
-      redirect_to edit_news_entry_path(@news_entry)
+      redirect_to edit_admin_news_entry_path(@news_entry)
     else
       redirect_to @news_entry
     end
   end
-
+  
   def make_current_user_the_contributor
     return if current_user.administrator?
     unless current_user.contributor_profile == @news_entry.contributor_profile
       @news_entry.contributor_profile_id = current_user.contributor_profile_id
     end
+  end
+
+  def sort_column
+    NewsEntry.column_names.include?(params[:sort]) ? params[:sort] : 'name'
   end
 end

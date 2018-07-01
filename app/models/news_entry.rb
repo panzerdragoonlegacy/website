@@ -11,6 +11,7 @@ class NewsEntry < ActiveRecord::Base
   has_attached_file(
     :news_entry_picture,
     styles: {
+      thumbnail: '150x150',
       embedded: '622x250#'
     },
     path: ':rails_root/public/system/:attachment/:id/:style/:filename',
