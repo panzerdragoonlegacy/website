@@ -1,25 +1,48 @@
 <ul class="nav flex-column">
-  <li class="nav-item"><%= link_to 'Home', admin_path %></li>
-  <li class="nav-item">Category Groups</li>
-  <li class="nav-item">Categories</li>
-  <li class="nav-item">Albums</li>
-  <li class="nav-item">Emoticons</li>
-  <li class="nav-item">Pages</li>
-  <li class="nav-item">Sagas</li>
-  <li class="nav-item">Users</li>
-  <li class="nav-item">Contributor Profiles</li>
-  <li class="nav-item">Encyclopaedia Entries</li>
-  <li class="nav-item">News Entries</li>
-  <li class="nav-item"><%= link_to 'Articles', admin_articles_path %></li>
-  <li class="nav-item"><%= link_to 'Downloads', admin_downloads_path %></li>
-  <li class="nav-item"><%= link_to 'Links', admin_links_path %></li>
-  <li class="nav-item">
-    <%= link_to 'Music Tracks', admin_music_tracks_path %>
+  <li class="nav-item mb-3">
+    <ul class="nav flex-column">
+      <li class="nav-item"><%= link_to 'Admin Panel Home', admin_path %></li>
+    </ul>
   </li>
-  <li class="nav-item"><%= link_to 'Pictures', admin_pictures_path %></li>
-  <li class="nav-item">Poems</li>
-  <li class="nav-item">Quizzes</li>
-  <li class="nav-item">Resources</li>
-  <li class="nav-item">Stories</li>
-  <li class="nav-item">Videos</li>
+  <li class="nav-item mb-3">
+    <h5>Categorisation</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item">Category Groups</li>
+      <li class="nav-item">Categories</li>
+      <li class="nav-item">Albums</li>
+      <li class="nav-item">Sagas</li>
+    </ul>
+  </li>
+  <li class="nav-item mb-3">
+    <h5>User Management</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item">Users</li>
+      <li class="nav-item">Contributor Profiles</li>
+    </ul>
+  </li>
+  <li class="nav-item mb-3">
+    <h5>Posts and Pages</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item"><%= link_to 'Articles', admin_articles_path %></li>
+      <li class="nav-item">Encyclopaedia Entries</li>
+      <li class="nav-item">News Entries</li>
+      <li class="nav-item">Pages</li>
+      <li class="nav-item">Poems</li>
+      <li class="nav-item">Resources</li>
+      <li class="nav-item">Stories</li>
+    </ul>
+  </li>
+  <li class="nav-item mb-3">
+    <h5>Multimedia</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item"><%= link_to 'Downloads', admin_downloads_path %></li>
+      <li class="nav-item"><%= link_to 'Links', admin_links_path %></li>
+      <li class="nav-item">
+        <%= link_to 'Music Tracks', admin_music_tracks_path %>
+      </li>
+      <li class="nav-item"><%= link_to 'Pictures', admin_pictures_path %></li>
+      <li class="nav-item">Quizzes</li>
+      <li class="nav-item">Videos</li>
+    </ul>
+  <li>
 </ul>
