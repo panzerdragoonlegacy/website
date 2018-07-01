@@ -1,15 +1,14 @@
-class PagesController < ApplicationController
+class Admin::PagesController < ApplicationController
   include LoadableForPage
+  include Sortable
+  layout 'admin'
   before_action :load_page, except: [:index, :new, :create]
+  helper_method :sort_column, :sort_direction
 
   def index
-    if params[:filter] == 'draft'
-      @pages = policy_scope(
-        Page.where(publish: false).order(:name).page(params[:page])
-      )
-    else
-      @pages = policy_scope(Page.order(:name).page(params[:page]))
-    end
+    @pages = policy_scope(
+      Page.order(sort_column + ' ' + sort_direction).page(params[:page])
+    )
   end
 
   def new
@@ -18,7 +17,7 @@ class PagesController < ApplicationController
   end
 
   def create
-    @page = Page.new(page_params)
+    @page = Page.new page_params
     authorize @page
     if @page.save
       flash[:notice] = 'Successfully created page.'
@@ -29,7 +28,7 @@ class PagesController < ApplicationController
   end
 
   def update
-    if @page.update_attributes(page_params)
+    if @page.update_attributes page_params
       flash[:notice] = 'Successfully updated page.'
       redirect_to_page
     else
@@ -39,7 +38,7 @@ class PagesController < ApplicationController
 
   def destroy
     @page.destroy
-    redirect_to pages_path, notice: 'Successfully destroyed page.'
+    redirect_to admin_pages_path, notice: 'Successfully destroyed page.'
   end
 
   private
@@ -52,9 +51,13 @@ class PagesController < ApplicationController
 
   def redirect_to_page
     if params[:continue_editing]
-      redirect_to edit_page_path(@page)
+      redirect_to edit_admin_page_path(@page)
     else
       redirect_to @page
     end
+  end
+
+  def sort_column
+    Page.column_names.include?(params[:sort]) ? params[:sort] : 'name'
   end
 end

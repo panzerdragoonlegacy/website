@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :articles
     resources :encyclopaedia_entries
     resources :news_entries
+    resources :pages
     resources :downloads
     resources :links
     resources :music_tracks, path: 'music-tracks'
