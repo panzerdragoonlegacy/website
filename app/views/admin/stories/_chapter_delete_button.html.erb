@@ -1,0 +1,16 @@
+<td>
+  <% if policy(story).destroy? %>
+    <%=
+      link_to(
+        'Delete',
+        [:admin, chapter],
+        data: {
+          confirm: "Are you sure you want to delete this chapter?"
+        },
+        method: :delete,
+        class: 'btn btn-danger',
+        role: 'button'
+      )
+    %>
+  <% end %>
+</td>

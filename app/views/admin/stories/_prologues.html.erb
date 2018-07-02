@@ -1,0 +1,11 @@
+<%
+  story.chapters.where(chapter_type: :prologue).order(:number).
+    each do |prologue|
+%>
+  <tr>
+    <td>Prologue <%= prologue.number.to_s %></td>
+    <td><%= link_to prologue.name, chapter_path(prologue) %></td>
+    <%= render 'chapter_edit_button', story: story, chapter: prologue %>
+    <%= render 'chapter_delete_button', story: story, chapter: prologue %>
+  </tr>
+<% end %>

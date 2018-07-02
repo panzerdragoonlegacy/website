@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :pages
     resources :poems
     resources :resources
+    resources :stories
+    resources :chapters
 
     resources :downloads
     resources :links

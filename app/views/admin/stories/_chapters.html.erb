@@ -1,0 +1,17 @@
+<% if story.chapters.count > 0 %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Number</th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render 'prologues', story: story %>
+      <%= render 'regular_chapters', story: story %>
+      <%= render 'epilogues', story: story %>      
+    </tbody>
+  </table>
+<% end %>

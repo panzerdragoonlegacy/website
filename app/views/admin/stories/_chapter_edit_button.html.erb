@@ -1,0 +1,12 @@
+<td>
+  <% if policy(story).edit? %>
+    <%=
+      link_to(
+        'Edit',
+        edit_admin_chapter_path(chapter),
+        class: 'btn btn-warning',
+        role: 'button'
+      )
+      %>
+  <% end %>
+</td>

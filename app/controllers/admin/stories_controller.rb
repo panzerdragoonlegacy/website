@@ -1,23 +1,15 @@
-class StoriesController < ApplicationController
+class Admin::StoriesController < ApplicationController
   include LoadableForStory
-  before_action :load_categories, except: [:show, :destroy]
+  include Sortable
+  layout 'admin'
+  before_action :load_categories, except: [:destroy]
   before_action :load_story, except: [:index, :new, :create]
+  helper_method :sort_column, :sort_direction
 
   def index
-    if params[:contributor_profile_id]
-      load_contributors_stories
-    elsif params[:filter] == 'draft'
-      load_draft_stories
-    else
-      @stories = policy_scope(Story.order(:name).page(params[:page]))
-    end
-  end
-
-  def show
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
-      current_user,
-      @story.encyclopaedia_entries.order(:name)
-    ).resolve
+    @stories = policy_scope(
+      Story.order(sort_column + ' ' + sort_direction).page(params[:page])
+    )
   end
 
   def new
@@ -56,7 +48,7 @@ class StoriesController < ApplicationController
 
   def destroy
     @story.destroy
-    redirect_to stories_path, notice: 'Successfully destroyed story.'
+    redirect_to admin_stories_path, notice: 'Successfully destroyed story.'
   end
 
   private
@@ -69,12 +61,12 @@ class StoriesController < ApplicationController
 
   def redirect_to_story
     if params[:continue_editing]
-      redirect_to edit_story_path(@story)
+      redirect_to edit_admin_story_path(@story)
     else
       redirect_to @story
     end
   end
-
+  
   def make_current_user_a_contributor
     unless current_user.contributor_profile_id.to_s.in?(
       params[:story][:contributor_profile_ids]
@@ -82,5 +74,9 @@ class StoriesController < ApplicationController
       params[:story][:contributor_profile_ids] <<
         current_user.contributor_profile_id
     end
+  end
+
+  def sort_column
+    Story.column_names.include?(params[:sort]) ? params[:sort] : 'name'
   end
 end
