@@ -1,24 +1,15 @@
-class ResourcesController < ApplicationController
+class Admin::ResourcesController < ApplicationController
   include LoadableForResource
-  before_action :load_categories, except: [:index, :show, :destroy]
+  include Sortable
+  layout 'admin'
+  before_action :load_categories, except: [:show, :destroy]
   before_action :load_resource, except: [:index, :new, :create]
+  helper_method :sort_column, :sort_direction
 
   def index
-    if params[:contributor_profile_id]
-      load_contributors_resources
-    elsif params[:filter] == 'draft'
-      load_draft_resources
-    else
-      load_category_groups
-      @resources = policy_scope(Resource.order(:name).page(params[:page]))
-    end
-  end
-
-  def show
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
-      current_user,
-      @resource.encyclopaedia_entries.order(:name)
-    ).resolve
+    @resources = policy_scope(
+      Resource.order(sort_column + ' ' + sort_direction).page(params[:page])
+    )
   end
 
   def new
@@ -57,7 +48,7 @@ class ResourcesController < ApplicationController
 
   def destroy
     @resource.destroy
-    redirect_to resources_path, notice: 'Successfully destroyed resource.'
+    redirect_to admin_resources_path, notice: 'Successfully destroyed resource.'
   end
 
   private
@@ -70,7 +61,7 @@ class ResourcesController < ApplicationController
 
   def redirect_to_resource
     if params[:continue_editing]
-      redirect_to edit_resource_path(@resource)
+      redirect_to edit_admin_resource_path(@resource)
     else
       redirect_to @resource
     end
@@ -83,5 +74,9 @@ class ResourcesController < ApplicationController
       params[:resource][:contributor_profile_ids] <<
         current_user.contributor_profile_id
     end
+  end
+
+  def sort_column
+    Resource.column_names.include?(params[:sort]) ? params[:sort] : 'name'
   end
 end

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :news_entries
     resources :pages
     resources :poems
+    resources :resources
 
     resources :downloads
     resources :links
