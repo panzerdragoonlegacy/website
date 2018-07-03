@@ -21,6 +21,7 @@
         <th scope="col"><%= link_to_sort 'publish', 'Published' %></th>
         <th scope="col"></th>
         <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -70,6 +71,7 @@
               }
             )
           %>
+          <%= render 'chapter_new_button', story: story %>
           <%=
             render(
               partial: 'admin/shared/table/delete_button',
@@ -85,7 +87,7 @@
             <td colspan="7">
               <%= render 'chapters', story: story %>
             </td>
-          </tr>
+          </tr>          
         <% end %>
       <% end %>
     </tbody>

@@ -1,0 +1,12 @@
+<td>
+  <% if policy(story).new? %>
+    <%=
+      link_to(
+        "New Chapter",
+        new_admin_chapter_path(story: story),
+        class: 'btn btn-secondary',
+        role: 'button'
+      )
+    %>
+  <% end %>
+</td>

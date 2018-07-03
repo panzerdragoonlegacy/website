@@ -1,0 +1,9 @@
+<div class="form-group">
+  <%= f.label :number, 'Number*' %>
+  <%= f.number_field :number, { min: 1, max: 99, class: 'form-control' } %>
+  <small>
+    Numbers are relative to the specified chapter type. E.g. if the chapter type
+    is <code>Epilogue</code>, enter number <code>1</code> for the first
+    epilogue, number <code>2</code> for a second epilogue, etc. 
+  </small>
+</div>

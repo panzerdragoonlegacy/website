@@ -1,0 +1,13 @@
+<div class="form-group">
+  <%= f.label :chapter_type, 'Chapter Type*' %>
+  <%=
+    f.collection_select(
+      :chapter_type,
+      Chapter::CHAPTER_TYPES,
+      :to_s,
+      :titleize,
+      { include_blank: true },
+      { class: 'form-control' }
+    )
+  %>
+</div>
