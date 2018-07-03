@@ -1,0 +1,11 @@
+<%= form_for [:admin, @category] do |f| %>
+  <%= render 'admin/shared/form/error_messages', target: @category %>
+  <%= render 'category_type', f: f %>
+  <%= render 'category_group', f: f %>
+  <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
+  <%= render partial: 'admin/shared/form/description', locals: { f: f } %>
+  <% if policy(@category).permitted_attributes.include? :publish %>
+    <%= render partial: 'admin/shared/form/publish', locals: { f: f } %>
+  <% end %>
+  <%= render partial: 'admin/shared/form/save_buttons', locals: { f: f } %>
+<% end %>

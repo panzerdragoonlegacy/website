@@ -1,0 +1,6 @@
+<%= form_for [:admin, @category_group] do |f| %>
+  <%= render 'admin/shared/form/error_messages', target: @category_group %>
+  <%= render 'category_group_type', f: f %>
+  <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
+  <%= render partial: 'admin/shared/form/save_buttons', locals: { f: f } %>
+<% end %>

@@ -10,9 +10,12 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/', to: 'home#index'
     
+    resources :category_groups, path: 'category-groups'
+    resources :categories
+
     resources :articles
-    resources :encyclopaedia_entries
-    resources :news_entries
+    resources :encyclopaedia_entries, path: 'encyclopaedia-entries'
+    resources :news_entries, path: 'news-entries'
     resources :pages
     resources :poems
     resources :resources

@@ -1,0 +1,87 @@
+<% title 'Categories' %>
+
+<%=
+  render(
+    partial: 'admin/shared/table/new_button',
+    locals: {
+      resource: Category,
+      resource_name: 'Category',
+      path: new_admin_category_path
+    }
+  )
+%>
+
+<% if @categories %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"><%= link_to_sort 'name' %></th>
+        <th scope="col">
+          <%= link_to_sort 'category_type', 'Category Type' %>
+        </th>
+        <th scope="col">Category Group</th>
+        <th scope="col"><%= link_to_sort 'created_at', 'Created' %></th>
+        <th scope="col"><%= link_to_sort 'updated_at', 'Modified' %></th>
+        <th scope="col"><%= link_to_sort 'publish', 'Published' %></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @categories.each do |category| %>
+        <tr>
+          <%=
+            render(
+              partial: 'admin/shared/table/name',
+              locals: { resource: category, path: category_path(category) }
+            )
+          %>
+          <td>
+            <%= category.category_type.titleize %>
+          </td>
+          <td>
+            <%= category.category_group.name if category.category_group %>
+          </td>
+          <%=
+            render(
+              partial: 'admin/shared/table/created_at',
+              locals: { resource: category }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/updated_at',
+              locals: { resource: category }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/published',
+              locals: { resource: category }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/edit_button',
+              locals: {
+                resource: category,
+                path: edit_admin_category_path(category)
+              }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/delete_button',
+              locals: {
+                resource: category,
+                resource_name: 'category'
+              }
+            )
+          %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= paginate @categories, views_prefix: 'admin' %>

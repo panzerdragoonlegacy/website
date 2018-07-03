@@ -1,0 +1,67 @@
+<% title 'Category Groups' %>
+
+<%=
+  render(
+    partial: 'admin/shared/table/new_button',
+    locals: {
+      resource: CategoryGroup,
+      resource_name: 'Category Group',
+      path: new_admin_category_group_path
+    }
+  )
+%>
+
+<% if @category_groups %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"><%= link_to_sort 'name' %></th>
+        <th scope="col"><%= link_to_sort 'category_group_type' %></th>
+        <th scope="col"><%= link_to_sort 'created_at', 'Created' %></th>
+        <th scope="col"><%= link_to_sort 'updated_at', 'Modified' %></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @category_groups.each do |category_group| %>
+        <tr>
+          <td><%= category_group.name %></td>
+          <td><%= category_group.category_group_type.titleize %></td>
+          <%=
+            render(
+              partial: 'admin/shared/table/created_at',
+              locals: { resource: category_group }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/updated_at',
+              locals: { resource: category_group }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/edit_button',
+              locals: {
+                resource: category_group,
+                path: edit_admin_category_group_path(category_group)
+              }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/delete_button',
+              locals: {
+                resource: category_group,
+                resource_name: 'category group'
+              }
+            )
+          %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= paginate @category_groups, views_prefix: 'admin' %>

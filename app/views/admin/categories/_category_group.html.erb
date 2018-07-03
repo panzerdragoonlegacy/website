@@ -1,0 +1,13 @@
+<div class="form-group">
+  <%= f.label :category_group, 'Category Group' %>
+  <%=
+    f.collection_select(
+      :category_group_id,
+      @category_groups,
+      :id,
+      :name,
+      { include_blank: true },
+      { class: 'form-control' }
+    )
+  %>
+</div>

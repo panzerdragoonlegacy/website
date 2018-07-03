@@ -1,0 +1,13 @@
+<div class="form-group">
+  <%= f.label :category_group_type, 'Category Group Type*' %>
+  <%=
+    f.collection_select(
+      :category_group_type,
+      CategoryGroup::CATEGORY_GROUP_TYPES,
+      :to_s,
+      :titleize,
+      { include_blank: true },
+      { class: 'form-control' }
+    )
+  %>
+</div>
