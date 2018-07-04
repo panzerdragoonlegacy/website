@@ -9,16 +9,32 @@
   )
 %>
 
+<%= search_form_for @q, url: admin_users_path do |f| %>
+  <div class="form-group">
+    <%=
+      f.label(
+        :email_or_contributor_profile_name_cont,
+        'Email or Contributor Profile:',
+        class: 'mr-2'
+      )
+    %>
+    <%= f.search_field :email_or_contributor_profile_name_cont, class: 'mr-2' %>
+    <%= f.submit "Search", class: 'btn btn-secondary mb-1 pt-1 pb-1' %>
+  </div>
+<% end %>
+
 <% if @users %>
   <table class="table">
     <tr>
-      <th scope="col"><%= link_to_sort 'administrator', 'Admin' %></th>
-      <th scope="col"><%= link_to_sort 'email' %></th>
-      <th scope="col">Contributor Profile</th>
-      <th scope="col"><%= link_to_sort 'created_at', 'Created' %></th>
-      <th scope="col"><%= link_to_sort 'updated_at', 'Modified' %></th>
-      <th scope="col"><%= link_to_sort 'confirmed_at', 'Confirmed' %></th>
-      <th scope="col"><%= link_to_sort 'locked_at', 'Unlocked' %></th>
+      <th scope="col"><%= sort_link @q, :administrator, 'Admin' %></th>
+      <th scope="col"><%= sort_link @q, :email %></th>
+      <th scope="col">
+        <%= sort_link @q, :contributor_profile_name, 'Contributor Profile' %>
+      </th>
+      <th scope="col"><%= sort_link @q, :created_at, 'Created' %></th>
+      <th scope="col"><%= sort_link @q, :updated_at, 'Modified' %></th>
+      <th scope="col"><%= sort_link @q, :confirmed_at, 'Confirmed' %></th>
+      <th scope="col"><%= sort_link @q, :locked_at, 'Unlocked' %></th>
       <th scope="col"></th>
       <th scope="col"></th>
     </tr>

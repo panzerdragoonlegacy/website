@@ -1,13 +1,12 @@
 class Admin::UsersController < ApplicationController
-  include Sortable
   layout 'admin'
   before_action :load_contributor_profiles, except: [:show, :destroy]
   before_action :load_user, except: [:index, :new, :create]
-  helper_method :sort_column, :sort_direction
 
   def index
+    @q = User.order(:email).ransack(params[:q])
     @users = policy_scope(
-      User.order(sort_column + ' ' + sort_direction).page(params[:page])
+      @q.result.includes(:contributor_profile).page(params[:page])
     )
   end
 
@@ -74,9 +73,5 @@ class Admin::UsersController < ApplicationController
     else
       render :new
     end
-  end
-
-  def sort_column
-    User.column_names.include?(params[:sort]) ? params[:sort] : 'email'
   end
 end
