@@ -1,15 +1,11 @@
 class Admin::ContributorProfilesController < ApplicationController
   include LoadableForContributorProfile
-  include Sortable
   layout 'admin'
   before_action :load_contributor_profile, except: [:index, :new, :create]
-  helper_method :sort_column, :sort_direction
 
   def index
-    @contributor_profiles = policy_scope(
-      ContributorProfile.order(sort_column + ' ' + sort_direction)
-        .page(params[:page])
-    )
+    @q = ContributorProfile.order(:name).ransack(params[:q])
+    @contributor_profiles = policy_scope(@q.result.page(params[:page]))
   end
 
   def new
@@ -58,14 +54,6 @@ class Admin::ContributorProfilesController < ApplicationController
       redirect_to edit_admin_contributor_profile_path(@contributor_profile)
     else
       redirect_to @contributor_profile
-    end
-  end
-
-  def sort_column
-    if ContributorProfile.column_names.include?(params[:sort])
-      params[:sort]
-    else
-      'name'
     end
   end
 end
