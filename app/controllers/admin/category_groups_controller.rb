@@ -1,16 +1,11 @@
 class Admin::CategoryGroupsController < ApplicationController
   include LoadableForCategoryGroup
-  include Sortable
   layout 'admin'
   before_action :load_category_group, except: [:index, :new, :create]
-  helper_method :sort_column, :sort_direction
 
   def index
-    @category_groups = policy_scope(
-      CategoryGroup.order(
-        sort_column + ' ' + sort_direction
-      ).page(params[:page])
-    )
+    @q = CategoryGroup.order(:name).ransack(params[:q])
+    @category_groups = policy_scope(@q.result.page(params[:page]))
   end
 
   def new
@@ -63,9 +58,5 @@ class Admin::CategoryGroupsController < ApplicationController
     else
       redirect_to admin_category_groups_path
     end
-  end
-
-  def sort_column
-    CategoryGroup.column_names.include?(params[:sort]) ? params[:sort] : 'name'
   end
 end
