@@ -1,0 +1,12 @@
+<%= form_for [:admin, @user], html: { multipart: true } do |f| %>
+  <%= render 'admin/shared/form/error_messages', target: @user %>
+  <%= render 'email', f: f %>
+  <%=
+    render(
+      partial: 'contributor_profile',
+      locals: { f: f, contributor_profiles: @contributor_profiles }
+    )
+  %>
+  <%= render 'administrator', f: f %>
+  <%= f.submit 'Save', class: 'btn btn-primary' %>
+<% end %>

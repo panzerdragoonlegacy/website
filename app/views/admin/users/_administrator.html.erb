@@ -1,0 +1,12 @@
+<div class="form-group form-check">
+  <%= f.check_box :administrator, class: 'form-check-input' %>
+  <%= f.label :administrator, 'Administrator?', class: 'form-check-label' %>
+</div>
+<div class="alert alert-danger" role="alert">
+  <small>
+    <strong>Warning:</strong> Checking the administrator box will grant the 
+    user full access to edit, publish, and delete any content on the website. 
+    Regular contributors do not need to be granted administrator level access
+    to create and edit their own draft contributions.
+  </small>
+</div>

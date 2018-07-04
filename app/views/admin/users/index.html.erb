@@ -1,0 +1,93 @@
+<% title 'Users' %>
+
+<%=
+  render(
+    partial: 'admin/shared/table/new_button',
+    locals: {
+      resource: User, resource_name: 'User', path: new_admin_user_path
+    }
+  )
+%>
+
+<% if @users %>
+  <table class="table">
+    <tr>
+      <th scope="col"><%= link_to_sort 'administrator', 'Admin' %></th>
+      <th scope="col"><%= link_to_sort 'email' %></th>
+      <th scope="col">Contributor Profile</th>
+      <th scope="col"><%= link_to_sort 'created_at', 'Created' %></th>
+      <th scope="col"><%= link_to_sort 'updated_at', 'Modified' %></th>
+      <th scope="col"><%= link_to_sort 'confirmed_at', 'Confirmed' %></th>
+      <th scope="col"><%= link_to_sort 'locked_at', 'Unlocked' %></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <% if user.administrator? %>
+            <%= fa_icon('check', class: 'text-success') %>
+          <% else %>
+            <%= fa_icon('close', class: 'text-warning') %>
+          <% end %>
+        </td>
+        <td><%= user.email %></td>
+        <td>
+          <% if user.contributor_profile %>
+            <%=
+              link_to(
+                user.contributor_profile.name,
+                contributor_profile_path(user.contributor_profile)
+              )
+            %>
+          <% end %>
+        </td>
+        <%=
+          render(
+            partial: 'admin/shared/table/created_at',
+            locals: { resource: user }
+          )
+        %>
+        <%=
+          render(
+            partial: 'admin/shared/table/updated_at',
+            locals: { resource: user }
+          )
+        %>
+        <td>
+          <% if user.confirmed_at.present? %>
+            <%= fa_icon('check', class: 'text-success') %>
+          <% else %>
+            <%= fa_icon('close', class: 'text-warning') %>
+          <% end %>
+        </td>
+        <td>
+          <% if user.locked_at.present? %>
+            <%= fa_icon('close', class: 'text-warning') %>
+          <% else %>
+            <%= fa_icon('check', class: 'text-success') %>
+          <% end %>
+        </td>
+        <%=
+          render(
+            partial: 'admin/shared/table/edit_button',
+            locals: {
+              resource: user,
+              path: edit_admin_user_path(user)
+            }
+          )
+        %>
+        <%=
+          render(
+            partial: 'admin/shared/table/delete_button',
+            locals: {
+              resource: user,
+              resource_name: 'user'
+            }
+          )
+        %>
+      </tr>
+    <% end %>
+  </table>
+  <%= paginate @users %>
+<% end %>

@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :categories
     resources :sagas
     
+    resources :users
+
     resources :articles
     resources :encyclopaedia_entries, path: 'encyclopaedia-entries'
     resources :news_entries, path: 'news-entries'

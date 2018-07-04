@@ -1,0 +1,20 @@
+<div class="form-group">
+  <%= f.label :contributor_profile_id, 'Contributor Profile*' %>
+  <%=
+    f.collection_select(
+      :contributor_profile_id,
+      @contributor_profiles,
+      :id,
+      :name,
+      { include_blank: true },
+      { class: 'form-control' }
+    )
+  %>
+  <div class="alert alert-warning mt-3" role="alert">
+    <small>
+      Contributions (from non-administrator users) will be automatically added 
+      to the contributor profile associated with the user creating or editing 
+      the contribution.
+    </small>
+  </div>
+</div>
