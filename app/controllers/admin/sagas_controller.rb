@@ -4,7 +4,8 @@ class Admin::SagasController < ApplicationController
   before_action :load_saga, except: [:index, :new, :create]
 
   def index
-    @sagas = policy_scope(Saga.order(:sequence_number).page(params[:page]))
+    @q = Saga.order(:sequence_number).ransack(params[:q])
+    @sagas = policy_scope(@q.result.page(params[:page]))
   end
 
   def new
