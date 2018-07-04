@@ -1,15 +1,12 @@
 class Admin::ArticlesController < ApplicationController
   include LoadableForArticle
-  include Sortable
   layout 'admin'
   before_action :load_categories, except: [:destroy]
   before_action :load_article, except: [:index, :new, :create]
-  helper_method :sort_column, :sort_direction
 
   def index
-    @articles = policy_scope(
-      Article.order(sort_column + ' ' + sort_direction).page(params[:page])
-    )
+    @q = Article.order(:name).ransack(params[:q])
+    @articles = policy_scope(@q.result.includes(:category).page(params[:page]))
   end
 
   def new
@@ -74,9 +71,5 @@ class Admin::ArticlesController < ApplicationController
       params[:article][:contributor_profile_ids] <<
         current_user.contributor_profile_id
     end
-  end
-
-  def sort_column
-    Article.column_names.include?(params[:sort]) ? params[:sort] : 'name'
   end
 end
