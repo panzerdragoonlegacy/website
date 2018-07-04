@@ -3,7 +3,7 @@
     <%=
       link_to(
         pluralize(draft_article_count, 'article'),
-        articles_path(filter: 'draft')
+        admin_articles_path(filter: 'draft')
       )
     %>
   </li>

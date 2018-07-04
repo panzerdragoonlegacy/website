@@ -1,1 +1,33 @@
 <% title 'Admin Panel' %>
+
+<% if current_user %>
+  <% if current_user.administrator %>
+    <p>
+      There's a total of <%= pluralize(draft_count, 'draft') %> on the site.
+    </p>
+  <% elsif current_user.contributor_profile %>
+    <p>
+      You have a total of <%= pluralize(draft_count, 'draft') %>.
+    </p>
+  <% end %>
+<% end %>
+
+<% if draft_count > 0 %>
+  <ul>
+    <%= render 'draft_news_entries' %>
+    <%= render 'draft_categories' %>
+    <%= render 'draft_encyclopaedia_entries' %>
+    <%= render 'draft_contributor_profiles' %>
+    <%= render 'draft_articles' %>
+    <%= render 'draft_downloads' %>
+    <%= render 'draft_music_tracks' %>
+    <%= render 'draft_albums' %>
+    <%= render 'draft_pictures' %>
+    <%= render 'draft_poems' %>
+    <%= render 'draft_quizzes' %>
+    <%= render 'draft_resources' %>
+    <%= render 'draft_stories' %>
+    <%= render 'draft_videos' %>
+    <%= render 'draft_pages' %>
+  <ul>
+<% end %>

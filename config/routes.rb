@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/', to: 'home#index'
     
+    resources :albums
     resources :category_groups, path: 'category-groups'
     resources :categories
     resources :sagas
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
     resources :links
     resources :music_tracks, path: 'music-tracks'
     resources :pictures
+    resources :quizzes
     resources :videos
   end
 
@@ -71,8 +73,6 @@ Rails.application.routes.draw do
   resources :emoticons
   resources :pages
   resources :sagas
-
-  resources :drafts
 
   get ':id', to: 'pages#show'
   root to: "news_entries#index"

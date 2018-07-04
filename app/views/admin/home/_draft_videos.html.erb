@@ -2,7 +2,8 @@
   <li>
     <%=
       link_to(
-        pluralize(draft_video_count, 'video'), videos_path(filter: 'draft')
+        pluralize(draft_video_count, 'video'),
+        admin_videos_path(filter: 'draft')
       )
     %>
   </li>

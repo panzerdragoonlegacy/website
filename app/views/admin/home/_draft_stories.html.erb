@@ -2,7 +2,8 @@
   <li>
     <%=
       link_to(
-        pluralize(draft_story_count, 'story'), stories_path(filter: 'draft')
+        pluralize(draft_story_count, 'story'),
+        admin_stories_path(filter: 'draft')
       )
     %>
   </li>

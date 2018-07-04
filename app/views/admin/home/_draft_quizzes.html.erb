@@ -2,7 +2,7 @@
   <li>
     <%=
       link_to(
-        pluralize(draft_quiz_count, 'quiz'), quizzes_path(filter: 'draft')
+        pluralize(draft_quiz_count, 'quiz'), admin_quizzes_path(filter: 'draft')
       )
     %>
   </li>
