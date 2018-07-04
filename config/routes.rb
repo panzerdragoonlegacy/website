@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :links
     resources :music_tracks, path: 'music-tracks'
     resources :pictures
+    resources :videos
   end
 
   resources :searches

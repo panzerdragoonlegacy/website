@@ -1,24 +1,15 @@
-class VideosController < ApplicationController
+class Admin::VideosController < ApplicationController
   include LoadableForVideo
-  before_action :load_categories, expect: [:index, :show, :destroy]
+  include Sortable
+  layout 'admin'
+  before_action :load_categories, except: [:show, :destroy]
   before_action :load_video, except: [:index, :new, :create]
+  helper_method :sort_column, :sort_direction
 
   def index
-    if params[:contributor_profile_id]
-      load_contributors_videos
-    elsif params[:filter] == 'draft'
-      load_draft_videos
-    else
-      load_category_groups
-      @videos = policy_scope(Video.order(:name).page(params[:page]))
-    end
-  end
-
-  def show
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
-      current_user,
-      @video.encyclopaedia_entries.order(:name)
-    ).resolve
+    @videos = policy_scope(
+      Video.order(sort_column + ' ' + sort_direction).page(params[:page])
+    )
   end
 
   def new
@@ -57,7 +48,10 @@ class VideosController < ApplicationController
 
   def destroy
     @video.destroy
-    redirect_to videos_path, notice: 'Successfully destroyed video.'
+    redirect_to(
+      admin_videos_path,
+      notice: 'Successfully destroyed video.'
+    )
   end
 
   private
@@ -70,7 +64,7 @@ class VideosController < ApplicationController
 
   def redirect_to_video
     if params[:continue_editing]
-      redirect_to edit_video_path(@video)
+      redirect_to edit_admin_video_path(@video)
     else
       redirect_to @video
     end
@@ -83,5 +77,9 @@ class VideosController < ApplicationController
       params[:video][:contributor_profile_ids] <<
         current_user.contributor_profile_id
     end
+  end
+
+  def sort_column
+    Video.column_names.include?(params[:sort]) ? params[:sort] : 'name'
   end
 end

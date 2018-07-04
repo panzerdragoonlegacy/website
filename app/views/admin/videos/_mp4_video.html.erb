@@ -1,0 +1,13 @@
+<div class="form-group">
+  <%= f.label :mp4_video, 'MP4 Video*' %>
+  <div class="alert alert-warning" role="alert">
+    <small>
+      MP4 Video files must be of type MP4 (.mp4). Other formats are not
+      supported and will prevent this form from being saved.
+    </small>
+  </div>
+  <% if @video.mp4_video? %>
+    <p>File has already been uploaded. Replace file?</p>
+  <% end %>
+  <%= f.file_field :mp4_video, class: 'form-control' %>
+</div>
