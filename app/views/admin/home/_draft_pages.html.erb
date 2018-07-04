@@ -2,7 +2,8 @@
   <li>
     <%=
       link_to(
-        pluralize(draft_page_count, 'page'), admin_pages_path(filter: 'draft')
+        pluralize(draft_page_count, 'page'),
+        admin_pages_path + '?q%5Bpublish_false%5D=1'
       )
     %>
   </li>

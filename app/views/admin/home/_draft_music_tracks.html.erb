@@ -3,7 +3,7 @@
     <%=
       link_to(
         pluralize(draft_music_track_count, 'music track'),
-        admin_music_tracks_path(filter: 'draft')
+        admin_music_tracks_path + '?q%5Bpublish_false%5D=1'
       )
     %>
   </li>

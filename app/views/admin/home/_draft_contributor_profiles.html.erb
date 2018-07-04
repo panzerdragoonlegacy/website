@@ -3,7 +3,7 @@
     <%=
       link_to(
         pluralize(draft_contributor_profile_count, 'contributor profile'),
-        admin_contributor_profiles_path(filter: 'draft')
+        admin_contributor_profiles_path + '?q%5Bpublish_false%5D=1'
       )
     %>
   </li>

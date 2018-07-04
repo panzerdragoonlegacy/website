@@ -3,7 +3,7 @@
     <%=
       link_to(
         pluralize(draft_video_count, 'video'),
-        admin_videos_path(filter: 'draft')
+        admin_videos_path + '?q%5Bpublish_false%5D=1'
       )
     %>
   </li>

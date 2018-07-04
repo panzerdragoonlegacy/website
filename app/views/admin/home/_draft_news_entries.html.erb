@@ -3,7 +3,7 @@
     <%=
       link_to(
         pluralize(draft_news_entry_count, 'news entry'),
-        admin_news_entries_path(filter: 'draft')
+        admin_news_entries_path + '?q%5Bpublish_false%5D=1'
       )
     %>
   </li>

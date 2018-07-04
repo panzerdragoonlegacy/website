@@ -3,7 +3,7 @@
     <%=
       link_to(
         pluralize(draft_album_count, 'album'),
-        admin_albums_path(filter: 'draft')
+        admin_albums_path + '?q%5Bpublish_false%5D=1'
       )
     %>
   </li>

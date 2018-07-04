@@ -1,6 +1,6 @@
 <%= search_form_for q, url: path do |f| %>
   <div class="form-group">
-    <%= f.label :name_cont, 'Name:', class: 'mr-2' %>
+    <%= f.label :name_cont, 'Name:', class: 'mr-1' %>
     <%= f.search_field :name_cont, class: 'mr-2' %>
     <%= render partial: 'admin/shared/search/search_button', locals: { f: f } %>
   </div>
