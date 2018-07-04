@@ -1,15 +1,15 @@
-class ContributorProfilesController < ApplicationController
+class Admin::ContributorProfilesController < ApplicationController
   include LoadableForContributorProfile
+  include Sortable
+  layout 'admin'
   before_action :load_contributor_profile, except: [:index, :new, :create]
+  helper_method :sort_column, :sort_direction
 
   def index
-    if params[:filter] == 'draft'
-      load_draft_contributor_profiles
-    else
-      @contributor_profiles = policy_scope(
-        ContributorProfile.order(:name).page(params[:page])
-      )
-    end
+    @contributor_profiles = policy_scope(
+      ContributorProfile.order(sort_column + ' ' + sort_direction)
+        .page(params[:page])
+    )
   end
 
   def new
@@ -18,7 +18,7 @@ class ContributorProfilesController < ApplicationController
   end
 
   def create
-    @contributor_profile = ContributorProfile.new(contributor_profile_params)
+    @contributor_profile = ContributorProfile.new contributor_profile_params
     authorize @contributor_profile
     if @contributor_profile.save
       flash[:notice] = 'Successfully created contributor profile.'
@@ -29,7 +29,7 @@ class ContributorProfilesController < ApplicationController
   end
 
   def update
-    if @contributor_profile.update_attributes(contributor_profile_params)
+    if @contributor_profile.update_attributes contributor_profile_params
       flash[:notice] = 'Successfully updated contributor profile.'
       redirect_to_contributor_profile
     else
@@ -40,7 +40,7 @@ class ContributorProfilesController < ApplicationController
   def destroy
     @contributor_profile.destroy
     redirect_to(
-      contributor_profiles_path,
+      admin_contributor_profiles_path,
       notice: 'Successfully destroyed contributor profile.'
     )
   end
@@ -55,9 +55,17 @@ class ContributorProfilesController < ApplicationController
 
   def redirect_to_contributor_profile
     if params[:continue_editing]
-      redirect_to edit_contributor_profile_path(@contributor_profile)
+      redirect_to edit_admin_contributor_profile_path(@contributor_profile)
     else
       redirect_to @contributor_profile
+    end
+  end
+
+  def sort_column
+    if ContributorProfile.column_names.include?(params[:sort])
+      params[:sort]
+    else
+      'name'
     end
   end
 end

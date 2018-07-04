@@ -1,0 +1,88 @@
+<% title 'Contributor Profiles' %>
+
+<%=
+  render(
+    partial: 'admin/shared/table/new_button',
+    locals: {
+      resource: ContributorProfile,
+      resource_name: 'Contributor Profile',
+      path: new_admin_contributor_profile_path
+    }
+  )
+%>
+
+<% if @contributor_profiles %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col"><%= link_to_sort 'name' %></th>
+        <th scope="col"><%= link_to_sort 'created_at', 'Created' %></th>
+        <th scope="col"><%= link_to_sort 'updated_at', 'Modified' %></th>
+        <th scope="col"><%= link_to_sort 'publish', 'Published' %></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @contributor_profiles.each do |contributor_profile| %>
+        <tr>
+          <td>
+            <% if contributor_profile.avatar_file_name.blank? %>
+              <%= image_tag 'default-avatar.jpg' %>
+            <% else %>
+              <%= image_tag contributor_profile.avatar.url(:thumbnail) %>
+            <% end %>
+          </td>
+          <%=
+            render(
+              partial: 'admin/shared/table/name',
+              locals: {
+                resource: contributor_profile,
+                path: contributor_profile_path(contributor_profile)
+              }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/created_at',
+              locals: { resource: contributor_profile }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/updated_at',
+              locals: { resource: contributor_profile }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/published',
+              locals: { resource: contributor_profile }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/edit_button',
+              locals: {
+                resource: contributor_profile,
+                path: edit_admin_contributor_profile_path(contributor_profile)
+              }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/delete_button',
+              locals: {
+                resource: contributor_profile,
+                resource_name: 'contributor profile'
+              }
+            )
+          %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= paginate @contributor_profiles, views_prefix: 'admin' %>

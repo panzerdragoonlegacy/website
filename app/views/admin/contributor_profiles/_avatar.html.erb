@@ -1,0 +1,10 @@
+<div class="form-group">
+  <%= f.label :avatar, 'Avatar' %>
+  <div class="alert alert-warning" role="alert">
+    <%= render 'admin/shared/form/image_type_warning' %>
+  </div>
+  <% if contributor_profile.avatar? %>
+    <p>File has already been uploaded. Replace file?</p>
+  <% end %>
+  <%= f.file_field :avatar, class: 'form-control' %>
+</div>
