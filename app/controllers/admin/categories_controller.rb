@@ -5,6 +5,7 @@ class Admin::CategoriesController < ApplicationController
   before_action :load_category, except: [:index, :new, :create]
 
   def index
+    clean_publish_false_param
     @q = Category.order(:name).ransack(params[:q])
     @categories = policy_scope(
       @q.result.includes(:category_group).page(params[:page])

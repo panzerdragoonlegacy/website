@@ -25,4 +25,12 @@ class ApplicationController < ActionController::Base
   def partner_sites
     @partner_sites = policy_scope(Link.where(partner_site: true).order(:name))
   end
+
+  # This allows all records to be displayed in a Ransack search when 'Drafts
+  # Only' is unchecked.
+  def clean_publish_false_param
+    if params[:q]
+      params[:q].delete_if { |k,v| k == 'publish_false' && v == '0' }
+    end
+  end
 end

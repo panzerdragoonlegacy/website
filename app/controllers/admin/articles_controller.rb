@@ -5,6 +5,7 @@ class Admin::ArticlesController < ApplicationController
   before_action :load_article, except: [:index, :new, :create]
 
   def index
+    clean_publish_false_param
     @q = Article.order(:name).ransack(params[:q])
     @articles = policy_scope(@q.result.includes(:category).page(params[:page]))
   end

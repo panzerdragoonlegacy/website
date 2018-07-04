@@ -4,6 +4,7 @@ class Admin::ContributorProfilesController < ApplicationController
   before_action :load_contributor_profile, except: [:index, :new, :create]
 
   def index
+    clean_publish_false_param
     @q = ContributorProfile.order(:name).ransack(params[:q])
     @contributor_profiles = policy_scope(@q.result.page(params[:page]))
   end
