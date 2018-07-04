@@ -19,7 +19,7 @@
       )
     %>
     <%= f.search_field :email_or_contributor_profile_name_cont, class: 'mr-2' %>
-    <%= f.submit "Search", class: 'btn btn-secondary mb-1 pt-1 pb-1' %>
+    <%= render partial: 'admin/shared/search/search_button', locals: { f: f } %>
   </div>
 <% end %>
 
