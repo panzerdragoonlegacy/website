@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     
     resources :category_groups, path: 'category-groups'
     resources :categories
-
+    resources :sagas
+    
     resources :articles
     resources :encyclopaedia_entries, path: 'encyclopaedia-entries'
     resources :news_entries, path: 'news-entries'

@@ -1,0 +1,68 @@
+<% title 'Sagas' %>
+
+<%=
+  render(
+    partial: 'admin/shared/table/new_button',
+    locals: {
+      resource: Saga, resource_name: 'Saga', path: new_admin_saga_path
+    }
+  )
+%>
+
+<% if @sagas %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Sequence Number</th>
+        <th scope="col">Created</th>
+        <th scope="col">Modified</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sagas.each do |saga| %>
+        <tr>
+          <%=
+            render(partial: 'admin/shared/table/name',
+              locals: {
+                resource: saga,
+                path: encyclopaedia_entry_path(saga.encyclopaedia_entry)
+              }
+            )
+          %>
+          <td><%= saga.sequence_number.to_s %></td>
+          <%=
+            render(
+              partial: 'admin/shared/table/created_at',
+              locals: { resource: saga }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/updated_at',
+              locals: { resource: saga }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/edit_button',
+              locals: {
+                resource: saga, path: edit_admin_saga_path(saga)
+              }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/delete_button',
+              locals: { resource: saga, resource_name: 'saga' }
+            )
+          %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= paginate @sagas, views_prefix: 'admin' %>

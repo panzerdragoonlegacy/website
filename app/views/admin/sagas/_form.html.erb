@@ -1,0 +1,12 @@
+<%= form_for [:admin, @saga] do |f| %>
+  <%= render 'admin/shared/form/error_messages', target: @saga %>
+  <%=
+    render(
+      partial: 'encyclopaedia_entry',
+      locals: { f: f, encyclopaedia_entries: @encyclopaedia_entries }
+    )
+  %>
+  <%= render 'sequence_number', f: f %>
+  <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
+  <%= render partial: 'admin/shared/form/save_buttons', locals: { f: f } %>
+<% end %>

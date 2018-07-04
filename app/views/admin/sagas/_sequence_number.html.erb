@@ -1,0 +1,9 @@
+<div class="form-group">
+  <%= f.label :sequence_number, 'Sequence Number*' %>
+  <%=
+    f.number_field(
+      :sequence_number,
+      { min: 1, max: 99, class: 'form-control' }
+    )
+  %>
+</div>

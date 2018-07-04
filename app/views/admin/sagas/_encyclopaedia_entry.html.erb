@@ -1,0 +1,13 @@
+<div class="form-group">
+  <%= f.label :encyclopaedia_entry_id, 'Encyclopaedia Entry*' %>
+  <%=
+    f.collection_select(
+      :encyclopaedia_entry_id,
+      @encyclopaedia_entries,
+      :id,
+      :name,
+      { include_blank: true },
+      { class: 'form-control' }
+    )
+  %>
+</div>
