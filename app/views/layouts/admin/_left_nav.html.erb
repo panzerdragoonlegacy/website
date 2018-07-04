@@ -7,21 +7,21 @@
   <li class="nav-item mb-3">
     <h5>Categorisation</h5>
     <ul class="nav flex-column">
-      <li class="nav-item">
-        <%= link_to 'Category Groups', admin_category_groups_path %>
-      </li>
+      <li class="nav-item">Albums</li>
       <li class="nav-item">
         <%= link_to 'Categories', admin_categories_path %>
       </li>
-      <li class="nav-item">Albums</li>
+      <li class="nav-item">
+        <%= link_to 'Category Groups', admin_category_groups_path %>
+      </li>
       <li class="nav-item"><%= link_to 'Sagas', admin_sagas_path %></li>
     </ul>
   </li>
   <li class="nav-item mb-3">
     <h5>User Management</h5>
     <ul class="nav flex-column">
-      <li class="nav-item"><%= link_to 'Users', admin_users_path %></li>
       <li class="nav-item">Contributor Profiles</li>
+      <li class="nav-item"><%= link_to 'Users', admin_users_path %></li>
     </ul>
   </li>
   <li class="nav-item mb-3">
