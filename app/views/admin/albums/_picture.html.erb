@@ -2,17 +2,10 @@
   class="nested-fields card mb-3"
   style="width: 390px;"
 >
-  <div class="p-3">
-    <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
-    <%= render partial: 'admin/shared/form/description', locals: { f: f } %>
-    <%= render partial: 'admin/shared/form/extra_information', locals: { f: f } %>
-  </div>
   <% if f.object.picture_file_name.blank? %>
     <div class="card-body">
       <h3 class="card-title">New Picture</h3>
-      <div class="alert alert-warning" role="alert">
-        <%= render 'admin/shared/form/image_type_warning' %>
-      </div>
+      <%= render 'admin/shared/form/image_type_warning' %>
       <%= f.file_field :picture %>
     </div>
   <% else %>
@@ -21,9 +14,7 @@
     <% end %>
     <div class="card-body">
       <% unless is_jpeg(f.object.picture.url) %>
-        <div class="alert alert-danger" role="alert">
-          <%= render 'admim/shared/form/image_type_warning' %>
-        </div>
+        <%= render 'admim/shared/form/image_type_warning' %>
       <% end %>
       <%=
         link_to_remove_association(
@@ -35,4 +26,9 @@
       %>
     </div>
   <% end %>
+  <div class="p-3">
+    <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
+    <%= render partial: 'admin/shared/form/description', locals: { f: f } %>
+    <%= render partial: 'admin/shared/form/extra_information', locals: { f: f } %>
+  </div>
 </div>

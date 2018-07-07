@@ -1,13 +1,17 @@
 <div class="form-group">
   <%= f.label :flac_music_track, 'FLAC Music Track*' %>
-  <div class="alert alert-warning" role="alert">
-    <small>
-      FLAC Music Track files must be of type FLAC (.flac). Other formats are not
-      supported and will prevent this form from being saved.
-    </small>
-  </div>
   <% if @music_track.flac_music_track? %>
     <p>File has already been uploaded. Replace file?</p>
   <% end %>
   <%= f.file_field :flac_music_track, class: 'form-control' %>
+  <%=
+    render(
+      partial: 'admin/shared/form/warning',
+      locals: { 
+        warning: 'FLAC Music Track files must be of type FLAC (.flac). ' \
+          'Other formats are not supported and will prevent this form from ' \
+          'being saved.'
+      }
+    )
+  %>
 </div>

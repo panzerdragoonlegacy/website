@@ -1,4 +1,9 @@
-<small>
-  Images must be of type JPEG (.jpg or .jpeg). PNG and GIF images are not
-  supported and will prevent this form from being saved.
-</small>
+<%=
+  render(
+    partial: 'admin/shared/form/warning',
+    locals: { 
+      warning: 'Images must be of type JPEG (.jpg or .jpeg). PNG and GIF ' \
+        'images are not supported and will prevent this form from being saved.'
+    }
+  )
+%>

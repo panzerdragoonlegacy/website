@@ -1,13 +1,16 @@
 <div class="form-group">
   <%= f.label :download, 'Download*' %>
-  <div class="alert alert-warning" role="alert">
-    <small>
-      Download files must be of type ZIP (.zip). Other formats are not supported
-      and will prevent this form from being saved.
-    </small>
-  </div>
   <% if @download.download? %>
     <p>File has already been uploaded. Replace file?</p>
   <% end %>
   <%= f.file_field :download, class: 'form-control' %>
+  <%=
+    render(
+      partial: 'admin/shared/form/warning',
+      locals: { 
+        warning: 'Download files must be of type ZIP (.zip). Other formats ' \
+          'are not supported and will prevent this form from being saved.'
+      }
+    )
+  %>
 </div>

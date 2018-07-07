@@ -1,7 +1,12 @@
  <div class="form-group">
   <%= f.label :discourse_username, 'Discourse Username' %>
   <%= f.text_field :discourse_username, class: 'form-control' %>
-  <small>
-    The contributor's username on Panzer Dragoon Legacy's forum.
-  </small>
+  <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: 'The contributor''s username on Panzer Dragoon Legacy''s forum.'
+      }
+    )
+  %>
 </div>

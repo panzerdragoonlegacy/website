@@ -1,9 +1,14 @@
  <div class="form-group">
   <%= f.label :email_address, 'Email Address' %>
   <%= f.email_field :email_address, class: 'form-control' %>
-  <small>
-    The contributor's email address is a private field. It may be recorded for 
-    administrative purposes in case we need to contact the contributor in the 
-    future.
-  </small>
+  <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: 'The contributor''s email address is a private field. It ' \
+          'may be recorded for administrative purposes in case we need to ' \
+          'contact the contributor in the future.'
+      }
+    )
+  %>
 </div>

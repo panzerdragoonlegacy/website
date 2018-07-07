@@ -10,11 +10,14 @@
       { class: 'form-control' }
     )
   %>
-  <div class="alert alert-warning mt-3" role="alert">
-    <small>
-      Contributions (from non-administrator users) will be automatically added 
-      to the contributor profile associated with the user creating or editing 
-      the contribution.
-    </small>
-  </div>
+  <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: 'Contributions (from non-administrator users) will be ' \
+          'automatically added to the contributor profile associated with ' \
+          'the user creating or editing the contribution.'
+      }
+    )
+  %>
 </div>
