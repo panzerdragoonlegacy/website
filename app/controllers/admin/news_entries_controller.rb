@@ -1,14 +1,12 @@
 class Admin::NewsEntriesController < ApplicationController
   include LoadableForNewsEntry
-  include Sortable
   layout 'admin'
   before_action :load_news_entry, except: [:index, :new, :create]
-  helper_method :sort_column, :sort_direction
 
   def index
-    @news_entries = policy_scope(
-      NewsEntry.order(sort_column + ' ' + sort_direction).page(params[:page])
-    )
+    clean_publish_false_param
+    @q = NewsEntry.order(:name).ransack(params[:q])
+    @news_entries = policy_scope(@q.result.page(params[:page]))
   end
 
   def new
@@ -73,9 +71,5 @@ class Admin::NewsEntriesController < ApplicationController
     unless current_user.contributor_profile == @news_entry.contributor_profile
       @news_entry.contributor_profile_id = current_user.contributor_profile_id
     end
-  end
-
-  def sort_column
-    NewsEntry.column_names.include?(params[:sort]) ? params[:sort] : 'name'
   end
 end
