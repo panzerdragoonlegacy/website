@@ -1,15 +1,13 @@
 class Admin::VideosController < ApplicationController
   include LoadableForVideo
-  include Sortable
   layout 'admin'
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_video, except: [:index, :new, :create]
-  helper_method :sort_column, :sort_direction
 
   def index
-    @videos = policy_scope(
-      Video.order(sort_column + ' ' + sort_direction).page(params[:page])
-    )
+    clean_publish_false_param
+    @q = Video.order(:name).ransack(params[:q])
+    @videos = policy_scope(@q.result.includes(:category).page(params[:page]))
   end
 
   def new

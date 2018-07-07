@@ -1,17 +1,15 @@
 class Admin::PicturesController < ApplicationController
   include LoadableForPicture
-  include Sortable
   layout 'admin'
   before_action :load_replaceable_pictures, except: [:index, :destroy]
   before_action :load_albums, except: [:index, :destroy]
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_picture, except: [:index, :new, :create]
-  helper_method :sort_column, :sort_direction
 
   def index
-    @pictures = policy_scope(
-      Picture.order(sort_column + ' ' + sort_direction).page(params[:page])
-    )
+    clean_publish_false_param
+    @q = Picture.order(:name).ransack(params[:q])
+    @pictures = policy_scope(@q.result.includes(:category).page(params[:page]))
   end
 
   def new
@@ -76,9 +74,5 @@ class Admin::PicturesController < ApplicationController
       params[:picture][:contributor_profile_ids] <<
         current_user.contributor_profile_id
     end
-  end
-
-  def sort_column
-    Picture.column_names.include?(params[:sort]) ? params[:sort] : 'name'
   end
 end
