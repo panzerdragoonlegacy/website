@@ -1,15 +1,12 @@
 class Admin::LinksController < ApplicationController
   include LoadableForLink
-  include Sortable
   layout 'admin'
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_link, except: [:index, :new, :create]
-  helper_method :sort_column, :sort_direction
 
   def index
-    @links = policy_scope(
-      Link.order(sort_column + ' ' + sort_direction).page(params[:page])
-    )
+    @q = Link.order(:name).ransack(params[:q])
+    @links = policy_scope(@q.result.includes(:category).page(params[:page]))
   end
 
   def new
@@ -74,9 +71,5 @@ class Admin::LinksController < ApplicationController
       params[:link][:contributor_profile_ids] <<
         current_user.contributor_profile_id
     end
-  end
-
-  def sort_column
-    Link.column_names.include?(params[:sort]) ? params[:sort] : 'name'
   end
 end
