@@ -10,4 +10,12 @@
       { class: 'form-control' }
     )
   %>
+  <% if defined? warning %>
+    <%=
+      render(
+        partial: 'admin/shared/form/warning',
+        locals: { warning: warning }
+      )
+    %>
+  <% end %>
 </div>

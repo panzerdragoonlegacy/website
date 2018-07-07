@@ -13,4 +13,12 @@
     You may use a <a href="/markdown-syntax-guide" target="_blank">limited
     subset of Markdown</a> to format the page's extra information.
   </small>
+  <% if defined? info %>
+    <%=
+      render(
+        partial: 'admin/shared/form/info',
+        locals: { info: info }
+      )
+    %>
+  <% end %>
 </div>

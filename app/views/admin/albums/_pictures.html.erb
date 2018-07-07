@@ -1,0 +1,18 @@
+<div class="form-group">
+  <label>Pictures</label>
+  <%= f.fields_for :pictures do |picture| %>
+    <%= render 'picture', f: picture %>
+  <% end %>
+  <p>
+    <%=
+      link_to_add_association(
+        'Add Picture',
+        f,
+        :pictures,
+        role: 'button',
+        class: 'btn btn-success',
+        partial: 'picture'
+      )
+    %>
+  </p>
+</div>

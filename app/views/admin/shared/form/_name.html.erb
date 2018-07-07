@@ -1,4 +1,12 @@
 <div class="form-group">
   <%= f.label :name, 'Name*' %>
   <%= f.text_field :name, class: 'form-control' %>
+  <% if defined? info %>
+    <%=
+      render(
+        partial: 'admin/shared/form/info',
+        locals: { info: info }
+      )
+    %>
+  <% end %>
 </div>

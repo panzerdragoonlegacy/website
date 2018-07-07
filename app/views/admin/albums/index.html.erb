@@ -1,0 +1,88 @@
+<% title 'Albums' %>
+
+<%=
+  render(
+    partial: 'admin/shared/table/new_button',
+    locals: {
+      resource: Album, resource_name: 'Album', path: new_admin_album_path
+    }
+  )
+%>
+
+<%=
+  render(
+    partial: 'admin/shared/search/name_and_draft_form',
+    locals: { q: @q, path: admin_albums_path }
+  )
+%>
+
+<% if @albums %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"><%= sort_link @q, :name %></th>
+        <th scope="col"><%= sort_link @q, :category_name, 'Category' %></th>
+        <th scope="col">Has Pictures?</th>
+        <th scope="col"><%= sort_link @q, :created_at, 'Created' %></th>
+        <th scope="col"><%= sort_link @q, :updated_at, 'Modified' %></th>
+        <th scope="col"><%= sort_link @q, :publish, 'Published' %></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @albums.each do |album| %>
+        <tr>
+          <td><%= album.name %></td>
+          <%=
+            render(
+              partial: 'admin/shared/table/category',
+              locals: { category: album.category }
+            )
+          %>
+          <td>
+            <% if album.pictures.count > 0 %>
+              <%= fa_icon('check') %>
+            <% else %>
+              <%= fa_icon('close') %>
+            <% end %>
+          </td>
+          <%=
+            render(
+              partial: 'admin/shared/table/created_at',
+              locals: { resource: album }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/updated_at',
+              locals: { resource: album }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/published',
+              locals: { resource: album }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/edit_button',
+              locals: {
+                resource: album, path: edit_admin_album_path(album)
+              }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/delete_button',
+              locals: { resource: album, resource_name: 'album' }
+            )
+          %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= paginate @albums, views_prefix: 'admin' %>
