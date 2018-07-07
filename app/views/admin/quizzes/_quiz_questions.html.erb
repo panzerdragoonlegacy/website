@@ -1,0 +1,18 @@
+<div class="form-group">
+  <label>Questions</label>
+  <%= f.fields_for :quiz_questions do |quiz_question| %>
+    <%= render 'quiz_question', f: quiz_question %>
+  <% end %>
+  <p>
+    <%=
+      link_to_add_association(
+        'Add Question',
+        f,
+        :quiz_questions,
+        role: 'button',
+        class: 'btn btn-success',
+        partial: 'quiz_question'
+      )
+    %>
+  </p>
+</div>

@@ -1,34 +1,17 @@
-class QuizzesController < ApplicationController
+class Admin::QuizzesController < ApplicationController
   include LoadableForQuiz
+  layout 'admin'
   before_action :load_quiz, except: [:index, :new, :create]
 
   def index
-    if params[:contributor_profile_id]
-      load_contributors_quizzes
-    elsif params[:filter] == 'draft'
-      load_draft_quizzes
-    else
-      @quizzes = policy_scope(Quiz.order(:name).page(params[:page]))
-    end
-  end
-
-  def show
-    if params[:commit]
-      check_quiz_results if params[:results]
-    else
-      flash.now[:notice] = "You haven't filled out the quiz."
-    end
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
-      current_user,
-      @quiz.encyclopaedia_entries.order(:name)
-    ).resolve
+    clean_publish_false_param
+    @q = Quiz.order(:name).ransack(params[:q])
+    @quizzes = policy_scope(@q.result.page(params[:page]))
   end
 
   def new
     @quiz = Quiz.new
     authorize @quiz
-    quiz_question = @quiz.quiz_questions.build
-    3.times { quiz_question.quiz_answers.build }
   end
 
   def create
@@ -41,11 +24,6 @@ class QuizzesController < ApplicationController
     else
       render :new
     end
-  end
-
-  def edit
-    quiz_question = @quiz.quiz_questions.build
-    3.times { quiz_question.quiz_answers.build }
   end
 
   def update
@@ -61,7 +39,7 @@ class QuizzesController < ApplicationController
 
   def destroy
     @quiz.destroy
-    redirect_to quizzes_path, notice: 'Successfully destroyed quiz.'
+    redirect_to admin_quizzes_path, notice: 'Successfully destroyed quiz.'
   end
 
   private
@@ -74,20 +52,12 @@ class QuizzesController < ApplicationController
 
   def redirect_to_quiz
     if params[:continue_editing]
-      redirect_to edit_quiz_path(@quiz)
+      redirect_to edit_admin_quiz_path(@quiz)
     else
       redirect_to @quiz
     end
   end
-
-  def check_quiz_results
-    if params[:results].count < @quiz.quiz_questions.count
-      flash.now[:notice] = 'You must fill out all questions.'
-    else
-      @show_results = true
-    end
-  end
-
+  
   def make_current_user_a_contributor
     unless current_user.contributor_profile_id.to_s.in?(
       params[:quiz][:contributor_profile_ids]

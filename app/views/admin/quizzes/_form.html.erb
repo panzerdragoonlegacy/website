@@ -1,25 +1,25 @@
-<%= form_for [:admin, @poem] do |f| %>
-  <%= render 'admin/shared/form/error_messages', target: @poem %>
+<%= form_for [:admin, @quiz], html: { multipart: true } do |f| %>
+  <%= render 'admin/shared/form/error_messages', target: @quiz %>
   <%=
     render(
       partial: 'admin/shared/form/contributors',
       locals: {
-        f: f, contributor_profile_ids: @poem.contributor_profile_ids
+        f: f, contributor_profile_ids: @quiz.contributor_profile_ids
       }
     )
   %>
   <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
   <%= render partial: 'admin/shared/form/description', locals: { f: f } %>
-  <%= render partial: 'admin/shared/form/content', locals: { f: f } %>
+  <%= render 'quiz_questions', f: f %>
   <%=
     render(
       partial: 'admin/shared/form/encyclopaedia_entries',
       locals: {
-        f: f, encyclopaedia_entry_ids: @poem.encyclopaedia_entry_ids
+        f: f, encyclopaedia_entry_ids: @quiz.encyclopaedia_entry_ids
       }
     )
   %>
-  <% if policy(@poem).permitted_attributes.include? :publish %>
+  <% if policy(@quiz).permitted_attributes.include? :publish %>
     <%= render partial: 'admin/shared/form/publish', locals: { f: f } %>
   <% end %>
   <%= render partial: 'admin/shared/form/save_buttons', locals: { f: f } %>
