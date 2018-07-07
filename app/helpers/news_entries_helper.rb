@@ -191,8 +191,6 @@ module NewsEntriesHelper
     # Converts non-html links to html links.
     html = auto_link(html, sanitize: false)
 
-    html = display_emoticons(html)
-
     return html
   end
 end

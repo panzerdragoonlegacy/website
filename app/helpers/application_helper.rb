@@ -16,14 +16,6 @@ module ApplicationHelper
     truncate(html, length: 250, separator: ' ')
   end
 
-  def display_emoticons(text)
-    emoticons = Emoticon.all
-    emoticons.each do |emoticon|
-  	  text.gsub!(emoticon.code, image_tag(emoticon.emoticon.url))
-    end
-    text
-  end
-
   def markdown_to_html(markdown_text)
     # Converts remaining Markdown syntax to html tags using Kramdown.
     require 'kramdown'
@@ -68,8 +60,6 @@ module ApplicationHelper
     # Converts non-html links to html links.
     require 'rails_autolink'
     html = auto_link(html, sanitize: false)
-
-    html = display_emoticons(html)
 
     return html
   end
@@ -240,8 +230,6 @@ module ApplicationHelper
     # Converts non-html links to html links.
     require 'rails_autolink'
     html = auto_link(html, sanitize: false)
-
-    html = display_emoticons(html)
 
     return html
   end
