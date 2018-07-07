@@ -1,15 +1,7 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s News Entries" %>
-<% elsif params[:filter] == 'draft' %>
-  <% title 'Draft News Entries' %>
 <% elsif policy(NewsEntry).new? %>
   <% title 'News' %>
-<% end %>
-
-<% if policy(NewsEntry).new? %>
-  <ul class="administration">
-    <li><%= link_to 'New News Entry', new_news_entry_path %></li>
-  </ul>
 <% end %>
 
 <% if @news_entries %>

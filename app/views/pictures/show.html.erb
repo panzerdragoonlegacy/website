@@ -16,61 +16,6 @@
   </p>
 <% end %>
 
-<%
-  if (
-    policy(@picture).new? ||
-    policy(@picture).edit? ||
-    policy(@picture).destroy?
-  )
-%>
-  <ul class="administration">
-    <% if policy(Album).new? %>
-      <li>
-        <%=
-          link_to(
-            'New Album',
-            new_album_path(category: @picture.category)
-          )
-        %>
-      </li>
-    <% end %>
-    <% if policy(@picture).new? %>
-      <li>
-        <%=
-          link_to(
-            'New Picture',
-            new_picture_path(category: @picture.category)
-          )
-        %>
-      </li>
-    <% end %>
-    <% if @picture.album %>
-      <% if policy(@picture.album).edit? %>
-        <li>
-          <%= link_to "Edit Picture's Album", edit_album_path(@picture.album) %>
-        </li>
-      <% end %>
-    <% end %>
-    <% if policy(@picture).edit? %>
-      <li>
-        <%= link_to 'Edit Picture', edit_picture_path(@picture) %>
-      </li>
-    <% end %>
-    <% if policy(@picture).destroy? %>
-      <li>
-        <%=
-          link_to(
-            'Delete Picture',
-            @picture,
-            data: { confirm: 'Are you sure you want to delete this picture?' },
-            method: :delete
-          )
-        %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-
 <% if @picture_to_replace %>
   <h2>Picture to Replace:</h2>
   <%=

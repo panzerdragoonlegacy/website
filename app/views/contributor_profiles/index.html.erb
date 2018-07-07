@@ -1,13 +1,5 @@
 <% title 'Contributors' %>
 
-<% if policy(ContributorProfile).new? %>
-  <ul class="administration">
-    <li>
-      <%= link_to 'New Contributor Profile', new_contributor_profile_path %>
-    </li>
-  </ul>
-<% end %>
-
 <% if @contributor_profiles %>
   <div id="resources">
     <% @contributor_profiles.each do |contributor_profile| %>

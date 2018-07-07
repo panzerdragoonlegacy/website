@@ -1,11 +1,4 @@
 <h2>Stories in this Category</h2>
-<% if policy(Story).new? %>
-  <ul class="administration">
-    <li>
-      <%= link_to 'New Story', new_story_path(category: @category) %>
-    </li>
-  </ul>
-<% end %>
 <%= render 'stories/list' %>
 <p>
   <%= link_to 'Site Map', site_map_path %> |

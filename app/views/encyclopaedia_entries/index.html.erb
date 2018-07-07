@@ -1,44 +1,4 @@
-<% if params[:filter] == 'draft' %>
-  <% title 'Draft Encyclopaedia Entries' %>
-<% else %>
-  <% title 'Encyclopaedia' %>
-<% end %>
-
-<%
-  if (
-    policy(CategoryGroup).new? ||
-    policy(Category).new? ||
-    policy(EncyclopaediaEntry).new?
-  )
-%>
-  <ul class="administration">
-    <% if policy(CategoryGroup).new? %>
-      <li>
-        <%=
-          link_to(
-            'New Category Group',
-            new_category_group_path(category_group_type: :encyclopaedia_entry)
-          )
-        %>
-      </li>
-    <% end %>
-    <% if policy(Category).new? %>
-      <li>
-        <%=
-          link_to(
-            'New Category',
-            new_category_path(category_type: :encyclopaedia_entry)
-          )
-        %>
-      </li>
-    <% end %>
-    <% if policy(EncyclopaediaEntry).new? %>
-      <li>
-        <%= link_to 'New Encyclopaedia Entry', new_encyclopaedia_entry_path %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+<% title 'Encyclopaedia' %>
 
 <% if @category_groups.present? %>
   <h2>Encyclopaedia Categories</h2>

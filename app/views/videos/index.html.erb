@@ -1,38 +1,7 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Videos" %>
-<% elsif params[:filter] == 'draft' %>
-  <% title 'Draft Videos' %>
 <% else %>
   <% title 'Videos' %>
-<% end %>
-
-<%
-  if (
-    policy(CategoryGroup).new? ||
-    policy(Category).new? ||
-    policy(Video).new?
-  )
-%>
-  <ul class="administration">
-    <% if policy(CategoryGroup).new? %>
-      <li>
-        <%=
-          link_to(
-            'New Category Group',
-            new_category_group_path(category_group_type: :video)
-          )
-        %>
-      </li>
-    <% end %>
-    <% if policy(Category).new? %>
-      <li>
-        <%= link_to 'New Category', new_category_path(category_type: :video) %>
-      </li>
-    <% end %>
-    <% if policy(Video).new? %>
-      <li><%= link_to 'New Video', new_video_path %></li>
-    <% end %>
-  </ul>
 <% end %>
 
 <% unless params[:contributor_profile_id] %>

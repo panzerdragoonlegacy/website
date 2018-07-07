@@ -1,15 +1,7 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Quizzes" %>
-<% elsif params[:filter] == 'draft' %>
-  <% title 'Draft Quizzes' %>
 <% else %>
   <% title 'Quizzes' %>
-<% end %>
-
-<% if policy(Quiz).new? %>
-  <ul class="administration">
-    <li><%= link_to 'New Quiz', new_quiz_path %></li>
-  </ul>
 <% end %>
 
 <%= render 'list' %>

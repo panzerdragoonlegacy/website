@@ -7,19 +7,6 @@
   </p>
 <% end %>
 
-<% if policy(@contributor_profile).edit? %>
-  <ul id="administration">
-    <li>
-      <%=
-        link_to(
-          'Edit Contributor Profile',
-          edit_contributor_profile_path(@contributor_profile)
-        )
-      %>
-    </li>
-  </ul>
-<% end %>
-
 <div id="information">
   <% if @contributor_profile.avatar_file_name.blank? %>
     <%=

@@ -28,22 +28,6 @@
     <li><%= link_to 'Stories', stories_path %></li>
     <li><%= link_to 'Videos', videos_path %></li>
   </ul>
-  <% if current_user %>
-    <% if current_user.administrator %>
-      <h3>Administrator Resources</h3>
-      <ul>
-        <li><%= link_to 'New Category', new_category_path %></li>
-        <li>
-          <%= link_to 'New Category Group', new_category_group_path %>
-        </li>
-        <li><%= link_to 'Albums', albums_path %></li>
-        <li><%= link_to 'Emoticons', emoticons_path %></li>
-        <li><%= link_to 'Pages', pages_path %></li>
-        <li><%= link_to 'Sagas', sagas_path %></li>
-        <li><%= link_to 'Users', users_path %></li>
-      </ul>
-    <% end %>
-  <% end %>
   <% if @partner_sites.present? %>
     <h3>Partner Sites</h3>
     <ul>

@@ -1,15 +1,7 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Poems" %>
-<% elsif params[:filter] == 'draft' %>
-  <% title 'Draft Poems' %>
 <% else %>
   <% title 'Poems' %>
-<% end %>
-
-<% if policy(Poem).new? %>
-  <ul class="administration">
-    <li><%= link_to 'New Poem', new_poem_path %></li>
-  </ul>
 <% end %>
 
 <%= render 'list' %>

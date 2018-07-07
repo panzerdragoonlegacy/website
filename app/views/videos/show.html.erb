@@ -16,31 +16,6 @@
   </p>
 <% end %>
 
-<% if policy(@video).new? || policy(@video).edit? || policy(@video).destroy? %>
-  <ul class="administration">
-    <% if policy(@video).new? %>
-      <li>
-        <%= link_to 'New Video', new_video_path(category: @video.category) %>
-      </li>
-    <% end %>
-    <% if policy(@video).edit? %>
-      <li><%= link_to 'Edit Video', edit_video_path(@video) %></li>
-    <% end %>
-    <% if policy(@video).destroy? %>
-      <li>
-        <%=
-          link_to(
-            'Delete Video',
-            @video,
-            data: { confirm: 'Are you sure you want to delete this video?' },
-            method: :delete
-          )
-        %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-
 <h2>Contributed By:</h2>
 <ul class="thumbnail_and_name_list">
   <% @video.contributor_profiles.each do |contributor_profile| %>

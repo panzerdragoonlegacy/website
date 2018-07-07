@@ -1,27 +1,10 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Downloads" %>
-<% elsif params[:filter] == 'draft' %>
-  <% title 'Draft Downloads' %>
 <% else %>
   <% title 'Downloads' %>
 <% end %>
 
-<% if policy(Category).new? || policy(Download).new? %>
-  <ul class="administration">
-    <% if policy(Category).new? %>
-      <li>
-        <%=
-          link_to 'New Category', new_category_path(category_type: :download)
-        %>
-      </li>
-    <% end %>
-    <% if policy(Download).new? %>
-      <li><%= link_to 'New Download', new_download_path %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<% unless params[:contributor_profile_id] || params[:filter] %>
+<% unless params[:contributor_profile_id] %>
   <% if @categories.present? %>
     <h2>Download Categories</h2>
     <ul class="categories">

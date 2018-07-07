@@ -1,4 +1,5 @@
 class Admin::SagasController < ApplicationController
+  include LoadableForSaga
   layout 'admin'
   before_action :load_encyclopaedia_entries, except: [:index, :destroy]
   before_action :load_saga, except: [:index, :new, :create]
@@ -47,16 +48,7 @@ class Admin::SagasController < ApplicationController
       :name
     )
   end
-
-  def load_encyclopaedia_entries
-    @encyclopaedia_entries = policy_scope(EncyclopaediaEntry.order(:name))
-  end
-
-  def load_saga
-    @saga = Saga.find_by url: params[:id]
-    authorize @saga
-  end
-
+  
   def redirect_to_saga
     if params[:continue_editing]
       redirect_to edit_admin_saga_path(@saga)

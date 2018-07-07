@@ -1,25 +1,6 @@
 <% title @chapter.story.name %>
 <% description @chapter.story.description %>
 
-<% if policy(@chapter.story).edit? %>
-  <ul class="administration">
-    <li>
-      <%= link_to 'New Chapter', new_chapter_path(story: @chapter.story) %>
-    </li>
-    <li><%= link_to 'Edit Chapter', edit_chapter_path(@chapter) %></li>
-    <li>
-      <%=
-        link_to(
-          'Delete Chapter',
-          @chapter,
-          data: { confirm: 'Are you sure you want to delete this chapter?' },
-          method: :delete
-        )
-      %>
-    </li>
-  </ul>
-<% end %>
-
 <h2>
   <% if @chapter.chapter_type == :regular_chapter.to_s %>
     Chapter <%= @chapter.number %><% unless @chapter.name.blank? %>:<% end %>

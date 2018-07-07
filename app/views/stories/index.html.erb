@@ -1,25 +1,10 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Stories" %>
-<% elsif params[:filter] == 'draft' %>
-  <% title 'Draft Stories' %>
 <% else %>
   <% title 'Stories' %>
 <% end %>
 
-<% if policy(Category).new? or policy(Story).new? %>
-  <ul class="administration">
-    <% if policy(Category).new? %>
-      <li>
-        <%= link_to 'New Category', new_category_path(category_type: :story) %>
-      </li>
-    <% end %>
-    <% if policy(Story).new? %>
-      <li><%= link_to 'New Story', new_story_path %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<% unless params[:contributor_profile_id] or params[:filter] %>
+<% unless params[:contributor_profile_id] %>
   <% if @categories.present? %>
     <h2>Story Categories</h2>
     <ul class="categories">

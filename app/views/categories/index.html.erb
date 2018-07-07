@@ -1,18 +1,3 @@
-<% if params[:filter] == 'draft' %>
-  <% title 'Draft Categories' %>
-<% else %>
-  <% title 'Categories' %>
-<% end %>
-
-<% if policy(CategoryGroup).new? || policy(Category).new? %>
-  <ul class="administration">
-    <% if policy(CategoryGroup).new? %>
-      <li><%= link_to 'New Category Group', new_category_group_path %></li>
-    <% end %>
-    <% if policy(Category).new? %>
-      <li><%= link_to 'New Category', new_category_path %></li>
-    <% end %>
-  </ul>
-<% end %>
+<% title 'Categories' %>
 
 <%= render 'list' %>

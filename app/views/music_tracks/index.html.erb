@@ -1,46 +1,10 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Music Tracks" %>
-<% elsif params[:filter] == 'draft' %>
-  <% title 'Draft Music Tracks' %>
 <% else %>
   <% title 'Music Tracks' %>
 <% end %>
 
-<%
-  if (
-    policy(CategoryGroup).new? ||
-    policy(Category).new? ||
-    policy(MusicTrack).new?
-  )
-%>
-  <ul class="administration">
-    <% if policy(CategoryGroup).new? %>
-      <li>
-        <%=
-          link_to(
-            'New Category Group',
-            new_category_group_path(category_group_type: :music_track)
-          )
-        %>
-      </li>
-    <% end %>
-    <% if policy(Category).new? %>
-      <li>
-        <%=
-          link_to(
-            'New Category',
-            new_category_path(category_type: :music_track)
-          )
-        %>
-      </li>
-    <% end %>
-    <% if policy(MusicTrack).new? %>
-      <li><%= link_to 'New Music Track', new_music_track_path %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<% unless params[:contributor_profile_id] || params[:filter] %>
+<% unless params[:contributor_profile_id] %>
   <% if @category_groups.present? %>
     <h2>Music Categories</h2>
     <%=

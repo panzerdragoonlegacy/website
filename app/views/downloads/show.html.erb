@@ -10,43 +10,6 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<%
-  if (
-    policy(@download).new? ||
-    policy(@download).edit? ||
-    policy(@download).destroy?
-  )
-%>
-  <ul class="administration">
-    <% if policy(@download).new? %>
-      <li>
-        <%=
-          link_to(
-            'New Download', new_download_path(category: @download.category)
-          )
-        %>
-      </li>
-    <% end %>
-    <% if policy(@download).edit? %>
-      <li>
-        <%= link_to 'Edit Download', edit_download_path(@download) %>
-      </li>
-    <% end %>
-    <% if policy(@download).destroy? %>
-      <li>
-        <%=
-          link_to(
-            'Delete Download',
-            @download,
-            data: { confirm: 'Are you sure you want to delete this download?' },
-            method: :delete
-          )
-        %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-
 <h2>Contributed By:</h2>
 <ul class="thumbnail_and_name_list">
   <% @download.contributor_profiles.each do |contributor_profile| %>

@@ -1,60 +1,10 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Pictures" %>
-<% elsif params[:filter] == 'draft' %>
-  <% title 'Draft Pictures' %>
 <% else %>
   <% title 'Pictures' %>
 <% end %>
 
-<%
-  if (
-    policy(CategoryGroup).new? ||
-    policy(Category).new? ||
-    policy(Picture).new?
-  )
-%>
-  <ul class="administration">
-    <% if policy(CategoryGroup).new? %>
-      <li>
-        <%=
-          link_to(
-            'New Category Group',
-            new_category_group_path(category_group_type: :picture)
-          )
-        %>
-      </li>
-    <% end %>
-    <% if policy(Category).new? %>
-      <li>
-        <%=
-          link_to(
-            'New Category',
-            new_category_path(category_type: :picture)
-          )
-        %>
-      </li>
-    <% end %>
-    <% if policy(Album).new? %>
-      <li>
-        <%= link_to 'New Album', new_album_path %>
-      </li>
-    <% end %>
-    <% if policy(Picture).new? %>
-      <li>
-        <%= link_to 'New Picture', new_picture_path %>
-      </li>
-    <% end %>
-    <% if current_user %>
-      <% if current_user.contributor_profile %>
-        <li>
-          <%= link_to 'List of Albums', albums_path %>
-        </li>
-      <% end %>
-    <% end %>
-  </ul>
-<% end %>
-
-<% unless params[:contributor_profile_id] || params[:filter] %>
+<% unless params[:contributor_profile_id] %>
   <% if @category_groups.present? %>
     <h2>Picture Categories</h2>
     <%=

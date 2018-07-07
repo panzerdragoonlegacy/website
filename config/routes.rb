@@ -5,7 +5,6 @@ Rails.application.routes.draw do
     sign_up: "register",
     edit: "edit-profile"
   }
-  resources :users
 
   namespace :admin do
     get '/', to: 'home#index'
@@ -39,9 +38,9 @@ Rails.application.routes.draw do
   resources :news_entries, path: 'news'
   get 'site-map', to: 'site_map#show', as: :site_map
   resources :site_map
-  resources :category_groups, path: 'category-groups'
   resources :categories
   resources :encyclopaedia_entries, path: 'encyclopaedia'
+  resources :pages
 
   resources :contributor_profiles, path: 'contributors' do
     resources :news_entries, path: 'news-entries'
@@ -61,7 +60,6 @@ Rails.application.routes.draw do
   resources :downloads
   resources :links
   resources :music_tracks, path: 'music'
-  resources :albums
   resources :pictures
   resources :poems
   resources :quizzes
@@ -69,10 +67,6 @@ Rails.application.routes.draw do
   resources :stories
   resources :chapters
   resources :videos
-
-  resources :emoticons
-  resources :pages
-  resources :sagas
 
   get ':id', to: 'pages#show'
   root to: "news_entries#index"
