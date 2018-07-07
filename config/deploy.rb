@@ -68,7 +68,5 @@ namespace :deploy do
     end
   end
 
-  # Note: You will need to temporarily increase the size of the Digital Ocean
-  # droplet from 512MB to 1GB of RAM in order for this step to succeed.
   after :compile_assets, :build_missing_paperclip_styles
 end
