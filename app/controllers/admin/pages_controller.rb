@@ -1,14 +1,12 @@
 class Admin::PagesController < ApplicationController
   include LoadableForPage
-  include Sortable
   layout 'admin'
   before_action :load_page, except: [:index, :new, :create]
-  helper_method :sort_column, :sort_direction
 
   def index
-    @pages = policy_scope(
-      Page.order(sort_column + ' ' + sort_direction).page(params[:page])
-    )
+    clean_publish_false_param
+    @q = Page.order(:name).ransack(params[:q])
+    @pages = policy_scope(@q.result.page(params[:page]))
   end
 
   def new
@@ -55,9 +53,5 @@ class Admin::PagesController < ApplicationController
     else
       redirect_to @page
     end
-  end
-
-  def sort_column
-    Page.column_names.include?(params[:sort]) ? params[:sort] : 'name'
   end
 end
