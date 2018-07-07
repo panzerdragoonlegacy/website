@@ -1,14 +1,12 @@
 class Admin::PoemsController < ApplicationController
   include LoadableForPoem
-  include Sortable
   layout 'admin'
   before_action :load_poem, except: [:index, :new, :create]
-  helper_method :sort_column, :sort_direction
 
   def index
-    @poems = policy_scope(
-      Poem.order(sort_column + ' ' + sort_direction).page(params[:page])
-    )
+    clean_publish_false_param
+    @q = Poem.order(:name).ransack(params[:q])
+    @poems = policy_scope(@q.result.page(params[:page]))
   end
 
   def new
@@ -67,9 +65,5 @@ class Admin::PoemsController < ApplicationController
       params[:poem][:contributor_profile_ids] <<
         current_user.contributor_profile_id
     end
-  end
-
-  def sort_column
-    Poem.column_names.include?(params[:sort]) ? params[:sort] : 'name'
   end
 end
