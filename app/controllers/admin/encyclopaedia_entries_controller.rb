@@ -1,15 +1,14 @@
 class Admin::EncyclopaediaEntriesController < ApplicationController
   include LoadableForEncyclopaediaEntry
-  include Sortable
   layout 'admin'
   before_action :load_categories, except: [:destroy]
   before_action :load_encyclopaedia_entry, except: [:index, :new, :create]
-  helper_method :sort_column, :sort_direction
 
   def index
+    clean_publish_false_param
+    @q = EncyclopaediaEntry.order(:name).ransack(params[:q])
     @encyclopaedia_entries = policy_scope(
-      EncyclopaediaEntry.order(sort_column + ' ' + sort_direction)
-        .page(params[:page])
+      @q.result.includes(:category).page(params[:page])
     )
   end
 
@@ -77,14 +76,6 @@ class Admin::EncyclopaediaEntriesController < ApplicationController
     )
       params[:encyclopaedia_entry][:contributor_profile_ids] <<
         current_user.contributor_profile_id
-    end
-  end
-
-  def sort_column
-    if EncyclopaediaEntry.column_names.include?(params[:sort])
-      params[:sort]
-    else
-      'name'
     end
   end
 end
