@@ -17,24 +17,39 @@
 
   </head>
   <body>
-    <div class="container-fluid pl-3 pr-3">
-      <div class="row pt-2 pb-2" style="background-color: #eeeeee;">
-        <%= render 'layouts/admin/top_nav' %>
-      </div>
-    </div>
-    <div class="container-fluid p-3">
-      <div class="row">
-        <div class="col">
-          <%= render 'layouts/admin/left_nav' %>
-        </div>
-        <div class="col-9">
-          <%= render 'admin/shared/flash_messages' %>
-          <% if yield(:title).present? %>
-            <h1><%= yield(:title) %></h1>
-          <% end %>
-          <%= yield %>
+    <% if user_signed_in? %>
+      <div class="container-fluid pl-3 pr-3">
+        <div class="row pt-2 pb-2" style="background-color: #eeeeee;">
+          <%= render 'layouts/admin/top_nav' %>
         </div>
       </div>
-    </div>
+      <div class="container-fluid p-3">
+        <div class="row">
+          <div class="col">
+            <%= render 'layouts/admin/left_nav' %>
+          </div>
+          <div class="col-9">
+            <%= render 'admin/shared/flash_messages' %>
+            <% if yield(:title).present? %>
+              <h1><%= yield(:title) %></h1>
+            <% end %>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div class="container mt-3">
+        <div class="row">
+          <div class="col">
+            <div class="alert alert-info" role="alert">
+              <p class="mb-0">
+                You must be logged in to view the admin panel.
+                <%= link_to 'Log In', new_user_session_path %>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </body>
 </html>
