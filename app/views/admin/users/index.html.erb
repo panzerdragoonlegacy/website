@@ -105,5 +105,6 @@
       </tr>
     <% end %>
   </table>
-  <%= paginate @users %>
 <% end %>
+
+<%= paginate @users, views_prefix: 'admin' %>
