@@ -52,25 +52,8 @@
       <% end %>
     </ul>
   <% end %>
-  <% if user_signed_in? %>
-    <h3>Your Details</h3>
-    <ul>
-      <li>Welcome
-        <% if current_user.contributor_profile_id %>
-          <%= current_user.contributor_profile.name %>
-        <% else %>
-          <%= current_user.email %>
-        <% end %>
-      </li>
-      <li><%= link_to 'Edit Profile', edit_user_registration_path %>
-      <li>
-        <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
-      </li>
-    </ul>
-  <% else %>
-    <h3>Contributor Access</h3>
-    <ul>
-      <li><%= link_to 'Log In', new_user_session_path %></li>
-    </ul>
-  <% end %>
+  <h3>Contributor Access</h3>
+  <ul>
+    <li><%= link_to 'Admin Panel', admin_path %></li>
+  </ul>
 </div>
