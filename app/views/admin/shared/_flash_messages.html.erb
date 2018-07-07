@@ -1,7 +1,15 @@
 <div class="row">
   <% flash.each do |name, msg| %>
     <% unless name.to_s == 'timedout' %>
-      <%= content_tag :div, msg, id: "flash_#{name}", class: 'alert alert-success', role: 'alert' %>
+      <%=
+        content_tag(
+          :div,
+          msg,
+          id: "flash_#{name}",
+          class: 'alert alert-success',
+          role: 'alert'
+        )
+      %>
     <% end %>
   <% end %>
 </div>
