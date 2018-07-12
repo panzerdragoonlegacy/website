@@ -10,4 +10,14 @@
       { class: 'form-control' }
     )
   %>
+  <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: 'Albums should be used to group a set of related pictures ' \
+          'from the same category. Pictures added to an album will show up ' \
+          'below other pictures belonging to the same album.'
+      }
+    )
+  %>
 </div>
