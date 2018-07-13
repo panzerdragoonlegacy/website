@@ -15,7 +15,17 @@
       }
     )
   %>
-  <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
+  <%=
+    render(
+      partial: 'admin/shared/form/name',
+      locals: {
+        f: f,
+        info: 'Names should not end with a full stop and important words ' \
+          'should begin with a capital letter, e.g. "The North American 20th ' \
+          'Anniversary of Panzer Dragoon Saga is Upon Us".'
+      }
+    )
+  %>
   <%= render partial: 'admin/shared/form/content', locals: { f: f } %>
   <% if policy(@news_entry).permitted_attributes.include? :publish %>
     <%= render partial: 'admin/shared/form/publish', locals: { f: f } %>
