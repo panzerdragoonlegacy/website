@@ -2,6 +2,18 @@
   <%= render 'admin/shared/form/error_messages', target: @album %>
   <%=
     render(
+      partial: 'admin/shared/form/warning',
+      locals: {
+        warning: 'To avoid losing a large batch of pictures due to a ' \
+        'validation error or a request timeout, it is recommended that you ' \
+        'only upload around five pictures at a time. Saving the form will ' \
+        'upload the current batch of unsaved pictures. Further pictures can ' \
+        'be added to the album at any time by editing the album record.'
+      }
+    )
+  %>
+  <%=
+    render(
       partial: 'admin/shared/form/category',
       locals: {
         f: f,
