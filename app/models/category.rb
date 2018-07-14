@@ -39,7 +39,7 @@ class Category < ActiveRecord::Base
     if persisted?
       persisted_category = Category.find id
       if category_type != persisted_category.category_type &&
-         send(persisted_category.category_type.pluralize).present?
+        send(persisted_category.category_type.pluralize).present?
         errors.add(persisted_category.category_type, 'category type cannot ' \
           'be reassigned while the category contains items.')
       end
