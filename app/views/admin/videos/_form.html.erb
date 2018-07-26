@@ -21,10 +21,8 @@
   <%= render partial: 'admin/shared/form/extra_information', locals: { f: f } %>
   <%=
     render(
-      partial: 'admin/shared/form/encyclopaedia_entries',
-      locals: {
-        f: f, encyclopaedia_entry_ids: @video.encyclopaedia_entry_ids
-      }
+      partial: 'admin/shared/form/tags',
+      locals: { f: f, tag_ids: @video.tag_ids }
     )
   %>
   <% if policy(@video).permitted_attributes.include? :publish %>

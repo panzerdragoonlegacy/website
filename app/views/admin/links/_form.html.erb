@@ -20,10 +20,8 @@
   <%= render partial: 'admin/shared/form/description', locals: { f: f } %>
   <%=
     render(
-      partial: 'admin/shared/form/encyclopaedia_entries',
-      locals: {
-        f: f, encyclopaedia_entry_ids: @link.encyclopaedia_entry_ids
-      }
+      partial: 'admin/shared/form/tags',
+      locals: { f: f, tag_ids: @link.tag_ids }
     )
   %>
   <%= render partial: 'admin/shared/form/save_buttons', locals: { f: f } %>

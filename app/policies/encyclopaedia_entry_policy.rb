@@ -66,7 +66,7 @@ class EncyclopaediaEntryPolicy < ApplicationPolicy
   private
 
   def attributes_except_publish
-    related_id_attributes + [
+    [
       :category_id,
       :name,
       :encyclopaedia_entry_picture,
@@ -74,21 +74,6 @@ class EncyclopaediaEntryPolicy < ApplicationPolicy
       :content,
       contributor_profile_ids: [],
       illustrations_attributes: [:id, :illustration, :_destroy]
-    ]
-  end
-
-  def related_id_attributes
-    [
-      article_ids: [],
-      download_ids: [],
-      link_ids: [],
-      music_track_ids: [],
-      picture_ids: [],
-      poem_ids: [],
-      quiz_ids: [],
-      resource_ids: [],
-      story_ids: [],
-      video_ids: []
     ]
   end
 end

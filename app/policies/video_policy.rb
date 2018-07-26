@@ -73,7 +73,7 @@ class VideoPolicy < ApplicationPolicy
       :mp4_video,
       :youtube_video_id,
       contributor_profile_ids: [],
-      encyclopaedia_entry_ids: []
+      tag_ids: []
     ]
   end
 end

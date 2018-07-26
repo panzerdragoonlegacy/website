@@ -13,10 +13,8 @@
   <%= render partial: 'admin/shared/form/content', locals: { f: f } %>
   <%=
     render(
-      partial: 'admin/shared/form/encyclopaedia_entries',
-      locals: {
-        f: f, encyclopaedia_entry_ids: @poem.encyclopaedia_entry_ids
-      }
+      partial: 'admin/shared/form/tags',
+      locals: { f: f, tag_ids: @poem.tag_ids }
     )
   %>
   <% if policy(@poem).permitted_attributes.include? :publish %>

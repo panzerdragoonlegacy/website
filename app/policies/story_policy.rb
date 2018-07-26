@@ -71,7 +71,7 @@ class StoryPolicy < ApplicationPolicy
       :description,
       :content,
       contributor_profile_ids: [],
-      encyclopaedia_entry_ids: [],
+      tag_ids: [],
       illustrations_attributes: [:id, :illustration, :_destroy]
     ]
   end

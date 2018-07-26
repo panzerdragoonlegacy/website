@@ -19,10 +19,8 @@
   <%= render partial: 'admin/shared/form/illustrations', locals: { f: f } %>
   <%=
     render(
-      partial: 'admin/shared/form/encyclopaedia_entries',
-      locals: {
-        f: f, encyclopaedia_entry_ids: @resource.encyclopaedia_entry_ids
-      }
+      partial: 'admin/shared/form/tags',
+      locals: { f: f, tag_ids: @resource.tag_ids }
     )
   %>
   <% if policy(@resource).permitted_attributes.include? :publish %>

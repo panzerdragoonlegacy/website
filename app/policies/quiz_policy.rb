@@ -70,7 +70,7 @@ class QuizPolicy < ApplicationPolicy
       :description,
       quiz_questions_attributes: quiz_questions_attributes,
       contributor_profile_ids: [],
-      encyclopaedia_entry_ids: []
+      tag_ids: []
     ]
   end
 

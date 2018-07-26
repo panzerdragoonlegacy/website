@@ -13,10 +13,8 @@
   <%= render 'quiz_questions', f: f %>
   <%=
     render(
-      partial: 'admin/shared/form/encyclopaedia_entries',
-      locals: {
-        f: f, encyclopaedia_entry_ids: @quiz.encyclopaedia_entry_ids
-      }
+      partial: 'admin/shared/form/tags',
+      locals: { f: f, tag_ids: @quiz.tag_ids }
     )
   %>
   <% if policy(@quiz).permitted_attributes.include? :publish %>

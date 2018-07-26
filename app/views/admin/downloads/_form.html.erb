@@ -20,10 +20,8 @@
   <%= render partial: 'admin/shared/form/extra_information', locals: { f: f } %>
   <%=
     render(
-      partial: 'admin/shared/form/encyclopaedia_entries',
-      locals: {
-        f: f, encyclopaedia_entry_ids: @download.encyclopaedia_entry_ids
-      }
+      partial: 'admin/shared/form/tags',
+      locals: { f: f, tag_ids: @download.tag_ids }
     )
   %>
   <% if policy(@download).permitted_attributes.include? :publish %>

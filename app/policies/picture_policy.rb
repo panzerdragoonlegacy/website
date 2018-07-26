@@ -73,7 +73,7 @@ class PicturePolicy < ApplicationPolicy
       :description,
       :information,
       contributor_profile_ids: [],
-      encyclopaedia_entry_ids: []
+      tag_ids: []
     ]
   end
 

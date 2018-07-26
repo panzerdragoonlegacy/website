@@ -3,7 +3,7 @@ $(document).on('ready page:load', function() {
   $('#picture_category_id').select2();
   $('#picture_album_id').select2();
   $('#picture_contributor_profile_ids').select2();
-  $('#picture_encyclopaedia_entry_ids').select2();
+  $('#picture_tag_ids').select2();
 
   $('.edit_picture').submit(function(event) {
     if (

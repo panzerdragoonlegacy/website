@@ -73,7 +73,7 @@ class DownloadPolicy < ApplicationPolicy
       :information,
       :download,
       contributor_profile_ids: [],
-      encyclopaedia_entry_ids: []
+      tag_ids: []
     ]
   end
 end

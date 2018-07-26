@@ -70,7 +70,7 @@ class PoemPolicy < ApplicationPolicy
       :description,
       :content,
       contributor_profile_ids: [],
-      encyclopaedia_entry_ids: []
+      tag_ids: []
     ]
   end
 end

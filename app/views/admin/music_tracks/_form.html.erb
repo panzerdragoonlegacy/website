@@ -22,10 +22,8 @@
   <%= render partial: 'admin/shared/form/extra_information', locals: { f: f } %>
   <%=
     render(
-      partial: 'admin/shared/form/encyclopaedia_entries',
-      locals: {
-        f: f, encyclopaedia_entry_ids: @music_track.encyclopaedia_entry_ids
-      }
+      partial: 'admin/shared/form/tags',
+      locals: { f: f, tag_ids: @music_track.tag_ids }
     )
   %>
   <% if policy(@music_track).permitted_attributes.include? :publish %>
