@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :category_groups, path: 'category-groups'
     resources :categories
     resources :sagas
+    resources :tags
     
     resources :contributor_profiles, path: 'contributor-profiles'
     resources :users
