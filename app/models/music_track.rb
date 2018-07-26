@@ -3,7 +3,7 @@ class MusicTrack < ActiveRecord::Base
 
   include Categorisable
   include Contributable
-  include Relatable
+  include Taggable
   include Syncable
 
   validates(

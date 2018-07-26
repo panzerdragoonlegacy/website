@@ -1,6 +1,6 @@
 class Link < ActiveRecord::Base
   include Categorisable
-  include Relatable
+  include Taggable
 
   has_many :contributions, as: :contributable, dependent: :destroy
   has_many :contributor_profiles, through: :contributions

@@ -2,7 +2,7 @@ class Story < ActiveRecord::Base
   include Categorisable
   include Contributable
   include Illustratable
-  include Relatable
+  include Taggable
   include Sluggable
 
   has_many :chapters, dependent: :destroy

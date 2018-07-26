@@ -1,6 +1,6 @@
 class Poem < ActiveRecord::Base
   include Contributable
-  include Relatable
+  include Taggable
   include Sluggable
 
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true

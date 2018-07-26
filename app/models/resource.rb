@@ -4,7 +4,7 @@ class Resource < ActiveRecord::Base
   include Categorisable
   include Contributable
   include Illustratable
-  include Relatable
+  include Taggable
 
   validates :name, presence: true, length: { in: 2..100 }
   validates :content, presence: true

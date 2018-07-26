@@ -1,6 +1,6 @@
 class Quiz < ActiveRecord::Base
   include Contributable
-  include Relatable
+  include Taggable
   include Sluggable
 
   has_many :quiz_questions, dependent: :destroy
