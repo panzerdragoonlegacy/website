@@ -25,78 +25,88 @@ module LoadableForEncyclopaediaEntry
 
   def load_draft_encyclopaedia_entries
     @encyclopaedia_entries = policy_scope(
-      EncyclopaediaEntry.where(publish: false)
-        .order(:name).page(params[:page])
+      EncyclopaediaEntry.where(publish: false).order(:name).page(params[:page])
     )
   end
 
   def load_articles
     @articles = ArticlePolicy::Scope.new(
       current_user,
-      @encyclopaedia_entry.articles.order(:name)
+      Article.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
+        .order(:name)
     ).resolve
   end
 
   def load_downloads
     @downloads = DownloadPolicy::Scope.new(
       current_user,
-      @encyclopaedia_entry.downloads.order(:name)
+      Download.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
+        .order(:name)
     ).resolve
   end
 
   def load_links
     @links = LinkPolicy::Scope.new(
       current_user,
-      @encyclopaedia_entry.links.order(:name)
+      Link.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
+        .order(:name)
     ).resolve
   end
 
   def load_music_tracks
     @music_tracks = MusicTrackPolicy::Scope.new(
       current_user,
-      @encyclopaedia_entry.music_tracks.order(:name)
+      MusicTrack.includes(:tags)
+        .where(tags: { name: @encyclopaedia_entry.name })
+        .order(:name)
     ).resolve
   end
 
   def load_pictures
     @pictures = PicturePolicy::Scope.new(
       current_user,
-      @encyclopaedia_entry.pictures.order(:name)
+      Picture.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
+        .order(:name)
     ).resolve
   end
 
   def load_poems
     @poems = PoemPolicy::Scope.new(
       current_user,
-      @encyclopaedia_entry.poems.order(:name)
+      Poem.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
+        .order(:name)
     ).resolve
   end
 
   def load_quizzes
     @quizzes = QuizPolicy::Scope.new(
       current_user,
-      @encyclopaedia_entry.quizzes.order(:name)
+      Quiz.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
+        .order(:name)
     ).resolve
   end
 
   def load_resources
     @resources = ResourcePolicy::Scope.new(
       current_user,
-      @encyclopaedia_entry.resources.order(:name)
+      Resource.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
+        .order(:name)
     ).resolve
   end
 
   def load_stories
     @stories = StoryPolicy::Scope.new(
       current_user,
-      @encyclopaedia_entry.stories.order(:name)
+      Story.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
+        .order(:name)
     ).resolve
   end
 
   def load_videos
     @videos = VideoPolicy::Scope.new(
       current_user,
-      @encyclopaedia_entry.videos.order(:name)
+      Video.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
+        .order(:name)
     ).resolve
   end
 end
