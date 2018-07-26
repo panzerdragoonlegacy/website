@@ -55,8 +55,8 @@ module Admin::HomeHelper
     policy_scope(Video.where(publish: false)).count
   end
 
-  def draft_page_count
-    policy_scope(Page.where(publish: false)).count
+  def draft_special_page_count
+    policy_scope(SpecialPage.where(publish: false)).count
   end
 
   def draft_count
@@ -74,6 +74,6 @@ module Admin::HomeHelper
     draft_resource_count +
     draft_story_count +
     draft_video_count +
-    draft_page_count
+    draft_special_page_count
   end
 end

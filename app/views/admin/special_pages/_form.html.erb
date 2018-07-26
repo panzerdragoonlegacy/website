@@ -1,9 +1,9 @@
-<%= form_for [:admin, @page], html: { multipart: true } do |f| %>
-  <%= render 'admin/shared/form/error_messages', target: @page %>
+<%= form_for [:admin, @special_page], html: { multipart: true } do |f| %>
+  <%= render 'admin/shared/form/error_messages', target: @special_page %>
   <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
   <%= render partial: 'admin/shared/form/content', locals: { f: f } %>
   <%= render partial: 'admin/shared/form/illustrations', locals: { f: f } %>
-  <% if policy(@page).permitted_attributes.include? :publish %>
+  <% if policy(@special_page).permitted_attributes.include? :publish %>
     <%= render partial: 'admin/shared/form/publish', locals: { f: f } %>
   <% end %>
   <%= render partial: 'admin/shared/form/save_buttons', locals: { f: f } %>

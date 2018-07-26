@@ -1,0 +1,14 @@
+<% title @special_page.name %>
+<% description truncated_text(@special_page.content) %>
+
+<% unless @special_page.publish %>
+  <p class="unpublished">Unpublished</p>
+<% end %>
+
+<%=
+  raw(
+    illustrated_markdown_to_html(
+      @special_page.id, 'Special Page', @special_page.content
+    )
+  )
+%>

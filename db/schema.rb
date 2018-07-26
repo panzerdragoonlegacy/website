@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180707165844) do
+ActiveRecord::Schema.define(version: 20180726082243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,15 +183,6 @@ ActiveRecord::Schema.define(version: 20180707165844) do
     t.datetime "news_entry_picture_updated_at"
   end
 
-  create_table "pages", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "url",        limit: 255
-    t.text     "content"
-    t.boolean  "publish",                default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "pictures", force: :cascade do |t|
     t.string   "name",                     limit: 255
     t.string   "url",                      limit: 255
@@ -271,6 +262,15 @@ ActiveRecord::Schema.define(version: 20180707165844) do
   end
 
   add_index "sagas", ["encyclopaedia_entry_id"], name: "index_sagas_on_encyclopaedia_entry_id", using: :btree
+
+  create_table "special_pages", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "url",        limit: 255
+    t.text     "content"
+    t.boolean  "publish",                default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "stories", force: :cascade do |t|
     t.string   "name",        limit: 255

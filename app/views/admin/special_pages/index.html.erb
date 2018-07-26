@@ -1,10 +1,12 @@
-<% title 'Pages' %>
+<% title 'Special Pages' %>
 
 <%=
   render(
     partial: 'admin/shared/table/new_button',
     locals: {
-      resource: Page, resource_name: 'Page', path: new_admin_page_path
+      resource: SpecialPage,
+      resource_name: 'Special Page',
+      path: new_admin_special_page_path
     }
   )
 %>
@@ -12,11 +14,11 @@
 <%=
   render(
     partial: 'admin/shared/search/name_and_draft_form',
-    locals: { q: @q, path: admin_pages_path }
+    locals: { q: @q, path: admin_special_pages_path }
   )
 %>
 
-<% if @pages %>
+<% if @special_pages %>
   <table class="table">
     <thead>
       <tr>
@@ -29,44 +31,47 @@
       </tr>
     </thead>
     <tbody>
-      <% @pages.each do |page| %>
+      <% @special_pages.each do |special_page| %>
         <tr>
           <%=
             render(
               partial: 'admin/shared/table/name',
-              locals: { resource: page, path: page_path(page) }
+              locals: {
+                resource: special_page, path: special_page_path(special_page)
+              }
             )
           %>
           <%=
             render(
               partial: 'admin/shared/table/created_at',
-              locals: { resource: page }
+              locals: { resource: special_page }
             )
           %>
           <%=
             render(
               partial: 'admin/shared/table/updated_at',
-              locals: { resource: page }
+              locals: { resource: special_page }
             )
           %>
           <%=
             render(
               partial: 'admin/shared/table/published',
-              locals: { resource: page }
+              locals: { resource: special_page }
             )
           %>
           <%=
             render(
               partial: 'admin/shared/table/edit_button',
               locals: {
-                resource: page, path: edit_admin_page_path(page)
+                resource: special_page,
+                path: edit_admin_special_page_path(special_page)
               }
             )
           %>
           <%=
             render(
               partial: 'admin/shared/table/delete_button',
-              locals: { resource: page, resource_name: 'page' }
+              locals: { resource: special_page, resource_name: 'special page' }
             )
           %>
         </tr>
@@ -75,4 +80,4 @@
   </table>
 <% end %>
 
-<%= paginate @pages, views_prefix: 'admin' %>
+<%= paginate @special_pages, views_prefix: 'admin' %>

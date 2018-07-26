@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Page, type: :model do
+RSpec.describe SpecialPage, type: :model do
   describe 'fields' do
     it { is_expected.to respond_to(:name) }
     it { is_expected.to respond_to(:url) }
@@ -31,26 +31,26 @@ RSpec.describe Page, type: :model do
   end
 
   describe 'slug' do
-    context 'creating a new page' do
-      let(:page) do
-        FactoryGirl.build :valid_page, name: 'Page 1'
+    context 'creating a new special page' do
+      let(:special_page) do
+        FactoryGirl.build :valid_special_page, name: 'Special Page 1'
       end
 
       it 'generates a slug that is a parameterised version of the name' do
-        page.save
-        expect(page.url).to eq 'page-1'
+        special_page.save
+        expect(special_page.url).to eq 'special-page-1'
       end
     end
 
-    context 'updating a page' do
-      let(:page) do
-        FactoryGirl.create :valid_page, name: 'Page 1'
+    context 'updating a special page' do
+      let(:special_page) do
+        FactoryGirl.create :valid_special_page, name: 'Special Page 1'
       end
 
       it 'synchronises the slug with the updated name' do
-        page.name = 'Page 2'
-        page.save
-        expect(page.url).to eq 'page-2'
+        special_page.name = 'Special Page 2'
+        special_page.save
+        expect(special_page.url).to eq 'special-page-2'
       end
     end
   end

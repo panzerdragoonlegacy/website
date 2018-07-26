@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :articles
     resources :encyclopaedia_entries, path: 'encyclopaedia-entries'
     resources :news_entries, path: 'news-entries'
-    resources :pages
+    resources :special_pages, path: 'special-pages'
     resources :poems
     resources :resources
     resources :stories
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   resources :site_map
   resources :categories
   resources :encyclopaedia_entries, path: 'encyclopaedia'
-  resources :pages
+  resources :special_pages, path: 'special-pages'
 
   resources :contributor_profiles, path: 'contributors' do
     resources :news_entries, path: 'news-entries'
@@ -68,6 +68,6 @@ Rails.application.routes.draw do
   resources :chapters
   resources :videos
 
-  get ':id', to: 'pages#show'
+  get ':id', to: 'special_pages#show'
   root to: "news_entries#index"
 end

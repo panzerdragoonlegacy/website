@@ -1,4 +1,4 @@
-class Page < ActiveRecord::Base
+class SpecialPage < ActiveRecord::Base
   include Sluggable
   include Illustratable
 

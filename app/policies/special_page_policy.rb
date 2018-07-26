@@ -1,4 +1,4 @@
-class PagePolicy < ApplicationPolicy
+class SpecialPagePolicy < ApplicationPolicy
   class Scope
     attr_reader :user, :scope
 

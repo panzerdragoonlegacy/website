@@ -1,8 +1,0 @@
-<% title @page.name %>
-<% description truncated_text(@page.content) %>
-
-<% unless @page.publish %>
-  <p class="unpublished">Unpublished</p>
-<% end %>
-
-<%= raw illustrated_markdown_to_html @page.id, 'Page', @page.content %>
