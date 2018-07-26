@@ -1,0 +1,13 @@
+ <div class="form-group">
+  <%= f.label :tag_ids, 'Tags (Related Encyclopaedia Entries)' %>
+  <%=
+    f.collection_select(
+      :tag_ids,
+      Tag.order(:name),
+      :id,
+      :name,
+      { selected: tag_ids, include_blank: true },
+      { multiple: true, class: 'form-control' }
+    )
+  %>
+</div>
