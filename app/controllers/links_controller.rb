@@ -14,7 +14,8 @@ class LinksController < ApplicationController
     load_link
     @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
       current_user,
-      @link.encyclopaedia_entries.order(:name)
+      EncyclopaediaEntry.where(name: @link.tags.map { |tag| tag.name })
+        .order(:name)
     ).resolve
   end
 end

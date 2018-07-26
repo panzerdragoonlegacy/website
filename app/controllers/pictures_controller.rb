@@ -16,7 +16,8 @@ class PicturesController < ApplicationController
     load_other_pictures_in_album
     @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
       current_user,
-      @picture.encyclopaedia_entries.order(:name)
+      EncyclopaediaEntry.where(name: @picture.tags.map { |tag| tag.name })
+        .order(:name)
     ).resolve
   end
 end

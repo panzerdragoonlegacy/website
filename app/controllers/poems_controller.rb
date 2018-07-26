@@ -13,7 +13,8 @@ class PoemsController < ApplicationController
     load_poem
     @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
       current_user,
-      @poem.encyclopaedia_entries.order(:name)
+      EncyclopaediaEntry.where(name: @poem.tags.map { |tag| tag.name })
+        .order(:name)
     ).resolve
   end
 end

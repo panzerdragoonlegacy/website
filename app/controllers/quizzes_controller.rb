@@ -18,7 +18,8 @@ class QuizzesController < ApplicationController
     end
     @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
       current_user,
-      @quiz.encyclopaedia_entries.order(:name)
+      EncyclopaediaEntry.where(name: @quiz.tags.map { |tag| tag.name })
+        .order(:name)
     ).resolve
   end
 

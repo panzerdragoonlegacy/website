@@ -14,7 +14,8 @@ class ResourcesController < ApplicationController
     load_resource
     @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
       current_user,
-      @resource.encyclopaedia_entries.order(:name)
+      EncyclopaediaEntry.where(name: @resource.tags.map { |tag| tag.name })
+        .order(:name)
     ).resolve
   end
 end

@@ -14,7 +14,8 @@ class MusicTracksController < ApplicationController
     load_music_track
     @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
       current_user,
-      @music_track.encyclopaedia_entries.order(:name)
+      EncyclopaediaEntry.where(name: @music_track.tags.map { |tag| tag.name })
+        .order(:name)
     ).resolve
   end
 end

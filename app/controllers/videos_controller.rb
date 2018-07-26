@@ -14,7 +14,8 @@ class VideosController < ApplicationController
     load_video
     @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
       current_user,
-      @video.encyclopaedia_entries.order(:name)
+      EncyclopaediaEntry.where(name: @video.tags.map { |tag| tag.name })
+        .order(:name)
     ).resolve
   end
 end

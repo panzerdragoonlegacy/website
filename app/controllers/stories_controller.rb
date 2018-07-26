@@ -14,7 +14,8 @@ class StoriesController < ApplicationController
     load_story
     @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
       current_user,
-      @story.encyclopaedia_entries.order(:name)
+      EncyclopaediaEntry.where(name: @story.tags.map { |tag| tag.name })
+        .order(:name)
     ).resolve
   end
 end

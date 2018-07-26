@@ -14,7 +14,8 @@ class DownloadsController < ApplicationController
     load_download
     @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
       current_user,
-      @download.encyclopaedia_entries.order(:name)
+      EncyclopaediaEntry.where(name: @download.tags.map { |tag| tag.name })
+        .order(:name)
     ).resolve
   end
 end
