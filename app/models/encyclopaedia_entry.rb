@@ -5,6 +5,7 @@ class EncyclopaediaEntry < ActiveRecord::Base
   include Syncable
 
   has_one :saga, dependent: :destroy
+  has_many :taggings, dependent: :destroy # Remove once migration has run in production.
   has_many :contributions, as: :contributable, dependent: :destroy
   has_many :contributor_profiles, through: :contributions
   
