@@ -21,17 +21,6 @@ RSpec.describe EncyclopaediaEntry, type: :model do
       is_expected.to have_many(:contributor_profiles).through(:contributions)
     end
     it { is_expected.to have_many(:illustrations).dependent(:destroy) }
-    it { is_expected.to have_many(:relations).dependent(:destroy) }
-    it { is_expected.to have_many(:articles) }
-    it { is_expected.to have_many(:downloads) }
-    it { is_expected.to have_many(:links) }
-    it { is_expected.to have_many(:music_tracks) }
-    it { is_expected.to have_many(:pictures) }
-    it { is_expected.to have_many(:poems) }
-    it { is_expected.to have_many(:quizzes) }
-    it { is_expected.to have_many(:resources) }
-    it { is_expected.to have_many(:stories) }
-    it { is_expected.to have_many(:videos) }
   end
 
   describe 'nested attributes' do
