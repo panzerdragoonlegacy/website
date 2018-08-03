@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180727082655) do
+ActiveRecord::Schema.define(version: 20180803064139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -276,11 +276,10 @@ ActiveRecord::Schema.define(version: 20180727082655) do
   end
 
   create_table "taggings", force: :cascade do |t|
-    t.integer  "encyclopaedia_entry_id"
     t.integer  "taggable_id"
-    t.string   "taggable_type",          limit: 255
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.string   "taggable_type", limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.integer  "tag_id"
   end
 
