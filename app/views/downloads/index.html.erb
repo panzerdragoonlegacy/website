@@ -5,19 +5,16 @@
 <% end %>
 
 <% unless params[:contributor_profile_id] %>
-  <% if @categories.present? %>
+  <% if @category_groups.present? %>
     <h2>Download Categories</h2>
-    <ul class="categories">
-      <% @categories.each do |category| %>
-        <li>
-          <%= link_to category.name, category %>
-          <% unless category.publish %>
-             - <span class="unpublished">Unpublished</span>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+    <%=
+      render(
+        partial: 'site_map/category_groups',
+        locals: { category_groups: @category_groups }
+      )
+    %>
   <% end %>
+
   <% if @downloads.present? %>
     <h2>All Downloads</h2>
   <% end %>

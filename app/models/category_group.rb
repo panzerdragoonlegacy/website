@@ -7,6 +7,8 @@ class CategoryGroup < ActiveRecord::Base
 
   # The list of category group types.
   CATEGORY_GROUP_TYPES = %w(
+    article
+    download
     encyclopaedia_entry
     music_track
     picture

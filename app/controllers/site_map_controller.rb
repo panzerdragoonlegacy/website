@@ -2,8 +2,8 @@ class SiteMapController < ApplicationController
   after_action :verify_authorized, except: [:show]
 
   def show
-    load_article_categories
-    load_download_categories
+    load_article_category_groups
+    load_download_category_groups
     load_encyclopaedia_entry_category_groups
     load_link_categories
     load_music_track_category_groups
@@ -15,15 +15,15 @@ class SiteMapController < ApplicationController
 
   private
 
-  def load_article_categories
-    @article_categories = policy_scope(
-      Category.where(category_type: :article).order(:name)
+  def load_article_category_groups
+    @article_category_groups = policy_scope(
+      CategoryGroup.where(category_group_type: :article).order(:name)
     )
   end
 
-  def load_download_categories
-    @download_categories = policy_scope(
-      Category.where(category_type: :download).order(:name)
+  def load_download_category_groups
+    @download_category_groups = policy_scope(
+      CategoryGroup.where(category_group_type: :download).order(:name)
     )
   end
 

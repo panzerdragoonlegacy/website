@@ -2,10 +2,10 @@ class ArticlesController < ApplicationController
   include LoadableForArticle
 
   def index
-    load_categories
     if params[:contributor_profile_id]
       load_contributors_articles
     else
+      load_category_groups
       @articles = policy_scope(Article.order(:name).page(params[:page]))
     end
   end

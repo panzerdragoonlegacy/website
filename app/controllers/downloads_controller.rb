@@ -2,10 +2,10 @@ class DownloadsController < ApplicationController
   include LoadableForDownload
 
   def index
-    load_categories
     if params[:contributor_profile_id]
       load_contributors_downloads
     else
+      load_category_groups
       @downloads = policy_scope(Download.order(:name).page(params[:page]))
     end
   end

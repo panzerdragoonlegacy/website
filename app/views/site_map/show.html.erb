@@ -5,8 +5,8 @@
     <h2><%= link_to 'Articles', articles_path %></h2>
     <%=
       render(
-        partial: 'categories',
-        locals: { categories: @article_categories }
+        partial: 'category_groups',
+        locals: { category_groups: @article_category_groups }
       )
     %>
   </li>
@@ -14,8 +14,8 @@
     <h2><%= link_to 'Downloads', downloads_path %></h2>
     <%=
       render(
-        partial: 'categories',
-        locals: { categories: @download_categories }
+        partial: 'category_groups',
+        locals: { category_groups: @download_category_groupss }
       )
     %>
   </li>
