@@ -27,8 +27,8 @@ describe CategoryPolicy do
 
     context 'category has children' do
       before do
-        category.articles << FactoryGirl.create(
-          :published_article_in_published_category
+        category.stories << FactoryGirl.create(
+          :published_story_in_published_category
         )
       end
 
@@ -54,8 +54,8 @@ describe CategoryPolicy do
 
     context 'category has children' do
       before do
-        category.articles << FactoryGirl.create(
-          :published_article_in_published_category
+        category.stories << FactoryGirl.create(
+          :published_story_in_published_category
         )
       end
 

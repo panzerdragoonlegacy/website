@@ -39,18 +39,18 @@ RSpec.describe Category, type: :model do
 
     describe 'validation of category type reassignment' do
       before do
-        @category = FactoryGirl.create :valid_category, category_type: :article
-        @article = FactoryGirl.create :valid_article
+        @category = FactoryGirl.create :valid_category, category_type: :link
+        @link = FactoryGirl.create :valid_link
       end
 
       context 'category has children' do
         before do
-          @category.articles << @article
+          @category.links << @link
         end
 
         context 'category type has changed' do
           it 'should not be valid' do
-            @category.category_type = :download
+            @category.category_type = :story
             expect(@category).not_to be_valid
           end
         end
@@ -65,7 +65,7 @@ RSpec.describe Category, type: :model do
       context 'category has no children' do
         context 'category type has changed' do
           it 'should be valid' do
-            @category.category_type = :download
+            @category.category_type = :story
             expect(@category).to be_valid
           end
         end
@@ -123,7 +123,7 @@ RSpec.describe Category, type: :model do
         before do
           @category = FactoryGirl.build(
             :valid_category,
-            category_type: :article
+            category_type: :link
           )
         end
 
