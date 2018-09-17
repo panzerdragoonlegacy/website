@@ -68,7 +68,7 @@ class AlbumPolicy < ApplicationPolicy
   def attributes_except_publish
     shared_attributes + [
       contributor_profile_ids: [],
-      encyclopaedia_entry_ids: [],
+      tag_ids: [],
       pictures_attributes: pictures_attributes
     ]
   end
@@ -77,7 +77,7 @@ class AlbumPolicy < ApplicationPolicy
     shared_attributes + [
       :id,
       :contributor_profile_ids,
-      :encyclopaedia_entry_ids,
+      :tag_ids,
       :picture,
       :_destroy
     ]
