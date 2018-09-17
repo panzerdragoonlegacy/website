@@ -10,4 +10,12 @@
       { multiple: true, class: 'form-control' }
     )
   %>
+  <% if defined? info %>
+    <%=
+      render(
+        partial: 'admin/shared/form/info',
+        locals: { info: info }
+      )
+    %>
+  <% end %>
 </div>

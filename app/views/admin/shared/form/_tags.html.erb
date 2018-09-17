@@ -1,4 +1,4 @@
- <div class="form-group">
+<div class="form-group">
   <%= f.label :tag_ids, 'Tags (Related Encyclopaedia Entries)' %>
   <%=
     f.collection_select(
@@ -10,4 +10,12 @@
       { multiple: true, class: 'form-control' }
     )
   %>
+  <% if defined? info %>
+    <%=
+      render(
+        partial: 'admin/shared/form/info',
+        locals: { info: info }
+      )
+    %>
+  <% end %>
 </div>

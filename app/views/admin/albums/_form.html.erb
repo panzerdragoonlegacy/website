@@ -64,12 +64,12 @@
       }
     )
   %>
- <%=
+  <%=
     render(
-      partial: 'admin/shared/form/encyclopaedia_entries',
+      partial: 'admin/shared/form/tags',
       locals: {
         f: f,
-        encyclopaedia_entry_ids: @album.encyclopaedia_entry_ids,
+        tag_ids: @album.tag_ids,
         info: 'Pictures in the album with no related encyclopaedia entries ' \
           "will inherit the album's related encyclopaedia entries."
       }
