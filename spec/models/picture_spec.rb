@@ -67,46 +67,8 @@ RSpec.describe Picture, type: :model do
         end
       end
     end
-
-    describe 'validation of category reassignment' do
-      before do
-        @album = FactoryGirl.create :valid_album
-        @picture = FactoryGirl.create :valid_picture
-      end
-
-      context 'album is present' do
-        before do
-          @picture.album = @album
-        end
-
-        context "category matches the album's category" do
-          it 'should be valid' do
-            @picture.category = @album.category
-            expect(@picture).to be_valid
-          end
-        end
-
-        context "category does not match the album's category" do
-          it 'should not be valid' do
-            different_category = FactoryGirl.create(:valid_picture_category)
-            @picture.category = different_category
-            expect(@picture).not_to be_valid
-          end
-        end
-      end
-
-      context 'album is not present' do
-        before do
-          @picture.album = nil
-        end
-
-        it 'should be valid' do
-          expect(@picture).to be_valid
-        end
-      end
-    end
   end
-
+  
   describe 'file attachment' do
     it { is_expected.to have_attached_file(:picture) }
     it { is_expected.to validate_attachment_presence(:picture) }
