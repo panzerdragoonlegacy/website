@@ -10,6 +10,13 @@ module LoadableForCategory
     ).resolve
   end
 
+  def load_sagas
+    @sagas = SagaPolicy::Scope.new(
+      current_user,
+      Saga.order(:name)
+    ).resolve
+  end
+
   def load_category
     @category = Category.find_by url: params[:id]
     authorize @category

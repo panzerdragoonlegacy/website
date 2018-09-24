@@ -4,6 +4,7 @@ RSpec.describe Category, type: :model do
   describe 'fields' do
     it { is_expected.to respond_to(:name) }
     it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:short_name) }
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:category_type) }
     it { is_expected.to respond_to(:publish) }
@@ -13,6 +14,7 @@ RSpec.describe Category, type: :model do
 
   describe 'associations' do
     it { is_expected.to belong_to(:category_group) }
+    it { is_expected.to belong_to(:saga) }
     it { is_expected.to have_many(:articles).dependent(:destroy) }
     it { is_expected.to have_many(:downloads).dependent(:destroy) }
     it { is_expected.to have_many(:encyclopaedia_entries).dependent(:destroy) }
@@ -29,6 +31,11 @@ RSpec.describe Category, type: :model do
     it { is_expected.to validate_uniqueness_of(:name) }
     it do
       is_expected.to validate_length_of(:name).is_at_least(2).is_at_most(100)
+    end
+    it { is_expected.to validate_presence_of(:short_name) }
+    it do
+      is_expected.to validate_length_of(:short_name).is_at_least(2)
+        .is_at_most(50)
     end
     it { is_expected.to validate_presence_of(:description) }
     it do

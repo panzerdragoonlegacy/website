@@ -2,6 +2,7 @@ class Category < ActiveRecord::Base
   include Sluggable
 
   belongs_to :category_group
+  belongs_to :saga
   has_many :articles, dependent: :destroy
   has_many :downloads, dependent: :destroy
   has_many :encyclopaedia_entries, dependent: :destroy
@@ -13,6 +14,7 @@ class Category < ActiveRecord::Base
   has_many :videos, dependent: :destroy
 
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
+  validates :short_name, presence: true, length: { in: 2..50 }
   validates :description, presence: true, length: { in: 2..250 }
   validates :category_type, presence: true
 

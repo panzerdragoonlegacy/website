@@ -40,7 +40,9 @@ class CategoryPolicy < ApplicationPolicy
     [
       :category_type,
       :category_group_id,
+      :saga_id,
       :name,
+      :short_name,
       :description
     ]
   end

@@ -29,6 +29,9 @@
         <th scope="col">
           <%= sort_link @q, :category_group_name, 'Category Group' %>
         </th>
+        <th scope="col">
+          <%= sort_link @q, :saga_name, 'Saga' %>
+        </th>
         <th scope="col"><%= sort_link @q, :created_at, 'Created' %></th>
         <th scope="col"><%= sort_link @q, :updated_at, 'Modified' %></th>
         <th scope="col"><%= sort_link @q, :publish, 'Published' %></th>
@@ -50,6 +53,9 @@
           </td>
           <td>
             <%= category.category_group.name if category.category_group %>
+          </td>
+          <td>
+            <%= category.saga.name if category.saga %>
           </td>
           <%=
             render(
