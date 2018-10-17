@@ -71,6 +71,7 @@ class VideoPolicy < ApplicationPolicy
       :description,
       :information,
       :mp4_video,
+      :video_picture,
       :youtube_video_id,
       contributor_profile_ids: [],
       tag_ids: []

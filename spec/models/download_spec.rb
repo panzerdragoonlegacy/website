@@ -7,6 +7,7 @@ RSpec.describe Download, type: :model do
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:information) }
     it { is_expected.to respond_to(:download) }
+    it { is_expected.to respond_to(:download_picture) }
     it { is_expected.to respond_to(:publish) }
     it { is_expected.to respond_to(:category) }
     it { is_expected.to respond_to(:created_at) }
@@ -66,7 +67,7 @@ RSpec.describe Download, type: :model do
     end
   end
 
-  describe 'file attachment' do
+  describe 'file attachments' do
     it { is_expected.to have_attached_file(:download) }
     it { is_expected.to validate_attachment_presence(:download) }
     it do
@@ -76,6 +77,15 @@ RSpec.describe Download, type: :model do
     it do
       is_expected.to validate_attachment_size(:download)
         .less_than(500.megabytes)
+    end
+    it { is_expected.to have_attached_file(:download_picture) }
+    it do
+      is_expected.to validate_attachment_content_type(:download_picture)
+        .allowing('image/jpeg')
+    end
+    it do
+      is_expected.to validate_attachment_size(:download_picture)
+        .less_than(5.megabytes)
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180924065251) do
+ActiveRecord::Schema.define(version: 20181017024504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,18 +102,22 @@ ActiveRecord::Schema.define(version: 20180924065251) do
   end
 
   create_table "downloads", force: :cascade do |t|
-    t.string   "name",                  limit: 255
-    t.string   "url",                   limit: 255
-    t.string   "description",           limit: 255
+    t.string   "name",                          limit: 255
+    t.string   "url",                           limit: 255
+    t.string   "description",                   limit: 255
     t.text     "information"
-    t.string   "download_file_name",    limit: 255
-    t.string   "download_content_type", limit: 255
+    t.string   "download_file_name",            limit: 255
+    t.string   "download_content_type",         limit: 255
     t.integer  "download_file_size"
     t.datetime "download_updated_at"
-    t.boolean  "publish",                           default: false
+    t.boolean  "publish",                                   default: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "download_picture_file_name"
+    t.string   "download_picture_content_type"
+    t.integer  "download_picture_file_size"
+    t.datetime "download_picture_updated_at"
   end
 
   create_table "encyclopaedia_entries", force: :cascade do |t|
@@ -153,23 +157,27 @@ ActiveRecord::Schema.define(version: 20180924065251) do
   end
 
   create_table "music_tracks", force: :cascade do |t|
-    t.string   "name",                          limit: 255
-    t.string   "url",                           limit: 255
-    t.string   "description",                   limit: 255
+    t.string   "name",                             limit: 255
+    t.string   "url",                              limit: 255
+    t.string   "description",                      limit: 255
     t.text     "information"
-    t.string   "mp3_music_track_file_name",     limit: 255
-    t.string   "mp3_music_track_content_type",  limit: 255
+    t.string   "mp3_music_track_file_name",        limit: 255
+    t.string   "mp3_music_track_content_type",     limit: 255
     t.integer  "mp3_music_track_file_size"
     t.datetime "mp3_music_track_updated_at"
-    t.boolean  "publish",                                   default: false
+    t.boolean  "publish",                                      default: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "track_number",                              default: 0
-    t.string   "flac_music_track_file_name",    limit: 255
-    t.string   "flac_music_track_content_type", limit: 255
+    t.integer  "track_number",                                 default: 0
+    t.string   "flac_music_track_file_name",       limit: 255
+    t.string   "flac_music_track_content_type",    limit: 255
     t.integer  "flac_music_track_file_size"
     t.datetime "flac_music_track_updated_at"
+    t.string   "music_track_picture_file_name"
+    t.string   "music_track_picture_content_type"
+    t.integer  "music_track_picture_file_size"
+    t.datetime "music_track_picture_updated_at"
   end
 
   create_table "news_entries", force: :cascade do |t|
@@ -325,19 +333,23 @@ ActiveRecord::Schema.define(version: 20180924065251) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "videos", force: :cascade do |t|
-    t.string   "name",                   limit: 255
-    t.string   "url",                    limit: 255
-    t.string   "description",            limit: 255
+    t.string   "name",                       limit: 255
+    t.string   "url",                        limit: 255
+    t.string   "description",                limit: 255
     t.text     "information"
-    t.string   "mp4_video_file_name",    limit: 255
-    t.string   "mp4_video_content_type", limit: 255
+    t.string   "mp4_video_file_name",        limit: 255
+    t.string   "mp4_video_content_type",     limit: 255
     t.integer  "mp4_video_file_size"
     t.datetime "mp4_video_updated_at"
-    t.boolean  "publish",                            default: false
+    t.boolean  "publish",                                default: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "youtube_video_id",       limit: 255
+    t.string   "youtube_video_id",           limit: 255
+    t.string   "video_picture_file_name"
+    t.string   "video_picture_content_type"
+    t.integer  "video_picture_file_size"
+    t.datetime "video_picture_updated_at"
   end
 
   add_foreign_key "albums", "categories"

@@ -9,6 +9,7 @@ RSpec.describe MusicTrack, type: :model do
     it { is_expected.to respond_to(:information) }
     it { is_expected.to respond_to(:mp3_music_track) }
     it { is_expected.to respond_to(:flac_music_track) }
+    it { is_expected.to respond_to(:music_track_picture) }
     it { is_expected.to respond_to(:publish) }
     it { is_expected.to respond_to(:category) }
     it { is_expected.to respond_to(:created_at) }
@@ -85,6 +86,12 @@ RSpec.describe MusicTrack, type: :model do
       is_expected.to validate_attachment_size(:flac_music_track)
         .less_than(50.megabytes)
     end
+    it { is_expected.to have_attached_file(:music_track_picture) }
+    it do
+      is_expected.to validate_attachment_size(:music_track_picture)
+        .less_than(5.megabytes)
+    end
+
   end
 
   describe 'slug' do

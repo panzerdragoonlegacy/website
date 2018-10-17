@@ -80,7 +80,8 @@ class MusicTrackPolicy < ApplicationPolicy
   def file_attributes
     [
       :mp3_music_track,
-      :flac_music_track
+      :flac_music_track,
+      :music_track_picture
     ]
   end
 end

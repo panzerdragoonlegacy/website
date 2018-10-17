@@ -28,6 +28,16 @@ class MusicTrack < ActiveRecord::Base
     path: ':rails_root/public/system/:attachment/:id/:style/:filename',
     url: '/system/:attachment/:id/:style/:filename'
   )
+  has_attached_file(
+    :music_track_picture,
+    styles: {
+      mini_thumbnail: '25x25#',
+      thumbnail: '150x150',
+      embedded: '280x280>'
+    },
+    path: ':rails_root/public/system/:attachment/:id/:style/:filename',
+    url: '/system/:attachment/:id/:style/:filename'
+  )
 
   validates_attachment(
     :mp3_music_track,
@@ -35,6 +45,11 @@ class MusicTrack < ActiveRecord::Base
     size: { in: 0..25.megabytes }
   )
   validates_attachment :flac_music_track, size: { in: 0..50.megabytes }
+  validates_attachment(
+    :music_track_picture,
+    content_type: { content_type: 'image/jpeg' },
+    size: { in: 0..5.megabytes }
+  )
 
   # There were issues specifying content types.
   do_not_validate_attachment_file_type :mp3_music_track
@@ -45,6 +60,7 @@ class MusicTrack < ActiveRecord::Base
   def sync_file_names
     sync_file_name_of :mp3_music_track, file_name: "#{name.to_url}.mp3"
     sync_file_name_of :flac_music_track, file_name: "#{name.to_url}.flac"
+    sync_file_name_of :music_track_picture, file_name: "#{name.to_url}.jpg"
   end
 
   def to_param

@@ -6,7 +6,8 @@ RSpec.describe Video, type: :model do
     it { is_expected.to respond_to(:url) }
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:information) }
-    it { is_expected.to respond_to(:mp4_video_file_name) }
+    it { is_expected.to respond_to(:mp4_video) }
+    it { is_expected.to respond_to(:video_picture) }
     it { is_expected.to respond_to(:youtube_video_id) }
     it { is_expected.to respond_to(:publish) }
     it { is_expected.to respond_to(:category) }
@@ -73,6 +74,11 @@ RSpec.describe Video, type: :model do
     it do
       is_expected.to validate_attachment_size(:mp4_video)
         .less_than(500.megabytes)
+    end
+    it { is_expected.to have_attached_file(:video_picture) }
+    it do
+      is_expected.to validate_attachment_size(:video_picture)
+        .less_than(5.megabytes)
     end
   end
 

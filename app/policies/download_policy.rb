@@ -72,6 +72,7 @@ class DownloadPolicy < ApplicationPolicy
       :description,
       :information,
       :download,
+      :download_picture,
       contributor_profile_ids: [],
       tag_ids: []
     ]
