@@ -25,6 +25,8 @@ RSpec.describe NewsEntry, type: :model do
     end
     it { is_expected.to validate_presence_of(:content) }
     it { is_expected.to validate_presence_of(:contributor_profile) }
+    it { is_expected.to have_many(:taggings).dependent(:destroy) }
+    it { is_expected.to have_many(:tags).through(:taggings) }
   end
 
   describe 'file attachment' do

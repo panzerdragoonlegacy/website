@@ -4,6 +4,12 @@ class Tag < ActiveRecord::Base
   has_many :taggings, dependent: :destroy
 
   has_many(
+    :news_entries,
+    through: :taggings,
+    source: :taggable,
+    source_type: 'NewsEntry'
+  )
+  has_many(
     :articles,
     through: :taggings,
     source: :taggable,

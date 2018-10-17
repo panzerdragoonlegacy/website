@@ -1,6 +1,7 @@
 class NewsEntry < ActiveRecord::Base
   include Sluggable
   include Syncable
+  include Taggable
 
   belongs_to :contributor_profile
 
