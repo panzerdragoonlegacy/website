@@ -22,6 +22,7 @@
   <table class="table">
     <thead>
       <tr>
+        <th scope="col"></th>
         <th scope="col"><%= sort_link @q, :name %></th>
         <th scope="col"><%= sort_link @q, :category_name, 'Category' %></th>
         <th scope="col">Contributors</th>
@@ -35,6 +36,16 @@
     <tbody>
       <% @videos.each do |video| %>
         <tr>
+          <td>
+            <%=
+              link_to(
+                show_video_picture(
+                  video, :thumbnail
+                ),
+                video
+              )
+            %>
+          </td>
           <%=
             render(
               partial: 'admin/shared/table/name',

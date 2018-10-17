@@ -15,6 +15,15 @@
     )
   %>
   <%= render 'mp4_video', f: f %>
+  <%=
+    render(
+      partial: 'picture',
+      locals: {
+        f: f,
+        video: @video
+      }
+    )
+  %>
   <%= render 'youtube_video_id', f: f %>
   <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
   <%= render partial: 'admin/shared/form/description', locals: { f: f } %>

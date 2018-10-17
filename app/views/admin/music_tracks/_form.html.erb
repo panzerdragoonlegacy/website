@@ -16,6 +16,15 @@
   %>
   <%= render 'mp3_music_track', f: f %>
   <%= render 'flac_music_track', f: f %>
+  <%=
+    render(
+      partial: 'picture',
+      locals: {
+        f: f,
+        music_track: @music_track
+      }
+    )
+  %>
   <%= render 'track_number', f: f %>
   <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
   <%= render partial: 'admin/shared/form/description', locals: { f: f } %>
