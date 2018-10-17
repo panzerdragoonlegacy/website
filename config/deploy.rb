@@ -68,5 +68,5 @@ namespace :deploy do
     end
   end
 
-  after :compile_assets, :build_missing_paperclip_styles
+  #after :compile_assets, :build_missing_paperclip_styles
 end
