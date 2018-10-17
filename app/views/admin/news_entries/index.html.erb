@@ -39,16 +39,12 @@
       <% @news_entries.each do |news_entry| %>
         <tr>
           <td>
-            <% if news_entry.news_entry_picture.present? %>
-              <%=
-                link_to(
-                  show_news_entry_picture(
-                    news_entry, :thumbnail
-                  ),
-                  news_entry
-                )
-              %>
-            <% end %>
+            <%=
+              link_to(
+                show_picture(news_entry, 'news_entry_picture', :thumbnail),
+                news_entry
+              )
+            %>
           </td>
           <%=
             render(

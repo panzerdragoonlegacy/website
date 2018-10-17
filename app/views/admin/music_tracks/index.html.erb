@@ -39,9 +39,7 @@
           <td>
             <%=
               link_to(
-                show_music_track_picture(
-                  music_track, :thumbnail
-                ),
+                show_picture(music_track, 'music_track_picture', :thumbnail),
                 music_track
               )
             %>

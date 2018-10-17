@@ -39,9 +39,7 @@
           <td>
             <%=
               link_to(
-                show_download_picture(
-                  download, :thumbnail
-                ),
+                show_picture(download, 'download_picture', :thumbnail),
                 download
               )
             %>

@@ -1,7 +1,7 @@
 <div class="form-group">
   <%= f.label :music_track_picture, 'Music Track Picture' %>
   <% if music_track.music_track_picture? %>
-    <p><%= show_music_track_picture music_track, :thumbnail %></p>
+    <p><%= show_picture music_track, 'music_track_picture', :thumbnail %></p>
     <p>File has already been uploaded. Replace file?</p>
   <% end %>
   <%= f.file_field :music_track_picture, class: 'form-control' %>

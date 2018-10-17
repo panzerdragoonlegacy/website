@@ -20,7 +20,7 @@
   <h2>Picture to Replace:</h2>
   <%=
     link_to(
-      picture_tag(@picture_to_replace, :thumbnail),
+      show_picture(@picture_to_replace, 'picture', :thumbnail),
       @picture_to_replace
     )
   %>
@@ -46,7 +46,11 @@
 </ul>
 
 <div class="embedded_picture_container">
-  <%= link_to picture_tag(@picture, :embedded), @picture.picture.url %>
+  <%=
+    link_to(
+      show_picture(@picture, 'picture', :embedded), @picture.picture.url
+    )
+  %>
 </div>
 
 <p><%= link_to "View Full Size", @picture.picture.url %></p>

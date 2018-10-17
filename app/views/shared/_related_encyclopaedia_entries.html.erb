@@ -5,8 +5,10 @@
       <li>
         <%=
           link_to(
-            show_encyclopaedia_entry_picture(
-              encyclopaedia_entry, :mini_thumbnail
+            show_picture(
+              encyclopaedia_entry,
+              'encyclopaedia_entry_picture',
+              :mini_thumbnail
             ),
             encyclopaedia_entry
           )

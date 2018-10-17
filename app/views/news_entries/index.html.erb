@@ -10,7 +10,9 @@
       <h2 class="news_entry_index_heading">
         <%= link_to news_entry.name, news_entry %>
       </h2>
-      <%= show_news_entry_picture(news_entry, :embedded) %>
+      <% if news_entry.news_entry_picture.present? %>
+        <%= show_picture news_entry, 'news_entry_picture', :embedded %>
+      <% end %>
       <div class="comment_thumbnail">
         <% if news_entry.contributor_profile.avatar_file_name.blank? %>
           <%= image_tag("default-avatar.jpg") %>

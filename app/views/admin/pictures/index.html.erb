@@ -42,7 +42,7 @@
       <% @pictures.each do |picture| %>
         <tr>
           <td>
-            <%= link_to picture_tag(picture, :thumbnail), picture %>
+            <%= link_to show_picture(picture, 'picture', :thumbnail), picture %>
           </td>
           <%=
             render(

@@ -11,7 +11,11 @@
 <% end %>
 
 <div id="information">
-  <%= show_encyclopaedia_entry_picture(@encyclopaedia_entry, :embedded) %>
+  <%=
+    show_picture(
+      @encyclopaedia_entry, 'encyclopaedia_entry_picture', :embedded
+    )
+  %>
   <%= raw markdown_to_html @encyclopaedia_entry.information %>
 </div>
 

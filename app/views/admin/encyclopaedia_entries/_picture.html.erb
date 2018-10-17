@@ -1,6 +1,13 @@
 <div class="form-group">
   <%= f.label :encyclopaedia_entry_picture, 'Encyclopaedia Entry Picture*' %>
   <% if encyclopaedia_entry.encyclopaedia_entry_picture? %>
+    <p>
+      <%=
+        show_picture(
+          encyclopaedia_entry, 'encyclopaedia_entry_picture', :thumbnail
+        )
+      %>
+    </p>
     <p>File has already been uploaded. Replace file?</p>
   <% end %>
   <%= f.file_field :encyclopaedia_entry_picture, class: 'form-control' %>
