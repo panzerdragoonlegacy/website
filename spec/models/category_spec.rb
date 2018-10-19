@@ -32,10 +32,8 @@ RSpec.describe Category, type: :model do
     it do
       is_expected.to validate_length_of(:name).is_at_least(2).is_at_most(100)
     end
-    it { is_expected.to validate_presence_of(:short_name) }
     it do
-      is_expected.to validate_length_of(:short_name).is_at_least(2)
-        .is_at_most(50)
+      is_expected.to validate_length_of(:short_name).is_at_most(50)
     end
     it { is_expected.to validate_presence_of(:description) }
     it do

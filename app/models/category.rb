@@ -14,7 +14,7 @@ class Category < ActiveRecord::Base
   has_many :videos, dependent: :destroy
 
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
-  validates :short_name, presence: true, length: { in: 2..50 }
+  validates :short_name, length: { in: 0..50 }
   validates :description, presence: true, length: { in: 2..250 }
   validates :category_type, presence: true
 
