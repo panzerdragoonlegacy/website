@@ -33,14 +33,7 @@
     <tbody>
       <% @sagas.each do |saga| %>
         <tr>
-          <%=
-            render(partial: 'admin/shared/table/name',
-              locals: {
-                resource: saga,
-                path: encyclopaedia_entry_path(saga.encyclopaedia_entry)
-              }
-            )
-          %>
+          <td><%= saga.name %></td>
           <td><%= saga.sequence_number.to_s %></td>
           <%=
             render(

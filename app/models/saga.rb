@@ -2,7 +2,6 @@ class Saga < ActiveRecord::Base
   include Sluggable
 
   belongs_to :encyclopaedia_entry
-  validates :encyclopaedia_entry, presence: true
 
   validates :name, presence: true, uniqueness: true, length: { in: 2..30 }
   validates(

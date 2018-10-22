@@ -25,7 +25,6 @@ RSpec.describe Saga, type: :model do
       is_expected.to validate_numericality_of(:sequence_number)
         .is_greater_than(0).is_less_than(100)
     end
-    it { is_expected.to validate_presence_of(:encyclopaedia_entry) }
 
     describe 'validation of encyclopaedia entry' do
       context 'creating a new saga' do

@@ -3,14 +3,16 @@
     <h3>Browse by Saga</h3>
     <ul>
       <% @sagas.each do |saga| %>
-        <% if policy(saga.encyclopaedia_entry).show? %>
-          <li>
-            <%=
-              link_to(
-                saga.name, encyclopaedia_entry_path(saga.encyclopaedia_entry)
-              )
-            %>
-          </li>
+        <% if saga.encyclopaedia_entry%>
+          <% if policy(saga.encyclopaedia_entry).show? %>
+            <li>
+              <%=
+                link_to(
+                  saga.name, encyclopaedia_entry_path(saga.encyclopaedia_entry)
+                )
+              %>
+            </li>
+          <% end %>
         <% end %>
       <% end %>
     </ul>
