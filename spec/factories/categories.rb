@@ -3,6 +3,7 @@ FactoryGirl.define do
     factory :valid_category do
       sequence(:name) { |n| "Category #{n}" }
       sequence(:short_name) { |n| "Cat #{n}" }
+      sequence(:short_name_2) { |n| "Cat #{n}" }
       description 'Test Description'
       category_type :story
 

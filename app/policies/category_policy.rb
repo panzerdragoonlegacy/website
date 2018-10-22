@@ -43,6 +43,7 @@ class CategoryPolicy < ApplicationPolicy
       :saga_id,
       :name,
       :short_name,
+      :short_name_2,
       :description
     ]
   end

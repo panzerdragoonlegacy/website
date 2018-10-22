@@ -5,6 +5,7 @@
   <%= render 'saga', f: f %>
   <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
   <%= render 'short_name', f: f %>
+  <%= render 'short_name_2', f: f %>
   <%= render partial: 'admin/shared/form/description', locals: { f: f } %>
   <% if policy(@category).permitted_attributes.include? :publish %>
     <%= render partial: 'admin/shared/form/publish', locals: { f: f } %>

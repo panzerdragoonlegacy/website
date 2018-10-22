@@ -15,6 +15,7 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
   validates :short_name, length: { in: 0..50 }
+  validates :short_name_2, length: { in: 0..50 }
   validates :description, presence: true, length: { in: 2..250 }
   validates :category_type, presence: true
 
