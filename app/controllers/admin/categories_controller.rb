@@ -2,6 +2,7 @@ class Admin::CategoriesController < ApplicationController
   include LoadableForCategory
   layout 'admin'
   before_action :load_category_groups, except: [:index, :destroy]
+  before_action :load_sagas, only: [:new, :edit]
   before_action :load_category, except: [:index, :new, :create]
 
   def index
