@@ -12,6 +12,7 @@ RSpec.describe Saga, type: :model do
 
   describe 'associations' do
     it { is_expected.to belong_to(:encyclopaedia_entry) }
+    it { is_expected.to have_many(:categories).dependent(:destroy) }
   end
 
   describe 'validations' do

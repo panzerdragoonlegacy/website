@@ -15,7 +15,7 @@ RSpec.describe EncyclopaediaEntry, type: :model do
 
   describe 'associations' do
     it { is_expected.to belong_to(:category) }
-    it { is_expected.to have_one(:saga).dependent(:destroy) }
+    it { is_expected.to have_one(:saga) }
     it { is_expected.to have_many(:contributions).dependent(:destroy) }
     it do
       is_expected.to have_many(:contributor_profiles).through(:contributions)

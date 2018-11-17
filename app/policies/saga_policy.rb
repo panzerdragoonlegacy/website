@@ -8,12 +8,15 @@ class SagaPolicy < ApplicationPolicy
     end
 
     def resolve
-      if user
-        return scope if user.administrator?
-      end
-      scope.joins(:encyclopaedia_entry).where(
-        encyclopaedia_entries: { publish: true }
-      )
+      scope
     end
+  end
+
+  def show?
+    true
+  end
+
+  def destroy?
+    return true if user && user.administrator? && record.categories.blank?
   end
 end

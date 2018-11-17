@@ -14,6 +14,10 @@ FactoryGirl.define do
 
       factory :published_category do
         publish true
+
+        factory :published_category_in_saga do
+          saga { FactoryGirl.create(:valid_saga) }
+        end
       end
 
       factory :unpublished_category do

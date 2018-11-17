@@ -19,7 +19,11 @@ class ApplicationController < ActionController::Base
   end
 
   def sagas
-    @sagas = policy_scope(Saga.order(:sequence_number))
+    @sagas = policy_scope(
+      Saga.order(:sequence_number).joins(:encyclopaedia_entry).where(
+        encyclopaedia_entries: { publish: true }
+      )
+    )
   end
 
   def partner_sites
