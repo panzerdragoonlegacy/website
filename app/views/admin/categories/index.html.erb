@@ -24,6 +24,12 @@
       <tr>
         <th scope="col"><%= sort_link @q, :name %></th>
         <th scope="col">
+          <%= sort_link @q, :short_name, 'Short Name' %>
+        </th>
+        <th scope="col">
+          <%= sort_link @q, :short_name_2, 'Short Name 2' %>
+        </th>
+        <th scope="col">
           <%= sort_link @q, :category_type, 'Category Type' %>
         </th>
         <th scope="col">
@@ -48,6 +54,12 @@
               locals: { resource: category, path: category_path(category) }
             )
           %>
+          <td>
+            <%= category.short_name if category.short_name.present? %>
+          </td>
+          <td>
+            <%= category.short_name_2 if category.short_name_2.present? %>
+          </td>
           <td>
             <%= category.category_type.titleize %>
           </td>
