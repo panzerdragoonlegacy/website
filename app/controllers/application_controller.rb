@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   # after_filter :verify_authorized, except: :index
   # after_filter :verify_policy_scoped, only: :index
 
-  before_action :sagas
+  before_action :sagas_with_published_encyclopaedia_entries
   before_action :partner_sites
 
   private
@@ -18,8 +18,8 @@ class ApplicationController < ActionController::Base
     redirect_to(request.referer || root_path)
   end
 
-  def sagas
-    @sagas = policy_scope(
+  def sagas_with_published_encyclopaedia_entries
+    @sagas_with_published_encyclopaedia_entries = policy_scope(
       Saga.order(:sequence_number).joins(:encyclopaedia_entry).where(
         encyclopaedia_entries: { publish: true }
       )

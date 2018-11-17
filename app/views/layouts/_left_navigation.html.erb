@@ -1,8 +1,8 @@
 <div id="aside">
-  <% if @sagas.present? %>
+  <% if @sagas_with_published_encyclopaedia_entries.present? %>
     <h3>Browse by Saga</h3>
     <ul>
-      <% @sagas.each do |saga| %>
+      <% @sagas_with_published_encyclopaedia_entries.each do |saga| %>
         <% if saga.encyclopaedia_entry%>
           <% if policy(saga.encyclopaedia_entry).show? %>
             <li>
