@@ -144,11 +144,16 @@ module NewsEntriesHelper
     html.css('p').each do |tag|
       url = tag.content
       next unless (url =~ /http:\/\/(.)/) || (url =~ /https:\/\/(.)/)
-      preview = Onebox.preview(url)
-
-      new_node = html.create_element 'div'
-      new_node['class'] = 'onebox'
-      new_node.inner_html = preview.to_s
+      begin
+        preview = Onebox.preview(url)
+        new_node = html.create_element 'div'
+        new_node['class'] = 'onebox'
+        new_node.inner_html = preview.to_s
+      rescue
+        new_node = html.create_element 'a'
+        new_node.set_attribute 'href', url
+        new_node.inner_html = url
+      end
       tag.replace new_node
     end
 
