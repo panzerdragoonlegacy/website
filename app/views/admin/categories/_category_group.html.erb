@@ -3,7 +3,7 @@
   <%=
     f.collection_select(
       :category_group_id,
-      @category_groups,
+      @category_groups ? @category_groups : [],
       :id,
       :name,
       { include_blank: true },

@@ -1,6 +1,7 @@
 class Admin::NewsEntriesController < ApplicationController
   include LoadableForNewsEntry
   layout 'admin'
+  before_action :load_categories, except: [:destroy]
   before_action :load_news_entry, except: [:index, :new, :create]
 
   def index

@@ -1,4 +1,5 @@
 class NewsEntry < ActiveRecord::Base
+  include Categorisable
   include Sluggable
   include Syncable
   include Taggable

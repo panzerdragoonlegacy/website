@@ -8,13 +8,17 @@ RSpec.describe NewsEntry, type: :model do
     it { is_expected.to respond_to(:news_entry_picture) }
     it { is_expected.to respond_to(:publish) }
     it { is_expected.to respond_to(:contributor_profile) }
+    it { is_expected.to respond_to(:category) }
     it { is_expected.to respond_to(:created_at) }
     it { is_expected.to respond_to(:updated_at) }
     it { is_expected.to respond_to(:published_at) }
   end
 
   describe 'associations' do
+    it { is_expected.to belong_to(:category) }
     it { is_expected.to belong_to(:contributor_profile) }
+    it { is_expected.to have_many(:taggings).dependent(:destroy) }
+    it { is_expected.to have_many(:tags).through(:taggings) }
   end
 
   describe 'validations' do
@@ -25,8 +29,7 @@ RSpec.describe NewsEntry, type: :model do
     end
     it { is_expected.to validate_presence_of(:content) }
     it { is_expected.to validate_presence_of(:contributor_profile) }
-    it { is_expected.to have_many(:taggings).dependent(:destroy) }
-    it { is_expected.to have_many(:tags).through(:taggings) }
+    it { is_expected.to validate_presence_of(:category) }
   end
 
   describe 'file attachment' do

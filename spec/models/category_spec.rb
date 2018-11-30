@@ -21,6 +21,7 @@ RSpec.describe Category, type: :model do
     it { is_expected.to have_many(:encyclopaedia_entries).dependent(:destroy) }
     it { is_expected.to have_many(:links).dependent(:destroy) }
     it { is_expected.to have_many(:music_tracks).dependent(:destroy) }
+    it { is_expected.to have_many(:news_entries).dependent(:destroy) }
     it { is_expected.to have_many(:pictures).dependent(:destroy) }
     it { is_expected.to have_many(:resources).dependent(:destroy) }
     it { is_expected.to have_many(:stories).dependent(:destroy) }

@@ -2,6 +2,12 @@
   <%= render 'admin/shared/form/error_messages', target: @news_entry %>
   <%=
     render(
+      partial: 'admin/shared/form/category',
+      locals: { f: f, categories: @categories }
+    )
+  %>
+  <%=
+    render(
       partial: 'author',
       locals: { f: f, contributor_profiles: @contributor_profiles }
     )

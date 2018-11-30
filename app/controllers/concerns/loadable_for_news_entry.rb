@@ -3,6 +3,12 @@ module LoadableForNewsEntry
 
   private
 
+  def load_categories
+    @categories = CategoryPolicy::Scope.new(
+      current_user, Category.where(category_type: :news_entry).order(:name)
+    ).resolve
+  end
+
   def load_news_entry
     @news_entry = NewsEntry.find_by url: params[:id]
     authorize @news_entry

@@ -3,7 +3,7 @@
   <%=
     f.collection_select(
       :saga_id,
-      @sagas,
+      @sagas ? @sagas : [],
       :id,
       :name,
       { include_blank: true },

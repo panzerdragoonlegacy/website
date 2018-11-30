@@ -8,6 +8,7 @@ class Category < ActiveRecord::Base
   has_many :encyclopaedia_entries, dependent: :destroy
   has_many :links, dependent: :destroy
   has_many :music_tracks, dependent: :destroy
+  has_many :news_entries, dependent: :destroy
   has_many :pictures, dependent: :destroy
   has_many :resources, dependent: :destroy
   has_many :stories, dependent: :destroy
@@ -26,6 +27,7 @@ class Category < ActiveRecord::Base
     encyclopaedia_entry
     link
     music_track
+    news_entry
     picture
     resource
     story
