@@ -271,6 +271,4 @@ Homebrew for package management instead of APT.
 
    `cap production deploy`
 
-   If there are database migrations to be applied this must be explictly stated:
-
-   `cap production deploy:migrate`
+  You may need to manually restart the VPS for the changes to come into effect.
