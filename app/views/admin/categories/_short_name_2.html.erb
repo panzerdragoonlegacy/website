@@ -1,4 +1,13 @@
 <div class="form-group">
   <%= f.label :short_name_2, 'Short Name 2' %>
   <%= f.text_field :short_name_2, class: 'form-control' %>
+  <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: 'Used when browsing by media type. This field should generally ' \
+          "omit the name of the category's group."
+      }
+    )
+  %>
 </div>
