@@ -6,7 +6,7 @@ class Admin::NewsEntriesController < ApplicationController
 
   def index
     clean_publish_false_param
-    @q = NewsEntry.order(:name).ransack(params[:q])
+    @q = NewsEntry.order(created_at: :desc).ransack(params[:q])
     @news_entries = policy_scope(@q.result.page(params[:page]))
   end
 
