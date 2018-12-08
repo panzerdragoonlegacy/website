@@ -42,8 +42,8 @@ class CategoryPolicy < ApplicationPolicy
       :category_group_id,
       :saga_id,
       :name,
-      :short_name,
-      :short_name_2,
+      :short_name_for_saga,
+      :short_name_for_media_type,
       :description
     ]
   end

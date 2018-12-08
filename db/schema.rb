@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181130210406) do
+ActiveRecord::Schema.define(version: 20181208084704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,17 +41,17 @@ ActiveRecord::Schema.define(version: 20181130210406) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name",              limit: 255
-    t.string   "url",               limit: 255
-    t.string   "description",       limit: 255
-    t.string   "category_type",     limit: 255
-    t.boolean  "publish",                       default: false
+    t.string   "name",                      limit: 255
+    t.string   "url",                       limit: 255
+    t.string   "description",               limit: 255
+    t.string   "category_type",             limit: 255
+    t.boolean  "publish",                               default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_group_id"
     t.integer  "saga_id"
-    t.string   "short_name"
-    t.string   "short_name_2"
+    t.string   "short_name_for_saga"
+    t.string   "short_name_for_media_type"
   end
 
   add_index "categories", ["saga_id"], name: "index_categories_on_saga_id", using: :btree
