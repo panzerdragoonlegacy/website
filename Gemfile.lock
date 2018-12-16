@@ -288,9 +288,8 @@ GEM
     uglifier (4.1.12)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.4.0)
-    unicorn (5.0.1)
+    unicorn (5.4.1)
       kgio (~> 2.6)
-      rack
       raindrops (~> 0.7)
     warden (1.2.7)
       rack (>= 1.0)
@@ -341,7 +340,7 @@ DEPENDENCIES
   therubyracer (~> 0.12.2)
   turbolinks (~> 2.5.3)
   uglifier (>= 2.5.0)
-  unicorn (~> 5.0.1)
+  unicorn (~> 5.4.1)
   web-console (~> 2.0.0)
 
 BUNDLED WITH
