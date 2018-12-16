@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '4.2.11'
-gem 'rake', '11.1.1'
+gem 'rake', '12.3.2'
 
 group :development do
   gem 'capistrano', '3.4.0'
@@ -28,7 +28,7 @@ end
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap', '~> 4.1.1'
 gem 'cocoon', '~> 1.2.9'
-gem 'devise', '~> 3.5.2'
+gem 'devise', '~> 4.5.0'
 gem 'font-awesome-sass', '~> 5.5.0'
 gem 'jquery-rails', '~> 3.1.0'
 gem 'kaminari', '~> 1.1.1'
