@@ -41,11 +41,10 @@
     <% @users.each do |user| %>
       <tr>
         <td>
-          <% if user.administrator? %>
-            <%= fa_icon('check', class: 'text-success') %>
-          <% else %>
-            <%= fa_icon('close', class: 'text-warning') %>
-          <% end %>
+          <%= render(
+            partial: 'admin/shared/table/check_or_cross',
+            locals: { check: user.administrator? }
+          ) %>
         </td>
         <td><%= user.email %></td>
         <td>
@@ -71,18 +70,16 @@
           )
         %>
         <td>
-          <% if user.confirmed_at.present? %>
-            <%= fa_icon('check', class: 'text-success') %>
-          <% else %>
-            <%= fa_icon('close', class: 'text-warning') %>
-          <% end %>
+          <%= render(
+            partial: 'admin/shared/table/check_or_cross',
+            locals: { check: user.confirmed_at.present? }
+          ) %>
         </td>
         <td>
-          <% if user.locked_at.present? %>
-            <%= fa_icon('close', class: 'text-warning') %>
-          <% else %>
-            <%= fa_icon('check', class: 'text-success') %>
-          <% end %>
+          <%= render(
+            partial: 'admin/shared/table/check_or_cross',
+            locals: { check: user.locked_at.present? }
+          ) %>
         </td>
         <%=
           render(

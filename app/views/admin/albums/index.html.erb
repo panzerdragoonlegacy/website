@@ -46,11 +46,10 @@
             )
           %>
           <td>
-            <% if album.pictures.count > 0 %>
-              <%= fa_icon('check') %>
-            <% else %>
-              <%= fa_icon('close') %>
-            <% end %>
+            <%= render(
+              partial: 'admin/shared/table/check_or_cross',
+              locals: { check: album.pictures.count > 0 }
+            ) %>
           </td>
           <%=
             render(

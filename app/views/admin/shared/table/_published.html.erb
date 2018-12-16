@@ -1,7 +1,6 @@
 <td>
-  <% if resource.publish %>
-    <%= fa_icon('check', class: 'text-success') %>
-  <% else %>
-    <%= fa_icon('close', class: 'text-warning') %>
-  <% end %>
+  <%= render(
+    partial: 'admin/shared/table/check_or_cross',
+    locals: { check: resource.publish }
+  ) %>
 </td>
