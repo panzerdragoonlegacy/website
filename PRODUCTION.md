@@ -83,11 +83,11 @@ Step-by-step instructions for setting up the site on a VPS.
 
 5. Install the ruby version in the Rails app's `.ruby_version` file:
 
-   `rbenv install -v 2.3.0`
+   `rbenv install -v 2.5.3`
 
 6. Set this ruby version to be the global ruby:
 
-   `rbenv global 2.3.0`
+   `rbenv global 2.5.3`
 
 7. Prevent rubygems from creating local documentation for gems:
 

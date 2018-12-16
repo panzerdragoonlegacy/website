@@ -77,11 +77,11 @@ Homebrew for package management instead of APT.
 
 8. Install the ruby version in the app's .ruby_version file:
 
-   `rbenv install 2.3.0`
+   `rbenv install 2.5.3`
 
 9. Set this ruby version as the global ruby:
 
-   `rbenv global 2.3.0`
+   `rbenv global 2.5.3`
 
 10. Install bundler:
 
