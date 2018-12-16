@@ -1,6 +1,9 @@
 # Ignore OSX hidden file.
 .DS_Store
 
+# Ignore Visual Studio Code configuration
+.vscode
+
 # Ignore files containing sensitive information.
 /config/database.yml
 /config/secrets.yml
