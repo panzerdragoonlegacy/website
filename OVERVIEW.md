@@ -171,19 +171,23 @@ account.
 ### Twitter
 
 The Twitter page is linked to the email address
-`support@panzerdragoonlegacy.com`. This is redirected to Chris' personal email
-and can be reconfigured via the Namecheap control panel if need be.
+`panzerdragoonlegacy@gmail.com`.
 
 ### YouTube
 
 The YouTube account is owned by the Google account
 `panzerdragoonlegacy@gmail.com` for which a password reset email can be sent to
-`support@panzerdragoonlegacy.com`. The YouTube channel can be managed via the
-administrator's personal Google account.
+`support@panzerdragoonlegacy.com` or Chris' personal email. The YouTube channel
+can be managed via the administrator's personal Google account.
 
 ### Steam
 
 The Steam group can be updated via the administrator's personal Steam account.
+
+### Discord
+
+The Discord server owner is linked to the email address
+`panzerdragoonlegacy@gmail.com`.
 
 ## Additional Accounts
 
