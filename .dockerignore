@@ -1,2 +1,18 @@
-# Ignore Paperclip attachments
-/public/system/*
+# Git
+.git
+.gitignore
+
+# Logs
+log/*
+
+# Temp files
+tmp/*
+
+# macOS system files
+.DS_Store
+
+# Editor files
+.vscode
+
+# Paperclip attachments
+public/system/*

@@ -1,9 +1,14 @@
 FROM ruby:2.5
 
-RUN apt-get update -y
-RUN apt-get install -y --no-install-recommends nodejs
+LABEL maintainer="chris@chrisalley.info"
+
+RUN apt-get update -y && apt-get install -y --no-install-recommends \
+  nodejs
+
+COPY Gemfile* /app/
+WORKDIR /app
+RUN bundle install
 
 COPY . /app
 
-WORKDIR /app
-RUN bundle install
+CMD ["bin/rails", "s", "-b", "0.0.0.0"]
