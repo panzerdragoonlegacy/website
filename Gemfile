@@ -8,7 +8,7 @@ group :development do
   gem 'capistrano-bundler', '~> 1.1.4'
   gem 'capistrano-rails', '~> 1.1.6'
   gem 'capistrano-rbenv', '~> 2.0.4'
-  gem 'puma', '~> 3.1.0'
+  gem 'puma', '~> 3.12.0'
   gem 'rubocop', '~> 0.39.0', require: false
   gem 'spring', '~> 1.1.2'
   gem 'web-console', '~> 2.0.0'
