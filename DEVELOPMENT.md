@@ -6,15 +6,17 @@ Step-by-step instructions for setting up a development environment for the site.
 
 ### Setting Up the Development Environment
 
-1. Install Docker (refer to setup instructions on docker.com)
+1. Install git (refer to setup instructions on git-scm.com)
 
-2. Clone the git repository and change into it's directory:
+2. Install Docker (refer to setup instructions on docker.com)
+
+3. Clone the git repository and change into it's directory:
 
    `git clone https://github.com/chrisalley/panzer-dragoon-legacy.git`
 
    `cd panzer-dragoon-legacy`
 
-3. Create database.yml, secrets.yml, and .env from the example files:
+4. Create database.yml, secrets.yml, and .env from the example files:
 
    `cp config/examples/database.yml config/database.yml`
 
@@ -22,21 +24,21 @@ Step-by-step instructions for setting up a development environment for the site.
 
    `cp .example.env .env`
 
-4. Run and start the Docker containers:
+5. Run and start the Docker containers:
 
    `docker-compose up -d`
 
-5. If it does not already exist, create the development database:
+6. If it does not already exist, create the development database:
 
    `docker-compose exec web bin/rake db:create`
 
-6. Load the database schema and run any pending migrations:
+7. Load the database schema and run any pending migrations:
 
    `docker-compose exec web bin/rake db:schema:load`
 
    `docker-compose exec web bin/rake db:migrate`
 
-7. Enter the Rails console and create an administrator user:
+8. Enter the Rails console and create an administrator user:
 
    `docker-compose exec web bin/rails c`
 
@@ -51,7 +53,7 @@ Step-by-step instructions for setting up a development environment for the site.
    exit
    ```
 
-8. Open http://localhost:3000 to log in as the admin user.
+9. Open http://localhost:3000 to log in as the admin user.
 
 ### Running the Test Suite
 
