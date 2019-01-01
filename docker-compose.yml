@@ -6,3 +6,13 @@ services:
       - "3000:3000"
     volumes:
       - .:/app
+    env_file:
+      - .env
+  database:
+    image: postgres
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+volumes:
+  db_data:

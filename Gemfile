@@ -16,6 +16,7 @@ end
 
 group :development, :test do
   gem 'byebug', '~> 3.1.2'
+  gem 'dotenv-rails', '~> 2.5.0'
   gem 'rspec-rails', '~> 3.6.1'
 end
 

@@ -8,6 +8,9 @@ log/*
 # Temp files
 tmp/*
 
+# Environment variables
+.env
+
 # macOS system files
 .DS_Store
 
