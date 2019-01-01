@@ -2,7 +2,70 @@
 
 Step-by-step instructions for setting up a development environment for the site.
 
-## Set Up the Virtual Machine
+## With Docker
+
+### Setting Up the Development Environment
+
+1. Install Docker (refer to setup instructions on docker.com)
+
+2. Clone the git repository and change into it's directory:
+
+   `git clone https://github.com/chrisalley/panzer-dragoon-legacy.git`
+
+   `cd panzer-dragoon-legacy`
+
+3. Create database.yml, secrets.yml, and .env from the example files:
+
+   `cp config/examples/database.yml config/database.yml`
+
+   `cp config/examples/secrets.yml config/secrets.yml`
+
+   `cp .example.env .env`
+
+4. Run and start the Docker containers:
+
+   `docker-compose up -d`
+
+5. If it does not already exist, create the development database:
+
+   `docker-compose exec web bin/rake db:create`
+
+6. Load the database schema and run any pending migrations:
+
+   `docker-compose exec web bin/rake db:schema:load`
+
+   `docker-compose exec web bin/rake db:migrate`
+
+7. Enter the Rails console and create an administrator user:
+
+   `docker-compose exec web bin/rails c`
+
+   ```ruby
+   User.create(
+     email: 'admin@example.com',
+     password: 'MyPa$$word',
+     administrator: true,
+     confirmed_at: Time.now
+   )
+
+   exit
+   ```
+
+8. Open http://localhost:3000 to log in as the admin user.
+
+### Running the Test Suite
+
+1. If it does not already exist, create the test database:
+
+   `docker-compose exec web bin/rake db:create RAILS_ENV=test`
+
+2. Run this test suite:
+
+   `docker-compose exec web bin/rspec`
+
+## Without Docker
+
+### Set Up the Virtual Machine
 
 These instructions are geared towards setting up the development environment in
 a Debian-based virtual machine (specifically Linux Mint). Alternatively,
@@ -95,7 +158,7 @@ Homebrew for package management instead of APT.
 
     `rbenv rehash`
 
-## Install Other Rails Dependencies
+### Install Other Rails Dependencies
 
 1. Install nodejs (for the asset pipeline):
 
@@ -146,7 +209,7 @@ Homebrew for package management instead of APT.
 
    `\q`
 
-## Set Up the Rails App
+### Set Up the Rails App
 
 1. Create a Code directory and change into it:
 
@@ -208,7 +271,7 @@ Homebrew for package management instead of APT.
    installed a copy of the website with a different dataset you may need to
    clear your browser cookies.
 
-## Setting Up an Admin Account in Development
+### Setting Up an Admin Account in Development
 
 1. Go to Mailtrap.io and create an account to use as a development mail server.
    Paste the API details provided by Mailtrap into secrets.yml:
