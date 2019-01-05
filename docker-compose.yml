@@ -13,6 +13,6 @@ services:
     env_file:
       - .env
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - database_data:/var/lib/postgresql/data
 volumes:
-  db_data:
+  database_data:
