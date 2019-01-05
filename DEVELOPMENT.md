@@ -8,9 +8,14 @@ Step-by-step instructions for setting up a development environment for the site.
 
 1. Install git (refer to setup instructions on git-scm.com)
 
-2. Install Docker (refer to setup instructions on docker.com)
+2. Install Docker (refer to setup instructions on docker.com). If you are using
+   Windows 10 Home you will need to install the Docker Toolbox instead. With
+   Docker Toolbox installed, run the following setup commands in the Docker
+   QuickStart Terminal.
 
 3. Clone the git repository and change into it's directory:
+
+   (Windows specific): `git config --global core.autocrif false`
 
    `git clone https://github.com/chrisalley/panzer-dragoon-legacy.git`
 
@@ -54,6 +59,11 @@ Step-by-step instructions for setting up a development environment for the site.
    ```
 
 9. Open http://localhost:3000 to log in as the admin user.
+
+   If you are using the Docker Toolbox you will get a connection refused error.
+   In this case, you will need to use the IP address of Docker Machine instead.
+   Run `docker-machine ls`. If the displayed URL is `tcp://192.168.99.100:2376`
+   you would access the site at `http://192.168.99.100:3000` instead.
 
 ### Running the Test Suite
 
