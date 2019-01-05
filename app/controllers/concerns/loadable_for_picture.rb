@@ -31,7 +31,7 @@ module LoadableForPicture
   end
 
   def load_picture
-    @picture = Picture.find params[:id]
+    @picture = Picture.find_by id: params[:id]
     authorize @picture
   end
 

@@ -4,6 +4,7 @@ gem 'rails', '4.2.11'
 gem 'rake', '12.3.2'
 
 group :development do
+  gem 'brakeman' # It is recommended to always use the latest version.
   gem 'capistrano', '3.4.0'
   gem 'capistrano-bundler', '~> 1.1.4'
   gem 'capistrano-rails', '~> 1.1.6'
