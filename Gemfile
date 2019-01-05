@@ -1,10 +1,11 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'rails', '4.2.11'
 gem 'rake', '12.3.2'
 
 group :development do
   gem 'brakeman' # It is recommended to always use the latest version.
+  gem 'bundler-audit'
   gem 'capistrano', '3.4.0'
   gem 'capistrano-bundler', '~> 1.1.4'
   gem 'capistrano-rails', '~> 1.1.6'
@@ -12,7 +13,7 @@ group :development do
   gem 'puma', '~> 3.12.0'
   gem 'rubocop', '~> 0.39.0', require: false
   gem 'spring', '~> 1.1.2'
-  gem 'web-console', '~> 2.0.0'
+  gem 'web-console', '~> 2.3.0'
 end
 
 group :development, :test do
