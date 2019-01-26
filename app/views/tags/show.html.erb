@@ -4,10 +4,29 @@
 <% end %>
 
 <% if @encyclopaedia_entry && policy(@encyclopaedia_entry).show? %>
-  <%= link_to(
-    'Learn more about "' + @encyclopaedia_entry.name + '" in our encyclopaedia',
-    encyclopaedia_entry_path(@encyclopaedia_entry)
-  ) %>
+  <div id="resources">
+    <div class="resource">
+      <div class="thumbnail">
+        <%=
+          link_to(
+            show_picture(
+              @encyclopaedia_entry, 'encyclopaedia_entry_picture', :thumbnail
+            ),
+            @encyclopaedia_entry
+          )
+        %>
+      </div>
+      <div class="details">
+        <h2>
+          <%= link_to(
+            "#{@encyclopaedia_entry.name} Encyclopaedia Entry",
+            @encyclopaedia_entry
+          ) %>
+        </h2>
+        <p><%= truncated_text @encyclopaedia_entry.content %></p>
+      </div>
+    </div>
+  </div>
 <% end %>
 
 <p><%= @tag.description if @tag.description.present? %></p>
