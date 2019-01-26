@@ -13,9 +13,7 @@ class TagPolicy < ApplicationPolicy
   end
 
   def show?
-    if user
-      return true if user.administrator?
-    end
+    true
   end
 
   def new?

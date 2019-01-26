@@ -17,9 +17,8 @@ describe TagPolicy do
     end
 
     it do
-      is_expected.to forbid_actions([
-        :show, :new, :create, :edit, :update, :destroy
-      ])
+      is_expected.to permit_action :show
+      is_expected.to forbid_actions([:new, :create, :edit, :update, :destroy])
     end
   end
 end
