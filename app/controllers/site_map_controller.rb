@@ -2,9 +2,7 @@ class SiteMapController < ApplicationController
   after_action :verify_authorized, except: [:show]
 
   def show
-    if params[:browse_by] == 'saga'
-      load_categories_grouped_by_saga
-    end
+
     if params[:browse_by] == 'media_type'
       load_article_category_groups
       load_download_category_groups
@@ -15,8 +13,11 @@ class SiteMapController < ApplicationController
       load_resource_category_groups
       load_story_categories
       load_video_category_groups
+    elsif params[:browse_by] == 'tag'
+     load_tags
+    else
+      load_categories_grouped_by_saga
     end
-    load_tags if params[:browse_by] == 'tag'
   end
 
   private

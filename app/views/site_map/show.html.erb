@@ -6,12 +6,10 @@
   <%= link_to 'Browse By Tag', site_map_path(browse_by: 'tag') %>
 </p>
 
-<% if params[:browse_by] == 'saga' %>
-  <%= render partial: 'browse_by_saga', locals: { tags: @tags } %>
-<% end %>
 <% if params[:browse_by] == 'media_type' %>
   <%= render partial: 'browse_by_media_type', locals: { tags: @tags } %>
-<% end %>
-<% if params[:browse_by] == 'tag' %>
+<% elsif params[:browse_by] == 'tag' %>
   <%= render partial: 'browse_by_tag', locals: { tags: @tags } %>
+<% else %>
+  <%= render partial: 'browse_by_saga', locals: { tags: @tags } %>
 <% end %>
