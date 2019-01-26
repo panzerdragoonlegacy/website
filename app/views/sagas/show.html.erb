@@ -11,7 +11,9 @@
   </p>
 <% end %>
 
-<h2><%= @saga.name %> Categories</h2>
+<% if true.in?(@categories.each.map { |key, value| value.present? }) %>
+  <h2><%= @saga.name %> Categories</h2>
+<% end %>
 
 <% MediaType::all.each do |key, value| %>
   <% if @categories[key].present? %>
