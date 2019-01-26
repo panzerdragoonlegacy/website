@@ -9,8 +9,6 @@
             <% elsif category_parent == :category_group %>
               <%= link_to category.short_name_for_media_type, category %>
             <% end %>
-          <% else %>
-            <%= link_to category.name, category %>
           <% end %>
           <% unless category.publish %>
              - <span class="unpublished">Unpublished</span>

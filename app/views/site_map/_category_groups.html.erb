@@ -7,7 +7,10 @@
           <%=
             render(
               partial: 'site_map/categories',
-              locals: { categories: category_group.categories.order(:name) }
+              locals: {
+                categories: category_group.categories.order(:name),
+                category_parent: :category_group
+              }
             )
           %>
         </li>
