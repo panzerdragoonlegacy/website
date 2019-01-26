@@ -5,13 +5,7 @@
       <% @sagas_with_published_encyclopaedia_entries.each do |saga| %>
         <% if saga.encyclopaedia_entry%>
           <% if policy(saga.encyclopaedia_entry).show? %>
-            <li>
-              <%=
-                link_to(
-                  saga.name, encyclopaedia_entry_path(saga.encyclopaedia_entry)
-                )
-              %>
-            </li>
+            <li><%= link_to saga.name, saga_path(saga) %></li>
           <% end %>
         <% end %>
       <% end %>
@@ -40,7 +34,7 @@
   <% end %>
   <h3>Contributor Access</h3>
   <ul>
-    <% if user_signed_in? %>  
+    <% if user_signed_in? %>
       <li>Logged in as
         <% if current_user.contributor_profile_id %>
           <%= current_user.contributor_profile.name %>

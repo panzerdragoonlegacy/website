@@ -8,13 +8,13 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/', to: 'home#index'
-    
+
     resources :albums
     resources :category_groups, path: 'category-groups'
     resources :categories
     resources :sagas
     resources :tags
-    
+
     resources :contributor_profiles, path: 'contributor-profiles'
     resources :users
 
@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :encyclopaedia_entries, path: 'encyclopaedia'
   resources :special_pages, path: 'special-pages'
+  resources :sagas
 
   resources :contributor_profiles, path: 'contributors' do
     resources :news_entries, path: 'news-entries'

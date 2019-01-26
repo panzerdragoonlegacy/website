@@ -1,0 +1,16 @@
+<% title @saga.name %>
+
+<% MediaType::all.each do |key, value| %>
+  <% if @categories[key].present? %>
+    <h2><%= value %></h2>
+    <%=
+      render(
+        partial: 'site_map/categories',
+        locals: {
+          categories: @categories[key],
+          category_parent: :saga
+        }
+      )
+    %>
+  <% end %>
+<% end %>

@@ -3,8 +3,12 @@
     <% categories.each do |category| %>
       <% if policy(category).show? %>
         <li>
-          <% if category.short_name_for_media_type.present? %>
-            <%= link_to category.short_name_for_media_type, category %>
+          <% if defined? category_parent %>
+            <% if category_parent == :saga %>
+              <%= link_to category.short_name_for_saga, category %>
+            <% elsif category_parent == :category_group %>
+              <%= link_to category.short_name_for_media_type, category %>
+            <% end %>
           <% else %>
             <%= link_to category.name, category %>
           <% end %>
