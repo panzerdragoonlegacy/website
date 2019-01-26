@@ -2,18 +2,36 @@ class SiteMapController < ApplicationController
   after_action :verify_authorized, except: [:show]
 
   def show
-    load_article_category_groups
-    load_download_category_groups
-    load_encyclopaedia_entry_category_groups
-    load_link_categories
-    load_music_track_category_groups
-    load_picture_category_groups
-    load_resource_category_groups
-    load_story_categories
-    load_video_category_groups
+    if params[:browse_by] == 'saga'
+      load_categories_grouped_by_saga
+    end
+    if params[:browse_by] == 'media_type'
+      load_article_category_groups
+      load_download_category_groups
+      load_encyclopaedia_entry_category_groups
+      load_link_categories
+      load_music_track_category_groups
+      load_picture_category_groups
+      load_resource_category_groups
+      load_story_categories
+      load_video_category_groups
+    end
   end
 
   private
+
+  def load_categories_grouped_by_saga
+    @all_sagas = {}
+    Saga.all.each do |saga|
+      media_types = {}
+      MediaType::all.each do |key, value|
+        media_types[value] = policy_scope(
+          saga.categories.where(category_type: key.to_s).order(:name)
+        )
+      end
+      @all_sagas[saga] = media_types
+    end
+  end
 
   def load_article_category_groups
     @article_category_groups = policy_scope(

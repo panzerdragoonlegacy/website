@@ -1,0 +1,17 @@
+<% if media_types.present? %>
+  <ul>
+    <% media_types.each do |key, value| %>
+      <% if value.present? %>
+        <li>
+          <h3><%= key %></h3>
+          <%=
+            render(
+              partial: 'site_map/categories',
+              locals: { categories: value }
+            )
+          %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
