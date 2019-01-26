@@ -1,13 +1,9 @@
 <div id="aside">
-  <% if @sagas_with_published_encyclopaedia_entries.present? %>
+  <% if @sagas_for_left_nav.present? %>
     <h3>Browse by Saga</h3>
     <ul>
-      <% @sagas_with_published_encyclopaedia_entries.each do |saga| %>
-        <% if saga.encyclopaedia_entry%>
-          <% if policy(saga.encyclopaedia_entry).show? %>
-            <li><%= link_to saga.name, saga_path(saga) %></li>
-          <% end %>
-        <% end %>
+      <% @sagas_for_left_nav.each do |saga| %>
+        <li><%= link_to saga.name, saga_path(saga) %></li>
       <% end %>
     </ul>
   <% end %>
