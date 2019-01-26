@@ -1,0 +1,14 @@
+<p>Browsing by Saga...</p>
+<ul>
+  <% @all_sagas.each do |key, value| %>
+    <li>
+      <h2><%= link_to key.name, key %></h2>
+      <%=
+        render(
+          partial: 'media_types',
+          locals: { media_types: value }
+        )
+      %>
+    </li>
+  <% end %>
+</ul>

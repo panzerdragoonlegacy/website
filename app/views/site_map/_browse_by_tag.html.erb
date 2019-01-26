@@ -1,0 +1,17 @@
+<p>Browsing by Tag...</p>
+<% if tags %>
+  <div id="resources">
+    <% tags.each do |tag| %>
+      <div class="resource">
+        <div class="details">
+          <h2><%= link_to tag.name, tag %></h2>
+          <% if tag.description.present? %>
+            <p><%= tag.description %></p>
+          <% end %>
+          <p><%= website_contributions_count(tag) %> contributions tagged</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= paginate tags %>
+<% end %>

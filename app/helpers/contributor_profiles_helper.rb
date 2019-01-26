@@ -25,61 +25,61 @@ module ContributorProfilesHelper
     end
   end
 
-  def article_count(contributor_profile)
-    policy_scope(contributor_profile.articles).count
+  def article_count(owner)
+    policy_scope(owner.articles).count
   end
 
-  def download_count(contributor_profile)
-    policy_scope(contributor_profile.downloads).count
+  def download_count(owner)
+    policy_scope(owner.downloads).count
   end
 
-  def link_count(contributor_profile)
-    policy_scope(contributor_profile.links).count
+  def link_count(owner)
+    policy_scope(owner.links).count
   end
 
-  def music_track_count(contributor_profile)
-    policy_scope(contributor_profile.music_tracks).count
+  def music_track_count(owner)
+    policy_scope(owner.music_tracks).count
   end
 
-  def news_entry_count(contributor_profile)
-    policy_scope(contributor_profile.news_entries).count
+  def news_entry_count(owner)
+    policy_scope(owner.news_entries).count
   end
 
-  def picture_count(contributor_profile)
-    policy_scope(contributor_profile.pictures).count
+  def picture_count(owner)
+    policy_scope(owner.pictures).count
   end
 
-  def poem_count(contributor_profile)
-    policy_scope(contributor_profile.poems).count
+  def poem_count(owner)
+    policy_scope(owner.poems).count
   end
 
-  def quiz_count(contributor_profile)
-    policy_scope(contributor_profile.quizzes).count
+  def quiz_count(owner)
+    policy_scope(owner.quizzes).count
   end
 
-  def resource_count(contributor_profile)
-    policy_scope(contributor_profile.resources).count
+  def resource_count(owner)
+    policy_scope(owner.resources).count
   end
 
-  def story_count(contributor_profile)
-    policy_scope(contributor_profile.stories).count
+  def story_count(owner)
+    policy_scope(owner.stories).count
   end
 
-  def video_count(contributor_profile)
-    policy_scope(contributor_profile.videos).count
+  def video_count(owner)
+    policy_scope(owner.videos).count
   end
 
-  def website_contributions_count(contributor_profile)
-    news_entry_count(contributor_profile) +
-    article_count(contributor_profile) +
-    download_count(contributor_profile) +
-    link_count(contributor_profile) +
-    music_track_count(contributor_profile) +
-    picture_count(contributor_profile) +
-    poem_count(contributor_profile) +
-    quiz_count(contributor_profile) +
-    resource_count(contributor_profile) +
-    story_count(contributor_profile) +
-    video_count(contributor_profile)
+  def website_contributions_count(owner)
+    news_entry_count(owner) +
+    article_count(owner) +
+    download_count(owner) +
+    link_count(owner) +
+    music_track_count(owner) +
+    picture_count(owner) +
+    poem_count(owner) +
+    quiz_count(owner) +
+    resource_count(owner) +
+    story_count(owner) +
+    video_count(owner)
   end
 end

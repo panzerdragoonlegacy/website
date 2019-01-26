@@ -16,6 +16,7 @@ class SiteMapController < ApplicationController
       load_story_categories
       load_video_category_groups
     end
+    load_tags if params[:browse_by] == 'tag'
   end
 
   private
@@ -87,5 +88,9 @@ class SiteMapController < ApplicationController
     @video_category_groups = policy_scope(
       CategoryGroup.where(category_group_type: :video).order(:name)
     )
+  end
+
+  def load_tags
+    @tags = policy_scope(Tag.order(:name).page(params[:page]))
   end
 end

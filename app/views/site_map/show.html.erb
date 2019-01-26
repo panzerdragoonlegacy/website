@@ -2,114 +2,16 @@
 
 <p>
   <%= link_to 'Browse By Saga', site_map_path(browse_by: 'saga') %> |
-  <%= link_to 'Browse By Media Type', site_map_path(browse_by: 'media_type') %>
+  <%= link_to 'Browse By Media Type', site_map_path(browse_by: 'media_type') %> |
+  <%= link_to 'Browse By Tag', site_map_path(browse_by: 'tag') %>
 </p>
 
 <% if params[:browse_by] == 'saga' %>
-  <p>Browsing by Saga...</p>
-  <ul>
-    <% @all_sagas.each do |key, value| %>
-      <li>
-        <h2><%= link_to key.name, key %></h2>
-        <%=
-          render(
-            partial: 'media_types',
-            locals: { media_types: value }
-          )
-        %>
-      </li>
-    <% end %>
-  </ul>
+  <%= render partial: 'browse_by_saga', locals: { tags: @tags } %>
 <% end %>
 <% if params[:browse_by] == 'media_type' %>
-  <p>Browsing by Media Type...</p>
-  <ul>
-    <li>
-      <h2><%= link_to 'Articles', articles_path %></h2>
-      <%=
-        render(
-          partial: 'category_groups',
-          locals: { category_groups: @article_category_groups }
-        )
-      %>
-    </li>
-    <li>
-      <h2><%= link_to 'Downloads', downloads_path %></h2>
-      <%=
-        render(
-          partial: 'category_groups',
-          locals: { category_groups: @download_category_groups }
-        )
-      %>
-    </li>
-    <li>
-      <h2><%= link_to 'Encyclopaedia', encyclopaedia_entries_path %></h2>
-      <%=
-        render(
-          partial: 'category_groups',
-          locals: { category_groups: @encyclopaedia_entry_category_groups }
-        )
-      %>
-    </li>
-    <li>
-      <h2><%= link_to 'Links', links_path %></h2>
-      <%=
-        render(
-          partial: 'categories',
-          locals: { categories: @link_categories }
-        )
-      %>
-    </li>
-    <li>
-      <h2><%= link_to 'Music', music_tracks_path %></h2>
-      <%=
-        render(
-          partial: 'category_groups',
-          locals: { category_groups: @music_track_category_groups }
-        )
-      %>
-    </li>
-    <li>
-      <h2><%= link_to 'Pictures', pictures_path %></h2>
-      <%=
-        render(
-          partial: 'category_groups',
-          locals: { category_groups: @picture_category_groups }
-        )
-      %>
-    </li>
-    <li>
-      <h2><%= link_to 'Poems', poems_path %></h2>
-    </li>
-    <li>
-      <h2><%= link_to 'Quizzes', quizzes_path %></h2>
-    </li>
-    <li>
-      <h2><%= link_to 'Resources', resources_path %></h2>
-      <%=
-        render(
-          partial: 'category_groups',
-          locals: { category_groups: @resource_category_groups }
-        )
-      %>
-    </li>
-    <li>
-      <h2><%= link_to 'Stories', stories_path %></h2>
-      <%=
-        render(
-          partial: 'categories',
-          locals: { categories: @story_categories }
-        )
-      %>
-    </li>
-    <li>
-      <h2><%= link_to 'Videos', videos_path %></h2>
-      <%=
-        render(
-          partial: 'category_groups',
-          locals: { category_groups: @video_category_groups }
-        )
-      %>
-    </li>
-  </ul>
+  <%= render partial: 'browse_by_media_type', locals: { tags: @tags } %>
+<% end %>
+<% if params[:browse_by] == 'tag' %>
+  <%= render partial: 'browse_by_tag', locals: { tags: @tags } %>
 <% end %>
