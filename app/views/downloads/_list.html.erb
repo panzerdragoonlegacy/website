@@ -2,6 +2,12 @@
   <div id="resources">
     <% @downloads.each do |download| %>
       <div class="resource">
+        <div class="thumbnail">
+          <%= link_to(
+            show_picture(download, 'download_picture', :thumbnail),
+            download
+          ) %>
+        </div>
         <div class="details">
           <h2><%= link_to download.name, download %></h2>
           <% unless download.publish %>

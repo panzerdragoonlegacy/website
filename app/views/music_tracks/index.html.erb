@@ -19,19 +19,4 @@
   <% end %>
 <% end %>
 
-<% if @music_tracks %>
-  <div id="resources">
-    <% @music_tracks.each do |music_track| %>
-      <div class="resource">
-        <div class="details">
-          <h2><%= link_to music_track.name, music_track %></h2>
-          <% unless music_track.publish %>
-            <p class="unpublished">Unpublished</p>
-          <% end %>
-          <p><%= music_track.description %></p>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <%= paginate @music_tracks %>
-<% end %>
+<%= render 'list' %>
