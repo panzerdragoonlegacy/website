@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   resources :encyclopaedia_entries, path: 'encyclopaedia'
   resources :special_pages, path: 'special-pages'
   resources :sagas
+  resources :tags
 
   resources :contributor_profiles, path: 'contributors' do
     resources :news_entries, path: 'news-entries'

@@ -1,0 +1,15 @@
+<% unless @videos.count == 0 %>
+  <h2>Videos</h2>
+  <ul>
+    <% @videos.each do |video| %>
+      <li>
+        <%= link_to video.name, video %>
+        <% if !video.publish %>
+           - <span class="unpublished">Unpublished</span>
+        <% elsif !video.category.publish %>
+           - <span class="unpublished">Published in Unpublished Category</span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

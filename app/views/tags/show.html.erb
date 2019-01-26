@@ -1,0 +1,24 @@
+<% title @tag.name %>
+<% if @tag.description.present? %>
+  <% description truncated_text(@tag.description) %>
+<% end %>
+
+<% if @encyclopaedia_entry && policy(@encyclopaedia_entry).show? %>
+  <%= link_to(
+    'Learn more about "' + @encyclopaedia_entry.name + '" in our encyclopaedia',
+    encyclopaedia_entry_path(@encyclopaedia_entry)
+  ) %>
+<% end %>
+
+<p><%= @tag.description if @tag.description.present? %></p>
+
+<%= render 'tags/show/articles' %>
+<%= render 'tags/show/downloads' %>
+<%= render 'tags/show/links' %>
+<%= render 'tags/show/music_tracks' %>
+<%= render 'tags/show/pictures' %>
+<%= render 'tags/show/poems' %>
+<%= render 'tags/show/quizzes' %>
+<%= render 'tags/show/resources' %>
+<%= render 'tags/show/stories' %>
+<%= render 'tags/show/videos' %>

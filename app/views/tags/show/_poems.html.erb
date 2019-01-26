@@ -1,0 +1,13 @@
+<% unless @poems.count == 0 %>
+  <h2>Poems</h2>
+  <ul>
+    <% @poems.each do |poem| %>
+      <li>
+        <%= link_to poem.name, poem %>
+        <% unless poem.publish %>
+           - <span class="unpublished">Unpublished</span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
