@@ -3,7 +3,10 @@
   <% description truncated_text(@tag.description) %>
 <% end %>
 
+<p><%= @tag.description if @tag.description.present? %></p>
+
 <% if @encyclopaedia_entry && policy(@encyclopaedia_entry).show? %>
+  <h2>Encyclopaedia Entry</h2>
   <div id="resources">
     <div class="resource">
       <div class="thumbnail">
@@ -19,7 +22,7 @@
       <div class="details">
         <h2>
           <%= link_to(
-            "#{@encyclopaedia_entry.name} Encyclopaedia Entry",
+            @encyclopaedia_entry.name,
             @encyclopaedia_entry
           ) %>
         </h2>
@@ -28,8 +31,6 @@
     </div>
   </div>
 <% end %>
-
-<p><%= @tag.description if @tag.description.present? %></p>
 
 <% if @tag.news_entries.count > 0 %>
   <h2>News Entries</h2>
