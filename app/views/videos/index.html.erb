@@ -19,4 +19,7 @@
   <% end %>
 <% end %>
 
-<%= render 'list' %>
+<% if @videos %>
+  <%= render 'list' %>
+  <%= paginate @videos %>
+<% end %>

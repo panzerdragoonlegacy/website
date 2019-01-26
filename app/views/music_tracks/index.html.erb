@@ -19,4 +19,7 @@
   <% end %>
 <% end %>
 
-<%= render 'list' %>
+<% if @music_tracks %>
+  <%= render 'list' %>
+  <%= paginate @music_tracks %>
+<% end %>

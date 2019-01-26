@@ -1,16 +1,13 @@
-<% if @quizzes %>
-  <div id="resources">
-    <% @quizzes.each do |quiz| %>
-      <div class="resource">
-        <div class="details">
-          <h2><%= link_to quiz.name, quiz %></h2>
-          <% unless quiz.publish %>
-            <p class="unpublished">Unpublished</p>
-          <% end %>
-          <p><%= quiz.description %></p>
-        </div>
+<div id="resources">
+  <% @quizzes.each do |quiz| %>
+    <div class="resource">
+      <div class="details">
+        <h2><%= link_to quiz.name, quiz %></h2>
+        <% unless quiz.publish %>
+          <p class="unpublished">Unpublished</p>
+        <% end %>
+        <p><%= quiz.description %></p>
       </div>
-    <% end %>
-  </div>
-  <%= paginate @quizzes %>
-<% end %>
+    </div>
+  <% end %>
+</div>

@@ -4,4 +4,7 @@
   <% title 'Quizzes' %>
 <% end %>
 
-<%= render 'list' %>
+<% if @quizzes %>
+  <%= render 'list' %>
+  <%= paginate @quizzes %>
+<% end %>

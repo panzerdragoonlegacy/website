@@ -1,26 +1,23 @@
-<% if @encyclopaedia_entries %>
-  <div id="resources">
-    <% @encyclopaedia_entries.each do |encyclopaedia_entry| %>
-      <div class="resource">
-        <div class="thumbnail">
-          <%=
-            link_to(
-              show_picture(
-                encyclopaedia_entry, 'encyclopaedia_entry_picture', :thumbnail
-              ),
-              encyclopaedia_entry
-            )
-          %>
-        </div>
-        <div class="details">
-          <h2><%= link_to encyclopaedia_entry.name, encyclopaedia_entry %></h2>
-          <% unless encyclopaedia_entry.publish %>
-            <p class="unpublished">Unpublished</p>
-          <% end %>
-          <p><%= truncated_text encyclopaedia_entry.content %></p>
-        </div>
+<div id="resources">
+  <% @encyclopaedia_entries.each do |encyclopaedia_entry| %>
+    <div class="resource">
+      <div class="thumbnail">
+        <%=
+          link_to(
+            show_picture(
+              encyclopaedia_entry, 'encyclopaedia_entry_picture', :thumbnail
+            ),
+            encyclopaedia_entry
+          )
+        %>
       </div>
-    <% end %>
-  </div>
-  <%= paginate @encyclopaedia_entries %>
-<% end %>
+      <div class="details">
+        <h2><%= link_to encyclopaedia_entry.name, encyclopaedia_entry %></h2>
+        <% unless encyclopaedia_entry.publish %>
+          <p class="unpublished">Unpublished</p>
+        <% end %>
+        <p><%= truncated_text encyclopaedia_entry.content %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

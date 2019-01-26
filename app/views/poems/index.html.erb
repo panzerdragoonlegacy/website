@@ -4,4 +4,7 @@
   <% title 'Poems' %>
 <% end %>
 
-<%= render 'list' %>
+<% if @poems %>
+  <%= render 'list' %>
+  <%= paginate @poems %>
+<% end %>

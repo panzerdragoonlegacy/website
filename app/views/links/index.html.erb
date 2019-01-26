@@ -23,4 +23,7 @@
   <% end %>
 <% end %>
 
-<%= render 'list' %>
+<% if @links %>
+  <%= render 'list' %>
+  <%= paginate @links %>
+<% end %>

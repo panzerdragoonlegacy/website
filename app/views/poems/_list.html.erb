@@ -1,16 +1,13 @@
-<% if @poems %>
-  <div id="resources">
-    <% @poems.each do |poem| %>
-      <div class="resource">
-        <div class="details">
-          <h2><%= link_to poem.name, poem %></h2>
-          <% unless poem.publish %>
-            <p class="unpublished">Unpublished</p>
-          <% end %>
-          <p><%= poem.description %></p>
-        </div>
+<div id="resources">
+  <% @poems.each do |poem| %>
+    <div class="resource">
+      <div class="details">
+        <h2><%= link_to poem.name, poem %></h2>
+        <% unless poem.publish %>
+          <p class="unpublished">Unpublished</p>
+        <% end %>
+        <p><%= poem.description %></p>
       </div>
-    <% end %>
-  </div>
-  <%= paginate @poems %>
-<% end %>
+    </div>
+  <% end %>
+</div>

@@ -19,4 +19,7 @@
   <% end %>
 <% end %>
 
-<%= render 'list' %>
+<% if @resources %>
+  <%= render 'list' %>
+  <%= paginate @resources %>
+<% end %>

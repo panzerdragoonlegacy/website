@@ -1,16 +1,13 @@
-<% if @articles %>
-  <div id="resources">
-    <% @articles.each do |article| %>
-      <div class="resource">
-        <div class="details">
-          <h2><%= link_to article.name, article %></h2>
-          <% unless article.publish == true %>
-            <p class="unpublished">Unpublished</p>
-          <% end %>
-          <p><%= article.description %></p>
-        </div>
+<div id="resources">
+  <% @articles.each do |article| %>
+    <div class="resource">
+      <div class="details">
+        <h2><%= link_to article.name, article %></h2>
+        <% unless article.publish == true %>
+          <p class="unpublished">Unpublished</p>
+        <% end %>
+        <p><%= article.description %></p>
       </div>
-    <% end %>
-  </div>
-  <%= paginate @articles %>
-<% end %>
+    </div>
+  <% end %>
+</div>

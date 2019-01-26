@@ -12,14 +12,18 @@
 
 <p><%= @tag.description if @tag.description.present? %></p>
 
-<%= render 'tags/show/news_entries' %>
-<%= render 'tags/show/articles' %>
-<%= render 'tags/show/downloads' %>
-<%= render 'tags/show/links' %>
-<%= render 'tags/show/music_tracks' %>
-<%= render 'tags/show/pictures' %>
-<%= render 'tags/show/poems' %>
-<%= render 'tags/show/quizzes' %>
-<%= render 'tags/show/resources' %>
-<%= render 'tags/show/stories' %>
-<%= render 'tags/show/videos' %>
+<% if @tag.news_entries.count > 0 %>
+  <h2>News Entries</h2>
+  <%= render 'news_entries/list' %>
+<% end %>
+
+<% MediaType::all.each do |key, value| %>
+  <% if @tag.send(key.to_s.pluralize).count > 0 %>
+    <h2><%= value %></h2>
+    <%= render "#{key.to_s.pluralize}/list"%>
+  <% end %>
+<% end %>
+
+<p class="links">
+  <%= link_to 'Site Map', site_map_path(browse_by: 'tag') %>
+</p>

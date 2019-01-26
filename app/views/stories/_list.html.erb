@@ -1,16 +1,13 @@
-<% if @stories %>
-  <div id="resources">
-    <% @stories.each do |story| %>
-      <div class="resource">
-        <div class="details">
-          <h2><%= link_to story.name, story %></h2>
-          <% unless story.publish %>
-            <p class="unpublished">Unpublished</p>
-          <% end %>
-          <p><%= story.description %></p>
-        </div>
+<div id="resources">
+  <% @stories.each do |story| %>
+    <div class="resource">
+      <div class="details">
+        <h2><%= link_to story.name, story %></h2>
+        <% unless story.publish %>
+          <p class="unpublished">Unpublished</p>
+        <% end %>
+        <p><%= story.description %></p>
       </div>
-    <% end %>
-  </div>
-  <%= paginate @stories %>
-<% end %>
+    </div>
+  <% end %>
+</div>

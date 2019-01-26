@@ -1,23 +1,20 @@
-<% if @links %>
-  <div id="resources">
-    <% @links.each do |link| %>
-      <div class="resource">
-        <div class="details">
-          <h2><%= link_to link.name, link.url %></h2>
-          <% if link.contributor_profiles.count > 0 %>
-            <h3>Maintained By:</h3>
-            <ul>
-              <% link.contributor_profiles.each do |contributor_profile| %>
-                <li>
-                  <%= link_to contributor_profile.name, contributor_profile %>
-                </li>
-              <% end %>
-            </ul>
-          <% end %>
-          <p><%= link.description %></p>
-        </div>
+<div id="resources">
+  <% @links.each do |link| %>
+    <div class="resource">
+      <div class="details">
+        <h2><%= link_to link.name, link.url %></h2>
+        <% if link.contributor_profiles.count > 0 %>
+          <h3>Maintained By:</h3>
+          <ul>
+            <% link.contributor_profiles.each do |contributor_profile| %>
+              <li>
+                <%= link_to contributor_profile.name, contributor_profile %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+        <p><%= link.description %></p>
       </div>
-    <% end %>
-  </div>
-  <%= paginate @links %>
-<% end %>
+    </div>
+  <% end %>
+</div>

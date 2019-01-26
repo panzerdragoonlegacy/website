@@ -1,5 +1,6 @@
 <h2>Music Tracks in this Category</h2>
 <%= render 'music_tracks/list' %>
+<%= paginate @music_tracks %>
 <p>
   <%= link_to 'Site Map', site_map_path %> |
   <%= link_to 'Music', music_tracks_path %>

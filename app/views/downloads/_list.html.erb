@@ -1,22 +1,19 @@
-<% if @downloads %>
-  <div id="resources">
-    <% @downloads.each do |download| %>
-      <div class="resource">
-        <div class="thumbnail">
-          <%= link_to(
-            show_picture(download, 'download_picture', :thumbnail),
-            download
-          ) %>
-        </div>
-        <div class="details">
-          <h2><%= link_to download.name, download %></h2>
-          <% unless download.publish %>
-            <p class="unpublished">Unpublished</p>
-          <% end %>
-          <p><%= download.description %></p>
-        </div>
+<div id="resources">
+  <% @downloads.each do |download| %>
+    <div class="resource">
+      <div class="thumbnail">
+        <%= link_to(
+          show_picture(download, 'download_picture', :thumbnail),
+          download
+        ) %>
       </div>
-    <% end %>
-  </div>
-  <%= paginate @downloads %>
-<% end %>
+      <div class="details">
+        <h2><%= link_to download.name, download %></h2>
+        <% unless download.publish %>
+          <p class="unpublished">Unpublished</p>
+        <% end %>
+        <p><%= download.description %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
