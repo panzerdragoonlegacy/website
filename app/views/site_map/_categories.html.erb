@@ -3,7 +3,11 @@
     <% categories.each do |category| %>
       <% if policy(category).show? %>
         <li>
-          <%= link_to category.name, category %>
+          <% if category.short_name_for_media_type.present? %>
+            <%= link_to category.short_name_for_media_type, category %>
+          <% else %>
+            <%= link_to category.name, category %>
+          <% end %>
           <% unless category.publish %>
              - <span class="unpublished">Unpublished</span>
           <% end %>
