@@ -12,6 +12,7 @@
 
 <p><%= @tag.description if @tag.description.present? %></p>
 
+<%= render 'tags/show/news_entries' %>
 <%= render 'tags/show/articles' %>
 <%= render 'tags/show/downloads' %>
 <%= render 'tags/show/links' %>

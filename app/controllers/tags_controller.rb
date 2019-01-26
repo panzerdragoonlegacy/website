@@ -4,6 +4,7 @@ class TagsController < ApplicationController
   def show
     load_tag
     load_encyclopadia_entry
+    load_news_entries
     load_articles
     load_downloads
     load_links
