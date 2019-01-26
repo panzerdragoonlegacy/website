@@ -9,16 +9,11 @@
   <% end %>
   <h3>Browse by Media Type</h3>
   <ul>
-    <li><%= link_to 'Articles', articles_path %></li>
-    <li><%= link_to 'Downloads', downloads_path %></li>
-    <li><%= link_to 'Links', links_path %></li>
-    <li><%= link_to 'Music', music_tracks_path %></li>
-    <li><%= link_to 'Pictures', pictures_path %></li>
-    <li><%= link_to 'Poems', poems_path %></li>
-    <li><%= link_to 'Quizzes', quizzes_path %></li>
-    <li><%= link_to 'Resources', resources_path %></li>
-    <li><%= link_to 'Stories', stories_path %></li>
-    <li><%= link_to 'Videos', videos_path %></li>
+    <% MediaType::all.each do |key, value| %>
+      <li>
+        <%= link_to value, send("#{key.to_s.pluralize}_path") %>
+      </li>
+    <% end %>
   </ul>
   <% if @partner_sites.present? %>
     <h3>Partner Sites</h3>
