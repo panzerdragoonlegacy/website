@@ -7,13 +7,13 @@ module ApplicationHelper
     content_for(:description) { page_description }
   end
 
-  def truncated_text(markdown_text)
+  def truncated_text(markdown_text, length = 250)
     html = markdown_to_html(markdown_text)
 
     require 'sanitize'
     html = Sanitize.fragment(html).strip
 
-    truncate(html, length: 250, separator: ' ')
+    truncate(html, length: length, separator: ' ')
   end
 
   def markdown_to_html(markdown_text)

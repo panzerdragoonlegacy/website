@@ -10,14 +10,10 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<div id="information">
-  <%=
-    show_picture(
-      @encyclopaedia_entry, 'encyclopaedia_entry_picture', :embedded
-    )
-  %>
-  <%= raw markdown_to_html @encyclopaedia_entry.information %>
-</div>
+<%= render(
+  partial: 'encyclopaedia_entries/show/information',
+  locals: { encyclopaedia_entry: @encyclopaedia_entry }
+) %>
 
 <%=
   raw(

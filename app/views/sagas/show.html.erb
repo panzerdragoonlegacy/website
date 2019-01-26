@@ -1,8 +1,21 @@
 <% title @saga.name %>
+<% if @saga.encyclopaedia_entry %>
+  <% description truncated_text(@saga.encyclopaedia_entry.content) %>
+  <%= render(
+    partial: 'encyclopaedia_entries/show/information',
+    locals: { encyclopaedia_entry: @saga.encyclopaedia_entry }
+  ) %>
+  <p>
+    <%= truncated_text @saga.encyclopaedia_entry.content, 700 %>
+    <%= link_to 'Learn More in Our Encyclopaedia', @saga.encyclopaedia_entry %>
+  </p>
+<% end %>
+
+<h2><%= @saga.name %> Categories</h2>
 
 <% MediaType::all.each do |key, value| %>
   <% if @categories[key].present? %>
-    <h2><%= value %></h2>
+    <h3><%= value %></h3>
     <%=
       render(
         partial: 'site_map/categories',
