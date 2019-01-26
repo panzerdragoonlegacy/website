@@ -22,7 +22,7 @@ class SiteMapController < ApplicationController
 
   def load_categories_grouped_by_saga
     @all_sagas = {}
-    Saga.all.each do |saga|
+    Saga.order(:sequence_number).each do |saga|
       media_types = {}
       MediaType::all.each do |key, value|
         media_types[value] = policy_scope(
