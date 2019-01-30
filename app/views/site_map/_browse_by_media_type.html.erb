@@ -32,7 +32,7 @@
     <%=
       render(
         partial: 'categories',
-        locals: { categories: @link_categories }
+        locals: { categories: @link_categories, category_parent: :media_type }
       )
     %>
   </li>
@@ -74,7 +74,7 @@
     <%=
       render(
         partial: 'categories',
-        locals: { categories: @story_categories }
+        locals: { categories: @story_categories, category_parent: :media_type }
       )
     %>
   </li>
