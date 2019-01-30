@@ -40,6 +40,11 @@
 <%= render partial: 'shared/related_encyclopaedia_entries' %>
 
 <p class="links">
+  <% if @download.category.saga %>
+    <%= link_to(
+      @download.category.saga.name, saga_path(@download.category.saga)
+    ) %> |
+  <% end %>
   <%= link_to 'Downloads', downloads_path %> |
   <%= link_to @download.category.name, category_path(@download.category) %>
 </p>

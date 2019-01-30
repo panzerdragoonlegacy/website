@@ -85,6 +85,11 @@
 <%= render partial: 'shared/related_encyclopaedia_entries' %>
 
 <p class="links">
+  <% if @picture.category.saga %>
+    <%= link_to(
+      @picture.category.saga.name, saga_path(@picture.category.saga)
+    ) %> |
+  <% end %>
   <%= link_to 'Pictures', pictures_path %> |
   <%= link_to @picture.category.name, category_path(@picture.category) %>
 </p>

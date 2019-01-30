@@ -60,6 +60,11 @@
 <%= render partial: 'shared/related_encyclopaedia_entries' %>
 
 <p class="links">
+  <% if @music_track.category.saga %>
+    <%= link_to(
+      @music_track.category.saga.name, saga_path(@music_track.category.saga)
+    ) %> |
+  <% end %>
   <%= link_to 'Music', music_tracks_path %> |
   <%=
     link_to(
