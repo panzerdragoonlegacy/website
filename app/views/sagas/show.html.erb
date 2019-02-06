@@ -1,14 +1,37 @@
 <% title @saga.name %>
 <% if @saga.encyclopaedia_entry %>
   <% description truncated_text(@saga.encyclopaedia_entry.content) %>
-  <%= render(
-    partial: 'encyclopaedia_entries/show/information',
-    locals: { encyclopaedia_entry: @saga.encyclopaedia_entry }
-  ) %>
-  <p>
-    <%= truncated_text @saga.encyclopaedia_entry.content, 700 %>
-    <%= link_to 'Learn More in Our Encyclopaedia', @saga.encyclopaedia_entry %>
-  </p>
+<% end %>
+
+<% if @saga.encyclopaedia_entry && policy(@saga.encyclopaedia_entry).show? %>
+  <div id="resources">
+    <div class="resource">
+      <div class="thumbnail">
+        <%=
+          link_to(
+            show_picture(
+              @saga.encyclopaedia_entry,
+              'encyclopaedia_entry_picture',
+              :thumbnail
+            ),
+            @saga.encyclopaedia_entry
+          )
+        %>
+      </div>
+      <div class="details">
+        <h2>
+          <%= link_to(
+            @saga.encyclopaedia_entry.name,
+            @saga.encyclopaedia_entry
+          ) %>
+        </h2>
+        <p>
+          <%= truncated_text @saga.encyclopaedia_entry.content %>
+          <%= link_to 'Learn More', @saga.encyclopaedia_entry %>
+        </p>
+      </div>
+    </div>
+  </div>
 <% end %>
 
 <% if true.in?(@categories.each.map { |key, value| value.present? }) %>
