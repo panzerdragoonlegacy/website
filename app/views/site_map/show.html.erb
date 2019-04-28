@@ -1,8 +1,18 @@
 <% title "Site Map" %>
 
 <p>
-  <%= link_to 'Browse By Saga', site_map_path(browse_by: 'saga') %> |
-  <%= link_to 'Browse By Media Type', site_map_path(browse_by: 'media_type') %>
+  <% if params[:browse_by] == 'saga' || !params[:browse_by] %>
+    Browse By Saga
+  <% else %>
+    <%= link_to 'Browse By Saga', site_map_path(browse_by: 'saga') %>
+  <% end %> |
+  <% if params[:browse_by] == 'media_type' %>
+    Browse By Media Type
+  <% else %>
+    <%= link_to(
+      'Browse By Media Type', site_map_path(browse_by: 'media_type')
+    ) %>
+  <% end %>
 </p>
 
 <% if params[:browse_by] == 'media_type' %>

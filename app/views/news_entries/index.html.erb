@@ -1,7 +1,27 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s News Entries" %>
-<% elsif policy(NewsEntry).new? %>
-  <% title 'News' %>
+<% end %>
+
+<% unless @contributor_profile %>
+  <p class="news_entry_category_selector">
+    <% if !params[:category] %>
+      All
+    <% else %>
+      <%= link_to 'All', news_entries_path %>
+    <% end %> |
+    <% if params[:category] == 'news' %>
+      News
+    <% else %>
+      <%= link_to 'News', news_entries_path(category: 'news') %>
+    <% end %> |
+    <% if params[:category] == 'contributions' %>
+      Contributions
+    <% else %>
+      <%= link_to(
+        'Contributions', news_entries_path(category: 'contributions')
+      ) %>
+    <% end %>
+  </p>
 <% end %>
 
 <% if @news_entries %>
