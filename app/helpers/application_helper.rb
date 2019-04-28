@@ -7,6 +7,14 @@ module ApplicationHelper
     content_for(:description) { page_description }
   end
 
+  def open_graph_type(open_graph_type)
+    content_for(:open_graph_type) { open_graph_type }
+  end
+
+  def open_graph_image(open_graph_image)
+    content_for(:open_graph_image) { open_graph_image }
+  end
+
   def truncated_text(markdown_text, length = 250)
     html = markdown_to_html(markdown_text)
 

@@ -1,5 +1,6 @@
 <% title @article.name %>
 <% description @article.description %>
+<% open_graph_type 'article' %>
 
 <% if !@article.publish %>
   <p class="unpublished">

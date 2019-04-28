@@ -1,5 +1,6 @@
 <% title @resource.name %>
 <% description truncated_text(@resource.content) %>
+<% open_graph_type 'article' %>
 
 <% if !@resource.publish %>
   <p class="unpublished">

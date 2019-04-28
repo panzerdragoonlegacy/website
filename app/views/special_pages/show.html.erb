@@ -1,5 +1,6 @@
 <% title @special_page.name %>
 <% description truncated_text(@special_page.content) %>
+<% open_graph_type 'article' %>
 
 <% unless @special_page.publish %>
   <p class="unpublished">Unpublished</p>

@@ -7,6 +7,7 @@
     </title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="<%= yield(:description) %>" />
+    <%= render 'layouts/open_graph_metadata' %>
     <%= favicon_link_tag 'favicon.ico' %>
     <%= auto_discovery_link_tag(:atom, news_entries_path(:atom)) %>
     <%= stylesheet_link_tag "application", media: "all",

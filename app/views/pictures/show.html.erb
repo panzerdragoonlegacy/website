@@ -1,5 +1,11 @@
 <% title @picture.name %>
 <% description @picture.description %>
+<% open_graph_type 'image' %>
+<% if @picture.picture.present? %>
+  <% open_graph_image(
+    "#{root_url.chomp('/')}#{@picture.picture.url(:original)}"
+  ) %>
+<% end %>
 
 <% if !@picture.publish %>
   <p class="unpublished">

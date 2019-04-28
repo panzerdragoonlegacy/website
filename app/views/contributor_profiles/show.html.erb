@@ -1,4 +1,11 @@
 <% title @contributor_profile.name %>
+<% description @contributor_profile.description %>
+<% open_graph_type 'profile' %>
+<% if @contributor_profile.avatar.present? %>
+  <% open_graph_image(
+    "#{root_url.chomp('/')}#{@contributor_profile.avatar.url(:original)}"
+  ) %>
+<% end %>
 
 <% unless @contributor_profile.publish %>
   <p class="unpublished">

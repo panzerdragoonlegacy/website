@@ -1,5 +1,6 @@
 <% title @poem.name %>
 <% description @poem.description %>
+<% open_graph_type 'article' %>
 
 <% unless @poem.publish %>
   <p class="unpublished">

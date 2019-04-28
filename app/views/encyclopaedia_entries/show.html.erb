@@ -1,5 +1,12 @@
 <% title @encyclopaedia_entry.name %>
 <% description truncated_text(@encyclopaedia_entry.content) %>
+<% open_graph_type 'article' %>
+<% if @encyclopaedia_entry.encyclopaedia_entry_picture.present? %>
+  <% open_graph_image(
+    root_url.chomp('/') +
+      @encyclopaedia_entry.encyclopaedia_entry_picture.url(:original)
+  ) %>
+<% end %>
 
 <% if !@encyclopaedia_entry.publish %>
   <p class="unpublished">

@@ -1,5 +1,10 @@
 <% title @download.name %>
 <% description @download.description %>
+<% if @download.download_picture.present? %>
+  <% open_graph_image(
+    "#{root_url.chomp('/')}#{@download.download_picture.url(:original)}"
+  ) %>
+<% end %>
 
 <% if !@download.publish %>
   <p class="unpublished">

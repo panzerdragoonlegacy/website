@@ -1,5 +1,11 @@
 <% title @video.name %>
 <% description @video.description %>
+<% open_graph_type 'video' %>
+<% if @video.video_picture.present? %>
+  <% open_graph_image(
+    "#{root_url.chomp('/')}#{@video.video_picture.url(:original)}"
+  ) %>
+<% end %>
 
 <% if !@video.publish %>
   <p class="unpublished">

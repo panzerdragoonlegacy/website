@@ -1,0 +1,14 @@
+<meta property="og:site_name" content="Panzer Dragoon Legacy">
+<meta property="og:title" content="<%=
+  yield(:title).present? ? yield(:title) : 'Panzer Dragoon Legacy'
+%>" />
+<% if yield(:description).present? %>
+  <meta property="og:description" content="<%= yield(:description) %>" />
+<% end %>
+<meta property="og:type" content="<%=
+  yield(:open_graph_type).present? ? yield(:open_graph_type) : 'website'
+%>" />
+<meta property="og:url" content="<%= request.original_url %>" />
+<% if yield(:open_graph_image).present? %>
+  <meta property="og:image" content="<%= yield(:open_graph_image) %>" />
+<% end %>
