@@ -1,12 +1,12 @@
 <% title @saga.name %>
 <% if @saga.encyclopaedia_entry %>
   <% description truncated_text(@saga.encyclopaedia_entry.content) %>
-<% end %>
-<% if @saga.encyclopaedia_entry.encyclopaedia_entry_picture.present? %>
-  <% open_graph_image(
-    root_url.chomp('/') +
-      @saga.encyclopaedia_entry.encyclopaedia_entry_picture.url(:original)
-  ) %>
+  <% if @saga.encyclopaedia_entry.encyclopaedia_entry_picture.present? %>
+    <% open_graph_image(
+      root_url.chomp('/') +
+        @saga.encyclopaedia_entry.encyclopaedia_entry_picture.url(:original)
+    ) %>
+  <% end %>
 <% end %>
 
 <% if @saga.encyclopaedia_entry && policy(@saga.encyclopaedia_entry).show? %>
