@@ -25,6 +25,7 @@ class NewsEntry < ActiveRecord::Base
     content_type: { content_type: 'image/jpeg' },
     size: { in: 0..5.megabytes }
   )
+  validates_attachment :news_entry_picture, presence: true
 
   before_save :publish_news_entry
   before_save :sync_file_name
