@@ -286,8 +286,6 @@ GEM
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.8)
-    turbolinks (2.5.4)
-      coffee-rails
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (4.1.12)
@@ -346,7 +344,6 @@ DEPENDENCIES
   spring (~> 1.1.2)
   stringex (~> 2.5.2)
   therubyracer (~> 0.12.2)
-  turbolinks (~> 2.5.3)
   uglifier (>= 2.5.0)
   unicorn (~> 5.4.1)
   web-console (~> 2.3.0)

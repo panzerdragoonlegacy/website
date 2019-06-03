@@ -10,14 +10,12 @@
     <%= render 'layouts/open_graph_metadata' %>
     <%= favicon_link_tag 'favicon.ico' %>
     <%= auto_discovery_link_tag(:atom, news_entries_path(:atom)) %>
-    <%= stylesheet_link_tag "application", media: "all",
-      "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
     <div id="overall">
-      <%= render 'illustrations/popover' %>
       <%= render 'layouts/header' %>
       <%= render 'layouts/top_navigation' %>
       <div id="main">

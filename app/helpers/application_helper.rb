@@ -161,14 +161,6 @@ module ApplicationHelper
           illustration.illustration.path(:embedded))
         img.set_attribute('width', image_file.width.to_i.to_s)
         img.set_attribute('height', image_file.height.to_i.to_s)
-        img.set_attribute('data-popover-src', illustration.illustration.url(
-          :popover))
-        popover_image_file = Paperclip::Geometry.from_file(
-          illustration.illustration.path(:popover))
-        img.set_attribute('data-popover-width',
-          popover_image_file.width.to_i.to_s)
-        img.set_attribute('data-popover-height',
-          popover_image_file.height.to_i.to_s)
       else
         img.set_attribute('src', '')
       end
@@ -215,11 +207,6 @@ module ApplicationHelper
     html.css('img').each do |img|
       caption = img.get_attribute('alt')
       img.add_next_sibling('<p>' + caption + '</p>')
-    end
-
-    # Wrap each illustration with a popover link.
-    html.css('div').each do |div|
-      div.search("img").wrap('<a href="#" class="popover"></a>')
     end
 
     # Converts nokogiri variable to html.
