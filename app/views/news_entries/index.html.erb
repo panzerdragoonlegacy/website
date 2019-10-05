@@ -57,8 +57,12 @@
             )
           %>
           <% if news_entry.publish %>
-            <%= local_time_ago news_entry.published_at %>.
-          <% else %>
+            <%= local_time_ago news_entry.published_at %>
+          <% end %>
+          <% if news_entry.category %>
+            in <%= link_to news_entry.category.name, news_entry.category %>
+          <% end %>
+          <% unless news_entry.publish %>
             - <span class="unpublished">Unpublished</span>
           <% end %>
         </p>

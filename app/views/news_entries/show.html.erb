@@ -30,8 +30,12 @@
         <%= link_to @news_entry.contributor_profile.name,
           @news_entry.contributor_profile %>
         <% if @news_entry.publish %>
-          <%= local_time_ago @news_entry.published_at %>.
-        <% else %>
+          <%= local_time_ago @news_entry.published_at %>
+        <% end %>
+        <% if @news_entry.category %>
+          in <%= link_to @news_entry.category.name, @news_entry.category %>
+        <% end %>
+        <% unless @news_entry.publish %>
           - <span class="unpublished">
             This news entry is not published. Please inform an administrator
             when it and any linked or embedded content is ready to be published.
@@ -39,6 +43,7 @@
         <% end %>
       </p>
       <%= raw news_entry_markdown_to_html @news_entry.content %>
+      <%= render partial: 'shared/related_encyclopaedia_entries' %>
     </div>
   </div>
 </div>
