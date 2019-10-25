@@ -59,7 +59,18 @@
   %>
 </div>
 
-<p><%= link_to "View Full Size", @picture.picture.url %></p>
+<p>
+  <% unless @picture.source_url.blank? %>
+    View Source:
+      <%=
+        link_to(
+          picture_source_link_text(@picture.source_url),
+          @picture.source_url
+        )
+      %>.
+  <% end %>
+  Download Full Size Picture: <%= link_to "JPEG", @picture.picture.url %>
+</p>
 
 <p><%= @picture.description %></p>
 

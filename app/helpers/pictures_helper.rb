@@ -27,4 +27,11 @@ module PicturesHelper
       )
     end
   end
+
+  def picture_source_link_text(source_url)
+    return 'DeviantArt' if source_url.include? 'deviantart.com'
+    return 'Instagram' if source_url.include? 'instagram.com'
+    return 'Twitter' if source_url.include? 'twitter.com'
+    'External Webpage'
+  end
 end

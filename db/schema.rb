@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181208084704) do
+ActiveRecord::Schema.define(version: 20191025230407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -212,6 +212,7 @@ ActiveRecord::Schema.define(version: 20181208084704) do
     t.datetime "updated_at"
     t.integer  "id_of_picture_to_replace"
     t.integer  "album_id"
+    t.string   "source_url"
   end
 
   create_table "poems", force: :cascade do |t|

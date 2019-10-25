@@ -1,0 +1,13 @@
+ <div class="form-group">
+  <%= f.label :source_url, 'Source URL' %>
+  <%= f.text_field :source_url, class: 'form-control' %>
+  <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: 'The URL of an external webpage that also contains the ' \
+          'picture, e.g. Deviantart, Instagram, or Twitter'
+      }
+    )
+  %>
+</div>

@@ -72,6 +72,7 @@ class PicturePolicy < ApplicationPolicy
       :name,
       :description,
       :information,
+      :source_url,
       contributor_profile_ids: [],
       tag_ids: []
     ]
