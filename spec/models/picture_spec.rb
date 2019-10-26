@@ -6,6 +6,7 @@ RSpec.describe Picture, type: :model do
     it { is_expected.to respond_to(:url) }
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:information) }
+    it { is_expected.to respond_to(:source_url) }
     it { is_expected.to respond_to(:picture) }
     it { is_expected.to respond_to(:publish) }
     it { is_expected.to respond_to(:category) }
@@ -68,7 +69,7 @@ RSpec.describe Picture, type: :model do
       end
     end
   end
-  
+
   describe 'file attachment' do
     it { is_expected.to have_attached_file(:picture) }
     it { is_expected.to validate_attachment_presence(:picture) }
