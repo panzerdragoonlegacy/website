@@ -16,7 +16,7 @@ module NewsEntriesHelper
       'a' => ['href'],
       'img' => ['src', 'alt'],
       'iframe' => ['width', 'height', 'src', 'frameborder', 'allowfullscreen'],
-      'video' => ['width', 'height', 'controls'],
+      'video' => ['width', 'height', 'controls', 'poster'],
       'audio' => ['controls'],
       'source' => ['type', 'src'],
       'div' => ['class']
