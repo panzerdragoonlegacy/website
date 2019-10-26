@@ -72,6 +72,7 @@ module NewsEntriesHelper
 
         video_id = file_name.split('-')[0].to_i
         if video = Video.where(id: video_id).first
+          tag.parent.set_attribute('poster', video.video_picture.url(:embedded))
           mp4_source_tag = html.create_element('source')
           p_tag = html.create_element('p')
 
