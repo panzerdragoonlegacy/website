@@ -59,6 +59,14 @@ module NewsEntriesHelper
           mp3_source_tag['src'] = music_track.mp3_music_track.url
           mp3_source_tag.add_next_sibling(p_tag)
           p_tag.content = 'Your browser does not support the audio element.'
+
+          # Add view details link below embedded audio.
+          p_tag = html.create_element('p')
+          a_tag = html.create_element('a')
+          a_tag.set_attribute('href', music_track_path(music_track))
+          a_tag.content = 'Audio Details for "' + music_track.name + '"'
+          p_tag.add_child(a_tag)
+          mp3_source_tag.parent.add_next_sibling(p_tag)
         end
       end
 
@@ -82,6 +90,14 @@ module NewsEntriesHelper
           mp4_source_tag['src'] = video.mp4_video.url
           mp4_source_tag.add_next_sibling(p_tag)
           p_tag.content = 'Your browser does not support the video element.'
+
+          # Add view details link below embedded video.
+          p_tag = html.create_element('p')
+          a_tag = html.create_element('a')
+          a_tag.set_attribute('href', video_path(video))
+          a_tag.content = 'Video Details for "' + video.name + '"'
+          p_tag.add_child(a_tag)
+          mp4_source_tag.parent.add_next_sibling(p_tag)
         end
       end
     end
