@@ -3,6 +3,7 @@ class Download < ActiveRecord::Base
 
   include Categorisable
   include Contributable
+  include Publishable
   include Taggable
   include Syncable
 
@@ -37,6 +38,7 @@ class Download < ActiveRecord::Base
     size: { in: 0..5.megabytes }
   )
 
+  before_save :set_published_at
   before_save :sync_file_names
 
   def sync_file_names

@@ -3,6 +3,7 @@ class MusicTrack < ActiveRecord::Base
 
   include Categorisable
   include Contributable
+  include Publishable
   include Taggable
   include Syncable
 
@@ -55,6 +56,7 @@ class MusicTrack < ActiveRecord::Base
   do_not_validate_attachment_file_type :mp3_music_track
   do_not_validate_attachment_file_type :flac_music_track
 
+  before_save :set_published_at
   before_save :sync_file_names
 
   def sync_file_names

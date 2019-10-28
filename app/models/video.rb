@@ -3,6 +3,7 @@ class Video < ActiveRecord::Base
 
   include Categorisable
   include Contributable
+  include Publishable
   include Taggable
   include Syncable
 
@@ -39,6 +40,7 @@ class Video < ActiveRecord::Base
   # There were issues specifying content types.
   do_not_validate_attachment_file_type :mp4_video
 
+  before_save :set_published_at
   before_save :sync_file_names
 
   def sync_file_names

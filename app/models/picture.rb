@@ -3,6 +3,7 @@ class Picture < ActiveRecord::Base
 
   include Categorisable
   include Contributable
+  include Publishable
   include Taggable
   include Syncable
 
@@ -33,6 +34,7 @@ class Picture < ActiveRecord::Base
     size: { in: 0..5.megabytes }
   )
 
+  before_save :set_published_at
   before_save :sync_file_name
   before_save :replace_picture
 

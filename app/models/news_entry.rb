@@ -1,5 +1,6 @@
 class NewsEntry < ActiveRecord::Base
   include Categorisable
+  include Publishable
   include Sluggable
   include Syncable
   include Taggable
@@ -27,19 +28,10 @@ class NewsEntry < ActiveRecord::Base
   )
   validates_attachment :news_entry_picture, presence: true
 
-  before_save :publish_news_entry
+  before_save :set_published_at
   before_save :sync_file_name
 
   private
-
-  def publish_news_entry
-    # The first time the news entry is published:
-    if published_at.blank? && publish
-
-      # Set published_at field in the database to the current datetime:
-      self.published_at = DateTime.now.utc
-    end
-  end
 
   def sync_file_name
     sync_file_name_of(

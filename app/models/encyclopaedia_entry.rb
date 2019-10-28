@@ -1,13 +1,14 @@
 class EncyclopaediaEntry < ActiveRecord::Base
   include Categorisable
   include Illustratable
+  include Publishable
   include Sluggable
   include Syncable
 
   has_one :saga
   has_many :contributions, as: :contributable, dependent: :destroy
   has_many :contributor_profiles, through: :contributions
-  
+
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
   validates :information, presence: true
   validates :content, presence: true
@@ -30,6 +31,7 @@ class EncyclopaediaEntry < ActiveRecord::Base
     size: { in: 0..5.megabytes }
   )
 
+  before_save :set_published_at
   before_save :sync_file_name
 
   def sync_file_name

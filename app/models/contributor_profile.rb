@@ -1,4 +1,5 @@
 class ContributorProfile < ActiveRecord::Base
+  include Publishable
   include Sluggable
 
   has_one :user, dependent: :destroy
@@ -73,6 +74,8 @@ class ContributorProfile < ActiveRecord::Base
   )
 
   validates :name, presence: true, length: { in: 2..50 }, uniqueness: true
+
+  before_save :set_published_at
 
   has_attached_file(
     :avatar,

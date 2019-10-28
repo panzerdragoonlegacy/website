@@ -1,4 +1,5 @@
 class Category < ActiveRecord::Base
+  include Publishable
   include Sluggable
 
   belongs_to :category_group
@@ -37,6 +38,8 @@ class Category < ActiveRecord::Base
   before_validation :validate_category_type_reassignment
   before_validation :validate_presence_of_category_group
   before_validation :validate_category_and_category_group_type_match
+
+  before_save :set_published_at
 
   private
 

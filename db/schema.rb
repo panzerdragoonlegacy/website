@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191025230407) do
+ActiveRecord::Schema.define(version: 20191028055213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,23 +21,25 @@ ActiveRecord::Schema.define(version: 20191025230407) do
     t.string   "url"
     t.string   "description"
     t.integer  "category_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.boolean  "publish",     default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "publish",      default: false
     t.text     "information"
+    t.datetime "published_at"
   end
 
   add_index "albums", ["category_id"], name: "index_albums_on_category_id", using: :btree
 
   create_table "articles", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "url",         limit: 255
-    t.string   "description", limit: 255
+    t.string   "name",         limit: 255
+    t.string   "url",          limit: 255
+    t.string   "description",  limit: 255
     t.text     "content"
-    t.boolean  "publish",                 default: false
+    t.boolean  "publish",                  default: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "published_at"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -52,6 +54,7 @@ ActiveRecord::Schema.define(version: 20191025230407) do
     t.integer  "saga_id"
     t.string   "short_name_for_saga"
     t.string   "short_name_for_media_type"
+    t.datetime "published_at"
   end
 
   add_index "categories", ["saga_id"], name: "index_categories_on_saga_id", using: :btree
@@ -100,6 +103,7 @@ ActiveRecord::Schema.define(version: 20191025230407) do
     t.boolean  "publish",                         default: false
     t.string   "description"
     t.string   "website_name"
+    t.datetime "published_at"
   end
 
   create_table "downloads", force: :cascade do |t|
@@ -119,6 +123,7 @@ ActiveRecord::Schema.define(version: 20191025230407) do
     t.string   "download_picture_content_type"
     t.integer  "download_picture_file_size"
     t.datetime "download_picture_updated_at"
+    t.datetime "published_at"
   end
 
   create_table "encyclopaedia_entries", force: :cascade do |t|
@@ -134,6 +139,7 @@ ActiveRecord::Schema.define(version: 20191025230407) do
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "published_at"
   end
 
   create_table "illustrations", force: :cascade do |t|
@@ -179,6 +185,7 @@ ActiveRecord::Schema.define(version: 20191025230407) do
     t.string   "music_track_picture_content_type"
     t.integer  "music_track_picture_file_size"
     t.datetime "music_track_picture_updated_at"
+    t.datetime "published_at"
   end
 
   create_table "news_entries", force: :cascade do |t|
@@ -213,16 +220,18 @@ ActiveRecord::Schema.define(version: 20191025230407) do
     t.integer  "id_of_picture_to_replace"
     t.integer  "album_id"
     t.string   "source_url"
+    t.datetime "published_at"
   end
 
   create_table "poems", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "url",         limit: 255
-    t.string   "description", limit: 255
+    t.string   "name",         limit: 255
+    t.string   "url",          limit: 255
+    t.string   "description",  limit: 255
     t.text     "content"
-    t.boolean  "publish",                 default: false
+    t.boolean  "publish",                  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "published_at"
   end
 
   create_table "quiz_answers", force: :cascade do |t|
@@ -241,22 +250,24 @@ ActiveRecord::Schema.define(version: 20191025230407) do
   end
 
   create_table "quizzes", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "url",         limit: 255
-    t.string   "description", limit: 255
-    t.boolean  "publish",                 default: false
+    t.string   "name",         limit: 255
+    t.string   "url",          limit: 255
+    t.string   "description",  limit: 255
+    t.boolean  "publish",                  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "published_at"
   end
 
   create_table "resources", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "url",         limit: 255
+    t.string   "name",         limit: 255
+    t.string   "url",          limit: 255
     t.text     "content"
-    t.boolean  "publish",                 default: false
+    t.boolean  "publish",                  default: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "published_at"
   end
 
   create_table "sagas", force: :cascade do |t|
@@ -271,23 +282,25 @@ ActiveRecord::Schema.define(version: 20191025230407) do
   add_index "sagas", ["encyclopaedia_entry_id"], name: "index_sagas_on_encyclopaedia_entry_id", using: :btree
 
   create_table "special_pages", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "url",        limit: 255
+    t.string   "name",         limit: 255
+    t.string   "url",          limit: 255
     t.text     "content"
-    t.boolean  "publish",                default: false
+    t.boolean  "publish",                  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "published_at"
   end
 
   create_table "stories", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "url",         limit: 255
-    t.string   "description", limit: 255
+    t.string   "name",         limit: 255
+    t.string   "url",          limit: 255
+    t.string   "description",  limit: 255
     t.text     "content"
-    t.boolean  "publish",                 default: false
+    t.boolean  "publish",                  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_id"
+    t.datetime "published_at"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -353,6 +366,7 @@ ActiveRecord::Schema.define(version: 20191025230407) do
     t.string   "video_picture_content_type"
     t.integer  "video_picture_file_size"
     t.datetime "video_picture_updated_at"
+    t.datetime "published_at"
   end
 
   add_foreign_key "albums", "categories"

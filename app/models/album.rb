@@ -3,6 +3,7 @@ class Album < ActiveRecord::Base
 
   include Categorisable
   include Contributable
+  include Publishable
   include Taggable
   include Syncable
 
@@ -16,6 +17,7 @@ class Album < ActiveRecord::Base
   validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }
 
+  before_save :set_published_at
   after_save :update_picture_categories
 
   def to_param
