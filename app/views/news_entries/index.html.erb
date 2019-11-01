@@ -21,6 +21,9 @@
         'Contributions', news_entries_path(category: 'contributions')
       ) %>
     <% end %>
+    <%= link_to(
+      'Contributions Feed', contributions_path, class: 'contributions_feed'
+    ) %>
   </p>
 <% end %>
 
