@@ -21,6 +21,11 @@
         'Contributions', news_entries_path(category: 'contributions')
       ) %>
     <% end %>
+    <% if params[:category] == 'meta' %>
+      Meta
+    <% else %>
+      <%= link_to 'Meta', news_entries_path(category: 'meta') %>
+    <% end %>
     <%= link_to(
       'Contributions Feed', contributions_path, class: 'contributions_feed'
     ) %>
