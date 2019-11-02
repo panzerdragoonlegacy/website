@@ -1,0 +1,12 @@
+<div class="form-group">
+  <%= f.label :description, 'Description' %>
+  <%= f.text_area :description, rows: 3, class: 'form-control' %>
+  <% if defined? info %>
+    <%=
+      render(
+        partial: 'admin/shared/form/info',
+        locals: { info: info }
+      )
+    %>
+  <% end %>
+</div>

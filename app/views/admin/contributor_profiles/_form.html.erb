@@ -1,7 +1,7 @@
 <%= form_for [:admin, @contributor_profile], html: { multipart: true } do |f| %>
   <%= render 'admin/shared/form/error_messages', target: @contributor_profile %>
   <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
-  <%= render partial: 'admin/shared/form/description', locals: { f: f } %>
+  <%= render 'description', f: f %>
   <%= render 'email_address', f: f %>
   <%= render 'discourse_username', f: f %>
   <%= render 'avatar', f: f, contributor_profile: @contributor_profile %>
