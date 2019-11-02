@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191028055213) do
+ActiveRecord::Schema.define(version: 20191101234341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20191028055213) do
     t.boolean  "publish",      default: false
     t.text     "information"
     t.datetime "published_at"
+    t.string   "source_url"
   end
 
   add_index "albums", ["category_id"], name: "index_albums_on_category_id", using: :btree

@@ -15,7 +15,7 @@
       }
     )
   %>
-  <%= render 'source_url', f: f %>
+  <%= render partial: 'admin/shared/form/source_url', locals: { f: f } %>
   <%= render 'picture', f: f, picture: @picture %>
   <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
   <%= render partial: 'admin/shared/form/description', locals: { f: f } %>

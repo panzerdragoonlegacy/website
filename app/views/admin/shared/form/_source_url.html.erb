@@ -6,8 +6,16 @@
       partial: 'admin/shared/form/info',
       locals: {
         info: 'The URL of an external webpage that also contains the ' \
-          'picture, e.g. Deviantart, Instagram, or Twitter'
+          'picture, e.g. Deviantart, Instagram, or Twitter.'
       }
     )
   %>
+  <% if defined? info %>
+    <%=
+      render(
+        partial: 'admin/shared/form/info',
+        locals: { info: info }
+      )
+    %>
+  <% end %>
 </div>

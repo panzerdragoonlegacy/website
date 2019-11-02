@@ -86,6 +86,7 @@ class AlbumPolicy < ApplicationPolicy
   def shared_attributes
     [
       :category_id,
+      :source_url,
       :name,
       :description,
       :information

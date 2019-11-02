@@ -64,6 +64,10 @@ class Admin::AlbumsController < ApplicationController
       the_params['pictures_attributes'].each do |key, value|
         the_params['pictures_attributes'][key]['category_id'] =
           the_params['category_id']
+        if value['source_url'].blank?
+          the_params['pictures_attributes'][key]['source_url'] =
+            the_params['source_url']
+        end
         if value['name'].blank?
           the_params['pictures_attributes'][key]['name'] =
             the_params['name']

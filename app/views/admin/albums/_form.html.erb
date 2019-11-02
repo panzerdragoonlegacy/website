@@ -36,6 +36,16 @@
   %>
   <%=
     render(
+      partial: 'admin/shared/form/source_url',
+      locals: {
+        f: f,
+        info: 'Pictures in the album with blank source URLs will inherit the ' \
+          "album's source URL."
+      }
+    )
+  %>
+  <%=
+    render(
       partial: 'admin/shared/form/name',
       locals: {
         f: f,
@@ -79,7 +89,7 @@
   <% if policy(@album).permitted_attributes.include? :publish %>
     <%=
       render(
-        partial: 'admin/shared/form/publish', 
+        partial: 'admin/shared/form/publish',
         locals: {
           f: f,
           warning: 'Warning: publishing the album will publish every picture ' \
