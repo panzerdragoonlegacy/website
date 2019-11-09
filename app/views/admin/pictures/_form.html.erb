@@ -17,7 +17,14 @@
   %>
   <%= render partial: 'admin/shared/form/source_url', locals: { f: f } %>
   <%= render 'picture', f: f, picture: @picture %>
-  <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
+  <%= render(
+    partial: 'admin/shared/form/name',
+    locals: {
+      f: f,
+      info: 'Names should not end with a full stop and important words ' \
+        'should begin with a capital letter, e.g. "Orta and Her Dragon".'
+    }
+  ) %>
   <%= render partial: 'admin/shared/form/description', locals: { f: f } %>
   <%= render partial: 'admin/shared/form/extra_information', locals: { f: f } %>
   <%=
