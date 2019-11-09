@@ -1,6 +1,13 @@
 <%= form_for [:admin, @contributor_profile], html: { multipart: true } do |f| %>
   <%= render 'admin/shared/form/error_messages', target: @contributor_profile %>
-  <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
+  <%= render(
+    partial: 'admin/shared/form/name',
+    locals: {
+      f: f,
+      info: 'Use a nicely formatted version of the contributor''s name, e.g.' +
+        '"Solo Wing" rather than "solo_wing_98"'
+    }
+  ) %>
   <%= render 'description', f: f %>
   <%= render 'email_address', f: f %>
   <%= render 'discourse_username', f: f %>
