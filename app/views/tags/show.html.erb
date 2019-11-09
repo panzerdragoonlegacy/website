@@ -3,6 +3,12 @@
   <% description truncated_text(@tag.description) %>
 <% end %>
 
+<% if policy(@tag).edit? %>
+  <p>
+    <%= link_to 'Edit Tag', edit_admin_tag_path(@tag) %>
+  </p>
+<% end %>
+
 <p><%= @tag.description if @tag.description.present? %></p>
 
 <% if @encyclopaedia_entry && policy(@encyclopaedia_entry).show? %>

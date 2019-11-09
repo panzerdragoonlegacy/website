@@ -6,6 +6,10 @@
   ) %>
 <% end %>
 
+<% if policy(@download).edit? %>
+  <p><%= link_to 'Edit Download', edit_admin_download_path(@download) %></p>
+<% end %>
+
 <% if !@download.publish %>
   <p class="unpublished">
     This download is not published. Please inform an administrator when it and

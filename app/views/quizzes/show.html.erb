@@ -1,6 +1,12 @@
 <% title @quiz.name %>
 <% description @quiz.description %>
 
+<% if policy(@quiz).edit? %>
+  <p>
+    <%= link_to 'Edit Quiz', edit_admin_quiz_path(@quiz) %>
+  </p>
+<% end %>
+
 <% unless @quiz.publish %>
   <p class="unpublished">
     This quiz is not published. Please inform an administrator when it and the

@@ -2,6 +2,12 @@
 <% description truncated_text(@resource.content) %>
 <% open_graph_type 'article' %>
 
+<% if policy(@resource).edit? %>
+  <p>
+    <%= link_to 'Edit Resource', edit_admin_resource_path(@resource) %>
+  </p>
+<% end %>
+
 <% if !@resource.publish %>
   <p class="unpublished">
     This resource is not published. Please inform an administrator when it and

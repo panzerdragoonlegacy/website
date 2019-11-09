@@ -2,6 +2,15 @@
 <% description truncated_text(@special_page.content) %>
 <% open_graph_type 'article' %>
 
+<% if policy(@special_page).edit? %>
+  <p>
+    <%= link_to(
+      'Edit Special Page',
+      edit_admin_special_page_path(@special_page)
+    ) %>
+  </p>
+<% end %>
+
 <% unless @special_page.publish %>
   <p class="unpublished">Unpublished</p>
 <% end %>

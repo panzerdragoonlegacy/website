@@ -1,6 +1,10 @@
 <% title @category.name %>
 <% description @category.description %>
 
+<% if policy(@category).edit? %>
+  <p><%= link_to 'Edit Category', edit_admin_category_path(@category) %></p>
+<% end %>
+
 <% unless @category.publish %>
   <p class="unpublished">Unpublished</p>
 <% end %>

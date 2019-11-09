@@ -7,6 +7,12 @@
   ) %>
 <% end %>
 
+<% if policy(@video).edit? %>
+  <p>
+    <%= link_to 'Edit Video', edit_admin_video_path(@video) %>
+  </p>
+<% end %>
+
 <% if !@video.publish %>
   <p class="unpublished">
     This video is not published. Please inform an administrator when it and the

@@ -7,6 +7,12 @@
   ) %>
 <% end %>
 
+<% if policy(@news_entry).edit? %>
+  <p>
+    <%= link_to 'Edit News Entry', edit_admin_news_entry_path(@news_entry) %>
+  </p>
+<% end %>
+
 <div id="resources">
   <div class="resource">
     <% if @news_entry.news_entry_picture.present? %>

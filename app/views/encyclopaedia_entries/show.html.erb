@@ -8,6 +8,15 @@
   ) %>
 <% end %>
 
+<% if policy(@encyclopaedia_entry).edit? %>
+  <p>
+    <%= link_to(
+      'Edit Encyclopaedia Entry',
+      edit_admin_encyclopaedia_entry_path(@encyclopaedia_entry)
+    ) %>
+  </p>
+<% end %>
+
 <% if !@encyclopaedia_entry.publish %>
   <p class="unpublished">
     This encyclopaedia entry is not published. Please inform an administrator

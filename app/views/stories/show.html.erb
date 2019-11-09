@@ -2,6 +2,12 @@
 <% description @story.description %>
 <% open_graph_type 'article' %>
 
+<% if policy(@story).edit? %>
+  <p>
+    <%= link_to 'Edit Story', edit_admin_story_path(@story) %>
+  </p>
+<% end %>
+
 <% if !@story.publish %>
   <p class="unpublished">
     This story is not published. Please inform an administrator when it and the

@@ -2,6 +2,12 @@
 <% description @poem.description %>
 <% open_graph_type 'article' %>
 
+<% if policy(@poem).edit? %>
+  <p>
+    <%= link_to 'Edit Poem', edit_admin_poem_path(@poem) %>
+  </p>
+<% end %>
+
 <% unless @poem.publish %>
   <p class="unpublished">
     This poem is not published. Please inform an administrator when it and the

@@ -7,6 +7,15 @@
   ) %>
 <% end %>
 
+<% if policy(@contributor_profile).edit? %>
+  <p>
+    <%= link_to(
+      'Edit Contributor Profile',
+      edit_admin_contributor_profile_path(@contributor_profile)
+    ) %>
+  </p>
+<% end %>
+
 <% unless @contributor_profile.publish %>
   <p class="unpublished">
     This contributor profile is not published. Please inform an administrator

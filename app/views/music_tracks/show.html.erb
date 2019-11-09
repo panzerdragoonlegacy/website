@@ -7,6 +7,12 @@
   ) %>
 <% end %>
 
+<% if policy(@music_track).edit? %>
+  <p>
+    <%= link_to 'Edit Music Track', edit_admin_music_track_path(@music_track) %>
+  </p>
+<% end %>
+
 <% if !@music_track.publish %>
   <p class="unpublished">
     This music track is not published. Please inform an administrator when it

@@ -9,6 +9,12 @@
   <% end %>
 <% end %>
 
+<% if policy(@saga).edit? %>
+  <p>
+    <%= link_to 'Edit Saga', edit_admin_saga_path(@saga) %>
+  </p>
+<% end %>
+
 <% if @saga.encyclopaedia_entry && policy(@saga.encyclopaedia_entry).show? %>
   <div id="resources">
     <div class="resource">
