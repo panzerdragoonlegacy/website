@@ -31,7 +31,7 @@ class Picture < ActiveRecord::Base
     :picture,
     presence: true,
     content_type: { content_type: 'image/jpeg' },
-    size: { in: 0..5.megabytes }
+    size: { in: 0..25.megabytes }
   )
 
   before_save :set_published_at
