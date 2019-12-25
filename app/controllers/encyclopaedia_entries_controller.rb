@@ -10,6 +10,7 @@ class EncyclopaediaEntriesController < ApplicationController
 
   def show
     load_encyclopaedia_entry
+    load_news_entries
     load_articles
     load_downloads
     load_links

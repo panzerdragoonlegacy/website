@@ -29,6 +29,14 @@ module LoadableForEncyclopaediaEntry
     )
   end
 
+  def load_news_entries
+    @news_entries = NewsEntryPolicy::Scope.new(
+      current_user,
+      NewsEntry.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
+        .order(:name)
+    ).resolve
+  end
+
   def load_articles
     @articles = ArticlePolicy::Scope.new(
       current_user,
