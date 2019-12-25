@@ -74,7 +74,7 @@ module LoadableForEncyclopaediaEntry
     @pictures = PicturePolicy::Scope.new(
       current_user,
       Picture.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .limit(50).order(:name)
+        .limit(50).order(:published_at: :desc)
     ).resolve
   end
 
