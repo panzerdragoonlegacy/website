@@ -3,6 +3,9 @@
   <ul>
     <% @news_entries.each do |news_entry| %>
       <li>
+        <% if news_entry.publish %>
+          <%= local_date news_entry.published_at %> -
+        <% end %>
         <%= link_to news_entry.name, news_entry %>
         <% if !news_entry.publish %>
            - <span class="unpublished">Unpublished</span>

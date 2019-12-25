@@ -33,7 +33,7 @@ module LoadableForEncyclopaediaEntry
     @news_entries = NewsEntryPolicy::Scope.new(
       current_user,
       NewsEntry.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .order(:name)
+        .order(published_at: :desc)
     ).resolve
   end
 
