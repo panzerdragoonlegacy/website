@@ -33,7 +33,7 @@ module LoadableForEncyclopaediaEntry
     @news_entries = NewsEntryPolicy::Scope.new(
       current_user,
       NewsEntry.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .order(published_at: :desc)
+        .limit(50).order(published_at: :desc)
     ).resolve
   end
 
@@ -41,7 +41,7 @@ module LoadableForEncyclopaediaEntry
     @articles = ArticlePolicy::Scope.new(
       current_user,
       Article.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .order(:name)
+        .limit(50).order(:name)
     ).resolve
   end
 
@@ -49,7 +49,7 @@ module LoadableForEncyclopaediaEntry
     @downloads = DownloadPolicy::Scope.new(
       current_user,
       Download.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .order(:name)
+        .limit(50).order(:name)
     ).resolve
   end
 
@@ -57,7 +57,7 @@ module LoadableForEncyclopaediaEntry
     @links = LinkPolicy::Scope.new(
       current_user,
       Link.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .order(:name)
+        .limit(50).order(:name)
     ).resolve
   end
 
@@ -66,7 +66,7 @@ module LoadableForEncyclopaediaEntry
       current_user,
       MusicTrack.includes(:tags)
         .where(tags: { name: @encyclopaedia_entry.name })
-        .order(:name)
+          .limit(50).order(:name)
     ).resolve
   end
 
@@ -74,7 +74,7 @@ module LoadableForEncyclopaediaEntry
     @pictures = PicturePolicy::Scope.new(
       current_user,
       Picture.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .order(:name)
+        .limit(50).order(:name)
     ).resolve
   end
 
@@ -82,7 +82,7 @@ module LoadableForEncyclopaediaEntry
     @poems = PoemPolicy::Scope.new(
       current_user,
       Poem.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .order(:name)
+        .limit(50).order(:name)
     ).resolve
   end
 
@@ -90,7 +90,7 @@ module LoadableForEncyclopaediaEntry
     @quizzes = QuizPolicy::Scope.new(
       current_user,
       Quiz.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .order(:name)
+        .limit(50).order(:name)
     ).resolve
   end
 
@@ -98,7 +98,7 @@ module LoadableForEncyclopaediaEntry
     @resources = ResourcePolicy::Scope.new(
       current_user,
       Resource.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .order(:name)
+        .limit(50).order(:name)
     ).resolve
   end
 
@@ -106,7 +106,7 @@ module LoadableForEncyclopaediaEntry
     @stories = StoryPolicy::Scope.new(
       current_user,
       Story.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .order(:name)
+        .limit(50).order(:name)
     ).resolve
   end
 
@@ -114,7 +114,7 @@ module LoadableForEncyclopaediaEntry
     @videos = VideoPolicy::Scope.new(
       current_user,
       Video.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .order(:name)
+        .limit(50).order(:name)
     ).resolve
   end
 end
