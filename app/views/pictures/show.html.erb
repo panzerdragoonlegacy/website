@@ -10,6 +10,9 @@
 <% if policy(@picture).edit? %>
   <p>
     <%= link_to 'Edit Picture', edit_admin_picture_path(@picture) %>
+    <% if @picture.album && policy(@picture.album).edit? %>
+      | <%= link_to 'Edit Album', edit_admin_album_path(@picture.album) %>
+    <% end %>
   </p>
 <% end %>
 
