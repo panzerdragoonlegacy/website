@@ -1,0 +1,21 @@
+<div class="form-group">
+  <%= f.label :category_id, 'Category' %>
+  <%=
+    f.collection_select(
+      :category_id,
+      categories ? categories : [],
+      :id,
+      :name,
+      { include_blank: true },
+      { class: 'form-control' }
+    )
+  %>
+  <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: 'Only required for Literature pages that are not chapters.'
+      }
+    )
+  %>
+</div>

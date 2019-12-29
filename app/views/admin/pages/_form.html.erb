@@ -2,22 +2,17 @@
   <%= render 'admin/shared/form/error_messages', target: @page %>
   <%=
     render(
-      partial: 'admin/shared/form/category',
-      locals: { f: f, categories: @categories }
-    )
-  %>
-  <%=
-    render(
       partial: 'admin/shared/form/contributors',
       locals: {
         f: f, contributor_profile_ids: @page.contributor_profile_ids
       }
     )
   %>
+  <%= render 'picture', f: f, page: @page %>
   <%= render 'page_type', f: f %>
   <%= render 'parent_page', f: f, parent_pages: @parent_pages %>
   <%= render 'sequence_number', f: f %>
-  <%= render 'picture', f: f, page: @page %>
+  <%= render 'category', f: f, categories: @categories %>
   <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
   <%= render partial: 'admin/shared/form/description', locals: { f: f } %>
   <%= render partial: 'admin/shared/form/content', locals: { f: f } %>

@@ -1,12 +1,13 @@
 class Page < ActiveRecord::Base
   acts_as_url :name, sync_url: true
 
-  include Categorisable
   include Contributable
   include Illustratable
   include Publishable
   include Syncable
   include Taggable
+
+  belongs_to :category
 
   validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }
@@ -40,6 +41,7 @@ class Page < ActiveRecord::Base
 
   before_validation :validate_parent_page
   before_validation :validate_sequence_number
+  before_validation :validate_category
 
   before_save :set_published_at
   before_save :sync_file_name
@@ -76,8 +78,22 @@ class Page < ActiveRecord::Base
     end
   end
 
+  def validate_category
+    if literature? && category.blank?
+      errors.add(page_type, 'pages must have a category.')
+    end
+    if !literature? && category.present?
+      errors.add(page_type, 'pages must not have a category.')
+    end
+  end
+
   def chapter?
     return false if page_type.blank?
     page_type == :literature_chapter.to_s
+  end
+
+  def literature?
+    return false if page_type.blank?
+    page_type == :literature.to_s
   end
 end
