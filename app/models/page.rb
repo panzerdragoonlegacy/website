@@ -1,0 +1,81 @@
+class Page < ActiveRecord::Base
+  acts_as_url :name, sync_url: true
+
+  include Categorisable
+  include Contributable
+  include Illustratable
+  include Publishable
+  include Syncable
+  include Taggable
+
+  validates :name, presence: true, length: { in: 2..100 }
+  validates :description, presence: true, length: { in: 2..250 }
+  validates :content, presence: true
+  validates :page_type, presence: true
+
+  # The list of page types.
+  PAGE_TYPES = %w(
+    literature
+    literature_chapter
+  ).freeze
+
+  has_attached_file(
+    :page_picture,
+    styles: {
+      mini_thumbnail: '25x25#',
+      thumbnail: '150x150',
+      embedded: '622x250#'
+    },
+    path: ':rails_root/public/system/:attachment/:id/:style/:filename',
+    url: '/system/:attachment/:id/:style/:filename'
+  )
+
+  validates_attachment(
+    :page_picture,
+    content_type: { content_type: 'image/jpeg' },
+    size: { in: 0..5.megabytes }
+  )
+
+  before_validation :validate_parent_page
+  before_validation :validate_sequence_number
+
+  before_save :set_published_at
+  before_save :sync_file_name
+
+  def sync_file_name
+    sync_file_name_of :page_picture, file_name: "#{name.to_url}.jpg"
+  end
+
+  def to_param
+    id.to_s + '-' + url
+  end
+
+  def name_and_id
+    "#{name} (#{id})"
+  end
+
+  private
+
+  def validate_parent_page
+    if chapter? && parent_page_id.blank?
+      errors.add(page_type, 'pages must belong to a parent page.')
+    end
+    if !chapter? && parent_page_id.present?
+      errors.add(page_type, 'pages must not belong to a parent page.')
+    end
+  end
+
+  def validate_sequence_number
+    if chapter? && sequence_number.blank?
+      errors.add(page_type, 'pages must have a sequence number.')
+    end
+    if !chapter? && sequence_number.present?
+      errors.add(page_type, 'pages must not have a sequence number.')
+    end
+  end
+
+  def chapter?
+    return false if page_type.blank?
+    page_type == :literature_chapter.to_s
+  end
+end

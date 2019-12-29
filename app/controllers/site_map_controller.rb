@@ -4,14 +4,12 @@ class SiteMapController < ApplicationController
   def show
 
     if params[:browse_by] == 'media_type'
-      load_article_category_groups
+      load_literature_category_groups
       load_download_category_groups
       load_encyclopaedia_entry_category_groups
       load_link_categories
       load_music_track_category_groups
       load_picture_category_groups
-      load_resource_category_groups
-      load_story_categories
       load_video_category_groups
     elsif params[:browse_by] == 'tag'
      load_tags
@@ -35,9 +33,9 @@ class SiteMapController < ApplicationController
     end
   end
 
-  def load_article_category_groups
-    @article_category_groups = policy_scope(
-      CategoryGroup.where(category_group_type: :article).order(:name)
+  def load_literature_category_groups
+    @literature_category_groups = policy_scope(
+      CategoryGroup.where(category_group_type: :literature).order(:name)
     )
   end
 
@@ -70,18 +68,6 @@ class SiteMapController < ApplicationController
   def load_picture_category_groups
     @picture_category_groups = policy_scope(
       CategoryGroup.where(category_group_type: :picture).order(:name)
-    )
-  end
-
-  def load_resource_category_groups
-    @resource_category_groups = policy_scope(
-      CategoryGroup.where(category_group_type: :resource).order(:name)
-    )
-  end
-
-  def load_story_categories
-    @story_categories = policy_scope(
-      Category.where(category_type: :story).order(:name)
     )
   end
 

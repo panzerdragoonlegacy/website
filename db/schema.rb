@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191229010808) do
+ActiveRecord::Schema.define(version: 20191229055101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,6 +207,25 @@ ActiveRecord::Schema.define(version: 20191229010808) do
     t.integer  "news_entry_picture_file_size"
     t.datetime "news_entry_picture_updated_at"
     t.integer  "category_id"
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "description"
+    t.text     "content"
+    t.boolean  "publish"
+    t.string   "page_type"
+    t.integer  "parent_page_id"
+    t.integer  "sequence_number"
+    t.integer  "category_id"
+    t.string   "page_picture_file_name"
+    t.string   "page_picture_content_type"
+    t.integer  "page_picture_file_size"
+    t.datetime "page_picture_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "published_at"
   end
 
   create_table "pictures", force: :cascade do |t|

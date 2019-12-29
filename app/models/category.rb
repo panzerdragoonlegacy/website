@@ -5,6 +5,7 @@ class Category < ActiveRecord::Base
 
   belongs_to :category_group
   belongs_to :saga
+  has_many :pages, dependent: :destroy
   has_many :articles, dependent: :destroy
   has_many :downloads, dependent: :destroy
   has_many :encyclopaedia_entries, dependent: :destroy
@@ -24,6 +25,7 @@ class Category < ActiveRecord::Base
 
   # The list of category types.
   CATEGORY_TYPES = %w(
+    literature
     article
     download
     encyclopaedia_entry

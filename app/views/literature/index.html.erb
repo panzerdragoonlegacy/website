@@ -1,0 +1,25 @@
+<% if @contributor_profile %>
+  <% title "#{@contributor_profile.name}'s Literature" %>
+<% else %>
+  <% title 'Literature' %>
+<% end %>
+
+<% unless params[:contributor_profile_id] %>
+  <% if @category_groups.present? %>
+    <h2>Literature Categories</h2>
+    <%=
+      render(
+        partial: 'site_map/category_groups',
+        locals: { category_groups: @category_groups }
+      )
+    %>
+  <% end %>
+  <% if @pages.present? %>
+    <h2>All Literature</h2>
+  <% end %>
+<% end %>
+
+<% if @pages %>
+  <%= render 'list' %>
+  <%= paginate @pages %>
+<% end %>

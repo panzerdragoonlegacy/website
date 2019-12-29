@@ -1,0 +1,13 @@
+<div id="resources">
+  <% @pages.each do |page| %>
+    <div class="resource">
+      <div class="details">
+        <h2><%= link_to page.name, literature_path(page) %></h2>
+        <% unless page.publish == true %>
+          <p class="unpublished">Unpublished</p>
+        <% end %>
+        <p><%= page.description %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

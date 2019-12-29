@@ -1,11 +1,11 @@
 <p>Browsing by Media Type...</p>
 <ul>
   <li>
-    <h2><%= link_to 'Articles', articles_path %></h2>
+    <h2><%= link_to 'Literature', literature_index_path %></h2>
     <%=
       render(
         partial: 'category_groups',
-        locals: { category_groups: @article_category_groups }
+        locals: { category_groups: @literature_category_groups }
       )
     %>
   </li>
@@ -55,28 +55,7 @@
     %>
   </li>
   <li>
-    <h2><%= link_to 'Poems', poems_path %></h2>
-  </li>
-  <li>
     <h2><%= link_to 'Quizzes', quizzes_path %></h2>
-  </li>
-  <li>
-    <h2><%= link_to 'Resources', resources_path %></h2>
-    <%=
-      render(
-        partial: 'category_groups',
-        locals: { category_groups: @resource_category_groups }
-      )
-    %>
-  </li>
-  <li>
-    <h2><%= link_to 'Stories', stories_path %></h2>
-    <%=
-      render(
-        partial: 'categories',
-        locals: { categories: @story_categories, category_parent: :media_type }
-      )
-    %>
   </li>
   <li>
     <h2><%= link_to 'Videos', videos_path %></h2>

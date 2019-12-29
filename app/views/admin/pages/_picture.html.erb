@@ -1,0 +1,11 @@
+<div class="form-group">
+  <%= f.label :page_picture, 'Page Picture' %>
+  <% if page.page_picture? %>
+    <% if is_jpeg page.page_picture.url %>
+      <p><%= show_picture page, 'page_picture', :thumbnail %></p>
+    <% end %>
+    <p>File has already been uploaded. Replace file?</p>
+  <% end %>
+  <%= f.file_field :page_picture, class: 'form-control' %>
+  <%= render 'admin/shared/form/image_type_warning' %>
+</div>

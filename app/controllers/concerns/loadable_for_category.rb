@@ -22,6 +22,16 @@ module LoadableForCategory
     authorize @category
   end
 
+  def load_category_literature
+    if @category.category_type == 'literature'
+      @pages = PagePolicy::Scope.new(
+        current_user,
+        Page.where(category_id: @category.id).order(:name)
+          .page(params[:page])
+      ).resolve
+    end
+  end
+
   def load_category_articles
     if @category.category_type == 'article'
       @articles = ArticlePolicy::Scope.new(

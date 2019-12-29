@@ -7,6 +7,10 @@ module Admin::HomeHelper
     policy_scope(Category.where(publish: false)).count
   end
 
+  def draft_page_count
+    policy_scope(Page.where(publish: false)).count
+  end
+
   def draft_encyclopaedia_entry_count
     policy_scope(EncyclopaediaEntry.where(publish: false)).count
   end

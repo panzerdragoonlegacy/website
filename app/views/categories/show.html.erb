@@ -21,6 +21,7 @@
 
 <%= @category.description %>
 
+<%= render 'categories/show/literature' if @pages %>
 <%= render 'categories/show/articles' if @articles %>
 <%= render 'categories/show/downloads' if @downloads %>
 <%= render 'categories/show/encyclopaedia_entries' if @encyclopaedia_entries %>

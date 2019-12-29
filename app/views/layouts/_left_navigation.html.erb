@@ -11,7 +11,11 @@
   <ul>
     <% MediaType::all.each do |key, value| %>
       <li>
-        <%= link_to value, send("#{key.to_s.pluralize}_path") %>
+        <% if key === :literature %>
+          <%= link_to value, literature_index_path %>
+        <% else %>
+          <%= link_to value, send("#{key.to_s.pluralize}_path") %>
+        <% end %>
       </li>
     <% end %>
   </ul>

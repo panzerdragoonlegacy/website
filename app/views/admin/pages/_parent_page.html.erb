@@ -1,0 +1,23 @@
+<div class="form-group">
+  <%= f.label :parent_page_id, 'Parent Page' %>
+  <%= f.collection_select(
+      :parent_page_id,
+      parent_pages,
+      :id,
+      :name_and_id,
+      { include_blank: true },
+      { class: 'form-control' }
+    )
+  %>
+  <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: 'Parent pages should be used to group a set of related ' \
+          'chapters (subpages) from the same category. Chapters will show up ' \
+          'in a table of contents on the parent page and as links at the ' \
+          'bottom of other chapters belonging to the same parent.'
+      }
+    )
+  %>
+</div>

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :contributor_profiles, path: 'contributor-profiles'
     resources :users
 
+    resources :pages
     resources :articles
     resources :encyclopaedia_entries, path: 'encyclopaedia-entries'
     resources :news_entries, path: 'news-entries'
@@ -60,6 +61,7 @@ Rails.application.routes.draw do
     resources :videos
   end
 
+  resources :literature
   resources :articles
   resources :downloads
   resources :links

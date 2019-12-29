@@ -7,6 +7,7 @@ class CategoriesController < ApplicationController
 
   def show
     load_category
+    load_category_literature
     load_category_articles
     load_category_downloads
     load_category_encyclopaedia_entries
