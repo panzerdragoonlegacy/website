@@ -17,6 +17,8 @@ class Page < ActiveRecord::Base
   PAGE_TYPES = %w(
     literature
     literature_chapter
+    site_footer
+    site_help
   ).freeze
 
   has_attached_file(
