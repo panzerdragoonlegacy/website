@@ -14,7 +14,7 @@
     <% end %>
     <div class="card-body">
       <% unless is_jpeg(f.object.picture.url) %>
-        <%= render 'admim/shared/form/image_type_warning' %>
+        <%= render 'admin/shared/form/image_type_warning' %>
       <% end %>
       <%=
         link_to_remove_association(

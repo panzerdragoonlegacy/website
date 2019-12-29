@@ -1,7 +1,9 @@
 <div class="form-group">
   <%= f.label :download_picture, 'Download Picture' %>
   <% if download.download_picture? %>
-    <p><%= show_picture download, 'download_picture', :thumbnail %></p>
+    <% if is_jpeg download.download_picture.url %>
+      <p><%= show_picture download, 'download_picture', :thumbnail %></p>
+    <% end %>
     <p>File has already been uploaded. Replace file?</p>
   <% end %>
   <%= f.file_field :download_picture, class: 'form-control' %>

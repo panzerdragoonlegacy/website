@@ -1,7 +1,9 @@
 <div class="form-group">
   <%= f.label :video_picture, 'Video Picture' %>
   <% if video.video_picture? %>
-    <p><%= show_picture video, 'video_picture', :thumbnail %></p>
+    <% if is_jpeg video.video_picture.url %>
+      <p><%= show_picture video, 'video_picture', :thumbnail %></p>
+    <% end %>
     <p>File has already been uploaded. Replace file?</p>
   <% end %>
   <%= f.file_field :video_picture, class: 'form-control' %>
