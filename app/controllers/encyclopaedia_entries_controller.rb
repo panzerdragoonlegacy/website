@@ -11,15 +11,11 @@ class EncyclopaediaEntriesController < ApplicationController
   def show
     load_encyclopaedia_entry
     load_news_entries
-    load_articles
+    load_literature
     load_downloads
-    load_links
     load_music_tracks
     load_pictures
-    load_poems
     load_quizzes
-    load_resources
-    load_stories
     load_videos
   end
 end

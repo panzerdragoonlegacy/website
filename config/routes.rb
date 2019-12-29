@@ -49,15 +49,11 @@ Rails.application.routes.draw do
 
   resources :contributor_profiles, path: 'contributors' do
     resources :news_entries, path: 'news-entries'
-    resources :articles
+    resources :literature
     resources :downloads
-    resources :links
     resources :music_tracks, path: 'music-tracks'
     resources :pictures
-    resources :poems
     resources :quizzes
-    resources :resources
-    resources :stories
     resources :videos
   end
 

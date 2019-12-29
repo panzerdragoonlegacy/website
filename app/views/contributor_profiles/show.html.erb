@@ -124,12 +124,13 @@
         %>
       </li>
     <% end %>
-    <% unless article_count(@contributor_profile) == 0 %>
+    <% unless literature_count(@contributor_profile) == 0 %>
       <li>
         <%=
           link_to(
-            pluralize(article_count(@contributor_profile), 'article'),
-            contributor_profile_articles_path(@contributor_profile)
+            pluralize(literature_count(@contributor_profile), 'work') +
+              ' of literature',
+            contributor_profile_literature_index_path(@contributor_profile)
           )
         %>
       </li>
@@ -140,16 +141,6 @@
           link_to(
             pluralize(download_count(@contributor_profile), 'download'),
             contributor_profile_downloads_path(@contributor_profile)
-          )
-        %>
-      </li>
-    <% end %>
-    <% unless link_count(@contributor_profile) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(link_count(@contributor_profile), 'link'),
-            contributor_profile_links_path(@contributor_profile)
           )
         %>
       </li>
@@ -174,42 +165,12 @@
         %>
       </li>
     <% end %>
-    <% unless poem_count(@contributor_profile) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(poem_count(@contributor_profile), 'poem'),
-            contributor_profile_poems_path(@contributor_profile)
-          )
-        %>
-      </li>
-    <% end %>
     <% unless quiz_count(@contributor_profile) == 0 %>
       <li>
         <%=
           link_to(
             pluralize(quiz_count(@contributor_profile), 'quiz'),
             contributor_profile_quizzes_path(@contributor_profile)
-          )
-        %>
-      </li>
-    <% end %>
-    <% unless resource_count(@contributor_profile) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(resource_count(@contributor_profile), 'resource'),
-            contributor_profile_resources_path(@contributor_profile)
-          )
-        %>
-      </li>
-    <% end %>
-    <% unless story_count(@contributor_profile) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(story_count(@contributor_profile), 'story'),
-            contributor_profile_stories_path(@contributor_profile)
           )
         %>
       </li>

@@ -37,11 +37,13 @@ module LoadableForEncyclopaediaEntry
     ).resolve
   end
 
-  def load_articles
-    @articles = ArticlePolicy::Scope.new(
+  def load_literature
+    @pages = PagePolicy::Scope.new(
       current_user,
-      Article.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .limit(50).order(:name)
+      Page.includes(:tags).where(
+        page_type: :literature.to_s,
+        tags: { name: @encyclopaedia_entry.name }
+      ).limit(50).order(:name)
     ).resolve
   end
 
@@ -49,14 +51,6 @@ module LoadableForEncyclopaediaEntry
     @downloads = DownloadPolicy::Scope.new(
       current_user,
       Download.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .limit(50).order(:name)
-    ).resolve
-  end
-
-  def load_links
-    @links = LinkPolicy::Scope.new(
-      current_user,
-      Link.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
         .limit(50).order(:name)
     ).resolve
   end
@@ -78,34 +72,10 @@ module LoadableForEncyclopaediaEntry
     ).resolve
   end
 
-  def load_poems
-    @poems = PoemPolicy::Scope.new(
-      current_user,
-      Poem.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .limit(50).order(:name)
-    ).resolve
-  end
-
   def load_quizzes
     @quizzes = QuizPolicy::Scope.new(
       current_user,
       Quiz.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .limit(50).order(:name)
-    ).resolve
-  end
-
-  def load_resources
-    @resources = ResourcePolicy::Scope.new(
-      current_user,
-      Resource.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
-        .limit(50).order(:name)
-    ).resolve
-  end
-
-  def load_stories
-    @stories = StoryPolicy::Scope.new(
-      current_user,
-      Story.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
         .limit(50).order(:name)
     ).resolve
   end

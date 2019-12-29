@@ -3,7 +3,6 @@ class MediaType
     {
       literature: 'Literature',
       download: 'Downloads',
-      link: 'Links',
       music_track: 'Music',
       picture: 'Pictures',
       quiz: 'Quizzes',

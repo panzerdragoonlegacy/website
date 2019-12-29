@@ -7,6 +7,12 @@ class ContributorProfile < ActiveRecord::Base
 
   has_many :contributions, dependent: :destroy
   has_many(
+    :pages,
+    through: :contributions,
+    source: :contributable,
+    source_type: 'Page'
+  )
+  has_many(
     :articles,
     through: :contributions,
     source: :contributable,

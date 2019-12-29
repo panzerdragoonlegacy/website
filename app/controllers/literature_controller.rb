@@ -3,7 +3,7 @@ class LiteratureController < ApplicationController
 
   def index
     if params[:contributor_profile_id]
-      load_contributors_pages
+      load_contributors_literature
     else
       load_category_groups
       @pages = policy_scope(

@@ -17,6 +17,7 @@ RSpec.describe Category, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:category_group) }
     it { is_expected.to belong_to(:saga) }
+    it { is_expected.to have_many(:pages).dependent(:destroy) }
     it { is_expected.to have_many(:articles).dependent(:destroy) }
     it { is_expected.to have_many(:downloads).dependent(:destroy) }
     it { is_expected.to have_many(:encyclopaedia_entries).dependent(:destroy) }
