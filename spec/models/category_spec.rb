@@ -8,6 +8,7 @@ RSpec.describe Category, type: :model do
     it { is_expected.to respond_to(:short_name_for_media_type) }
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:category_type) }
+    it { is_expected.to respond_to(:category_picture) }
     it { is_expected.to respond_to(:publish) }
     it { is_expected.to respond_to(:created_at) }
     it { is_expected.to respond_to(:updated_at) }
@@ -152,6 +153,18 @@ RSpec.describe Category, type: :model do
           expect(@category).to be_valid
         end
       end
+    end
+  end
+
+  describe 'file attachment' do
+    it { is_expected.to have_attached_file(:category_picture) }
+    it do
+      is_expected.to validate_attachment_content_type(:category_picture)
+        .allowing('image/jpeg')
+    end
+    it do
+      is_expected.to validate_attachment_size(:category_picture)
+        .less_than(5.megabytes)
     end
   end
 

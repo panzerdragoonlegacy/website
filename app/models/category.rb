@@ -1,6 +1,7 @@
 class Category < ActiveRecord::Base
   include Publishable
   include Sluggable
+  include Syncable
 
   belongs_to :category_group
   belongs_to :saga
@@ -35,11 +36,33 @@ class Category < ActiveRecord::Base
     video
   ).freeze
 
+  has_attached_file(
+    :category_picture,
+    styles: {
+      mini_thumbnail: '25x25#',
+      thumbnail: '150x150',
+      embedded: '622x250#'
+    },
+    path: ':rails_root/public/system/:attachment/:id/:style/:filename',
+    url: '/system/:attachment/:id/:style/:filename'
+  )
+
+  validates_attachment(
+    :category_picture,
+    content_type: { content_type: 'image/jpeg' },
+    size: { in: 0..5.megabytes }
+  )
+
   before_validation :validate_category_type_reassignment
   before_validation :validate_presence_of_category_group
   before_validation :validate_category_and_category_group_type_match
 
   before_save :set_published_at
+  before_save :sync_file_name
+
+  def sync_file_name
+    sync_file_name_of :category_picture, file_name: "#{name.to_url}.jpg"
+  end
 
   private
 

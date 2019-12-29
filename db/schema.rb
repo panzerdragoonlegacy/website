@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191101234341) do
+ActiveRecord::Schema.define(version: 20191229010808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,11 +44,11 @@ ActiveRecord::Schema.define(version: 20191101234341) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name",                      limit: 255
-    t.string   "url",                       limit: 255
-    t.string   "description",               limit: 255
-    t.string   "category_type",             limit: 255
-    t.boolean  "publish",                               default: false
+    t.string   "name",                          limit: 255
+    t.string   "url",                           limit: 255
+    t.string   "description",                   limit: 255
+    t.string   "category_type",                 limit: 255
+    t.boolean  "publish",                                   default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_group_id"
@@ -56,6 +56,10 @@ ActiveRecord::Schema.define(version: 20191101234341) do
     t.string   "short_name_for_saga"
     t.string   "short_name_for_media_type"
     t.datetime "published_at"
+    t.string   "category_picture_file_name"
+    t.string   "category_picture_content_type"
+    t.integer  "category_picture_file_size"
+    t.datetime "category_picture_updated_at"
   end
 
   add_index "categories", ["saga_id"], name: "index_categories_on_saga_id", using: :btree
@@ -318,6 +322,10 @@ ActiveRecord::Schema.define(version: 20191101234341) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "tag_picture_file_name"
+    t.string   "tag_picture_content_type"
+    t.integer  "tag_picture_file_size"
+    t.datetime "tag_picture_updated_at"
   end
 
   create_table "users", force: :cascade do |t|

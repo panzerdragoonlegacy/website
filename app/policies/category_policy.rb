@@ -38,6 +38,7 @@ class CategoryPolicy < ApplicationPolicy
 
   def attributes_except_publish
     [
+      :category_picture,
       :category_type,
       :category_group_id,
       :saga_id,

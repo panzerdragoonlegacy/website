@@ -2,6 +2,16 @@
 <% if @tag.description.present? %>
   <% description truncated_text(@tag.description) %>
 <% end %>
+<% open_graph_type 'article' %>
+<% if @tag.tag_picture.present? %>
+  <% open_graph_image(
+    "#{root_url.chomp('/')}#{@tag.tag_picture.url(:original)}"
+  ) %>
+<% end %>
+
+<% if @tag.tag_picture.present? %>
+  <%= show_picture @tag, 'tag_picture', :embedded %>
+<% end %>
 
 <% if policy(@tag).edit? %>
   <p>

@@ -1,0 +1,11 @@
+<div class="form-group">
+  <%= f.label :category_picture, 'Category Picture' %>
+  <% if category.category_picture? %>
+    <% if is_jpeg category.category_picture.url %>
+      <p><%= show_picture category, 'category_picture', :thumbnail %></p>
+    <% end %>
+    <p>File has already been uploaded. Replace file?</p>
+  <% end %>
+  <%= f.file_field :category_picture, class: 'form-control' %>
+  <%= render 'admin/shared/form/image_type_warning' %>
+</div>

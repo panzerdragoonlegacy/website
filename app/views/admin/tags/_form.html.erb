@@ -1,6 +1,7 @@
 <%= form_for [:admin, @tag] do |f| %>
   <%= render 'admin/shared/form/error_messages', target: @tag %>
+  <%= render partial: 'picture', locals: { f: f, tag: @tag } %>
   <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
-  <%= render partial: 'admin/shared/form/description', locals: { f: f } %>
+  <%= render partial: 'description', locals: { f: f } %>
   <%= render partial: 'admin/shared/form/save_buttons', locals: { f: f } %>
 <% end %>

@@ -22,6 +22,7 @@
   <table class="table">
     <thead>
       <tr>
+        <th scope="col"></th>
         <th scope="col"><%= sort_link @q, :name %></th>
         <th scope="col">
           <%= sort_link @q, :short_name_for_saga, 'Short Name for Saga' %>
@@ -53,6 +54,14 @@
     <tbody>
       <% @categories.each do |category| %>
         <tr>
+          <td>
+            <%=
+              link_to(
+                show_picture(category, 'category_picture', :thumbnail),
+                category
+              )
+            %>
+          </td>
           <%=
             render(
               partial: 'admin/shared/table/name',

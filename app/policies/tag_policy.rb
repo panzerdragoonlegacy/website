@@ -42,6 +42,7 @@ class TagPolicy < ApplicationPolicy
 
   def permitted_attributes
     [
+      :tag_picture,
       :name,
       :description
     ]

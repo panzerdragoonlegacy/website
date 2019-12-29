@@ -1,5 +1,15 @@
 <% title @category.name %>
 <% description @category.description %>
+<% open_graph_type 'article' %>
+<% if @category.category_picture.present? %>
+  <% open_graph_image(
+    "#{root_url.chomp('/')}#{@category.category_picture.url(:original)}"
+  ) %>
+<% end %>
+
+<% if @category.category_picture.present? %>
+  <%= show_picture @category, 'category_picture', :embedded %>
+<% end %>
 
 <% if policy(@category).edit? %>
   <p><%= link_to 'Edit Category', edit_admin_category_path(@category) %></p>
