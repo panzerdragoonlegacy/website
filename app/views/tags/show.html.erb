@@ -9,14 +9,14 @@
   ) %>
 <% end %>
 
-<% if @tag.tag_picture.present? %>
-  <%= show_picture @tag, 'tag_picture', :embedded %>
-<% end %>
-
 <% if policy(@tag).edit? %>
   <p>
     <%= link_to 'Edit Tag', edit_admin_tag_path(@tag) %>
   </p>
+<% end %>
+
+<% if @tag.tag_picture.present? %>
+  <%= show_picture @tag, 'tag_picture', :embedded %>
 <% end %>
 
 <p><%= @tag.description if @tag.description.present? %></p>

@@ -7,16 +7,16 @@
   ) %>
 <% end %>
 
-<% if @category.category_picture.present? %>
-  <%= show_picture @category, 'category_picture', :embedded %>
-<% end %>
-
 <% if policy(@category).edit? %>
   <p><%= link_to 'Edit Category', edit_admin_category_path(@category) %></p>
 <% end %>
 
 <% unless @category.publish %>
   <p class="unpublished">Unpublished</p>
+<% end %>
+
+<% if @category.category_picture.present? %>
+  <%= show_picture @category, 'category_picture', :embedded %>
 <% end %>
 
 <%= @category.description %>
