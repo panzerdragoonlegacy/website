@@ -21,7 +21,7 @@ RSpec.describe ContributorProfile, type: :model do
     it { is_expected.to have_one(:user).dependent(:destroy) }
     it { is_expected.to have_many(:news_entries).dependent(:destroy) }
     it { is_expected.to have_many(:contributions).dependent(:destroy) }
-    it { is_expected.to have_many(:pages).dependent(:destroy) }
+    it { is_expected.to have_many(:pages) }
     it { is_expected.to have_many(:articles) }
     it { is_expected.to have_many(:downloads) }
     it { is_expected.to have_many(:links) }

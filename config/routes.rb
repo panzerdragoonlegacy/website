@@ -19,17 +19,10 @@ Rails.application.routes.draw do
     resources :users
 
     resources :pages
-    resources :articles
     resources :encyclopaedia_entries, path: 'encyclopaedia-entries'
     resources :news_entries, path: 'news-entries'
-    resources :special_pages, path: 'special-pages'
-    resources :poems
-    resources :resources
-    resources :stories
-    resources :chapters
 
     resources :downloads
-    resources :links
     resources :music_tracks, path: 'music-tracks'
     resources :pictures
     resources :quizzes
@@ -42,7 +35,6 @@ Rails.application.routes.draw do
   resources :site_map
   resources :categories
   resources :encyclopaedia_entries, path: 'encyclopaedia'
-  resources :special_pages, path: 'special-pages'
   resources :sagas
   resources :tags
   resources :contributions
@@ -58,18 +50,12 @@ Rails.application.routes.draw do
   end
 
   resources :literature
-  resources :articles
   resources :downloads
-  resources :links
   resources :music_tracks, path: 'music'
   resources :pictures
-  resources :poems
   resources :quizzes
-  resources :resources
-  resources :stories
-  resources :chapters
   resources :videos
 
-  get ':id', to: 'special_pages#show'
+  get ':id', to: 'pages#show'
   root to: "news_entries#index"
 end
