@@ -1,0 +1,10 @@
+<% if policy(page).new? %>
+  <%=
+    link_to(
+      "New Chapter",
+      new_admin_page_path(page_parent: page),
+      class: 'btn btn-secondary',
+      role: 'button'
+    )
+  %>
+<% end %>

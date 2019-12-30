@@ -8,6 +8,7 @@ class Page < ActiveRecord::Base
   include Taggable
 
   belongs_to :category
+  has_many :pages, dependent: :destroy
 
   validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }
@@ -56,6 +57,14 @@ class Page < ActiveRecord::Base
 
   def name_and_id
     "#{name} (#{id})"
+  end
+
+  def chapters
+    Page.where(parent_page_id: id).order(:sequence_number)
+  end
+
+  def parent_page
+    Page.where(id: parent_page_id).first
   end
 
   private

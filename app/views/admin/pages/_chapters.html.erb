@@ -1,0 +1,22 @@
+<% if page.chapters.count > 0 %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Sequence Number</th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% page.chapters.each do |chapter| %>
+        <tr>
+          <td><%= chapter.sequence_number.to_s %></td>
+          <td><%= chapter.name %></td>
+          <td><%= render 'edit_chapter_button', chapter: chapter %></td>
+          <td><%= render 'delete_chapter_button', chapter: chapter %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

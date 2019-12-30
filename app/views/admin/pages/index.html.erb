@@ -31,6 +31,7 @@
         <th scope="col"><%= sort_link @q, :publish, 'Published' %></th>
         <th scope="col"></th>
         <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -42,12 +43,16 @@
               locals: { resource: page, path: literature_path(page) }
             )
           %>
-          <%=
-            render(
-              partial: 'admin/shared/table/category',
-              locals: { category: page.category }
-            )
-          %>
+          <% if page.category %>
+            <%=
+              render(
+                partial: 'admin/shared/table/category',
+                locals: { category: page.category }
+              )
+            %>
+          <% else %>
+            <td>N/A</td>
+          <% end %>
           <%=
             render(
               partial: 'admin/shared/table/contributor_profiles',
@@ -86,6 +91,7 @@
               }
             )
           %>
+          <td><%= render 'new_chapter_button', page: page %></td>
           <%=
             render(
               partial: 'admin/shared/table/delete_button',
@@ -93,6 +99,16 @@
             )
           %>
         </tr>
+        <% if page.chapters.count > 0 %>
+          <tr>
+            <td>
+              <h6 class="mt-3">Chapters for <%= page.name %>:</h6>
+            </td>
+            <td colspan="7">
+              <%= render 'chapters', page: page %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

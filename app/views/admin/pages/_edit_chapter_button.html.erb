@@ -1,0 +1,10 @@
+<% if policy(chapter).edit? %>
+  <%=
+    link_to(
+      'Edit Chapter',
+      edit_admin_page_path(chapter),
+      class: 'btn btn-warning',
+      role: 'button'
+    )
+    %>
+<% end %>

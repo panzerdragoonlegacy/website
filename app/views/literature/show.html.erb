@@ -41,11 +41,26 @@
 <%= render partial: 'shared/related_encyclopaedia_entries' %>
 
 <p class="links">
-  <% if @page.category.saga %>
+  <% if @page.category && @page.category.saga %>
     <%= link_to(
       @page.category.saga.name, saga_path(@page.category.saga)
     ) %> |
   <% end %>
+  <% if @page.page_type == :literature_chapter.to_s &&
+    @page.parent_page.category.saga %>
+    <%= link_to(
+      @page.parent_page.category.saga.name,
+      saga_path(@page.parent_page.category.saga)
+    ) %> |
+  <% end %>
   <%= link_to 'Literature', literature_index_path %> |
-  <%= link_to @page.category.name, category_path(@page.category) %>
+  <% if @page.category %>
+    <%= link_to @page.category.name, category_path(@page.category) %>
+  <% end %>
+  <% if @page.page_type == :literature_chapter.to_s %>
+    <%= link_to(
+      @page.parent_page.category.name, category_path(@page.parent_page.category)
+    ) %> |
+    <%= link_to @page.parent_page.name, literature_path(@page.parent_page) %>
+  <% end %>
 </p>
