@@ -12,13 +12,17 @@ class Admin::PagesController < ApplicationController
   end
 
   def new
+    if params[:parent_page_id]
+      parent_page = Page.find_by id: params[:parent_page_id]
+      raise 'Parent page not found.' unless parent_page.present?
+    end
     if params[:category]
       category = Category.find_by url: params[:category]
       raise 'Category not found.' unless category.present?
-      @page = Page.new category: category
-    else
-      @page = Page.new
     end
+    @page = Page.new
+    @page.category = category if category
+    @page.parent_page_id = parent_page.id if parent_page
     authorize @page
   end
 

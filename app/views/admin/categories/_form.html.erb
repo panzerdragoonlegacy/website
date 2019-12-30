@@ -1,9 +1,9 @@
 <%= form_for [:admin, @category] do |f| %>
   <%= render 'admin/shared/form/error_messages', target: @category %>
-  <%= render partial: 'picture', locals: { f: f, category: @category } %>
   <%= render 'category_type', f: f %>
   <%= render 'category_group', f: f %>
   <%= render 'saga', f: f %>
+  <%= render partial: 'picture', locals: { f: f, category: @category } %>
   <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
   <%= render 'short_name_for_saga', f: f %>
   <%= render 'short_name_for_media_type', f: f %>

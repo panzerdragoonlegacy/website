@@ -20,6 +20,7 @@
   <table class="table">
     <thead>
       <tr>
+        <th scope="col"></th>
         <th scope="col"><%= sort_link @q, :name %></th>
         <th scope="col"><%= sort_link @q, :category_name, 'Category' %></th>
         <th scope="col">Contributors</th>
@@ -31,12 +32,12 @@
         <th scope="col"><%= sort_link @q, :publish, 'Published' %></th>
         <th scope="col"></th>
         <th scope="col"></th>
-        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <% @pages.each do |page| %>
         <tr>
+          <td><%= show_picture page, 'page_picture', :mini_thumbnail %></td>
           <%=
             render(
               partial: 'admin/shared/table/name',
@@ -91,7 +92,6 @@
               }
             )
           %>
-          <td><%= render 'new_chapter_button', page: page %></td>
           <%=
             render(
               partial: 'admin/shared/table/delete_button',
@@ -103,6 +103,7 @@
           <tr>
             <td>
               <h6 class="mt-3">Chapters for <%= page.name %>:</h6>
+              <%= render 'new_chapter_button', page: page %>
             </td>
             <td colspan="7">
               <%= render 'chapters', page: page %>

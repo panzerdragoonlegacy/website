@@ -2,8 +2,14 @@
   <table class="table">
     <thead>
       <tr>
+        <th scope="col"></th>
         <th scope="col">Sequence Number</th>
         <th scope="col">Name</th>
+        <th scope="col">Contributors</th>
+        <th scope="col">Created</th>
+        <th scope="col">Modified</th>
+        <th scope="col">First Published</th>
+        <th scope="col">Published</th>
         <th scope="col"></th>
         <th scope="col"></th>
       </tr>
@@ -11,10 +17,53 @@
     <tbody>
       <% page.chapters.each do |chapter| %>
         <tr>
+          <td><%= show_picture chapter, 'page_picture', :mini_thumbnail %></td>
           <td><%= chapter.sequence_number.to_s %></td>
           <td><%= chapter.name %></td>
-          <td><%= render 'edit_chapter_button', chapter: chapter %></td>
-          <td><%= render 'delete_chapter_button', chapter: chapter %></td>
+          <%=
+            render(
+              partial: 'admin/shared/table/contributor_profiles',
+              locals: { contributor_profiles: page.contributor_profiles }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/created_at',
+              locals: { resource: chapter }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/updated_at',
+              locals: { resource: chapter }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/published_at',
+              locals: { resource: chapter }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/published',
+              locals: { resource: chapter }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/edit_button',
+              locals: {
+                resource: chapter, path: edit_admin_page_path(chapter)
+              }
+            )
+          %>
+          <%=
+            render(
+              partial: 'admin/shared/table/delete_button',
+              locals: { resource: chapter, resource_name: 'chapter' }
+            )
+          %>
         </tr>
       <% end %>
     </tbody>

@@ -2,7 +2,7 @@
   <%=
     link_to(
       "New Chapter",
-      new_admin_page_path(page_parent: page),
+      new_admin_page_path(parent_page_id: page.id),
       class: 'btn btn-secondary',
       role: 'button'
     )
