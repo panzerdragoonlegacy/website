@@ -8,10 +8,8 @@ class Page < ActiveRecord::Base
   include Taggable
 
   belongs_to :category
-  has_many :pages, dependent: :destroy
 
   validates :name, presence: true, length: { in: 2..100 }
-  validates :description, presence: true, length: { in: 2..250 }
   validates :content, presence: true
   validates :page_type, presence: true
 
@@ -40,9 +38,10 @@ class Page < ActiveRecord::Base
     size: { in: 0..5.megabytes }
   )
 
+  before_validation :validate_category
   before_validation :validate_parent_page
   before_validation :validate_sequence_number
-  before_validation :validate_category
+  before_validation :validate_description
 
   before_save :set_published_at
   before_save :sync_file_name
@@ -69,6 +68,15 @@ class Page < ActiveRecord::Base
 
   private
 
+  def validate_category
+    if literature? && category.blank?
+      errors.add(page_type, 'pages must have a category.')
+    end
+    if !literature? && category.present?
+      errors.add(page_type, 'pages must not have a category.')
+    end
+  end
+
   def validate_parent_page
     if chapter? && parent_page_id.blank?
       errors.add(page_type, 'pages must belong to a parent page.')
@@ -87,22 +95,28 @@ class Page < ActiveRecord::Base
     end
   end
 
-  def validate_category
-    if literature? && category.blank?
-      errors.add(page_type, 'pages must have a category.')
+  def validate_description
+    if literature?
+      if description.blank?
+        errors.add(page_type, 'pages must have a description.')
+      elsif description.length < 2 || description.length > 250
+        errors.add(
+          page_type, 'page descriptions must be between 2 and 250 characters.'
+        )
+      end
     end
-    if !literature? && category.present?
-      errors.add(page_type, 'pages must not have a category.')
+    if !literature? && description.present?
+      errors.add(page_type, 'pages must not have a description.')
     end
-  end
-
-  def chapter?
-    return false if page_type.blank?
-    page_type == :literature_chapter.to_s
   end
 
   def literature?
     return false if page_type.blank?
     page_type == :literature.to_s
+  end
+
+  def chapter?
+    return false if page_type.blank?
+    page_type == :literature_chapter.to_s
   end
 end
