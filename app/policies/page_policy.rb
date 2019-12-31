@@ -54,7 +54,10 @@ class PagePolicy < ApplicationPolicy
   end
 
   def destroy?
-    edit?
+    if edit?
+      return false if record.chapters.length > 0
+      return true
+    end
   end
 
   def permitted_attributes
