@@ -1,0 +1,17 @@
+<nav class="chapters">
+  <% if previous_chapter(@page) %>
+    <%= link_to(
+      "‹ #{previous_chapter(@page).name}",
+      literature_chapter_path(
+        @page.parent_page.to_param, previous_chapter(@page)
+      )
+    ) %> |
+  <% end %>
+  <%= link_to 'Table of Contents', literature_path(@page.parent_page) %>
+  <% if next_chapter(@page) %>
+    | <%= link_to(
+      "#{next_chapter(@page).name} ›",
+      literature_chapter_path(@page.parent_page.to_param, next_chapter(@page))
+    ) %>
+  <% end %>
+</nav>

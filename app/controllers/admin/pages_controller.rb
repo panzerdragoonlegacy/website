@@ -23,6 +23,7 @@ class Admin::PagesController < ApplicationController
     @page = Page.new
     @page.category = category if category
     @page.parent_page_id = parent_page.id if parent_page
+    @page.page_type = :literature_chapter.to_s if parent_page
     authorize @page
   end
 

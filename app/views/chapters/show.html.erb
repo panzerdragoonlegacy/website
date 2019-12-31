@@ -1,6 +1,8 @@
-<% title @page.parent_page.name + ': ' + @page.name %>
+<% title @page.parent_page.name %>
 <% description @page.parent_page.description %>
 <% open_graph_type 'article' %>
+
+<h2><%= @page.name %></h2>
 
 <% if policy(@page).edit? %>
   <p><%= link_to 'Edit Page', edit_admin_page_path(@page) %></p>
@@ -39,6 +41,8 @@
 <%= raw illustrated_markdown_to_html @page.id, 'Page', @page.content %>
 
 <%= render partial: 'shared/related_encyclopaedia_entries' %>
+
+<%= render partial: 'chapter_navigation' %>
 
 <p class="links">
   <% if @page.parent_page.category.saga %>
