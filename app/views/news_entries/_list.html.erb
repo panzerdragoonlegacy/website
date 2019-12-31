@@ -1,6 +1,12 @@
 <div id="resources">
   <% @news_entries.each do |news_entry| %>
     <div class="resource">
+      <div class="thumbnail">
+        <%= link_to(
+          show_picture(news_entry, 'news_entry_picture', :thumbnail),
+          news_entry
+        ) %>
+      </div>
       <div class="details">
         <h2><%= link_to news_entry.name, news_entry %></h2>
         <% unless news_entry.publish %>

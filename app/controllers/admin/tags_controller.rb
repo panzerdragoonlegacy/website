@@ -53,7 +53,7 @@ class Admin::TagsController < ApplicationController
     if params[:continue_editing]
       redirect_to edit_admin_tag_path(@tag)
     else
-      redirect_to admin_tags_path
+      redirect_to tag_path(@tag)
     end
   end
 end
