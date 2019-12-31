@@ -38,12 +38,24 @@
       <% @pages.each do |page| %>
         <tr>
           <td><%= show_picture page, 'page_picture', :mini_thumbnail %></td>
-          <%=
-            render(
-              partial: 'admin/shared/table/name',
-              locals: { resource: page, path: literature_path(page) }
-            )
-          %>
+          <% if page.page_type == :literature.to_s %>
+            <%=
+              render(
+                partial: 'admin/shared/table/name',
+                locals: { resource: page, path: literature_path(page) }
+              )
+            %>
+          <% elsif page.page_type == :literature_chapter.to_s %>
+            <%=
+              render(
+                partial: 'admin/shared/table/name',
+                locals: {
+                  resource: page,
+                  path: literature_chapter_path(page.parent_page.to_param, page)
+                }
+              )
+            %>
+          <% end %>
           <% if page.category %>
             <%=
               render(

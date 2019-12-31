@@ -1,0 +1,55 @@
+<% title @page.parent_page.name + ': ' + @page.name %>
+<% description @page.parent_page.description %>
+<% open_graph_type 'article' %>
+
+<% if policy(@page).edit? %>
+  <p><%= link_to 'Edit Page', edit_admin_page_path(@page) %></p>
+<% end %>
+
+<% if !@page.publish %>
+  <p class="unpublished">
+    This page is not published. Please inform an administrator when it and
+    the associated news entry are ready to be published.
+  </p>
+<% elsif !@page.parent_page.publish %>
+  <p class="unpublished">Published in Unpublished Parent Page</p>
+<% elsif !@page.parent_page.category.publish %>
+  <p class="unpublished">Published in Unpublished Category</p>
+<% end %>
+
+<% if @page.page_picture.present? %>
+  <%= show_picture @page, 'page_picture', :embedded %>
+<% end %>
+
+<h2>Written By:</h2>
+<ul class="thumbnail_and_name_list">
+  <% @page.parent_page.contributor_profiles.each do |contributor_profile| %>
+    <li>
+      <%=
+        link_to(
+          show_avatar(contributor_profile, :mini_thumbnail),
+          contributor_profile
+        )
+      %>
+      <h3><%= link_to contributor_profile.name, contributor_profile %></h3>
+    </li>
+  <% end %>
+</ul>
+
+<%= raw illustrated_markdown_to_html @page.id, 'Page', @page.content %>
+
+<%= render partial: 'shared/related_encyclopaedia_entries' %>
+
+<p class="links">
+  <% if @page.parent_page.category.saga %>
+    <%= link_to(
+      @page.parent_page.category.saga.name,
+      saga_path(@page.parent_page.category.saga)
+    ) %> |
+  <% end %>
+  <%= link_to 'Literature', literature_index_path %> |
+  <%= link_to(
+    @page.parent_page.category.name, category_path(@page.parent_page.category)
+  ) %> |
+  <%= link_to @page.parent_page.name, literature_path(@page.parent_page) %>
+</p>

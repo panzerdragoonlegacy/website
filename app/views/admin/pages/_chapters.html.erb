@@ -19,7 +19,17 @@
         <tr>
           <td><%= show_picture chapter, 'page_picture', :mini_thumbnail %></td>
           <td><%= chapter.sequence_number.to_s %></td>
-          <td><%= chapter.name %></td>
+          <%=
+            render(
+              partial: 'admin/shared/table/name',
+              locals: {
+                resource: chapter,
+                path: literature_chapter_path(
+                  chapter.parent_page.to_param, chapter
+                )
+              }
+            )
+          %>
           <%=
             render(
               partial: 'admin/shared/table/contributor_profiles',

@@ -49,7 +49,9 @@ Rails.application.routes.draw do
     resources :videos
   end
 
-  resources :literature
+  resources :literature, only: %i(index show) do
+    resources :chapters, only: :show
+  end
   resources :downloads
   resources :music_tracks, path: 'music'
   resources :pictures
