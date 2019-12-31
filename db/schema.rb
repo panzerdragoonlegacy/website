@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191229055101) do
+ActiveRecord::Schema.define(version: 20191231062205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,6 +213,7 @@ ActiveRecord::Schema.define(version: 20191229055101) do
     t.string   "name"
     t.string   "url"
     t.string   "description"
+    t.text     "information"
     t.text     "content"
     t.boolean  "publish"
     t.string   "page_type"
@@ -301,9 +302,11 @@ ActiveRecord::Schema.define(version: 20191229055101) do
     t.integer  "encyclopaedia_entry_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.integer  "page_id"
   end
 
   add_index "sagas", ["encyclopaedia_entry_id"], name: "index_sagas_on_encyclopaedia_entry_id", using: :btree
+  add_index "sagas", ["page_id"], name: "index_sagas_on_page_id", using: :btree
 
   create_table "special_pages", force: :cascade do |t|
     t.string   "name",         limit: 255

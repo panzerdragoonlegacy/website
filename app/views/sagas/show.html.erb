@@ -1,10 +1,10 @@
 <% title @saga.name %>
-<% if @saga.encyclopaedia_entry %>
-  <% description truncated_text(@saga.encyclopaedia_entry.content) %>
-  <% if @saga.encyclopaedia_entry.encyclopaedia_entry_picture.present? %>
+<% if @saga.page %>
+  <% description truncated_text(@saga.page.content) %>
+  <% if @saga.page.page_picture.present? %>
     <% open_graph_image(
       root_url.chomp('/') +
-        @saga.encyclopaedia_entry.encyclopaedia_entry_picture.url(:original)
+        @saga.page.page_picture.url(:original)
     ) %>
   <% end %>
 <% end %>
@@ -15,31 +15,20 @@
   </p>
 <% end %>
 
-<% if @saga.encyclopaedia_entry && policy(@saga.encyclopaedia_entry).show? %>
+<% if @saga.page && policy(@saga.page).show? %>
   <div id="resources">
     <div class="resource">
       <div class="thumbnail">
-        <%=
-          link_to(
-            show_picture(
-              @saga.encyclopaedia_entry,
-              'encyclopaedia_entry_picture',
-              :thumbnail
-            ),
-            @saga.encyclopaedia_entry
-          )
-        %>
+        <%= link_to(
+          show_picture(@saga.page, 'page_picture', :thumbnail),
+          encyclopaedia_path(@saga.page)
+        ) %>
       </div>
       <div class="details">
-        <h2>
-          <%= link_to(
-            @saga.encyclopaedia_entry.name,
-            @saga.encyclopaedia_entry
-          ) %>
-        </h2>
+        <h2><%= link_to @saga.page.name, encyclopaedia_path(@saga.page) %></h2>
         <p>
-          <%= truncated_text @saga.encyclopaedia_entry.content %>
-          <%= link_to 'Learn More', @saga.encyclopaedia_entry %>
+          <%= truncated_text @saga.page.content %>
+          <%= link_to 'Learn More', encyclopaedia_path(@saga.page) %>
         </p>
       </div>
     </div>

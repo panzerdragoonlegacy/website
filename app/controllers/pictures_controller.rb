@@ -14,10 +14,9 @@ class PicturesController < ApplicationController
     load_picture
     load_picture_to_replace
     load_other_pictures_in_album
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
+    @tags = TagPolicy::Scope.new(
       current_user,
-      EncyclopaediaEntry.where(name: @picture.tags.map { |tag| tag.name })
-        .order(:name)
+      Tag.where(name: @picture.tags.map { |tag| tag.name }).order(:name)
     ).resolve
   end
 end

@@ -11,6 +11,12 @@ class Tag < ActiveRecord::Base
     source_type: 'NewsEntry'
   )
   has_many(
+    :pages,
+    through: :taggings,
+    source: :taggable,
+    source_type: 'Page'
+  )
+  has_many(
     :articles,
     through: :taggings,
     source: :taggable,

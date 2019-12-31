@@ -20,6 +20,6 @@
 <% end %>
 
 <% if @pages %>
-  <%= render 'list' %>
+  <%= render 'list', pages: @pages %>
   <%= paginate @pages %>
 <% end %>

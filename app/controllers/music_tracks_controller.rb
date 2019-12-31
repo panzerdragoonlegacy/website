@@ -12,10 +12,9 @@ class MusicTracksController < ApplicationController
 
   def show
     load_music_track
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
+    @tags = TagPolicy::Scope.new(
       current_user,
-      EncyclopaediaEntry.where(name: @music_track.tags.map { |tag| tag.name })
-        .order(:name)
+      Tag.where(name: @music_track.tags.map { |tag| tag.name }).order(:name)
     ).resolve
   end
 end

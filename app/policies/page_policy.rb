@@ -77,6 +77,7 @@ class PagePolicy < ApplicationPolicy
       :category_id,
       :name,
       :description,
+      :information,
       :content,
       contributor_profile_ids: [],
       tag_ids: [],

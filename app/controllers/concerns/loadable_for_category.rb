@@ -24,10 +24,10 @@ module LoadableForCategory
 
   def load_category_literature
     if @category.category_type == 'literature'
-      @pages = PagePolicy::Scope.new(
+      @works_of_literature = PagePolicy::Scope.new(
         current_user,
-        Page.where(category_id: @category.id).order(:name)
-          .page(params[:page])
+        Page.where(category_id: @category.id, page_type: :literature.to_s)
+          .order(:name).page(params[:page])
       ).resolve
     end
   end
@@ -55,9 +55,9 @@ module LoadableForCategory
 
   def load_category_encyclopaedia_entries
     if @category.category_type == 'encyclopaedia_entry'
-      @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
+      @encyclopaedia_entries = PagePolicy::Scope.new(
         current_user,
-        EncyclopaediaEntry.where(category_id: @category.id)
+        Page.where(category_id: @category.id, page_type: :encyclopaedia.to_s)
           .order(:name).page(params[:page])
       ).resolve
     end

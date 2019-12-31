@@ -1,7 +1,7 @@
 class Admin::SagasController < ApplicationController
   include LoadableForSaga
   layout 'admin'
-  before_action :load_encyclopaedia_entries, except: [:index, :destroy]
+  before_action :load_pages, except: [:index, :destroy]
   before_action :load_saga, except: [:index, :new, :create]
 
   def index
@@ -43,12 +43,12 @@ class Admin::SagasController < ApplicationController
 
   def saga_params
     params.require(:saga).permit(
-      :encyclopaedia_entry_id,
+      :page_id,
       :sequence_number,
       :name
     )
   end
-  
+
   def redirect_to_saga
     if params[:continue_editing]
       redirect_to edit_admin_saga_path(@saga)

@@ -16,10 +16,9 @@ class QuizzesController < ApplicationController
     else
       flash.now[:notice] = "You haven't filled out the quiz."
     end
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
+    @tags = TagPolicy::Scope.new(
       current_user,
-      EncyclopaediaEntry.where(name: @quiz.tags.map { |tag| tag.name })
-        .order(:name)
+      Tag.where(name: @quiz.tags.map { |tag| tag.name }).order(:name)
     ).resolve
   end
 

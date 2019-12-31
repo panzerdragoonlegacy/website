@@ -1,6 +1,6 @@
 <h2>Literature in this Category</h2>
-<%= render 'literature/list' %>
-<%= paginate @pages %>
+<%= render 'literature/list', pages: @works_of_literature %>
+<%= paginate @works_of_literature %>
 <p>
   <%= link_to 'Site Map', site_map_path %> |
   <%= link_to 'Literature', literature_index_path %>

@@ -1,4 +1,4 @@
-module LoadableForEncyclopaediaEntry
+module LoadableForEncyclopaedia
   extend ActiveSupport::Concern
 
   private
@@ -18,31 +18,20 @@ module LoadableForEncyclopaediaEntry
     ).resolve
   end
 
-  def load_encyclopaedia_entry
-    @encyclopaedia_entry = EncyclopaediaEntry.find_by url: params[:id]
-    authorize @encyclopaedia_entry
-  end
-
-  def load_draft_encyclopaedia_entries
-    @encyclopaedia_entries = policy_scope(
-      EncyclopaediaEntry.where(publish: false).order(:name).page(params[:page])
-    )
-  end
-
   def load_news_entries
     @news_entries = NewsEntryPolicy::Scope.new(
       current_user,
-      NewsEntry.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
+      NewsEntry.includes(:tags).where(tags: { name: @page.name })
         .limit(50).order(published_at: :desc)
     ).resolve
   end
 
   def load_literature
-    @pages = PagePolicy::Scope.new(
+    @works_of_literature = PagePolicy::Scope.new(
       current_user,
       Page.includes(:tags).where(
         page_type: :literature.to_s,
-        tags: { name: @encyclopaedia_entry.name }
+        tags: { name: @page.name }
       ).limit(50).order(:name)
     ).resolve
   end
@@ -50,7 +39,7 @@ module LoadableForEncyclopaediaEntry
   def load_downloads
     @downloads = DownloadPolicy::Scope.new(
       current_user,
-      Download.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
+      Download.includes(:tags).where(tags: { name: @page.name })
         .limit(50).order(:name)
     ).resolve
   end
@@ -59,7 +48,7 @@ module LoadableForEncyclopaediaEntry
     @music_tracks = MusicTrackPolicy::Scope.new(
       current_user,
       MusicTrack.includes(:tags)
-        .where(tags: { name: @encyclopaedia_entry.name })
+        .where(tags: { name: @page.name })
           .limit(50).order(:name)
     ).resolve
   end
@@ -67,7 +56,7 @@ module LoadableForEncyclopaediaEntry
   def load_pictures
     @pictures = PicturePolicy::Scope.new(
       current_user,
-      Picture.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
+      Picture.includes(:tags).where(tags: { name: @page.name })
         .limit(50).order(published_at: :desc)
     ).resolve
   end
@@ -75,7 +64,7 @@ module LoadableForEncyclopaediaEntry
   def load_quizzes
     @quizzes = QuizPolicy::Scope.new(
       current_user,
-      Quiz.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
+      Quiz.includes(:tags).where(tags: { name: @page.name })
         .limit(50).order(:name)
     ).resolve
   end
@@ -83,7 +72,7 @@ module LoadableForEncyclopaediaEntry
   def load_videos
     @videos = VideoPolicy::Scope.new(
       current_user,
-      Video.includes(:tags).where(tags: { name: @encyclopaedia_entry.name })
+      Video.includes(:tags).where(tags: { name: @page.name })
         .limit(50).order(:name)
     ).resolve
   end

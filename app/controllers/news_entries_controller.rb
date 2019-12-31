@@ -22,10 +22,9 @@ class NewsEntriesController < ApplicationController
 
   def show
     load_news_entry
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
+    @tags = TagPolicy::Scope.new(
       current_user,
-      EncyclopaediaEntry.where(name: @news_entry.tags.map { |tag| tag.name })
-        .order(:name)
+      TagEntry.where(name: @news_entry.tags.map { |tag| tag.name }).order(:name)
     ).resolve
   end
 end

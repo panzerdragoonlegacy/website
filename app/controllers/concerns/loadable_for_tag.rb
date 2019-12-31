@@ -15,31 +15,12 @@ module LoadableForTag
     ).resolve
   end
 
-  def load_articles
-    @articles = ArticlePolicy::Scope.new(
+  def load_literature
+    @works_of_literature = PagePolicy::Scope.new(
       current_user,
-      Article.includes(:tags).where(tags: { name: @tag.name }).order(:name)
-    ).resolve
-  end
-
-  def load_downloads
-    @downloads = DownloadPolicy::Scope.new(
-      current_user,
-      Download.includes(:tags).where(tags: { name: @tag.name }).order(:name)
-    ).resolve
-  end
-
-  def load_links
-    @links = LinkPolicy::Scope.new(
-      current_user,
-      Link.includes(:tags).where(tags: { name: @tag.name }).order(:name)
-    ).resolve
-  end
-
-  def load_music_tracks
-    @music_tracks = MusicTrackPolicy::Scope.new(
-      current_user,
-      MusicTrack.includes(:tags).where(tags: { name: @tag.name }).order(:name)
+      Page.includes(:tags)
+        .where(page_type: :literature.to_s, tags: { name: @tag.name })
+        .order(:name)
     ).resolve
   end
 
@@ -50,31 +31,10 @@ module LoadableForTag
     ).resolve
   end
 
-  def load_poems
-    @poems = PoemPolicy::Scope.new(
+  def load_music_tracks
+    @music_tracks = MusicTrackPolicy::Scope.new(
       current_user,
-      Poem.includes(:tags).where(tags: { name: @tag.name }).order(:name)
-    ).resolve
-  end
-
-  def load_quizzes
-    @quizzes = QuizPolicy::Scope.new(
-      current_user,
-      Quiz.includes(:tags).where(tags: { name: @tag.name }).order(:name)
-    ).resolve
-  end
-
-  def load_resources
-    @resources = ResourcePolicy::Scope.new(
-      current_user,
-      Resource.includes(:tags).where(tags: { name: @tag.name }).order(:name)
-    ).resolve
-  end
-
-  def load_stories
-    @stories = StoryPolicy::Scope.new(
-      current_user,
-      Story.includes(:tags).where(tags: { name: @tag.name }).order(:name)
+      MusicTrack.includes(:tags).where(tags: { name: @tag.name }).order(:name)
     ).resolve
   end
 
@@ -82,6 +42,20 @@ module LoadableForTag
     @videos = VideoPolicy::Scope.new(
       current_user,
       Video.includes(:tags).where(tags: { name: @tag.name }).order(:name)
+    ).resolve
+  end
+
+  def load_downloads
+    @downloads = DownloadPolicy::Scope.new(
+      current_user,
+      Download.includes(:tags).where(tags: { name: @tag.name }).order(:name)
+    ).resolve
+  end
+
+  def load_quizzes
+    @quizzes = QuizPolicy::Scope.new(
+      current_user,
+      Quiz.includes(:tags).where(tags: { name: @tag.name }).order(:name)
     ).resolve
   end
 end

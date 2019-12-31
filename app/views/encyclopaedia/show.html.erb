@@ -1,0 +1,30 @@
+<% title @page.name %>
+<% description truncated_text(@page.content) %>
+<%= render 'pages/show/open_graph' %>
+<%= render 'pages/show/edit_page_link' %>
+
+<% if !@page.publish %>
+  <p class="unpublished">
+    This page is not published. Please inform an administrator when it and the
+    associated news entry are ready to be published.
+  </p>
+<% elsif !@page.category.publish %>
+  <p class="unpublished">Published in Unpublished Category</p>
+<% end %>
+
+<%= render 'encyclopaedia/show/information' %>
+
+<%= render 'pages/show/content' %>
+
+<%= render 'encyclopaedia/show/news_entries' %>
+<%= render 'encyclopaedia/show/literature' %>
+<%= render 'encyclopaedia/show/downloads' %>
+<%= render 'encyclopaedia/show/music_tracks' %>
+<%= render 'encyclopaedia/show/pictures' %>
+<%= render 'encyclopaedia/show/quizzes' %>
+<%= render 'encyclopaedia/show/videos' %>
+
+<p class="links">
+  <%= link_to 'Encyclopaedia', encyclopaedia_path %> |
+  <%= link_to @page.category.name, category_path(@page.category) %>
+</p>

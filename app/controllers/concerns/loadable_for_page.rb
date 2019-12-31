@@ -3,12 +3,6 @@ module LoadableForPage
 
   private
 
-  def load_categories
-    @categories = CategoryPolicy::Scope.new(
-      current_user, Category.where(category_type: :literature).order(:name)
-    ).resolve
-  end
-
   def load_parent_pages
     @parent_pages = PagePolicy::Scope.new(
       current_user, Page.where(page_type: :literature.to_s).order(:name)

@@ -3,8 +3,8 @@ module LoadableForSaga
 
   private
 
-  def load_encyclopaedia_entries
-    @encyclopaedia_entries = policy_scope(EncyclopaediaEntry.order(:name))
+  def load_pages
+    @pages = policy_scope(Page.where(page_type: :encyclopaedia).order(:name))
   end
 
   def load_saga

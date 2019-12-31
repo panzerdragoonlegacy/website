@@ -26,20 +26,16 @@
   <div id="resources">
     <div class="resource">
       <div class="thumbnail">
-        <%=
-          link_to(
-            show_picture(
-              @encyclopaedia_entry, 'encyclopaedia_entry_picture', :thumbnail
-            ),
-            @encyclopaedia_entry
-          )
-        %>
+        <%= link_to(
+          show_picture(@encyclopaedia_entry, 'page_picture', :thumbnail),
+          encyclopaedia_path(@encyclopaedia_entry)
+        ) %>
       </div>
       <div class="details">
         <h2>
           <%= link_to(
             @encyclopaedia_entry.name,
-            @encyclopaedia_entry
+            encyclopaedia_path(@encyclopaedia_entry)
           ) %>
         </h2>
         <p><%= truncated_text @encyclopaedia_entry.content %></p>
@@ -54,9 +50,14 @@
 <% end %>
 
 <% MediaType::all.each do |key, value| %>
-  <% if @tag.send(key.to_s.pluralize).count > 0 %>
+  <% if key == :literature %>
+    <% if @works_of_literature.count > 0 %>
+      <h2><%= value %></h2>
+      <%= render 'literature/list', pages: @works_of_literature %>
+    <% end %>
+  <% elsif @tag.send(key.to_s.pluralize).count > 0 %>
     <h2><%= value %></h2>
-    <%= render "#{key.to_s.pluralize}/list"%>
+    <%= render "#{key.to_s.pluralize}/list" %>
   <% end %>
 <% end %>
 

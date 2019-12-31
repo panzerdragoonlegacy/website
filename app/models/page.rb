@@ -8,6 +8,7 @@ class Page < ActiveRecord::Base
   include Taggable
 
   belongs_to :category
+  has_one :saga
 
   validates :name, presence: true, length: { in: 2..100 }
   validates :content, presence: true
@@ -15,6 +16,7 @@ class Page < ActiveRecord::Base
 
   # The list of page types.
   PAGE_TYPES = %w(
+    encyclopaedia
     literature
     literature_chapter
     site_footer
@@ -26,6 +28,7 @@ class Page < ActiveRecord::Base
     styles: {
       mini_thumbnail: '25x25#',
       thumbnail: '150x150',
+      information: '280x280>',
       embedded: '622x250#'
     },
     path: ':rails_root/public/system/:attachment/:id/:style/:filename',
@@ -42,6 +45,7 @@ class Page < ActiveRecord::Base
   before_validation :validate_parent_page
   before_validation :validate_sequence_number
   before_validation :validate_description
+  before_validation :validate_information
 
   before_save :set_published_at
   before_save :sync_file_name
@@ -69,15 +73,25 @@ class Page < ActiveRecord::Base
   private
 
   def validate_category
-    if literature? && category.blank?
+    return unless page_type.present?
+    if (literature? || encyclopaedia?) && category.blank?
       errors.add(page_type, 'pages must have a category.')
     end
-    if !literature? && category.present?
+    if (literature? || encyclopaedia?) && category.present?
+      if literature? && category.category_type != :literature.to_s
+        errors.add(page_type, 'pages must belong to a literature category.')
+      end
+      if encyclopaedia? && category.category_type != :encyclopaedia_entry.to_s
+        errors.add(page_type, 'pages must belong to an encyclopaedia category.')
+      end
+    end
+    if !literature? && !encyclopaedia? && category.present?
       errors.add(page_type, 'pages must not have a category.')
     end
   end
 
   def validate_parent_page
+    return unless page_type.present?
     if chapter? && parent_page_id.blank?
       errors.add(page_type, 'pages must belong to a parent page.')
     end
@@ -87,6 +101,7 @@ class Page < ActiveRecord::Base
   end
 
   def validate_sequence_number
+    return unless page_type.present?
     if chapter? && sequence_number.blank?
       errors.add(page_type, 'pages must have a sequence number.')
     end
@@ -96,6 +111,7 @@ class Page < ActiveRecord::Base
   end
 
   def validate_description
+    return unless page_type.present?
     if literature?
       if description.blank?
         errors.add(page_type, 'pages must have a description.')
@@ -110,13 +126,25 @@ class Page < ActiveRecord::Base
     end
   end
 
+  def validate_information
+    return unless page_type.present?
+    if encyclopaedia? && information.blank?
+      errors.add(page_type, 'pages must have an information box.')
+    end
+    if !encyclopaedia? && information.present?
+      errors.add(page_type, 'pages must not have an information box.')
+    end
+  end
+
   def literature?
-    return false if page_type.blank?
     page_type == :literature.to_s
   end
 
   def chapter?
-    return false if page_type.blank?
     page_type == :literature_chapter.to_s
+  end
+
+  def encyclopaedia?
+    page_type == :encyclopaedia.to_s
   end
 end

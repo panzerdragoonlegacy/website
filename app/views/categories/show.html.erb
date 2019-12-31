@@ -21,10 +21,10 @@
 
 <%= @category.description %>
 
-<%= render 'categories/show/literature' if @pages %>
+<%= render 'categories/show/literature' if @works_of_literature %>
 <%= render 'categories/show/articles' if @articles %>
 <%= render 'categories/show/downloads' if @downloads %>
-<%= render 'categories/show/encyclopaedia_entries' if @encyclopaedia_entries %>
+<%= render 'categories/show/encyclopaedia' if @encyclopaedia_entries %>
 <%= render 'categories/show/links' if @links %>
 <%= render 'categories/show/music_tracks' if @music_tracks %>
 <%= render 'categories/show/pictures' if @pictures %>

@@ -4,6 +4,7 @@ class CreatePagesAgain < ActiveRecord::Migration
       t.string :name
       t.string :url
       t.string :description
+      t.text :information
       t.text :content
       t.boolean :publish
       t.string :page_type

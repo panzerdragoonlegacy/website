@@ -1,5 +1,6 @@
 class LiteratureController < ApplicationController
   include LoadableForLiterature
+  include LoadableForPage
 
   def index
     if params[:contributor_profile_id]
@@ -14,10 +15,9 @@ class LiteratureController < ApplicationController
 
   def show
     load_page
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
+    @tags = TagPolicy::Scope.new(
       current_user,
-      EncyclopaediaEntry.where(name: @page.tags.map { |tag| tag.name })
-        .order(:name)
+      Tag.where(name: @page.tags.map { |tag| tag.name }).order(:name)
     ).resolve
   end
 end

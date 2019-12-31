@@ -18,15 +18,13 @@ Rails.application.routes.draw do
     resources :contributor_profiles, path: 'contributor-profiles'
     resources :users
 
-    resources :pages
-    resources :encyclopaedia_entries, path: 'encyclopaedia-entries'
     resources :news_entries, path: 'news-entries'
-
-    resources :downloads
-    resources :music_tracks, path: 'music-tracks'
+    resources :pages
     resources :pictures
-    resources :quizzes
+    resources :music_tracks, path: 'music-tracks'
     resources :videos
+    resources :downloads
+    resources :quizzes
   end
 
   resources :searches
@@ -34,7 +32,8 @@ Rails.application.routes.draw do
   get 'site-map', to: 'site_map#show', as: :site_map
   resources :site_map
   resources :categories
-  resources :encyclopaedia_entries, path: 'encyclopaedia'
+  get 'encyclopaedia', to: 'encyclopaedia#index', as: 'encyclopaedia_index'
+  get 'encyclopaedia/:id', to: 'encyclopaedia#show', as: 'encyclopaedia'
   resources :sagas
   resources :tags
   resources :contributions
@@ -42,21 +41,21 @@ Rails.application.routes.draw do
   resources :contributor_profiles, path: 'contributors' do
     resources :news_entries, path: 'news-entries'
     resources :literature
-    resources :downloads
-    resources :music_tracks, path: 'music-tracks'
     resources :pictures
-    resources :quizzes
+    resources :music_tracks, path: 'music-tracks'
+    resources :downloads
     resources :videos
+    resources :quizzes
   end
 
   resources :literature, only: %i(index show) do
     resources :chapters, only: :show
   end
-  resources :downloads
-  resources :music_tracks, path: 'music'
   resources :pictures
-  resources :quizzes
+  resources :music_tracks, path: 'music'
   resources :videos
+  resources :downloads
+  resources :quizzes
 
   get ':id', to: 'pages#show'
   root to: "news_entries#index"
