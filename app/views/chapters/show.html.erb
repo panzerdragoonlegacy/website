@@ -4,9 +4,7 @@
 
 <h2><%= @page.name %></h2>
 
-<% if policy(@page).edit? %>
-  <p><%= link_to 'Edit Page', edit_admin_page_path(@page) %></p>
-<% end %>
+<%= render 'literature/show/edit_page_link' %>
 
 <% if !@page.publish %>
   <p class="unpublished">
@@ -19,24 +17,8 @@
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<% if @page.page_picture.present? %>
-  <%= show_picture @page, 'page_picture', :embedded %>
-<% end %>
-
-<h2>Written By:</h2>
-<ul class="thumbnail_and_name_list">
-  <% @page.contributor_profiles.each do |contributor_profile| %>
-    <li>
-      <%=
-        link_to(
-          show_avatar(contributor_profile, :mini_thumbnail),
-          contributor_profile
-        )
-      %>
-      <h3><%= link_to contributor_profile.name, contributor_profile %></h3>
-    </li>
-  <% end %>
-</ul>
+<%= render 'literature/show/page_picture' %>
+<%= render 'literature/show/contributors' %>
 
 <%= raw illustrated_markdown_to_html @page.id, 'Page', @page.content %>
 
@@ -54,6 +36,5 @@
   <%= link_to 'Literature', literature_index_path %> |
   <%= link_to(
     @page.parent_page.category.name, category_path(@page.parent_page.category)
-  ) %> |
-  <%= link_to @page.parent_page.name, literature_path(@page.parent_page) %>
+  ) %>
 </p>

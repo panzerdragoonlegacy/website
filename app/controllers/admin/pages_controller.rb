@@ -66,8 +66,12 @@ class Admin::PagesController < ApplicationController
   def redirect_to_page
     if params[:continue_editing]
       redirect_to edit_admin_page_path(@page)
-    else
+    elsif @page.page_type == :literature.to_s
       redirect_to literature_path(@page)
+    elsif @page.page_type == :literature_chapter.to_s
+      redirect_to(
+        literature_chapter_path(@page.parent_page.to_param, @page.to_param)
+      )
     end
   end
 
