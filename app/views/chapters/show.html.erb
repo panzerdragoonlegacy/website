@@ -25,7 +25,7 @@
 
 <h2>Written By:</h2>
 <ul class="thumbnail_and_name_list">
-  <% @page.parent_page.contributor_profiles.each do |contributor_profile| %>
+  <% @page.contributor_profiles.each do |contributor_profile| %>
     <li>
       <%=
         link_to(

@@ -8,7 +8,12 @@
     render(
       partial: 'admin/shared/form/contributors',
       locals: {
-        f: f, contributor_profile_ids: @page.contributor_profile_ids
+        f: f,
+        contributor_profile_ids: @page.contributor_profile_ids,
+        info: 'Contributors are only displayed on "Literature" and ' \
+          '"Literature Chapter" pages. Other page types still require at ' \
+          'least one contributor since these profiles are used for user ' \
+          'access control.'
       }
     )
   %>
