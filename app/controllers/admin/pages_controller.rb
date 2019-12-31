@@ -58,9 +58,7 @@ class Admin::PagesController < ApplicationController
   private
 
   def page_params
-    params.require(:page).permit(
-      policy(@page || :page).permitted_attributes
-    )
+    params.require(:page).permit(policy(@page || :page).permitted_attributes)
   end
 
   def redirect_to_page
@@ -74,6 +72,8 @@ class Admin::PagesController < ApplicationController
       )
     elsif @page.page_type == :encyclopaedia.to_s
       redirect_to encyclopaedia_path(@page)
+    else
+      redirect_to top_level_page_path(@page.url)
     end
   end
 

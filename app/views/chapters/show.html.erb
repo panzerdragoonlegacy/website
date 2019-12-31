@@ -29,7 +29,7 @@
   <% if @page.parent_page.category.saga %>
     <%= link_to(
       @page.parent_page.category.saga.name,
-      saga_path(@page.parent_page.category.saga)
+      top_level_page_path(@page.parent_page.category.saga)
     ) %> |
   <% end %>
   <%= link_to 'Literature', literature_index_path %> |

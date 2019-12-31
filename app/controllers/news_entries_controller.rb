@@ -24,7 +24,7 @@ class NewsEntriesController < ApplicationController
     load_news_entry
     @tags = TagPolicy::Scope.new(
       current_user,
-      TagEntry.where(name: @news_entry.tags.map { |tag| tag.name }).order(:name)
+      Tag.where(name: @news_entry.tags.map { |tag| tag.name }).order(:name)
     ).resolve
   end
 end

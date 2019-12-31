@@ -113,7 +113,7 @@
 <p class="links">
   <% if @picture.category.saga %>
     <%= link_to(
-      @picture.category.saga.name, saga_path(@picture.category.saga)
+      @picture.category.saga.name, top_level_page_path(@picture.category.saga)
     ) %> |
   <% end %>
   <%= link_to 'Pictures', pictures_path %> |

@@ -19,20 +19,11 @@
     %>
   </li>
   <li>
-    <h2><%= link_to 'Encyclopaedia', encyclopaedia_entries_path %></h2>
+    <h2><%= link_to 'Encyclopaedia', encyclopaedia_index_path %></h2>
     <%=
       render(
         partial: 'category_groups',
         locals: { category_groups: @encyclopaedia_entry_category_groups }
-      )
-    %>
-  </li>
-  <li>
-    <h2><%= link_to 'Links', links_path %></h2>
-    <%=
-      render(
-        partial: 'categories',
-        locals: { categories: @link_categories, category_parent: :media_type }
       )
     %>
   </li>

@@ -2,7 +2,7 @@
 <ul>
   <% @all_sagas.each do |key, value| %>
     <li>
-      <h2><%= link_to key.name, key %></h2>
+      <h2><%= link_to key.name, top_level_page_path(key) %></h2>
       <%=
         render(
           partial: 'media_types',

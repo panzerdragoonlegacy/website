@@ -74,7 +74,8 @@
 <p class="links">
   <% if @music_track.category.saga %>
     <%= link_to(
-      @music_track.category.saga.name, saga_path(@music_track.category.saga)
+      @music_track.category.saga.name,
+      top_level_page_path(@music_track.category.saga)
     ) %> |
   <% end %>
   <%= link_to 'Music', music_tracks_path %> |

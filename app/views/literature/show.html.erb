@@ -26,7 +26,7 @@
 <p class="links">
   <% if @page.category && @page.category.saga %>
     <%= link_to(
-      @page.category.saga.name, saga_path(@page.category.saga)
+      @page.category.saga.name, top_level_page_path(@page.category.saga)
     ) %> |
   <% end %>
   <%= link_to 'Literature', literature_index_path %> |

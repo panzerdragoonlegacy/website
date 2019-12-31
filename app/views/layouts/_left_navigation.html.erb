@@ -3,7 +3,7 @@
     <h3>Browse by Saga</h3>
     <ul>
       <% @sagas_for_left_nav.each do |saga| %>
-        <li><%= link_to saga.name, saga_path(saga) %></li>
+        <li><%= link_to saga.name, top_level_page_path(saga) %></li>
       <% end %>
     </ul>
   <% end %>

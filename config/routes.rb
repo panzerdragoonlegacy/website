@@ -34,7 +34,6 @@ Rails.application.routes.draw do
   resources :categories
   get 'encyclopaedia', to: 'encyclopaedia#index', as: 'encyclopaedia_index'
   get 'encyclopaedia/:id', to: 'encyclopaedia#show', as: 'encyclopaedia'
-  resources :sagas
   resources :tags
   resources :contributions
 
@@ -57,6 +56,6 @@ Rails.application.routes.draw do
   resources :downloads
   resources :quizzes
 
-  get ':id', to: 'pages#show'
-  root to: "news_entries#index"
+  get ':id', to: 'top_level_page#show', as: 'top_level_page'
+  root to: 'news_entries#index'
 end

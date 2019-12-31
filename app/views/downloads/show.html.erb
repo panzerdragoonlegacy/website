@@ -51,7 +51,7 @@
 <p class="links">
   <% if @download.category.saga %>
     <%= link_to(
-      @download.category.saga.name, saga_path(@download.category.saga)
+      @download.category.saga.name, top_level_page_path(@download.category.saga)
     ) %> |
   <% end %>
   <%= link_to 'Downloads', downloads_path %> |

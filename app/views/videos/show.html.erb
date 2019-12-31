@@ -77,7 +77,7 @@
 <p class="links">
   <% if @video.category.saga %>
     <%= link_to(
-      @video.category.saga.name, saga_path(@video.category.saga)
+      @video.category.saga.name, top_level_page_path(@video.category.saga)
     ) %> |
   <% end %>
   <%= link_to 'Videos', videos_path %> |

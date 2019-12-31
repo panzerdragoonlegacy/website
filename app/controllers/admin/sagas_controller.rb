@@ -53,7 +53,7 @@ class Admin::SagasController < ApplicationController
     if params[:continue_editing]
       redirect_to edit_admin_saga_path(@saga)
     else
-      redirect_to admin_sagas_path
+      redirect_to top_level_page_path(@saga)
     end
   end
 end
