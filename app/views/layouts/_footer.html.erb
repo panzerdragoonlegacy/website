@@ -1,9 +1,7 @@
 <div id="footer">
   <ul>
-    <li><%= link_to 'About the Site', '/about-the-site' %></li>
-    <li><%= link_to 'How to Contribute', '/how-to-contribute' %></li>
-    <li>
-      <%= link_to 'Copyright Information', '/copyright-information' %>
-    </li>
+    <% @site_footer_pages.each do |page| %>
+      <li><%= link_to page.name, top_level_page_path(page.url) %></li>
+    <% end %>
   </ul>
 </div>

@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   before_action :sagas_for_left_nav
   before_action :partner_sites
+  before_action :site_footer_pages
 
   private
 
@@ -24,6 +25,11 @@ class ApplicationController < ActionController::Base
 
   def partner_sites
     @partner_sites = Link.where(partner_site: true).order(:name)
+  end
+
+  def site_footer_pages
+    @site_footer_pages =
+      policy_scope(Page.where(page_type: :site_footer.to_s)).order(:name)
   end
 
   # This allows all records to be displayed in a Ransack search when 'Drafts
