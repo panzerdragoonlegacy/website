@@ -12,6 +12,11 @@
     <%= link_to(
       'Browse By Media Type', site_map_path(browse_by: 'media_type')
     ) %>
+  <% end %> |
+  <% if params[:browse_by] == 'tag' %>
+    Browse By Tag
+  <% else %>
+    <%= link_to 'Browse By Tag', site_map_path(browse_by: 'tag') %>
   <% end %>
 </p>
 

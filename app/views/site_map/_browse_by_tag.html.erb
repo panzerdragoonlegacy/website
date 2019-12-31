@@ -3,6 +3,12 @@
   <div id="resources">
     <% tags.each do |tag| %>
       <div class="resource">
+        <div class="thumbnail">
+          <%= link_to(
+            show_picture(tag, 'tag_picture', :thumbnail),
+            tag
+          ) %>
+        </div>
         <div class="details">
           <h2><%= link_to tag.name, tag %></h2>
           <% if tag.description.present? %>
