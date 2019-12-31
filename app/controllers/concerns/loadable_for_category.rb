@@ -22,37 +22,6 @@ module LoadableForCategory
     authorize @category
   end
 
-  def load_category_literature
-    if @category.category_type == 'literature'
-      @works_of_literature = PagePolicy::Scope.new(
-        current_user,
-        Page.where(category_id: @category.id, page_type: :literature.to_s)
-          .order(:name).page(params[:page])
-      ).resolve
-    end
-  end
-
-  def load_category_articles
-    if @category.category_type == 'article'
-      @articles = ArticlePolicy::Scope.new(
-        current_user,
-        Article.where(category_id: @category.id).order(:name)
-          .page(params[:page])
-      ).resolve
-    end
-  end
-
-  def load_category_downloads
-    if @category.category_type == 'download'
-      @downloads = DownloadPolicy::Scope.new(
-        current_user,
-        Download.where(
-          category_id: @category.id
-        ).order(:name).page(params[:page])
-      ).resolve
-    end
-  end
-
   def load_category_encyclopaedia_entries
     if @category.category_type == 'encyclopaedia_entry'
       @encyclopaedia_entries = PagePolicy::Scope.new(
@@ -63,20 +32,11 @@ module LoadableForCategory
     end
   end
 
-  def load_category_links
-    if @category.category_type == 'link'
-      @links = LinkPolicy::Scope.new(
+  def load_category_literature
+    if @category.category_type == 'literature'
+      @works_of_literature = PagePolicy::Scope.new(
         current_user,
-        Link.where(category_id: @category.id).order(:name).page(params[:page])
-      ).resolve
-    end
-  end
-
-  def load_category_music_tracks
-    if @category.category_type == 'music_track'
-      @music_tracks = MusicTrackPolicy::Scope.new(
-        current_user,
-        MusicTrack.where(category_id: @category.id).order(:track_number)
+        Page.where(category_id: @category.id, page_type: :literature.to_s)
           .order(:name).page(params[:page])
       ).resolve
     end
@@ -92,21 +52,12 @@ module LoadableForCategory
     end
   end
 
-  def load_category_resources
-    if @category.category_type == 'resource'
-      @resources = ResourcePolicy::Scope.new(
+  def load_category_music_tracks
+    if @category.category_type == 'music_track'
+      @music_tracks = MusicTrackPolicy::Scope.new(
         current_user,
-        Resource.where(category_id: @category.id).order(:name)
-          .page(params[:page])
-      ).resolve
-    end
-  end
-
-  def load_category_stories
-    if @category.category_type == 'story'
-      @stories = StoryPolicy::Scope.new(
-        current_user,
-        Story.where(category_id: @category.id).order(:name).page(params[:page])
+        MusicTrack.where(category_id: @category.id).order(:track_number)
+          .order(:name).page(params[:page])
       ).resolve
     end
   end
@@ -116,6 +67,17 @@ module LoadableForCategory
       @videos = VideoPolicy::Scope.new(
         current_user,
         Video.where(category_id: @category.id).order(:name).page(params[:page])
+      ).resolve
+    end
+  end
+
+  def load_category_downloads
+    if @category.category_type == 'download'
+      @downloads = DownloadPolicy::Scope.new(
+        current_user,
+        Download.where(
+          category_id: @category.id
+        ).order(:name).page(params[:page])
       ).resolve
     end
   end
