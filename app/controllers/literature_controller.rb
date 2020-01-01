@@ -15,9 +15,6 @@ class LiteratureController < ApplicationController
 
   def show
     load_page
-    @tags = TagPolicy::Scope.new(
-      current_user,
-      Tag.where(name: @page.tags.map { |tag| tag.name }).order(:name)
-    ).resolve
+    load_tags
   end
 end

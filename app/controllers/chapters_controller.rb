@@ -1,11 +1,9 @@
 class ChaptersController < ApplicationController
+  include LoadableForPage
+
   def show
     load_chapter
-    @encyclopaedia_entries = EncyclopaediaEntryPolicy::Scope.new(
-      current_user,
-      EncyclopaediaEntry.where(name: @page.tags.map { |tag| tag.name })
-        .order(:name)
-    ).resolve
+    load_tags
   end
 
   private

@@ -14,6 +14,14 @@ module LoadableForPage
     authorize @page
   end
 
+  def load_tags
+    @tags = TagPolicy::Scope.new(
+      current_user,
+      Tag.where(name: @page.tags.map { |tag| tag.name })
+        .order(:name)
+    ).resolve
+  end
+
   def load_draft_pages
     @pages = policy_scope(
       Page.where(publish: false).order(:name).page(params[:page])
