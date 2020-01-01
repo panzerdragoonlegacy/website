@@ -20,6 +20,7 @@ class Page < ActiveRecord::Base
     literature_chapter
     site_footer
     site_help
+    top_level
   ).freeze
 
   has_attached_file(
@@ -80,7 +81,7 @@ class Page < ActiveRecord::Base
       if literature? && category.category_type != :literature.to_s
         errors.add(page_type, 'pages must belong to a literature category.')
       end
-      if encyclopaedia? && category.category_type != :encyclopaedia_entry.to_s
+      if encyclopaedia? && category.category_type != :encyclopaedia.to_s
         errors.add(page_type, 'pages must belong to an encyclopaedia category.')
       end
     end

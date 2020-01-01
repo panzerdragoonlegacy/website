@@ -25,6 +25,7 @@ class Category < ActiveRecord::Base
 
   # The list of category types.
   CATEGORY_TYPES = %w(
+    encyclopaedia
     literature
     article
     download
