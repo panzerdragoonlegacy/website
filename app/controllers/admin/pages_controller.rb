@@ -90,7 +90,7 @@ class Admin::PagesController < ApplicationController
     @categories = CategoryPolicy::Scope.new(
       current_user,
       Category.where(
-        "category_type = 'literature' OR category_type = 'encyclopaedia_entry'"
+        "category_type = 'literature' OR category_type = 'encyclopaedia'"
       ).order(:name)
     ).resolve
   end
