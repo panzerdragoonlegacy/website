@@ -3,8 +3,8 @@ module LoadableForLiterature
 
   private
 
-  def load_page
-    @page = Page.find_by id: params[:id]
+  def load_literature_page
+    @page = Page.where(id: params[:id], page_type: :literature.to_s).first
     authorize @page
   end
 

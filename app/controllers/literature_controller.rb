@@ -14,7 +14,7 @@ class LiteratureController < ApplicationController
   end
 
   def show
-    load_page
+    load_literature_page
     load_tags
   end
 end

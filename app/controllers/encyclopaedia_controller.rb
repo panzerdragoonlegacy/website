@@ -11,7 +11,7 @@ class EncyclopaediaController < ApplicationController
   end
 
   def show
-    load_page
+    load_encyclopaedia_page
     load_news_entries
     load_literature
     load_downloads

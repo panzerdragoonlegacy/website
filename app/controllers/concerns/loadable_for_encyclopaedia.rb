@@ -3,10 +3,15 @@ module LoadableForEncyclopaedia
 
   private
 
+  def load_encyclopaedia_page
+    @page = Page.where(id: params[:id], page_type: :encyclopaedia.to_s).first
+    authorize @page
+  end
+
   def load_category_groups
     @category_groups = policy_scope(
       CategoryGroup.where(
-        category_group_type: :encyclopaedia_entry
+        category_group_type: :encyclopaedia
       ).order(:name)
     )
   end
@@ -14,7 +19,7 @@ module LoadableForEncyclopaedia
   def load_categories
     @categories = CategoryPolicy::Scope.new(
       current_user,
-      Category.where(category_type: :encyclopaedia_entry).order(:name)
+      Category.where(category_type: :encyclopaedia).order(:name)
     ).resolve
   end
 

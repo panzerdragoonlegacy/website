@@ -4,7 +4,8 @@
       <div class="thumbnail">
         <% if page.page_picture.present? %>
           <%= link_to(
-            show_picture(page, 'page_picture', :thumbnail), encyclopaedia_path(page)
+            show_picture(page, 'page_picture', :thumbnail),
+            encyclopaedia_path(page)
           ) %>
         <% end %>
       </div>
