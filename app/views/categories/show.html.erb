@@ -21,13 +21,9 @@
 
 <%= @category.description %>
 
-<%= render 'categories/show/literature' if @works_of_literature %>
-<%= render 'categories/show/articles' if @articles %>
-<%= render 'categories/show/downloads' if @downloads %>
-<%= render 'categories/show/encyclopaedia' if @encyclopaedia_entries %>
-<%= render 'categories/show/links' if @links %>
-<%= render 'categories/show/music_tracks' if @music_tracks %>
+<%= render 'categories/show/encyclopaedia_pages' if @encyclopaedia_pages %>
+<%= render 'categories/show/literature_pages' if @literature_pages %>
 <%= render 'categories/show/pictures' if @pictures %>
-<%= render 'categories/show/resources' if @resources %>
-<%= render 'categories/show/stories' if @stories %>
+<%= render 'categories/show/music_tracks' if @music_tracks %>
 <%= render 'categories/show/videos' if @videos %>
+<%= render 'categories/show/downloads' if @downloads %>

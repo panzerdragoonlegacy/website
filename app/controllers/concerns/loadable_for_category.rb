@@ -22,9 +22,9 @@ module LoadableForCategory
     authorize @category
   end
 
-  def load_category_encyclopaedia_entries
-    if @category.category_type == 'encyclopaedia_entry'
-      @encyclopaedia_entries = PagePolicy::Scope.new(
+  def load_category_encyclopaedia_pages
+    if @category.category_type == :encyclopaedia.to_s
+      @encyclopaedia_pages = PagePolicy::Scope.new(
         current_user,
         Page.where(category_id: @category.id, page_type: :encyclopaedia.to_s)
           .order(:name).page(params[:page])
@@ -32,9 +32,9 @@ module LoadableForCategory
     end
   end
 
-  def load_category_literature
-    if @category.category_type == 'literature'
-      @works_of_literature = PagePolicy::Scope.new(
+  def load_category_literature_pages
+    if @category.category_type == :literature.to_s
+      @literature_pages = PagePolicy::Scope.new(
         current_user,
         Page.where(category_id: @category.id, page_type: :literature.to_s)
           .order(:name).page(params[:page])
@@ -43,7 +43,7 @@ module LoadableForCategory
   end
 
   def load_category_pictures
-    if @category.category_type == 'picture'
+    if @category.category_type == :picture.to_s
       @pictures = PicturePolicy::Scope.new(
         current_user,
         Picture.where(category_id: @category.id).order(:name)
@@ -53,7 +53,7 @@ module LoadableForCategory
   end
 
   def load_category_music_tracks
-    if @category.category_type == 'music_track'
+    if @category.category_type == :music_track.to_s
       @music_tracks = MusicTrackPolicy::Scope.new(
         current_user,
         MusicTrack.where(category_id: @category.id).order(:track_number)
@@ -63,7 +63,7 @@ module LoadableForCategory
   end
 
   def load_category_videos
-    if @category.category_type == 'video'
+    if @category.category_type == :video.to_s
       @videos = VideoPolicy::Scope.new(
         current_user,
         Video.where(category_id: @category.id).order(:name).page(params[:page])
@@ -72,7 +72,7 @@ module LoadableForCategory
   end
 
   def load_category_downloads
-    if @category.category_type == 'download'
+    if @category.category_type == :download.to_s
       @downloads = DownloadPolicy::Scope.new(
         current_user,
         Download.where(
