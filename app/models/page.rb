@@ -11,7 +11,6 @@ class Page < ActiveRecord::Base
   has_one :saga
 
   validates :name, presence: true, length: { in: 2..100 }
-  validates :content, presence: true
   validates :page_type, presence: true
 
   # The list of page types.

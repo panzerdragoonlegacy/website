@@ -1,0 +1,16 @@
+<div class="form-group">
+  <%= f.label :content, 'Content' %>
+  <%= f.text_area :content, rows: 15, class: 'data_entry form-control' %>
+  <small>
+    <%=
+      image_tag(
+        'markdown-mark.png',
+        alt: 'Markdown Mark',
+        width: '30px',
+        height: '18px'
+      )
+    %>
+    You may use a <a href="/markdown-syntax-guide" target="_blank">limited
+    subset of Markdown</a> to format the page's content.
+  </small>
+</div>
