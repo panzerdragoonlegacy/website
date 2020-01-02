@@ -56,7 +56,6 @@ class Category < ActiveRecord::Base
     size: { in: 0..5.megabytes }
   )
 
-  before_validation :validate_category_type_reassignment
   before_validation :validate_presence_of_category_group
   before_validation :validate_category_and_category_group_type_match
 
@@ -68,17 +67,6 @@ class Category < ActiveRecord::Base
   end
 
   private
-
-  def validate_category_type_reassignment
-    if persisted?
-      persisted_category = Category.find id
-      if category_type != persisted_category.category_type &&
-        send(persisted_category.category_type.pluralize).present?
-        errors.add(persisted_category.category_type, 'category type cannot ' \
-          'be reassigned while the category contains items.')
-      end
-    end
-  end
 
   def validate_presence_of_category_group
     if category_is_groupable && category_group.blank?

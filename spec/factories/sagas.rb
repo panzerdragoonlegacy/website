@@ -4,7 +4,7 @@ FactoryGirl.define do
       sequence(:name) { |n| "Saga #{n}" }
       sequence(:sequence_number) { |n| n }
 
-      encyclopaedia_entry { FactoryGirl.create(:valid_encyclopaedia_entry) }
+      page { FactoryGirl.create(:valid_encyclopaedia_page) }
     end
   end
 end

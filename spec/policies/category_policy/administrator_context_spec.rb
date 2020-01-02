@@ -10,7 +10,7 @@ describe CategoryPolicy do
   let(:user) { FactoryGirl.create(:administrator) }
 
   context 'administrator accessing a published category' do
-    let(:category) { FactoryGirl.create(:published_category) }
+    let(:category) { FactoryGirl.create(:published_picture_category) }
 
     it 'includes category in resolved scope' do
       expect(resolved_scope).to include(category)
@@ -27,8 +27,8 @@ describe CategoryPolicy do
 
     context 'category has children' do
       before do
-        category.stories << FactoryGirl.create(
-          :published_story_in_published_category
+        category.pictures << FactoryGirl.create(
+          :published_picture_in_published_category
         )
       end
 
@@ -37,7 +37,7 @@ describe CategoryPolicy do
   end
 
   context 'administrator accessing an unpublished category' do
-    let(:category) { FactoryGirl.create(:unpublished_category) }
+    let(:category) { FactoryGirl.create(:unpublished_picture_category) }
 
     it 'includes category in resolved scope' do
       expect(resolved_scope).to include(category)
@@ -54,8 +54,8 @@ describe CategoryPolicy do
 
     context 'category has children' do
       before do
-        category.stories << FactoryGirl.create(
-          :published_story_in_published_category
+        category.pictures << FactoryGirl.create(
+          :published_picture_in_published_category
         )
       end
 

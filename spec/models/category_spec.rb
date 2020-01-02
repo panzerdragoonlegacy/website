@@ -50,47 +50,6 @@ RSpec.describe Category, type: :model do
     end
     it { is_expected.to validate_presence_of(:category_type) }
 
-    describe 'validation of category type reassignment' do
-      before do
-        @category = FactoryGirl.create :valid_category, category_type: :link
-        @link = FactoryGirl.create :valid_link
-      end
-
-      context 'category has children' do
-        before do
-          @category.links << @link
-        end
-
-        context 'category type has changed' do
-          it 'should not be valid' do
-            @category.category_type = :story
-            expect(@category).not_to be_valid
-          end
-        end
-
-        context 'category type has not changed' do
-          it 'should be valid' do
-            expect(@category).to be_valid
-          end
-        end
-      end
-
-      context 'category has no children' do
-        context 'category type has changed' do
-          it 'should be valid' do
-            @category.category_type = :story
-            expect(@category).to be_valid
-          end
-        end
-
-        context 'category type has not changed' do
-          it 'should be valid' do
-            expect(@category).to be_valid
-          end
-        end
-      end
-    end
-
     describe 'validation of category group' do
       context 'category type is also a category group type' do
         before do

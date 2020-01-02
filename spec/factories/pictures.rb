@@ -7,7 +7,7 @@ FactoryGirl.define do
         'spec/fixtures/picture.jpg', 'image/jpeg'
       )
 
-      category { FactoryGirl.create(:valid_category) }
+      category { FactoryGirl.create(:valid_picture_category) }
       contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }
 
       factory :published_picture_in_published_category do
