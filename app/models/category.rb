@@ -57,7 +57,8 @@ class Category < ActiveRecord::Base
   )
 
   before_validation :validate_presence_of_category_group
-  before_validation :validate_category_and_category_group_type_match
+  # Commented out so that reassignment migration can run without issues.
+  # before_validation :validate_category_and_category_group_type_match
 
   before_save :set_published_at
   before_save :sync_file_name

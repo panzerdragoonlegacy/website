@@ -50,7 +50,7 @@ RSpec.describe Category, type: :model do
     end
     it { is_expected.to validate_presence_of(:category_type) }
 
-    describe 'validation of category group' do
+    pending describe 'validation of category group' do
       context 'category type is also a category group type' do
         before do
           @category_group = FactoryGirl.create(
