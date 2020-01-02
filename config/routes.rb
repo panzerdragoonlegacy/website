@@ -12,7 +12,6 @@ Rails.application.routes.draw do
     resources :albums
     resources :category_groups, path: 'category-groups'
     resources :categories
-    resources :links
     resources :sagas
     resources :tags
 
