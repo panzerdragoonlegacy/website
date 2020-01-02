@@ -1,18 +1,55 @@
 <% title 'Contributions Feed' %>
 
-<% if @pictures %>
-  <div id="resources">
-    <% @pictures.each do |picture| %>
-      <div class="resource">
-        <div class="thumbnail">
-          <%= link_to show_picture(picture, 'picture', :thumbnail), picture %>
-        </div>
-        <div class="details">
-          <h2><%= link_to picture.name, picture %></h2>
-          <p>Published <%= local_time_ago picture.published_at %></p>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <%= paginate @pictures %>
+<p>
+  <% if params[:media_type] == 'pictures' || !params[:media_type] %>
+    Pictures
+  <% else %>
+    <%= link_to 'Pictures', contributions_path(media_type: 'pictures') %>
+  <% end %> |
+  <% if params[:media_type] == 'encyclopaedia' %>
+    Encyclopaedia
+  <% else %>
+    <%= link_to(
+      'Encyclopaedia', contributions_path(media_type: 'encyclopaedia')
+    ) %>
+  <% end %> |
+  <% if params[:media_type] == 'literature' %>
+    Literature
+  <% else %>
+    <%= link_to 'Literature', contributions_path(media_type: 'literature') %>
+  <% end %> |
+  <% if params[:media_type] == 'music' %>
+    Music
+  <% else %>
+    <%= link_to 'Music', contributions_path(media_type: 'music') %>
+  <% end %> |
+  <% if params[:media_type] == 'videos' %>
+    Videos
+  <% else %>
+    <%= link_to 'Videos', contributions_path(media_type: 'videos') %>
+  <% end %> |
+  <% if params[:media_type] == 'downloads' %>
+    Downloads
+  <% else %>
+    <%= link_to 'Downloads', contributions_path(media_type: 'downloads') %>
+  <% end %>
+</p>
+
+<% if params[:media_type] == 'pictures' || !params[:media_type] %>
+  <%= render 'pictures' %>
+<% end %>
+<% if params[:media_type] == 'encyclopaedia' %>
+  <%= render 'encyclopaedia' %>
+<% end %>
+<% if params[:media_type] == 'literature' %>
+  <%= render 'literature' %>
+<% end %>
+<% if params[:media_type] == 'music' %>
+  <%= render 'music' %>
+<% end %>
+<% if params[:media_type] == 'videos' %>
+  <%= render 'videos' %>
+<% end %>
+<% if params[:media_type] == 'downloads' %>
+  <%= render 'downloads' %>
 <% end %>

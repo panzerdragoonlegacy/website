@@ -1,7 +1,35 @@
 class ContributionsController < ApplicationController
   def index
-    @pictures = policy_scope(
-      Picture.where(publish: true).order(published_at: :desc).page(params[:page])
-    )
+    if params[:media_type] == 'pictures' || !params[:media_type]
+      @pictures = policy_scope(
+        Picture.where(publish: true).order(published_at: :desc)
+          .page(params[:page])
+      )
+    elsif params[:media_type] == 'encyclopaedia'
+      @encyclopaedia_pages = policy_scope(
+        Page.where(page_type: :encyclopaedia.to_s, publish: true)
+          .order(published_at: :desc).page(params[:page])
+      )
+    elsif params[:media_type] == 'literature'
+      @literature_pages = policy_scope(
+        Page.where(page_type: :literature.to_s, publish: true)
+          .order(published_at: :desc).page(params[:page])
+      )
+    elsif params[:media_type] == 'music'
+      @music_tracks = policy_scope(
+        MusicTrack.where(publish: true).order(published_at: :desc)
+          .page(params[:page])
+      )
+    elsif params[:media_type] == 'videos'
+      @videos = policy_scope(
+        Video.where(publish: true).order(published_at: :desc)
+          .page(params[:page])
+      )
+    elsif params[:media_type] == 'downloads'
+      @downloads = policy_scope(
+        Download.where(publish: true).order(published_at: :desc)
+          .page(params[:page])
+      )
+    end
   end
 end

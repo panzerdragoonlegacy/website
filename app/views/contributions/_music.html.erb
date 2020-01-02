@@ -1,0 +1,19 @@
+<% if @music_tracks %>
+  <div id="resources">
+    <% @music_tracks.each do |music_track| %>
+      <div class="resource">
+        <div class="thumbnail">
+          <%= link_to(
+            show_picture(music_track, 'music_track_picture', :thumbnail),
+            music_track
+          ) %>
+        </div>
+        <div class="details">
+          <h2><%= link_to music_track.name, music_track %></h2>
+          <p>Published <%= local_time_ago music_track.published_at %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= paginate @music_tracks %>
+<% end %>

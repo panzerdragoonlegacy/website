@@ -1,0 +1,19 @@
+<% if @encyclopaedia_pages %>
+  <div id="resources">
+    <% @encyclopaedia_pages.each do |page| %>
+      <div class="resource">
+        <div class="thumbnail">
+          <%= link_to(
+            show_picture(page, 'page_picture', :thumbnail),
+            encyclopaedia_path(page)
+          ) %>
+        </div>
+        <div class="details">
+          <h2><%= link_to page.name, encyclopaedia_path(page) %></h2>
+          <p>Published <%= local_time_ago page.published_at %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= paginate @encyclopaedia_pages %>
+<% end %>

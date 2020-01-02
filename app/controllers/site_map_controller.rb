@@ -2,7 +2,6 @@ class SiteMapController < ApplicationController
   after_action :verify_authorized, except: [:show]
 
   def show
-
     if params[:browse_by] == 'media_type'
       load_literature_category_groups
       load_download_category_groups

@@ -1,0 +1,13 @@
+<% if @literature_pages %>
+  <div id="resources">
+    <% @literature_pages.each do |page| %>
+      <div class="resource">
+        <div class="details">
+          <h2><%= link_to page.name, literature_path(page) %></h2>
+          <p>Published <%= local_time_ago page.published_at %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= paginate @literature_pages %>
+<% end %>

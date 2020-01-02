@@ -1,0 +1,16 @@
+<% if @pictures %>
+  <div id="resources">
+    <% @pictures.each do |picture| %>
+      <div class="resource">
+        <div class="thumbnail">
+          <%= link_to show_picture(picture, 'picture', :thumbnail), picture %>
+        </div>
+        <div class="details">
+          <h2><%= link_to picture.name, picture %></h2>
+          <p>Published <%= local_time_ago picture.published_at %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= paginate @pictures %>
+<% end %>
