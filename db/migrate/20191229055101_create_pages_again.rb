@@ -17,6 +17,8 @@ class CreatePagesAgain < ActiveRecord::Migration
       t.datetime :page_picture_updated_at
       t.timestamps
       t.datetime :published_at
+      t.string :old_model_type
+      t.integer :old_model_id
     end
   end
 end
