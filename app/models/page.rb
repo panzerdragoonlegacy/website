@@ -18,8 +18,6 @@ class Page < ActiveRecord::Base
     encyclopaedia
     literature
     literature_chapter
-    site_footer
-    site_help
     top_level
   ).freeze
 
