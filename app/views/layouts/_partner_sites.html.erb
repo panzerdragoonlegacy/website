@@ -1,0 +1,11 @@
+<h3>Partner Sites</h3>
+<ul>
+  <% {
+    'NiGHTS into Dreams.com': 'http://www.nightsintodreams.com',
+    'Panzer Dragoon World Petition': 'http://www.panzerdragoonworld.com',
+    'Segalization': 'http://www.segalization.com',
+    'The Panzer Dragoon Saga Oasis': 'http://pdsoasis.github.io'
+  }.each do |key, value| %>
+    <li><%= link_to key, value %></li>
+  <% end %>
+</ul>

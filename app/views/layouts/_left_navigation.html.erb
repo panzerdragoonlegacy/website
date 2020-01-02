@@ -19,14 +19,7 @@
       </li>
     <% end %>
   </ul>
-  <% if @partner_sites.present? %>
-    <h3>Partner Sites</h3>
-    <ul>
-      <% @partner_sites.each do |partner_site| %>
-        <li><%= link_to partner_site.name, partner_site.url %></li>
-      <% end %>
-    </ul>
-  <% end %>
+  <%= render 'layouts/partner_sites' %>
   <h3>Contributor Access</h3>
   <ul>
     <% if user_signed_in? %>

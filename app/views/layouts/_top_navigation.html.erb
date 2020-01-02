@@ -3,11 +3,15 @@
     <%= text_field_tag :query, nil, placeholder: 'Search...' %>
   <% end %>
   <ul>
-    <li><%= link_to 'Latest News', root_url %></li>
-    <li><%= link_to 'Site Map', site_map_path %></li>
-    <li><%= link_to 'Encyclopaedia', encyclopaedia_index_path %></li>
-    <li><%= link_to 'Forum', 'https://discuss.panzerdragoonlegacy.com' %></li>
-    <li><%= link_to 'Contributors', contributor_profiles_path %></li>
-    <li><%= link_to 'How to Contribute', '/how-to-contribute' %></li>
+    <% {
+      'Latest News': root_url,
+      'Site Map': site_map_path,
+      'Encyclopaedia': encyclopaedia_index_path,
+      'Forum': 'https://discuss.panzerdragoonlegacy.com',
+      'Contributors': contributor_profiles_path,
+      'How to Contribute': '/how-to-contribute'
+    }.each do |key, value| %>
+      <li><%= link_to key, value %></li>
+    <% end %>
   </ul>
 </div>
