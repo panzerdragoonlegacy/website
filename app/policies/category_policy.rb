@@ -24,7 +24,7 @@ class CategoryPolicy < ApplicationPolicy
 
   def destroy?
     if user && user.administrator?
-      if record.category_type == :literature.to_s
+      if record.category_type.in?(%w(encyclopaedia literature))
         return true if record.pages.blank?
       else
         return true if record.send(record.category_type.pluralize).blank?
