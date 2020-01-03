@@ -99,7 +99,15 @@ class ConvertToPages < ActiveRecord::Migration
         end
         page.name = old_page.name
         if klass == Resource
-          page.description = old_page.name
+          if old_page.category.name.include? 'Fan Translations'
+            page.description = 'An unofficial fan translation.'
+          elsif old_page.category.name.include? 'Song Lyrics'
+            page.description = 'Official text from ' \
+              "#{old_page.category.saga.name}'s soundtrack."
+          else
+            page.description = 'Official text extracted from ' \
+              "#{old_page.category.saga.name}."
+          end
         elsif klass.in?([Article, Poem, Story])
           page.description = old_page.description
         end
