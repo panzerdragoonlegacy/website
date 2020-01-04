@@ -1,7 +1,6 @@
 class Saga < ActiveRecord::Base
   include Sluggable
 
-  belongs_to :encyclopaedia_entry
   belongs_to :page
   has_many :categories, dependent: :destroy
 

@@ -17,22 +17,10 @@ class Tag < ActiveRecord::Base
     source_type: 'Page'
   )
   has_many(
-    :articles,
+    :pictures,
     through: :taggings,
     source: :taggable,
-    source_type: 'Article'
-  )
-  has_many(
-    :downloads,
-    through: :taggings,
-    source: :taggable,
-    source_type: 'Download'
-  )
-  has_many(
-    :links,
-    through: :taggings,
-    source: :taggable,
-    source_type: 'Link'
+    source_type: 'Picture'
   )
   has_many(
     :music_tracks,
@@ -41,40 +29,22 @@ class Tag < ActiveRecord::Base
     source_type: 'MusicTrack'
   )
   has_many(
-    :pictures,
+    :videos,
     through: :taggings,
     source: :taggable,
-    source_type: 'Picture'
+    source_type: 'Video'
   )
   has_many(
-    :poems,
+    :downloads,
     through: :taggings,
     source: :taggable,
-    source_type: 'Poem'
+    source_type: 'Download'
   )
   has_many(
     :quizzes,
     through: :taggings,
     source: :taggable,
     source_type: 'Quiz'
-  )
-  has_many(
-    :resources,
-    through: :taggings,
-    source: :taggable,
-    source_type: 'Resource'
-  )
-  has_many(
-    :stories,
-    through: :taggings,
-    source: :taggable,
-    source_type: 'Story'
-  )
-  has_many(
-    :videos,
-    through: :taggings,
-    source: :taggable,
-    source_type: 'Video'
   )
 
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true

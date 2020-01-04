@@ -9,12 +9,9 @@ class CategoryGroup < ActiveRecord::Base
   CATEGORY_GROUP_TYPES = %w(
     encyclopaedia
     literature
-    article
-    download
-    encyclopaedia_entry
-    music_track
     picture
-    resource
+    music_track
     video
+    download
   ).freeze
 end

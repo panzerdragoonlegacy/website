@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
   # after_filter :verify_policy_scoped, only: :index
 
   before_action :sagas_for_left_nav
-  before_action :partner_sites
 
   private
 
@@ -20,10 +19,6 @@ class ApplicationController < ActionController::Base
 
   def sagas_for_left_nav
     @sagas_for_left_nav = policy_scope Saga.order(:sequence_number)
-  end
-
-  def partner_sites
-    @partner_sites = Link.where(partner_site: true).order(:name)
   end
 
   # This allows all records to be displayed in a Ransack search when 'Drafts
