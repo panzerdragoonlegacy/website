@@ -135,26 +135,6 @@
         %>
       </li>
     <% end %>
-    <% unless download_count(@contributor_profile) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(download_count(@contributor_profile), 'download'),
-            contributor_profile_downloads_path(@contributor_profile)
-          )
-        %>
-      </li>
-    <% end %>
-    <% unless music_track_count(@contributor_profile) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(music_track_count(@contributor_profile), 'music track'),
-            contributor_profile_music_tracks_path(@contributor_profile)
-          )
-        %>
-      </li>
-    <% end %>
     <% unless picture_count(@contributor_profile) == 0 %>
       <li>
         <%=
@@ -165,12 +145,12 @@
         %>
       </li>
     <% end %>
-    <% unless quiz_count(@contributor_profile) == 0 %>
+   <% unless music_track_count(@contributor_profile) == 0 %>
       <li>
         <%=
           link_to(
-            pluralize(quiz_count(@contributor_profile), 'quiz'),
-            contributor_profile_quizzes_path(@contributor_profile)
+            pluralize(music_track_count(@contributor_profile), 'music track'),
+            contributor_profile_music_tracks_path(@contributor_profile)
           )
         %>
       </li>
@@ -181,6 +161,26 @@
           link_to(
             pluralize(video_count(@contributor_profile), 'video'),
             contributor_profile_videos_path(@contributor_profile)
+          )
+        %>
+      </li>
+    <% end %>
+    <% unless download_count(@contributor_profile) == 0 %>
+      <li>
+        <%=
+          link_to(
+            pluralize(download_count(@contributor_profile), 'download'),
+            contributor_profile_downloads_path(@contributor_profile)
+          )
+        %>
+      </li>
+    <% end %>
+    <% unless quiz_count(@contributor_profile) == 0 %>
+      <li>
+        <%=
+          link_to(
+            pluralize(quiz_count(@contributor_profile), 'quiz'),
+            contributor_profile_quizzes_path(@contributor_profile)
           )
         %>
       </li>
