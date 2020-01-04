@@ -17,9 +17,9 @@
       partial: 'admin/shared/form/category',
       locals: {
         f: f,
-        categories: @categories,
+        categories: @picture_categories,
         warning: 'Warning: saving the album will set every picture in the ' \
-          'album to the specified category.'
+          'album to the specified category. Video categories are different.'
       }
     )
   %>
@@ -29,8 +29,8 @@
       locals: {
         f: f,
         contributor_profile_ids: @album.contributor_profile_ids,
-        info: 'Pictures in the album with no contributors will inherit the ' \
-          "album's contributors."
+        info: 'Pictures/videos in the album with no contributors will ' \
+          "inherit the album's contributors."
       }
     )
   %>
@@ -39,8 +39,8 @@
       partial: 'admin/shared/form/source_url',
       locals: {
         f: f,
-        info: 'Pictures in the album with blank source URLs will inherit the ' \
-          "album's source URL."
+        info: 'Pictures/videos in the album with blank source URLs will ' \
+          "inherit the album's source URL."
       }
     )
   %>
@@ -49,8 +49,8 @@
       partial: 'admin/shared/form/name',
       locals: {
         f: f,
-        info: 'Pictures in the album with blank names will inherit the ' \
-          "album's name."
+        info: 'Pictures/videos in the album with blank names will inherit ' \
+          "the album's name."
       }
     )
   %>
@@ -59,8 +59,8 @@
       partial: 'admin/shared/form/description',
       locals: {
         f: f,
-        info: 'Pictures in the album with blank descriptions will inherit ' \
-          "the album's description."
+        info: 'Pictures/videos in the album with blank descriptions will ' \
+          "inherit the album's description."
       }
     )
   %>
@@ -69,8 +69,8 @@
       partial: 'admin/shared/form/extra_information',
       locals: {
         f: f,
-        info: 'Pictures in the album with blank extra information will ' \
-          "inherit the album's extra information."
+        info: 'Pictures/videos in the album with blank extra information ' \
+          "will inherit the album's extra information."
       }
     )
   %>
@@ -80,8 +80,8 @@
       locals: {
         f: f,
         tag_ids: @album.tag_ids,
-        info: 'Pictures in the album with no related encyclopaedia entries ' \
-          "will inherit the album's related encyclopaedia entries."
+        info: 'Pictures/videos in the album with no related tags will ' \
+          "inherit the album's tags."
       }
     )
   %>
@@ -93,9 +93,9 @@
         partial: 'admin/shared/form/publish',
         locals: {
           f: f,
-          warning: 'Warning: publishing the album will publish every picture ' \
-            'in the album. Unpublishing the album will unpublish every ' \
-            'picture in the album.'
+          warning: 'Warning: publishing the album will publish every ' \
+            'picture/video in the album. Unpublishing the album will ' \
+            'unpublish every picture in the album.'
         }
       )
     %>

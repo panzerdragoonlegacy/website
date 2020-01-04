@@ -1,0 +1,53 @@
+<div
+  class="nested-fields card mb-3"
+  style="width: 390px;"
+>
+  <% if f.object.video_picture_file_name.blank? %>
+    <div class="card-body">
+      <h3 class="card-title">New Video</h3>
+    </div>
+  <% else %>
+    <% if f.object.video_picture && is_jpeg(f.object.video_picture.url) %>
+      <%= image_tag f.object.video_picture.url, class: 'card-img-top' %>
+    <% end %>
+    <div class="card-body">
+      <%=
+        link_to_remove_association(
+          'Remove Video',
+          f,
+          role: 'button',
+          class: 'btn btn-danger'
+        )
+      %>
+    </div>
+  <% end %>
+  <div class="p-3">
+    <div class="form-group">
+      <%= f.label :video_picture, 'Video Picture' %>
+      <% if f.object.video_picture? %>
+        <p>File has already been uploaded. Replace file?</p>
+      <% end %>
+      <%= f.file_field :video_picture, class: 'form-control' %>
+      <%= render 'admin/shared/form/image_type_warning' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :mp4_video, 'MP4 Video*' %>
+      <% if f.object.mp4_video? %>
+        <p>File has already been uploaded. Replace file?</p>
+      <% end %>
+      <%= f.file_field :mp4_video, class: 'form-control' %>
+      <%= render 'admin/shared/form/video_type_warning' %>
+    </div>
+    <%= render(
+      partial: 'admin/shared/form/category',
+      locals: { f: f, categories: @video_categories }
+    ) %>
+    <%= render partial: 'admin/shared/form/source_url', locals: { f: f } %>
+    <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
+    <%= render partial: 'admin/shared/form/description', locals: { f: f } %>
+    <%= render(
+      partial: 'admin/shared/form/extra_information', locals: { f: f }
+    ) %>
+  </div>
+</div>
+

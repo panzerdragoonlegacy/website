@@ -1,9 +1,18 @@
 <div class="form-group">
   <label>Videos</label>
-  <p>Videos can be added to this album from the edit video form.</p>
-  <ul>
-    <% @album.videos.each do |video| %>
-      <li><%= video.name %></li>
-    <% end %>
-  </ul>
+  <%= f.fields_for :videos do |video| %>
+    <%= render 'video', f: video %>
+  <% end %>
+  <p>
+    <%=
+      link_to_add_association(
+        'Add Video',
+        f,
+        :videos,
+        role: 'button',
+        class: 'btn btn-success',
+        partial: 'video'
+      )
+    %>
+  </p>
 </div>

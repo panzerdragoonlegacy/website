@@ -10,6 +10,9 @@
 <% if policy(@video).edit? %>
   <p>
     <%= link_to 'Edit Video', edit_admin_video_path(@video) %>
+    <% if @video.album && policy(@video.album).edit? %>
+      | <%= link_to 'Edit Album', edit_admin_album_path(@video.album) %>
+    <% end %>
   </p>
 <% end %>
 

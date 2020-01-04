@@ -17,15 +17,6 @@ module LoadableForPicture
     ).resolve
   end
 
-  def load_other_pictures_in_album
-    if @picture.album
-      @other_pictures_in_album = PicturePolicy::Scope.new(
-        current_user,
-        @picture.album.pictures.where.not(id: @picture.id).order(:name)
-      ).resolve
-    end
-  end
-
   def load_picture
     @picture = Picture.find_by id: params[:id]
     authorize @picture

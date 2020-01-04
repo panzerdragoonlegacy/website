@@ -13,7 +13,6 @@ class PicturesController < ApplicationController
   def show
     load_picture
     load_picture_to_replace
-    load_other_pictures_in_album
     @tags = TagPolicy::Scope.new(
       current_user,
       Tag.where(name: @picture.tags.map { |tag| tag.name }).order(:name)

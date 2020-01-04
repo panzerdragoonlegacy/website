@@ -3,10 +3,17 @@ module LoadableForAlbum
 
   private
 
-  def load_categories
-    @categories = CategoryPolicy::Scope.new(
+  def load_picture_categories
+    @picture_categories = CategoryPolicy::Scope.new(
       current_user,
       Category.where(category_type: :picture).order(:name)
+    ).resolve
+  end
+
+  def load_video_categories
+    @video_categories = CategoryPolicy::Scope.new(
+      current_user,
+      Category.where(category_type: :video).order(:name)
     ).resolve
   end
 

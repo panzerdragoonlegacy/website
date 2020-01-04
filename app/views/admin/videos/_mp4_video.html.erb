@@ -4,13 +4,5 @@
     <p>File has already been uploaded. Replace file?</p>
   <% end %>
   <%= f.file_field :mp4_video, class: 'form-control' %>
-  <%=
-    render(
-      partial: 'admin/shared/form/warning',
-      locals: { 
-        warning: 'MP4 Video files must be of type MP4 (.mp4). Other formats ' \
-          'are not supported and will prevent this form from being saved.'
-      }
-    )
-  %>
+  <%= render 'admin/shared/form/video_type_warning' %>
 </div>

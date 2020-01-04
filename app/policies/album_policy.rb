@@ -67,15 +67,18 @@ class AlbumPolicy < ApplicationPolicy
 
   def attributes_except_publish
     shared_attributes + [
+      :category_id,
       contributor_profile_ids: [],
       tag_ids: [],
-      pictures_attributes: pictures_attributes
+      pictures_attributes: pictures_attributes,
+      videos_attributes: videos_attributes
     ]
   end
 
   def pictures_attributes
     shared_attributes + [
       :id,
+      :category_id,
       :contributor_profile_ids,
       :tag_ids,
       :picture,
@@ -83,9 +86,20 @@ class AlbumPolicy < ApplicationPolicy
     ]
   end
 
+  def videos_attributes
+    shared_attributes + [
+      :id,
+      :category_id,
+      :contributor_profile_ids,
+      :tag_ids,
+      :video_picture,
+      :mp4_video,
+      :_destroy
+    ]
+  end
+
   def shared_attributes
     [
-      :category_id,
       :source_url,
       :name,
       :description,

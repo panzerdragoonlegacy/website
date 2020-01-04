@@ -2,7 +2,8 @@ class Admin::AlbumsController < ApplicationController
   layout 'admin'
   include LoadableForAlbum
 
-  before_action :load_categories, except: [:index, :destroy]
+  before_action :load_picture_categories, except: [:index, :destroy]
+  before_action :load_video_categories, except: [:index, :destroy]
   before_action :load_album, except: [:index, :new, :create]
 
   def index
@@ -64,33 +65,43 @@ class Admin::AlbumsController < ApplicationController
       the_params['pictures_attributes'].each do |key, value|
         the_params['pictures_attributes'][key]['category_id'] =
           the_params['category_id']
-        if value['source_url'].blank?
-          the_params['pictures_attributes'][key]['source_url'] =
-            the_params['source_url']
-        end
-        if value['name'].blank?
-          the_params['pictures_attributes'][key]['name'] =
-            the_params['name']
-        end
-        if value['description'].blank?
-          the_params['pictures_attributes'][key]['description'] =
-            the_params['description']
-        end
-        if value['information'].blank?
-          the_params['pictures_attributes'][key]['information'] =
-            the_params['information']
-        end
-        if value['contributor_profile_ids'].blank?
-          the_params['pictures_attributes'][key]['contributor_profile_ids'] =
-            the_params['contributor_profile_ids']
-        end
-        if value['tag_ids'].blank?
-          the_params['pictures_attributes'][key]['tag_ids'] =
-            the_params['tag_ids']
-        end
-        the_params['pictures_attributes'][key]['publish'] =
-          the_params['publish']
       end
+      the_params = synchronise_attributes(the_params, 'pictures_attributes')
+    end
+    if the_params['videos_attributes']
+      the_params = synchronise_attributes(the_params, 'videos_attributes')
+    end
+    the_params
+  end
+
+  def synchronise_attributes(the_params, attributes_key)
+    the_params[attributes_key].each do |key, value|
+      if value['source_url'].blank?
+        the_params[attributes_key][key]['source_url'] =
+          the_params['source_url']
+      end
+      if value['name'].blank?
+        the_params[attributes_key][key]['name'] =
+          the_params['name']
+      end
+      if value['description'].blank?
+        the_params[attributes_key][key]['description'] =
+          the_params['description']
+      end
+      if value['information'].blank?
+        the_params[attributes_key][key]['information'] =
+          the_params['information']
+      end
+      if value['contributor_profile_ids'].blank?
+        the_params[attributes_key][key]['contributor_profile_ids'] =
+          the_params['contributor_profile_ids']
+      end
+      if value['tag_ids'].blank?
+        the_params[attributes_key][key]['tag_ids'] =
+          the_params['tag_ids']
+      end
+      the_params[attributes_key][key]['publish'] =
+        the_params['publish']
     end
     the_params
   end
@@ -98,6 +109,10 @@ class Admin::AlbumsController < ApplicationController
   def redirect_to_album
     if params[:continue_editing]
       redirect_to edit_admin_album_path(@album)
+    elsif @album.pictures && @album.pictures.count > 0
+      redirect_to @album.pictures.first
+    elsif @album.videos && @album.videos.count > 0
+      redirect_to @album.videos.first
     else
       redirect_to admin_albums_path
     end
