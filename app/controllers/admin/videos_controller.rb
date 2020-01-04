@@ -1,6 +1,8 @@
 class Admin::VideosController < ApplicationController
+  include LoadableForAlbumable
   include LoadableForVideo
   layout 'admin'
+  before_action :load_albums, except: [:index, :destroy]
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_video, except: [:index, :new, :create]
 

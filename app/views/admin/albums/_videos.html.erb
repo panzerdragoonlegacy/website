@@ -1,0 +1,9 @@
+<div class="form-group">
+  <label>Videos</label>
+  <p>Videos can be added to this album from the edit video form.</p>
+  <ul>
+    <% @album.videos.each do |video| %>
+      <li><%= video.name %></li>
+    <% end %>
+  </ul>
+</div>

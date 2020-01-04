@@ -22,11 +22,15 @@ RSpec.describe Album, type: :model do
     it { is_expected.to have_many(:taggings).dependent(:destroy) }
     it { is_expected.to have_many(:tags).through(:taggings) }
     it { is_expected.to have_many(:pictures).dependent(:destroy) }
+    it { is_expected.to have_many(:videos).dependent(:destroy) }
   end
 
   describe 'nested attributes' do
     it do
       is_expected.to accept_nested_attributes_for(:pictures).allow_destroy(true)
+    end
+    it do
+      is_expected.to accept_nested_attributes_for(:videos).allow_destroy(true)
     end
   end
 

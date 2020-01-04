@@ -6,6 +6,10 @@
       locals: { f: f, categories: @categories }
     )
   %>
+  <%= render(
+    partial: 'admin/shared/form/album',
+    locals: { f: f, albums: @albums }
+  ) %>
   <%=
     render(
       partial: 'admin/shared/form/contributors',
@@ -14,6 +18,14 @@
       }
     )
   %>
+  <%= render(
+    partial: 'admin/shared/form/source_url',
+    locals: {
+      f: f,
+      info: 'The URL of an external webpage that also contains the video, ' \
+        'e.g. Twitter or YouTube.'
+    }
+  ) %>
   <%= render 'mp4_video', f: f %>
   <%=
     render(

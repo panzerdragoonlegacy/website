@@ -67,6 +67,8 @@ class VideoPolicy < ApplicationPolicy
   def attributes_except_publish
     [
       :category_id,
+      :album_id,
+      :source_url,
       :name,
       :description,
       :information,

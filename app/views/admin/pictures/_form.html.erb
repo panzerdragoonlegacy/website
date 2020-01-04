@@ -6,7 +6,10 @@
       locals: { f: f, categories: @categories }
     )
   %>
-  <%= render 'album', f: f, albums: @albums %>
+  <%= render(
+    partial: 'admin/shared/form/album',
+    locals: { f: f, albums: @albums }
+  ) %>
   <%=
     render(
       partial: 'admin/shared/form/contributors',
@@ -15,7 +18,14 @@
       }
     )
   %>
-  <%= render partial: 'admin/shared/form/source_url', locals: { f: f } %>
+  <%= render(
+    partial: 'admin/shared/form/source_url',
+    locals: {
+      f: f,
+      info: 'The URL of an external webpage that also contains the picture, ' \
+        'e.g. Deviantart, Instagram, or Twitter.'
+    }
+  ) %>
   <%= render 'picture', f: f, picture: @picture %>
   <%= render(
     partial: 'admin/shared/form/name',

@@ -17,10 +17,6 @@ module LoadableForPicture
     ).resolve
   end
 
-  def load_albums
-    @albums = AlbumPolicy::Scope.new(current_user, Album.order(:name)).resolve
-  end
-
   def load_other_pictures_in_album
     if @picture.album
       @other_pictures_in_album = PicturePolicy::Scope.new(

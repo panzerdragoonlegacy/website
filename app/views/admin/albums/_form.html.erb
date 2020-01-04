@@ -86,6 +86,7 @@
     )
   %>
   <%= render 'pictures', f: f %>
+  <%= render 'videos', f: f %>
   <% if policy(@album).permitted_attributes.include? :publish %>
     <%=
       render(

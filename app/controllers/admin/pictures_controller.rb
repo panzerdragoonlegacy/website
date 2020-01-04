@@ -1,4 +1,5 @@
 class Admin::PicturesController < ApplicationController
+  include LoadableForAlbumable
   include LoadableForPicture
   layout 'admin'
   before_action :load_replaceable_pictures, except: [:index, :destroy]

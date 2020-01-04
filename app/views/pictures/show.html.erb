@@ -87,20 +87,35 @@
   <%= raw markdown_to_html @picture.information %>
 <% end %>
 
-<% if @other_pictures_in_album %>
-  <% unless @other_pictures_in_album.count == 0 %>
-    <h2>Other Pictures in this Album</h2>
+<% if @picture.album && (@picture.album.pictures || @picture.album.videos) %>
+  <% unless @picture.album.pictures == 0 && @picture.album.videos == 0 %>
+    <h2>Also in this Album</h2>
     <div id="other_pictures_in_album">
-      <% @other_pictures_in_album.each do |picture| %>
+      <% @picture.album.pictures.order(:name).each do |picture| %>
+        <% unless picture.id == @picture.id %>
+          <%=
+            link_to(
+              image_tag(
+                picture.picture.url(:mini_thumbnail),
+                alt: picture.name,
+                width: '75',
+                height: '75'
+              ),
+              picture
+            )
+          %>
+        <% end %>
+      <% end %>
+      <% @picture.album.videos.order(:name).each do |video| %>
         <%=
           link_to(
             image_tag(
-              picture.picture.url(:mini_thumbnail),
-              alt: picture.name,
+              video.video_picture.url(:mini_thumbnail),
+              alt: video.name,
               width: '75',
               height: '75'
             ),
-            picture
+            video
           )
         %>
       <% end %>

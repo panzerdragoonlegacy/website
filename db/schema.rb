@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200104030257) do
+ActiveRecord::Schema.define(version: 20200104033111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -397,6 +397,8 @@ ActiveRecord::Schema.define(version: 20200104030257) do
     t.integer  "video_picture_file_size"
     t.datetime "video_picture_updated_at"
     t.datetime "published_at"
+    t.string   "source_url"
+    t.integer  "album_id"
   end
 
   add_foreign_key "albums", "categories"

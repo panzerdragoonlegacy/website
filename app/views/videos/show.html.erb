@@ -60,6 +60,15 @@
 <% end %>
 
 <p>
+  <% unless @video.source_url.blank? %>
+    View Source:
+      <%=
+        link_to(
+          video_source_link_text(@video.source_url),
+          @video.source_url
+        )
+      %>.
+  <% end %>
   <% unless @video.youtube_video_id.blank? %>
     Watch Video:
       <%=
@@ -69,8 +78,44 @@
         )
       %>.
   <% end %>
-  Download Video: <%= link_to 'MP4', @video.mp4_video.url %>
+   Download Video: <%= link_to 'MP4', @video.mp4_video.url %>
 </p>
+
+<% if @video.album && (@video.album.pictures || @video.album.videos) %>
+  <% unless @video.album.pictures == 0 && @video.album.videos == 0 %>
+    <h2>Also in this Album</h2>
+    <div id="other_pictures_in_album">
+      <% @video.album.videos.order(:name).each do |video| %>
+        <% unless video.id == @video.id %>
+          <%=
+            link_to(
+              image_tag(
+                video.video_picture.url(:mini_thumbnail),
+                alt: video.name,
+                width: '75',
+                height: '75'
+              ),
+              video
+            )
+          %>
+        <% end %>
+      <% end %>
+      <% @video.album.pictures.order(:name).each do |picture| %>
+        <%=
+          link_to(
+            image_tag(
+              picture.picture.url(:mini_thumbnail),
+              alt: picture.name,
+              width: '75',
+              height: '75'
+            ),
+            picture
+          )
+        %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
 
 <%= render partial: 'shared/related_tags' %>
 

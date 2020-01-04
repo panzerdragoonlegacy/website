@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Video, type: :model do
   describe 'fields' do
+    it { is_expected.to respond_to(:album_id) }
+    it { is_expected.to respond_to(:source_url) }
     it { is_expected.to respond_to(:name) }
     it { is_expected.to respond_to(:url) }
     it { is_expected.to respond_to(:description) }
@@ -13,9 +15,11 @@ RSpec.describe Video, type: :model do
     it { is_expected.to respond_to(:category) }
     it { is_expected.to respond_to(:created_at) }
     it { is_expected.to respond_to(:updated_at) }
+    it { is_expected.to respond_to(:published_at) }
   end
 
   describe 'associations' do
+    it { is_expected.to belong_to(:album) }
     it { is_expected.to belong_to(:category) }
     it { is_expected.to have_many(:contributions).dependent(:destroy) }
     it do
