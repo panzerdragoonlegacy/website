@@ -8,7 +8,7 @@ RSpec.describe Illustration, type: :model do
   end
 
   describe 'associations' do
-    it { is_expected.to belong_to(:illustratable) }
+    it { is_expected.to belong_to(:page) }
   end
 
   describe 'file attachment' do

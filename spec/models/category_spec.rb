@@ -17,17 +17,12 @@ RSpec.describe Category, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:category_group) }
     it { is_expected.to belong_to(:saga) }
-    it { is_expected.to have_many(:pages).dependent(:destroy) }
-    it { is_expected.to have_many(:articles).dependent(:destroy) }
-    it { is_expected.to have_many(:downloads).dependent(:destroy) }
-    it { is_expected.to have_many(:encyclopaedia_entries).dependent(:destroy) }
-    it { is_expected.to have_many(:links).dependent(:destroy) }
-    it { is_expected.to have_many(:music_tracks).dependent(:destroy) }
     it { is_expected.to have_many(:news_entries).dependent(:destroy) }
+    it { is_expected.to have_many(:pages).dependent(:destroy) }
     it { is_expected.to have_many(:pictures).dependent(:destroy) }
-    it { is_expected.to have_many(:resources).dependent(:destroy) }
-    it { is_expected.to have_many(:stories).dependent(:destroy) }
+    it { is_expected.to have_many(:music_tracks).dependent(:destroy) }
     it { is_expected.to have_many(:videos).dependent(:destroy) }
+    it { is_expected.to have_many(:downloads).dependent(:destroy) }
   end
 
   describe 'validations' do
