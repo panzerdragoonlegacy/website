@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200104014743) do
+ActiveRecord::Schema.define(version: 20200104030257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,8 +148,7 @@ ActiveRecord::Schema.define(version: 20200104014743) do
   end
 
   create_table "illustrations", force: :cascade do |t|
-    t.integer  "illustratable_id"
-    t.string   "illustratable_type",        limit: 255
+    t.integer  "page_id"
     t.string   "illustration_file_name",    limit: 255
     t.string   "illustration_content_type", limit: 255
     t.integer  "illustration_file_size"

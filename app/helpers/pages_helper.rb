@@ -1,10 +1,10 @@
 module PagesHelper
-  def illustrated_markdown_to_html(id, type, markdown_text)
+  def illustrated_markdown_to_html(page)
     # Automatically insert the table of contents before the first second level
     # Atx-style header.
     updated_markdown = ""
     contents_added = false
-    markdown_text.each_line do |line|
+    page.content.each_line do |line|
       if line.start_with? "## " and !contents_added
         line = "## Contents\n\n* replace this with toc\n{:toc}" +
           "\n\n" + line
@@ -81,8 +81,9 @@ module PagesHelper
     # Sets correct src, width, and height attributes for the illustration.
     html.css('img').each do |img|
       file_name = img.get_attribute('src')
-      if illustration = Illustration.where(illustratable_id: id,
-        illustratable_type: type, illustration_file_name: file_name).first
+      if illustration = Illustration.where(
+        page_id: page.id, illustration_file_name: file_name
+      ).first
         img.set_attribute('src', illustration.illustration.url(:embedded))
         image_file = Paperclip::Geometry.from_file(
           illustration.illustration.path(:embedded))

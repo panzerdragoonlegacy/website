@@ -1,7 +1,7 @@
 class Illustration < ActiveRecord::Base
   include Syncable
 
-  belongs_to :illustratable, polymorphic: true
+  belongs_to :page
 
   has_attached_file(
     :illustration,

@@ -2,13 +2,18 @@ class Page < ActiveRecord::Base
   acts_as_url :name, sync_url: true
 
   include Contributable
-  include Illustratable
   include Publishable
   include Syncable
   include Taggable
 
   belongs_to :category
   has_one :saga
+  has_many :illustrations, dependent: :destroy
+  accepts_nested_attributes_for(
+    :illustrations,
+    reject_if: :all_blank,
+    allow_destroy: true
+  )
 
   validates :name, presence: true, length: { in: 2..100 }
   validates :page_type, presence: true
