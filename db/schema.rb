@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200104033111) do
+ActiveRecord::Schema.define(version: 20200122051851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -247,6 +247,7 @@ ActiveRecord::Schema.define(version: 20200104033111) do
     t.integer  "album_id"
     t.string   "source_url"
     t.datetime "published_at"
+    t.boolean  "full_size_link",                       default: true
   end
 
   create_table "poems", force: :cascade do |t|

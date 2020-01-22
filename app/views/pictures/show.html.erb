@@ -61,11 +61,15 @@
 </ul>
 
 <div class="embedded_picture_container">
-  <%=
-    link_to(
-      show_picture(@picture, 'picture', :embedded), @picture.picture.url
-    )
-  %>
+  <% if @picture.full_size_link %>
+    <%=
+      link_to(
+        show_picture(@picture, 'picture', :embedded), @picture.picture.url
+      )
+    %>
+  <% else %>
+    <%= show_picture @picture, 'picture', :embedded %>
+  <% end %>
 </div>
 
 <p>
@@ -78,7 +82,11 @@
         )
       %>.
   <% end %>
-  Download Full Size Picture: <%= link_to "JPEG", @picture.picture.url %>
+  <% if @picture.full_size_link %>
+    Download Full Size Picture: <%= link_to "JPEG", @picture.picture.url %>
+  <% else %>
+    Full size downloads are disabled for this picture.
+  <% end %>
 </p>
 
 <p><%= @picture.description %></p>

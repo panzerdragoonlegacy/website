@@ -1,0 +1,14 @@
+<div class="form-group form-check">
+  <%= f.check_box :full_size_link, class: 'form-check-input' %>
+  <%= f.label :full_size_link, 'Full Size Link?', class: 'form-check-label' %>
+  <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: 'Only uncheck this if the contributor has explicitly requested ' \
+          "that we hide the 'Download Full Size Picture' link. In general we " \
+          'encourage the availability of full sized pictures.'
+      }
+    )
+  %>
+</div>

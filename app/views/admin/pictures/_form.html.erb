@@ -52,6 +52,7 @@
       )
     %>
   <% end %>
+  <%= render 'full_size_link', f: f %>
   <% if policy(@picture).permitted_attributes.include? :publish %>
     <%= render partial: 'admin/shared/form/publish', locals: { f: f } %>
   <% end %>
