@@ -1,9 +1,8 @@
 class Page < ActiveRecord::Base
-  acts_as_url :name, sync_url: true
-
   include Contributable
   include Publishable
   include Syncable
+  include SluggableWithId
   include Taggable
 
   belongs_to :category
@@ -55,10 +54,6 @@ class Page < ActiveRecord::Base
 
   def sync_file_name
     sync_file_name_of :page_picture, file_name: "#{name.to_url}.jpg"
-  end
-
-  def to_param
-    id.to_s + '-' + url
   end
 
   def name_and_id

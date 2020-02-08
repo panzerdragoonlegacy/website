@@ -1,5 +1,5 @@
 class Tag < ActiveRecord::Base
-  include Sluggable
+  include SluggableWithoutId
   include Syncable
 
   has_many :taggings, dependent: :destroy

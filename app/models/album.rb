@@ -5,6 +5,7 @@ class Album < ActiveRecord::Base
   include Contributable
   include Publishable
   include Taggable
+  include SluggableWithId
   include Syncable
 
   has_many :pictures, dependent: :destroy

@@ -1,5 +1,5 @@
 class Saga < ActiveRecord::Base
-  include Sluggable
+  include SluggableWithoutId
 
   belongs_to :page
   has_many :categories, dependent: :destroy

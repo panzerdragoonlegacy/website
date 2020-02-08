@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
   include Publishable
-  include Sluggable
+  include SluggableWithoutId
   include Syncable
 
   belongs_to :category_group

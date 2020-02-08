@@ -1,10 +1,9 @@
 class Video < ActiveRecord::Base
-  acts_as_url :name, sync_url: true
-
   include Categorisable
   include Contributable
   include Publishable
   include Taggable
+  include SluggableWithId
   include Syncable
 
   belongs_to :album
@@ -57,9 +56,5 @@ class Video < ActiveRecord::Base
   def sync_file_names
     sync_file_name_of :mp4_video, file_name: "#{name.to_url}.mp4"
     sync_file_name_of :video_picture, file_name: "#{name.to_url}.jpg"
-  end
-
-  def to_param
-    id.to_s + '-' + url
   end
 end

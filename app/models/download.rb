@@ -1,10 +1,9 @@
 class Download < ActiveRecord::Base
-  acts_as_url :name, sync_url: true
-
   include Categorisable
   include Contributable
   include Publishable
   include Taggable
+  include SluggableWithId
   include Syncable
 
   validates :name, presence: true, length: { in: 2..100 }
@@ -44,9 +43,5 @@ class Download < ActiveRecord::Base
   def sync_file_names
     sync_file_name_of :download, file_name: "#{name.to_url}.zip"
     sync_file_name_of :download_picture, file_name: "#{name.to_url}.jpg"
-  end
-
-  def to_param
-    id.to_s + '-' + url
   end
 end

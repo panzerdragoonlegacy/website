@@ -1,10 +1,9 @@
 class Picture < ActiveRecord::Base
-  acts_as_url :name, sync_url: true
-
   include Categorisable
   include Contributable
   include Publishable
   include Taggable
+  include SluggableWithId
   include Syncable
 
   belongs_to :album
@@ -49,10 +48,6 @@ class Picture < ActiveRecord::Base
 
   def sync_file_name
     sync_file_name_of :picture, file_name: "#{name.to_url}.jpg"
-  end
-
-  def to_param
-    id.to_s + '-' + url
   end
 
   def name_and_id

@@ -1,10 +1,9 @@
 class MusicTrack < ActiveRecord::Base
-  acts_as_url :name, sync_url: true
-
   include Categorisable
   include Contributable
   include Publishable
   include Taggable
+  include SluggableWithId
   include Syncable
 
   validates(
@@ -63,9 +62,5 @@ class MusicTrack < ActiveRecord::Base
     sync_file_name_of :mp3_music_track, file_name: "#{name.to_url}.mp3"
     sync_file_name_of :flac_music_track, file_name: "#{name.to_url}.flac"
     sync_file_name_of :music_track_picture, file_name: "#{name.to_url}.jpg"
-  end
-
-  def to_param
-    id.to_s + '-' + url
   end
 end

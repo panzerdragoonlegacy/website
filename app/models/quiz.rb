@@ -2,7 +2,7 @@ class Quiz < ActiveRecord::Base
   include Contributable
   include Publishable
   include Taggable
-  include Sluggable
+  include SluggableWithoutId
 
   has_many :quiz_questions, dependent: :destroy
   accepts_nested_attributes_for(

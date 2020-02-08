@@ -1,5 +1,5 @@
 class CategoryGroup < ActiveRecord::Base
-  include Sluggable
+  include SluggableWithoutId
 
   has_many :categories, dependent: :destroy
 

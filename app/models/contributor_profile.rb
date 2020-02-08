@@ -1,6 +1,6 @@
 class ContributorProfile < ActiveRecord::Base
   include Publishable
-  include Sluggable
+  include SluggableWithoutId
 
   has_one :user, dependent: :destroy
   has_many :news_entries, dependent: :destroy
