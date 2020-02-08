@@ -6,6 +6,7 @@ RSpec.describe Video, type: :model do
     it { is_expected.to respond_to(:source_url) }
     it { is_expected.to respond_to(:name) }
     it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:sequence_number) }
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:information) }
     it { is_expected.to respond_to(:mp4_video) }
@@ -38,6 +39,11 @@ RSpec.describe Video, type: :model do
     it do
       is_expected.to validate_length_of(:description).is_at_least(2)
         .is_at_most(250)
+    end
+    it { is_expected.to validate_presence_of(:sequence_number) }
+    it do
+      is_expected.to validate_numericality_of(:sequence_number)
+        .is_greater_than_or_equal_to(0).is_less_than_or_equal_to(99)
     end
     it { is_expected.to validate_presence_of(:category) }
 

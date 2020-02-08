@@ -11,6 +11,15 @@ class Picture < ActiveRecord::Base
 
   validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }
+  validates(
+    :sequence_number,
+    presence: true,
+    numericality: {
+      only_integer: true,
+      greater_than_or_equal_to: 0,
+      less_than_or_equal_to: 99
+    }
+  )
 
   has_attached_file(
     :picture,

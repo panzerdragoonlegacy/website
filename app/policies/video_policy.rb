@@ -68,6 +68,7 @@ class VideoPolicy < ApplicationPolicy
     [
       :category_id,
       :album_id,
+      :sequence_number,
       :source_url,
       :name,
       :description,

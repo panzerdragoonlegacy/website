@@ -69,6 +69,7 @@ class PicturePolicy < ApplicationPolicy
     file_attributes + [
       :category_id,
       :album_id,
+      :sequence_number,
       :name,
       :description,
       :information,

@@ -110,9 +110,9 @@ class Admin::AlbumsController < ApplicationController
     if params[:continue_editing]
       redirect_to edit_admin_album_path(@album)
     elsif @album.pictures && @album.pictures.count > 0
-      redirect_to @album.pictures.first
+      redirect_to @album.pictures.order(:sequence_number).first
     elsif @album.videos && @album.videos.count > 0
-      redirect_to @album.videos.first
+      redirect_to @album.videos.order(:sequence_number).first
     else
       redirect_to admin_albums_path
     end

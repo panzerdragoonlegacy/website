@@ -1,0 +1,18 @@
+<div class="form-group">
+  <%= f.label :sequence_number, 'Sequence Number' %>
+  <%=
+    f.number_field(
+      :sequence_number,
+      { min: 0, max: 99, class: 'form-control' }
+    )
+  %>
+  <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: 'Used to determine the order of pictures and videos within an '
+          "album. Set this value to 0 for videos that don't belong to an album."
+      }
+    )
+  %>
+</div>

@@ -10,6 +10,7 @@
     partial: 'admin/shared/form/album',
     locals: { f: f, albums: @albums }
   ) %>
+  <%= render 'sequence_number', f: f %>
   <%=
     render(
       partial: 'admin/shared/form/contributors',

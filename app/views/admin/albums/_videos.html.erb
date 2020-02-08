@@ -1,6 +1,8 @@
 <div class="form-group">
   <label>Videos</label>
-  <%= f.fields_for :videos do |video| %>
+  <%= f.fields_for(
+    :videos, f.object.videos.order(:sequence_number)
+  ) do |video| %>
     <%= render 'video', f: video %>
   <% end %>
   <p>

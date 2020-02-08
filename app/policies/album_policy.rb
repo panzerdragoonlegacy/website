@@ -100,6 +100,7 @@ class AlbumPolicy < ApplicationPolicy
 
   def shared_attributes
     [
+      :sequence_number,
       :source_url,
       :name,
       :description,

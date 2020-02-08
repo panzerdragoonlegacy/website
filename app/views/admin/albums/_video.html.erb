@@ -42,6 +42,7 @@
       partial: 'admin/shared/form/category',
       locals: { f: f, categories: @video_categories }
     ) %>
+    <%= render partial: 'admin/shared/form/sequence_number', locals: { f: f } %>
     <%= render partial: 'admin/shared/form/source_url', locals: { f: f } %>
     <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
     <%= render partial: 'admin/shared/form/description', locals: { f: f } %>
