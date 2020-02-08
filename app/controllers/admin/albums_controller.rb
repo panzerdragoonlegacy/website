@@ -100,8 +100,6 @@ class Admin::AlbumsController < ApplicationController
         the_params[attributes_key][key]['tag_ids'] =
           the_params['tag_ids']
       end
-      the_params[attributes_key][key]['publish'] =
-        the_params['publish']
     end
     the_params
   end

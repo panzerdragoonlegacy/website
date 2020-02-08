@@ -23,6 +23,7 @@ class Album < ActiveRecord::Base
   validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }
 
+  before_save :publish_in_sequence
   before_save :set_published_at
   after_save :update_picture_categories
 
@@ -35,6 +36,27 @@ class Album < ActiveRecord::Base
   end
 
   private
+
+  # Publishes the pictures/videos in the album one second apart
+  def publish_in_sequence
+    if publish
+      self.pictures.sort_by{ |p| p.sequence_number }.each do |picture|
+        picture.publish = true
+        if picture.published_at.blank?
+          picture.published_at = DateTime.now.utc
+          sleep 1
+        end
+      end
+      self.videos.sort_by{ |v| v.sequence_number }.each do |video|
+        video.publish = true
+        if video.published_at.blank?
+          video.published_at = DateTime.now.utc
+          sleep 1
+        end
+      end
+    end
+    set_published_at
+  end
 
   def update_picture_categories
     pictures.each do |picture|
