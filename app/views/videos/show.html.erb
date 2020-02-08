@@ -86,7 +86,7 @@
 
 <% if @video.album && (@video.album.pictures || @video.album.videos) %>
   <% unless @video.album.pictures == 0 && @video.album.videos == 0 %>
-    <h2>Also in this Album</h2>
+    <h2>Also in the Album "<%= @video.album.name %>"</h2>
     <div id="other_pictures_in_album">
       <% @video.album.videos.order(:sequence_number).each do |video| %>
         <% unless video.id == @video.id %>
