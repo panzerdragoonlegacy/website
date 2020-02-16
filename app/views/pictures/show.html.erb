@@ -99,7 +99,7 @@
   <% unless @picture.album.pictures == 0 && @picture.album.videos == 0 %>
     <h2>Also in the Album "<%= @picture.album.name %>"</h2>
     <div id="other_pictures_in_album">
-      <% @picture.album.pictures.order(:sequence_number).each do |picture| %>
+      <% @picture.album.ordered_pictures.each do |picture| %>
         <% unless picture.id == @picture.id %>
           <%=
             link_to(
@@ -114,7 +114,7 @@
           %>
         <% end %>
       <% end %>
-      <% @picture.album.videos.order(:sequence_number).each do |video| %>
+      <% @picture.album.ordered_videos.each do |video| %>
         <%=
           link_to(
             image_tag(

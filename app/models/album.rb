@@ -36,6 +36,14 @@ class Album < ActiveRecord::Base
     "#{name} (#{id})"
   end
 
+  def ordered_pictures
+    pictures.order :sequence_number, :name
+  end
+
+  def ordered_videos
+    videos.order :sequence_number, :name
+  end
+
   private
 
   # Publishes the pictures/videos in the album one second apart

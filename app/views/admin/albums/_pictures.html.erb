@@ -1,8 +1,6 @@
 <div class="form-group">
   <label>Pictures</label>
-  <%= f.fields_for(
-    :pictures, f.object.pictures.order(:sequence_number)
-  ) do |picture| %>
+  <%= f.fields_for :pictures, f.object.ordered_pictures do |picture| %>
     <%= render 'picture', f: picture %>
   <% end %>
   <p>
