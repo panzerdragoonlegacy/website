@@ -79,10 +79,10 @@ class AlbumPolicy < ApplicationPolicy
     shared_attributes + [
       :id,
       :category_id,
-      :contributor_profile_ids,
-      :tag_ids,
       :picture,
-      :_destroy
+      :_destroy,
+      contributor_profile_ids: [],
+      tag_ids: []
     ]
   end
 
@@ -90,11 +90,11 @@ class AlbumPolicy < ApplicationPolicy
     shared_attributes + [
       :id,
       :category_id,
-      :contributor_profile_ids,
-      :tag_ids,
       :video_picture,
       :mp4_video,
-      :_destroy
+      :_destroy,
+      contributor_profile_ids: [],
+      tag_ids: []
     ]
   end
 
