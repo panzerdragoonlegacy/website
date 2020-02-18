@@ -52,6 +52,16 @@ module LoadableForCategory
     end
   end
 
+  def load_category_picture_albums
+    if @category.category_type == :picture.to_s
+      @albums = AlbumPolicy::Scope.new(
+        current_user,
+        Album.where(category_id: @category.id).order(:name)
+          .page(params[:page])
+      ).resolve
+    end
+  end
+
   def load_category_music_tracks
     if @category.category_type == :music_track.to_s
       @music_tracks = MusicTrackPolicy::Scope.new(
