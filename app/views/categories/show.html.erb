@@ -16,7 +16,9 @@
 <% end %>
 
 <% if @category.category_picture.present? %>
-  <%= show_picture @category, 'category_picture', :embedded %>
+  <div class="category_picture_container">
+    <%= show_picture @category, 'category_picture', :embedded %>
+  </div>
 <% end %>
 
 <%= @category.description %>
