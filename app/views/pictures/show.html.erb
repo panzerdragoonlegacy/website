@@ -60,6 +60,12 @@
   <% end %>
 </ul>
 
+<% if @picture.album %>
+  <%= render(
+    partial: 'albums/album_navigation', locals: { albumable: @picture }
+  ) %>
+<% end %>
+
 <div class="embedded_picture_container">
   <% if @picture.full_size_link %>
     <%=

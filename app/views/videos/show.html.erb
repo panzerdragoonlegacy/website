@@ -46,15 +46,23 @@
   <% end %>
 </ul>
 
-<video
-  width="620"
-  height="349"
-  controls="true"
-  autobuffer="true"
-  poster="<%= @video.video_picture.url(:embedded) %>">
-  <source type="video/mp4" src="<%= @video.mp4_video.url %>" />
-  Your browser does not support the <code>video</code> element.
-</video>
+<% if @video.album %>
+  <%= render(
+    partial: 'albums/album_navigation', locals: { albumable: @video }
+  ) %>
+<% end %>
+
+<div class="embedded_picture_container">
+  <video
+    width="620"
+    height="349"
+    controls="true"
+    autobuffer="true"
+    poster="<%= @video.video_picture.url(:embedded) %>">
+    <source type="video/mp4" src="<%= @video.mp4_video.url %>" />
+    Your browser does not support the <code>video</code> element.
+  </video>
+</div>
 
 <p><%= @video.description %></p>
 
