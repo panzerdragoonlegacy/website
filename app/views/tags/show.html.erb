@@ -16,7 +16,9 @@
 <% end %>
 
 <% if @tag.tag_picture.present? %>
-  <%= show_picture @tag, 'tag_picture', :embedded %>
+  <div class="category_picture_container">
+    <%= show_picture @tag, 'tag_picture', :embedded %>
+  </div>
 <% end %>
 
 <p><%= @tag.description if @tag.description.present? %></p>
