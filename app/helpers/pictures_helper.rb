@@ -28,6 +28,15 @@ module PicturesHelper
     end
   end
 
+  def show_controversial_content_thumbnail
+    image_tag(
+      'controversial-content-thumbnail.jpg',
+      alt: 'Warning: Controversial Content',
+      height: 150,
+      width: 150
+    )
+  end
+
   def picture_source_link_text(source_url)
     return 'DeviantArt' if source_url.include? 'deviantart.com'
     return 'Instagram' if source_url.include? 'instagram.com'

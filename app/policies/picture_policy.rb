@@ -75,6 +75,7 @@ class PicturePolicy < ApplicationPolicy
       :information,
       :source_url,
       :full_size_link,
+      :controversial_content,
       contributor_profile_ids: [],
       tag_ids: []
     ]

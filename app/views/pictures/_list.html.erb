@@ -2,7 +2,11 @@
   <% @pictures.each do |picture| %>
     <div class="resource">
       <div class="thumbnail">
-        <%= link_to show_picture(picture, 'picture', :thumbnail), picture %>
+        <% if picture.controversial_content? %>
+          <%= link_to show_controversial_content_thumbnail, picture %>
+        <% else %>
+          <%= link_to show_picture(picture, 'picture', :thumbnail), picture %>
+        <% end %>
       </div>
       <div class="details">
         <h2><%= link_to picture.name, picture %></h2>

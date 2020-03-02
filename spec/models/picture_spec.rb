@@ -10,6 +10,7 @@ RSpec.describe Picture, type: :model do
     it { is_expected.to respond_to(:source_url) }
     it { is_expected.to respond_to(:picture) }
     it { is_expected.to respond_to(:full_size_link) }
+    it { is_expected.to respond_to(:controversial_content) }
     it { is_expected.to respond_to(:publish) }
     it { is_expected.to respond_to(:category) }
     it { is_expected.to respond_to(:album) }

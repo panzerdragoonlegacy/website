@@ -2,9 +2,13 @@
 <% description @picture.description %>
 <% open_graph_type 'image' %>
 <% if @picture.picture.present? %>
-  <% open_graph_image(
-    "#{root_url.chomp('/')}#{@picture.picture.url(:original)}"
-  ) %>
+  <% if @picture.controversial_content? %>
+    <% open_graph_image asset_path('controversial-content-embedded.jpg') %>
+  <% else %>
+    <% open_graph_image(
+      "#{root_url.chomp('/')}#{@picture.picture.url(:original)}"
+    ) %>
+  <% end %>
 <% end %>
 
 <% if policy(@picture).edit? %>
