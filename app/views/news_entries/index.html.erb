@@ -1,5 +1,7 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s News Entries" %>
+<% else %>
+  <% title "What's New?" %>
 <% end %>
 
 <% unless @contributor_profile %>
@@ -36,7 +38,11 @@
   <% @news_entries.each do |news_entry| %>
     <div class="resource">
       <h2 class="news_entry_index_heading">
-        <%= link_to news_entry.name, news_entry %>
+        <% if news_entry.post_type == :news.to_s %>
+          <%= link_to news_entry.name, news_entry %>
+        <% elsif news_entry.post_type == :link.to_s %>
+          <%= link_to news_entry.name, news_entry.link %>
+        <% end %>
       </h2>
       <% if news_entry.news_entry_picture.present? %>
         <%= show_picture news_entry, 'news_entry_picture', :embedded %>

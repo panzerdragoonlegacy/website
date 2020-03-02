@@ -1,5 +1,6 @@
 <%= form_for [:admin, @news_entry], html: { multipart: true } do |f| %>
   <%= render 'admin/shared/form/error_messages', target: @news_entry %>
+  <%= render 'post_type', f: f %>
   <%=
     render(
       partial: 'admin/shared/form/category',
@@ -32,6 +33,7 @@
       }
     )
   %>
+  <%= render partial: 'link', locals: { f: f } %>
   <%= render partial: 'admin/shared/form/content', locals: { f: f } %>
   <%=
     render(
