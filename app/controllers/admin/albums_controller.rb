@@ -97,7 +97,7 @@ class Admin::AlbumsController < ApplicationController
           the_params['contributor_profile_ids'].reject { |cp| cp.blank? }
       end
       if value['tag_ids'].reject { |t| t.blank? }.blank?
-        the_params[attributes_key][key]['tag_ids'] <<
+        the_params[attributes_key][key]['tag_ids'] =
           the_params['tag_ids'].reject { |t| t.blank? }
       end
     end
