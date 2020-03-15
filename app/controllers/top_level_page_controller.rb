@@ -22,7 +22,7 @@ class TopLevelPageController < ApplicationController
   end
 
   def load_page
-    @page = Page.find_by url: params[:id]
+    @page = Page.where(url: params[:id]).first
     authorize @page
   end
 end
