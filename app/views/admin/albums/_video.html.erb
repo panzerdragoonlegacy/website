@@ -42,17 +42,13 @@
       partial: 'admin/shared/form/category',
       locals: { f: f, categories: @video_categories }
     ) %>
-    <!-- Load video's contributor profiles so that the synchronise_attributes
-         method in the controller won't think they're empty. -->
-    <div style="display: none;">
-      <%= render(
-        partial: 'admin/shared/form/contributors',
-        locals: {
-          f: f,
-          contributor_profile_ids: f.object.contributor_profile_ids
-        }
-      ) %>
-    </div>
+    <%= render(
+      partial: 'admin/shared/form/contributors',
+      locals: {
+        f: f,
+        contributor_profile_ids: f.object.contributor_profile_ids
+      }
+    ) %>
     <%= render partial: 'admin/shared/form/sequence_number', locals: { f: f } %>
     <%= render partial: 'admin/shared/form/source_url', locals: { f: f } %>
     <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
@@ -60,14 +56,10 @@
     <%= render(
       partial: 'admin/shared/form/extra_information', locals: { f: f }
     ) %>
-    <!-- Load video's tags so that the synchronise_attributes method in the
-         controller won't think they're empty. -->
-    <div style="display: none;">
-      <%= render(
-        partial: 'admin/shared/form/tags',
-        locals: { f: f, tag_ids: f.object.tag_ids }
-      ) %>
-    </div>
+    <%= render(
+      partial: 'admin/shared/form/tags',
+      locals: { f: f, tag_ids: f.object.tag_ids }
+    ) %>
   </div>
 </div>
 
