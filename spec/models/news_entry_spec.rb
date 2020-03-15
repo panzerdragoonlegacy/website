@@ -2,10 +2,8 @@ require 'rails_helper'
 
 RSpec.describe NewsEntry, type: :model do
   describe 'fields' do
-    it { is_expected.to respond_to(:post_type) }
     it { is_expected.to respond_to(:name) }
     it { is_expected.to respond_to(:url) }
-    it { is_expected.to respond_to(:link) }
     it { is_expected.to respond_to(:content) }
     it { is_expected.to respond_to(:news_entry_picture) }
     it { is_expected.to respond_to(:publish) }
@@ -24,7 +22,6 @@ RSpec.describe NewsEntry, type: :model do
   end
 
   describe 'validations' do
-    it { is_expected.to validate_presence_of(:post_type) }
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_uniqueness_of(:name) }
     it do

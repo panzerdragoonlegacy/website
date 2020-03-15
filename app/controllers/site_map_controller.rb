@@ -6,7 +6,6 @@ class SiteMapController < ApplicationController
       load_literature_category_groups
       load_download_category_groups
       load_encyclopaedia_category_groups
-      load_link_categories
       load_music_track_category_groups
       load_picture_category_groups
       load_video_category_groups
@@ -53,12 +52,6 @@ class SiteMapController < ApplicationController
   def load_music_track_category_groups
     @music_track_category_groups = policy_scope(
       CategoryGroup.where(category_group_type: :music_track).order(:name)
-    )
-  end
-
-  def load_link_categories
-    @link_categories = policy_scope(
-      Category.where(category_type: :link).order(:name)
     )
   end
 

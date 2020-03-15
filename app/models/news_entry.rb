@@ -10,13 +10,6 @@ class NewsEntry < ActiveRecord::Base
   validates :name, presence: true, length: { in: 2..150 }, uniqueness: true
   validates :content, presence: true
   validates :contributor_profile, presence: true
-  validates :post_type, presence: true
-
-  # The list of post types.
-  POST_TYPES = %w(
-    news
-    link
-  ).freeze
 
   has_attached_file(
     :news_entry_picture,

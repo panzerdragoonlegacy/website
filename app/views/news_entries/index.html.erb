@@ -38,11 +38,7 @@
   <% @news_entries.each do |news_entry| %>
     <div class="resource">
       <h2 class="news_entry_index_heading">
-        <% if news_entry.post_type == :news.to_s %>
-          <%= link_to news_entry.name, news_entry %>
-        <% elsif news_entry.post_type == :link.to_s %>
-          <%= link_to news_entry.name, news_entry.link %>
-        <% end %>
+        <%= link_to news_entry.name, news_entry %>
       </h2>
       <% if news_entry.news_entry_picture.present? %>
         <%= show_picture news_entry, 'news_entry_picture', :embedded %>

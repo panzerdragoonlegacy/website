@@ -77,10 +77,8 @@ class NewsEntryPolicy < ApplicationPolicy
 
   def attributes_except_contributor_profile_id_and_publish
     [
-      :post_type,
       :category_id,
       :name,
-      :link,
       :news_entry_picture,
       :content,
       tag_ids: []
