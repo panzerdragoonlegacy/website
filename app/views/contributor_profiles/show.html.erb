@@ -105,6 +105,30 @@
           %>
         </dd>
       <% end %>
+      <% unless @contributor_profile.instagram_username.blank? %>
+        <dt>Instagram</dt>
+        <dd>
+          <%=
+            link_to(
+              @contributor_profile.instagram_username,
+              'https://www.instagram.com/' +
+                @contributor_profile.instagram_username
+            )
+          %>
+        </dd>
+      <% end %>
+      <% unless @contributor_profile.deviantart_username.blank? %>
+        <dt>DeviantArt</dt>
+        <dd>
+          <%=
+            link_to(
+              @contributor_profile.deviantart_username,
+              'https://www.deviantart.com/' +
+                @contributor_profile.deviantart_username
+            )
+          %>
+        </dd>
+      <% end %>
     </dl>
   <% end %>
 </div>

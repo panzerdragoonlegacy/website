@@ -55,7 +55,9 @@ class ContributorProfilePolicy < ApplicationPolicy
       :website_name,
       :website_url,
       :facebook_username,
-      :twitter_username
+      :twitter_username,
+      :instagram_username,
+      :deviantart_username
     ]
   end
 end

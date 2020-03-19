@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200319071426) do
+ActiveRecord::Schema.define(version: 20200319083719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,6 +109,8 @@ ActiveRecord::Schema.define(version: 20200319071426) do
     t.string   "description"
     t.string   "website_name"
     t.datetime "published_at"
+    t.string   "instagram_username"
+    t.string   "deviantart_username"
   end
 
   create_table "downloads", force: :cascade do |t|

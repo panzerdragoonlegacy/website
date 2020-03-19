@@ -16,6 +16,8 @@
   <%= render 'website_url', f: f %>
   <%= render 'facebook_username', f: f %>
   <%= render 'twitter_username', f: f %>
+  <%= render 'instagram_username', f: f %>
+  <%= render 'deviantart_username', f: f %>
   <% if policy(@contributor_profile).permitted_attributes.include? :publish %>
     <%= render partial: 'admin/shared/form/publish', locals: { f: f } %>
   <% end %>

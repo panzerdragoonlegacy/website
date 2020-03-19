@@ -55,6 +55,8 @@ class ContributorProfile < ActiveRecord::Base
   before_save :strip_discourse_url_to_just_username
   before_save :strip_facebook_url_to_just_username
   before_save :strip_twitter_url_to_just_username
+  before_save :strip_instagram_url_to_just_username
+  before_save :strip_deviantart_url_to_just_username
 
   has_attached_file(
     :avatar,
@@ -102,5 +104,15 @@ class ContributorProfile < ActiveRecord::Base
   def strip_twitter_url_to_just_username
     self.twitter_username =
       self.twitter_username.sub('https://twitter.com/', '')
+  end
+
+  def strip_instagram_url_to_just_username
+    self.instagram_username =
+      self.instagram_username.sub('https://www.instagram.com/', '').chomp('/')
+  end
+
+  def strip_deviantart_url_to_just_username
+    self.deviantart_username =
+      self.deviantart_username.sub('https://www.deviantart.com/', '')
   end
 end

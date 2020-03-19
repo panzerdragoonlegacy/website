@@ -11,6 +11,8 @@ RSpec.describe ContributorProfile, type: :model do
     it { is_expected.to respond_to(:website_url) }
     it { is_expected.to respond_to(:facebook_username) }
     it { is_expected.to respond_to(:twitter_username) }
+    it { is_expected.to respond_to(:instagram_username) }
+    it { is_expected.to respond_to(:deviantart_username) }
     it { is_expected.to respond_to(:discourse_username) }
     it { is_expected.to respond_to(:publish) }
     it { is_expected.to respond_to(:created_at) }
