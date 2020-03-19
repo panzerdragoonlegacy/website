@@ -92,27 +92,37 @@ class ContributorProfile < ActiveRecord::Base
   private
 
   def strip_discourse_url_to_just_username
-    self.discourse_username = self.discourse_username
-      .sub('https://discuss.panzerdragoonlegacy.com/u/', '').chomp('/')
+    if self.discourse_username
+      self.discourse_username = self.discourse_username
+        .sub('https://discuss.panzerdragoonlegacy.com/u/', '').chomp('/')
+    end
   end
 
   def strip_facebook_url_to_just_username
-    self.facebook_username =
-      self.facebook_username.sub('https://www.facebook.com/', '')
+    if self.facebook_username
+      self.facebook_username =
+        self.facebook_username.sub('https://www.facebook.com/', '')
+    end
   end
 
   def strip_twitter_url_to_just_username
-    self.twitter_username =
-      self.twitter_username.sub('https://twitter.com/', '')
+    if self.twitter_username
+      self.twitter_username =
+        self.twitter_username.sub('https://twitter.com/', '')
+    end
   end
 
   def strip_instagram_url_to_just_username
-    self.instagram_username =
-      self.instagram_username.sub('https://www.instagram.com/', '').chomp('/')
+    if self.instagram_username
+      self.instagram_username =
+        self.instagram_username.sub('https://www.instagram.com/', '').chomp('/')
+    end
   end
 
   def strip_deviantart_url_to_just_username
-    self.deviantart_username =
-      self.deviantart_username.sub('https://www.deviantart.com/', '')
+    if self.deviantart_username
+      self.deviantart_username =
+        self.deviantart_username.sub('https://www.deviantart.com/', '')
+    end
   end
 end

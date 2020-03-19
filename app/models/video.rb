@@ -62,7 +62,9 @@ class Video < ActiveRecord::Base
   private
 
   def strip_youtube_url_to_just_id
-    self.youtube_video_id =
-      self.youtube_video_id.sub('https://www.youtube.com/watch?v=', '')
+    if self.youtube_video_id
+      self.youtube_video_id =
+        self.youtube_video_id.sub('https://www.youtube.com/watch?v=', '')
+    end
   end
 end
