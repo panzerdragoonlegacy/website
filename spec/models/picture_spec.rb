@@ -8,6 +8,7 @@ RSpec.describe Picture, type: :model do
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:information) }
     it { is_expected.to respond_to(:source_url) }
+    it { is_expected.to respond_to(:instagram_post_id) }
     it { is_expected.to respond_to(:picture) }
     it { is_expected.to respond_to(:full_size_link) }
     it { is_expected.to respond_to(:controversial_content) }

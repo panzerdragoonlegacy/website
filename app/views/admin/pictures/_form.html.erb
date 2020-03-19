@@ -27,6 +27,7 @@
         'e.g. Deviantart, Instagram, or Twitter.'
     }
   ) %>
+  <%= render 'instagram_post_id', f: f %>
   <%= render 'picture', f: f, picture: @picture %>
   <%= render(
     partial: 'admin/shared/form/name',

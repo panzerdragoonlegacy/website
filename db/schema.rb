@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200315013041) do
+ActiveRecord::Schema.define(version: 20200319071426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -250,6 +250,7 @@ ActiveRecord::Schema.define(version: 20200315013041) do
     t.boolean  "full_size_link",                       default: true
     t.integer  "sequence_number",                      default: 0
     t.boolean  "controversial_content",                default: false
+    t.string   "instagram_post_id"
   end
 
   create_table "poems", force: :cascade do |t|

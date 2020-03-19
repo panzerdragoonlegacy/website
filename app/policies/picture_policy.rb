@@ -74,6 +74,7 @@ class PicturePolicy < ApplicationPolicy
       :description,
       :information,
       :source_url,
+      :instagram_post_id,
       :full_size_link,
       :controversial_content,
       contributor_profile_ids: [],

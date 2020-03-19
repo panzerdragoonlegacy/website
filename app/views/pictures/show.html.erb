@@ -92,6 +92,15 @@
         )
       %>.
   <% end %>
+  <% unless @picture.instagram_post_id.blank? %>
+    View Post:
+      <%=
+        link_to(
+          'Instagram',
+          "https://www.instagram.com/p/#{@picture.instagram_post_id}"
+        )
+      %>.
+  <% end %>
   <% if @picture.full_size_link %>
     Download Full Size Picture: <%= link_to "JPEG", @picture.picture.url %>
   <% else %>

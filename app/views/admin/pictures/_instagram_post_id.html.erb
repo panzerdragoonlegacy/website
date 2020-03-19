@@ -1,0 +1,15 @@
+ <div class="form-group">
+  <%= f.label :instagram_post_id, 'Instagram Post ID' %>
+  <%= f.text_field :instagram_post_id, class: 'form-control' %>
+  <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: "The ID of the post on Panzer Dragoon Legacy's Instagram " \
+          'account. If the URL of the Instagram post is ' \
+          '"https://www.instagram.com/p/B4DqsQ3jYUY/", then the Instagram ' \
+          'Post ID is "B4DqsQ3jYUY".'
+      }
+    )
+  %>
+</div>
