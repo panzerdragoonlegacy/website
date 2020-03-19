@@ -52,9 +52,17 @@ class Video < ActiveRecord::Base
 
   before_save :set_published_at
   before_save :sync_file_names
+  before_save :strip_youtube_url_to_just_id
 
   def sync_file_names
     sync_file_name_of :mp4_video, file_name: "#{name.to_url}.mp4"
     sync_file_name_of :video_picture, file_name: "#{name.to_url}.jpg"
+  end
+
+  private
+
+  def strip_youtube_url_to_just_id
+    self.youtube_video_id =
+      self.youtube_video_id.sub('https://www.youtube.com/watch?v=', '')
   end
 end

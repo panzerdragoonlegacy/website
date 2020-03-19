@@ -45,6 +45,7 @@ class Picture < ActiveRecord::Base
   before_save :set_published_at
   before_save :sync_file_name
   before_save :replace_picture
+  before_save :strip_instagram_url_to_just_id
 
   def sync_file_name
     sync_file_name_of :picture, file_name: "#{name.to_url}.jpg"
@@ -61,5 +62,10 @@ class Picture < ActiveRecord::Base
       picture_to_replace = Picture.find(id_of_picture_to_replace)
       picture_to_replace.destroy
     end
+  end
+
+  def strip_instagram_url_to_just_id
+    self.instagram_post_id = self.instagram_post_id
+      .sub('https://www.instagram.com/p/', '').chomp('/')
   end
 end

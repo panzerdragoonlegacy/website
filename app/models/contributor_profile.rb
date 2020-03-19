@@ -52,6 +52,9 @@ class ContributorProfile < ActiveRecord::Base
   validates :name, presence: true, length: { in: 2..50 }, uniqueness: true
 
   before_save :set_published_at
+  before_save :strip_discourse_url_to_just_username
+  before_save :strip_facebook_url_to_just_username
+  before_save :strip_twitter_url_to_just_username
 
   has_attached_file(
     :avatar,
@@ -82,5 +85,22 @@ class ContributorProfile < ActiveRecord::Base
   # Sets avatar filename in the file system.
   Paperclip.interpolates :avatar_filename do |attachment, _style|
     attachment.instance.avatar_filename
+  end
+
+  private
+
+  def strip_discourse_url_to_just_username
+    self.discourse_username = self.discourse_username
+      .sub('https://discuss.panzerdragoonlegacy.com/u/', '').chomp('/')
+  end
+
+  def strip_facebook_url_to_just_username
+    self.facebook_username =
+      self.facebook_username.sub('https://www.facebook.com/', '')
+  end
+
+  def strip_twitter_url_to_just_username
+    self.twitter_username =
+      self.twitter_username.sub('https://twitter.com/', '')
   end
 end
