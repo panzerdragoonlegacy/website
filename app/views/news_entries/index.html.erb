@@ -3,6 +3,12 @@
 <% else %>
   <% title "What's New?" %>
 <% end %>
+<% description "The web's most comprehensive Panzer Dragoon archive, " \
+  'bringing you news, articles, fan art and other content related to the ' \
+  'Panzer Dragoon franchise!'
+%>
+<% open_graph_type 'article' %>
+<% open_graph_image "#{root_url.chomp('/')}/banner.jpg" %>
 
 <% unless @contributor_profile %>
   <p class="news_entry_category_selector">
