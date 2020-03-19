@@ -31,7 +31,7 @@ end
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap', '~> 4.1.1'
 gem 'cocoon', '~> 1.2.9'
-gem 'devise', '~> 4.5.0'
+gem 'devise', '~> 4.7.1'
 gem 'font-awesome-sass', '~> 5.5.0'
 gem 'jquery-rails', '~> 3.1.0'
 gem 'kaminari', '~> 1.1.1'
