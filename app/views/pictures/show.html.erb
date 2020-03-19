@@ -102,9 +102,12 @@
       %>.
   <% end %>
   <% if @picture.full_size_link %>
-    Download Full Size Picture: <%= link_to "JPEG", @picture.picture.url %>
+    Download Full Size Picture: <%= link_to "JPEG", @picture.picture.url %>.
   <% else %>
     Full size downloads are disabled for this picture.
+  <% end %>
+  <% if @picture.publish %>
+    Published <%= local_date @picture.published_at %>.
   <% end %>
 </p>
 
