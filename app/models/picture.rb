@@ -1,6 +1,7 @@
 class Picture < ActiveRecord::Base
   include Categorisable
   include Contributable
+  include Instagramable
   include Publishable
   include Taggable
   include SluggableWithId
@@ -61,13 +62,6 @@ class Picture < ActiveRecord::Base
     if publish && id_of_picture_to_replace.present?
       picture_to_replace = Picture.find(id_of_picture_to_replace)
       picture_to_replace.destroy
-    end
-  end
-
-  def strip_instagram_url_to_just_id
-    if self.instagram_post_id
-      self.instagram_post_id = self.instagram_post_id
-        .sub('https://www.instagram.com/p/', '').chomp('/')
     end
   end
 end

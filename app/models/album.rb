@@ -3,6 +3,7 @@ class Album < ActiveRecord::Base
 
   include Categorisable
   include Contributable
+  include Instagramable
   include Publishable
   include Taggable
   include SluggableWithId
@@ -24,6 +25,7 @@ class Album < ActiveRecord::Base
   validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }
 
+  before_save :strip_instagram_url_to_just_id
   before_save :publish_in_sequence
   before_save :set_published_at
   after_save :update_picture_categories
@@ -46,7 +48,9 @@ class Album < ActiveRecord::Base
 
   private
 
-  # Publishes the pictures/videos in the album one second apart
+  # Publishes the pictures/videos in the album one second apart (to ensure
+  # unique published_at fields). This ensures that they will appear in the
+  # Contributions Feed in sequence.
   def publish_in_sequence
     if publish
       self.pictures.sort_by{ |p| p.sequence_number }.each do |picture|

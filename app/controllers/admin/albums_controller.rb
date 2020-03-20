@@ -55,9 +55,7 @@ class Admin::AlbumsController < ApplicationController
   private
 
   def album_params
-    params.require(:album).permit(
-      policy(@album || :album).permitted_attributes
-    )
+    params.require(:album).permit(policy(@album || :album).permitted_attributes)
   end
 
   def synchronised_params(the_params)
