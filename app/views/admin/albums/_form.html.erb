@@ -46,6 +46,16 @@
   %>
   <%=
     render(
+      partial: 'admin/shared/form/instagram_post_id',
+      locals: {
+        f: f,
+        info: 'Pictures in the album with blank Instagram post IDs will ' \
+          "inherit the album's Instagram post ID."
+      }
+    )
+  %>
+  <%=
+    render(
       partial: 'admin/shared/form/name',
       locals: {
         f: f,

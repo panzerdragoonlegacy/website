@@ -68,6 +68,7 @@ class AlbumPolicy < ApplicationPolicy
   def attributes_except_publish
     shared_attributes + [
       :category_id,
+      :instagram_post_id,
       contributor_profile_ids: [],
       tag_ids: [],
       pictures_attributes: pictures_attributes,
@@ -79,6 +80,7 @@ class AlbumPolicy < ApplicationPolicy
     shared_attributes + [
       :id,
       :category_id,
+      :instagram_post_id,
       :picture,
       :_destroy,
       contributor_profile_ids: [],

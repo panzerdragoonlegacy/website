@@ -40,6 +40,9 @@
     </div>
     <%= render partial: 'admin/shared/form/sequence_number', locals: { f: f } %>
     <%= render partial: 'admin/shared/form/source_url', locals: { f: f } %>
+    <%= render(
+      partial: 'admin/shared/form/instagram_post_id', locals: { f: f }
+    ) %>
     <%= render partial: 'admin/shared/form/name', locals: { f: f } %>
     <%= render partial: 'admin/shared/form/description', locals: { f: f } %>
     <%= render(
