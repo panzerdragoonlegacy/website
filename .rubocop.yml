@@ -1,9 +1,21 @@
 AllCops:
   Exclude:
     - db/schema.rb
+    - 'bin/**'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'spec/**/*'
+    - 'vendor/bundle/gems/**/*'
+Layout/LineLength:
+  Max: 80
 Style/FrozenStringLiteralComment:
   Enabled: false
-Rails:
-  Enabled: true
-Documentation:
+Style/Documentation:
+  Enabled: false
+Style/HashEachMethods:
+  Enabled: false
+Style/HashTransformKeys:
+  Enabled: false
+Style/HashTransformValues:
   Enabled: false
