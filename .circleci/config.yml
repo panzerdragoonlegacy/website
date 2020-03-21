@@ -1,0 +1,115 @@
+version: 2.1
+
+references:
+  default_docker_ruby_executor: &default_docker_ruby_executor
+    image: circleci/ruby:2.5.3
+    environment:
+      BUNDLE_JOBS: 3
+      BUNDLE_RETRY: 3
+      BUNDLE_PATH: vendor/bundle
+      PGHOST: 127.0.0.1
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      RAILS_ENV: test
+  postgres: &postgres
+    image: circleci/postgres:9.5-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: panzerdragoonlegacy_test
+      POSTGRES_PASSWORD: postgres
+
+jobs:
+  build:
+    docker:
+      - *default_docker_ruby_executor
+    steps:
+      - checkout
+      - run:
+          name: Install Bundler
+          command: gem install bundler:1.17.3
+      # bundle cache
+      - restore_cache:
+          keys:
+            - pdl-bundle-v2-{{ checksum "Gemfile.lock" }}
+            - pdl-bundle-v2-
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      # Store bundle cache
+      - save_cache:
+          key: pdl-bundle-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Install Bundler Audit
+          command: gem install bundler-audit
+      - run:
+          name: Running bundle audit check
+          command: bundle audit check --update
+      - run:
+          name: Running Brakeman
+          command: bundle exec brakeman -w3 -q -o /dev/stderr
+      - run:
+          name: Running Rubocop
+          command: bundle exec rubocop
+      # - run:
+      #     name: Running Standard
+      #     command: npx standard
+  test:
+    docker:
+      - *default_docker_ruby_executor
+      - *postgres
+    steps:
+      - checkout
+      - run:
+          name: Install Bundler
+          command: gem install bundler:1.17.3
+      - restore_cache:
+          keys:
+            - pdl-bundle-v2-{{ checksum "Gemfile.lock" }}
+            - pdl-bundle-v2-
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bundle exec rake db:schema:load --trace
+      # Run rspec in parallel
+      - run:
+          command: |
+            mkdir /tmp/test-results
+            TESTFILES=$(circleci tests glob "spec/**/*_spec.rb")
+            bundle exec rspec --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress -- $TESTFILES
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+  push_latest_image:
+    docker:
+      - *default_docker_ruby_executor
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+      - run: docker build --no-cache -t chrisalley/panzerdragoonlegacy:latest --file Dockerfile .
+      - run: docker push chrisalley/panzerdragoonlegacy:latest
+
+workflows:
+  version: 2.1
+  panzer_dragoon_legacy_workflow:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - push_latest_image:
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              only: /^master.*/
