@@ -43,9 +43,9 @@ jobs:
       - run:
           name: Install Bundler Audit
           command: gem install bundler-audit
-      - run:
-          name: Running bundle audit check
-          command: bundle audit check --update
+      # - run:
+      #     name: Running bundle audit check
+      #     command: bundle audit check --update
       - run:
           name: Running Brakeman
           command: bundle exec brakeman -w3 -q -o /dev/stderr
