@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200320222938) do
+ActiveRecord::Schema.define(version: 20200402071446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -313,6 +313,15 @@ ActiveRecord::Schema.define(version: 20200320222938) do
   end
 
   add_index "sagas", ["page_id"], name: "index_sagas_on_page_id", using: :btree
+
+  create_table "shares", force: :cascade do |t|
+    t.string   "url"
+    t.string   "comment"
+    t.integer  "category_id"
+    t.integer  "contributor_profile_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "special_pages", force: :cascade do |t|
     t.string   "name",         limit: 255

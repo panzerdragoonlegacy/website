@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :users
 
     resources :news_entries, path: 'news-entries'
+    resources :shares
     resources :pages
     resources :pictures
     resources :music_tracks, path: 'music-tracks'
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
   get 'encyclopaedia', to: 'encyclopaedia#index', as: 'encyclopaedia_index'
   get 'encyclopaedia/:id', to: 'encyclopaedia#show', as: 'encyclopaedia'
   resources :tags
+  resources :shares
   resources :contributions
 
   resources :contributor_profiles, path: 'contributors' do

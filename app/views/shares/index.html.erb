@@ -1,0 +1,26 @@
+<% title 'Shares Feed' %>
+
+<% if @shares %>
+  <div id="resources">
+    <% @shares.each do |share| %>
+      <div class="resource">
+        <div class="details">
+          <h2>
+            <%= link_to(
+              share.contributor_profile.name,
+              contributor_profile_path(share.contributor_profile)
+            )%> shared a link
+            <%= local_time_ago share.created_at %>
+          </h2>
+          <% if share.comment.present? %>
+            <p style="margin-bottom: 15px;"><%= share.comment %></p>
+          <% end %>
+          <div>
+            <%= raw show_embedded_share(share.url) %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= paginate @shares %>
+<% end %>

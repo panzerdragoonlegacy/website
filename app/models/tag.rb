@@ -11,6 +11,12 @@ class Tag < ActiveRecord::Base
     source_type: 'NewsEntry'
   )
   has_many(
+    :shares,
+    through: :taggings,
+    source: :taggable,
+    source_type: 'Share'
+  )
+  has_many(
     :pages,
     through: :taggings,
     source: :taggable,

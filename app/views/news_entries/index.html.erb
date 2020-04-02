@@ -34,9 +34,10 @@
     <% else %>
       <%= link_to 'Meta', news_entries_path(category: 'meta') %>
     <% end %>
-    <%= link_to(
-      'Contributions Feed', contributions_path, class: 'contributions_feed'
-    ) %>
+    <span class="feed_links">
+      <%= link_to 'Shares Feed', shares_path %> |
+      <%= link_to 'Contributions Feed', contributions_path %>
+    </span>
   </p>
 <% end %>
 

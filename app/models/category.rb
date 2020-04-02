@@ -6,6 +6,7 @@ class Category < ActiveRecord::Base
   belongs_to :category_group
   belongs_to :saga
   has_many :news_entries, dependent: :destroy
+  has_many :shares, dependent: :destroy
   has_many :pages, dependent: :destroy
   has_many :pictures, dependent: :destroy
   has_many :music_tracks, dependent: :destroy
@@ -21,6 +22,7 @@ class Category < ActiveRecord::Base
   # The list of category types.
   CATEGORY_TYPES = %w(
     news_entry
+    share
     encyclopaedia
     literature
     picture

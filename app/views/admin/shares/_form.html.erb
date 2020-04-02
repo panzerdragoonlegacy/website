@@ -1,0 +1,18 @@
+<%= form_for [:admin, @share], html: { multipart: true } do |f| %>
+  <%= render 'admin/shared/form/error_messages', target: @share %>
+  <%=
+    render(
+      partial: 'admin/shared/form/category',
+      locals: { f: f, categories: @categories }
+    )
+  %>
+  <%= render 'url', f: f %>
+  <%= render 'comment', f: f %>
+  <%=
+    render(
+      partial: 'admin/shared/form/tags',
+      locals: { f: f, tag_ids: @share.tag_ids }
+    )
+  %>
+  <%= render partial: 'admin/shared/form/save_buttons', locals: { f: f } %>
+<% end %>

@@ -12,6 +12,7 @@ RSpec.describe Tag, type: :model do
   describe 'associations' do
     it { is_expected.to have_many(:taggings).dependent(:destroy) }
     it { is_expected.to have_many(:news_entries) }
+    it { is_expected.to have_many(:shares) }
     it { is_expected.to have_many(:pages) }
     it { is_expected.to have_many(:pictures) }
     it { is_expected.to have_many(:music_tracks) }
