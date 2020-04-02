@@ -27,10 +27,8 @@ class PagePolicy < ApplicationPolicy
   end
 
   def show?
-    if user
-      return true if user.administrator?
-      return true if user_contributes_to_record?
-    end
+    return true if user && (user.administrator? || user_contributes_to_record?)
+
     if record.category
       return true if record.publish? && record.category.publish?
     end
@@ -46,10 +44,9 @@ class PagePolicy < ApplicationPolicy
   end
 
   def edit?
-    if user
-      return true if user.administrator?
-      return true if user_contributes_to_record? && !record.publish
-    end
+    return unless user
+    return true if user.administrator?
+    return true if user_contributes_to_record? && !record.publish
   end
 
   def update?
@@ -57,15 +54,12 @@ class PagePolicy < ApplicationPolicy
   end
 
   def destroy?
-    if edit?
-      return false if record.chapters.length > 0
-      return true
-    end
+    return true if edit? && record.chapters.empty?
   end
 
   def permitted_attributes
     permitted_attributes = attributes_except_publish
-    permitted_attributes << :publish if user && user.administrator?
+    permitted_attributes << :publish if user&.administrator?
     permitted_attributes
   end
 
@@ -84,7 +78,7 @@ class PagePolicy < ApplicationPolicy
       :content,
       contributor_profile_ids: [],
       tag_ids: [],
-      illustrations_attributes: [:id, :illustration, :_destroy]
+      illustrations_attributes: %i[id illustration _destroy]
     ]
   end
 end

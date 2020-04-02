@@ -43,10 +43,9 @@ class PicturePolicy < ApplicationPolicy
   end
 
   def edit?
-    if user
-      return true if user.administrator?
-      return true if user_contributes_to_record? && !record.publish
-    end
+    return unless user
+    return true if user.administrator?
+    return true if user_contributes_to_record? && !record.publish
   end
 
   def update?
@@ -59,7 +58,7 @@ class PicturePolicy < ApplicationPolicy
 
   def permitted_attributes
     permitted_attributes = attributes_except_publish
-    permitted_attributes << :publish if user && user.administrator?
+    permitted_attributes << :publish if user&.administrator?
     permitted_attributes
   end
 
@@ -83,9 +82,6 @@ class PicturePolicy < ApplicationPolicy
   end
 
   def file_attributes
-    [
-      :id_of_picture_to_replace,
-      :picture
-    ]
+    %i[id_of_picture_to_replace picture]
   end
 end

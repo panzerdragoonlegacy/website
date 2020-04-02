@@ -17,9 +17,7 @@ class TagPolicy < ApplicationPolicy
   end
 
   def new?
-    if user
-      return true if user.administrator?
-    end
+    return true if user&.administrator?
   end
 
   def create?
@@ -27,9 +25,7 @@ class TagPolicy < ApplicationPolicy
   end
 
   def edit?
-    if user
-      return true if user.administrator?
-    end
+    return true if user&.administrator?
   end
 
   def update?
@@ -41,10 +37,6 @@ class TagPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [
-      :tag_picture,
-      :name,
-      :description
-    ]
+    %i[tag_picture name description]
   end
 end

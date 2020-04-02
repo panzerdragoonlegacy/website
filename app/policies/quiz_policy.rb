@@ -42,10 +42,9 @@ class QuizPolicy < ApplicationPolicy
   end
 
   def edit?
-    if user
-      return true if user.administrator?
-      return true if user_contributes_to_record? && !record.publish
-    end
+    return unless user
+    return true if user.administrator?
+    return true if user_contributes_to_record? && !record.publish
   end
 
   def update?
@@ -58,7 +57,7 @@ class QuizPolicy < ApplicationPolicy
 
   def permitted_attributes
     permitted_attributes = attributes_except_publish
-    permitted_attributes << :publish if user && user.administrator?
+    permitted_attributes << :publish if user&.administrator?
     permitted_attributes
   end
 
@@ -79,6 +78,6 @@ class QuizPolicy < ApplicationPolicy
   end
 
   def quiz_answers_attributes
-    [:content, :correct_answer]
+    %i[content correct_answer]
   end
 end

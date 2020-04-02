@@ -7,8 +7,13 @@ AllCops:
     - 'script/**/*'
     - 'spec/**/*'
     - 'vendor/bundle/gems/**/*'
+    - 'vendor/bundle/specifications/*'
 Layout/LineLength:
   Max: 80
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/Documentation:

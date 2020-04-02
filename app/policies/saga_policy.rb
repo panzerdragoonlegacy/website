@@ -17,6 +17,6 @@ class SagaPolicy < ApplicationPolicy
   end
 
   def destroy?
-    return true if user && user.administrator? && record.categories.blank?
+    return true if user&.administrator? && record.categories.blank?
   end
 end

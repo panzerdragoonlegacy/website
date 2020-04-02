@@ -49,9 +49,9 @@ jobs:
       - run:
           name: Running Brakeman
           command: bundle exec brakeman -w3 -q -o /dev/stderr
-      - run:
-          name: Running Rubocop
-          command: bundle exec rubocop
+      # - run:
+      #     name: Running Rubocop
+      #     command: bundle exec rubocop
       # - run:
       #     name: Running Standard
       #     command: npx standard

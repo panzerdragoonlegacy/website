@@ -59,8 +59,8 @@ class NewsEntryPolicy < ApplicationPolicy
 
   def permitted_attributes
     permitted_attributes = attributes_except_contributor_profile_id_and_publish
-    if user && user.administrator?
-      return permitted_attributes + [:contributor_profile_id, :publish]
+    if user&.administrator?
+      return permitted_attributes + %i[contributor_profile_id publish]
     end
     permitted_attributes
   end
@@ -68,11 +68,8 @@ class NewsEntryPolicy < ApplicationPolicy
   private
 
   def user_authors_record?
-    if user.contributor_profile.present?
-      if record.contributor_profile_id == user.contributor_profile_id
-        return true
-      end
-    end
+    return unless user.contributor_profile.present?
+    return true if record.contributor_profile_id == user.contributor_profile_id
   end
 
   def attributes_except_contributor_profile_id_and_publish

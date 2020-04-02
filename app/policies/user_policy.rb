@@ -16,6 +16,6 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    return true if user && user.administrator?
+    return true if user&.administrator?
   end
 end
