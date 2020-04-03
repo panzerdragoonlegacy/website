@@ -18,7 +18,7 @@
         <th scope="col"><%= sort_link @q, :url, 'URL' %></th>
         <th scope="col"><%= sort_link @q, :comment %></th>
         <th scope="col"><%= sort_link @q, :category_name, 'Category' %></th>
-        <th scope="col">Contributor</th>
+        <th scope="col"><%= sort_link @q, :contributor, 'Contributor' %></th>
         <th scope="col"><%= sort_link @q, :created_at, 'Created' %></th>
         <th scope="col"><%= sort_link @q, :updated_at, 'Modified' %></th>
         <th scope="col"></th>
@@ -28,10 +28,10 @@
     <tbody>
       <% @shares.each do |share| %>
         <tr>
-          <td><%= share.url %></td>
+          <td><%= link_to share.url, share.url %></td>
           <td>
             <% if share.comment %>
-              <%= share.comment %>
+              <%= truncated_text(share.comment, 50) %>
             <% end %>
           </td>
           <%=

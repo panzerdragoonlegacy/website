@@ -61,7 +61,7 @@ class Admin::SharesController < ApplicationController
     if params[:continue_editing]
       redirect_to edit_admin_share_path(@share)
     else
-      redirect_to admin_shares_path
+      redirect_to shares_path
     end
   end
 

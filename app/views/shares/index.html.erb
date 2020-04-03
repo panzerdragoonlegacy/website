@@ -1,5 +1,9 @@
 <% title 'Shares Feed' %>
 
+<% if policy(Share).new? %>
+  <p><%= link_to 'New Share', new_admin_share_path(Share) %></p>
+<% end %>
+
 <% if @shares %>
   <div id="resources">
     <% @shares.each do |share| %>
@@ -12,6 +16,9 @@
             )%> shared a link
             <%= local_time_ago share.created_at %>
           </h2>
+          <% if policy(share).edit? %>
+            <p><%= link_to 'Edit Share', edit_admin_share_path(share) %></p>
+          <% end %>
           <% if share.comment.present? %>
             <p style="margin-bottom: 15px;"><%= share.comment %></p>
           <% end %>
