@@ -22,8 +22,9 @@ RSpec.describe Share, type: :model do
     it do
       is_expected.to validate_length_of(:url).is_at_least(1).is_at_most(250)
     end
+    it { is_expected.to validate_presence_of(:comment) }
     it do
-      is_expected.to validate_length_of(:comment).is_at_least(0).is_at_most(250)
+      is_expected.to validate_length_of(:comment).is_at_least(1).is_at_most(250)
     end
     it { is_expected.to validate_presence_of(:category) }
     it { is_expected.to validate_presence_of(:contributor_profile) }
