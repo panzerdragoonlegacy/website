@@ -11,6 +11,8 @@
   )
 %>
 
+<%= render 'url_form', { q: @q, path: admin_shares_path } %>
+
 <% if @shares %>
   <table class="table">
     <thead>
