@@ -25,6 +25,8 @@ RSpec.describe Page, type: :model do
       is_expected.to have_many(:contributor_profiles).through(:contributions)
     end
     it { is_expected.to have_many(:illustrations).dependent(:destroy) }
+    it { is_expected.to have_many(:taggings).dependent(:destroy) }
+    it { is_expected.to have_many(:tags).through(:taggings) }
   end
 
   describe 'nested attributes' do
