@@ -25,6 +25,7 @@ class SharePolicy < ApplicationPolicy
       :category_id,
       :url,
       :comment,
+      :show_in_feed,
       tag_ids: []
     ]
   end

@@ -14,5 +14,6 @@
       locals: { f: f, tag_ids: @share.tag_ids }
     )
   %>
+  <%= render 'show_in_feed', f: f %>
   <%= render partial: 'admin/shared/form/save_buttons', locals: { f: f } %>
 <% end %>

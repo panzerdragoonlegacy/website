@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200402071446) do
+ActiveRecord::Schema.define(version: 20200404225459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -321,6 +321,7 @@ ActiveRecord::Schema.define(version: 20200402071446) do
     t.integer  "contributor_profile_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "show_in_feed",           default: true
   end
 
   create_table "special_pages", force: :cascade do |t|
