@@ -27,12 +27,11 @@ class PagePolicy < ApplicationPolicy
   end
 
   def show?
-    return true if user && (user.administrator? || user_contributes_to_record?)
-
-    if record.category
-      return true if record.publish? && record.category.publish?
+    if user
+      return true if user.administrator?
+      return true if user_contributes_to_record?
     end
-    record.publish?
+    return true if record.publish? && record&.category.publish?
   end
 
   def new?
