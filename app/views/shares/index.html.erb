@@ -1,4 +1,11 @@
-<% title 'Shares Feed (Beta!)' %>
+<% title "What's New? - Shares (Beta!)" %>
+<%= render partial: 'shared/meta_tags' %>
+
+<p class="news_entry_category_selector">
+  <%= link_to 'News', news_entries_path %> |
+  <%= link_to 'Contributions', contributions_path %> |
+  Shares (Beta!)
+</p>
 
 <% if policy(Share).new? %>
   <p><%= link_to 'New Share', new_admin_share_path(Share) %></p>

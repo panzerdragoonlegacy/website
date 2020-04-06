@@ -7,37 +7,13 @@
   'bringing you news, articles, fan art and other content related to the ' \
   'Panzer Dragoon franchise!'
 %>
-<% open_graph_type 'article' %>
-<% open_graph_image "#{root_url.chomp('/')}/banner.jpg" %>
+<%= render partial: 'shared/meta_tags' %>
 
 <% unless @contributor_profile %>
   <p class="news_entry_category_selector">
-    <% if !params[:category] %>
-      All
-    <% else %>
-      <%= link_to 'All', news_entries_path %>
-    <% end %> |
-    <% if params[:category] == 'news' %>
-      News
-    <% else %>
-      <%= link_to 'News', news_entries_path(category: 'news') %>
-    <% end %> |
-    <% if params[:category] == 'contributions' %>
-      Contributions
-    <% else %>
-      <%= link_to(
-        'Contributions', news_entries_path(category: 'contributions')
-      ) %>
-    <% end %> |
-    <% if params[:category] == 'meta' %>
-      Meta
-    <% else %>
-      <%= link_to 'Meta', news_entries_path(category: 'meta') %>
-    <% end %>
-    <span class="feed_links">
-      <%= link_to 'Shares Feed (Beta!)', shares_path %> |
-      <%= link_to 'Contributions Feed', contributions_path %>
-    </span>
+    News |
+    <%= link_to 'Contributions', contributions_path %> |
+    <%= link_to 'Shares (Beta!)', shares_path %>
   </p>
 <% end %>
 
