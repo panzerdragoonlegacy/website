@@ -31,7 +31,7 @@ class PagePolicy < ApplicationPolicy
       return true if user.administrator?
       return true if user_contributes_to_record?
     end
-    return true if record.publish? && record&.category.publish?
+    true if record_and_category_are_published?
   end
 
   def new?
@@ -79,5 +79,13 @@ class PagePolicy < ApplicationPolicy
       tag_ids: [],
       illustrations_attributes: %i[id illustration _destroy]
     ]
+  end
+
+  def record_and_category_are_published?
+    if record.category
+      return true if record.publish? && record.category.publish?
+    elsif record.publish?
+      true
+    end
   end
 end
