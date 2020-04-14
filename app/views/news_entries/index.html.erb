@@ -62,6 +62,9 @@
             - <span class="unpublished">Unpublished</span>
           <% end %>
         </p>
+        <% if news_entry.summary.present? %>
+          <h3><%= news_entry.summary %></h3>
+        <% end %>
         <%= raw news_entry_markdown_to_html news_entry.content %>
       </div>
     </div>

@@ -32,6 +32,7 @@
       }
     )
   %>
+  <%= render partial: 'summary', locals: { f: f } %>
   <%= render partial: 'admin/shared/form/content', locals: { f: f } %>
   <%=
     render(

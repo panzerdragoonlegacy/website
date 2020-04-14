@@ -77,6 +77,7 @@ class NewsEntryPolicy < ApplicationPolicy
       :category_id,
       :name,
       :news_entry_picture,
+      :summary,
       :content,
       tag_ids: []
     ]

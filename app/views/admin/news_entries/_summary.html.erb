@@ -1,0 +1,10 @@
+<div class="form-group">
+  <%= f.label :summary, 'Summary' %>
+  <%= f.text_area :summary, rows: 3, class: 'form-control' %>
+  <%= render(
+    partial: 'admin/shared/form/info',
+    locals: {
+      info: 'A short summary of the news. Reuse this summary on social media.'
+    }
+  ) %>
+</div>
