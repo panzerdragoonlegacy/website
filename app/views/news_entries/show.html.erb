@@ -1,6 +1,6 @@
 <% title @news_entry.name %>
-<% if @news_entry.summary %>
-  <% description @news_entry.summary.present? %>
+<% if @news_entry.summary.present? %>
+  <% description @news_entry.summary %>
 <% else %>
   <% description truncated_text(@news_entry.content) %>
 <% end %>
