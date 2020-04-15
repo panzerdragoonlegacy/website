@@ -19,5 +19,6 @@ class EncyclopaediaController < ApplicationController
     load_pictures
     load_quizzes
     load_videos
+    load_tags
   end
 end

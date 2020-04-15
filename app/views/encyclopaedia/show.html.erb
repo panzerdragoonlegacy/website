@@ -25,6 +25,8 @@
 <%= render 'encyclopaedia/show/quizzes' %>
 <%= render 'encyclopaedia/show/videos' %>
 
+<%= render partial: 'shared/related_tags' %>
+
 <p class="links">
   <%= link_to 'Encyclopaedia', encyclopaedia_path %> |
   <%= link_to @page.category.name, category_path(@page.category) %>
