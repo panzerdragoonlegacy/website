@@ -1,0 +1,35 @@
+<h2>Revisions</h2>
+
+<% if versions.count === 0 %>
+  <%= render(
+    partial: 'admin/shared/form/info',
+    locals: { info: 'No revisions have been made.' }
+  ) %>
+<% else %>
+  <ul>
+    <% versions.reverse_each do |version| %>
+      <li>
+        <h4>
+          Revised by
+          <%= link_to_contributor_profile(version.whodunnit.to_i) %>
+          <%= local_time_ago version.created_at %>
+        </h4>
+        <dl>
+          <% version.changeset.each do |key, value| %>
+            <% if value[0].present? || value[1].present? %>
+              <dt><%= key %></dt>
+              <dd>
+                <% if key.in?(%w(encrypted_password reset_password_token)) %>
+                  Value not displayed for security reasons.
+                <% else %>
+                  <s class="text-danger"><%= value[0] %></s>
+                  <span class="text-success"><%= value[1] %></span>
+                <% end %>
+              </dd>
+            <% end %>
+          <% end %>
+        </dl>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

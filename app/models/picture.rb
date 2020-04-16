@@ -7,6 +7,8 @@ class Picture < ActiveRecord::Base
   include SluggableWithId
   include Syncable
 
+  has_paper_trail
+
   belongs_to :album
 
   validates :name, presence: true, length: { in: 2..100 }

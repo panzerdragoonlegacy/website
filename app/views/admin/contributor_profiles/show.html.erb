@@ -1,0 +1,6 @@
+<% title @contributor_profile.name %>
+
+<%= render(
+  partial: 'admin/shared/revisions',
+  locals: { versions: @contributor_profile.versions }
+) %>

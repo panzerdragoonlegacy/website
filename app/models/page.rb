@@ -5,6 +5,8 @@ class Page < ActiveRecord::Base
   include SluggableWithId
   include Taggable
 
+  has_paper_trail
+
   belongs_to :category
   has_one :saga
   has_many :illustrations, dependent: :destroy

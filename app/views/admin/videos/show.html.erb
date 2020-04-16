@@ -1,0 +1,6 @@
+<% title @video.name %>
+
+<%= render(
+  partial: 'admin/shared/revisions',
+  locals: { versions: @video.versions }
+) %>

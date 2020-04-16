@@ -13,5 +13,7 @@ class User < ActiveRecord::Base
     :timeoutable
   )
 
+  has_paper_trail
+
   belongs_to :contributor_profile
 end

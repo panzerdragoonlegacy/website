@@ -1,0 +1,6 @@
+<% title @download.name %>
+
+<%= render(
+  partial: 'admin/shared/revisions',
+  locals: { versions: @download.versions }
+) %>

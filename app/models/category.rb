@@ -3,6 +3,8 @@ class Category < ActiveRecord::Base
   include SluggableWithoutId
   include Syncable
 
+  has_paper_trail
+
   belongs_to :category_group
   belongs_to :saga
   has_many :news_entries, dependent: :destroy

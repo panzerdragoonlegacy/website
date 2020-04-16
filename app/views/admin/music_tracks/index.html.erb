@@ -34,6 +34,7 @@
         <th scope="col"><%= sort_link @q, :publish, 'Published' %></th>
         <th scope="col"></th>
         <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -91,6 +92,12 @@
               locals: { resource: music_track }
             )
           %>
+          <%= render(
+            partial: 'admin/shared/table/revisions_button',
+            locals: {
+              resource: music_track, path: admin_music_track_path(music_track)
+            }
+          ) %>
           <%=
             render(
               partial: 'admin/shared/table/edit_button',

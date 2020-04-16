@@ -1,0 +1,6 @@
+<% title @user.email %>
+
+<%= render(
+  partial: 'admin/shared/revisions',
+  locals: { versions: @user.versions }
+) %>

@@ -32,6 +32,7 @@
         <th scope="col"><%= sort_link @q, :publish, 'Published' %></th>
         <th scope="col"></th>
         <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -77,6 +78,13 @@
               locals: { resource: contributor_profile }
             )
           %>
+          <%= render(
+            partial: 'admin/shared/table/revisions_button',
+            locals: {
+              resource: contributor_profile,
+              path: admin_contributor_profile_path(contributor_profile)
+            }
+          ) %>
           <%=
             render(
               partial: 'admin/shared/table/edit_button',

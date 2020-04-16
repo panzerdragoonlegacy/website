@@ -4,6 +4,8 @@ class Quiz < ActiveRecord::Base
   include Taggable
   include SluggableWithoutId
 
+  has_paper_trail
+
   has_many :quiz_questions, dependent: :destroy
   accepts_nested_attributes_for(
     :quiz_questions,

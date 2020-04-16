@@ -6,6 +6,8 @@ class Download < ActiveRecord::Base
   include SluggableWithId
   include Syncable
 
+  has_paper_trail
+
   validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }
 

@@ -1,0 +1,12 @@
+<td>
+  <% if policy(resource).show? %>
+    <%=
+      link_to(
+        'Revisions',
+        path,
+        class: 'btn btn-secondary',
+        role: 'button'
+      )
+      %>
+  <% end %>
+</td>

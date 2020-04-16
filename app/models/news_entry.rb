@@ -5,6 +5,8 @@ class NewsEntry < ActiveRecord::Base
   include Syncable
   include Taggable
 
+  has_paper_trail
+
   belongs_to :contributor_profile
 
   validates :name, presence: true, length: { in: 2..150 }, uniqueness: true

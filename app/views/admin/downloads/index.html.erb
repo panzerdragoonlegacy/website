@@ -34,6 +34,7 @@
         <th scope="col"><%= sort_link @q, :publish, 'Published' %></th>
         <th scope="col"></th>
         <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -89,6 +90,12 @@
               locals: { resource: download }
             )
           %>
+          <%= render(
+            partial: 'admin/shared/table/revisions_button',
+            locals: {
+              resource: download, path: admin_download_path(download)
+            }
+          ) %>
           <%=
             render(
               partial: 'admin/shared/table/edit_button',

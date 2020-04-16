@@ -1,6 +1,8 @@
 class CategoryGroup < ActiveRecord::Base
   include SluggableWithoutId
 
+  has_paper_trail
+
   has_many :categories, dependent: :destroy
 
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true

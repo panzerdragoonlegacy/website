@@ -12,6 +12,7 @@
         <th scope="col">Published</th>
         <th scope="col"></th>
         <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -60,6 +61,10 @@
               locals: { resource: chapter }
             )
           %>
+          <%= render(
+            partial: 'admin/shared/table/revisions_button',
+            locals: { resource: chapter, path: admin_page_path(chapter) }
+          ) %>
           <%=
             render(
               partial: 'admin/shared/table/edit_button',

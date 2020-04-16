@@ -1,0 +1,6 @@
+<% title @page.name %>
+
+<%= render(
+  partial: 'admin/shared/revisions',
+  locals: { versions: @page.versions }
+) %>

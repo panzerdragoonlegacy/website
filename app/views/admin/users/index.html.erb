@@ -37,6 +37,7 @@
       <th scope="col"><%= sort_link @q, :locked_at, 'Unlocked' %></th>
       <th scope="col"></th>
       <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
     <% @users.each do |user| %>
       <tr>
@@ -81,6 +82,10 @@
             locals: { check: user.locked_at.present? }
           ) %>
         </td>
+        <%= render(
+          partial: 'admin/shared/table/revisions_button',
+          locals: { resource: user, path: admin_user_path(user) }
+        ) %>
         <%=
           render(
             partial: 'admin/shared/table/edit_button',

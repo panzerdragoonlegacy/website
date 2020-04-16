@@ -6,6 +6,8 @@ class MusicTrack < ActiveRecord::Base
   include SluggableWithId
   include Syncable
 
+  has_paper_trail
+
   validates(
     :track_number,
     presence: true,

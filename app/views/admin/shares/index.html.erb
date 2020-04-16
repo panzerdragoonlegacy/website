@@ -25,6 +25,7 @@
         <th scope="col"><%= sort_link @q, :updated_at, 'Modified' %></th>
         <th scope="col"></th>
         <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -62,6 +63,10 @@
               locals: { resource: share }
             )
           %>
+          <%= render(
+            partial: 'admin/shared/table/revisions_button',
+            locals: { resource: share, path: admin_share_path(share) }
+          ) %>
           <%=
             render(
               partial: 'admin/shared/table/edit_button',

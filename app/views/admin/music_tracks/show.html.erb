@@ -1,0 +1,6 @@
+<% title @music_track.name %>
+
+<%= render(
+  partial: 'admin/shared/revisions',
+  locals: { versions: @music_track.versions }
+) %>

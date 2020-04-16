@@ -1,0 +1,6 @@
+<% title @picture.name %>
+
+<%= render(
+  partial: 'admin/shared/revisions',
+  locals: { versions: @picture.versions }
+) %>

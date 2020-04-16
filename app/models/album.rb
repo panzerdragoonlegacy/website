@@ -9,6 +9,8 @@ class Album < ActiveRecord::Base
   include SluggableWithId
   include Syncable
 
+  has_paper_trail
+
   has_many :pictures, dependent: :destroy
   accepts_nested_attributes_for(
     :pictures,

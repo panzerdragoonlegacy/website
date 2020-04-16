@@ -1,0 +1,6 @@
+<% title @category.name %>
+
+<%= render(
+  partial: 'admin/shared/revisions',
+  locals: { versions: @category.versions }
+) %>

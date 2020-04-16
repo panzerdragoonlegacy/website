@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   # after_filter :verify_authorized, except: :index
   # after_filter :verify_policy_scoped, only: :index
 
+  before_action :set_paper_trail_whodunnit
   before_action :sagas_for_left_nav
 
   private

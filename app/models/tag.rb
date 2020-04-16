@@ -2,6 +2,8 @@ class Tag < ActiveRecord::Base
   include SluggableWithoutId
   include Syncable
 
+  has_paper_trail
+
   has_many :taggings, dependent: :destroy
 
   has_many(

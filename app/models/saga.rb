@@ -1,6 +1,8 @@
 class Saga < ActiveRecord::Base
   include SluggableWithoutId
 
+  has_paper_trail
+
   belongs_to :page
   has_many :categories, dependent: :destroy
 
