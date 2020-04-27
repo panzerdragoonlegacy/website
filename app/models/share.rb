@@ -1,5 +1,6 @@
 class Share < ActiveRecord::Base
   include Categorisable
+  include Publishable
   include Taggable
 
   has_paper_trail
