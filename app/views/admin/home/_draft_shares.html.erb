@@ -1,0 +1,10 @@
+<% if draft_share_count > 0 %>
+  <li>
+    <%=
+      link_to(
+        pluralize(draft_share_count, 'share'),
+        admin_shares_path + '?q%5Bpublish_false%5D=1'
+      )
+    %>
+  </li>
+<% end %>
