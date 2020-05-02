@@ -1,0 +1,6 @@
+<% title @redirect.old_url %>
+
+<%= render(
+  partial: 'admin/shared/revisions',
+  locals: { versions: @redirect.versions }
+) %>

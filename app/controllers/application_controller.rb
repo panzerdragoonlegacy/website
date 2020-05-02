@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from Pundit::NotDefinedError, with: :attempt_to_redirect
   # after_filter :verify_authorized, except: :index
   # after_filter :verify_policy_scoped, only: :index
 
@@ -16,6 +17,15 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:alert] = 'You are not authorized to perform this action.'
     redirect_to(request.referer || root_path)
+  end
+
+  def attempt_to_redirect
+    redirect = Redirect.find_by old_url: request.fullpath
+    if redirect
+      redirect_to "#{root_url}/#{redirect.new_url}"
+    else
+      raise ActionController::RoutingError, 404
+    end
   end
 
   def sagas_for_left_nav

@@ -1,0 +1,68 @@
+<% title 'Redirects' %>
+
+<%=
+  render(
+    partial: 'admin/shared/table/new_button',
+    locals: {
+      resource: Redirect,
+      resource_name: 'Redirect',
+      path: new_admin_redirect_path
+    }
+  )
+%>
+
+<%= render 'url_form', { q: @q, path: admin_redirects_path } %>
+
+<% if @redirects %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"><%= sort_link @q, :old_url, 'Old URL' %></th>
+        <th scope="col"><%= sort_link @q, :new_url, 'New URL' %></th>
+        <th scope="col"><%= sort_link @q, :comment %></th>
+        <th scope="col"><%= sort_link @q, :created_at, 'Created' %></th>
+        <th scope="col"><%= sort_link @q, :updated_at, 'Modified' %></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @redirects.each do |redirect| %>
+        <tr>
+          <td><%= link_to redirect.old_url, redirect.old_url %></td>
+          <td><%= link_to redirect.new_url, redirect.new_url %></td>
+          <td>
+            <% if redirect.comment %>
+              <%= truncated_text(redirect.comment, 50) %>
+            <% end %>
+          </td>
+          <%= render(
+            partial: 'admin/shared/table/created_at',
+            locals: { resource: redirect }
+          ) %>
+          <%= render(
+            partial: 'admin/shared/table/updated_at',
+            locals: { resource: redirect }
+          ) %>
+          <%= render(
+            partial: 'admin/shared/table/revisions_button',
+            locals: { resource: redirect, path: admin_redirect_path(redirect) }
+          ) %>
+          <%= render(
+            partial: 'admin/shared/table/edit_button',
+            locals: {
+              resource: redirect, path: edit_admin_redirect_path(redirect)
+            }
+          ) %>
+          <%= render(
+            partial: 'admin/shared/table/delete_button',
+            locals: { resource: redirect, resource_name: 'redirect' }
+          ) %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= paginate @redirects, views_prefix: 'admin' %>

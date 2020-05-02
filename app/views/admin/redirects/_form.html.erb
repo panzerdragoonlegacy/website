@@ -1,0 +1,7 @@
+<%= form_for [:admin, @redirect] do |f| %>
+  <%= render 'admin/shared/form/error_messages', target: @redirect %>
+  <%= render 'old_url', f: f %>
+  <%= render 'new_url', f: f %>
+  <%= render 'comment', f: f %>
+  <%= render partial: 'admin/shared/form/save_buttons', locals: { f: f } %>
+<% end %>

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :sagas
     resources :tags
+    resources :redirects
 
     resources :contributor_profiles, path: 'contributor-profiles'
     resources :users
