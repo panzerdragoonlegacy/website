@@ -9,4 +9,12 @@
       )
     %>
   <% end %>
+ <% if defined? danger %>
+    <%=
+      render(
+        partial: 'admin/shared/form/danger',
+        locals: { danger: danger }
+      )
+    %>
+  <% end %>
 </div>

@@ -30,7 +30,7 @@
         f: f,
         contributor_profile_ids: @album.contributor_profile_ids,
         info: 'Pictures/videos in the album with no contributors will ' \
-          "inherit the album's contributors."
+          "have the album's contributors copied to them when the form is saved."
       }
     )
   %>
@@ -40,7 +40,7 @@
       locals: {
         f: f,
         info: 'Pictures/videos in the album with blank source URLs will ' \
-          "inherit the album's source URL."
+          "have the album's source URL copied to them when the form is saved."
       }
     )
   %>
@@ -50,7 +50,8 @@
       locals: {
         f: f,
         info: 'Pictures in the album with blank Instagram post IDs will ' \
-          "inherit the album's Instagram post ID."
+          "have the album's Instagram post ID copied to them when the form " \
+          'is saved.'
       }
     )
   %>
@@ -59,8 +60,8 @@
       partial: 'admin/shared/form/name',
       locals: {
         f: f,
-        info: 'Pictures/videos in the album with blank names will inherit ' \
-          "the album's name."
+        info: 'Pictures/videos in the album with blank names will have the ' \
+          "album's name copied to them when the form is saved."
       }
     )
   %>
@@ -70,7 +71,7 @@
       locals: {
         f: f,
         info: 'Pictures/videos in the album with blank descriptions will ' \
-          "inherit the album's description."
+          "have the album's description copied to them when the form is saved."
       }
     )
   %>
@@ -80,7 +81,8 @@
       locals: {
         f: f,
         info: 'Pictures/videos in the album with blank extra information ' \
-          "will inherit the album's extra information."
+          "will have the album's extra information copied to them when the " \
+          "form is saved."
       }
     )
   %>
@@ -90,8 +92,8 @@
       locals: {
         f: f,
         tag_ids: @album.tag_ids,
-        info: 'Pictures/videos in the album with no related tags will ' \
-          "inherit the album's tags."
+        info: 'Pictures/videos in the album with no tags will have the ' \
+          "album's tags copied to them when the form is saved."
       }
     )
   %>
@@ -103,9 +105,14 @@
         partial: 'admin/shared/form/publish',
         locals: {
           f: f,
-          warning: 'Warning: publishing the album will publish every ' \
-            'picture/video in the album. Unpublishing the album will ' \
-            'unpublish every picture/video in the album.'
+          danger: 'Danger: if this box is checked when the form is saved, ' \
+            "all pictures and videos in the album (that haven't been " \
+            'published before) will be published. These pictures/videos will ' \
+            'appear in the Contributions Feed one second apart and ordered ' \
+            'by sequence number. This order cannot be changed once the ' \
+            'contributions are published (unless they are deleted). You ' \
+            'should double check that the album is ordered in a logical ' \
+            'fashion before publishing it.'
         }
       )
     %>
