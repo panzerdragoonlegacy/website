@@ -63,8 +63,10 @@ class Admin::AlbumsController < ApplicationController
       the_params['pictures_attributes'].each do |key, value|
         the_params['pictures_attributes'][key]['category_id'] =
           the_params['category_id']
-        the_params['pictures_attributes'][key]['instagram_post_id'] =
-          the_params['instagram_post_id']
+        if value['instagram_post_id'].blank?
+          the_params['pictures_attributes'][key]['instagram_post_id'] =
+            the_params['instagram_post_id']
+        end
       end
       the_params = synchronise_attributes(the_params, 'pictures_attributes')
     end
