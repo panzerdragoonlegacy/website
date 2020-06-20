@@ -43,7 +43,7 @@ RSpec.describe Video, type: :model do
     it { is_expected.to validate_presence_of(:sequence_number) }
     it do
       is_expected.to validate_numericality_of(:sequence_number)
-        .is_greater_than_or_equal_to(0).is_less_than_or_equal_to(99)
+        .is_greater_than_or_equal_to(0).is_less_than_or_equal_to(999)
     end
     it { is_expected.to validate_presence_of(:category) }
 
