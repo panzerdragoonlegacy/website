@@ -25,9 +25,4 @@ test:
   password: <%= ENV["TEST_DB_PASS"] || 'postgres' %>
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  database:
-  host: localhost
-  username:
-  password:
+  <<: *default

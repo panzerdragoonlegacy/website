@@ -72,11 +72,6 @@ jobs:
           name: Bundle Install
           command: bundle check || bundle install
       - run:
-          name: Create database.yml and secrets.yml from examples
-          command: |
-            cp config/examples/database.yml config/database.yml
-            cp config/examples/secrets.yml config/secrets.yml
-      - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
