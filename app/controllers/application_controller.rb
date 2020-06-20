@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   def attempt_to_redirect
     redirect = Redirect.find_by old_url: request.fullpath
     if redirect
-      redirect_to "#{root_url}/#{redirect.new_url}"
+      redirect_to URI.parse(redirect.new_url).path
     else
       raise ActionController::RoutingError, 404
     end
