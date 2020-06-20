@@ -1,5 +1,67 @@
 <% title 'Admin Panel' %>
 
+<div>
+  <% if policy(NewsEntry).new? %>
+    <%= link_to(
+      'New News Entry',
+      new_admin_news_entry_path,
+      class: 'btn btn-primary mb-3',
+      role: 'button'
+    ) %>
+  <% end %>
+  <% if policy(Picture).new? %>
+    <%= link_to(
+      'New Picture',
+      new_admin_picture_path,
+      class: 'btn btn-primary mb-3',
+      role: 'button'
+    ) %>
+  <% end %>
+  <% if policy(Album).new? %>
+    <%= link_to(
+      'New Album',
+      new_admin_album_path,
+      class: 'btn btn-primary mb-3',
+      role: 'button'
+    ) %>
+  <% end %>
+  <% if policy(Share).new? %>
+    <%= link_to(
+      'New Share',
+      new_admin_share_path,
+      class: 'btn btn-primary mb-3',
+      role: 'button'
+    ) %>
+  <% end %>
+</div>
+
+<div>
+  <% if policy(ContributorProfile).new? %>
+    <%= link_to(
+      'New Contributor Profile',
+      new_admin_contributor_profile_path,
+      class: 'btn btn-secondary mb-3',
+      role: 'button'
+    ) %>
+  <% end %>
+  <% if policy(Category).new? %>
+    <%= link_to(
+      'New Category',
+      new_admin_category_path,
+      class: 'btn btn-secondary mb-3',
+      role: 'button'
+    ) %>
+  <% end %>
+  <% if policy(Tag).new? %>
+    <%= link_to(
+      'New Tag',
+      new_admin_tag_path,
+      class: 'btn btn-secondary mb-3',
+      role: 'button'
+    ) %>
+  <% end %>
+</div>
+
 <% if current_user %>
   <% if current_user.administrator %>
     <p>
