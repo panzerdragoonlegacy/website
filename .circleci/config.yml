@@ -25,6 +25,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Create database.yml and secrets.yml from examples
+          command: |
+            cp config/examples/database.yml config/database.yml
+            cp config/examples/secrets.yml config/secrets.yml
+      - run:
           name: Install Bundler
           command: gem install bundler:1.17.3
       # bundle cache

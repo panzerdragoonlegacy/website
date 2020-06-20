@@ -1,10 +1,10 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: <%= ENV.fetch('DB_HOST') %>
-  username: <%= ENV.fetch('DB_USERNAME') %>
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
-  database: <%= ENV.fetch('DB_NAME') %>
+  host:     <%= ENV['DB_HOST'] || '' %>
+  username: <%= ENV['DB_USER'] || '' %>
+  password: <%= ENV['POSTGRES_PASSWORD'] || '' %>
+  database: <%= ENV['DB_NAME'] || '' %>
   pool: 5
   variables:
     statement_timeout: 5000
@@ -16,8 +16,13 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 10
+  host:     <%= ENV["TEST_DB_HOST"] || 'localhost' %>
   database: panzerdragoonlegacy_test
+  username: <%= ENV["TEST_DB_USER"] || 'postgres' %>
+  password: <%= ENV["TEST_DB_PASS"] || 'postgres' %>
 
 production:
   adapter: postgresql
