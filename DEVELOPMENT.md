@@ -17,9 +17,9 @@ Step-by-step instructions for setting up a development environment for the site.
 
    (Windows specific): `git config --global core.autocrif false`
 
-   `git clone https://github.com/chrisalley/panzer-dragoon-legacy.git`
+   `git clone https://github.com/panzerdragoonlegacy/cms.git`
 
-   `cd panzer-dragoon-legacy`
+   `cd cms`
 
 4. Create a .env from the example file:
 
@@ -65,7 +65,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 1. Open psql in an interactive terminal.
 
-   `docker exec -it panzer-dragoon-legacy_database_1 psql -U postgres`
+   `docker exec -it cms_database_1 psql -U postgres`
 
 2. Create a user for the webapp that matches what is in the backup:
 
@@ -89,7 +89,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 7. Restore the database from a backup.sql file:
 
-   `cat backup.sql | docker exec -i panzer-dragoon-legacy_database_1 psql -U panzerdragoonlegacy`
+   `cat backup.sql | docker exec -i cms_database_1 psql -U panzerdragoonlegacy`
 
 8. Update `.env` with the database user, password, and name you used.
 
@@ -106,7 +106,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 1. Copy the system folder from your local machine into the volume:
 
-   `docker cp /Users/chris/Code/panzer-dragoon-legacy/public/system panzer-dragoon-legacy_app_1:app/public`
+   `docker cp /Backups/cms/public/system panzer-dragoon-legacy_app_1:app/public`
 
 2. Restart the app
 

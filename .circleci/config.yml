@@ -15,7 +15,7 @@ references:
     image: circleci/postgres:9.5-alpine
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_DB: panzerdragoonlegacy_test
+      POSTGRES_DB: cms_test
       POSTGRES_PASSWORD: postgres
 
 jobs:
@@ -95,12 +95,12 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-      - run: docker build --no-cache -t chrisalley/panzer-dragoon-legacy:latest --file Dockerfile .
-      - run: docker push chrisalley/panzer-dragoon-legacy:latest
+      - run: docker build --no-cache -t panzerdragoonlegacy/cms:latest --file Dockerfile .
+      - run: docker push panzerdragoonlegacy/cms:latest
 
 workflows:
   version: 2.1
-  panzer_dragoon_legacy_workflow:
+  cms_workflow:
     jobs:
       - build
       - test:
