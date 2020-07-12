@@ -31,17 +31,17 @@ Step-by-step instructions for setting up a development environment for the site.
 
 6. If it does not already exist, create the development database:
 
-   `docker-compose exec web bin/rake db:create`
+   `docker-compose exec app bin/rake db:create`
 
 7. Load the database schema and run any pending migrations:
 
-   `docker-compose exec web bin/rake db:schema:load`
+   `docker-compose exec app bin/rake db:schema:load`
 
-   `docker-compose exec web bin/rake db:migrate`
+   `docker-compose exec app bin/rake db:migrate`
 
 8. Enter the Rails console and create an administrator user:
 
-   `docker-compose exec web bin/rails c`
+   `docker-compose exec app bin/rails c`
 
    ```ruby
    User.create(
@@ -95,7 +95,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 9. Run any outstanding migrations on the restored database
 
-   `docker-compose exec web bin/rake db:migrate`
+   `docker-compose exec app bin/rake db:migrate`
 
 10. Restart the containers to reload from `.env`
 
@@ -106,7 +106,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 1. Copy the system folder from your local machine into the volume:
 
-   `docker cp /Users/chris/Code/panzer-dragoon-legacy/public/system panzer-dragoon-legacy_web_1:app/public`
+   `docker cp /Users/chris/Code/panzer-dragoon-legacy/public/system panzer-dragoon-legacy_app_1:app/public`
 
 2. Restart the app
 
@@ -117,11 +117,11 @@ Step-by-step instructions for setting up a development environment for the site.
 
 1. If it does not already exist, create the test database:
 
-   `docker-compose exec web bin/rake db:create RAILS_ENV=test`
+   `docker-compose exec app bin/rake db:create RAILS_ENV=test`
 
 2. Run this test suite:
 
-   `docker-compose exec web bin/rspec`
+   `docker-compose exec app bin/rspec`
 
 ## Without Docker
 

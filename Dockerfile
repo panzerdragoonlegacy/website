@@ -6,11 +6,11 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
   nodejs \
   imagemagick
 
-COPY Gemfile* /app/
-WORKDIR /app
+COPY Gemfile* /cms/
+WORKDIR /cms
 RUN bundle install
 
-COPY . /app
+COPY . /cms
 
 # Execute entrypoint script every time the container starts.
 COPY docker-entrypoint.sh /usr/bin/

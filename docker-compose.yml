@@ -1,12 +1,12 @@
 version: '3'
 services:
-  web:
+  app:
     build: .
     ports:
       - "3000:3000"
     volumes:
-      - .:/app
-      - paperclip_data:/app/public/system
+      - .:/cms
+      - paperclip_data:/cms/public/system
     env_file:
       - .env
   database:
