@@ -6,6 +6,7 @@ services:
       - "3000:3000"
     volumes:
       - .:/app
+      - paperclip_data:/app/public/system
     env_file:
       - .env
   database:
@@ -16,3 +17,4 @@ services:
       - database_data:/var/lib/postgresql/data
 volumes:
   database_data:
+  paperclip_data:

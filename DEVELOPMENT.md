@@ -21,11 +21,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
    `cd panzer-dragoon-legacy`
 
-4. Create database.yml, secrets.yml, and .env from the example files:
-
-   `cp config/examples/database.yml config/database.yml`
-
-   `cp config/examples/secrets.yml config/secrets.yml`
+4. Create a .env from the example file:
 
    `cp .example.env .env`
 
@@ -64,6 +60,58 @@ Step-by-step instructions for setting up a development environment for the site.
    In this case, you will need to use the IP address of Docker Machine instead.
    Run `docker-machine ls`. If the displayed URL is `tcp://192.168.99.100:2376`
    you would access the site at `http://192.168.99.100:3000` instead.
+
+### Restore a Database Backup into Docker Volume
+
+1. Open psql in an interactive terminal.
+
+   `docker exec -it panzer-dragoon-legacy_database_1 psql -U postgres`
+
+2. Create a user for the webapp that matches what is in the backup:
+
+   `CREATE USER panzerdragoonlegacy WITH ENCRYPTED PASSWORD 'PASSWORDHERE';`
+
+3. Create a database:
+
+   `CREATE DATABASE panzerdragoonlegacy;`
+
+4. Give the user you created full access to the database:
+
+   `GRANT ALL PRIVILEGES ON DATABASE panzerdragoonlegacy TO panzerdragoonlegacy;`
+
+5. Set the owner of the database to the user:
+
+   `ALTER DATABASE panzerdragoonlegacy OWNER TO panzerdragoonlegacy;`
+
+6. Quit postgres:
+
+   `\q`
+
+7. Restore the database from a backup.sql file:
+
+   `cat backup.sql | docker exec -i panzer-dragoon-legacy_database_1 psql -U panzerdragoonlegacy`
+
+8. Update `.env` with the database user, password, and name you used.
+
+9. Run any outstanding migrations on the restored database
+
+   `docker-compose exec web bin/rake db:migrate`
+
+10. Restart the containers to reload from `.env`
+
+   `docker-compose down`
+   `docker-compose up`
+
+### Restore Paperclip Attachments into Docker Volume
+
+1. Copy the system folder from your local machine into the volume:
+
+   `docker cp /Users/chris/Code/panzer-dragoon-legacy/public/system panzer-dragoon-legacy_web_1:app/public`
+
+2. Restart the app
+
+   `docker-compose down`
+   `docker-compose up`
 
 ### Running the Test Suite
 
