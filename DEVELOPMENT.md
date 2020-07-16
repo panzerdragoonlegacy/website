@@ -76,10 +76,9 @@ Step-by-step instructions for setting up a development environment for the site.
 
    `CREATE USER panzerdragoonlegacy WITH ENCRYPTED PASSWORD 'PASSWORDHERE';`
 
-3. Create a database:
+3. Create a database (drop old database first if required):
 
-   (To delete an old database run `DROP DATABASE panzerdragoonlegacy;` first)
-
+   `DROP DATABASE panzerdragoonlegacy;` (if required)
    `CREATE DATABASE panzerdragoonlegacy;`
 
 4. Give the user you created full access to the database:
@@ -96,7 +95,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 7. Restore the database from a backup.sql file:
 
-   `cat backup.sql | docker exec -i cms_database_1 psql -U panzerdragoonlegacy`
+   `cat /My/Path/backup.sql | docker exec -i cms_database_1 psql -U panzerdragoonlegacy`
 
 8. Update `.env` with the database user, password, and name you used.
 
