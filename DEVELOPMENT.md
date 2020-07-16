@@ -27,7 +27,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 5. Run and start the Docker containers:
 
-   `docker-compose up -d`
+   `docker-compose up`
 
 6. If it does not already exist, create the development database:
 
@@ -63,6 +63,11 @@ Step-by-step instructions for setting up a development environment for the site.
 
 ### Restore a Database Backup into Docker Volume
 
+1. Stop the app and start the database container only.
+
+   `docker-compose stop`
+   `docker-compose start database`
+
 1. Open psql in an interactive terminal.
 
    `docker exec -it cms_database_1 psql -U postgres`
@@ -72,6 +77,8 @@ Step-by-step instructions for setting up a development environment for the site.
    `CREATE USER panzerdragoonlegacy WITH ENCRYPTED PASSWORD 'PASSWORDHERE';`
 
 3. Create a database:
+
+   (To delete an old database run `DROP DATABASE panzerdragoonlegacy;` first)
 
    `CREATE DATABASE panzerdragoonlegacy;`
 
@@ -93,14 +100,21 @@ Step-by-step instructions for setting up a development environment for the site.
 
 8. Update `.env` with the database user, password, and name you used.
 
-9. Run any outstanding migrations on the restored database
+   ```
+   DB_USER=panzerdragoonlegacy
+   POSTGRES_PASSWORD=PASSWORDHERE
+   DB_NAME=panzerdragoonlegacy
+   DB_HOST=database
+   ```
 
-   `docker-compose exec app bin/rake db:migrate`
-
-10. Restart the containers to reload from `.env`
+9. Restart the containers to reload from `.env`
 
    `docker-compose down`
    `docker-compose up`
+
+10. Run any outstanding migrations on the restored database
+
+   `docker-compose exec app bin/rake db:migrate`
 
 ### Restore Paperclip Attachments into Docker Volume
 
