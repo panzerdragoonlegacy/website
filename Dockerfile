@@ -18,7 +18,7 @@ RUN chmod +x /usr/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Precompile assets
-RUN rake assets:clean
+RUN rake assets:clobber
 RUN RAILS_ENV=production SECRET_KEY_BASE=abcd1234 rake assets:precompile
 
 # Start the main process.
