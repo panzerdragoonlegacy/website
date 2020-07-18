@@ -119,7 +119,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 1. Copy the system folder from your local machine into the volume:
 
-   `docker cp /Backups/cms/public/system panzer-dragoon-legacy_app_1:app/public`
+   `docker cp /Backups/cms/public/system panzer-dragoon-legacy_app_1:cms/public`
 
 2. Restart the app
 

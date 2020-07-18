@@ -7,6 +7,7 @@ services:
     volumes:
       - .:/cms
       - paperclip_data:/cms/public/system
+      - asset_data:/cms/public/assets
     env_file:
       - .env
   database:
@@ -18,3 +19,4 @@ services:
 volumes:
   database_data:
   paperclip_data:
+  asset_data:
