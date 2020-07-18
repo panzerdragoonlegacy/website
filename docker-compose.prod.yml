@@ -16,10 +16,14 @@ services:
       - .env
   database:
     image: postgres
-    env_file:
-      - .env
+    container_name: database
+    restart: unless-stopped
+    networks:
+      - app-network
     volumes:
       - database_data:/var/lib/postgresql/data
+    env_file:
+      - .env
   webserver:
     image: nginx:mainline-alpine
     container_name: webserver
