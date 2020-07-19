@@ -167,7 +167,7 @@ Step-by-step instructions for setting up the site on a VPS.
 
    `sudo docker-compose -f docker-compose.prod.yml up -d`
 
-5. Go to https://www.panzerdragoonlegacy.com in your web browser and verify it.
+5. Go to https://www.panzerdragoonlegacy.com in your web browser and verify.
 
 ## Restore a Database Backup into Docker Volume
 
@@ -234,6 +234,24 @@ Step-by-step instructions for setting up the site on a VPS.
    `sudo docker-compose -f docker-compose.prod.yml exec app bash`
 
    `cd /cms/public/system & ls -la`
+
+## Add a Cron Job to call the SSL Certificate Renewal Script
+
+1. Open the crontab
+
+   `sudo crontab -e`
+
+2. Add the following line to call the script every 5 minutes:
+
+   `*/5 * * * * /home/panzerdragoonlegacy/cms/ssl_renew.sh >> /var/log/cron.log 2>&1`
+
+3. After 5 minutes, check the cron log to see if it succeeded.
+
+   `tail -f /var/log/cron.log`
+
+4. Change the cron job to run every day at noon:
+
+	`0 12 * * * /home/panzerdragoonlegacy/cms/ssl_renew.sh >> /var/log/cron.log 2>&1`
 
 ## Copying the Site's Data From Another Server
 
