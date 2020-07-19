@@ -167,7 +167,9 @@ Step-by-step instructions for setting up the site on a VPS.
 
    `sudo docker-compose -f docker-compose.prod.yml up -d`
 
-5. Go to https://www.panzerdragoonlegacy.com in your web browser and verify.
+5. Ensure that there are no errors in the output. Once the database and
+   Paperclip attachments are restored into the volumes that were created by
+   Docker Compose you can verify that the app is working by going to the site's domain in your web browser.
 
 ## Restore a Database Backup into Docker Volume
 
