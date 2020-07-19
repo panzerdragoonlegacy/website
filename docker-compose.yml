@@ -6,8 +6,7 @@ services:
       - "3000:3000"
     volumes:
       - .:/cms
-      - paperclip_data:/cms/public/system
-      - asset_data:/cms/public/assets
+      - public_data:/cms/public
     env_file:
       - .env
   database:
@@ -18,5 +17,4 @@ services:
       - .env
 volumes:
   database_data:
-  paperclip_data:
-  asset_data:
+  public_data:
