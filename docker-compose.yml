@@ -1,18 +1,20 @@
 version: '3'
 services:
-  web:
+  app:
     build: .
     ports:
       - "3000:3000"
     volumes:
-      - .:/app
+      - .:/cms
+      - public_data:/cms/public
     env_file:
       - .env
   database:
     image: postgres
-    env_file:
-      - .env
     volumes:
       - database_data:/var/lib/postgresql/data
+    env_file:
+      - .env
 volumes:
   database_data:
+  public_data:

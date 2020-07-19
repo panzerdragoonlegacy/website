@@ -1,0 +1,70 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: app
+    container_name: app
+    restart: unless-stopped
+    networks:
+      - app-network
+    volumes:
+      - .:/cms
+      - public_data:/cms/public
+    env_file:
+      - .env
+  database:
+    image: postgres
+    container_name: database
+    restart: unless-stopped
+    networks:
+      - app-network
+    volumes:
+      - database_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+  webserver:
+    image: nginx:mainline-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - .:/cms
+      - public_data:/cms/public
+      - ./nginx:/etc/nginx/conf.d
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - dhparam:/etc/ssl/certs
+    depends_on:
+      - app
+    networks:
+      - app-network
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - public_data:/cms/public
+    depends_on:
+      - webserver
+    networks:
+      - app-network
+    command: certonly --webroot --webroot-path=/cms/public --email support@panzerdragoonlegacy.com --agree-tos --no-eff-email --force-renewal -d docker.panzerdragoonlegacy.com -d www.docker.panzerdragoonlegacy.com
+volumes:
+  database_data:
+  public_data:
+  certbot-etc:
+  certbot-var:
+  dhparam:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/panzerdragoonlegacy/cms/dhparam/
+      o: bind
+networks:
+  app-network:
+    driver: bridge
