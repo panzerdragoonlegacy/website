@@ -11,8 +11,7 @@ services:
       - app-network
     volumes:
       - .:/cms
-      - paperclip_data:/cms/public/system
-      - asset_data:/cms/public/assets
+      - public_data:/cms/public
     env_file:
       - .env
   database:
@@ -34,7 +33,7 @@ services:
       - "443:443"
     volumes:
       - .:/cms
-      - web-root:/cms/public
+      - public_data:/cms/public
       - ./nginx:/etc/nginx/conf.d
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
@@ -49,22 +48,17 @@ services:
     volumes:
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
-      - web-root:/var/www/html
+      - public_data:/cms/public
     depends_on:
       - webserver
-    command: certonly --webroot --webroot-path=/var/www/html --email support@panzerdragoonlegacy.com --agree-tos --no-eff-email --force-renewal -d docker.panzerdragoonlegacy.com -d www.docker.panzerdragoonlegacy.com
+    networks:
+      - app-network
+    command: certonly --webroot --webroot-path=/cms/public --email support@panzerdragoonlegacy.com --agree-tos --no-eff-email --force-renewal -d docker.panzerdragoonlegacy.com -d www.docker.panzerdragoonlegacy.com
 volumes:
   database_data:
-  paperclip_data:
-  asset_data:
+  public_data:
   certbot-etc:
   certbot-var:
-  web-root:
-    # driver: local
-    # driver_opts:
-    #   type: none
-    #   device: :/public/
-    #   o: bind
   dhparam:
     driver: local
     driver_opts:
