@@ -63,7 +63,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ./public/
+      device: :/cms/public/
       o: bind
   dhparam:
     driver: local
