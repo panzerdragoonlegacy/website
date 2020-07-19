@@ -7,9 +7,7 @@ Step-by-step instructions for setting up a development environment for the site.
 1. Install git (refer to setup instructions on git-scm.com)
 
 2. Install Docker (refer to setup instructions on docker.com). If you are using
-   Windows 10 Home you will need to install the Docker Toolbox instead. With
-   Docker Toolbox installed, run the following setup commands in the Docker
-   QuickStart Terminal.
+   Windows 10 Home you will need to install the Docker Toolbox instead.
 
 3. Clone the git repository and change into it's directory:
 
@@ -117,7 +115,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 1. Copy the system folder from your local machine into the volume:
 
-   `docker cp /Backups/cms/public/system panzer-dragoon-legacy_app_1:cms/public`
+   `docker cp /My/Path/system panzer-dragoon-legacy_app_1:cms/public`
 
 2. Restart the app
 
