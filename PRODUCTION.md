@@ -174,6 +174,7 @@ Step-by-step instructions for setting up the site on a VPS.
 1. Stop the app and start the database container only.
 
    `sudo docker-compose -f docker-compose.prod.yml stop`
+
    `sudo docker-compose -f docker-compose.prod.yml start database`
 
 1. Open psql in an interactive terminal.
@@ -187,6 +188,7 @@ Step-by-step instructions for setting up the site on a VPS.
 3. Create a database (drop old database first if required):
 
    `DROP DATABASE panzerdragoonlegacy;` (if required)
+
    `CREATE DATABASE panzerdragoonlegacy;`
 
 4. Give the user you created full access to the database:
@@ -208,6 +210,7 @@ Step-by-step instructions for setting up the site on a VPS.
 8. Restart the containers
 
    `sudo docker-compose -f docker-compose.prod.yml down`
+
    `sudo docker-compose -f docker-compose.prod.yml up -d`
 
 9. Run any outstanding migrations on the restored database
@@ -223,6 +226,7 @@ Step-by-step instructions for setting up the site on a VPS.
 2. Restart the app
 
    `sudo docker-compose -f docker-compose.prod.yml down`
+
    `sudo docker-compose -f docker-compose.prod.yml up -d`
 
 3. Check that the system directory contains the files

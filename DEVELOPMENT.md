@@ -62,6 +62,7 @@ Step-by-step instructions for setting up a development environment for the site.
 1. Stop the app and start the database container only.
 
    `docker-compose stop`
+
    `docker-compose start database`
 
 1. Open psql in an interactive terminal.
@@ -75,6 +76,7 @@ Step-by-step instructions for setting up a development environment for the site.
 3. Create a database (drop old database first if required):
 
    `DROP DATABASE panzerdragoonlegacy;` (if required)
+
    `CREATE DATABASE panzerdragoonlegacy;`
 
 4. Give the user you created full access to the database:
@@ -105,6 +107,7 @@ Step-by-step instructions for setting up a development environment for the site.
 9. Restart the containers to reload from `.env`
 
    `docker-compose down`
+
    `docker-compose up`
 
 10. Run any outstanding migrations on the restored database
@@ -120,6 +123,7 @@ Step-by-step instructions for setting up a development environment for the site.
 2. Restart the app
 
    `docker-compose down`
+
    `docker-compose up`
 
 ## Running the Test Suite
