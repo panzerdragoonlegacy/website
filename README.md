@@ -11,11 +11,12 @@ Documentation
 For instructions on setting up a development environment for the CMS, see
 [DEVELOPMENT.md](DEVELOPMENT.md).
 
-To provision a VPS for the site's deployment,
+To provision a VPS for the CMS's deployment,
 see [PRODUCTION.md](PRODUCTION.md).
 
 Both Development and Production environments are set up using Docker Compose,
-along with a Cron job renewing the Let's Encrypt SSL certificate in production.
+along with a Cron job for renewing the Let's Encrypt SSL certificate in
+production.
 
 There are a couple of Docker volumes which store the website's data called
 `cms_database_data` (Postgres database) and `cms_public_data` (Paperclip file
