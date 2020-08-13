@@ -1,6 +1,7 @@
 # Production Configuration
 
-Step-by-step instructions for setting up the site on a VPS.
+Step-by-step instructions for setting up the site on a VPS. Ensure that IPv6 is
+enabled (for Let's Encrypt).
 
 ## Create Linux User Accounts for the Admin and Web App Users
 
