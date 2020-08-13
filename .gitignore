@@ -20,3 +20,6 @@
 
 # Ignore compiled assets directory.
 /public/assets/*
+
+# Ignore the Let's Encrypt certbot directory.
+/certbot

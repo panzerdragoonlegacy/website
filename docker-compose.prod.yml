@@ -25,46 +25,33 @@ services:
     env_file:
       - .env
   webserver:
-    image: nginx:mainline-alpine
+    image: nginx:latest
     container_name: webserver
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
     volumes:
       - .:/cms
       - public_data:/cms/public
       - ./nginx:/etc/nginx/conf.d
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - dhparam:/etc/ssl/certs
+      - ./certbot/conf:/etc/nginx/ssl
+      - ./certbot/data:/var/www/certbot
     depends_on:
       - app
     networks:
       - app-network
   certbot:
-    image: certbot/certbot
+    image: certbot/certbot:latest
     container_name: certbot
     volumes:
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - public_data:/cms/public
-    depends_on:
-      - webserver
-    networks:
-      - app-network
-    command: certonly --webroot --webroot-path=/cms/public --email support@panzerdragoonlegacy.com --agree-tos --no-eff-email --force-renewal -d docker.panzerdragoonlegacy.com -d www.docker.panzerdragoonlegacy.com
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/logs:/var/log/letsencrypt
+      - ./certbot/data:/var/www/certbot
+    command: certonly --webroot --webroot-path=/var/www/certbot --email support@panzerdragoonlegacy.com --agree-tos --no-eff-email --staging -d docker.panzerdragoonlegacy.com -d www.docker.panzerdragoonlegacy.com
 volumes:
   database_data:
   public_data:
-  certbot-etc:
-  certbot-var:
-  dhparam:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/panzerdragoonlegacy/cms/dhparam/
-      o: bind
 networks:
   app-network:
     driver: bridge

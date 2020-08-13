@@ -67,11 +67,17 @@ Step-by-step instructions for setting up the site on a VPS.
 
    `sudo ufw allow OpenSSH`
 
+3. Enable ports 80 and 443 for the web application:
+
+  `sudo ufw allow 80`
+
+  `sudo ufw allow 443`
+
 3. Enable to Firewall
 
    `sudo ufw enable`
 
-4. Check that SSH connections are allowed:
+4. Check that SSH connections and port 80 and 443 are allowed:
 
    `sudo ufw status`
 
@@ -163,13 +169,42 @@ Step-by-step instructions for setting up the site on a VPS.
    SMTP_PASSWORD=PASSWORDHERE
    ```
 
-4. Start the docker container:
+4. If there is already an SSL certificate for this subdomain, copy an existing
+   `certbot` directory into `/home/panzerdragoonlegacy/cms`. Otherwise,
+   temporarily change `nginx/default.conf` to contain the following contents
+   the first time that docker-compose is run (see next step) to generate new
+   certificate files:
+
+   ```
+   server {
+     listen [::]:80;
+     listen 80;
+
+     server_name panzerdragoonlegacy.com www.panzerdragoonlegacy.com;
+
+     location ~ /.well-known/acme-challenge {
+       allow all; 
+       root /var/www/certbot;
+     }
+   }
+   ```
+
+5. Start the docker container:
 
    `sudo docker-compose -f docker-compose.prod.yml up -d`
 
-5. Ensure that there are no errors in the output. Once the database and
+6. Check that the SSL certificate files exist in `certbot/conf/live`. If you
+   changed the `nginx/default.conf` in step 4, change it back to what it was
+   and restart the app:
+
+   `sudo docker-compose -f docker-compose.prod.yml down`
+
+   `sudo docker-compose -f docker-compose.prod.yml up -d`
+
+6. Ensure that there are no errors in the output. Once the database and
    Paperclip attachments are restored into the volumes that were created by
-   Docker Compose you can verify that the app is working by going to the site's domain in your web browser.
+   Docker Compose you can verify that the app is working by going to the site's
+   domain in your web browser.
 
 ## Restore a Database Backup into Docker Volume
 
