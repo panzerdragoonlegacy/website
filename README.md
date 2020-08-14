@@ -20,7 +20,7 @@ production.
 
 There are a couple of Docker volumes which store the website's data called
 `cms_database_data` (Postgres database) and `cms_public_data` (Paperclip file
-attachements). Ensure that the contents of these volumes are included in every
+attachments). Ensure that the contents of these volumes are included in every
 backup.
 
 Copyright
