@@ -67,9 +67,9 @@ enabled (for Let's Encrypt).
 
 3. Enable ports 80 and 443 for the web application:
 
-  `sudo ufw allow 80`
+   `sudo ufw allow 80`
 
-  `sudo ufw allow 443`
+   `sudo ufw allow 443`
 
 3. Enable to Firewall
 
@@ -167,11 +167,10 @@ enabled (for Let's Encrypt).
    SMTP_PASSWORD=PASSWORDHERE
    ```
 
-4. If there is already an SSL certificate for this subdomain, copy an existing
+4. If there is already an SSL certificate for this domain, copy an existing
    `certbot` directory into `/var/cms`. Otherwise, temporarily change
    `/var/cms/nginx/default.conf` to contain the following contents the first
-   time that docker-compose is run (see next step) to generate new certificate
-   files:
+   time that the app is built (see next step) to generate new certificate files:
 
    ```
    server {
@@ -198,7 +197,7 @@ enabled (for Let's Encrypt).
 6. Check that the SSL certificate files were generated successfully. These will
    exist in a subdirectory for the domain.
 
-  `sudo ls -la /var/cms/certbot/conf/live/panzerdragoonlegacy.com`
+   `sudo ls -la /var/cms/certbot/conf/live/panzerdragoonlegacy.com`
 
 7. If you changed the `default.conf` in step 4, change it back to what it was
    and restart the app.
@@ -207,10 +206,45 @@ enabled (for Let's Encrypt).
 
    `sudo docker-compose -f docker-compose.prod.yml up -d`
 
-8. Ensure that there are no errors in the output. Once the database and
+8. Ensure that there are no errors in the output. If you go to the domain your
+   web browser you should see the 404 error page. Once the database and
    Paperclip attachments are restored into the volumes that were created by
-   Docker Compose you can verify that the app is working by going to the site's
-   domain in your web browser.
+   Docker Compose you can verify that the app is working.
+
+## Copying the Site's Data From Another Server
+
+1. On the old server, log in as the web app user:
+
+   `sudo su thewilloftheancients`
+
+2. Get the password for the database from `database.yml`:
+
+   `cat ~/thewilloftheancients/shared/config/database.yml`
+
+3. Create a dump of the database as a tar file, pasting in the password from
+   `database.yml` when prompted:
+
+   `pg_dump thewilloftheancients > backup.sql`
+
+4. On the new server, get your public key:
+
+   `cat ~/.ssh/id_rsa.pub`
+
+5. Back on the old server, paste the new web app user's public key into the
+   `authorized_keys` file of the old web app user:
+
+   `vim ~/.ssh/authorized_keys`
+
+6. On the new server, copy the database dump from the old server to the home
+   directory of the webapp user on the new server:
+
+   `scp thewilloftheancients@1.2.3.4:backup.sql ~`
+
+7. On the new server, copy the data files in the `system` directory from the
+   old server. These must be copied at the same time as the database so that
+   the record IDs remain in sync:
+
+   `rsync -av thewilloftheancients@1.2.3.4:~/thewilloftheancients/shared/public/system ~/`
 
 ## Restore a Database Backup into Docker Volume
 
@@ -274,6 +308,8 @@ enabled (for Let's Encrypt).
 
    `ls -la`
 
+   `exit`
+
 3. Restart the app
 
    `sudo docker-compose -f docker-compose.prod.yml down`
@@ -299,38 +335,3 @@ enabled (for Let's Encrypt).
    `sudo crontab -e`
 
    `0 12 * * * /var/cms/ssl_renew.sh >> /var/log/cron.log 2>&1`
-
-## Copying the Site's Data From Another Server
-
-1. On the old server, log in as the web app user:
-
-   `sudo su thewilloftheancients`
-
-2. Get the password for the database from `database.yml`:
-
-   `cat ~/thewilloftheancients/shared/config/database.yml`
-
-3. Create a dump of the database as a tar file, pasting in the password from
-   `database.yml` when prompted:
-
-   `pg_dump thewilloftheancients > backup.sql`
-
-4. On the new server, get your public key:
-
-   `cat ~/.ssh/id_rsa.pub`
-
-5. Back on the old server, paste the new web app user's public key into the
-   `authorized_keys` file of the old web app user:
-
-   `vim ~/.ssh/authorized_keys`
-
-6. On the new server, copy the database dump from the old server to the home
-   directory of the webapp user on the new server:
-
-   `scp thewilloftheancients@1.2.3.4:backup.sql ~`
-
-7. On the new server, copy the data files in the `system` directory from the
-   old server. These must be copied at the same time as the database so that
-   the record IDs remain in sync:
-
-   `rsync -av thewilloftheancients@1.2.3.4:~/thewilloftheancients/shared/public/system ~/`
