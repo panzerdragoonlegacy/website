@@ -3,13 +3,13 @@
 Step-by-step instructions for setting up the site on a VPS. Ensure that IPv6 is
 enabled (for Let's Encrypt).
 
-## Create Linux User Accounts for the Admin and Web App Users
+## Create Linux User Accounts for Admins
 
 1. Add the user account with a strong password:
 
    `sudo adduser kyle`
 
-2. If appropriate, give the user sudo access (only if needed).
+2. Give the user sudo access:
 
    `sudo adduser kyle sudo`
 
@@ -54,9 +54,6 @@ enabled (for Let's Encrypt).
 10. (On local machine) Test that key based authentication works.
 
     `ssh kyle@servername`
-
-11. Repeat the steps any other admin users and for the web app user
-    `panzerdragoonlegacy` which we will use to run the app.
 
 ## Enable the Firewall
 
@@ -138,21 +135,21 @@ enabled (for Let's Encrypt).
 
 1. Clone the git repo and change into the cloned directory:
 
-   `cd /home/panzerdragoonlegacy`
+   `cd /var`
 
-   `git clone https://github.com/panzerdragoonlegacy/cms.git`
+   `sudo git clone https://github.com/panzerdragoonlegacy/cms.git`
 
    `cd cms`
 
-   `pwd` (should show `/home/panzerdragoonlegacy/cms`)
+   `pwd` (should show `/var/cms`)
 
 2. Copy .env based on .example.env
 
-   `cp .example.env .env`
+   `sudo cp .example.env .env`
 
 3. Edit the .env to include the database and mail details.
 
-   `sudo nano .env`
+   `sudo vim .env`
 
    ```
    RAILS_ENV=production
@@ -171,10 +168,10 @@ enabled (for Let's Encrypt).
    ```
 
 4. If there is already an SSL certificate for this subdomain, copy an existing
-   `certbot` directory into `/home/panzerdragoonlegacy/cms`. Otherwise,
-   temporarily change `nginx/default.conf` to contain the following contents
-   the first time that docker-compose is run (see next step) to generate new
-   certificate files:
+   `certbot` directory into `/var/cms`. Otherwise, temporarily change
+   `/var/cms/nginx/default.conf` to contain the following contents the first
+   time that docker-compose is run (see next step) to generate new certificate
+   files:
 
    ```
    server {
@@ -190,19 +187,27 @@ enabled (for Let's Encrypt).
    }
    ```
 
-5. Start the docker container:
+5. Build and start the docker containers, which will also run certbot:
 
-   `sudo docker-compose -f docker-compose.prod.yml up -d`
+   `sudo docker-compose -f docker-compose.prod.yml up --build`
 
-6. Check that the SSL certificate files exist in `certbot/conf/live`. If you
-   changed the `nginx/default.conf` in step 4, change it back to what it was
-   and restart the app:
+   If generating the SSL certicate, you should see a congratulations message and
+   `certbot exited with code 0`. If certbot exits with a non-zero code, there's
+   an error.
+
+6. Check that the SSL certificate files were generated successfully. These will
+   exist in a subdirectory for the domain.
+
+  `sudo ls -la /var/cms/certbot/conf/live/panzerdragoonlegacy.com`
+
+7. If you changed the `default.conf` in step 4, change it back to what it was
+   and restart the app.
 
    `sudo docker-compose -f docker-compose.prod.yml down`
 
    `sudo docker-compose -f docker-compose.prod.yml up -d`
 
-6. Ensure that there are no errors in the output. Once the database and
+8. Ensure that there are no errors in the output. Once the database and
    Paperclip attachments are restored into the volumes that were created by
    Docker Compose you can verify that the app is working by going to the site's
    domain in your web browser.
@@ -259,19 +264,21 @@ enabled (for Let's Encrypt).
 
 1. Copy the system folder from outside of the container into the volume:
 
-   `sudo docker cp ~/system app:cms/public/system`
+   `sudo docker cp ~/system app:/cms/public`
 
-2. Restart the app
+2. Inside the container, check that the system directory contains the files
+
+   `sudo docker-compose -f docker-compose.prod.yml exec app bash`
+
+   `cd /cms/public/system`
+
+   `ls -la`
+
+3. Restart the app
 
    `sudo docker-compose -f docker-compose.prod.yml down`
 
    `sudo docker-compose -f docker-compose.prod.yml up -d`
-
-3. Check that the system directory contains the files
-
-   `sudo docker-compose -f docker-compose.prod.yml exec app bash`
-
-   `cd /cms/public/system & ls -la`
 
 ## Add a Cron Job to call the SSL Certificate Renewal Script
 
@@ -281,7 +288,7 @@ enabled (for Let's Encrypt).
 
 2. Add the following line to call the script every 5 minutes:
 
-   `*/5 * * * * /home/panzerdragoonlegacy/cms/ssl_renew.sh >> /var/log/cron.log 2>&1`
+   `*/5 * * * * /var/cms/ssl_renew.sh >> /var/log/cron.log 2>&1`
 
 3. After 5 minutes, check the cron log to see if it succeeded.
 
@@ -289,7 +296,9 @@ enabled (for Let's Encrypt).
 
 4. Change the cron job to run every day at noon:
 
-	`0 12 * * * /home/panzerdragoonlegacy/cms/ssl_renew.sh >> /var/log/cron.log 2>&1`
+   `sudo crontab -e`
+
+   `0 12 * * * /var/cms/ssl_renew.sh >> /var/log/cron.log 2>&1`
 
 ## Copying the Site's Data From Another Server
 
@@ -306,26 +315,22 @@ enabled (for Let's Encrypt).
 
    `pg_dump thewilloftheancients > backup.sql`
 
-4. On the new server, log in as the web app user:
-
-   `sudo su panzerdragoonlegacy`
-
-5. Get the web app user's public key:
+4. On the new server, get your public key:
 
    `cat ~/.ssh/id_rsa.pub`
 
-6. Back on the old server, paste the new web app user's public key into the
+5. Back on the old server, paste the new web app user's public key into the
    `authorized_keys` file of the old web app user:
 
    `vim ~/.ssh/authorized_keys`
+
+6. On the new server, copy the database dump from the old server to the home
+   directory of the webapp user on the new server:
+
+   `scp thewilloftheancients@1.2.3.4:backup.sql ~`
 
 7. On the new server, copy the data files in the `system` directory from the
    old server. These must be copied at the same time as the database so that
    the record IDs remain in sync:
 
-   `scp -r kyle@1.2.3.4:~/thewilloftheancients/shared/public/system/* ~/system`
-
-8. On the new server, copy the database dump from the old server to the home
-   directory of the webapp user on the new server:
-
-   `scp thewilloftheancients@1.2.3.4:backup.sql ~`
+   `rsync -av thewilloftheancients@1.2.3.4:~/thewilloftheancients/shared/public/system ~/`

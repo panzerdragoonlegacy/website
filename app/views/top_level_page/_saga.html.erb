@@ -3,7 +3,7 @@
   <% description truncated_text(@saga.page.content) %>
   <% if @saga.page.page_picture.present? %>
     <% open_graph_image(
-      root_url.chomp('/') +
+      root_path.chomp('/') +
         @saga.page.page_picture.url(:original)
     ) %>
   <% end %>

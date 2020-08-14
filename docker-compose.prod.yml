@@ -48,7 +48,14 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/logs:/var/log/letsencrypt
       - ./certbot/data:/var/www/certbot
-    command: certonly --webroot --webroot-path=/var/www/certbot --email support@panzerdragoonlegacy.com --agree-tos --no-eff-email --staging -d docker.panzerdragoonlegacy.com -d www.docker.panzerdragoonlegacy.com
+    # command: >
+    #  certonly --webroot --webroot-path=/var/www/certbot --email 
+    #  support@panzerdragoonlegacy.com --agree-tos --no-eff-email --staging -d 
+    #  panzerdragoonlegacy.com -d www.panzerdragoonlegacy.com
+    command: >
+      certonly --webroot --webroot-path=/var/www/certbot --email 
+      support@panzerdragoonlegacy.com --agree-tos --no-eff-email 
+      --force-renewal -d panzerdragoonlegacy.com -d www.panzerdragoonlegacy.com
 volumes:
   database_data:
   public_data:

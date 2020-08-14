@@ -1,6 +1,6 @@
 <% open_graph_type 'article' %>
 <% if @page.page_picture.present? %>
   <% open_graph_image(
-    root_url.chomp('/') + @page.page_picture.url(:original)
+    root_path.chomp('/') + @page.page_picture.url(:original)
   ) %>
 <% end %>

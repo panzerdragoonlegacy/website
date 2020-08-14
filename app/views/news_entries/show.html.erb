@@ -7,7 +7,7 @@
 <% open_graph_type 'article' %>
 <% if @news_entry.news_entry_picture.present? %>
   <% open_graph_image(
-    "#{root_url.chomp('/')}#{@news_entry.news_entry_picture.url(:original)}"
+    "#{root_path.chomp('/')}#{@news_entry.news_entry_picture.url(:original)}"
   ) %>
 <% end %>
 
