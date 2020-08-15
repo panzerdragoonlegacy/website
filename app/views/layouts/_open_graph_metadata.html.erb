@@ -10,7 +10,9 @@
 <meta property="og:type" content="<%=
   yield(:open_graph_type).present? ? yield(:open_graph_type) : 'website'
 %>" />
-<meta property="og:url" content="<%= request.original_url %>" />
+<meta property="og:url" content="<%=
+  root_path.chomp('/') + request.fullpath
+%>" />
 <% if yield(:open_graph_image).present? %>
   <meta property="og:image" content="<%= yield(:open_graph_image) %>" />
 <% end %>
