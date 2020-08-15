@@ -112,7 +112,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 10. Run any outstanding migrations on the restored database
 
-   `docker-compose exec app bin/rake db:migrate`
+    `docker-compose exec app bin/rake db:migrate`
 
 ### Restore Paperclip Attachments into Docker Volume
 
