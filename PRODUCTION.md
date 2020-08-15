@@ -180,7 +180,7 @@ enabled (for Let's Encrypt).
      server_name panzerdragoonlegacy.com www.panzerdragoonlegacy.com;
 
      location ~ /.well-known/acme-challenge {
-       allow all; 
+       allow all;
        root /var/www/certbot;
      }
    }
@@ -206,10 +206,11 @@ enabled (for Let's Encrypt).
 
    `sudo docker-compose -f docker-compose.prod.yml up -d`
 
-8. Ensure that there are no errors in the output. If you go to the domain your
-   web browser you should see the 404 error page. Once the database and
-   Paperclip attachments are restored into the volumes that were created by
-   Docker Compose you can verify that the app is working.
+8. Ensure that there are no errors in the output. If you go to
+   https://www.panzerdragoonlegacy.com in your web browser you should see the
+   custom 404 error page. Once the database and Paperclip attachments are
+   restored into the volumes that were created by Docker Compose you can verify
+   that the app is fully working (see next steps).
 
 ## Copying the Site's Data From Another Server
 
