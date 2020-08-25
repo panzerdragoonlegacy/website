@@ -8,7 +8,7 @@ class Video < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to :album
+  belongs_to :album, optional: true
 
   validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { in: 2..250 }

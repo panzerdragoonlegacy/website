@@ -15,5 +15,5 @@ class User < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to :contributor_profile
+  belongs_to :contributor_profile, optional: true
 end

@@ -6,7 +6,7 @@ class Category < ApplicationRecord
   has_paper_trail
 
   belongs_to :category_group
-  belongs_to :saga
+  belongs_to :saga, optional: true
   has_many :news_entries, dependent: :destroy
   has_many :shares, dependent: :destroy
   has_many :pages, dependent: :destroy
