@@ -7,10 +7,10 @@ describe SagaPolicy do
     described_class::Scope.new(user, Saga.all).resolve
   end
 
-  let(:user) { FactoryGirl.create(:administrator) }
+  let(:user) { FactoryBot.create(:administrator) }
 
   context 'administrator accessing a saga' do
-    let(:saga) { FactoryGirl.create(:valid_saga) }
+    let(:saga) { FactoryBot.create(:valid_saga) }
 
     it 'includes saga in resolved scope' do
       expect(resolved_scope).to include(saga)
@@ -26,7 +26,7 @@ describe SagaPolicy do
 
     context 'saga has children' do
       before do
-        saga.categories << FactoryGirl.create(
+        saga.categories << FactoryBot.create(
           :published_category_in_saga
         )
       end

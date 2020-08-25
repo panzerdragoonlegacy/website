@@ -24,7 +24,7 @@ RSpec.describe CategoryGroup, type: :model do
   describe 'slug' do
     context 'creating a new category group' do
       let(:category_group) do
-        FactoryGirl.build :valid_category_group, name: 'Category Group 1'
+        FactoryBot.build :valid_category_group, name: 'Category Group 1'
       end
 
       it 'generates a slug that is a parameterised version of the name' do
@@ -35,7 +35,7 @@ RSpec.describe CategoryGroup, type: :model do
 
     context 'updating a category group' do
       let(:category_group) do
-        FactoryGirl.create :valid_category_group, name: 'Category Group 1'
+        FactoryBot.create :valid_category_group, name: 'Category Group 1'
       end
 
       it 'synchronises the slug with the updated name' do

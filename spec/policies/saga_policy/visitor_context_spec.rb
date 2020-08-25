@@ -11,7 +11,7 @@ describe SagaPolicy do
 
   context 'visitor accessing a saga' do
     let(:saga) do
-      FactoryGirl.create(:valid_saga)
+      FactoryBot.create(:valid_saga)
     end
 
     it 'includes saga in resolved scope' do

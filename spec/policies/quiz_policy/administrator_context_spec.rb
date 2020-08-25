@@ -7,10 +7,10 @@ describe QuizPolicy do
     described_class::Scope.new(user, Quiz.all).resolve
   end
 
-  let(:user) { FactoryGirl.create(:administrator) }
+  let(:user) { FactoryBot.create(:administrator) }
 
   context 'administrator accessing a published quiz' do
-    let(:quiz) { FactoryGirl.create(:published_quiz) }
+    let(:quiz) { FactoryBot.create(:published_quiz) }
 
     it 'includes quiz in resolved scope' do
       expect(resolved_scope).to include(quiz)
@@ -21,7 +21,7 @@ describe QuizPolicy do
   end
 
   context 'administrator accessing an unpublished quiz' do
-    let(:quiz) { FactoryGirl.create(:unpublished_quiz) }
+    let(:quiz) { FactoryBot.create(:unpublished_quiz) }
 
     it 'includes quiz in resolved scope' do
       expect(resolved_scope).to include(quiz)

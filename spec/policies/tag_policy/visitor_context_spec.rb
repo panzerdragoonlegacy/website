@@ -10,7 +10,7 @@ describe TagPolicy do
   let(:user) { nil }
 
   context 'visitor accessing a tag' do
-    let(:tag) { FactoryGirl.create(:valid_tag) }
+    let(:tag) { FactoryBot.create(:valid_tag) }
 
     it 'includes tag in resolved scope' do
       expect(resolved_scope).to include(tag)

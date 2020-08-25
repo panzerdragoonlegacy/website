@@ -1,21 +1,23 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :news_entry do
     factory :valid_news_entry do
       sequence(:name) { |n| "News Entry #{n}" }
-      content 'Test Content'
-      news_entry_picture Rack::Test::UploadedFile.new(
-        'spec/fixtures/news-entry-picture.jpg', 'image/jpeg'
-      )
+      content { 'Test Content' }
+      news_entry_picture do
+        Rack::Test::UploadedFile.new(
+          'spec/fixtures/news-entry-picture.jpg', 'image/jpeg'
+        )
+      end
 
-      category { FactoryGirl.create(:valid_category) }
-      contributor_profile { FactoryGirl.create(:valid_contributor_profile) }
+      category { FactoryBot.create(:valid_category) }
+      contributor_profile { FactoryBot.create(:valid_contributor_profile) }
 
       factory :published_news_entry do
-        publish true
+        publish { true }
       end
 
       factory :unpublished_news_entry do
-        publish false
+        publish { false }
       end
     end
   end

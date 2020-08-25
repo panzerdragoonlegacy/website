@@ -42,7 +42,7 @@ RSpec.describe Quiz, type: :model do
     describe 'validation of contributor profiles' do
       context 'quiz has less than one contributor profile' do
         let(:quiz) do
-          FactoryGirl.build(
+          FactoryBot.build(
             :valid_quiz,
             contributor_profiles: []
           )
@@ -55,10 +55,10 @@ RSpec.describe Quiz, type: :model do
 
       context 'quiz has at least one contributor profile' do
         let(:quiz) do
-          FactoryGirl.build(
+          FactoryBot.build(
             :valid_quiz,
             contributor_profiles: [
-              FactoryGirl.create(:valid_contributor_profile)
+              FactoryBot.create(:valid_contributor_profile)
             ]
           )
         end
@@ -73,7 +73,7 @@ RSpec.describe Quiz, type: :model do
   describe 'slug' do
     context 'creating a new quiz' do
       let(:quiz) do
-        FactoryGirl.build :valid_quiz, name: 'Quiz 1'
+        FactoryBot.build :valid_quiz, name: 'Quiz 1'
       end
 
       it 'generates a slug that is a parameterised version of the name' do
@@ -84,7 +84,7 @@ RSpec.describe Quiz, type: :model do
 
     context 'updating a quiz' do
       let(:quiz) do
-        FactoryGirl.create :valid_quiz, name: 'Quiz 1'
+        FactoryBot.create :valid_quiz, name: 'Quiz 1'
       end
 
       it 'synchronises the slug with the updated name' do

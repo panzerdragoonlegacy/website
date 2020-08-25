@@ -7,11 +7,11 @@ describe CategoryPolicy do
     described_class::Scope.new(user, Category.all).resolve
   end
 
-  let(:user) { FactoryGirl.create(:registered_user) }
+  let(:user) { FactoryBot.create(:registered_user) }
 
   context 'registered user accessing a published category' do
     let(:category) do
-      FactoryGirl.create(:published_category)
+      FactoryBot.create(:published_category)
     end
 
     it 'includes category in resolved scope' do
@@ -27,7 +27,7 @@ describe CategoryPolicy do
 
   context 'registered user accessing an unpublished category' do
     let(:category) do
-      FactoryGirl.create(:unpublished_category)
+      FactoryBot.create(:unpublished_category)
     end
 
     it 'excludes category from resolved scope' do

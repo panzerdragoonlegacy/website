@@ -50,7 +50,7 @@ RSpec.describe Video, type: :model do
     describe 'validation of contributor profiles' do
       context 'video has less than one contributor profile' do
         let(:video) do
-          FactoryGirl.build(
+          FactoryBot.build(
             :valid_video,
             contributor_profiles: []
           )
@@ -63,10 +63,10 @@ RSpec.describe Video, type: :model do
 
       context 'video has at least one contributor profile' do
         let(:video) do
-          FactoryGirl.build(
+          FactoryBot.build(
             :valid_video,
             contributor_profiles: [
-              FactoryGirl.create(:valid_contributor_profile)
+              FactoryBot.create(:valid_contributor_profile)
             ]
           )
         end
@@ -95,7 +95,7 @@ RSpec.describe Video, type: :model do
   describe 'slug' do
     context 'creating a new video' do
       let(:video) do
-        FactoryGirl.build :valid_video, name: 'Video 1'
+        FactoryBot.build :valid_video, name: 'Video 1'
       end
 
       it 'sets the slug to be a parameterised version of the id + name' do
@@ -106,7 +106,7 @@ RSpec.describe Video, type: :model do
 
     context 'updating a video' do
       let(:video) do
-        FactoryGirl.create :valid_video, name: 'Video 1'
+        FactoryBot.create :valid_video, name: 'Video 1'
       end
 
       it 'sets the slug to be a parameterised version of the id + updated ' \

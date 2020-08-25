@@ -19,7 +19,7 @@ describe PagePolicy do
   context 'visitor accessing pages in a published category' do
     context 'accessing a published page' do
       let(:page) do
-        FactoryGirl.create(:published_page_in_published_category)
+        FactoryBot.create(:published_page_in_published_category)
       end
 
       it 'includes page in resolved scope' do
@@ -33,7 +33,7 @@ describe PagePolicy do
 
     context 'accessing an unpublished page' do
       let(:page) do
-        FactoryGirl.create(:unpublished_page_in_published_category)
+        FactoryBot.create(:unpublished_page_in_published_category)
       end
 
       it 'excludes page from resolved scope' do
@@ -48,7 +48,7 @@ describe PagePolicy do
   context 'visitor accessing pages in an unpublished category' do
     context 'accessing a published page' do
       let(:page) do
-        FactoryGirl.create(:published_page_in_unpublished_category)
+        FactoryBot.create(:published_page_in_unpublished_category)
       end
 
       it 'excludes page from resolved scope' do
@@ -61,7 +61,7 @@ describe PagePolicy do
 
     context 'accessing an unpublished page' do
       let(:page) do
-        FactoryGirl.create(:unpublished_page_in_unpublished_category)
+        FactoryBot.create(:unpublished_page_in_unpublished_category)
       end
 
       it 'excludes page from resolved scope' do

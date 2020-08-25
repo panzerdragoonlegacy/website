@@ -7,7 +7,7 @@ describe PagePolicy do
     described_class::Scope.new(user, Page.all).resolve
   end
 
-  let(:user) { FactoryGirl.create(:administrator) }
+  let(:user) { FactoryBot.create(:administrator) }
 
   context 'administrator creating a new page' do
     let(:page) { Page.new }
@@ -19,7 +19,7 @@ describe PagePolicy do
   context 'administrator accessing pages in a published category' do
     context 'accessing a published page' do
       let(:page) do
-        FactoryGirl.create(:published_page_in_published_category)
+        FactoryBot.create(:published_page_in_published_category)
       end
 
       it 'includes page in resolved scope' do
@@ -32,7 +32,7 @@ describe PagePolicy do
 
     context 'accessing an unpublished page' do
       let(:page) do
-        FactoryGirl.create(:unpublished_page_in_published_category)
+        FactoryBot.create(:unpublished_page_in_published_category)
       end
 
       it 'includes page in resolved scope' do
@@ -47,7 +47,7 @@ describe PagePolicy do
   context 'administrator accessing pages in an unpublished category' do
     context 'accessing a published page' do
       let(:page) do
-        FactoryGirl.create(:published_page_in_unpublished_category)
+        FactoryBot.create(:published_page_in_unpublished_category)
       end
 
       it 'includes page in resolved scope' do
@@ -60,7 +60,7 @@ describe PagePolicy do
 
     context 'accessing an unpublished page' do
       let(:page) do
-        FactoryGirl.create(:unpublished_page_in_unpublished_category)
+        FactoryBot.create(:unpublished_page_in_unpublished_category)
       end
 
       it 'includes page in resolved scope' do

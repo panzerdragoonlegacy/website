@@ -7,10 +7,10 @@ describe TagPolicy do
     described_class::Scope.new(user, Tag.all).resolve
   end
 
-  let(:user) { FactoryGirl.create(:registered_user) }
+  let(:user) { FactoryBot.create(:registered_user) }
 
   context 'registered user accessing a tag' do
-    let(:tag) { FactoryGirl.create(:valid_tag) }
+    let(:tag) { FactoryBot.create(:valid_tag) }
 
     it 'includes tag in resolved scope' do
       expect(resolved_scope).to include(tag)

@@ -7,7 +7,7 @@ describe DownloadPolicy do
     described_class::Scope.new(user, Download.all).resolve
   end
 
-  let(:user) { FactoryGirl.create(:administrator) }
+  let(:user) { FactoryBot.create(:administrator) }
 
   context 'administrator creating a new download' do
     let(:download) { Download.new }
@@ -19,7 +19,7 @@ describe DownloadPolicy do
   context 'administrator accessing downloads in a published category' do
     context 'accessing a published download' do
       let(:download) do
-        FactoryGirl.create(:published_download_in_published_category)
+        FactoryBot.create(:published_download_in_published_category)
       end
 
       it 'includes download in resolved scope' do
@@ -32,7 +32,7 @@ describe DownloadPolicy do
 
     context 'accessing an unpublished download' do
       let(:download) do
-        FactoryGirl.create(:unpublished_download_in_published_category)
+        FactoryBot.create(:unpublished_download_in_published_category)
       end
 
       it 'includes download in resolved scope' do
@@ -47,7 +47,7 @@ describe DownloadPolicy do
   context 'administrator accessing downloads in an unpublished category' do
     context 'accessing a published download' do
       let(:download) do
-        FactoryGirl.create(:published_download_in_unpublished_category)
+        FactoryBot.create(:published_download_in_unpublished_category)
       end
 
       it 'includes download in resolved scope' do
@@ -60,7 +60,7 @@ describe DownloadPolicy do
 
     context 'accessing an unpublished download' do
       let(:download) do
-        FactoryGirl.create(:unpublished_download_in_unpublished_category)
+        FactoryBot.create(:unpublished_download_in_unpublished_category)
       end
 
       it 'includes download in resolved scope' do

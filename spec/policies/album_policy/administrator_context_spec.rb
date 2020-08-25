@@ -7,7 +7,7 @@ describe AlbumPolicy do
     described_class::Scope.new(user, Album.all).resolve
   end
 
-  let(:user) { FactoryGirl.create(:administrator) }
+  let(:user) { FactoryBot.create(:administrator) }
 
   context 'administrator creating a new album' do
     let(:album) { Album.new }
@@ -19,7 +19,7 @@ describe AlbumPolicy do
   context 'administrator accessing albums in a published category' do
     context 'accessing a published album' do
       let(:album) do
-        FactoryGirl.create(:published_album_in_published_category)
+        FactoryBot.create(:published_album_in_published_category)
       end
 
       it 'includes album in resolved scope' do
@@ -34,7 +34,7 @@ describe AlbumPolicy do
 
       context 'album has children' do
         before do
-          album.pictures << FactoryGirl.create(:valid_picture)
+          album.pictures << FactoryBot.create(:valid_picture)
         end
 
         it { is_expected.to forbid_action(:destroy) }
@@ -45,7 +45,7 @@ describe AlbumPolicy do
 
     context 'accessing an unpublished album' do
       let(:album) do
-        FactoryGirl.create(:unpublished_album_in_published_category)
+        FactoryBot.create(:unpublished_album_in_published_category)
       end
 
       it 'includes album in resolved scope' do
@@ -60,7 +60,7 @@ describe AlbumPolicy do
 
       context 'album has children' do
         before do
-          album.pictures << FactoryGirl.create(:valid_picture)
+          album.pictures << FactoryBot.create(:valid_picture)
         end
 
         it { is_expected.to forbid_action(:destroy) }
@@ -73,7 +73,7 @@ describe AlbumPolicy do
   context 'administrator accessing albums in an unpublished category' do
     context 'accessing a published album' do
       let(:album) do
-        FactoryGirl.create(:published_album_in_unpublished_category)
+        FactoryBot.create(:published_album_in_unpublished_category)
       end
 
       it 'includes album in resolved scope' do
@@ -88,7 +88,7 @@ describe AlbumPolicy do
 
       context 'album has children' do
         before do
-          album.pictures << FactoryGirl.create(:valid_picture)
+          album.pictures << FactoryBot.create(:valid_picture)
         end
 
         it { is_expected.to forbid_action(:destroy) }
@@ -99,7 +99,7 @@ describe AlbumPolicy do
 
     context 'accessing an unpublished album' do
       let(:album) do
-        FactoryGirl.create(:unpublished_album_in_unpublished_category)
+        FactoryBot.create(:unpublished_album_in_unpublished_category)
       end
 
       it 'includes album in resolved scope' do
@@ -114,7 +114,7 @@ describe AlbumPolicy do
 
       context 'album has children' do
         before do
-          album.pictures << FactoryGirl.create(:valid_picture)
+          album.pictures << FactoryBot.create(:valid_picture)
         end
 
         it { is_expected.to forbid_action(:destroy) }

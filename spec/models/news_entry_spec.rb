@@ -52,7 +52,7 @@ RSpec.describe NewsEntry, type: :model do
   describe 'callbacks' do
     context 'before save' do
       it "sets the entry's picture file name to match the entry's name" do
-        valid_news_entry = FactoryGirl.build :valid_news_entry
+        valid_news_entry = FactoryBot.build :valid_news_entry
         valid_news_entry.name = 'New Name'
         valid_news_entry.save
         expect(valid_news_entry.news_entry_picture_file_name)
@@ -64,7 +64,7 @@ RSpec.describe NewsEntry, type: :model do
   describe 'slug' do
     context 'creating a new news entry' do
       let(:news_entry) do
-        FactoryGirl.build :valid_news_entry, name: 'News Entry 1'
+        FactoryBot.build :valid_news_entry, name: 'News Entry 1'
       end
 
       it 'generates a slug that is a parameterised version of the name' do
@@ -75,7 +75,7 @@ RSpec.describe NewsEntry, type: :model do
 
     context 'updating a news entry' do
       let(:news_entry) do
-        FactoryGirl.create :valid_news_entry, name: 'News Entry 1'
+        FactoryBot.create :valid_news_entry, name: 'News Entry 1'
       end
 
       it 'synchronises the slug with the updated name' do
@@ -90,7 +90,7 @@ RSpec.describe NewsEntry, type: :model do
     context 'the published date is not already set' do
       context 'the publish flag is set' do
         let(:news_entry) do
-          FactoryGirl.build :valid_news_entry, publish: true, published_at: nil
+          FactoryBot.build :valid_news_entry, publish: true, published_at: nil
         end
 
         it 'sets a new published date when saved' do
@@ -106,7 +106,7 @@ RSpec.describe NewsEntry, type: :model do
 
       context 'the published flag is not set' do
         let(:news_entry) do
-          FactoryGirl.build :valid_news_entry, publish: false, published_at: nil
+          FactoryBot.build :valid_news_entry, publish: false, published_at: nil
         end
 
         it 'does not set a published date when saved' do
@@ -126,7 +126,7 @@ RSpec.describe NewsEntry, type: :model do
 
       context 'the publish flag is set' do
         let(:news_entry) do
-          FactoryGirl.create(
+          FactoryBot.create(
             :valid_news_entry,
             publish: true,
             published_at: previously_set_published_at
@@ -146,7 +146,7 @@ RSpec.describe NewsEntry, type: :model do
 
       context 'the published flag is not set' do
         let(:news_entry) do
-          FactoryGirl.create(
+          FactoryBot.create(
             :valid_news_entry,
             publish: false,
             published_at: previously_set_published_at

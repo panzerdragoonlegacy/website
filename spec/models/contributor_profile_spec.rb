@@ -54,7 +54,7 @@ RSpec.describe ContributorProfile, type: :model do
   describe 'slug' do
     context 'creating a new contributor profile' do
       let(:contributor_profile) do
-        FactoryGirl.build :valid_contributor_profile, name: 'Contributor 1'
+        FactoryBot.build :valid_contributor_profile, name: 'Contributor 1'
       end
 
       it 'generates a slug that is a parameterised version of the name' do
@@ -65,7 +65,7 @@ RSpec.describe ContributorProfile, type: :model do
 
     context 'updating a contributor profile' do
       let(:contributor_profile) do
-        FactoryGirl.create :valid_contributor_profile, name: 'Contributor 1'
+        FactoryBot.create :valid_contributor_profile, name: 'Contributor 1'
       end
 
       it 'synchronises the slug with the updated name' do

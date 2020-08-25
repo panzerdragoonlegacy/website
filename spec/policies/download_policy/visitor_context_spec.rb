@@ -19,7 +19,7 @@ describe DownloadPolicy do
   context 'visitor accessing downloads in a published category' do
     context 'accessing a published download' do
       let(:download) do
-        FactoryGirl.create(:published_download_in_published_category)
+        FactoryBot.create(:published_download_in_published_category)
       end
 
       it 'includes download in resolved scope' do
@@ -33,7 +33,7 @@ describe DownloadPolicy do
 
     context 'accessing an unpublished download' do
       let(:download) do
-        FactoryGirl.create(:unpublished_download_in_published_category)
+        FactoryBot.create(:unpublished_download_in_published_category)
       end
 
       it 'excludes download from resolved scope' do
@@ -48,7 +48,7 @@ describe DownloadPolicy do
   context 'visitor accessing downloads in an unpublished category' do
     context 'accessing a published download' do
       let(:download) do
-        FactoryGirl.create(:published_download_in_unpublished_category)
+        FactoryBot.create(:published_download_in_unpublished_category)
       end
 
       it 'excludes download from resolved scope' do
@@ -61,7 +61,7 @@ describe DownloadPolicy do
 
     context 'accessing an unpublished download' do
       let(:download) do
-        FactoryGirl.create(:unpublished_download_in_unpublished_category)
+        FactoryBot.create(:unpublished_download_in_unpublished_category)
       end
 
       it 'excludes download from resolved scope' do

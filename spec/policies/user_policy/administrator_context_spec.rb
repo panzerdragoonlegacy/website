@@ -7,10 +7,10 @@ describe UserPolicy do
     described_class::Scope.new(current_user, User.all).resolve
   end
 
-  let(:current_user) { FactoryGirl.create(:administrator) }
+  let(:current_user) { FactoryBot.create(:administrator) }
 
   context 'administrator accessing a user' do
-    let(:user) { FactoryGirl.create(:registered_user) }
+    let(:user) { FactoryBot.create(:registered_user) }
 
     it 'includes user in resolved scope' do
       expect(resolved_scope).to include(user)

@@ -7,7 +7,7 @@ describe NewsEntryPolicy do
     described_class::Scope.new(user, NewsEntry.all).resolve
   end
 
-  let(:user) { FactoryGirl.create(:registered_user) }
+  let(:user) { FactoryBot.create(:registered_user) }
 
   context 'registered user creating a new news entry' do
     let(:news_entry) { NewsEntry.new }
@@ -18,7 +18,7 @@ describe NewsEntryPolicy do
   end
 
   context 'registered user accessing a published news entry' do
-    let(:news_entry) { FactoryGirl.create(:published_news_entry) }
+    let(:news_entry) { FactoryBot.create(:published_news_entry) }
 
     it 'includes news entry in resolved scope' do
       expect(resolved_scope).to include(news_entry)
@@ -31,7 +31,7 @@ describe NewsEntryPolicy do
   end
 
   context 'registered user accessing an unpublished news entry' do
-    let(:news_entry) { FactoryGirl.create(:unpublished_news_entry) }
+    let(:news_entry) { FactoryBot.create(:unpublished_news_entry) }
 
     it 'excludes news entry from resolved scope' do
       expect(resolved_scope).not_to include(news_entry)

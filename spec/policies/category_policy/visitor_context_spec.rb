@@ -11,7 +11,7 @@ describe CategoryPolicy do
 
   context 'visitor accessing a published category' do
     let(:category) do
-      FactoryGirl.create(:published_category)
+      FactoryBot.create(:published_category)
     end
 
     it 'includes category in resolved scope' do
@@ -27,7 +27,7 @@ describe CategoryPolicy do
 
   context 'visitor accessing an unpublished category' do
     let(:category) do
-      FactoryGirl.create(:unpublished_category)
+      FactoryBot.create(:unpublished_category)
     end
 
     it 'excludes category from resolved scope' do

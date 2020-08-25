@@ -8,10 +8,10 @@ describe AlbumPolicy do
   end
 
   let(:contributor_profile) do
-    FactoryGirl.create(:valid_contributor_profile)
+    FactoryBot.create(:valid_contributor_profile)
   end
   let(:user) do
-    FactoryGirl.create(
+    FactoryBot.create(
       :contributor,
       contributor_profile: contributor_profile
     )
@@ -28,7 +28,7 @@ describe AlbumPolicy do
     context 'accessing albums that the user does not contribute to' do
       context 'accessing a published album' do
         let(:album) do
-          FactoryGirl.create(:published_album_in_published_category)
+          FactoryBot.create(:published_album_in_published_category)
         end
 
         it 'includes album in resolved scope' do
@@ -42,7 +42,7 @@ describe AlbumPolicy do
 
       context 'accessing an unpublished album' do
         let(:album) do
-          FactoryGirl.create(:unpublished_album_in_published_category)
+          FactoryBot.create(:unpublished_album_in_published_category)
         end
 
         it 'excludes album from resolved scope' do
@@ -59,7 +59,7 @@ describe AlbumPolicy do
     context 'accessing albums the user contributes to' do
       context 'accessing a published album' do
         let(:album) do
-          FactoryGirl.create(
+          FactoryBot.create(
             :published_album_in_published_category,
             contributions: [
               Contribution.new(contributor_profile: contributor_profile)
@@ -78,7 +78,7 @@ describe AlbumPolicy do
 
       context 'accessing an unpublished album' do
         let(:album) do
-          FactoryGirl.create(
+          FactoryBot.create(
             :unpublished_album_in_published_category,
             contributions: [
               Contribution.new(contributor_profile: contributor_profile)
@@ -102,7 +102,7 @@ describe AlbumPolicy do
     context 'accessing albums that the user does not contribute to' do
       context 'accessing a published album' do
         let(:album) do
-          FactoryGirl.create(:published_album_in_published_category)
+          FactoryBot.create(:published_album_in_published_category)
         end
 
         it 'includes album in resolved scope' do
@@ -116,7 +116,7 @@ describe AlbumPolicy do
 
       context 'accessing an unpublished album' do
         let(:album) do
-          FactoryGirl.create(:unpublished_album_in_published_category)
+          FactoryBot.create(:unpublished_album_in_published_category)
         end
 
         it 'excludes album from resolved scope' do
@@ -133,7 +133,7 @@ describe AlbumPolicy do
     context 'accessing albums that the user contributes to' do
       context 'accessing a published album' do
         let(:album) do
-          FactoryGirl.create(
+          FactoryBot.create(
             :published_album_in_unpublished_category,
             contributions: [
               Contribution.new(contributor_profile: contributor_profile)
@@ -152,7 +152,7 @@ describe AlbumPolicy do
 
       context 'accessing an unpublished album' do
         let(:album) do
-          FactoryGirl.create(
+          FactoryBot.create(
             :unpublished_album_in_unpublished_category,
             contributions: [
               Contribution.new(contributor_profile: contributor_profile)

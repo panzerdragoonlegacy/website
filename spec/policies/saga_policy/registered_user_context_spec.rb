@@ -7,11 +7,11 @@ describe SagaPolicy do
     described_class::Scope.new(user, Saga.all).resolve
   end
 
-  let(:user) { FactoryGirl.create(:registered_user) }
+  let(:user) { FactoryBot.create(:registered_user) }
 
   context 'registered user accessing a saga' do
     let(:saga) do
-      FactoryGirl.create(:valid_saga)
+      FactoryBot.create(:valid_saga)
     end
 
     it 'includes saga in resolved scope' do

@@ -10,7 +10,7 @@ describe CategoryGroupPolicy do
   let(:user) { nil }
 
   context 'visitor accessing a category group' do
-    let(:category_group) { FactoryGirl.create(:valid_category_group) }
+    let(:category_group) { FactoryBot.create(:valid_category_group) }
 
     it 'includes category group in resolved scope' do
       expect(resolved_scope).to include(category_group)

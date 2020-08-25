@@ -7,7 +7,7 @@ describe PicturePolicy do
     described_class::Scope.new(user, Picture.all).resolve
   end
 
-  let(:user) { FactoryGirl.create(:administrator) }
+  let(:user) { FactoryBot.create(:administrator) }
 
   context 'administrator creating a new picture' do
     let(:picture) { Picture.new }
@@ -19,7 +19,7 @@ describe PicturePolicy do
   context 'administrator accessing pictures in a published category' do
     context 'accessing a published picture' do
       let(:picture) do
-        FactoryGirl.create(:published_picture_in_published_category)
+        FactoryBot.create(:published_picture_in_published_category)
       end
 
       it 'includes picture in resolved scope' do
@@ -32,7 +32,7 @@ describe PicturePolicy do
 
     context 'accessing an unpublished picture' do
       let(:picture) do
-        FactoryGirl.create(:unpublished_picture_in_published_category)
+        FactoryBot.create(:unpublished_picture_in_published_category)
       end
 
       it 'includes picture in resolved scope' do
@@ -47,7 +47,7 @@ describe PicturePolicy do
   context 'administrator accessing pictures in an unpublished category' do
     context 'accessing a published picture' do
       let(:picture) do
-        FactoryGirl.create(:published_picture_in_unpublished_category)
+        FactoryBot.create(:published_picture_in_unpublished_category)
       end
 
       it 'includes picture in resolved scope' do
@@ -60,7 +60,7 @@ describe PicturePolicy do
 
     context 'accessing an unpublished picture' do
       let(:picture) do
-        FactoryGirl.create(:unpublished_picture_in_unpublished_category)
+        FactoryBot.create(:unpublished_picture_in_unpublished_category)
       end
 
       it 'includes picture in resolved scope' do

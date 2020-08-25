@@ -15,11 +15,11 @@ end
 group :development, :test do
   gem 'byebug', '~> 11.1.3'
   gem 'dotenv-rails', '~> 2.7.6'
+  gem 'factory_bot_rails', '~> 6.1.0'
   gem 'rspec-rails', '~> 4.0.1'
 end
 
 group :test do
-  gem 'factory_girl_rails', '~> 4.9.0' # TODO: Replace with factory_bot_rails
   gem 'pundit-matchers', '~> 1.6.0'
   gem 'rspec_junit_formatter' # Used for formatting CircleCI output
   gem 'shoulda-matchers', '~> 4.3.0'

@@ -39,7 +39,7 @@ RSpec.describe Download, type: :model do
     describe 'validation of contributor profiles' do
       context 'download has less than one contributor profile' do
         let(:download) do
-          FactoryGirl.build(
+          FactoryBot.build(
             :valid_download,
             contributor_profiles: []
           )
@@ -52,10 +52,10 @@ RSpec.describe Download, type: :model do
 
       context 'download has at least one contributor profile' do
         let(:download) do
-          FactoryGirl.build(
+          FactoryBot.build(
             :valid_download,
             contributor_profiles: [
-              FactoryGirl.create(:valid_contributor_profile)
+              FactoryBot.create(:valid_contributor_profile)
             ]
           )
         end
@@ -92,7 +92,7 @@ RSpec.describe Download, type: :model do
   describe 'callbacks' do
     context 'before save' do
       it "sets the download file name to match the download's name" do
-        valid_download = FactoryGirl.build :valid_download, name: 'New Name'
+        valid_download = FactoryBot.build :valid_download, name: 'New Name'
         valid_download.save
         expect(valid_download.download_file_name).to eq 'new-name.zip'
       end
@@ -102,7 +102,7 @@ RSpec.describe Download, type: :model do
   describe 'slug' do
     context 'creating a new download' do
       let(:download) do
-        FactoryGirl.build :valid_download, name: 'Download 1'
+        FactoryBot.build :valid_download, name: 'Download 1'
       end
 
       it 'sets the slug to be a parameterised version of the id + name' do
@@ -113,7 +113,7 @@ RSpec.describe Download, type: :model do
 
     context 'updating a download' do
       let(:download) do
-        FactoryGirl.create :valid_download, name: 'Download 1'
+        FactoryBot.create :valid_download, name: 'Download 1'
       end
 
       it 'sets the slug to be a parameterised version of the id + updated ' \

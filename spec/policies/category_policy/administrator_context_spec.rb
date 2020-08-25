@@ -7,10 +7,10 @@ describe CategoryPolicy do
     described_class::Scope.new(user, Category.all).resolve
   end
 
-  let(:user) { FactoryGirl.create(:administrator) }
+  let(:user) { FactoryBot.create(:administrator) }
 
   context 'administrator accessing a published category' do
-    let(:category) { FactoryGirl.create(:published_picture_category) }
+    let(:category) { FactoryBot.create(:published_picture_category) }
 
     it 'includes category in resolved scope' do
       expect(resolved_scope).to include(category)
@@ -27,7 +27,7 @@ describe CategoryPolicy do
 
     context 'category has children' do
       before do
-        category.pictures << FactoryGirl.create(
+        category.pictures << FactoryBot.create(
           :published_picture_in_published_category
         )
       end
@@ -37,7 +37,7 @@ describe CategoryPolicy do
   end
 
   context 'administrator accessing an unpublished category' do
-    let(:category) { FactoryGirl.create(:unpublished_picture_category) }
+    let(:category) { FactoryBot.create(:unpublished_picture_category) }
 
     it 'includes category in resolved scope' do
       expect(resolved_scope).to include(category)
@@ -54,7 +54,7 @@ describe CategoryPolicy do
 
     context 'category has children' do
       before do
-        category.pictures << FactoryGirl.create(
+        category.pictures << FactoryBot.create(
           :published_picture_in_published_category
         )
       end

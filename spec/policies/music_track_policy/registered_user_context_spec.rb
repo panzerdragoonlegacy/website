@@ -7,7 +7,7 @@ describe MusicTrackPolicy do
     described_class::Scope.new(user, MusicTrack.all).resolve
   end
 
-  let(:user) { FactoryGirl.create(:registered_user) }
+  let(:user) { FactoryBot.create(:registered_user) }
 
   context 'registered user creating a new music track' do
     let(:music_track) { MusicTrack.new }
@@ -19,7 +19,7 @@ describe MusicTrackPolicy do
   context 'registered user accessing music tracks in a published category' do
     context 'accessing a published music track' do
       let(:music_track) do
-        FactoryGirl.create(:published_music_track_in_published_category)
+        FactoryBot.create(:published_music_track_in_published_category)
       end
 
       it 'includes music track in resolved scope' do
@@ -33,7 +33,7 @@ describe MusicTrackPolicy do
 
     context 'accessing an unpublished music track' do
       let(:music_track) do
-        FactoryGirl.create(:unpublished_music_track_in_published_category)
+        FactoryBot.create(:unpublished_music_track_in_published_category)
       end
 
       it 'excludes music track from resolved scope' do
@@ -48,7 +48,7 @@ describe MusicTrackPolicy do
   context 'registered user accessing music tracks in an unpublished category' do
     context 'accessing a published music track' do
       let(:music_track) do
-        FactoryGirl.create(:published_music_track_in_unpublished_category)
+        FactoryBot.create(:published_music_track_in_unpublished_category)
       end
 
       it 'excludes music track from resolved scope' do
@@ -61,7 +61,7 @@ describe MusicTrackPolicy do
 
     context 'accessing an unpublished music track' do
       let(:music_track) do
-        FactoryGirl.create(:unpublished_music_track_in_unpublished_category)
+        FactoryBot.create(:unpublished_music_track_in_unpublished_category)
       end
 
       it 'excludes music track from resolved scope' do

@@ -8,10 +8,10 @@ describe NewsEntryPolicy do
   end
 
   let(:contributor_profile) do
-    FactoryGirl.create(:valid_contributor_profile)
+    FactoryBot.create(:valid_contributor_profile)
   end
   let(:user) do
-    FactoryGirl.create(
+    FactoryBot.create(
       :contributor,
       contributor_profile: contributor_profile
     )
@@ -27,7 +27,7 @@ describe NewsEntryPolicy do
 
   context 'contributor accessing news entries that they do not author' do
     context 'accessing a published news entry' do
-      let(:news_entry) { FactoryGirl.create(:published_news_entry) }
+      let(:news_entry) { FactoryBot.create(:published_news_entry) }
 
       it 'includes news entry in resolved scope' do
         expect(resolved_scope).to include(news_entry)
@@ -40,7 +40,7 @@ describe NewsEntryPolicy do
     end
 
     context 'accessing an unpublished news entry' do
-      let(:news_entry) { FactoryGirl.create(:unpublished_news_entry) }
+      let(:news_entry) { FactoryBot.create(:unpublished_news_entry) }
 
       it 'excludes news entry from resolved scope' do
         expect(resolved_scope).not_to include(news_entry)
@@ -55,7 +55,7 @@ describe NewsEntryPolicy do
   context 'contributor accessing news entries that they author' do
     context 'accessing a published news entry' do
       let(:news_entry) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :published_news_entry,
           contributor_profile: contributor_profile
         )
@@ -73,7 +73,7 @@ describe NewsEntryPolicy do
 
     context 'accessing an unpublished news entry' do
       let(:news_entry) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :unpublished_news_entry,
           contributor_profile_id: contributor_profile.id
         )

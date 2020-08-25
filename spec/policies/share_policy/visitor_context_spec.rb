@@ -10,7 +10,7 @@ describe SharePolicy do
   let(:user) { nil }
 
   context 'visitor accessing a share' do
-    let(:share) { FactoryGirl.create(:valid_share) }
+    let(:share) { FactoryBot.create(:valid_share) }
 
     it 'includes share in resolved scope' do
       expect(resolved_scope).to include(share)

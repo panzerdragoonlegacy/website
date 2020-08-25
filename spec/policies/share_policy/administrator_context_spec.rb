@@ -7,10 +7,10 @@ describe SharePolicy do
     described_class::Scope.new(user, Share.all).resolve
   end
 
-  let(:user) { FactoryGirl.create(:administrator) }
+  let(:user) { FactoryBot.create(:administrator) }
 
   context 'administrator accessing a share' do
-    let(:share) { FactoryGirl.create(:valid_share) }
+    let(:share) { FactoryBot.create(:valid_share) }
 
     it 'includes share in resolved scope' do
       expect(resolved_scope).to include(share)

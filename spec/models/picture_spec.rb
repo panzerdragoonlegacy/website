@@ -51,7 +51,7 @@ RSpec.describe Picture, type: :model do
     describe 'validation of contributor profiles' do
       context 'picture has less than one contributor profile' do
         let(:picture) do
-          FactoryGirl.build(
+          FactoryBot.build(
             :valid_picture,
             contributor_profiles: []
           )
@@ -64,10 +64,10 @@ RSpec.describe Picture, type: :model do
 
       context 'picture has at least one contributor profile' do
         let(:picture) do
-          FactoryGirl.build(
+          FactoryBot.build(
             :valid_picture,
             contributor_profiles: [
-              FactoryGirl.create(:valid_contributor_profile)
+              FactoryBot.create(:valid_contributor_profile)
             ]
           )
         end
@@ -94,16 +94,16 @@ RSpec.describe Picture, type: :model do
   describe 'callbacks' do
     context 'before save' do
       it "sets the picture file name to match the picture's name" do
-        valid_picture = FactoryGirl.build :valid_picture, name: 'New Name'
+        valid_picture = FactoryBot.build :valid_picture, name: 'New Name'
         valid_picture.save
         expect(valid_picture.picture_file_name).to eq 'new-name.jpg'
       end
 
       describe 'replacement of picture' do
         before do
-          @picture_to_replace = FactoryGirl.create :valid_picture
+          @picture_to_replace = FactoryBot.create :valid_picture
           @picture_to_replace_id = @picture_to_replace.id
-          @replacement_picture = FactoryGirl.create :valid_picture
+          @replacement_picture = FactoryBot.create :valid_picture
           @replacement_picture.id_of_picture_to_replace = @picture_to_replace.id
           @replacement_picture.save
         end
@@ -132,7 +132,7 @@ RSpec.describe Picture, type: :model do
   describe 'slug' do
     context 'creating a new picture' do
       let(:picture) do
-        FactoryGirl.build :valid_picture, name: 'Picture 1'
+        FactoryBot.build :valid_picture, name: 'Picture 1'
       end
 
       it 'sets the slug to be a parameterised version of the id + name' do
@@ -143,7 +143,7 @@ RSpec.describe Picture, type: :model do
 
     context 'updating a picture' do
       let(:picture) do
-        FactoryGirl.create :valid_picture, name: 'Picture 1'
+        FactoryBot.create :valid_picture, name: 'Picture 1'
       end
 
       it 'sets the slug to be a parameterised version of the id + updated ' \

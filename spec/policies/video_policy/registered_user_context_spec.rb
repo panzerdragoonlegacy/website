@@ -7,7 +7,7 @@ describe VideoPolicy do
     described_class::Scope.new(user, Video.all).resolve
   end
 
-  let(:user) { FactoryGirl.create(:registered_user) }
+  let(:user) { FactoryBot.create(:registered_user) }
 
   context 'registered user creating a new video' do
     let(:video) { Video.new }
@@ -19,7 +19,7 @@ describe VideoPolicy do
   context 'registered user accessing videos in a published category' do
     context 'accessing a published video' do
       let(:video) do
-        FactoryGirl.create(:published_video_in_published_category)
+        FactoryBot.create(:published_video_in_published_category)
       end
 
       it 'includes video in resolved scope' do
@@ -33,7 +33,7 @@ describe VideoPolicy do
 
     context 'accessing an unpublished video' do
       let(:video) do
-        FactoryGirl.create(:unpublished_video_in_published_category)
+        FactoryBot.create(:unpublished_video_in_published_category)
       end
 
       it 'excludes video from resolved scope' do
@@ -48,7 +48,7 @@ describe VideoPolicy do
   context 'registered user accessing videos in an unpublished category' do
     context 'accessing a published video' do
       let(:video) do
-        FactoryGirl.create(:published_video_in_unpublished_category)
+        FactoryBot.create(:published_video_in_unpublished_category)
       end
 
       it 'excludes video from resolved scope' do
@@ -61,7 +61,7 @@ describe VideoPolicy do
 
     context 'accessing an unpublished video' do
       let(:video) do
-        FactoryGirl.create(:unpublished_video_in_unpublished_category)
+        FactoryBot.create(:unpublished_video_in_unpublished_category)
       end
 
       it 'excludes video from resolved scope' do

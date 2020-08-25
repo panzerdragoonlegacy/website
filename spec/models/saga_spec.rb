@@ -31,7 +31,7 @@ RSpec.describe Saga, type: :model do
   describe 'slug' do
     context 'creating a new saga' do
       let(:saga) do
-        FactoryGirl.build :valid_saga, name: 'Saga 1'
+        FactoryBot.build :valid_saga, name: 'Saga 1'
       end
 
       it 'generates a slug that is a parameterised version of the name' do
@@ -42,7 +42,7 @@ RSpec.describe Saga, type: :model do
 
     context 'updating a saga' do
       let(:saga) do
-        FactoryGirl.create :valid_saga, name: 'Saga 1'
+        FactoryBot.create :valid_saga, name: 'Saga 1'
       end
 
       it 'synchronises the slug with the updated name' do

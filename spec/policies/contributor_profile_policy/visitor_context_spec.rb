@@ -18,7 +18,7 @@ describe ContributorProfilePolicy do
 
   context 'visitor accessing a published contributor profile' do
     let(:contributor_profile) do
-      FactoryGirl.create(:published_contributor_profile)
+      FactoryBot.create(:published_contributor_profile)
     end
 
     it 'includes contributor profile in resolved scope' do
@@ -32,7 +32,7 @@ describe ContributorProfilePolicy do
 
   context 'visitor accessing an unpublished contributor profile' do
     let(:contributor_profile) do
-      FactoryGirl.create(:unpublished_contributor_profile)
+      FactoryBot.create(:unpublished_contributor_profile)
     end
 
     it 'excludes contributor profile from resolved scope' do

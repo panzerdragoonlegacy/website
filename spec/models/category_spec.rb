@@ -49,11 +49,11 @@ RSpec.describe Category, type: :model do
     pending describe 'validation of category group' do
       context 'category type is also a category group type' do
         before do
-          @category_group = FactoryGirl.create(
+          @category_group = FactoryBot.create(
             :valid_category_group,
             category_group_type: :music_track
           )
-          @category = FactoryGirl.build(
+          @category = FactoryBot.build(
             :valid_category,
             category_type: :music_track
           )
@@ -69,7 +69,7 @@ RSpec.describe Category, type: :model do
 
           context "category type does not match the group's type" do
             it 'should not be valid' do
-              different_category_group = FactoryGirl.create(
+              different_category_group = FactoryBot.create(
                 :valid_category_group,
                 category_group_type: :video
               )
@@ -89,14 +89,14 @@ RSpec.describe Category, type: :model do
 
       context 'category type is not a category group type' do
         before do
-          @category = FactoryGirl.build(
+          @category = FactoryBot.build(
             :valid_category,
             category_type: :link
           )
         end
 
         it 'should not validate if a category group is present' do
-          category_group = FactoryGirl.create(
+          category_group = FactoryBot.create(
             :valid_category_group,
             category_group_type: :music_track
           )
@@ -127,7 +127,7 @@ RSpec.describe Category, type: :model do
   describe 'slug' do
     context 'creating a new category' do
       let(:category) do
-        FactoryGirl.build :valid_category, name: 'Category 1'
+        FactoryBot.build :valid_category, name: 'Category 1'
       end
 
       it 'generates a slug that is a parameterised version of the name' do
@@ -138,7 +138,7 @@ RSpec.describe Category, type: :model do
 
     context 'updating a category' do
       let(:category) do
-        FactoryGirl.create :valid_category, name: 'Category 1'
+        FactoryBot.create :valid_category, name: 'Category 1'
       end
 
       it 'synchronises the slug with the updated name' do

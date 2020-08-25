@@ -46,7 +46,7 @@ RSpec.describe MusicTrack, type: :model do
     describe 'validation of contributor profiles' do
       context 'music track has less than one contributor profile' do
         let(:music_track) do
-          FactoryGirl.build(
+          FactoryBot.build(
             :valid_music_track,
             contributor_profiles: []
           )
@@ -59,10 +59,10 @@ RSpec.describe MusicTrack, type: :model do
 
       context 'music track has at least one contributor profile' do
         let(:music_track) do
-          FactoryGirl.build(
+          FactoryBot.build(
             :valid_music_track,
             contributor_profiles: [
-              FactoryGirl.create(:valid_contributor_profile)
+              FactoryBot.create(:valid_contributor_profile)
             ]
           )
         end
@@ -97,7 +97,7 @@ RSpec.describe MusicTrack, type: :model do
   describe 'slug' do
     context 'creating a new music track' do
       let(:music_track) do
-        FactoryGirl.build :valid_music_track, name: 'Music Track 1'
+        FactoryBot.build :valid_music_track, name: 'Music Track 1'
       end
 
       it 'sets the slug to be a parameterised version of the id + name' do
@@ -110,7 +110,7 @@ RSpec.describe MusicTrack, type: :model do
 
     context 'updating a music track' do
       let(:music_track) do
-        FactoryGirl.create :valid_music_track, name: 'Music Track 1'
+        FactoryBot.create :valid_music_track, name: 'Music Track 1'
       end
 
       it 'sets the slug to be a parameterised version of the id + updated ' \

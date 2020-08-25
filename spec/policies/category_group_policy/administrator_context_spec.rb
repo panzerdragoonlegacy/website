@@ -7,10 +7,10 @@ describe CategoryGroupPolicy do
     described_class::Scope.new(user, CategoryGroup.all).resolve
   end
 
-  let(:user) { FactoryGirl.create(:administrator) }
+  let(:user) { FactoryBot.create(:administrator) }
 
   context 'administrator accessing a category group' do
-    let(:category_group) { FactoryGirl.create(:valid_category_group) }
+    let(:category_group) { FactoryBot.create(:valid_category_group) }
 
     it 'includes category group in resolved scope' do
       expect(resolved_scope).to include(category_group)
@@ -24,7 +24,7 @@ describe CategoryGroupPolicy do
 
     context 'category group has children' do
       before do
-        category_group.categories << FactoryGirl.create(:valid_category)
+        category_group.categories << FactoryBot.create(:valid_category)
       end
 
       it { is_expected.to forbid_action(:destroy) }

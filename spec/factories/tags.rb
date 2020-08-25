@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :tag do
     factory :valid_tag do
       sequence(:name) { |n| "Tag #{n}" }

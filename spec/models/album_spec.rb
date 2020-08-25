@@ -50,7 +50,7 @@ RSpec.describe Album, type: :model do
     describe 'validation of contributor profiles' do
       context 'album has less than one contributor profile' do
         let(:album) do
-          FactoryGirl.build(
+          FactoryBot.build(
             :valid_album,
             contributor_profiles: []
           )
@@ -63,10 +63,10 @@ RSpec.describe Album, type: :model do
 
       context 'album has at least one contributor profile' do
         let(:album) do
-          FactoryGirl.build(
+          FactoryBot.build(
             :valid_album,
             contributor_profiles: [
-              FactoryGirl.create(:valid_contributor_profile)
+              FactoryBot.create(:valid_contributor_profile)
             ]
           )
         end
@@ -82,15 +82,15 @@ RSpec.describe Album, type: :model do
     context 'after save' do
       describe 'synchronisation of album and picture categories' do
         before do
-          category = FactoryGirl.create :valid_picture_category
-          @album = FactoryGirl.create :valid_album, category: category
-          @picture = FactoryGirl.create :valid_picture, category: category
+          category = FactoryBot.create :valid_picture_category
+          @album = FactoryBot.create :valid_album, category: category
+          @picture = FactoryBot.create :valid_picture, category: category
           @album.pictures << @picture
         end
 
         context 'album category has changed' do
           it "updates the album's pictures to match the album's category" do
-            different_category = FactoryGirl.create :valid_picture_category
+            different_category = FactoryBot.create :valid_picture_category
             @album.category = different_category
             @album.save
             expect(@picture.category).to eq different_category
@@ -111,7 +111,7 @@ RSpec.describe Album, type: :model do
   describe 'slug' do
     context 'creating a new album' do
       let(:album) do
-        FactoryGirl.build :valid_album, name: 'Album 1'
+        FactoryBot.build :valid_album, name: 'Album 1'
       end
 
       it 'sets the slug to be a parameterised version of the id + name' do
@@ -122,7 +122,7 @@ RSpec.describe Album, type: :model do
 
     context 'updating an album' do
       let(:album) do
-        FactoryGirl.create :valid_album, name: 'Album 1'
+        FactoryBot.create :valid_album, name: 'Album 1'
       end
 
       it 'sets the slug to be a parameterised version of the id + updated ' \

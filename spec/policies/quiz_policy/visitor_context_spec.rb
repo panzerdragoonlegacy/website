@@ -10,7 +10,7 @@ describe QuizPolicy do
   let(:user) { nil }
 
   context 'visitor accessing a published quiz' do
-    let(:quiz) { FactoryGirl.create(:published_quiz) }
+    let(:quiz) { FactoryBot.create(:published_quiz) }
 
     it 'includes quiz in resolved scope' do
       expect(resolved_scope).to include(quiz)
@@ -22,7 +22,7 @@ describe QuizPolicy do
   end
 
   context 'visitor accessing an unpublished quiz' do
-    let(:quiz) { FactoryGirl.create(:unpublished_quiz) }
+    let(:quiz) { FactoryBot.create(:unpublished_quiz) }
 
     it 'excludes quiz from resolved scope' do
       expect(resolved_scope).not_to include(quiz)

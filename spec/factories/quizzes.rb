@@ -1,17 +1,17 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :quiz do
     factory :valid_quiz do
       sequence(:name) { |n| "Quiz #{n}" }
-      description 'Test Description'
+      description { 'Test Description' }
 
-      contributor_profiles { [FactoryGirl.create(:valid_contributor_profile)] }
+      contributor_profiles { [FactoryBot.create(:valid_contributor_profile)] }
 
       factory :published_quiz do
-        publish true
+        publish { true }
       end
 
       factory :unpublished_quiz do
-        publish false
+        publish { false }
       end
     end
   end

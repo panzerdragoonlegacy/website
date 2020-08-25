@@ -10,7 +10,7 @@ describe UserPolicy do
   let(:current_user) { nil }
 
   context 'visitor accessing a user' do
-    let(:user) { FactoryGirl.create(:registered_user) }
+    let(:user) { FactoryBot.create(:registered_user) }
 
     it 'excludes user from resolved scope' do
       expect(resolved_scope).not_to include(user)
