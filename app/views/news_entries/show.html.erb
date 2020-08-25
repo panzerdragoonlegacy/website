@@ -7,7 +7,8 @@
 <% open_graph_type 'article' %>
 <% if @news_entry.news_entry_picture.present? %>
   <% open_graph_image(
-    "https://www.panzerdragoonlegacy.com#{@news_entry.news_entry_picture.url(:original)}"
+    ENV['WEBSITE_URL'].chomp('/') +
+      @news_entry.news_entry_picture.url(:original)
   ) %>
 <% end %>
 

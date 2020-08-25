@@ -2,7 +2,7 @@
 <% description @download.description %>
 <% if @download.download_picture.present? %>
   <% open_graph_image(
-    "#{root_path.chomp('/')}#{@download.download_picture.url(:original)}"
+    ENV['WEBSITE_URL'].chomp('/') + @download.download_picture.url(:original)
   ) %>
 <% end %>
 

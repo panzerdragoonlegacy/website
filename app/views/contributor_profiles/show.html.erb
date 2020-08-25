@@ -3,7 +3,7 @@
 <% open_graph_type 'profile' %>
 <% if @contributor_profile.avatar.present? %>
   <% open_graph_image(
-    "#{root_path.chomp('/')}#{@contributor_profile.avatar.url(:original)}"
+    ENV['WEBSITE_URL'].chomp('/') + @contributor_profile.avatar.url(:original)
   ) %>
 <% end %>
 

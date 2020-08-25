@@ -3,7 +3,8 @@
 <% open_graph_type 'music' %>
 <% if @music_track.music_track_picture.present? %>
   <% open_graph_image(
-    "#{root_path.chomp('/')}#{@music_track.music_track_picture.url(:original)}"
+    ENV['WEBSITE_URL'].chomp('/') +
+      @music_track.music_track_picture.url(:original)
   ) %>
 <% end %>
 

@@ -5,7 +5,7 @@
 <% open_graph_type 'article' %>
 <% if @tag.tag_picture.present? %>
   <% open_graph_image(
-    "#{root_path.chomp('/')}#{@tag.tag_picture.url(:original)}"
+    ENV['WEBSITE_URL'].chomp('/') + @tag.tag_picture.url(:original)
   ) %>
 <% end %>
 

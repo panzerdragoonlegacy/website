@@ -3,7 +3,7 @@
 <% open_graph_type 'article' %>
 <% if @category.category_picture.present? %>
   <% open_graph_image(
-    "#{root_path.chomp('/')}#{@category.category_picture.url(:original)}"
+    ENV['WEBSITE_URL'].chomp('/') + @category.category_picture.url(:original)
   ) %>
 <% end %>
 

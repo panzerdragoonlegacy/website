@@ -3,4 +3,4 @@
   'Panzer Dragoon universe!'
 %>
 <% open_graph_type 'article' %>
-<% open_graph_image "#{root_path.chomp('/')}/banner.jpg" %>
+<% open_graph_image ENV['WEBSITE_URL'].chomp('/') + '/banner.jpg' %>

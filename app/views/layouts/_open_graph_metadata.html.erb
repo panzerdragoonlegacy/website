@@ -11,7 +11,7 @@
   yield(:open_graph_type).present? ? yield(:open_graph_type) : 'website'
 %>" />
 <meta property="og:url" content="<%=
-  'https://www.panzerdragoonlegacy.com' + request.fullpath
+  ENV['WEBSITE_URL'].chomp('/') + request.fullpath
 %>" />
 <% if yield(:open_graph_image).present? %>
   <meta property="og:image" content="<%= yield(:open_graph_image) %>" />
