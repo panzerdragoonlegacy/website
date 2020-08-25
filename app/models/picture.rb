@@ -1,4 +1,4 @@
-class Picture < ActiveRecord::Base
+class Picture < ApplicationRecord
   include Categorisable
   include Contributable
   include Instagramable

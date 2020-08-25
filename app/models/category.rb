@@ -1,4 +1,4 @@
-class Category < ActiveRecord::Base
+class Category < ApplicationRecord
   include Publishable
   include SluggableWithoutId
   include Syncable

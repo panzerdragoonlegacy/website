@@ -1,4 +1,4 @@
-class NewsEntry < ActiveRecord::Base
+class NewsEntry < ApplicationRecord
   include Categorisable
   include Publishable
   include SluggableWithoutId

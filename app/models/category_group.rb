@@ -1,4 +1,4 @@
-class CategoryGroup < ActiveRecord::Base
+class CategoryGroup < ApplicationRecord
   include SluggableWithoutId
 
   has_paper_trail

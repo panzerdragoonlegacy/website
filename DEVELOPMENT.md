@@ -27,13 +27,13 @@ Step-by-step instructions for setting up a development environment for the site.
 
 6. If it does not already exist, create the development database:
 
-   `docker-compose exec app bin/rake db:create`
+   `docker-compose exec app bin/rails db:create`
 
 7. Load the database schema and run any pending migrations:
 
-   `docker-compose exec app bin/rake db:schema:load`
+   `docker-compose exec app bin/rails db:schema:load`
 
-   `docker-compose exec app bin/rake db:migrate`
+   `docker-compose exec app bin/rails db:migrate`
 
 8. Enter the Rails console and create an administrator user:
 
@@ -112,7 +112,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 10. Run any outstanding migrations on the restored database
 
-    `docker-compose exec app bin/rake db:migrate`
+    `docker-compose exec app bin/rails db:migrate`
 
 ### Restore Paperclip Attachments into Docker Volume
 
@@ -130,7 +130,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 1. If it does not already exist, create the test database:
 
-   `docker-compose exec app bin/rake db:create RAILS_ENV=test`
+   `docker-compose exec app bin/rails db:create RAILS_ENV=test`
 
 2. Run this test suite:
 

@@ -1,4 +1,4 @@
-class Quiz < ActiveRecord::Base
+class Quiz < ApplicationRecord
   include Contributable
   include Publishable
   include Taggable

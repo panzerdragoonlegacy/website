@@ -293,7 +293,7 @@ enabled (for Let's Encrypt).
 
 9. Run any outstanding migrations on the restored database
 
-   `sudo docker-compose -f docker-compose.prod.yml exec app bin/rake db:migrate`
+   `sudo docker-compose -f docker-compose.prod.yml exec app bin/rails db:migrate`
 
 ## Restore Paperclip Attachments into Docker Volume
 

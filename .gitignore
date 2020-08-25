@@ -1,10 +1,10 @@
-# Ignore OSX hidden file.
+# Ignore macOS hidden file.
 .DS_Store
 
-# Ignore Visual Studio Code configuration
+# Ignore Visual Studio Code configuration.
 .vscode
 
-# Ignore environment variables
+# Ignore environment variables.
 .env
 
 # Ignore the default SQLite database.
@@ -23,3 +23,6 @@
 
 # Ignore the Let's Encrypt certbot directory.
 /certbot
+
+# Ignore Node packages.
+/node_modules

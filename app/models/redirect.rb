@@ -1,4 +1,4 @@
-class Redirect < ActiveRecord::Base
+class Redirect < ApplicationRecord
   has_paper_trail
 
   validates :old_url, presence: true, length: { in: 2..250 }

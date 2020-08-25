@@ -1,4 +1,4 @@
-class MusicTrack < ActiveRecord::Base
+class MusicTrack < ApplicationRecord
   include Categorisable
   include Contributable
   include Publishable

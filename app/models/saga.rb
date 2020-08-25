@@ -1,4 +1,4 @@
-class Saga < ActiveRecord::Base
+class Saga < ApplicationRecord
   include SluggableWithoutId
 
   has_paper_trail

@@ -1,4 +1,4 @@
-class Download < ActiveRecord::Base
+class Download < ApplicationRecord
   include Categorisable
   include Contributable
   include Publishable

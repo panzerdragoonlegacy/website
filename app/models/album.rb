@@ -1,4 +1,4 @@
-class Album < ActiveRecord::Base
+class Album < ApplicationRecord
   acts_as_url :name, sync_url: true
 
   include Categorisable

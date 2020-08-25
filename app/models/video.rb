@@ -1,4 +1,4 @@
-class Video < ActiveRecord::Base
+class Video < ApplicationRecord
   include Categorisable
   include Contributable
   include Publishable

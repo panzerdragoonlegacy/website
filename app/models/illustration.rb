@@ -1,4 +1,4 @@
-class Illustration < ActiveRecord::Base
+class Illustration < ApplicationRecord
   include Syncable
 
   belongs_to :page
