@@ -27,11 +27,12 @@ RSpec.describe Illustration, type: :model do
   describe 'callbacks' do
     context 'before save' do
       it 'sets the illustration file name to a lowercase, hyphenated version' do
-        valid_illustration = FactoryBot.build :valid_illustration
-        valid_illustration.illustration_file_name = 'New File Name.jpg'
-        valid_illustration.save
-        expect(valid_illustration.illustration_file_name)
-          .to eq 'new-file-name.jpg'
+        valid_page = FactoryBot.build :valid_page
+        illustration = FactoryBot.build :illustration
+        illustration.page = valid_page
+        illustration.illustration_file_name = 'New File Name.jpg'
+        illustration.save
+        expect(illustration.illustration_file_name).to eq 'new-file-name.jpg'
       end
     end
   end
