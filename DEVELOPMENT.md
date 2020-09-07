@@ -11,7 +11,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 3. Clone the git repository and change into it's directory:
 
-   (Windows specific): `git config --global core.autocrif false`
+   (Windows specific): `git config --global core.autocrlf false`
 
    `git clone https://github.com/panzerdragoonlegacy/cms.git`
 
@@ -21,11 +21,11 @@ Step-by-step instructions for setting up a development environment for the site.
 
    `cp .example.env .env`
 
-5. Run and start the Docker containers:
+5. Build and start the Docker containers:
 
-   `docker-compose up`
+   `docker-compose up --build`
 
-6. If it does not already exist, create the development database:
+6. If they do not already exist, create the development and test databases:
 
    `docker-compose exec app bin/rails db:create`
 
@@ -118,7 +118,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 1. Copy the system folder from your local machine into the volume:
 
-   `docker cp /My/Path/system panzer-dragoon-legacy_app_1:cms/public`
+   `docker cp /My/Path/system cms_app_1:cms/public`
 
 2. Restart the app
 

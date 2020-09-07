@@ -19,10 +19,10 @@ test:
   adapter: postgresql
   encoding: unicode
   pool: 10
-  host:     <%= ENV["TEST_DB_HOST"] || 'localhost' %>
-  database: cms_test
-  username: <%= ENV["TEST_DB_USER"] || 'postgres' %>
-  password: <%= ENV["TEST_DB_PASS"] || 'postgres' %>
+  host:     <%= ENV["TEST_POSTGRES_HOST"] || 'database' %>
+  username: <%= ENV["TEST_POSTGRES_USER"] || 'postgres' %>
+  password: <%= ENV["TEST_POSTGRES_PASSWORD"] || 'postgres' %>
+  database: <%= ENV["TEST_POSTGRES_NAME"] || 'cms_test' %>
 
 production:
   <<: *default
