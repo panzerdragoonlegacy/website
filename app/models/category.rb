@@ -58,7 +58,9 @@ class Category < ApplicationRecord
   before_save :sync_file_name
 
   def sync_file_name
-    sync_file_name_of :category_picture, file_name: "#{name.to_url}.jpg"
+    if name.present?
+      sync_file_name_of :category_picture, file_name: "#{name.to_url}.jpg"
+    end
   end
 
   private
