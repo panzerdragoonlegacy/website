@@ -19,7 +19,7 @@ RSpec.describe Page, type: :model do
   end
 
   describe 'associations' do
-    it { is_expected.to belong_to(:category) }
+    it { is_expected.to belong_to(:category).optional }
     it { is_expected.to have_many(:contributions).dependent(:destroy) }
     it do
       is_expected.to have_many(:contributor_profiles).through(:contributions)
