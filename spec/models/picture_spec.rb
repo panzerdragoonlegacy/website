@@ -28,7 +28,7 @@ RSpec.describe Picture, type: :model do
     end
     it { is_expected.to have_many(:taggings).dependent(:destroy) }
     it { is_expected.to have_many(:tags).through(:taggings) }
-    it { is_expected.to belong_to(:album) }
+    it { is_expected.to belong_to(:album).optional }
   end
 
   describe 'validations' do

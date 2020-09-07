@@ -25,6 +25,6 @@ RSpec.describe User, type: :model do
   end
 
   describe 'associations' do
-    it { is_expected.to belong_to(:contributor_profile) }
+    it { is_expected.to belong_to(:contributor_profile).optional }
   end
 end

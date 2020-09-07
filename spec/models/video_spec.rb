@@ -20,7 +20,7 @@ RSpec.describe Video, type: :model do
   end
 
   describe 'associations' do
-    it { is_expected.to belong_to(:album) }
+    it { is_expected.to belong_to(:album).optional }
     it { is_expected.to belong_to(:category) }
     it { is_expected.to have_many(:contributions).dependent(:destroy) }
     it do
