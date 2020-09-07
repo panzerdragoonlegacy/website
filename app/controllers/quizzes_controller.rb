@@ -25,7 +25,8 @@ class QuizzesController < ApplicationController
   private
 
   def check_quiz_results
-    if params[:results].count < @quiz.quiz_questions.count
+    # Todo: Look for a cleaner solution than using to_unsafe_h here.
+    if params[:results].to_unsafe_h.count < @quiz.quiz_questions.count
       flash.now[:notice] = 'You must fill out all questions.'
     else
       @show_results = true
