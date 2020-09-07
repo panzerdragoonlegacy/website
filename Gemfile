@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.2.4.3'
+gem 'rails', '6.0.3.2'
 gem 'rake', '13.0.1'
 
 group :development do
@@ -47,6 +47,6 @@ gem 'puma', '~> 4.3.5'
 gem 'rails_autolink', '~> 1.1.6'
 gem 'ransack', '~> 2.3.2'
 gem 'sanitize', '~> 5.2.1'
-gem 'sass-rails', '~> 5.1.0'
+gem 'sass-rails', '~> 6.0.0'
 gem 'stringex', '~> 2.8.5'
 gem 'uglifier', '>= 4.2.0'
