@@ -9,7 +9,7 @@ group :development do
   gem 'listen'
   gem 'rubocop', '~> 0.89.1', require: false
   gem 'spring', '~> 2.1.1'
-  gem 'web-console', '~> 3.7.0'
+  gem 'web-console', '~> 4.0.4'
 end
 
 group :development, :test do
