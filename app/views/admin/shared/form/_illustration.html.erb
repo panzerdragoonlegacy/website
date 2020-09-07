@@ -14,7 +14,7 @@
     <% end %>
     <div class="card-body">
       <% unless is_jpeg(f.object.illustration.url) %>
-        <%= render 'admim/shared/form/image_type_warning' %>
+        <%= render 'admin/shared/form/image_type_warning' %>
       <% end %>
       <p class="card-title"><%= f.object.illustration_file_name %></p>
       <a class="btn btn-secondary insert_tag" href="#" role="button">
