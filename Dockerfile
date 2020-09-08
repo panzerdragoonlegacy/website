@@ -1,8 +1,9 @@
-FROM ruby:2.7
+FROM ruby:2.6.6
 
 LABEL maintainer="chris@chrisalley.info"
 
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
+  build-essential \
   imagemagick
 
 # Install Yarn and Node
@@ -12,6 +13,8 @@ RUN apt update -y && apt install -y yarn
 
 COPY Gemfile* /cms/
 WORKDIR /cms
+
+RUN gem install bundler --version=2.1.4
 RUN bundle install
 
 COPY . /cms
