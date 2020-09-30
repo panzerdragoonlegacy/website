@@ -65,4 +65,12 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default charset: "utf-8"
+
+  # Allow Docker IP
+  config.web_console.allowed_ips = ['172.18.0.1']
+
+  # Log to STDOUT
+  logger           = ActiveSupport::Logger.new(STDOUT)
+  logger.formatter = config.log_formatter
+  config.logger = ActiveSupport::TaggedLogging.new(logger)
 end
