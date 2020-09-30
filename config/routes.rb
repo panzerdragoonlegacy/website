@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     resources :quizzes
   end
 
+  resources :news_entries, path: 'news'
   resources :literature, only: %i(index show) do
     resources :chapters, only: :show
   end
@@ -60,5 +61,5 @@ Rails.application.routes.draw do
   resources :quizzes
 
   get ':id', to: 'top_level_page#show', as: 'top_level_page'
-  root to: 'news_entries#index'
+  root to: 'home#show'
 end

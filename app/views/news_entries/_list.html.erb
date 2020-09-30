@@ -9,10 +9,20 @@
       </div>
       <div class="details">
         <h2><%= link_to news_entry.name, news_entry %></h2>
-        <% unless news_entry.publish %>
+        <% if news_entry.publish %>
+          Published by <%= link_to(
+            news_entry.contributor_profile.name,
+            news_entry.contributor_profile
+          ) %>
+          <%= local_time_ago news_entry.published_at %>.
+        <% else %>
           <p class="unpublished">Unpublished</p>
         <% end %>
-        <p><%= truncated_text news_entry.content %></p>
+        <% if news_entry.summary.present? %>
+          <p><%= news_entry.summary %></p>
+        <% else %>
+          <p><%= truncated_text news_entry.content %></p>
+        <% end %>
       </div>
     </div>
   <% end %>
