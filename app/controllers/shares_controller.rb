@@ -1,9 +1,12 @@
 class SharesController < ApplicationController
+  include LoadableForShare
+
   def index
-    @shares = policy_scope(
-      Share.where(show_in_feed: true, publish: true)
-        .order(published_at: :desc)
-        .page(params[:page])
-    )
+    if params[:contributor_profile_id]
+      load_contributors_shares
+    else
+      load_category_groups
+      @shares = policy_scope(Share.order(:published_at).page(params[:page]))
+    end
   end
 end

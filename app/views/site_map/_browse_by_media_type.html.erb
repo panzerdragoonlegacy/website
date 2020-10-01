@@ -57,4 +57,13 @@
       )
     %>
   </li>
+  <li>
+    <h2><%= link_to 'Shares', shares_path %></h2>
+    <%=
+      render(
+        partial: 'category_groups',
+        locals: { category_groups: @share_category_groups }
+      )
+    %>
+  </li>
 </ul>

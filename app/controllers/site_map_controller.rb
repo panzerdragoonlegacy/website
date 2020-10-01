@@ -9,8 +9,9 @@ class SiteMapController < ApplicationController
       load_music_track_category_groups
       load_picture_category_groups
       load_video_category_groups
+      load_share_category_groups
     elsif params[:browse_by] == 'tag'
-     load_tags
+      load_tags
     else
       load_categories_grouped_by_saga
     end
@@ -64,6 +65,12 @@ class SiteMapController < ApplicationController
   def load_video_category_groups
     @video_category_groups = policy_scope(
       CategoryGroup.where(category_group_type: :video).order(:name)
+    )
+  end
+
+  def load_share_category_groups
+    @share_category_groups = policy_scope(
+      CategoryGroup.where(category_group_type: :share).order(:name)
     )
   end
 

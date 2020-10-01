@@ -91,4 +91,15 @@ module LoadableForCategory
       ).resolve
     end
   end
+
+  def load_category_shares
+    if @category.category_type == :share.to_s
+      @shares = SharePolicy::Scope.new(
+        current_user,
+        Share.where(
+          category_id: @category.id
+        ).order(published_at: :desc).page(params[:page])
+      ).resolve
+    end
+  end
 end

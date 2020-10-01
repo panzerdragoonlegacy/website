@@ -14,5 +14,6 @@ class CategoriesController < ApplicationController
     load_category_music_tracks
     load_category_videos
     load_category_downloads
+    load_category_shares
   end
 end

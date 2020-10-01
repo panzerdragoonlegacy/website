@@ -1,40 +1,25 @@
-<% title "What's New? - Shares (Beta!)" %>
-<%= render partial: 'shared/meta_tags' %>
+<% if @contributor_profile %>
+  <% title "#{@contributor_profile.name}'s Shares" %>
+<% else %>
+  <% title 'Shares' %>
+<% end %>
 
-<p class="news_entry_category_selector">
-  <%= link_to 'News', news_entries_path %> |
-  <%= link_to 'Contributions', contributions_path %> |
-  Shares (Beta!)
-</p>
-
-<% if policy(Share).new? %>
-  <p><%= link_to 'New Share', new_admin_share_path(Share) %></p>
+<% unless params[:contributor_profile_id] %>
+  <% if @category_groups.present? %>
+    <h2>Share Categories</h2>
+    <%=
+      render(
+        partial: 'site_map/category_groups',
+        locals: { category_groups: @category_groups }
+      )
+    %>
+  <% end %>
+  <% if @shares.present? %>
+    <h2>All Shares</h2>
+  <% end %>
 <% end %>
 
 <% if @shares %>
-  <div id="resources">
-    <% @shares.each do |share| %>
-      <div class="resource">
-        <div class="details">
-          <h2>
-            <%= link_to(
-              share.contributor_profile.name,
-              contributor_profile_path(share.contributor_profile)
-            )%> shared a link
-            <%= local_time_ago share.published_at %>
-          </h2>
-          <% if policy(share).edit? %>
-            <p><%= link_to 'Edit Share', edit_admin_share_path(share) %></p>
-          <% end %>
-          <% if share.comment.present? %>
-            <p style="margin-bottom: 15px;"><%= share.comment %></p>
-          <% end %>
-          <div>
-            <%= raw show_embedded_share(share.url) %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
+  <%= render 'list' %>
   <%= paginate @shares %>
 <% end %>

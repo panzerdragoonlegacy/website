@@ -37,7 +37,6 @@ Rails.application.routes.draw do
   get 'encyclopaedia', to: 'encyclopaedia#index', as: 'encyclopaedia_index'
   get 'encyclopaedia/:id', to: 'encyclopaedia#show', as: 'encyclopaedia'
   resources :tags
-  resources :shares
   resources :contributions
 
   resources :contributor_profiles, path: 'contributors' do
@@ -59,6 +58,7 @@ Rails.application.routes.draw do
   resources :videos
   resources :downloads
   resources :quizzes
+  resources :shares
 
   get ':id', to: 'top_level_page#show', as: 'top_level_page'
   root to: 'home#show'
