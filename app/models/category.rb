@@ -7,7 +7,6 @@ class Category < ApplicationRecord
 
   belongs_to :category_group
   belongs_to :saga, optional: true
-  has_many :news_entries, dependent: :destroy
   has_many :pages, dependent: :destroy
   has_many :pictures, dependent: :destroy
   has_many :music_tracks, dependent: :destroy
@@ -22,7 +21,6 @@ class Category < ApplicationRecord
 
   # The list of category types.
   CATEGORY_TYPES = %w(
-    news_entry
     encyclopaedia
     literature
     picture

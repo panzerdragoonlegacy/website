@@ -9,8 +9,6 @@
         <%= link_to news_entry.name, news_entry %>
         <% if !news_entry.publish %>
            - <span class="unpublished">Unpublished</span>
-        <% elsif !news_entry.category.publish %>
-           - <span class="unpublished">Published in Unpublished Category</span>
         <% end %>
       </li>
     <% end %>

@@ -9,7 +9,6 @@ FactoryBot.define do
         )
       end
 
-      category { FactoryBot.create(:valid_category) }
       contributor_profile { FactoryBot.create(:valid_contributor_profile) }
 
       factory :published_news_entry do

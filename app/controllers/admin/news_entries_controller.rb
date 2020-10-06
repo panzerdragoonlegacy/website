@@ -1,7 +1,6 @@
 class Admin::NewsEntriesController < ApplicationController
   include LoadableForNewsEntry
   layout 'admin'
-  before_action :load_categories, except: [:destroy]
   before_action :load_news_entry, except: [:index, :new, :create]
 
   def index
@@ -11,13 +10,7 @@ class Admin::NewsEntriesController < ApplicationController
   end
 
   def new
-    if params[:category]
-      category = Category.find_by url: params[:category]
-      raise 'Category not found.' unless category.present?
-      @news_entry = NewsEntry.new category: category
-    else
-      @news_entry = NewsEntry.new
-    end
+    @news_entry = NewsEntry.new
     authorize @news_entry
   end
 
@@ -66,7 +59,7 @@ class Admin::NewsEntriesController < ApplicationController
       redirect_to @news_entry
     end
   end
-  
+
   def make_current_user_the_contributor
     return if current_user.administrator?
     unless current_user.contributor_profile == @news_entry.contributor_profile

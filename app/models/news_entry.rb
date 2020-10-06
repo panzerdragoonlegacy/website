@@ -1,5 +1,4 @@
 class NewsEntry < ApplicationRecord
-  include Categorisable
   include Publishable
   include SluggableWithoutId
   include Syncable
