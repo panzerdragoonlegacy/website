@@ -8,6 +8,7 @@ class NewsEntriesController < ApplicationController
       load_news_entries_for_year
     else
       load_news_entry_years
+      load_news_entries_for_atom_feed
     end
   end
 
@@ -53,5 +54,11 @@ class NewsEntriesController < ApplicationController
         year = year - 1
       end
     end
+  end
+
+  def load_news_entries_for_atom_feed
+    @news_entries = policy_scope(
+      NewsEntry.order('published_at desc').page(params[:page])
+    )
   end
 end
