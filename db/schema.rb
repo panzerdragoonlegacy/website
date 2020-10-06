@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_06_053259) do
+ActiveRecord::Schema.define(version: 2020_10_06_060853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,18 +28,6 @@ ActiveRecord::Schema.define(version: 2020_10_06_053259) do
     t.string "source_url"
     t.string "instagram_post_id"
     t.index ["category_id"], name: "index_albums_on_category_id"
-  end
-
-  create_table "articles", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
-    t.string "url", limit: 255
-    t.string "description", limit: 255
-    t.text "content"
-    t.boolean "publish", default: false
-    t.integer "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "published_at"
   end
 
   create_table "categories", id: :serial, force: :cascade do |t|
@@ -68,17 +56,6 @@ ActiveRecord::Schema.define(version: 2020_10_06_053259) do
     t.string "category_group_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "chapters", id: :serial, force: :cascade do |t|
-    t.integer "story_id"
-    t.string "chapter_type", limit: 255, default: "regular_chapter"
-    t.integer "number", default: 1
-    t.string "name", limit: 255
-    t.string "url", limit: 255
-    t.text "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "contributions", id: :serial, force: :cascade do |t|
@@ -131,22 +108,6 @@ ActiveRecord::Schema.define(version: 2020_10_06_053259) do
     t.datetime "published_at"
   end
 
-  create_table "encyclopaedia_entries", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
-    t.string "url", limit: 255
-    t.text "information"
-    t.text "content"
-    t.string "encyclopaedia_entry_picture_file_name", limit: 255
-    t.string "encyclopaedia_entry_picture_content_type", limit: 255
-    t.integer "encyclopaedia_entry_picture_file_size"
-    t.datetime "encyclopaedia_entry_picture_updated_at"
-    t.boolean "publish", default: false
-    t.integer "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "published_at"
-  end
-
   create_table "illustrations", id: :serial, force: :cascade do |t|
     t.integer "page_id"
     t.string "illustration_file_name", limit: 255
@@ -155,16 +116,6 @@ ActiveRecord::Schema.define(version: 2020_10_06_053259) do
     t.datetime "illustration_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "links", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
-    t.string "url", limit: 255
-    t.string "description", limit: 255
-    t.integer "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean "partner_site", default: false
   end
 
   create_table "music_tracks", id: :serial, force: :cascade do |t|
@@ -254,17 +205,6 @@ ActiveRecord::Schema.define(version: 2020_10_06_053259) do
     t.string "instagram_post_id"
   end
 
-  create_table "poems", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
-    t.string "url", limit: 255
-    t.string "description", limit: 255
-    t.text "content"
-    t.boolean "publish", default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "published_at"
-  end
-
   create_table "quiz_answers", id: :serial, force: :cascade do |t|
     t.integer "quiz_question_id"
     t.text "content"
@@ -317,28 +257,6 @@ ActiveRecord::Schema.define(version: 2020_10_06_053259) do
     t.datetime "updated_at", null: false
     t.integer "page_id"
     t.index ["page_id"], name: "index_sagas_on_page_id"
-  end
-
-  create_table "special_pages", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
-    t.string "url", limit: 255
-    t.text "content"
-    t.boolean "publish", default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "published_at"
-  end
-
-  create_table "stories", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
-    t.string "url", limit: 255
-    t.string "description", limit: 255
-    t.text "content"
-    t.boolean "publish", default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "category_id"
-    t.datetime "published_at"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
