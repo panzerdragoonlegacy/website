@@ -15,10 +15,6 @@ module Admin::HomeHelper
     policy_scope(NewsEntry.where(publish: false)).count
   end
 
-  def draft_share_count
-    policy_scope(Share.where(publish: false)).count
-  end
-
   def draft_page_count
     policy_scope(Page.where(publish: false)).count
   end
@@ -48,7 +44,6 @@ module Admin::HomeHelper
     draft_category_count +
     draft_contributor_profile_count +
     draft_news_entry_count +
-    draft_share_count +
     draft_page_count +
     draft_picture_count +
     draft_music_track_count +

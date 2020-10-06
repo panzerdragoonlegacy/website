@@ -20,7 +20,6 @@ Rails.application.routes.draw do
     resources :users
 
     resources :news_entries, path: 'news-entries'
-    resources :shares
     resources :pages
     resources :pictures
     resources :music_tracks, path: 'music-tracks'
@@ -58,7 +57,6 @@ Rails.application.routes.draw do
   resources :videos
   resources :downloads
   resources :quizzes
-  resources :shares
 
   get ':id', to: 'top_level_page#show', as: 'top_level_page'
   root to: 'home#show'

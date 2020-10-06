@@ -9,7 +9,6 @@ class CategoryGroup < ApplicationRecord
 
   # The list of category group types.
   CATEGORY_GROUP_TYPES = %w(
-    share
     encyclopaedia
     literature
     picture
