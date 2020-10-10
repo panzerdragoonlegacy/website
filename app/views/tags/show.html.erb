@@ -46,11 +46,6 @@
   </div>
 <% end %>
 
-<% if @tag.news_entries.count > 0 %>
-  <h2>News Entries</h2>
-  <%= render 'news_entries/list' %>
-<% end %>
-
 <% MediaType::all.each do |key, value| %>
   <% if key == :literature %>
     <% if @works_of_literature.count > 0 %>
