@@ -11,6 +11,7 @@
         <div class="details">
           <h2><%= link_to music_track.name, music_track %></h2>
           <p>Published <%= local_time_ago music_track.published_at %></p>
+          <p><%= music_track.description %></p>
         </div>
       </div>
     <% end %>

@@ -11,6 +11,7 @@
         <div class="details">
           <h2><%= link_to page.name, encyclopaedia_path(page) %></h2>
           <p>Published <%= local_time_ago page.published_at %></p>
+          <p><%= truncated_text page.content %></p>
         </div>
       </div>
     <% end %>

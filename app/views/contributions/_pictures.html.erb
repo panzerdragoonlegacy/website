@@ -12,6 +12,7 @@
         <div class="details">
           <h2><%= link_to picture.name, picture %></h2>
           <p>Published <%= local_time_ago picture.published_at %></p>
+          <p><%= picture.description %></p>
         </div>
       </div>
     <% end %>

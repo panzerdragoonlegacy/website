@@ -8,6 +8,7 @@
         <div class="details">
           <h2><%= link_to video.name, video %></h2>
           <p>Published <%= local_time_ago video.published_at %></p>
+          <p><%= video.description %></p>
         </div>
       </div>
     <% end %>

@@ -5,6 +5,7 @@
         <div class="details">
           <h2><%= link_to page.name, literature_path(page) %></h2>
           <p>Published <%= local_time_ago page.published_at %></p>
+          <p><%= page.description %></p>
         </div>
       </div>
     <% end %>

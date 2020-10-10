@@ -10,6 +10,7 @@
         <div class="details">
           <h2><%= link_to download.name, download %></h2>
           <p>Published <%= local_time_ago download.published_at %></p>
+          <p><%= download.description %></p>
         </div>
       </div>
     <% end %>
