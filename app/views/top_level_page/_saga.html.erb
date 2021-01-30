@@ -14,24 +14,14 @@
   </p>
 <% end %>
 
-<% if @saga.page && policy(@saga.page).show? %>
-  <div id="resources">
-    <div class="resource">
-      <div class="thumbnail">
-        <%= link_to(
-          show_picture(@saga.page, 'page_picture', :thumbnail),
-          encyclopaedia_path(@saga.page)
-        ) %>
-      </div>
-      <div class="details">
-        <h2><%= link_to @saga.page.name, encyclopaedia_path(@saga.page) %></h2>
-        <p>
-          <%= truncated_text @saga.page.content %>
-          <%= link_to 'Learn More', encyclopaedia_path(@saga.page) %>
-        </p>
-      </div>
-    </div>
+<% if @tag && @tag.tag_picture.present? %>
+  <div class="category_picture_container">
+    <%= show_picture @tag, 'tag_picture', :embedded %>
   </div>
+<% end %>
+
+<% if @tag %>
+  <h2><%= link_to "Content Tagged With #{@tag.name}", @tag %>
 <% end %>
 
 <% if true.in?(@categories.each.map { |key, value| value.present? }) %>

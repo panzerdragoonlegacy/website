@@ -23,28 +23,7 @@
 
 <p><%= @tag.description if @tag.description.present? %></p>
 
-<% if @encyclopaedia_entry && policy(@encyclopaedia_entry).show? %>
-  <h2>Encyclopaedia Entry</h2>
-  <div id="resources">
-    <div class="resource">
-      <div class="thumbnail">
-        <%= link_to(
-          show_picture(@encyclopaedia_entry, 'page_picture', :thumbnail),
-          encyclopaedia_path(@encyclopaedia_entry)
-        ) %>
-      </div>
-      <div class="details">
-        <h2>
-          <%= link_to(
-            @encyclopaedia_entry.name,
-            encyclopaedia_path(@encyclopaedia_entry)
-          ) %>
-        </h2>
-        <p><%= truncated_text @encyclopaedia_entry.content %></p>
-      </div>
-    </div>
-  </div>
-<% end %>
+<h2>Content Tagged With <%= @tag.name %></h2>
 
 <% MediaType::all.each do |key, value| %>
   <% if key == :literature %>

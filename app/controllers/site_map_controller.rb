@@ -5,7 +5,6 @@ class SiteMapController < ApplicationController
     if params[:browse_by] == 'media_type'
       load_literature_category_groups
       load_download_category_groups
-      load_encyclopaedia_category_groups
       load_music_track_category_groups
       load_picture_category_groups
       load_video_category_groups
@@ -40,12 +39,6 @@ class SiteMapController < ApplicationController
   def load_download_category_groups
     @download_category_groups = policy_scope(
       CategoryGroup.where(category_group_type: :download).order(:name)
-    )
-  end
-
-  def load_encyclopaedia_category_groups
-    @encyclopaedia_category_groups = policy_scope(
-      CategoryGroup.where(category_group_type: :encyclopaedia).order(:name)
     )
   end
 
