@@ -88,15 +88,6 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-  push_latest_image:
-    docker:
-      - *default_docker_ruby_executor
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run: docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-      - run: docker build --no-cache -t panzerdragoonlegacy/cms:latest --file Dockerfile .
-      - run: docker push panzerdragoonlegacy/cms:latest
 
 workflows:
   version: 2.1
@@ -106,10 +97,3 @@ workflows:
       - test:
           requires:
             - build
-      - push_latest_image:
-          requires:
-            - build
-            - test
-          filters:
-            branches:
-              only: /^master.*/
