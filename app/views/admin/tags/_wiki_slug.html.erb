@@ -1,0 +1,15 @@
+<div class="form-group">
+  <%= f.label :wiki_slug, 'Wiki Slug' %>
+  <%= f.text_field :wiki_slug, class: 'form-control' %>
+  <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: "The slug of the Panzer Dragoon Wiki page. For example, if the " \
+          'URL of the Panzer Dragoon Wiki page is ' \
+          '"https://panzerdragoon.fandom.com/wiki/Panzer_Dragoon_Saga", then ' \
+          'the slug is "Panzer_Dragoon_Saga".'
+      }
+    )
+  %>
+</div>

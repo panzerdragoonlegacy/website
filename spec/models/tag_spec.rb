@@ -5,6 +5,8 @@ RSpec.describe Tag, type: :model do
     it { is_expected.to respond_to(:name) }
     it { is_expected.to respond_to(:url) }
     it { is_expected.to respond_to(:description) }
+    it { is_expected.to respond_to(:information) }
+    it { is_expected.to respond_to(:wiki_slug) }
     it { is_expected.to respond_to(:created_at) }
     it { is_expected.to respond_to(:updated_at) }
   end

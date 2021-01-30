@@ -37,6 +37,6 @@ class TagPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    %i[tag_picture name description]
+    %i[tag_picture name description information wiki_slug]
   end
 end

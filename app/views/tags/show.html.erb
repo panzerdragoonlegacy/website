@@ -23,6 +23,19 @@
 
 <p><%= @tag.description if @tag.description.present? %></p>
 
+<% if @tag.information.present? %></p>
+  <%= raw markdown_to_html @tag.information %>
+<% end %>
+
+<% if @tag.wiki_slug.present? %>
+  <p>
+    <%= link_to(
+      "#{@tag.name} on Panzer Dragoon Wiki",
+      "https://panzerdragoon.fandom.com/wiki/#{@tag.wiki_slug}"
+    ) %>
+  </p>
+<% end %>
+
 <h2>Content Tagged With <%= @tag.name %></h2>
 
 <% MediaType::all.each do |key, value| %>
