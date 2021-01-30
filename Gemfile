@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '6.0.3.3'
+gem 'rails', '6.1.1'
 gem 'rake', '13.0.1'
 
 group :development do
@@ -37,7 +37,7 @@ gem 'kramdown', '~> 2.3.0'
 gem 'local_time', '~> 2.1.0'
 gem 'mini_magick', '~> 4.10.1'
 gem 'mini_racer', '~> 0.3.1'
-gem 'nokogiri', '1.10.10'
+gem 'nokogiri', '1.11.1'
 gem 'onebox', '~> 2.0.2'
 gem 'kt-paperclip', '~> 6.3.0'
 gem 'paper_trail', '~> 11.0.0'
