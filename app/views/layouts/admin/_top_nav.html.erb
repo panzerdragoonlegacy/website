@@ -8,16 +8,13 @@
 <div class="col-6">
   <ul class="nav" style="float: right; z-index: 99">
     <li class="nav-item mr-2">
-      Logged in as 
+      Logged in as
       <% if current_user.contributor_profile_id %>
         <%= current_user.contributor_profile.name %>
       <% else %>
         <%= current_user.email %>
       <% end %>
     </li>
-    <li class="nav-item mr-2">
-      <%= link_to 'Edit Profile', edit_user_registration_path %>
-    <li>
     <li class="nav-item">
       <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
     </li>
