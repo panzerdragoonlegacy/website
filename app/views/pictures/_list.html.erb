@@ -9,11 +9,19 @@
         <% end %>
       </div>
       <div class="details">
-        <h2><%= link_to picture.name, picture %></h2>
+        <% if picture.album%>
+          <h2><%= link_to picture.album.name, picture %></h2>
+        <% else %>
+          <h2><%= link_to picture.name, picture %></h2>
+        <% end %>
         <% unless picture.publish %>
           <p class="unpublished">Unpublished</p>
         <% end %>
-        <p><%= picture.description %></p>
+        <% if picture.album%>
+          <p><%= picture.album.description %></p>
+        <% else %>
+          <p><%= picture.description %></p>
+        <% end %>
       </div>
     </div>
   <% end %>

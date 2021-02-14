@@ -46,8 +46,8 @@ module LoadableForCategory
     if @category.category_type == :picture.to_s
       @pictures = PicturePolicy::Scope.new(
         current_user,
-        Picture.where(category_id: @category.id).order(:name)
-          .page(params[:page])
+        Picture.where(category_id: @category.id, sequence_number: [0, 1])
+          .order(:name).page(params[:page])
       ).resolve
     end
   end

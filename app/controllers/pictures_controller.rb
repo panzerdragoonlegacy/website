@@ -6,7 +6,9 @@ class PicturesController < ApplicationController
       load_contributors_pictures
     else
       load_category_groups
-      @pictures = policy_scope(Picture.order(:name).page(params[:page]))
+      @pictures = policy_scope(
+        Picture.where(sequence_number: [0, 1]).order(:name).page(params[:page])
+      )
     end
   end
 

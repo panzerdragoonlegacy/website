@@ -36,7 +36,7 @@ module LoadableForPicture
     @pictures = policy_scope(
       Picture.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }
-      ).order(:name).page(params[:page])
+      ).where(sequence_number: [0, 1]).order(:name).page(params[:page])
     )
   end
 

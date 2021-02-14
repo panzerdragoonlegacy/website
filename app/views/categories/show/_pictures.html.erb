@@ -1,30 +1,7 @@
-<h2>
-  <% if @albums.present? %>
-    <% if !params[:browse_by] || params[:browse_by] == 'picture' %>
-      Pictures in this Category |
-      <%= link_to(
-        'Albums in this Category',
-        category_path(@category, browse_by: 'album')
-      ) %>
-    <% elsif params[:browse_by] == 'album' %>
-      <%= link_to(
-        'Pictures in this Category',
-        category_path(@category, browse_by: 'picture')
-      ) %> |
-      Albums in this Category
-    <% end %>
-  <% else %>
-    Pictures in this Category
-  <% end %>
-</h2>
+<h2>Pictures and Albums in this Category</h2>
 
-<% if !params[:browse_by] || params[:browse_by] == 'picture' %>
-  <%= render 'pictures/list' %>
-  <%= paginate @pictures %>
-<% elsif %>
-  <%= render 'albums/list' %>
-  <%= paginate @albums %>
-<% end %>
+<%= render 'pictures/list' %>
+<%= paginate @pictures %>
 
 <p>
   <%= link_to 'Site Map', site_map_path %> |
