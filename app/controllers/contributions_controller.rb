@@ -5,11 +5,6 @@ class ContributionsController < ApplicationController
         Picture.where(publish: true).order(published_at: :desc)
           .page(params[:page])
       )
-    elsif params[:media_type] == 'encyclopaedia'
-      @encyclopaedia_pages = policy_scope(
-        Page.where(page_type: :encyclopaedia.to_s, publish: true)
-          .order(published_at: :desc).page(params[:page])
-      )
     elsif params[:media_type] == 'literature'
       @literature_pages = policy_scope(
         Page.where(page_type: :literature.to_s, publish: true)
