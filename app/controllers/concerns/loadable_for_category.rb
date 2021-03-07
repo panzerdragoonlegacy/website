@@ -49,16 +49,7 @@ module LoadableForCategory
         Picture.where(category_id: @category.id, sequence_number: [0, 1])
           .order(:name).page(params[:page])
       ).resolve
-    end
-  end
-
-  def load_category_picture_albums
-    if @category.category_type == :picture.to_s
-      @albums = AlbumPolicy::Scope.new(
-        current_user,
-        Album.where(category_id: @category.id).order(:name)
-          .page(params[:page])
-      ).resolve
+      @group_pictures_into_albums = true
     end
   end
 

@@ -36,8 +36,9 @@ module LoadableForPicture
     @pictures = policy_scope(
       Picture.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }
-      ).where(sequence_number: [0, 1]).order(:name).page(params[:page])
+      ).order(:name).page(params[:page])
     )
+    @group_pictures_into_albums = false
   end
 
   def load_draft_pictures

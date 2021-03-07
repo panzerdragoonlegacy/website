@@ -9,7 +9,7 @@
         <% end %>
       </div>
       <div class="details">
-        <% if picture.album%>
+        <% if picture.album && @group_pictures_into_albums %>
           <h2><%= link_to picture.album.name, picture %></h2>
         <% else %>
           <h2><%= link_to picture.name, picture %></h2>
@@ -17,7 +17,8 @@
         <% unless picture.publish %>
           <p class="unpublished">Unpublished</p>
         <% end %>
-        <% if picture.album%>
+        <% if picture.album && @group_pictures_into_albums %>
+          <p><%= picture.album.pictures.count %> pictures</p>
           <p><%= picture.album.description %></p>
         <% else %>
           <p><%= picture.description %></p>

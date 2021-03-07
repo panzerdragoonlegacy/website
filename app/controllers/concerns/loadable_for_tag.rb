@@ -28,7 +28,7 @@ module LoadableForTag
     @pictures = PicturePolicy::Scope.new(
       current_user,
       Picture.includes(:tags)
-        .where(tags: { name: @tag.name }, sequence_number: [0, 1]).order(:name)
+        .where(tags: { name: @tag.name }).order(:name)
     ).resolve
   end
 
