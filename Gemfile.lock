@@ -121,7 +121,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
-    kramdown (2.3.0)
+    kramdown (2.3.1)
       rexml
     kt-paperclip (6.3.0)
       activemodel (>= 4.2.0)
@@ -330,7 +330,7 @@ DEPENDENCIES
   font-awesome-sass (~> 5.13.0)
   jquery-rails (~> 4.4.0)
   kaminari (~> 1.2.1)
-  kramdown (~> 2.3.0)
+  kramdown (~> 2.3.1)
   kt-paperclip (~> 6.3.0)
   listen
   local_time (~> 2.1.0)
