@@ -1,9 +1,9 @@
 <div class="form-group">
-  <%= f.label :page_id, 'Encyclopaedia Page' %>
+  <%= f.label :tag_id, 'Tag' %>
   <%=
     f.collection_select(
-      :page_id,
-      @pages,
+      :tag_id,
+      @tags,
       :id,
       :name,
       { include_blank: true },

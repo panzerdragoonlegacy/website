@@ -4,7 +4,6 @@ class TopLevelPageController < ApplicationController
   def show
     if Saga.where(url: params[:id]).count > 0
       load_saga
-      load_tag_for_saga
       load_categories
     else
       load_page

@@ -3,7 +3,7 @@ class Saga < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to :page
+  belongs_to :tag
   has_many :categories, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true, length: { in: 2..30 }

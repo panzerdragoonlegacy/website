@@ -1,7 +1,7 @@
 class Admin::SagasController < ApplicationController
   include LoadableForSaga
   layout 'admin'
-  before_action :load_pages, except: [:index, :destroy]
+  before_action :load_tags, except: [:index, :destroy]
   before_action :load_saga, except: [:index, :new, :create]
 
   def index
@@ -43,7 +43,7 @@ class Admin::SagasController < ApplicationController
 
   def saga_params
     params.require(:saga).permit(
-      :page_id,
+      :tag_id,
       :sequence_number,
       :name
     )

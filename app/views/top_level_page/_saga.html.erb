@@ -1,9 +1,11 @@
 <% title @saga.name %>
-<% if @saga.page %>
-  <% description truncated_text(@saga.page.content) %>
-  <% if @saga.page.page_picture.present? %>
+<% if @saga.tag %>
+  <% if @saga.tag.description %>
+    <% description @saga.tag.description %>
+  <% end %>
+  <% if @saga.tag.tag_picture.present? %>
     <% open_graph_image(
-      ENV['WEBSITE_URL'].chomp('/') + @saga.page.page_picture.url(:original)
+      ENV['WEBSITE_URL'].chomp('/') + @saga.tag.tag_picture.url(:original)
     ) %>
   <% end %>
 <% end %>
@@ -14,14 +16,14 @@
   </p>
 <% end %>
 
-<% if @tag && @tag.tag_picture.present? %>
+<% if @saga.tag && @saga.tag.tag_picture.present? %>
   <div class="category_picture_container">
-    <%= show_picture @tag, 'tag_picture', :embedded %>
+    <%= show_picture @saga.tag, 'tag_picture', :embedded %>
   </div>
 <% end %>
 
-<% if @tag %>
-  <h2><%= link_to "Content Tagged With #{@tag.name}", @tag %>
+<% if @saga.tag %>
+  <h2><%= link_to "Content Tagged With #{@saga.tag.name}", @saga.tag %>
 <% end %>
 
 <% if true.in?(@categories.each.map { |key, value| value.present? }) %>

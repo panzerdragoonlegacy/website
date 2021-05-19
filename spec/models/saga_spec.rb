@@ -5,13 +5,13 @@ RSpec.describe Saga, type: :model do
     it { is_expected.to respond_to(:name) }
     it { is_expected.to respond_to(:url) }
     it { is_expected.to respond_to(:sequence_number) }
-    it { is_expected.to respond_to(:page) }
+    it { is_expected.to respond_to(:tag) }
     it { is_expected.to respond_to(:created_at) }
     it { is_expected.to respond_to(:updated_at) }
   end
 
   describe 'associations' do
-    it { is_expected.to belong_to(:page) }
+    it { is_expected.to belong_to(:tag) }
     it { is_expected.to have_many(:categories).dependent(:destroy) }
   end
 

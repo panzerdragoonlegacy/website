@@ -4,7 +4,7 @@ FactoryBot.define do
       sequence(:name) { |n| "Saga #{n}" }
       sequence(:sequence_number) { |n| n }
 
-      page { FactoryBot.create(:valid_encyclopaedia_page) }
+      tag { FactoryBot.create(:valid_tag) }
     end
   end
 end
