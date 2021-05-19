@@ -6,6 +6,9 @@ RSpec.describe ContributorProfile, type: :model do
     it { is_expected.to respond_to(:url) }
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:email_address) }
+    it { is_expected.to respond_to(:discourse_username) }
+    it { is_expected.to respond_to(:discord_user_id) }
+    it { is_expected.to respond_to(:fandom_username) }
     it { is_expected.to respond_to(:avatar) }
     it { is_expected.to respond_to(:website_name) }
     it { is_expected.to respond_to(:website_url) }
@@ -13,7 +16,6 @@ RSpec.describe ContributorProfile, type: :model do
     it { is_expected.to respond_to(:twitter_username) }
     it { is_expected.to respond_to(:instagram_username) }
     it { is_expected.to respond_to(:deviantart_username) }
-    it { is_expected.to respond_to(:discourse_username) }
     it { is_expected.to respond_to(:publish) }
     it { is_expected.to respond_to(:created_at) }
     it { is_expected.to respond_to(:updated_at) }

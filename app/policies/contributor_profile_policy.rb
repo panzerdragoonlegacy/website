@@ -51,6 +51,8 @@ class ContributorProfilePolicy < ApplicationPolicy
       :description,
       :email_address,
       :discourse_username,
+      :discord_user_id,
+      :fandom_username,
       :avatar,
       :website_name,
       :website_url,

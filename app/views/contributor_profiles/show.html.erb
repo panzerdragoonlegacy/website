@@ -41,6 +41,8 @@
     unless (
       @contributor_profile.email_address.blank? &&
       @contributor_profile.discourse_username.blank? &&
+      @contributor_profile.discord_user_id.blank? &&
+      @contributor_profile.fandom_username.blank? &&
       @contributor_profile.website_url.blank? &&
       @contributor_profile.facebook_username.blank? &&
       @contributor_profile.twitter_username.blank? &&
@@ -65,6 +67,22 @@
               @contributor_profile.discourse_username,
               'https://discuss.panzerdragoonlegacy.com/u/' +
                 @contributor_profile.discourse_username.to_s.downcase
+            )
+          %>
+        </dd>
+      <% end %>
+      <% unless @contributor_profile.discord_user_id.blank? %>
+        <dt>Discord</dt>
+        <dd><%= @contributor_profile.discord_user_id %></dd>
+      <% end %>
+      <% unless @contributor_profile.fandom_username.blank? %>
+        <dt>Fandom</dt>
+        <dd>
+          <%=
+            link_to(
+              @contributor_profile.fandom_username,
+              'https://panzerdragoon.fandom.com/wiki/User:' +
+                @contributor_profile.fandom_username
             )
           %>
         </dd>

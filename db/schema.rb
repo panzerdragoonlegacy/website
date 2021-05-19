@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_19_055535) do
+ActiveRecord::Schema.define(version: 2021_05_19_064738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(version: 2021_05_19_055535) do
     t.datetime "published_at"
     t.string "instagram_username"
     t.string "deviantart_username"
+    t.string "discord_user_id"
+    t.string "fandom_username"
   end
 
   create_table "downloads", id: :serial, force: :cascade do |t|
