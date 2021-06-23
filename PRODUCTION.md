@@ -190,7 +190,7 @@ enabled (for Let's Encrypt).
 
    `sudo docker-compose -f docker-compose.prod.yml up --build`
 
-   If generating the SSL certicate, you should see a congratulations message and
+   If generating the SSL certificate, you should see a congratulations message and
    `certbot exited with code 0`. If certbot exits with a non-zero code, there's
    an error.
 
