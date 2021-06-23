@@ -7,7 +7,7 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
   imagemagick
 
 # Install Yarn and Node
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN wget --quiet -O - /tmp/pubkey.gpg https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt update -y && apt install -y yarn
 
