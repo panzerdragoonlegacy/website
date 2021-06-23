@@ -381,6 +381,6 @@ enabled (for Let's Encrypt).
 
 9. On the server, delete the backup files:
 
-  `sudo rm ~/backup.sql`
+   `sudo rm ~/backup.sql`
 
-  `sudo rm -rf ~/system`
+   `sudo rm -rf ~/system`
