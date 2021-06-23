@@ -337,7 +337,7 @@ enabled (for Let's Encrypt).
 
    `0 12 * * * /var/cms/ssl_renew.sh >> /var/log/cron.log 2>&1`
 
-# Create a Backup to Your Local Machine
+## Create a Backup to Your Local Machine
 
 1. On the server, back up the database to your home directory:
 
