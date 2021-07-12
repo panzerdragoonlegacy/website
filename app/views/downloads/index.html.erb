@@ -1,10 +1,12 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Downloads" %>
+<% elsif @tag %>
+  <% title "Downloads Tagged With #{@tag.name}" %>
 <% else %>
   <% title 'Downloads' %>
 <% end %>
 
-<% unless params[:contributor_profile_id] %>
+<% unless params[:contributor_profile_id] || params[:tag_id] %>
   <% if @category_groups.present? %>
     <h2>Download Categories</h2>
     <%=

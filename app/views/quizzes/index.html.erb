@@ -1,5 +1,7 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s Quizzes" %>
+<% elsif @tag %>
+  <% title "Quizzes Tagged With #{@tag.name}" %>
 <% else %>
   <% title 'Quizzes' %>
 <% end %>

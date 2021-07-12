@@ -21,6 +21,15 @@ module LoadableForLiterature
     )
   end
 
+  def load_tagged_literature
+    @tag = Tag.find_by url: params[:tag_id]
+    raise 'Tag not found.' unless @tag
+    @pages = policy_scope(
+      Page.joins(:taggings).where(taggings: { tag_id: @tag.id }).order(:name)
+        .page(params[:page])
+    )
+  end
+
   def load_category_groups
     @category_groups = policy_scope(
       CategoryGroup.where(category_group_type: :literature).order(:name)

@@ -4,6 +4,8 @@ class QuizzesController < ApplicationController
   def index
     if params[:contributor_profile_id]
       load_contributors_quizzes
+    elsif params[:tag_id]
+      load_tagged_quizzes
     else
       @quizzes = policy_scope(Quiz.order(:name).page(params[:page]))
     end

@@ -5,6 +5,8 @@ class LiteratureController < ApplicationController
   def index
     if params[:contributor_profile_id]
       load_contributors_literature
+    elsif params[:tag_id]
+      load_tagged_literature
     else
       load_category_groups
       @pages = policy_scope(

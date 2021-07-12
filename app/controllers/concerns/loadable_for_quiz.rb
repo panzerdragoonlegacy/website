@@ -20,6 +20,15 @@ module LoadableForQuiz
     )
   end
 
+  def load_tagged_quizzes
+    @tag = Tag.find_by url: params[:tag_id]
+    raise 'Tag not found.' unless @tag
+    @quizzes = policy_scope(
+      Quiz.joins(:taggings).where(taggings: { tag_id: @tag.id }).order(:name)
+        .page(params[:page])
+    )
+  end
+
   def load_draft_quizzes
     @quizzes = policy_scope(
       Quiz.where(publish: false).order(:name).page(params[:page])

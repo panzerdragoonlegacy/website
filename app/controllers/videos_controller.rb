@@ -4,6 +4,8 @@ class VideosController < ApplicationController
   def index
     if params[:contributor_profile_id]
       load_contributors_videos
+    elsif params[:tag_id]
+      load_tagged_videos
     else
       load_category_groups
       @videos = policy_scope(Video.order(:name).page(params[:page]))

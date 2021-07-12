@@ -1,5 +1,7 @@
 <% if @contributor_profile %>
   <% title "#{@contributor_profile.name}'s News Entries" %>
+<% elsif @tag %>
+  <% title "News Entries Tagged With #{@tag.name}" %>
 <% elsif params[:year] %>
   <% title "News from #{params[:year]}" %>
 <% else %>

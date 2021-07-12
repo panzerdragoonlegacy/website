@@ -10,9 +10,7 @@
 <% end %>
 
 <% if policy(@tag).edit? %>
-  <p>
-    <%= link_to 'Edit Tag', edit_admin_tag_path(@tag) %>
-  </p>
+  <p><%= link_to 'Edit Tag', edit_admin_tag_path(@tag) %></p>
 <% end %>
 
 <% if @tag.tag_picture.present? %>
@@ -36,18 +34,82 @@
   </p>
 <% end %>
 
-<h2>Content Tagged With <%= @tag.name %></h2>
+<h4>Tagged Content</h4>
 
-<% MediaType::all.each do |key, value| %>
-  <% if key == :literature %>
-    <% if @works_of_literature.count > 0 %>
-      <h2><%= value %></h2>
-      <%= render 'literature/list', pages: @works_of_literature %>
+<% unless tagged_count(@tag) == 0 %>
+  <ul>
+    <% unless news_entry_count(@tag) == 0 %>
+      <li>
+        <%=
+          link_to(
+            pluralize(news_entry_count(@tag), 'news entry'),
+            tag_news_entries_path(@tag)
+          )
+        %>
+      </li>
     <% end %>
-  <% elsif @tag.send(key.to_s.pluralize).count > 0 %>
-    <h2><%= value %></h2>
-    <%= render "#{key.to_s.pluralize}/list" %>
-  <% end %>
+    <% unless literature_count(@tag) == 0 %>
+      <li>
+        <%=
+          link_to(
+            pluralize(literature_count(@tag), 'work') +
+              ' of literature',
+            tag_literature_index_path(@tag)
+          )
+        %>
+      </li>
+    <% end %>
+    <% unless picture_count(@tag) == 0 %>
+      <li>
+        <%=
+          link_to(
+            pluralize(picture_count(@tag), 'picture'),
+            tag_pictures_path(@tag)
+          )
+        %>
+      </li>
+    <% end %>
+   <% unless music_track_count(@tag) == 0 %>
+      <li>
+        <%=
+          link_to(
+            pluralize(music_track_count(@tag), 'music track'),
+            tag_music_tracks_path(@tag)
+          )
+        %>
+      </li>
+    <% end %>
+    <% unless video_count(@tag) == 0 %>
+      <li>
+        <%=
+          link_to(
+            pluralize(video_count(@tag), 'video'),
+            tag_videos_path(@tag)
+          )
+        %>
+      </li>
+    <% end %>
+    <% unless download_count(@tag) == 0 %>
+      <li>
+        <%=
+          link_to(
+            pluralize(download_count(@tag), 'download'),
+            tag_downloads_path(@tag)
+          )
+        %>
+      </li>
+    <% end %>
+    <% unless quiz_count(@tag) == 0 %>
+      <li>
+        <%=
+          link_to(
+            pluralize(quiz_count(@tag), 'quiz'),
+            tag_quizzes_path(@tag)
+          )
+        %>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
 
 <p class="links">

@@ -26,6 +26,15 @@ module LoadableForVideo
     )
   end
 
+  def load_tagged_videos
+    @tag = Tag.find_by url: params[:tag_id]
+    raise 'Tag not found.' unless @tag
+    @videos = policy_scope(
+      Video.joins(:taggings).where(taggings: { tag_id: @tag.id }).order(:name)
+        .page(params[:page])
+    )
+  end
+
   def load_draft_videos
     @videos = policy_scope(
       Video.where(publish: false).order(:name).page(params[:page])

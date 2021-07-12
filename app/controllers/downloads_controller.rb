@@ -4,6 +4,8 @@ class DownloadsController < ApplicationController
   def index
     if params[:contributor_profile_id]
       load_contributors_downloads
+    elsif params[:tag_id]
+      load_tagged_downloads
     else
       load_category_groups
       @downloads = policy_scope(Download.order(:name).page(params[:page]))

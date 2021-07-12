@@ -26,6 +26,15 @@ module LoadableForDownload
     )
   end
 
+  def load_tagged_downloads
+    @tag = Tag.find_by url: params[:tag_id]
+    raise 'Tag not found.' unless @tag
+    @downloads = policy_scope(
+      Download.joins(:taggings).where(taggings: { tag_id: @tag.id })
+        .order(:name).page(params[:page])
+    )
+  end
+
   def load_draft_downloads
     @downloads = policy_scope(
       Download.where(publish: false).order(:name).page(params[:page])

@@ -4,6 +4,8 @@ class NewsEntriesController < ApplicationController
   def index
     if params[:contributor_profile_id]
       load_contributors_news_entries
+    elsif params[:tag_id]
+      load_tagged_news_entries
     elsif params[:year]
       load_news_entries_for_year
     else

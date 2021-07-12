@@ -4,6 +4,8 @@ class PicturesController < ApplicationController
   def index
     if params[:contributor_profile_id]
       load_contributors_pictures
+    elsif params[:tag_id]
+      load_tagged_pictures
     else
       load_category_groups
       @pictures = policy_scope(

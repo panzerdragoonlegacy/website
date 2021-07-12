@@ -34,7 +34,17 @@ Rails.application.routes.draw do
   resources :categories
   get 'encyclopaedia', to: 'encyclopaedia#index', as: 'encyclopaedia_index'
   get 'encyclopaedia/:id', to: 'encyclopaedia#show', as: 'encyclopaedia'
-  resources :tags
+
+  resources :tags do
+    resources :news_entries, path: 'news-entries'
+    resources :literature
+    resources :pictures
+    resources :music_tracks, path: 'music-tracks'
+    resources :downloads
+    resources :videos
+    resources :quizzes
+  end
+
   resources :contributions
 
   resources :contributor_profiles, path: 'contributors' do

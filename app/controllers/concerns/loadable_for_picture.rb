@@ -41,6 +41,15 @@ module LoadableForPicture
     @group_pictures_into_albums = false
   end
 
+  def load_tagged_pictures
+    @tag = Tag.find_by url: params[:tag_id]
+    raise 'Tag not found.' unless @tag
+    @pictures = policy_scope(
+      Picture.joins(:taggings).where(taggings: { tag_id: @tag.id }).order(:name)
+        .page(params[:page])
+    )
+  end
+
   def load_draft_pictures
     @pictures = policy_scope(
       Picture.where(publish: false).order(:name).page(params[:page])

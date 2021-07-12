@@ -1,10 +1,12 @@
 <% if @contributor_profile %>
-  <% title "#{@contributor_profile.name}'s Music Tracks" %>
+  <% title "#{@contributor_profile.name}'s Music" %>
+<% elsif @tag %>
+  <% title "Music Tagged With #{@tag.name}" %>
 <% else %>
-  <% title 'Music Tracks' %>
+  <% title 'Music' %>
 <% end %>
 
-<% unless params[:contributor_profile_id] %>
+<% unless params[:contributor_profile_id] || params[:tag_id] %>
   <% if @category_groups.present? %>
     <h2>Music Categories</h2>
     <%=
