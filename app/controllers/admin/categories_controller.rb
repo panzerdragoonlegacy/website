@@ -3,7 +3,7 @@ class Admin::CategoriesController < ApplicationController
   layout 'admin'
   before_action :load_category_groups, except: [:index, :destroy]
   before_action :load_sagas, only: [:new, :edit]
-  before_action :load_category, except: [:index, :new, :create]
+  before_action :load_category, except: [:index, :new, :create, :edit]
 
   def index
     clean_publish_false_param
@@ -16,6 +16,7 @@ class Admin::CategoriesController < ApplicationController
   def new
     @category = Category.new category_type: params[:category_type]
     authorize @category
+    load_all_subcategories
   end
 
   def create
@@ -25,8 +26,15 @@ class Admin::CategoriesController < ApplicationController
       flash[:notice] = 'Successfully created category.'
       redirect_to_category
     else
+      load_all_subcategories
       render :new
     end
+  end
+
+  def edit
+    @category = Category.find_by url: params[:id]
+    authorize @category
+    load_relevant_subcategories
   end
 
   def update
@@ -34,6 +42,7 @@ class Admin::CategoriesController < ApplicationController
       flash[:notice] = 'Successfully updated category.'
       redirect_to_category
     else
+      load_relevant_subcategories
       render :edit
     end
   end

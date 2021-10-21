@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_19_064738) do
+ActiveRecord::Schema.define(version: 2021_10_13_074106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,17 @@ ActiveRecord::Schema.define(version: 2021_05_19_064738) do
     t.integer "category_picture_file_size"
     t.datetime "category_picture_updated_at"
     t.index ["saga_id"], name: "index_categories_on_saga_id"
+  end
+
+  create_table "categorisations", force: :cascade do |t|
+    t.bigint "parent_id"
+    t.bigint "subcategory_id"
+    t.integer "sequence_number", default: 0
+    t.string "short_name_in_parent"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["parent_id"], name: "index_categorisations_on_parent_id"
+    t.index ["subcategory_id"], name: "index_categorisations_on_subcategory_id"
   end
 
   create_table "category_groups", id: :serial, force: :cascade do |t|
@@ -345,4 +356,6 @@ ActiveRecord::Schema.define(version: 2021_05_19_064738) do
   end
 
   add_foreign_key "albums", "categories"
+  add_foreign_key "categorisations", "categories", column: "parent_id"
+  add_foreign_key "categorisations", "categories", column: "subcategory_id"
 end

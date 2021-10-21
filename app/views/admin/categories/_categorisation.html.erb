@@ -1,0 +1,38 @@
+<div
+  class="nested-fields card mb-3"
+>
+  <div class="form-group">
+    <%= f.label :sequence_number, 'Sequence Number*' %>
+    <%=
+      f.number_field(
+        :sequence_number,
+        { min: 0, max: 99, class: 'form-control' }
+      )
+    %>
+  </div>
+  <div class="form-group">
+    <%= f.label :subcategory, 'Subcategory' %>
+    <%= f.collection_select(
+      :subcategory_id,
+      @subcategories ? @subcategories : [],
+      :id,
+      :name,
+      { include_blank: true },
+      { class: 'form-control' }
+    ) %>
+  </div>
+  <div class="form-group">
+	  <%= f.label :short_name_in_parent, 'Short Name in Parent' %>
+    <%= f.text_field :short_name_in_parent, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%=
+      link_to_remove_association(
+        'Remove Subcategory',
+        f,
+        role: 'button',
+        class: 'btn btn-danger'
+      )
+    %>
+  </div>
+</div>

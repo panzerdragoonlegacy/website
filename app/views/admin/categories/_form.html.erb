@@ -8,6 +8,7 @@
   <%= render 'short_name_for_saga', f: f %>
   <%= render 'short_name_for_media_type', f: f %>
   <%= render partial: 'admin/shared/form/description', locals: { f: f } %>
+  <%= render partial: 'categorisations', locals: { f: f } %>
   <% if policy(@category).permitted_attributes.include? :publish %>
     <%= render partial: 'admin/shared/form/publish', locals: { f: f } %>
   <% end %>

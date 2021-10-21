@@ -17,6 +17,20 @@ module LoadableForCategory
     ).resolve
   end
 
+  def load_all_subcategories
+    @subcategories = CategoryPolicy::Scope.new(
+      current_user, Category.order(:name)
+    ).resolve
+  end
+
+  def load_relevant_subcategories
+    @subcategories = CategoryPolicy::Scope.new(
+      current_user,
+      Category.where(category_type: @category.category_type)
+        .where.not(id: @category.id).order(:name)
+    ).resolve
+  end
+
   def load_category
     @category = Category.find_by url: params[:id]
     authorize @category

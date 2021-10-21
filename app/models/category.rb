@@ -5,8 +5,20 @@ class Category < ApplicationRecord
 
   has_paper_trail
 
+  # To be replaced by sub categories system
   belongs_to :category_group
   belongs_to :saga, optional: true
+
+  has_many :categorisations, foreign_key: 'parent_id', dependent: :destroy
+  accepts_nested_attributes_for(
+    :categorisations,
+    reject_if: :all_blank,
+    allow_destroy: true
+  )
+  belongs_to :categorisation, foreign_key: 'id', optional: true
+  has_many :subcategories, through: :categorisations,
+    foreign_key: 'subcategory_id'
+
   has_many :pages, dependent: :destroy
   has_many :pictures, dependent: :destroy
   has_many :music_tracks, dependent: :destroy
@@ -14,8 +26,11 @@ class Category < ApplicationRecord
   has_many :downloads, dependent: :destroy
 
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
+
+  # To be replaced by sub categories system
   validates :short_name_for_saga, length: { in: 0..50 }
   validates :short_name_for_media_type, length: { in: 0..50 }
+
   validates :description, presence: true, length: { in: 2..250 }
   validates :category_type, presence: true
 

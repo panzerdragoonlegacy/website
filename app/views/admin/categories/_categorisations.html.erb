@@ -1,0 +1,27 @@
+<div class="form-group">
+  <%= render(
+    partial: 'admin/shared/form/warning',
+    locals: { warning: 'Subcategories are an experimental feature.' }
+  ) %>
+  <label>Subcategories</label>
+  <%= f.fields_for :categorisations do |categorisation| %>
+    <%=
+      render(
+        partial: 'categorisation',
+        locals: { f: categorisation }
+      )
+    %>
+  <% end %>
+  <p>
+    <%=
+      link_to_add_association(
+        'Add Subcategory',
+        f,
+        :categorisations,
+        role: 'button',
+        class: 'btn btn-success',
+        partial: 'categorisation'
+      )
+    %>
+  </p>
+</div>

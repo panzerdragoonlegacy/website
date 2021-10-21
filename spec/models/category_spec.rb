@@ -15,6 +15,17 @@ RSpec.describe Category, type: :model do
   end
 
   describe 'associations' do
+    it do
+      is_expected.to have_many(:categorisations).with_foreign_key(:parent_id)
+        .dependent(:destroy)
+    end
+    it do
+      is_expected.to belong_to(:categorisation).with_foreign_key(:id).optional
+    end
+    it do
+      is_expected.to have_many(:subcategories).through(:categorisations)
+        .with_foreign_key(:subcategory_id)
+    end
     it { is_expected.to belong_to(:category_group) }
     it { is_expected.to belong_to(:saga).optional }
     it { is_expected.to have_many(:pages).dependent(:destroy) }
