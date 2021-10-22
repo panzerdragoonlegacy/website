@@ -37,7 +37,7 @@ class Category < ApplicationRecord
 
   # The list of category types.
   CATEGORY_TYPES = %w(
-    parent_category
+    parent
     encyclopaedia
     literature
     picture
