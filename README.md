@@ -5,8 +5,21 @@ A custom content management system for
 [panzerdragoonlegacy.com](http://www.panzerdragoonlegacy.com). Code is provided
 here for demonstration purposes.
 
-Documentation
--------------
+Quick Reference
+---------------
+
+To stop the application in production, run:
+`cd /var/cms && sudo docker-compose -f docker-compose.prod.yml down`
+
+To start the application in production, run:
+`cd /var/cms && sudo docker-compose -f docker-compose.prod.yml up -d`
+
+To start and rebuild the application in production, run:
+`cd /var/cms && sudo docker-compose -f docker-compose.prod.yml up -d --build`
+This will re-run certbot and renew the SSL certificate if it has expired.
+
+Setup Guides
+------------
 
 For instructions on setting up a development environment for the CMS, see
 [DEVELOPMENT.md](DEVELOPMENT.md).
