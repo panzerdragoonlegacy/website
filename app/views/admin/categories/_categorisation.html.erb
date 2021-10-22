@@ -11,7 +11,7 @@
     %>
   </div>
   <div class="form-group">
-    <%= f.label :subcategory, 'Subcategory' %>
+    <%= f.label :subcategory, 'Subcategory*' %>
     <%= f.collection_select(
       :subcategory_id,
       @subcategories ? @subcategories : [],
@@ -22,7 +22,7 @@
     ) %>
   </div>
   <div class="form-group">
-	  <%= f.label :short_name_in_parent, 'Short Name in Parent' %>
+	  <%= f.label :short_name_in_parent, 'Short Name in Parent*' %>
     <%= f.text_field :short_name_in_parent, class: 'form-control' %>
   </div>
   <div class="form-group">
