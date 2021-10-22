@@ -5,9 +5,13 @@
         from being saved:
     </h2>
     <ul>
-    <% target.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
+      <% target.errors.to_hash.each do |field_name, messages| %>
+        <% if messages.count > 0 %>
+          <% messages.each do |message| %>
+            <li><%= friendly_error_message(field_name, message) %></li>
+          <% end %>
+        <% end %>
+      <% end %>
     </ul>
   </div>
 <% end %>

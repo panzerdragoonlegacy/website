@@ -2,7 +2,6 @@ class Categorisation < ApplicationRecord
   belongs_to :parent, class_name: 'Category', foreign_key: 'parent_id'
   has_one :subcategory, class_name: 'Category', foreign_key: 'id'
 
-  # Todo: Add custom, sensible validation messages
   validates(
     :sequence_number,
     presence: true,
