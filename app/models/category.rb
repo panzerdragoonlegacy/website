@@ -74,6 +74,10 @@ class Category < ApplicationRecord
     end
   end
 
+  def ordered_categorisations
+    categorisations.order :sequence_number
+  end
+
   private
 
   def validate_presence_of_category_group

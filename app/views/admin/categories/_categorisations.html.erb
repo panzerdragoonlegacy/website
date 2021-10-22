@@ -4,7 +4,9 @@
     locals: { warning: 'Subcategories are an experimental feature.' }
   ) %>
   <label>Subcategories</label>
-  <%= f.fields_for :categorisations do |categorisation| %>
+  <%= f.fields_for(
+    :categorisations, f.object.ordered_categorisations
+  ) do |categorisation| %>
     <%=
       render(
         partial: 'categorisation',
