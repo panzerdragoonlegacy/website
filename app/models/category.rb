@@ -9,7 +9,8 @@ class Category < ApplicationRecord
   belongs_to :category_group
   belongs_to :saga, optional: true
 
-  has_many :categorisations, foreign_key: 'parent_id', dependent: :destroy
+  has_many :categorisations, foreign_key: 'parent_id', dependent: :destroy,
+    inverse_of: :parent
   accepts_nested_attributes_for(
     :categorisations,
     reject_if: :all_blank,

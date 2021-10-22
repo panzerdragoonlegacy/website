@@ -1,5 +1,6 @@
 class Categorisation < ApplicationRecord
-  belongs_to :parent, class_name: 'Category', foreign_key: 'parent_id'
+  belongs_to :parent, class_name: 'Category', foreign_key: 'parent_id',
+    inverse_of: :categorisations
   has_one :subcategory, class_name: 'Category', foreign_key: 'id'
 
   validates(

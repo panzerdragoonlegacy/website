@@ -12,7 +12,7 @@ RSpec.describe Categorisation, type: :model do
   describe 'associations' do
     it do
       is_expected.to belong_to(:parent).class_name('Category')
-        .with_foreign_key('parent_id')
+        .with_foreign_key('parent_id').inverse_of(:categorisations)
     end
     it do
       is_expected.to have_one(:subcategory).class_name('Category')

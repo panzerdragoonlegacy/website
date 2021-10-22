@@ -17,7 +17,7 @@ RSpec.describe Category, type: :model do
   describe 'associations' do
     it do
       is_expected.to have_many(:categorisations).with_foreign_key(:parent_id)
-        .dependent(:destroy)
+        .dependent(:destroy).inverse_of(:parent)
     end
     it do
       is_expected.to belong_to(:categorisation).with_foreign_key(:id).optional
