@@ -26,8 +26,7 @@ module LoadableForCategory
   def load_relevant_subcategories
     @subcategories = CategoryPolicy::Scope.new(
       current_user,
-      Category.where(category_type: @category.category_type)
-        .where.not(id: @category.id).order(:name)
+      Category.where.not(id: @category.id).order(:name)
     ).resolve
   end
 
