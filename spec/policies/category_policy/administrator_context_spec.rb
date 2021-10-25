@@ -62,4 +62,10 @@ describe CategoryPolicy do
       it { is_expected.to forbid_action(:destroy) }
     end
   end
+
+  context 'administrator is accessing a parent category' do
+    let(:category) { FactoryBot.create(:valid_parent_category) }
+
+    it { is_expected.to permit_action(:destroy) }
+  end
 end

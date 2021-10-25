@@ -41,4 +41,10 @@ describe CategoryPolicy do
     end
     it { is_expected.to forbid_mass_assignment_of(:publish) }
   end
+
+  context 'visitor is accessing a parent category' do
+    let(:category) { FactoryBot.create(:valid_parent_category) }
+
+    it { is_expected.to forbid_action(:destroy) }
+  end
 end

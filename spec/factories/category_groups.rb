@@ -4,6 +4,10 @@ FactoryBot.define do
       sequence(:name) { |n| "Category Group #{n}" }
       category_group_type { :literature }
 
+      factory :valid_parent_category_group do
+        category_group_type { :parent }
+      end
+
       factory :valid_literature_category_group do
         category_group_type { :literature }
       end

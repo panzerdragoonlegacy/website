@@ -8,6 +8,11 @@ FactoryBot.define do
       category_type { :literature }
       category_group { FactoryBot.create(:valid_category_group) }
 
+      factory :valid_parent_category do
+        category_type { :parent }
+        category_group { FactoryBot.create(:valid_parent_category_group) }
+      end
+
       factory :valid_literature_category do
         category_type { :literature }
         category_group { FactoryBot.create(:valid_literature_category_group) }

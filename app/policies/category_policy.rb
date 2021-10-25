@@ -26,6 +26,8 @@ class CategoryPolicy < ApplicationPolicy
     if user && user.administrator?
       if record.category_type == 'literature'
         return true if record.pages.blank?
+      elsif record.category_type == :parent.to_s
+        return true
       else
         return true if record.send(record.category_type.pluralize).blank?
       end
