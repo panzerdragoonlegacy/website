@@ -8,13 +8,6 @@ FactoryBot.define do
       category_type { :literature }
       category_group { FactoryBot.create(:valid_category_group) }
 
-      factory :valid_encyclopaedia_category do
-        category_type { :encyclopaedia }
-        category_group do
-          FactoryBot.create(:valid_encyclopaedia_category_group)
-        end
-      end
-
       factory :valid_literature_category do
         category_type { :literature }
         category_group { FactoryBot.create(:valid_literature_category_group) }

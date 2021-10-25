@@ -57,13 +57,6 @@
                 }
               )
             %>
-          <% elsif page.page_type == :encyclopaedia.to_s %>
-            <%=
-              render(
-                partial: 'admin/shared/table/name',
-                locals: { resource: page, path: encyclopaedia_path(page) }
-              )
-            %>
           <% else %>
             <%=
               render(

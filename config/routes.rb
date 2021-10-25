@@ -32,8 +32,6 @@ Rails.application.routes.draw do
   get 'site-map', to: 'site_map#show', as: :site_map
   resources :site_map
   resources :categories
-  get 'encyclopaedia', to: 'encyclopaedia#index', as: 'encyclopaedia_index'
-  get 'encyclopaedia/:id', to: 'encyclopaedia#show', as: 'encyclopaedia'
 
   resources :tags do
     resources :news_entries, path: 'news-entries'

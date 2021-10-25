@@ -37,12 +37,6 @@ FactoryBot.define do
           category { FactoryBot.create(:unpublished_category) }
         end
       end
-
-      factory :valid_encyclopaedia_page do
-        page_type { :encyclopaedia.to_s }
-        information { 'Test Information' }
-        category { FactoryBot.create(:valid_encyclopaedia_category) }
-      end
     end
   end
 end

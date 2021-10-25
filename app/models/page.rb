@@ -21,7 +21,6 @@ class Page < ApplicationRecord
 
   # The list of page types.
   PAGE_TYPES = %w(
-    encyclopaedia
     literature
     literature_chapter
     top_level
@@ -74,18 +73,13 @@ class Page < ApplicationRecord
 
   def validate_category
     return unless page_type.present?
-    if (literature? || encyclopaedia?) && category.blank?
+    if literature? && category.blank?
       errors.add(page_type, 'pages must have a category.')
     end
-    if (literature? || encyclopaedia?) && category.present?
-      if literature? && category.category_type != :literature.to_s
-        errors.add(page_type, 'pages must belong to a literature category.')
-      end
-      if encyclopaedia? && category.category_type != :encyclopaedia.to_s
-        errors.add(page_type, 'pages must belong to an encyclopaedia category.')
-      end
+    if literature? && category.present? && category.category_type != :literature.to_s
+      errors.add(page_type, 'pages must belong to a literature category.')
     end
-    if !literature? && !encyclopaedia? && category.present?
+    if !literature? && category.present?
       errors.add(page_type, 'pages must not have a category.')
     end
   end
@@ -128,10 +122,7 @@ class Page < ApplicationRecord
 
   def validate_information
     return unless page_type.present?
-    if encyclopaedia? && information.blank?
-      errors.add(page_type, 'pages must have an information box.')
-    end
-    if !encyclopaedia? && information.present?
+    if information.present?
       errors.add(page_type, 'pages must not have an information box.')
     end
   end
@@ -142,9 +133,5 @@ class Page < ApplicationRecord
 
   def chapter?
     page_type == :literature_chapter.to_s
-  end
-
-  def encyclopaedia?
-    page_type == :encyclopaedia.to_s
   end
 end

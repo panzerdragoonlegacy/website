@@ -35,16 +35,6 @@ module LoadableForCategory
     authorize @category
   end
 
-  def load_category_encyclopaedia_pages
-    if @category.category_type == :encyclopaedia.to_s
-      @encyclopaedia_pages = PagePolicy::Scope.new(
-        current_user,
-        Page.where(category_id: @category.id, page_type: :encyclopaedia.to_s)
-          .order(:name).page(params[:page])
-      ).resolve
-    end
-  end
-
   def load_category_literature_pages
     if @category.category_type == :literature.to_s
       @literature_pages = PagePolicy::Scope.new(

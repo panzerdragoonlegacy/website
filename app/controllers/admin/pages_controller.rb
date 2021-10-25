@@ -70,8 +70,6 @@ class Admin::PagesController < ApplicationController
       redirect_to(
         literature_chapter_path(@page.parent_page.to_param, @page.to_param)
       )
-    elsif @page.page_type == :encyclopaedia.to_s
-      redirect_to encyclopaedia_path(@page)
     else
       redirect_to top_level_page_path(@page.url)
     end
@@ -90,7 +88,7 @@ class Admin::PagesController < ApplicationController
     @categories = CategoryPolicy::Scope.new(
       current_user,
       Category.where(
-        "category_type = 'literature' OR category_type = 'encyclopaedia'"
+        "category_type = 'literature'"
       ).order(:name)
     ).resolve
   end
