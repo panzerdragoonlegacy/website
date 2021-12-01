@@ -65,6 +65,7 @@ class QuizPolicy < ApplicationPolicy
 
   def attributes_except_publish
     [
+      :category_id,
       :name,
       :description,
       quiz_questions_attributes: quiz_questions_attributes,

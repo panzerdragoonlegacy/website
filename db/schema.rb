@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_13_074106) do
+ActiveRecord::Schema.define(version: 2021_12_01_070122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -240,6 +240,7 @@ ActiveRecord::Schema.define(version: 2021_10_13_074106) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "published_at"
+    t.integer "category_id"
   end
 
   create_table "redirects", id: :serial, force: :cascade do |t|

@@ -3,6 +3,12 @@ module LoadableForQuiz
 
   private
 
+  def load_categories
+    @categories = CategoryPolicy::Scope.new(
+      current_user, Category.where(category_type: :quiz).order(:name)
+    ).resolve
+  end
+
   def load_quiz
     @quiz = Quiz.find_by url: params[:id]
     authorize @quiz

@@ -1,6 +1,7 @@
 class Admin::QuizzesController < ApplicationController
   include LoadableForQuiz
   layout 'admin'
+  before_action :load_categories, except: [:show, :destroy]
   before_action :load_quiz, except: [:index, :new, :create]
 
   def index

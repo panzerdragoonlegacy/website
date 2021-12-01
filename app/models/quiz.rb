@@ -1,4 +1,5 @@
 class Quiz < ApplicationRecord
+  include Categorisable
   include Contributable
   include Publishable
   include Taggable

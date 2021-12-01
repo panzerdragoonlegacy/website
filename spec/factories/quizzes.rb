@@ -4,6 +4,7 @@ FactoryBot.define do
       sequence(:name) { |n| "Quiz #{n}" }
       description { 'Test Description' }
 
+      category { FactoryBot.create(:valid_category) }
       contributor_profiles { [FactoryBot.create(:valid_contributor_profile)] }
 
       factory :published_quiz do

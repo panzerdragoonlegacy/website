@@ -15,5 +15,6 @@ class CategoryGroup < ApplicationRecord
     music_track
     video
     download
+    quiz
   ).freeze
 end
