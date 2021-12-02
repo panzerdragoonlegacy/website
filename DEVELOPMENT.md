@@ -2,7 +2,7 @@
 
 Step-by-step instructions for setting up a development environment for the site.
 
-## Setting Up the Development Environment
+## Set Up the Development Environment
 
 1. Install git (refer to setup instructions on git-scm.com)
 
@@ -91,7 +91,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
    `\q`
 
-7. Restore the database from a backup.sql file:
+7. Restore the database from a backup .sql file:
 
    `cat /My/Path/backup.sql | docker exec -i cms_database_1 psql -U panzerdragoonlegacy`
 
@@ -116,7 +116,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 ### Restore Paperclip Attachments into Docker Volume
 
-1. Copy the system folder from your local machine into the volume:
+1. Copy the system folder from the backup on your local machine into the volume:
 
    `docker cp /My/Path/system cms_app_1:cms/public`
 

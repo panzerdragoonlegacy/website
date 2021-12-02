@@ -212,7 +212,7 @@ enabled (for Let's Encrypt).
    restored into the volumes that were created by Docker Compose you can verify
    that the app is fully working (see next steps).
 
-## Copying the Site's Data From Another Server
+## Copy the CMS's Data From Another Server
 
 1. On the old server, log in as the web app user:
 
@@ -337,7 +337,7 @@ enabled (for Let's Encrypt).
 
    `0 12 * * * /var/cms/ssl_renew.sh >> /var/log/cron.log 2>&1`
 
-## Create a Backup to Your Local Machine
+## Create a Full Backup to Your Local Machine
 
 1. On the server, back up the database to your home directory:
 

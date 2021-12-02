@@ -39,7 +39,7 @@ backup.
 Copyright
 ---------
 
-Source *code* files in this repository are © 2020 Chris Alley and are freely
+Source *code* files in this repository are © 2021 Chris Alley and are freely
 available under the terms of the MIT license.
 
 However, most of the image assets and the Panzer Dragoon and Crimson Dragon
