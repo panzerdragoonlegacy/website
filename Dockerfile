@@ -1,4 +1,4 @@
-FROM ruby:2.7.4
+FROM ruby:3.0.3
 
 LABEL maintainer="chris@chrisalley.info"
 
