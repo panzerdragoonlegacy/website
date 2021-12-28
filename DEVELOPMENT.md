@@ -114,7 +114,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
     `docker-compose exec app bin/rails db:migrate`
 
-### Restore Paperclip Attachments into Docker Volume
+## Restore Paperclip Attachments into Docker Volume
 
 1. Copy the system folder from the backup on your local machine into the volume:
 
