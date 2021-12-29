@@ -6,12 +6,12 @@ Step-by-step instructions for setting up a development environment for the site.
 
 1. Install git (refer to setup instructions on git-scm.com)
 
-2. Install Docker (refer to setup instructions on docker.com). If you are using
-   Windows 10 Home you will need to install the Docker Toolbox instead.
+2. Install Docker and Docker Compose (refer to setup instructions on
+   docker.com).
 
 3. Clone the git repository and change into it's directory:
 
-   (Windows specific): `git config --global core.autocrlf false`
+   (Only required on Windows): `git config --global core.autocrlf false`
 
    `git clone https://github.com/panzerdragoonlegacy/cms.git`
 
@@ -51,11 +51,6 @@ Step-by-step instructions for setting up a development environment for the site.
    ```
 
 9. Open http://localhost:3000 to log in as the admin user.
-
-   If you are using the Docker Toolbox you will get a connection refused error.
-   In this case, you will need to use the IP address of Docker Machine instead.
-   Run `docker-machine ls`. If the displayed URL is `tcp://192.168.99.100:2376`
-   you would access the site at `http://192.168.99.100:3000` instead.
 
 ## Restore a Database Backup into Docker Volume
 
