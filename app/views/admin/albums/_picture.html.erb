@@ -1,7 +1,4 @@
-<div
-  class="nested-fields card mb-3"
-  style="width: 390px;"
->
+<div class="nested-fields card mb-3 custom-card">
   <% if f.object.picture_file_name.blank? %>
     <div class="card-body">
       <h3 class="card-title">New Picture</h3>
@@ -29,7 +26,7 @@
   <div class="p-3">
     <!-- Load picture's contributor profiles so that the synchronise_attributes
          method in the controller won't think they're empty. -->
-    <div style="display: none;">
+    <div class="custom-hidden-field">
       <%= render(
         partial: 'admin/shared/form/contributors',
         locals: {
@@ -50,7 +47,7 @@
     ) %>
     <!-- Load picture's tags so that the synchronise_attributes method in the
          controller won't think they're empty. -->
-    <div style="display: none;">
+    <div class="custom-hidden-field">
       <%= render(
         partial: 'admin/shared/form/tags',
         locals: { f: f, tag_ids: f.object.tag_ids }

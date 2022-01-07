@@ -4,7 +4,7 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 //
-// To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
+// To reference this file, add <%= javascript_pack_tag 'admin' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
 
@@ -12,8 +12,8 @@
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
 //
-const images = require.context('../images', true)
-const imagePath = (name) => images(name, true)
+// const images = require.context('../images', true)
+// const imagePath = (name) => images(name, true)
 
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'

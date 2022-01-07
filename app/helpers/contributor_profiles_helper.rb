@@ -16,8 +16,8 @@ module ContributorProfilesHelper
         height: img_tag_height
       )
     else
-      image_tag(
-        'default-avatar.jpg',
+      image_pack_tag(
+        'media/images/default-avatar.jpg',
         alt: contributor_profile.name,
         width: img_tag_width,
         height: img_tag_height

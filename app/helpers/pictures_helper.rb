@@ -19,8 +19,8 @@ module PicturesHelper
         height: image_file.height.to_i.to_s
       )
     else
-      image_tag(
-        'sorry-no-image-embedded.jpg',
+      image_pack_tag(
+        'media/images/sorry-no-image-embedded.jpg',
         alt: record.name,
         width: img_tag_width,
         height: img_tag_height
@@ -29,8 +29,8 @@ module PicturesHelper
   end
 
   def show_controversial_content_thumbnail
-    image_tag(
-      'controversial-content-thumbnail.jpg',
+    image_pack_tag(
+      'media/images/controversial-content-thumbnail.jpg',
       alt: 'Warning: Controversial Content',
       height: 150,
       width: 150

@@ -25,7 +25,7 @@
     <% end %>
     <div class="comment_thumbnail">
       <% if @news_entry.contributor_profile.avatar_file_name.blank? %>
-        <%= image_tag 'default-avatar.jpg' %>
+        <%= image_pack_tag 'media/images/default-avatar.jpg' %>
       <% else %>
         <%= image_tag @news_entry.contributor_profile.avatar.url(:thumbnail) %>
         <br />

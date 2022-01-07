@@ -40,7 +40,7 @@
         <tr>
           <td>
             <% if contributor_profile.avatar_file_name.blank? %>
-              <%= image_tag 'default-avatar.jpg' %>
+              <%= image_pack_tag 'media/images/default-avatar.jpg' %>
             <% else %>
               <%= image_tag contributor_profile.avatar.url(:thumbnail) %>
             <% end %>

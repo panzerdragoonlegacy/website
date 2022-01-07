@@ -29,7 +29,7 @@ RUN chmod +x /usr/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Precompile assets
-RUN rails assets:clobber
+RUN rails assets:clobber --trace
 RUN RAILS_ENV=production SECRET_KEY_BASE=abcd1234 rails assets:precompile
 
 # Start the main process.

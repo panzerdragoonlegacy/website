@@ -7,9 +7,11 @@
     'steam': 'https://steamcommunity.com/groups/panzerdragoonlegacy',
     'discord': 'https://discordapp.com/invite/N3mrMh6'
   }.each do |key, value| %>
-    <li><%= link_to icon('fab', key), value %></li>
+    <li>
+      <a href="<%= value %>"><i class="fab fa-<%= key %>"></i></a>
+    </li>
   <% end %>
   <li>
-    <%= link_to icon('fas', 'rss'), news_entries_path(:atom) %>
+    <a href="<%= news_entries_path(:atom) %>"><i class="fas fa-rss"></i></a>
   </li>
 </ul>

@@ -1,7 +1,4 @@
-<div
-  class="nested-fields card mb-3"
-  style="width: 390px;"
->
+<div class="nested-fields card mb-3 custom-card">
   <% if f.object.video_picture_file_name.blank? %>
     <div class="card-body">
       <h3 class="card-title">New Video</h3>
@@ -44,7 +41,7 @@
     ) %>
     <!-- Load video's contributor profiles so that the synchronise_attributes
          method in the controller won't think they're empty. -->
-    <div style="display: none;">
+    <div class="custom-hidden-field">
       <%= render(
         partial: 'admin/shared/form/contributors',
         locals: {
@@ -62,7 +59,7 @@
     ) %>
     <!-- Load video's tags so that the synchronise_attributes method in the
          controller won't think they're empty. -->
-    <div style="display: none;">
+    <div class="custom-hidden-field">
       <%= render(
         partial: 'admin/shared/form/tags',
         locals: { f: f, tag_ids: f.object.tag_ids }

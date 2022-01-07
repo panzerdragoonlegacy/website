@@ -4,6 +4,7 @@ body {
   color: $main-text-colour;
   background-color: #535353;
   background: linear-gradient(to bottom, #434343, #535353);
+}
 
   div#overall {
     width: 950px;
@@ -28,7 +29,7 @@ body {
     div#banner {
       width: 950px;
       height: 180px;
-      background-image: url(image_path('banner.jpg'));
+      background-image: url('../images/banner.jpg');
       border-bottom: $border-properties;
     }
 
@@ -200,4 +201,4 @@ body {
       }
     }
   }
-}
+
