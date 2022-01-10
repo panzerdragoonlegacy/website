@@ -23,7 +23,7 @@ services:
     ports:
       - '3035:3035'
   database:
-    image: postgres
+    image: postgres:13.5-alpine
     volumes:
       - database_data:/var/lib/postgresql/data
     env_file:
