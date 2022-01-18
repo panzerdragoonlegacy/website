@@ -14,7 +14,7 @@ RUN apt update -y && apt install -y yarn
 COPY Gemfile* /cms/
 WORKDIR /cms
 
-RUN gem install bundler --version=2.1.4
+RUN gem install bundler --version=2.3.5
 RUN bundle install
 
 COPY . /cms

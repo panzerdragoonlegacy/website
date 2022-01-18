@@ -26,7 +26,7 @@ jobs:
       - checkout
       - run:
           name: Install Bundler
-          command: gem install bundler:2.1.4
+          command: gem install bundler:2.3.5
       # bundle cache
       - restore_cache:
           keys:
@@ -63,7 +63,7 @@ jobs:
       - checkout
       - run:
           name: Install Bundler
-          command: gem install bundler:2.1.4
+          command: gem install bundler:2.3.5
       - restore_cache:
           keys:
             - pdl-bundle-v2-{{ checksum "Gemfile.lock" }}
