@@ -1,9 +1,12 @@
 class Admin::PagesController < ApplicationController
+  include FindBySlugConcerns
   include LoadableForPage
+  include PreviewSlugConcerns
   layout 'admin'
   before_action :load_parent_pages, except: [:index, :destroy]
   before_action :load_categories, except: [:destroy]
   before_action :load_page, except: [:index, :new, :create]
+  helper_method :custom_page_path
 
   def index
     clean_publish_false_param
@@ -13,13 +16,10 @@ class Admin::PagesController < ApplicationController
 
   def new
     if params[:parent_page_id]
-      parent_page = Page.find_by id: params[:parent_page_id]
+      parent_page = Page.find params[:parent_page_id]
       raise 'Parent page not found.' unless parent_page.present?
     end
-    if params[:category]
-      category = Category.find_by url: params[:category]
-      raise 'Category not found.' unless category.present?
-    end
+    category = find_category_by_slug(params[:category]) if params[:category]
     @page = Page.new
     @page.category = category if category
     @page.parent_page_id = parent_page.id if parent_page
@@ -64,14 +64,19 @@ class Admin::PagesController < ApplicationController
   def redirect_to_page
     if params[:continue_editing]
       redirect_to edit_admin_page_path(@page)
-    elsif @page.page_type == :literature.to_s
-      redirect_to literature_path(@page)
-    elsif @page.page_type == :literature_chapter.to_s
-      redirect_to(
-        literature_chapter_path(@page.parent_page.to_param, @page.to_param)
-      )
     else
-      redirect_to top_level_page_path(@page.url)
+      redirect_to custom_page_path(@page)
+    end
+  end
+
+  def custom_page_path(page)
+    if page.page_type == :literature.to_s
+      custom_path(page, literature_path(page))
+    elsif page.page_type == :literature_chapter.to_s
+      path = literature_chapter_path(page.parent_page.to_param, page.to_param)
+      custom_path(page, path)
+    else
+      custom_path(page, top_level_page_path(page.slug))
     end
   end
 

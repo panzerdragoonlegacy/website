@@ -52,7 +52,8 @@
             render(
               partial: 'admin/shared/table/name',
               locals: {
-                resource: music_track, path: music_track_path(music_track)
+                resource: music_track,
+                path: custom_music_track_path(music_track)
               }
             )
           %>

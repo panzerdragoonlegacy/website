@@ -23,12 +23,7 @@
           <%=
             render(
               partial: 'admin/shared/table/name',
-              locals: {
-                resource: chapter,
-                path: literature_chapter_path(
-                  chapter.parent_page.to_param, chapter
-                )
-              }
+              locals: { resource: chapter, path: custom_page_path(chapter) }
             )
           %>
           <%=

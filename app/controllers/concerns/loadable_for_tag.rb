@@ -4,7 +4,7 @@ module LoadableForTag
   private
 
   def load_tag
-    @tag = Tag.find_by url: params[:id]
+    @tag = Tag.find_by slug: params[:id]
     authorize @tag
   end
 

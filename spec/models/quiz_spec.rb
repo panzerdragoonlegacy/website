@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Quiz, type: :model do
   describe 'fields' do
     it { is_expected.to respond_to(:name) }
-    it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:slug) }
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:publish) }
     it { is_expected.to respond_to(:category) }
@@ -81,7 +81,7 @@ RSpec.describe Quiz, type: :model do
 
       it 'generates a slug that is a parameterised version of the name' do
         quiz.save
-        expect(quiz.url).to eq 'quiz-1'
+        expect(quiz.slug).to eq 'quiz-1'
       end
     end
 
@@ -93,7 +93,7 @@ RSpec.describe Quiz, type: :model do
       it 'synchronises the slug with the updated name' do
         quiz.name = 'Quiz 2'
         quiz.save
-        expect(quiz.url).to eq 'quiz-2'
+        expect(quiz.slug).to eq 'quiz-2'
       end
     end
   end

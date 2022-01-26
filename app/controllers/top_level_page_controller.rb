@@ -1,8 +1,9 @@
 class TopLevelPageController < ApplicationController
   include LoadableForSaga
+  include PreviewSlugConcerns
 
   def show
-    if Saga.where(url: params[:id]).count > 0
+    if Saga.where(slug: params[:id]).count > 0
       load_saga
       load_categories
     else
@@ -22,7 +23,7 @@ class TopLevelPageController < ApplicationController
   end
 
   def load_page
-    @page = Page.find_by url: params[:id]
+    @page = Page.find_by slug: previewless_slug(params[:id])
     authorize @page
   end
 end

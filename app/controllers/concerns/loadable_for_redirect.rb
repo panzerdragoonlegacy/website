@@ -4,7 +4,7 @@ module LoadableForRedirect
   private
 
   def load_redirect
-    @redirect = Redirect.find_by id: params[:id]
+    @redirect = Redirect.find params[:id]
     authorize @redirect
   end
 end

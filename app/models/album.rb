@@ -1,6 +1,4 @@
 class Album < ApplicationRecord
-  acts_as_url :name, sync_url: true
-
   include Categorisable
   include Contributable
   include Instagramable
@@ -30,11 +28,8 @@ class Album < ApplicationRecord
   before_save :strip_instagram_url_to_just_id
   before_save :publish_in_sequence
   before_save :set_published_at
+  before_save :set_slug
   after_save :update_picture_categories
-
-  def to_param
-    id.to_s + '-' + url
-  end
 
   def name_and_id
     "#{name} (#{id})"

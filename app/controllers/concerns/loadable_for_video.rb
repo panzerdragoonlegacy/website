@@ -1,5 +1,6 @@
 module LoadableForVideo
   extend ActiveSupport::Concern
+  include FindBySlugConcerns
 
   private
 
@@ -10,15 +11,13 @@ module LoadableForVideo
   end
 
   def load_video
-    @video = Video.find_by id: params[:id]
+    @video = Video.find params[:id]
     authorize @video
   end
 
   def load_contributors_videos
-    @contributor_profile = ContributorProfile.find_by(
-      url: params[:contributor_profile_id]
-    )
-    raise 'Contributor profile not found.' unless @contributor_profile
+    @contributor_profile =
+      find_contributor_profile_by_slug params[:contributor_profile_id]
     @videos = policy_scope(
       Video.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }
@@ -27,8 +26,7 @@ module LoadableForVideo
   end
 
   def load_tagged_videos
-    @tag = Tag.find_by url: params[:tag_id]
-    raise 'Tag not found.' unless @tag
+    @tag = find_tag_by_slug params[:tag_id]
     @videos = policy_scope(
       Video.joins(:taggings).where(taggings: { tag_id: @tag.id }).order(:name)
         .page(params[:page])

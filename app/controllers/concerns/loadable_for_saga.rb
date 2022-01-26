@@ -4,7 +4,7 @@ module LoadableForSaga
   private
 
   def load_saga
-    @saga = Saga.find_by url: params[:id]
+    @saga = Saga.find_by slug: params[:id]
     authorize @saga
   end
 

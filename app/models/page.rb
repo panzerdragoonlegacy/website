@@ -51,10 +51,11 @@ class Page < ApplicationRecord
   before_validation :validate_information
 
   before_save :set_published_at
+  before_save :set_slug
   before_save :sync_file_name
 
   def sync_file_name
-    sync_file_name_of :page_picture, file_name: "#{name.to_url}.jpg"
+    sync_file_name_of :page_picture, file_name: "#{slug_from_name}.jpg"
   end
 
   def name_and_id

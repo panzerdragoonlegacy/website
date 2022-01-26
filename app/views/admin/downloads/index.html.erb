@@ -51,7 +51,10 @@
           <%=
             render(
               partial: 'admin/shared/table/name',
-              locals: { resource: download, path: download_path(download) }
+              locals: {
+                resource: download,
+                path: custom_download_path(download)
+              }
             )
           %>
           <%=

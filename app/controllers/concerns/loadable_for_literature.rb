@@ -1,5 +1,6 @@
 module LoadableForLiterature
   extend ActiveSupport::Concern
+  include FindBySlugConcerns
 
   private
 
@@ -9,10 +10,9 @@ module LoadableForLiterature
   end
 
   def load_contributors_literature
-    @contributor_profile = ContributorProfile.find_by(
-      url: params[:contributor_profile_id]
+    @contributor_profile = find_contributor_profile_by_slug(
+      params[:contributor_profile_id]
     )
-    raise 'Contributor profile not found.' unless @contributor_profile
     @pages = policy_scope(
       Page.joins(:contributions).where(
         page_type: :literature.to_s,
@@ -22,8 +22,7 @@ module LoadableForLiterature
   end
 
   def load_tagged_literature
-    @tag = Tag.find_by url: params[:tag_id]
-    raise 'Tag not found.' unless @tag
+    @tag = find_tag_by_slug params[:tag_id]
     @pages = policy_scope(
       Page.joins(:taggings).where(taggings: { tag_id: @tag.id }).order(:name)
         .page(params[:page])

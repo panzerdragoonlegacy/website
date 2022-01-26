@@ -18,4 +18,5 @@ class Quiz < ApplicationRecord
   validates :description, presence: true, length: { in: 2..250 }
 
   before_save :set_published_at
+  before_save :set_slug
 end

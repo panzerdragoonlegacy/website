@@ -17,4 +17,6 @@ class CategoryGroup < ApplicationRecord
     download
     quiz
   ).freeze
+
+  before_save :set_slug
 end

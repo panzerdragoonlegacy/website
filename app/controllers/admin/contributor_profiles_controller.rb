@@ -1,7 +1,9 @@
 class Admin::ContributorProfilesController < ApplicationController
   include LoadableForContributorProfile
+  include PreviewSlugConcerns
   layout 'admin'
   before_action :load_contributor_profile, except: [:index, :new, :create]
+  helper_method :custom_contributor_profile_path
 
   def index
     clean_publish_false_param
@@ -54,7 +56,13 @@ class Admin::ContributorProfilesController < ApplicationController
     if params[:continue_editing]
       redirect_to edit_admin_contributor_profile_path(@contributor_profile)
     else
-      redirect_to @contributor_profile
+      redirect_to custom_contributor_profile_path(@contributor_profile)
     end
+  end
+
+  def custom_contributor_profile_path(contributor_profile)
+    custom_path(
+      contributor_profile, contributor_profile_path(contributor_profile)
+    )
   end
 end

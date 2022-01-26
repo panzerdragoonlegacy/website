@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_01_070122) do
+ActiveRecord::Schema.define(version: 2022_01_21_084924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_070122) do
     t.datetime "published_at"
     t.string "source_url"
     t.string "instagram_post_id"
+    t.string "slug"
     t.index ["category_id"], name: "index_albums_on_category_id"
   end
 
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_070122) do
     t.string "category_picture_content_type"
     t.integer "category_picture_file_size"
     t.datetime "category_picture_updated_at"
+    t.string "slug"
     t.index ["saga_id"], name: "index_categories_on_saga_id"
   end
 
@@ -67,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_070122) do
     t.string "category_group_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
   end
 
   create_table "contributions", id: :serial, force: :cascade do |t|
@@ -99,6 +102,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_070122) do
     t.string "deviantart_username"
     t.string "discord_user_id"
     t.string "fandom_username"
+    t.string "slug"
   end
 
   create_table "downloads", id: :serial, force: :cascade do |t|
@@ -119,6 +123,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_070122) do
     t.integer "download_picture_file_size"
     t.datetime "download_picture_updated_at"
     t.datetime "published_at"
+    t.string "slug"
   end
 
   create_table "illustrations", id: :serial, force: :cascade do |t|
@@ -154,6 +159,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_070122) do
     t.integer "music_track_picture_file_size"
     t.datetime "music_track_picture_updated_at"
     t.datetime "published_at"
+    t.string "slug"
   end
 
   create_table "news_entries", id: :serial, force: :cascade do |t|
@@ -170,6 +176,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_070122) do
     t.integer "news_entry_picture_file_size"
     t.datetime "news_entry_picture_updated_at"
     t.string "summary"
+    t.string "slug"
   end
 
   create_table "pages", id: :serial, force: :cascade do |t|
@@ -192,6 +199,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_070122) do
     t.datetime "published_at"
     t.string "old_model_type"
     t.integer "old_model_id"
+    t.string "slug"
   end
 
   create_table "pictures", id: :serial, force: :cascade do |t|
@@ -215,6 +223,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_070122) do
     t.integer "sequence_number", default: 0
     t.boolean "controversial_content", default: false
     t.string "instagram_post_id"
+    t.string "slug"
   end
 
   create_table "quiz_answers", id: :serial, force: :cascade do |t|
@@ -241,6 +250,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_070122) do
     t.datetime "updated_at"
     t.datetime "published_at"
     t.integer "category_id"
+    t.string "slug"
   end
 
   create_table "redirects", id: :serial, force: :cascade do |t|
@@ -269,6 +279,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_070122) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "tag_id"
+    t.string "slug"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -291,6 +302,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_070122) do
     t.datetime "tag_picture_updated_at"
     t.text "information"
     t.string "wiki_slug"
+    t.string "slug"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -354,6 +366,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_070122) do
     t.string "source_url"
     t.integer "album_id"
     t.integer "sequence_number", default: 0
+    t.string "slug"
   end
 
   add_foreign_key "albums", "categories"

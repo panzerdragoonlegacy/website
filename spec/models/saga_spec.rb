@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Saga, type: :model do
   describe 'fields' do
     it { is_expected.to respond_to(:name) }
-    it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:slug) }
     it { is_expected.to respond_to(:sequence_number) }
     it { is_expected.to respond_to(:tag) }
     it { is_expected.to respond_to(:created_at) }
@@ -36,7 +36,7 @@ RSpec.describe Saga, type: :model do
 
       it 'generates a slug that is a parameterised version of the name' do
         saga.save
-        expect(saga.url).to eq 'saga-1'
+        expect(saga.slug).to eq 'saga-1'
       end
     end
 
@@ -48,7 +48,7 @@ RSpec.describe Saga, type: :model do
       it 'synchronises the slug with the updated name' do
         saga.name = 'Saga 2'
         saga.save
-        expect(saga.url).to eq 'saga-2'
+        expect(saga.slug).to eq 'saga-2'
       end
     end
   end

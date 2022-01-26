@@ -1,7 +1,7 @@
 class Admin::AlbumsController < ApplicationController
   layout 'admin'
+  include FindBySlugConcerns
   include LoadableForAlbum
-
   before_action :load_picture_categories, except: [:index, :destroy]
   before_action :load_video_categories, except: [:index, :destroy]
   before_action :load_album, except: [:index, :new, :create]
@@ -14,8 +14,7 @@ class Admin::AlbumsController < ApplicationController
 
   def new
     if params[:category]
-      category = Category.find_by url: params[:category]
-      raise 'Category not found.' unless category.present?
+      category = find_category_by_slug params[:category]
       @album = Album.new category: category
     else
       @album = Album.new

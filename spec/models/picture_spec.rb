@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Picture, type: :model do
   describe 'fields' do
     it { is_expected.to respond_to(:name) }
-    it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:slug) }
     it { is_expected.to respond_to(:sequence_number) }
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:information) }

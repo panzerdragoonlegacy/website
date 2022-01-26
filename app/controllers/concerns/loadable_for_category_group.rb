@@ -4,7 +4,7 @@ module LoadableForCategoryGroup
   private
   
   def load_category_group
-    @category_group = CategoryGroup.find_by url: params[:id]
+    @category_group = CategoryGroup.find_by slug: params[:id]
     authorize @category_group
   end
 end

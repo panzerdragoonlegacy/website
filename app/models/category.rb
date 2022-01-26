@@ -69,11 +69,12 @@ class Category < ApplicationRecord
   # before_validation :validate_category_and_category_group_type_match
 
   before_save :set_published_at
+  before_save :set_slug
   before_save :sync_file_name
 
   def sync_file_name
     if name.present?
-      sync_file_name_of :category_picture, file_name: "#{name.to_url}.jpg"
+      sync_file_name_of :category_picture, file_name: "#{slug_from_name}.jpg"
     end
   end
 

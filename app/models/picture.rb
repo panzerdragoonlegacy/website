@@ -46,12 +46,13 @@ class Picture < ApplicationRecord
   )
 
   before_save :set_published_at
+  before_save :set_slug
   before_save :sync_file_name
   before_save :replace_picture
   before_save :strip_instagram_url_to_just_id
 
   def sync_file_name
-    sync_file_name_of :picture, file_name: "#{name.to_url}.jpg"
+    sync_file_name_of :picture, file_name: "#{slug_from_name}.jpg"
   end
 
   def name_and_id

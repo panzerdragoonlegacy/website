@@ -1,11 +1,8 @@
 module SluggableWithId
   extend ActiveSupport::Concern
-
-  included do
-    acts_as_url :name, sync_url: true, allow_duplicates: :true
-  end
+  include Sluggable
 
   def to_param
-    id.to_s + '-' + url
+    "#{id}-#{slug}"
   end
 end

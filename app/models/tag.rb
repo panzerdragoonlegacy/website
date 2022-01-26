@@ -68,11 +68,12 @@ class Tag < ApplicationRecord
     size: { in: 0..5.megabytes }
   )
 
+  before_save :set_slug
   before_save :sync_file_name
 
   def sync_file_name
     if name.present?
-      sync_file_name_of :tag_picture, file_name: "#{name.to_url}.jpg"
+      sync_file_name_of :tag_picture, file_name: "#{slug_from_name}.jpg"
     end
   end
 end

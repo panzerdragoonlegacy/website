@@ -12,4 +12,6 @@ class Saga < ApplicationRecord
     presence: true,
     numericality: { only_integer: true, greater_than: 0, less_than: 100 }
   )
+
+  before_save :set_slug
 end

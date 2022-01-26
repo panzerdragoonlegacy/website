@@ -1,5 +1,6 @@
 module LoadableForDownload
   extend ActiveSupport::Concern
+  include FindBySlugConcerns
 
   private
 
@@ -10,15 +11,13 @@ module LoadableForDownload
   end
 
   def load_download
-    @download = Download.find_by id: params[:id]
+    @download = Download.find params[:id]
     authorize @download
   end
 
   def load_contributors_downloads
-    @contributor_profile = ContributorProfile.find_by(
-      url: params[:contributor_profile_id]
-    )
-    raise 'Contributor profile not found.' unless @contributor_profile
+    @contributor_profile =
+      find_contributor_profile_by_slug(params[:contributor_profile_id])
     @downloads = policy_scope(
       Download.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }
@@ -27,8 +26,7 @@ module LoadableForDownload
   end
 
   def load_tagged_downloads
-    @tag = Tag.find_by url: params[:tag_id]
-    raise 'Tag not found.' unless @tag
+    @tag = find_tag_by_slug params[:tag_id]
     @downloads = policy_scope(
       Download.joins(:taggings).where(taggings: { tag_id: @tag.id })
         .order(:name).page(params[:page])

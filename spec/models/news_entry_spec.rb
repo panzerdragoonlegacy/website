@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe NewsEntry, type: :model do
   describe 'fields' do
     it { is_expected.to respond_to(:name) }
-    it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:slug) }
     it { is_expected.to respond_to(:content) }
     it { is_expected.to respond_to(:summary) }
     it { is_expected.to respond_to(:news_entry_picture) }
@@ -66,7 +66,7 @@ RSpec.describe NewsEntry, type: :model do
 
       it 'generates a slug that is a parameterised version of the name' do
         news_entry.save
-        expect(news_entry.url).to eq 'news-entry-1'
+        expect(news_entry.slug).to eq 'news-entry-1'
       end
     end
 
@@ -78,7 +78,7 @@ RSpec.describe NewsEntry, type: :model do
       it 'synchronises the slug with the updated name' do
         news_entry.name = 'News Entry 2'
         news_entry.save
-        expect(news_entry.url).to eq 'news-entry-2'
+        expect(news_entry.slug).to eq 'news-entry-2'
       end
     end
   end

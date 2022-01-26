@@ -4,7 +4,7 @@ RSpec.describe MusicTrack, type: :model do
   describe 'fields' do
     it { is_expected.to respond_to(:track_number) }
     it { is_expected.to respond_to(:name) }
-    it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:slug) }
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:information) }
     it { is_expected.to respond_to(:mp3_music_track) }

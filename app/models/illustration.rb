@@ -1,4 +1,5 @@
 class Illustration < ApplicationRecord
+  include Sluggable
   include Syncable
 
   belongs_to :page
@@ -25,7 +26,7 @@ class Illustration < ApplicationRecord
   def sync_file_name
     sync_file_name_of(
       :illustration,
-      file_name: "#{illustration_file_name.split('.')[0].to_url}.jpg"
+      file_name: "#{generate_slug(illustration_file_name.split('.')[0])}.jpg"
     )
   end
 end

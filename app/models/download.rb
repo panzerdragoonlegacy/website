@@ -40,10 +40,11 @@ class Download < ApplicationRecord
   )
 
   before_save :set_published_at
+  before_save :set_slug
   before_save :sync_file_names
 
   def sync_file_names
-    sync_file_name_of :download, file_name: "#{name.to_url}.zip"
-    sync_file_name_of :download_picture, file_name: "#{name.to_url}.jpg"
+    sync_file_name_of :download, file_name: "#{slug_from_name}.zip"
+    sync_file_name_of :download_picture, file_name: "#{slug_from_name}.jpg"
   end
 end

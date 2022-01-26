@@ -1,5 +1,6 @@
 module LoadableForCategory
   extend ActiveSupport::Concern
+  include PreviewSlugConcerns
 
   private
 
@@ -31,7 +32,7 @@ module LoadableForCategory
   end
 
   def load_category
-    @category = Category.find_by url: params[:id]
+    @category = Category.find_by slug: previewless_slug(params[:id])
     authorize @category
   end
 

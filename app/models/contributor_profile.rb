@@ -54,6 +54,7 @@ class ContributorProfile < ApplicationRecord
   validates :name, presence: true, length: { in: 2..50 }, uniqueness: true
 
   before_save :set_published_at
+  before_save :set_slug
   before_save :strip_discourse_url_to_just_username
   before_save :strip_facebook_url_to_just_username
   before_save :strip_twitter_url_to_just_username

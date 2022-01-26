@@ -1,5 +1,6 @@
 class QuizzesController < ApplicationController
   include LoadableForQuiz
+  include PreviewSlugConcerns
 
   def index
     if params[:contributor_profile_id]

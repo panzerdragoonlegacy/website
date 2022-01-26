@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ContributorProfile, type: :model do
   describe 'fields' do
     it { is_expected.to respond_to(:name) }
-    it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:slug) }
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:email_address) }
     it { is_expected.to respond_to(:discourse_username) }
@@ -61,7 +61,7 @@ RSpec.describe ContributorProfile, type: :model do
 
       it 'generates a slug that is a parameterised version of the name' do
         contributor_profile.save
-        expect(contributor_profile.url).to eq 'contributor-1'
+        expect(contributor_profile.slug).to eq 'contributor-1'
       end
     end
 
@@ -73,7 +73,7 @@ RSpec.describe ContributorProfile, type: :model do
       it 'synchronises the slug with the updated name' do
         contributor_profile.name = 'Contributor 2'
         contributor_profile.save
-        expect(contributor_profile.url).to eq 'contributor-2'
+        expect(contributor_profile.slug).to eq 'contributor-2'
       end
     end
   end

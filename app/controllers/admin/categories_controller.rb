@@ -1,9 +1,11 @@
 class Admin::CategoriesController < ApplicationController
   include LoadableForCategory
+  include PreviewSlugConcerns
   layout 'admin'
   before_action :load_category_groups, except: [:index, :destroy]
   before_action :load_sagas, only: [:new, :edit]
   before_action :load_category, except: [:index, :new, :create, :edit]
+  helper_method :custom_category_path
 
   def index
     clean_publish_false_param
@@ -32,7 +34,7 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find_by url: params[:id]
+    @category = Category.find_by slug: params[:id]
     authorize @category
     load_relevant_subcategories
   end
@@ -67,7 +69,11 @@ class Admin::CategoriesController < ApplicationController
     if params[:continue_editing]
       redirect_to edit_admin_category_path(@category)
     else
-      redirect_to @category
+      redirect_to custom_category_path(@category)
     end
+  end
+
+  def custom_category_path(category)
+    custom_path(category, category_path(category))
   end
 end

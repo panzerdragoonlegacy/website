@@ -1,11 +1,14 @@
 class Admin::PicturesController < ApplicationController
+  include FindBySlugConcerns
   include LoadableForAlbumable
   include LoadableForPicture
+  include PreviewSlugConcerns
   layout 'admin'
   before_action :load_replaceable_pictures, except: [:index, :destroy]
   before_action :load_albums, except: [:index, :destroy]
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_picture, except: [:index, :new, :create]
+  helper_method :custom_picture_path
 
   def index
     clean_publish_false_param
@@ -15,8 +18,7 @@ class Admin::PicturesController < ApplicationController
 
   def new
     if params[:category]
-      category = Category.find_by url: params[:category]
-      raise 'Category not found.' unless category.present?
+      category = find_category_by_slug params[:category]
       @picture = Picture.new category: category
     else
       @picture = Picture.new
@@ -64,8 +66,12 @@ class Admin::PicturesController < ApplicationController
     if params[:continue_editing]
       redirect_to edit_admin_picture_path(@picture)
     else
-      redirect_to @picture
+      redirect_to custom_picture_path(@picture)
     end
+  end
+
+  def custom_picture_path(picture)
+    custom_path(picture, picture_path(picture))
   end
 
   def make_current_user_a_contributor

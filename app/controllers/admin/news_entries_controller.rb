@@ -1,7 +1,9 @@
 class Admin::NewsEntriesController < ApplicationController
   include LoadableForNewsEntry
+  include PreviewSlugConcerns
   layout 'admin'
   before_action :load_news_entry, except: [:index, :new, :create]
+  helper_method :custom_news_entry_path
 
   def index
     clean_publish_false_param
@@ -56,8 +58,12 @@ class Admin::NewsEntriesController < ApplicationController
     if params[:continue_editing]
       redirect_to edit_admin_news_entry_path(@news_entry)
     else
-      redirect_to @news_entry
+      redirect_to custom_news_entry_path(@news_entry)
     end
+  end
+
+  def custom_news_entry_path(news_entry)
+    custom_path(news_entry, news_entry_path(news_entry))
   end
 
   def make_current_user_the_contributor

@@ -7,7 +7,7 @@ RSpec.describe Page, type: :model do
     it { is_expected.to respond_to(:parent_page_id) }
     it { is_expected.to respond_to(:sequence_number) }
     it { is_expected.to respond_to(:name) }
-    it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:slug) }
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:information) }
     it { is_expected.to respond_to(:content) }

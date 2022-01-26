@@ -1,10 +1,13 @@
 class Admin::VideosController < ApplicationController
+  include FindBySlugConcerns
   include LoadableForAlbumable
   include LoadableForVideo
+  include PreviewSlugConcerns
   layout 'admin'
   before_action :load_albums, except: [:index, :destroy]
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_video, except: [:index, :new, :create]
+  helper_method :custom_video_path
 
   def index
     clean_publish_false_param
@@ -14,8 +17,7 @@ class Admin::VideosController < ApplicationController
 
   def new
     if params[:category]
-      category = Category.find_by url: params[:category]
-      raise 'Category not found.' unless category.present?
+      category = find_category_by_slug params[:category]
       @video = Video.new category: category
     else
       @video = Video.new
@@ -66,8 +68,12 @@ class Admin::VideosController < ApplicationController
     if params[:continue_editing]
       redirect_to edit_admin_video_path(@video)
     else
-      redirect_to @video
+      redirect_to custom_video_path(@video)
     end
+  end
+
+  def custom_video_path(video)
+    custom_path(video, video_path(video))
   end
 
   def make_current_user_a_contributor

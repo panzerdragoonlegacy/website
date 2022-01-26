@@ -31,13 +31,14 @@ class NewsEntry < ApplicationRecord
   validates_attachment :news_entry_picture
 
   before_save :set_published_at
+  before_save :set_slug
   before_save :sync_file_name if name.present?
 
   private
 
   def sync_file_name
     if name.present?
-      sync_file_name_of(:news_entry_picture, file_name: "#{name.to_url}.jpg")
+      sync_file_name_of(:news_entry_picture, file_name: "#{slug}.jpg")
     end
   end
 end

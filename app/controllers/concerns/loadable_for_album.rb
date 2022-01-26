@@ -1,5 +1,6 @@
 module LoadableForAlbum
   extend ActiveSupport::Concern
+  include FindBySlugConcerns
 
   private
 
@@ -23,10 +24,8 @@ module LoadableForAlbum
   end
 
   def load_contributors_albums
-    @contributor_profile = ContributorProfile.find_by(
-      url: params[:contributor_profile_id]
-    )
-    raise 'Contributor profile not found.' unless @contributor_profile
+    @contributor_profile =
+      find_contributor_profile_by_slug(params[:contributor_profile_id])
     @albums = policy_scope(
       Album.joins(:contributions).where(
         contributions: { contributor_profile_id: @contributor_profile.id }

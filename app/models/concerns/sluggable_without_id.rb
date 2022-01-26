@@ -1,11 +1,8 @@
 module SluggableWithoutId
   extend ActiveSupport::Concern
-
-  included do
-    acts_as_url :name, sync_url: true
-  end
+  include Sluggable
 
   def to_param
-    url
+    slug
   end
 end

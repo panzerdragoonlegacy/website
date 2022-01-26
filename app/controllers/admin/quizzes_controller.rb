@@ -1,8 +1,10 @@
 class Admin::QuizzesController < ApplicationController
   include LoadableForQuiz
+  include PreviewSlugConcerns
   layout 'admin'
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_quiz, except: [:index, :new, :create]
+  helper_method :custom_quiz_path
 
   def index
     clean_publish_false_param
@@ -55,8 +57,12 @@ class Admin::QuizzesController < ApplicationController
     if params[:continue_editing]
       redirect_to edit_admin_quiz_path(@quiz)
     else
-      redirect_to @quiz
+      redirect_to custom_quiz_path(@quiz)
     end
+  end
+
+  def custom_quiz_path(quiz)
+    custom_path(quiz, quiz_path(quiz))
   end
   
   def make_current_user_a_contributor

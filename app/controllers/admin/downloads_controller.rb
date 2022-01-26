@@ -1,8 +1,10 @@
 class Admin::DownloadsController < ApplicationController
   include LoadableForDownload
+  include PreviewSlugConcerns
   layout 'admin'
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_download, except: [:index, :new, :create]
+  helper_method :custom_download_path
 
   def index
     clean_publish_false_param
@@ -12,8 +14,7 @@ class Admin::DownloadsController < ApplicationController
 
   def new
     if params[:category]
-      category = Category.find_by url: params[:category]
-      raise 'Category not found.' unless category.present?
+      category = find_category_by_slug params[:category]
       @download = Download.new category: category
     else
       @download = Download.new
@@ -61,8 +62,12 @@ class Admin::DownloadsController < ApplicationController
     if params[:continue_editing]
       redirect_to edit_admin_download_path(@download)
     else
-      redirect_to @download
+      redirect_to custom_download_path(@download)
     end
+  end
+
+  def custom_download_path(download)
+    custom_path(download, download_path(download))
   end
 
   def make_current_user_a_contributor

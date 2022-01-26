@@ -58,11 +58,12 @@ class MusicTrack < ApplicationRecord
   do_not_validate_attachment_file_type :flac_music_track
 
   before_save :set_published_at
+  before_save :set_slug
   before_save :sync_file_names
 
   def sync_file_names
-    sync_file_name_of :mp3_music_track, file_name: "#{name.to_url}.mp3"
-    sync_file_name_of :flac_music_track, file_name: "#{name.to_url}.flac"
-    sync_file_name_of :music_track_picture, file_name: "#{name.to_url}.jpg"
+    sync_file_name_of :mp3_music_track, file_name: "#{slug}.mp3"
+    sync_file_name_of :flac_music_track, file_name: "#{slug}.flac"
+    sync_file_name_of :music_track_picture, file_name: "#{slug}.jpg"
   end
 end

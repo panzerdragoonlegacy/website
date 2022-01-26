@@ -5,7 +5,7 @@ RSpec.describe Video, type: :model do
     it { is_expected.to respond_to(:album_id) }
     it { is_expected.to respond_to(:source_url) }
     it { is_expected.to respond_to(:name) }
-    it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:slug) }
     it { is_expected.to respond_to(:sequence_number) }
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:information) }

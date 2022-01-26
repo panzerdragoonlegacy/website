@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe CategoryGroup, type: :model do
   describe 'fields' do
     it { is_expected.to respond_to(:name) }
-    it { is_expected.to respond_to(:url) }
+    it { is_expected.to respond_to(:slug) }
     it { is_expected.to respond_to(:category_group_type) }
     it { is_expected.to respond_to(:created_at) }
     it { is_expected.to respond_to(:updated_at) }
@@ -29,7 +29,7 @@ RSpec.describe CategoryGroup, type: :model do
 
       it 'generates a slug that is a parameterised version of the name' do
         category_group.save
-        expect(category_group.url).to eq 'category-group-1'
+        expect(category_group.slug).to eq 'category-group-1'
       end
     end
 
@@ -41,7 +41,7 @@ RSpec.describe CategoryGroup, type: :model do
       it 'synchronises the slug with the updated name' do
         category_group.name = 'Category Group 2'
         category_group.save
-        expect(category_group.url).to eq 'category-group-2'
+        expect(category_group.slug).to eq 'category-group-2'
       end
     end
   end

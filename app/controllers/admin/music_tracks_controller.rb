@@ -1,8 +1,11 @@
 class Admin::MusicTracksController < ApplicationController
+  include FindBySlugConcerns
   include LoadableForMusicTrack
+  include PreviewSlugConcerns
   layout 'admin'
   before_action :load_categories, except: [:show, :destroy]
   before_action :load_music_track, except: [:index, :new, :create]
+  helper_method :custom_music_track_path
 
   def index
     clean_publish_false_param
@@ -14,8 +17,7 @@ class Admin::MusicTracksController < ApplicationController
 
   def new
     if params[:category]
-      category = Category.find_by url: params[:category]
-      raise 'Category not found.' unless category.present?
+      category = find_category_by_slug params[:category]
       @music_track = MusicTrack.new category: category
     else
       @music_track = MusicTrack.new
@@ -66,8 +68,12 @@ class Admin::MusicTracksController < ApplicationController
     if params[:continue_editing]
       redirect_to edit_admin_music_track_path(@music_track)
     else
-      redirect_to @music_track
+      redirect_to custom_music_track_path(@music_track)
     end
+  end
+
+  def custom_music_track_path(music_track)
+    custom_path(music_track, music_track_path(music_track))
   end
 
   def make_current_user_a_contributor
