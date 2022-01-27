@@ -26,6 +26,7 @@
       }
     )
   %>
+  <%= render partial: 'alternative_slug', locals: { f: f } %>
   <%= render partial: 'summary', locals: { f: f } %>
   <%= render partial: 'admin/shared/form/content', locals: { f: f } %>
   <%=

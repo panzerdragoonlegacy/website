@@ -75,6 +75,7 @@ class NewsEntryPolicy < ApplicationPolicy
   def attributes_except_contributor_profile_id_and_publish
     [
       :name,
+      :alternative_slug,
       :news_entry_picture,
       :summary,
       :content,

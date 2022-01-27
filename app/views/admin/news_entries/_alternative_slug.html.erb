@@ -1,0 +1,11 @@
+<div class="form-group">
+  <%= f.label :alternative_slug, 'Alternative Slug' %>
+  <%= f.text_field :alternative_slug, class: 'form-control' %>
+  <%= render(
+    partial: 'admin/shared/form/info',
+    locals: {
+      info: 'An alternative slug that can be used to reach the news entry if ' \
+        'the slug has changed after publication. Used to prevent broken links.'
+    }
+  ) %>
+</div>

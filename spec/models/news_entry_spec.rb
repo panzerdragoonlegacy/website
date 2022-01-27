@@ -4,6 +4,7 @@ RSpec.describe NewsEntry, type: :model do
   describe 'fields' do
     it { is_expected.to respond_to(:name) }
     it { is_expected.to respond_to(:slug) }
+    it { is_expected.to respond_to(:alternative_slug) }
     it { is_expected.to respond_to(:content) }
     it { is_expected.to respond_to(:summary) }
     it { is_expected.to respond_to(:news_entry_picture) }
@@ -25,6 +26,9 @@ RSpec.describe NewsEntry, type: :model do
     it { is_expected.to validate_uniqueness_of(:name) }
     it do
       is_expected.to validate_length_of(:name).is_at_least(2).is_at_most(150)
+    end
+    it do
+      is_expected.to validate_length_of(:alternative_slug).is_at_most(250)
     end
     it do
       is_expected.to validate_length_of(:summary).is_at_most(250)

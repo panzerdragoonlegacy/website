@@ -6,7 +6,9 @@ module LoadableForNewsEntry
   private
 
   def load_news_entry
-    @news_entry = NewsEntry.find_by slug: previewless_slug(params[:id])
+    slug = previewless_slug(params[:id])
+    @news_entry = NewsEntry.find_by slug: slug
+    @news_entry = NewsEntry.find_by alternative_slug: slug unless @news_entry
     authorize @news_entry
   end
 
