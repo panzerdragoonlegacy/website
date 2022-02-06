@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_paper_trail_whodunnit
   before_action :sagas_for_left_nav
+  after_action :conditionally_set_session_cookie
 
   private
 
@@ -30,6 +31,17 @@ class ApplicationController < ActionController::Base
 
   def sagas_for_left_nav
     @sagas_for_left_nav = policy_scope Saga.order(:sequence_number)
+  end
+
+  # Disable the session cookie unless you were going to a page with Devise (e.g.
+  # to sign up or log in, which will require a non-tracking cookie for CSRF
+  # protection) or are already signed in. Adapted from Ryan Baumann's post:
+  # https://ryanfb.github.io/etc/2021/08/29/going_cookie-free_with_rails.html
+  def conditionally_set_session_cookie
+    unless user_signed_in?
+      cookies.delete(Rails.application.config.session_options[:key])
+    end
+    request.session_options[:skip] = !(user_signed_in? || devise_controller?)
   end
 
   # This allows all records to be displayed in a Ransack search when 'Drafts
