@@ -56,8 +56,8 @@ jobs:
       #     name: Running Stylelint
       #     command: npx stylelint "**/*.scss"
       # - run:
-      #     name: Running Standard
-      #     command: npx standard
+      #     name: Running ESLint
+      #     command: npx eslint "**/*.js"
   test:
     docker:
       - *default_docker_ruby_executor

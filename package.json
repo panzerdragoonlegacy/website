@@ -13,6 +13,10 @@
     "webpack-cli": "^3.3.12"
   },
   "devDependencies": {
+    "eslint": "^8.8.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
     "prettier": "2.5.1",
     "stylelint": "^14.3.0",
     "stylelint-config-prettier-scss": "^0.0.1",
