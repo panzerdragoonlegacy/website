@@ -56,7 +56,7 @@ Step-by-step instructions for setting up a development environment for the site.
    exit
    ```
 
-10. Open http://localhost:3000 to log in as the admin user.
+10. Open http://localhost:3000/admin to log in as the admin user.
 
 11. For automatic reloading of webpack-dev-server, open a seperate tab and run:
 
