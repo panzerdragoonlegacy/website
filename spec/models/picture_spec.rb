@@ -38,23 +38,22 @@ RSpec.describe Picture, type: :model do
     end
     it { is_expected.to validate_presence_of(:description) }
     it do
-      is_expected.to validate_length_of(:description).is_at_least(2)
+      is_expected.to validate_length_of(:description)
+        .is_at_least(2)
         .is_at_most(250)
     end
     it { is_expected.to validate_presence_of(:sequence_number) }
     it do
       is_expected.to validate_numericality_of(:sequence_number)
-        .is_greater_than_or_equal_to(0).is_less_than_or_equal_to(999)
+        .is_greater_than_or_equal_to(0)
+        .is_less_than_or_equal_to(999)
     end
     it { is_expected.to validate_presence_of(:category) }
 
     describe 'validation of contributor profiles' do
       context 'picture has less than one contributor profile' do
         let(:picture) do
-          FactoryBot.build(
-            :valid_picture,
-            contributor_profiles: []
-          )
+          FactoryBot.build(:valid_picture, contributor_profiles: [])
         end
 
         it 'should not be valid' do
@@ -83,8 +82,9 @@ RSpec.describe Picture, type: :model do
     it { is_expected.to have_attached_file(:picture) }
     it { is_expected.to validate_attachment_presence(:picture) }
     it do
-      is_expected.to validate_attachment_content_type(:picture)
-        .allowing('image/jpeg')
+      is_expected.to validate_attachment_content_type(:picture).allowing(
+        'image/jpeg'
+      )
     end
     it do
       is_expected.to validate_attachment_size(:picture).less_than(25.megabytes)
@@ -120,9 +120,9 @@ RSpec.describe Picture, type: :model do
           it 'does not delete the specified picture to replace' do
             @replacement_picture.publish = false
             @replacement_picture.save
-            expect(
-              Picture.where(id: @picture_to_replace_id)
-            ).to eq([@picture_to_replace])
+            expect(Picture.where(id: @picture_to_replace_id)).to eq(
+              [@picture_to_replace]
+            )
           end
         end
       end
@@ -131,9 +131,7 @@ RSpec.describe Picture, type: :model do
 
   describe 'slug' do
     context 'creating a new picture' do
-      let(:picture) do
-        FactoryBot.build :valid_picture, name: 'Picture 1'
-      end
+      let(:picture) { FactoryBot.build :valid_picture, name: 'Picture 1' }
 
       it 'sets the slug to be a parameterised version of the id + name' do
         picture.save
@@ -142,12 +140,10 @@ RSpec.describe Picture, type: :model do
     end
 
     context 'updating a picture' do
-      let(:picture) do
-        FactoryBot.create :valid_picture, name: 'Picture 1'
-      end
+      let(:picture) { FactoryBot.create :valid_picture, name: 'Picture 1' }
 
       it 'sets the slug to be a parameterised version of the id + updated ' \
-        'name' do
+           'name' do
         picture.name = 'Picture 2'
         picture.save
         expect(picture.to_param).to eq picture.id.to_s + '-picture-2'

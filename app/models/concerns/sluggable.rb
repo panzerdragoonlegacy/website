@@ -12,6 +12,6 @@ module Sluggable
   end
 
   def generate_slug(sluggable_string)
-    sluggable_string.tr("'", '').tr("’", '').parameterize
+    sluggable_string.tr("'", '').tr('’', '').parameterize
   end
 end

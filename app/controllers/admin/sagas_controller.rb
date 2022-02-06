@@ -1,8 +1,8 @@
 class Admin::SagasController < ApplicationController
   include LoadableForSaga
   layout 'admin'
-  before_action :load_tags, except: [:index, :destroy]
-  before_action :load_saga, except: [:index, :new, :create]
+  before_action :load_tags, except: %i[index destroy]
+  before_action :load_saga, except: %i[index new create]
 
   def index
     @q = Saga.order(:sequence_number).ransack(params[:q])
@@ -42,11 +42,7 @@ class Admin::SagasController < ApplicationController
   private
 
   def saga_params
-    params.require(:saga).permit(
-      :tag_id,
-      :sequence_number,
-      :name
-    )
+    params.require(:saga).permit(:tag_id, :sequence_number, :name)
   end
 
   def redirect_to_saga

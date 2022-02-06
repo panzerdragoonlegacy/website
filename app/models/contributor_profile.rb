@@ -74,8 +74,12 @@ class ContributorProfile < ApplicationRecord
 
   validates_attachment(
     :avatar,
-    content_type: { content_type: 'image/jpeg' },
-    size: { in: 0..5.megabytes }
+    content_type: {
+      content_type: 'image/jpeg'
+    },
+    size: {
+      in: 0..5.megabytes
+    }
   )
 
   before_post_process :avatar_filename
@@ -96,8 +100,11 @@ class ContributorProfile < ApplicationRecord
 
   def strip_discourse_url_to_just_username
     if self.discourse_username
-      self.discourse_username = self.discourse_username
-        .sub('https://discuss.panzerdragoonlegacy.com/u/', '').chomp('/')
+      self.discourse_username =
+        self
+          .discourse_username
+          .sub('https://discuss.panzerdragoonlegacy.com/u/', '')
+          .chomp('/')
     end
   end
 

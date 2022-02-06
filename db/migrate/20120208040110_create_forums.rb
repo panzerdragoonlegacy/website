@@ -3,7 +3,7 @@ class CreateForums < ActiveRecord::Migration
     create_table :forums do |t|
       t.string :name
       t.string :url
-      t.integer :number, :default => 1
+      t.integer :number, default: 1
       t.string :description
       t.string :forum_picture_file_name
       t.string :forum_picture_content_type

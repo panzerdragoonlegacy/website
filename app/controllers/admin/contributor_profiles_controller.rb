@@ -2,7 +2,7 @@ class Admin::ContributorProfilesController < ApplicationController
   include LoadableForContributorProfile
   include PreviewSlugConcerns
   layout 'admin'
-  before_action :load_contributor_profile, except: [:index, :new, :create]
+  before_action :load_contributor_profile, except: %i[index new create]
   helper_method :custom_contributor_profile_path
 
   def index
@@ -47,9 +47,12 @@ class Admin::ContributorProfilesController < ApplicationController
   private
 
   def contributor_profile_params
-    params.require(:contributor_profile).permit(
-      policy(@contributor_profile || :contributor_profile).permitted_attributes
-    )
+    params
+      .require(:contributor_profile)
+      .permit(
+        policy(@contributor_profile || :contributor_profile)
+          .permitted_attributes
+      )
   end
 
   def redirect_to_contributor_profile
@@ -62,7 +65,8 @@ class Admin::ContributorProfilesController < ApplicationController
 
   def custom_contributor_profile_path(contributor_profile)
     custom_path(
-      contributor_profile, contributor_profile_path(contributor_profile)
+      contributor_profile,
+      contributor_profile_path(contributor_profile)
     )
   end
 end

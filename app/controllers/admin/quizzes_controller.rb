@@ -2,8 +2,8 @@ class Admin::QuizzesController < ApplicationController
   include LoadableForQuiz
   include PreviewSlugConcerns
   layout 'admin'
-  before_action :load_categories, except: [:show, :destroy]
-  before_action :load_quiz, except: [:index, :new, :create]
+  before_action :load_categories, except: %i[show destroy]
+  before_action :load_quiz, except: %i[index new create]
   helper_method :custom_quiz_path
 
   def index
@@ -48,9 +48,7 @@ class Admin::QuizzesController < ApplicationController
   private
 
   def quiz_params
-    params.require(:quiz).permit(
-      policy(@quiz || :quiz).permitted_attributes
-    )
+    params.require(:quiz).permit(policy(@quiz || :quiz).permitted_attributes)
   end
 
   def redirect_to_quiz
@@ -64,11 +62,11 @@ class Admin::QuizzesController < ApplicationController
   def custom_quiz_path(quiz)
     custom_path(quiz, quiz_path(quiz))
   end
-  
+
   def make_current_user_a_contributor
     unless current_user.contributor_profile_id.to_s.in?(
-      params[:quiz][:contributor_profile_ids]
-    )
+             params[:quiz][:contributor_profile_ids]
+           )
       params[:quiz][:contributor_profile_ids] <<
         current_user.contributor_profile_id
     end

@@ -17,9 +17,7 @@ describe UserPolicy do
     end
 
     it do
-      is_expected.to forbid_actions(
-        [:show, :new, :create, :edit, :update, :destroy]
-      )
+      is_expected.to forbid_actions(%i[show new create edit update destroy])
     end
   end
 end

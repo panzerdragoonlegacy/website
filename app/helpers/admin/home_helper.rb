@@ -40,15 +40,9 @@ module Admin::HomeHelper
   end
 
   def draft_count
-    draft_album_count +
-    draft_category_count +
-    draft_contributor_profile_count +
-    draft_news_entry_count +
-    draft_page_count +
-    draft_picture_count +
-    draft_music_track_count +
-    draft_video_count +
-    draft_download_count +
-    draft_quiz_count
+    draft_album_count + draft_category_count + draft_contributor_profile_count +
+      draft_news_entry_count + draft_page_count + draft_picture_count +
+      draft_music_track_count + draft_video_count + draft_download_count +
+      draft_quiz_count
   end
 end

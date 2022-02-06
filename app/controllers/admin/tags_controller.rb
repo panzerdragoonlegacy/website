@@ -1,7 +1,7 @@
 class Admin::TagsController < ApplicationController
   include LoadableForTag
   layout 'admin'
-  before_action :load_tag, except: [:index, :new, :create]
+  before_action :load_tag, except: %i[index new create]
 
   def index
     @q = Tag.order(:name).ransack(params[:q])
@@ -35,18 +35,13 @@ class Admin::TagsController < ApplicationController
 
   def destroy
     @tag.destroy
-    redirect_to(
-      admin_tags_path,
-      notice: 'Successfully destroyed tag.'
-    )
+    redirect_to(admin_tags_path, notice: 'Successfully destroyed tag.')
   end
 
   private
 
   def tag_params
-    params.require(:tag).permit(
-      policy(@tag || :tag).permitted_attributes
-    )
+    params.require(:tag).permit(policy(@tag || :tag).permitted_attributes)
   end
 
   def redirect_to_tag

@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users, path: "", path_names: {
-    sign_in: "log-in",
-    sign_out: "log-out",
-    edit: "edit-profile"
-  }
+  devise_for :users,
+             path: '',
+             path_names: {
+               sign_in: 'log-in',
+               sign_out: 'log-out',
+               edit: 'edit-profile'
+             }
 
   namespace :admin do
     get '/', to: 'home#index'
@@ -56,7 +58,7 @@ Rails.application.routes.draw do
   end
 
   resources :news_entries, path: 'news'
-  resources :literature, only: %i(index show) do
+  resources :literature, only: %i[index show] do
     resources :chapters, only: :show
   end
   resources :pictures

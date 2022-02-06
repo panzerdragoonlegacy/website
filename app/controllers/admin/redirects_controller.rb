@@ -1,7 +1,7 @@
 class Admin::RedirectsController < ApplicationController
   include LoadableForRedirect
   layout 'admin'
-  before_action :load_redirect, except: [:index, :new, :create]
+  before_action :load_redirect, except: %i[index new create]
 
   def index
     @q = Redirect.order(created_at: :desc).ransack(params[:q])
@@ -44,9 +44,9 @@ class Admin::RedirectsController < ApplicationController
   private
 
   def redirect_params
-    params.require(:redirect).permit(
-      policy(@redirect || :redirect).permitted_attributes
-    )
+    params
+      .require(:redirect)
+      .permit(policy(@redirect || :redirect).permitted_attributes)
   end
 
   def redirect_to_redirect

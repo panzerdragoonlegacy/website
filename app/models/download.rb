@@ -30,13 +30,21 @@ class Download < ApplicationRecord
   validates_attachment(
     :download,
     presence: true,
-    content_type: { content_type: 'application/zip' },
-    size: { in: 0..500.megabytes }
+    content_type: {
+      content_type: 'application/zip'
+    },
+    size: {
+      in: 0..500.megabytes
+    }
   )
   validates_attachment(
     :download_picture,
-    content_type: { content_type: 'image/jpeg' },
-    size: { in: 0..5.megabytes }
+    content_type: {
+      content_type: 'image/jpeg'
+    },
+    size: {
+      in: 0..5.megabytes
+    }
   )
 
   before_save :set_published_at

@@ -9,7 +9,7 @@ class CreateDragoons < ActiveRecord::Migration
       t.string :perishable_token
       t.datetime :perishable_token_expiry
       t.string :time_zone
-      t.string :role, :default => :guest.to_s
+      t.string :role, default: :guest.to_s
       t.string :photo_file_name
       t.string :photo_content_type
       t.integer :photo_file_size

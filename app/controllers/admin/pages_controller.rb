@@ -3,9 +3,9 @@ class Admin::PagesController < ApplicationController
   include LoadableForPage
   include PreviewSlugConcerns
   layout 'admin'
-  before_action :load_parent_pages, except: [:index, :destroy]
+  before_action :load_parent_pages, except: %i[index destroy]
   before_action :load_categories, except: [:destroy]
-  before_action :load_page, except: [:index, :new, :create]
+  before_action :load_page, except: %i[index new create]
   helper_method :custom_page_path
 
   def index
@@ -82,19 +82,18 @@ class Admin::PagesController < ApplicationController
 
   def make_current_user_a_contributor
     unless current_user.contributor_profile_id.to_s.in?(
-      params[:page][:contributor_profile_ids]
-    )
+             params[:page][:contributor_profile_ids]
+           )
       params[:page][:contributor_profile_ids] <<
         current_user.contributor_profile_id
     end
   end
 
   def load_categories
-    @categories = CategoryPolicy::Scope.new(
-      current_user,
-      Category.where(
-        "category_type = 'literature'"
-      ).order(:name)
-    ).resolve
+    @categories =
+      CategoryPolicy::Scope.new(
+        current_user,
+        Category.where("category_type = 'literature'").order(:name)
+      ).resolve
   end
 end

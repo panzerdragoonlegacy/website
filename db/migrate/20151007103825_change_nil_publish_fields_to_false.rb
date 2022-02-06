@@ -96,7 +96,7 @@ class ChangeNilPublishFieldsToFalse < ActiveRecord::Migration
         video.publish = false
         video.save
       end
-    end    
+    end
   end
 
   def down

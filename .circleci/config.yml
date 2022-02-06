@@ -2,7 +2,7 @@ version: 2.1
 
 references:
   default_docker_ruby_executor: &default_docker_ruby_executor
-    image: circleci/ruby:3.0.3
+    image: cimg/ruby:3.0.3-node
     environment:
       BUNDLE_JOBS: 3
       BUNDLE_RETRY: 3
@@ -49,9 +49,9 @@ jobs:
       - run:
           name: Running Brakeman
           command: bundle exec brakeman -w3 -q -o /dev/stderr
-      # - run:
-      #     name: Running Rubocop
-      #     command: bundle exec rubocop
+      - run:
+          name: Running Prettier
+          command: npx prettier --check .
       # - run:
       #     name: Running Standard
       #     command: npx standard

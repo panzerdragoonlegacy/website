@@ -41,8 +41,12 @@ class Picture < ApplicationRecord
   validates_attachment(
     :picture,
     presence: true,
-    content_type: { content_type: 'image/jpeg' },
-    size: { in: 0..25.megabytes }
+    content_type: {
+      content_type: 'image/jpeg'
+    },
+    size: {
+      in: 0..25.megabytes
+    }
   )
 
   before_save :set_published_at

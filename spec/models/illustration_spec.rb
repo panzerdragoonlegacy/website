@@ -15,12 +15,14 @@ RSpec.describe Illustration, type: :model do
     it { is_expected.to have_attached_file(:illustration) }
     it { is_expected.to validate_attachment_presence(:illustration) }
     it do
-      is_expected.to validate_attachment_content_type(:illustration)
-        .allowing('image/jpeg')
+      is_expected.to validate_attachment_content_type(:illustration).allowing(
+        'image/jpeg'
+      )
     end
     it do
-      is_expected.to validate_attachment_size(:illustration)
-        .less_than(5.megabytes)
+      is_expected.to validate_attachment_size(:illustration).less_than(
+        5.megabytes
+      )
     end
   end
 

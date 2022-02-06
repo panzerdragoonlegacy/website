@@ -5,7 +5,8 @@ FactoryBot.define do
       content { 'Test Content' }
       news_entry_picture do
         Rack::Test::UploadedFile.new(
-          'spec/fixtures/news-entry-picture.jpg', 'image/jpeg'
+          'spec/fixtures/news-entry-picture.jpg',
+          'image/jpeg'
         )
       end
 

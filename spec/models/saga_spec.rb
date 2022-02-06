@@ -24,15 +24,14 @@ RSpec.describe Saga, type: :model do
     it { is_expected.to validate_presence_of(:sequence_number) }
     it do
       is_expected.to validate_numericality_of(:sequence_number)
-        .is_greater_than(0).is_less_than(100)
+        .is_greater_than(0)
+        .is_less_than(100)
     end
   end
 
   describe 'slug' do
     context 'creating a new saga' do
-      let(:saga) do
-        FactoryBot.build :valid_saga, name: 'Saga 1'
-      end
+      let(:saga) { FactoryBot.build :valid_saga, name: 'Saga 1' }
 
       it 'generates a slug that is a parameterised version of the name' do
         saga.save
@@ -41,9 +40,7 @@ RSpec.describe Saga, type: :model do
     end
 
     context 'updating a saga' do
-      let(:saga) do
-        FactoryBot.create :valid_saga, name: 'Saga 1'
-      end
+      let(:saga) { FactoryBot.create :valid_saga, name: 'Saga 1' }
 
       it 'synchronises the slug with the updated name' do
         saga.name = 'Saga 2'

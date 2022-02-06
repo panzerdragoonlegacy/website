@@ -12,12 +12,7 @@ class Tag < ApplicationRecord
     source: :taggable,
     source_type: 'NewsEntry'
   )
-  has_many(
-    :pages,
-    through: :taggings,
-    source: :taggable,
-    source_type: 'Page'
-  )
+  has_many(:pages, through: :taggings, source: :taggable, source_type: 'Page')
   has_many(
     :pictures,
     through: :taggings,
@@ -30,24 +25,14 @@ class Tag < ApplicationRecord
     source: :taggable,
     source_type: 'MusicTrack'
   )
-  has_many(
-    :videos,
-    through: :taggings,
-    source: :taggable,
-    source_type: 'Video'
-  )
+  has_many(:videos, through: :taggings, source: :taggable, source_type: 'Video')
   has_many(
     :downloads,
     through: :taggings,
     source: :taggable,
     source_type: 'Download'
   )
-  has_many(
-    :quizzes,
-    through: :taggings,
-    source: :taggable,
-    source_type: 'Quiz'
-  )
+  has_many(:quizzes, through: :taggings, source: :taggable, source_type: 'Quiz')
 
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
 
@@ -64,8 +49,12 @@ class Tag < ApplicationRecord
 
   validates_attachment(
     :tag_picture,
-    content_type: { content_type: 'image/jpeg' },
-    size: { in: 0..5.megabytes }
+    content_type: {
+      content_type: 'image/jpeg'
+    },
+    size: {
+      in: 0..5.megabytes
+    }
   )
 
   before_save :set_slug

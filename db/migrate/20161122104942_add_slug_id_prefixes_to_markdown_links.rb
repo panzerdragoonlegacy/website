@@ -4,7 +4,7 @@ class AddSlugIdPrefixesToMarkdownLinks < ActiveRecord::Migration
       Download.all.each do |download|
         if news_entry.content.include? "](/downloads/#{download.url})"
           news_entry.content.gsub!(
-            /\(\/downloads\/#{download.url}\)/,
+            %r{\(\/downloads\/#{download.url}\)},
             "(/downloads/#{download.id.to_s}-#{download.url})"
           )
           news_entry.save
@@ -14,7 +14,7 @@ class AddSlugIdPrefixesToMarkdownLinks < ActiveRecord::Migration
       Picture.all.each do |picture|
         if news_entry.content.include? "](/pictures/#{picture.url})"
           news_entry.content.gsub!(
-            /\(\/pictures\/#{picture.url}\)/,
+            %r{\(\/pictures\/#{picture.url}\)},
             "(/pictures/#{picture.id.to_s}-#{picture.url})"
           )
           news_entry.save
@@ -32,7 +32,7 @@ class AddSlugIdPrefixesToMarkdownLinks < ActiveRecord::Migration
       MusicTrack.all.each do |music_track|
         if news_entry.content.include? "](/music/#{music_track.url})"
           news_entry.content.gsub!(
-            /\(\/music\/#{music_track.url}\)/,
+            %r{\(\/music\/#{music_track.url}\)},
             "(/music/#{music_track.id.to_s}-#{music_track.url})"
           )
           news_entry.save
@@ -50,7 +50,7 @@ class AddSlugIdPrefixesToMarkdownLinks < ActiveRecord::Migration
       Resource.all.each do |resource|
         if news_entry.content.include? "](/resources/#{resource.url})"
           news_entry.content.gsub!(
-            /\(\/resources\/#{resource.url}\)/,
+            %r{\(\/resources\/#{resource.url}\)},
             "(/resources/#{resource.id.to_s}-#{resource.url})"
           )
           news_entry.save
@@ -60,7 +60,7 @@ class AddSlugIdPrefixesToMarkdownLinks < ActiveRecord::Migration
       Video.all.each do |video|
         if news_entry.content.include? "](/videos/#{video.url})"
           news_entry.content.gsub!(
-            /\(\/videos\/#{video.url}\)/,
+            %r{\(\/videos\/#{video.url}\)},
             "(/videos/#{video.id.to_s}-#{video.url})"
           )
           news_entry.save
@@ -89,10 +89,10 @@ class AddSlugIdPrefixesToMarkdownLinks < ActiveRecord::Migration
         end
 
         if news_entry.content.include?(
-          "](/videos/#{video.id.to_s}-#{video.url})"
-        )
+             "](/videos/#{video.id.to_s}-#{video.url})"
+           )
           news_entry.content.gsub!(
-            /\(\/videos\/#{video.id.to_s}-#{video.url}\)/,
+            %r{\(\/videos\/#{video.id.to_s}-#{video.url}\)},
             "(/videos/#{video.url})"
           )
           news_entry.save
@@ -101,10 +101,10 @@ class AddSlugIdPrefixesToMarkdownLinks < ActiveRecord::Migration
 
       Resource.all.each do |resource|
         if news_entry.content.include?(
-          "](/resources/#{resource.id.to_s}-#{resource.url})"
-        )
+             "](/resources/#{resource.id.to_s}-#{resource.url})"
+           )
           news_entry.content.gsub!(
-            /\(\/resources\/#{resource.id.to_s}-#{resource.url}\)/,
+            %r{\(\/resources\/#{resource.id.to_s}-#{resource.url}\)},
             "(/resources/#{resource.url})"
           )
           news_entry.save
@@ -113,8 +113,8 @@ class AddSlugIdPrefixesToMarkdownLinks < ActiveRecord::Migration
 
       MusicTrack.all.each do |music_track|
         if news_entry.content.include?(
-          "![](#{music_track.id.to_s}-#{music_track.url}.jpg)"
-        )
+             "![](#{music_track.id.to_s}-#{music_track.url}.jpg)"
+           )
           news_entry.content.gsub!(
             /\(#{music_track.id.to_s}-#{music_track.url}.mp3\)/,
             "(#{music_track.url}.mp3)"
@@ -123,10 +123,10 @@ class AddSlugIdPrefixesToMarkdownLinks < ActiveRecord::Migration
         end
 
         if news_entry.content.include?(
-          "](/music/#{music_track.id.to_s}-#{music_track.url})"
-        )
+             "](/music/#{music_track.id.to_s}-#{music_track.url})"
+           )
           news_entry.content.gsub!(
-            /\(\/music\/#{music_track.id.to_s}-#{music_track.url}\)/,
+            %r{\(\/music\/#{music_track.id.to_s}-#{music_track.url}\)},
             "(/music/#{music_track.url})"
           )
           news_entry.save
@@ -135,8 +135,8 @@ class AddSlugIdPrefixesToMarkdownLinks < ActiveRecord::Migration
 
       Picture.all.each do |picture|
         if news_entry.content.include?(
-          "![](#{picture.id.to_s}-#{picture.url}.jpg)"
-        )
+             "![](#{picture.id.to_s}-#{picture.url}.jpg)"
+           )
           news_entry.content.gsub!(
             /\(#{picture.id.to_s}-#{picture.url}.jpg\)/,
             "(#{picture.url}.jpg)"
@@ -145,10 +145,10 @@ class AddSlugIdPrefixesToMarkdownLinks < ActiveRecord::Migration
         end
 
         if news_entry.content.include?(
-          "](/pictures/#{picture.id.to_s}-#{picture.url})"
-        )
+             "](/pictures/#{picture.id.to_s}-#{picture.url})"
+           )
           news_entry.content.gsub!(
-            /\(\/pictures\/#{picture.id.to_s}-#{picture.url}\)/,
+            %r{\(\/pictures\/#{picture.id.to_s}-#{picture.url}\)},
             "(/pictures/#{picture.url})"
           )
           news_entry.save
@@ -157,10 +157,10 @@ class AddSlugIdPrefixesToMarkdownLinks < ActiveRecord::Migration
 
       Download.all.each do |download|
         if news_entry.content.include?(
-          "](/downloads/#{download.id.to_s}-#{download.url})"
-        )
+             "](/downloads/#{download.id.to_s}-#{download.url})"
+           )
           news_entry.content.gsub!(
-            /\(\/downloads\/#{download.id.to_s}-#{download.url}\)/,
+            %r{\(\/downloads\/#{download.id.to_s}-#{download.url}\)},
             "(/downloads/#{download.url})"
           )
           news_entry.save

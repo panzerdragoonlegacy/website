@@ -2,8 +2,8 @@ class Admin::DownloadsController < ApplicationController
   include LoadableForDownload
   include PreviewSlugConcerns
   layout 'admin'
-  before_action :load_categories, except: [:show, :destroy]
-  before_action :load_download, except: [:index, :new, :create]
+  before_action :load_categories, except: %i[show destroy]
+  before_action :load_download, except: %i[index new create]
   helper_method :custom_download_path
 
   def index
@@ -53,9 +53,9 @@ class Admin::DownloadsController < ApplicationController
   private
 
   def download_params
-    params.require(:download).permit(
-      policy(@download || :download).permitted_attributes
-    )
+    params
+      .require(:download)
+      .permit(policy(@download || :download).permitted_attributes)
   end
 
   def redirect_to_download
@@ -72,8 +72,8 @@ class Admin::DownloadsController < ApplicationController
 
   def make_current_user_a_contributor
     unless current_user.contributor_profile_id.to_s.in?(
-      params[:download][:contributor_profile_ids]
-    )
+             params[:download][:contributor_profile_ids]
+           )
       params[:download][:contributor_profile_ids] <<
         current_user.contributor_profile_id
     end

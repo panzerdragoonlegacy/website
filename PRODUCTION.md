@@ -43,15 +43,15 @@ enabled (for Let's Encrypt).
 
    `sudo vim /etc/ssh/sshd_config`
 
-8. Add the following line and save the file:
+9. Add the following line and save the file:
 
    `PasswordAuthentication no`
 
-9. Restart the SSH service to apply the change:
+10. Restart the SSH service to apply the change:
 
-   `sudo service ssh restart`
+    `sudo service ssh restart`
 
-10. (On local machine) Test that key based authentication works.
+11. (On local machine) Test that key based authentication works.
 
     `ssh kyle@servername`
 
@@ -71,11 +71,11 @@ enabled (for Let's Encrypt).
 
    `sudo ufw allow 443`
 
-3. Enable to Firewall
+4. Enable to Firewall
 
    `sudo ufw enable`
 
-4. Check that SSH connections and port 80 and 443 are allowed:
+5. Check that SSH connections and port 80 and 443 are allowed:
 
    `sudo ufw status`
 
@@ -259,39 +259,39 @@ enabled (for Let's Encrypt).
 
    `sudo docker exec -it database psql -U postgres`
 
-2. Create a user for the webapp that matches what is in the backup:
+1. Create a user for the webapp that matches what is in the backup:
 
    `CREATE USER panzerdragoonlegacy WITH ENCRYPTED PASSWORD 'PASSWORDHERE';`
 
-3. Create a database (drop old database first if required):
+1. Create a database (drop old database first if required):
 
    `DROP DATABASE panzerdragoonlegacy;` (if required)
 
    `CREATE DATABASE panzerdragoonlegacy;`
 
-4. Give the user you created full access to the database:
+1. Give the user you created full access to the database:
 
    `GRANT ALL PRIVILEGES ON DATABASE panzerdragoonlegacy TO panzerdragoonlegacy;`
 
-5. Set the owner of the database to the user:
+1. Set the owner of the database to the user:
 
    `ALTER DATABASE panzerdragoonlegacy OWNER TO panzerdragoonlegacy;`
 
-6. Quit postgres:
+1. Quit postgres:
 
    `\q`
 
-7. Restore the database from a backup.sql file:
+1. Restore the database from a backup.sql file:
 
    `cat ~/backup.sql | sudo docker exec -i database psql -U panzerdragoonlegacy`
 
-8. Restart the containers
+1. Restart the containers
 
    `sudo docker-compose -f docker-compose.prod.yml down`
 
    `sudo docker-compose -f docker-compose.prod.yml up -d`
 
-9. Run any outstanding migrations on the restored database
+1. Run any outstanding migrations on the restored database
 
    `sudo docker-compose -f docker-compose.prod.yml exec app bin/rails db:migrate`
 

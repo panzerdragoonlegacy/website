@@ -1,13 +1,12 @@
 class Admin::UsersController < ApplicationController
   layout 'admin'
-  before_action :load_contributor_profiles, except: [:show, :destroy]
-  before_action :load_user, except: [:index, :new, :create]
+  before_action :load_contributor_profiles, except: %i[show destroy]
+  before_action :load_user, except: %i[index new create]
 
   def index
     @q = User.order(:email).ransack(params[:q])
-    @users = policy_scope(
-      @q.result.includes(:contributor_profile).page(params[:page])
-    )
+    @users =
+      policy_scope(@q.result.includes(:contributor_profile).page(params[:page]))
   end
 
   def new
@@ -39,18 +38,17 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(
-      :email,
-      :contributor_profile_id,
-      :administrator
-    )
+    params
+      .require(:user)
+      .permit(:email, :contributor_profile_id, :administrator)
   end
 
   def load_contributor_profiles
-    @contributor_profiles = ContributorProfilePolicy::Scope.new(
-      current_user,
-      ContributorProfile.order(:name)
-    ).resolve
+    @contributor_profiles =
+      ContributorProfilePolicy::Scope.new(
+        current_user,
+        ContributorProfile.order(:name)
+      ).resolve
   end
 
   def load_user
@@ -66,9 +64,10 @@ class Admin::UsersController < ApplicationController
 
   def attempt_to_create_user(password)
     if @user.save
-      flash[:notice] = 'Successfully created user. A confirmation email was ' \
-        "sent to #{@user.email}. The random password #{password} was " \
-        'generated which you can optionally provide to the user.'
+      flash[:notice] =
+        'Successfully created user. A confirmation email was ' \
+          "sent to #{@user.email}. The random password #{password} was " \
+          'generated which you can optionally provide to the user.'
       redirect_to admin_users_path
     else
       render :new

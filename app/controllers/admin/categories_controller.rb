@@ -2,17 +2,16 @@ class Admin::CategoriesController < ApplicationController
   include LoadableForCategory
   include PreviewSlugConcerns
   layout 'admin'
-  before_action :load_category_groups, except: [:index, :destroy]
-  before_action :load_sagas, only: [:new, :edit]
-  before_action :load_category, except: [:index, :new, :create, :edit]
+  before_action :load_category_groups, except: %i[index destroy]
+  before_action :load_sagas, only: %i[new edit]
+  before_action :load_category, except: %i[index new create edit]
   helper_method :custom_category_path
 
   def index
     clean_publish_false_param
     @q = Category.order(:name).ransack(params[:q])
-    @categories = policy_scope(
-      @q.result.includes(:category_group).page(params[:page])
-    )
+    @categories =
+      policy_scope(@q.result.includes(:category_group).page(params[:page]))
   end
 
   def new
@@ -60,9 +59,9 @@ class Admin::CategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(
-      policy(@category || :category).permitted_attributes
-    )
+    params
+      .require(:category)
+      .permit(policy(@category || :category).permitted_attributes)
   end
 
   def redirect_to_category

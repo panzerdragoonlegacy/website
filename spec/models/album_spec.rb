@@ -42,19 +42,15 @@ RSpec.describe Album, type: :model do
     end
     it { is_expected.to validate_presence_of(:description) }
     it do
-      is_expected.to validate_length_of(:description).is_at_least(2)
+      is_expected.to validate_length_of(:description)
+        .is_at_least(2)
         .is_at_most(250)
     end
     it { is_expected.to validate_presence_of(:category) }
 
     describe 'validation of contributor profiles' do
       context 'album has less than one contributor profile' do
-        let(:album) do
-          FactoryBot.build(
-            :valid_album,
-            contributor_profiles: []
-          )
-        end
+        let(:album) { FactoryBot.build(:valid_album, contributor_profiles: []) }
 
         it 'should not be valid' do
           expect(album).not_to be_valid
@@ -110,9 +106,7 @@ RSpec.describe Album, type: :model do
 
   describe 'slug' do
     context 'creating a new album' do
-      let(:album) do
-        FactoryBot.build :valid_album, name: 'Album 1'
-      end
+      let(:album) { FactoryBot.build :valid_album, name: 'Album 1' }
 
       it 'sets the slug to be a parameterised version of the id + name' do
         album.save
@@ -121,12 +115,10 @@ RSpec.describe Album, type: :model do
     end
 
     context 'updating an album' do
-      let(:album) do
-        FactoryBot.create :valid_album, name: 'Album 1'
-      end
+      let(:album) { FactoryBot.create :valid_album, name: 'Album 1' }
 
       it 'sets the slug to be a parameterised version of the id + updated ' \
-        'name' do
+           'name' do
         album.name = 'Album 2'
         album.save
         expect(album.to_param).to eq album.id.to_s + '-album-2'

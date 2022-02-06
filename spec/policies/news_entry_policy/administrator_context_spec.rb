@@ -24,7 +24,7 @@ describe NewsEntryPolicy do
       expect(resolved_scope).to include(news_entry)
     end
 
-    it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+    it { is_expected.to permit_actions(%i[show edit update destroy]) }
     it { is_expected.to permit_mass_assignment_of(:publish) }
     it { is_expected.to permit_mass_assignment_of(:contributor_profile_id) }
   end
@@ -36,7 +36,7 @@ describe NewsEntryPolicy do
       expect(resolved_scope).to include(news_entry)
     end
 
-    it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+    it { is_expected.to permit_actions(%i[show edit update destroy]) }
     it { is_expected.to permit_mass_assignment_of(:publish) }
     it { is_expected.to permit_mass_assignment_of(:contributor_profile_id) }
   end

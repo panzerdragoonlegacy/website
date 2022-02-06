@@ -27,12 +27,8 @@ RSpec.describe NewsEntry, type: :model do
     it do
       is_expected.to validate_length_of(:name).is_at_least(2).is_at_most(150)
     end
-    it do
-      is_expected.to validate_length_of(:alternative_slug).is_at_most(250)
-    end
-    it do
-      is_expected.to validate_length_of(:summary).is_at_most(250)
-    end
+    it { is_expected.to validate_length_of(:alternative_slug).is_at_most(250) }
+    it { is_expected.to validate_length_of(:summary).is_at_most(250) }
     it { is_expected.to validate_presence_of(:content) }
     it { is_expected.to validate_presence_of(:contributor_profile) }
   end
@@ -40,13 +36,13 @@ RSpec.describe NewsEntry, type: :model do
   describe 'file attachment' do
     it { is_expected.to have_attached_file(:news_entry_picture) }
     it do
-      is_expected.to validate_attachment_content_type(
-        :news_entry_picture
-      ).allowing('image/jpeg')
+      is_expected.to validate_attachment_content_type(:news_entry_picture)
+        .allowing('image/jpeg')
     end
     it do
-      is_expected.to validate_attachment_size(:news_entry_picture)
-        .less_than(5.megabytes)
+      is_expected.to validate_attachment_size(:news_entry_picture).less_than(
+        5.megabytes
+      )
     end
   end
 
@@ -56,8 +52,9 @@ RSpec.describe NewsEntry, type: :model do
         valid_news_entry = FactoryBot.build :valid_news_entry
         valid_news_entry.name = 'New Name'
         valid_news_entry.save
-        expect(valid_news_entry.news_entry_picture_file_name)
-          .to eq 'new-name.jpg'
+        expect(
+          valid_news_entry.news_entry_picture_file_name
+        ).to eq 'new-name.jpg'
       end
     end
   end
@@ -124,12 +121,7 @@ RSpec.describe NewsEntry, type: :model do
 
     context 'the published date is already set' do
       context 'the publish flag is set' do
-        let(:news_entry) do
-          FactoryBot.create(
-            :valid_news_entry,
-            publish: true
-          )
-        end
+        let(:news_entry) { FactoryBot.create(:valid_news_entry, publish: true) }
 
         xit 'does not replace the published date when saved' do
           previously_set_published_at = news_entry.published_at
@@ -146,10 +138,7 @@ RSpec.describe NewsEntry, type: :model do
 
       context 'the published flag is not set' do
         let(:news_entry) do
-          FactoryBot.create(
-            :valid_news_entry,
-            publish: false
-          )
+          FactoryBot.create(:valid_news_entry, publish: false)
         end
 
         xit 'does not replace the published date when saved' do

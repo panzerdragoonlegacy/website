@@ -27,7 +27,7 @@ describe MusicTrackPolicy do
       end
 
       it { is_expected.to permit_action(:show) }
-      it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
+      it { is_expected.to forbid_actions(%i[edit update destroy]) }
       it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
@@ -40,7 +40,7 @@ describe MusicTrackPolicy do
         expect(resolved_scope).not_to include(music_track)
       end
 
-      it { is_expected.to forbid_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to forbid_actions(%i[show edit update destroy]) }
       it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end
@@ -55,7 +55,7 @@ describe MusicTrackPolicy do
         expect(resolved_scope).not_to include(music_track)
       end
 
-      it { is_expected.to forbid_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to forbid_actions(%i[show edit update destroy]) }
       it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
@@ -68,7 +68,7 @@ describe MusicTrackPolicy do
         expect(resolved_scope).not_to include(music_track)
       end
 
-      it { is_expected.to forbid_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to forbid_actions(%i[show edit update destroy]) }
       it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end

@@ -4,9 +4,7 @@ FactoryBot.define do
       sequence(:name) { |n| "Picture #{n}" }
       description { 'Test Description' }
       picture do
-        Rack::Test::UploadedFile.new(
-          'spec/fixtures/picture.jpg', 'image/jpeg'
-        )
+        Rack::Test::UploadedFile.new('spec/fixtures/picture.jpg', 'image/jpeg')
       end
 
       category { FactoryBot.create(:valid_picture_category) }

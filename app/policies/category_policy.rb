@@ -59,12 +59,6 @@ class CategoryPolicy < ApplicationPolicy
   # The categorisation id has to be specified as id here for nested attributes
   # to work correctly even though we use the parent_id column in the database.
   def categorisations_attributes
-    %i[
-      id
-      subcategory_id
-      sequence_number
-      short_name_in_parent
-      _destroy
-    ]
+    %i[id subcategory_id sequence_number short_name_in_parent _destroy]
   end
 end

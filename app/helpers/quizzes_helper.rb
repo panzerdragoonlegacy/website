@@ -13,9 +13,7 @@ module QuizzesHelper
     score = 0
     params[:results].each do |key, value|
       quiz_answer = QuizAnswer.find(value)
-      if quiz_answer.correct_answer?
-        score = score + 1
-      end
+      score = score + 1 if quiz_answer.correct_answer?
     end
     score
   end

@@ -2,9 +2,9 @@ class Admin::AlbumsController < ApplicationController
   layout 'admin'
   include FindBySlugConcerns
   include LoadableForAlbum
-  before_action :load_picture_categories, except: [:index, :destroy]
-  before_action :load_video_categories, except: [:index, :destroy]
-  before_action :load_album, except: [:index, :new, :create]
+  before_action :load_picture_categories, except: %i[index destroy]
+  before_action :load_video_categories, except: %i[index destroy]
+  before_action :load_album, except: %i[index new create]
 
   def index
     clean_publish_false_param
@@ -78,12 +78,10 @@ class Admin::AlbumsController < ApplicationController
   def synchronise_attributes(the_params, attributes_key)
     the_params[attributes_key].each do |key, value|
       if value['source_url'].blank?
-        the_params[attributes_key][key]['source_url'] =
-          the_params['source_url']
+        the_params[attributes_key][key]['source_url'] = the_params['source_url']
       end
       if value['name'].blank?
-        the_params[attributes_key][key]['name'] =
-          the_params['name']
+        the_params[attributes_key][key]['name'] = the_params['name']
       end
       if value['description'].blank?
         the_params[attributes_key][key]['description'] =

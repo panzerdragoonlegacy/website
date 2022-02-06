@@ -3,22 +3,15 @@ require 'rails_helper'
 describe QuizPolicy do
   subject { described_class.new(user, quiz) }
 
-  let(:resolved_scope) do
-    described_class::Scope.new(user, Quiz.all).resolve
-  end
+  let(:resolved_scope) { described_class::Scope.new(user, Quiz.all).resolve }
 
-  let(:contributor_profile) do
-    FactoryBot.create(:valid_contributor_profile)
-  end
+  let(:contributor_profile) { FactoryBot.create(:valid_contributor_profile) }
   let(:user) do
-    FactoryBot.create(
-      :contributor,
-      contributor_profile: contributor_profile
-    )
+    FactoryBot.create(:contributor, contributor_profile: contributor_profile)
   end
 
   context 'contributor accessing quizzes that the user does not contribute ' \
-          'to' do
+            'to' do
     context 'accessing a published quiz' do
       let(:quiz) { FactoryBot.create(:published_quiz) }
 
@@ -27,7 +20,7 @@ describe QuizPolicy do
       end
 
       it { is_expected.to permit_action(:show) }
-      it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
+      it { is_expected.to forbid_actions(%i[edit update destroy]) }
       it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
@@ -38,7 +31,7 @@ describe QuizPolicy do
         expect(resolved_scope).not_to include(quiz)
       end
 
-      it { is_expected.to forbid_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to forbid_actions(%i[show edit update destroy]) }
       it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end
@@ -59,7 +52,7 @@ describe QuizPolicy do
       end
 
       it { is_expected.to permit_action(:show) }
-      it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
+      it { is_expected.to forbid_actions(%i[edit update destroy]) }
       it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
@@ -77,7 +70,7 @@ describe QuizPolicy do
         expect(resolved_scope).to include(quiz)
       end
 
-      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to permit_actions(%i[show edit update destroy]) }
       it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end

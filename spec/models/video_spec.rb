@@ -37,24 +37,21 @@ RSpec.describe Video, type: :model do
     end
     it { is_expected.to validate_presence_of(:description) }
     it do
-      is_expected.to validate_length_of(:description).is_at_least(2)
+      is_expected.to validate_length_of(:description)
+        .is_at_least(2)
         .is_at_most(250)
     end
     it { is_expected.to validate_presence_of(:sequence_number) }
     it do
       is_expected.to validate_numericality_of(:sequence_number)
-        .is_greater_than_or_equal_to(0).is_less_than_or_equal_to(999)
+        .is_greater_than_or_equal_to(0)
+        .is_less_than_or_equal_to(999)
     end
     it { is_expected.to validate_presence_of(:category) }
 
     describe 'validation of contributor profiles' do
       context 'video has less than one contributor profile' do
-        let(:video) do
-          FactoryBot.build(
-            :valid_video,
-            contributor_profiles: []
-          )
-        end
+        let(:video) { FactoryBot.build(:valid_video, contributor_profiles: []) }
 
         it 'should not be valid' do
           expect(video).not_to be_valid
@@ -82,21 +79,21 @@ RSpec.describe Video, type: :model do
     it { is_expected.to have_attached_file(:mp4_video) }
     it { is_expected.to validate_attachment_presence(:mp4_video) }
     it do
-      is_expected.to validate_attachment_size(:mp4_video)
-        .less_than(500.megabytes)
+      is_expected.to validate_attachment_size(:mp4_video).less_than(
+        500.megabytes
+      )
     end
     it { is_expected.to have_attached_file(:video_picture) }
     it do
-      is_expected.to validate_attachment_size(:video_picture)
-        .less_than(5.megabytes)
+      is_expected.to validate_attachment_size(:video_picture).less_than(
+        5.megabytes
+      )
     end
   end
 
   describe 'slug' do
     context 'creating a new video' do
-      let(:video) do
-        FactoryBot.build :valid_video, name: 'Video 1'
-      end
+      let(:video) { FactoryBot.build :valid_video, name: 'Video 1' }
 
       it 'sets the slug to be a parameterised version of the id + name' do
         video.save
@@ -105,12 +102,10 @@ RSpec.describe Video, type: :model do
     end
 
     context 'updating a video' do
-      let(:video) do
-        FactoryBot.create :valid_video, name: 'Video 1'
-      end
+      let(:video) { FactoryBot.create :valid_video, name: 'Video 1' }
 
       it 'sets the slug to be a parameterised version of the id + updated ' \
-        'name' do
+           'name' do
         video.name = 'Video 2'
         video.save
         expect(video.to_param).to eq video.id.to_s + '-video-2'

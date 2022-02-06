@@ -5,7 +5,8 @@ FactoryBot.define do
       description { 'Test Description' }
       download do
         Rack::Test::UploadedFile.new(
-          'spec/fixtures/download.zip', 'application/zip'
+          'spec/fixtures/download.zip',
+          'application/zip'
         )
       end
 

@@ -26,7 +26,7 @@ describe DownloadPolicy do
         expect(resolved_scope).to include(download)
       end
 
-      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to permit_actions(%i[show edit update destroy]) }
       it { is_expected.to permit_mass_assignment_of(:publish) }
     end
 
@@ -39,7 +39,7 @@ describe DownloadPolicy do
         expect(resolved_scope).to include(download)
       end
 
-      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to permit_actions(%i[show edit update destroy]) }
       it { is_expected.to permit_mass_assignment_of(:publish) }
     end
   end
@@ -54,7 +54,7 @@ describe DownloadPolicy do
         expect(resolved_scope).to include(download)
       end
 
-      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to permit_actions(%i[show edit update destroy]) }
       it { is_expected.to permit_mass_assignment_of(:publish) }
     end
 
@@ -67,7 +67,7 @@ describe DownloadPolicy do
         expect(resolved_scope).to include(download)
       end
 
-      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to permit_actions(%i[show edit update destroy]) }
       it { is_expected.to permit_mass_assignment_of(:publish) }
     end
   end

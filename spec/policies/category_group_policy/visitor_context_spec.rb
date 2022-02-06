@@ -17,8 +17,6 @@ describe CategoryGroupPolicy do
     end
 
     it { is_expected.to permit_action(:show) }
-    it do
-      is_expected.to forbid_actions([:new, :create, :edit, :update, :destroy])
-    end
+    it { is_expected.to forbid_actions(%i[new create edit update destroy]) }
   end
 end

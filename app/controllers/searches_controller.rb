@@ -5,7 +5,7 @@ class SearchesController < ApplicationController
     sanitized_query = Sanitize.fragment params[:query]
     redirect_to(
       'https://duckduckgo.com/?q=site:panzerdragoonlegacy.com+' +
-      sanitized_query
+        sanitized_query
     )
   end
 end

@@ -50,20 +50,26 @@ class Album < ApplicationRecord
   # Contributions Feed in sequence.
   def publish_in_sequence
     if publish
-      self.pictures.sort_by{ |p| p.sequence_number }.each do |picture|
-        picture.publish = true
-        if picture.published_at.blank?
-          picture.published_at = DateTime.now.utc
-          sleep 1
+      self
+        .pictures
+        .sort_by { |p| p.sequence_number }
+        .each do |picture|
+          picture.publish = true
+          if picture.published_at.blank?
+            picture.published_at = DateTime.now.utc
+            sleep 1
+          end
         end
-      end
-      self.videos.sort_by{ |v| v.sequence_number }.each do |video|
-        video.publish = true
-        if video.published_at.blank?
-          video.published_at = DateTime.now.utc
-          sleep 1
+      self
+        .videos
+        .sort_by { |v| v.sequence_number }
+        .each do |video|
+          video.publish = true
+          if video.published_at.blank?
+            video.published_at = DateTime.now.utc
+            sleep 1
+          end
         end
-      end
     end
     set_published_at
   end

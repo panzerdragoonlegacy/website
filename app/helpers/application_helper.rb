@@ -30,12 +30,24 @@ module ApplicationHelper
     html = Kramdown::Document.new(markdown_text, auto_ids: false).to_html
 
     # Setup whitelist of html elements, attributes, and protocols.
-    allowed_elements = ['a', 'p', 'ul', 'ol', 'li', 'strong', 'em', 'cite',
-      'blockquote', 'code', 'pre', 'dl', 'dt', 'dd', 'br']
-    allowed_attributes = {
-      'a' => ['href'],
-      'img' => ['src', 'alt']
-    }
+    allowed_elements = %w[
+      a
+      p
+      ul
+      ol
+      li
+      strong
+      em
+      cite
+      blockquote
+      code
+      pre
+      dl
+      dt
+      dd
+      br
+    ]
+    allowed_attributes = { 'a' => ['href'], 'img' => %w[src alt] }
     allowed_protocols = {
       'a' => {
         'href' => ['http', 'https', 'mailto', :relative]
@@ -44,23 +56,26 @@ module ApplicationHelper
 
     # Clean text of any unwanted html tags.
     require 'sanitize'
-    html = Sanitize.clean(
-      html,
-      elements: allowed_elements,
-      attributes: allowed_attributes,
-      protocols: allowed_protocols
-    )
+    html =
+      Sanitize.clean(
+        html,
+        elements: allowed_elements,
+        attributes: allowed_attributes,
+        protocols: allowed_protocols
+      )
 
     # Remove any footnote or footnote reference links.
     require 'nokogiri'
     html = Nokogiri::HTML.parse(html)
-    html.css('a').each do |a|
-      if (a.get_attribute('href') =~ /^#fn:/) or
-        (a.get_attribute('href') =~ /^#fnref:/)
-        # `Nokogiri::XML::Node#unlink` removes the node from the document
-        a.unlink
+    html
+      .css('a')
+      .each do |a|
+        if (a.get_attribute('href') =~ /^#fn:/) or
+             (a.get_attribute('href') =~ /^#fnref:/)
+          # `Nokogiri::XML::Node#unlink` removes the node from the document
+          a.unlink
+        end
       end
-    end
 
     # Converts nokogiri variable to html.
     html = html.to_html

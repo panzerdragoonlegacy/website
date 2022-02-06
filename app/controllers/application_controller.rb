@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from Pundit::NotDefinedError, with: :attempt_to_redirect
+
   # after_filter :verify_authorized, except: :index
   # after_filter :verify_policy_scoped, only: :index
 
@@ -48,7 +49,7 @@ class ApplicationController < ActionController::Base
   # Only' is unchecked.
   def clean_publish_false_param
     if params[:q]
-      params[:q].delete_if { |k,v| k == 'publish_false' && v == '0' }
+      params[:q].delete_if { |k, v| k == 'publish_false' && v == '0' }
     end
   end
 end

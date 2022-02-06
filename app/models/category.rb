@@ -9,16 +9,19 @@ class Category < ApplicationRecord
   belongs_to :category_group
   belongs_to :saga, optional: true
 
-  has_many :categorisations, foreign_key: 'parent_id', dependent: :destroy,
-    inverse_of: :parent
+  has_many :categorisations,
+           foreign_key: 'parent_id',
+           dependent: :destroy,
+           inverse_of: :parent
   accepts_nested_attributes_for(
     :categorisations,
     reject_if: :all_blank,
     allow_destroy: true
   )
   belongs_to :categorisation, foreign_key: 'id', optional: true
-  has_many :subcategories, through: :categorisations,
-    foreign_key: 'subcategory_id'
+  has_many :subcategories,
+           through: :categorisations,
+           foreign_key: 'subcategory_id'
 
   has_many :pages, dependent: :destroy
   has_many :pictures, dependent: :destroy
@@ -37,7 +40,7 @@ class Category < ApplicationRecord
   validates :category_type, presence: true
 
   # The list of category types.
-  CATEGORY_TYPES = %w(
+  CATEGORY_TYPES = %w[
     parent
     literature
     picture
@@ -45,7 +48,7 @@ class Category < ApplicationRecord
     video
     download
     quiz
-  ).freeze
+  ].freeze
 
   has_attached_file(
     :category_picture,
@@ -60,11 +63,16 @@ class Category < ApplicationRecord
 
   validates_attachment(
     :category_picture,
-    content_type: { content_type: 'image/jpeg' },
-    size: { in: 0..5.megabytes }
+    content_type: {
+      content_type: 'image/jpeg'
+    },
+    size: {
+      in: 0..5.megabytes
+    }
   )
 
   before_validation :validate_presence_of_category_group
+
   # Commented out so that reassignment migration can run without issues.
   # before_validation :validate_category_and_category_group_type_match
 
@@ -89,16 +97,22 @@ class Category < ApplicationRecord
       errors.add(category_type, 'categories must belong to a category group.')
     end
     if !category_is_groupable && category_group.present?
-      errors.add(category_type, 'categories must not belong to a category ' \
-        'group.')
+      errors.add(
+        category_type,
+        'categories must not belong to a category ' \
+          'group.'
+      )
     end
   end
 
   def validate_category_and_category_group_type_match
     if category_is_groupable && category_group.present?
       if category_group.category_group_type != category_type
-        errors.add(category_type, 'categories must belong to a category ' \
-          'group with a matching type.')
+        errors.add(
+          category_type,
+          'categories must belong to a category ' \
+            'group with a matching type.'
+        )
       end
     end
   end

@@ -10,33 +10,25 @@ describe CategoryPolicy do
   let(:user) { FactoryBot.create(:registered_user) }
 
   context 'registered user accessing a published category' do
-    let(:category) do
-      FactoryBot.create(:published_category)
-    end
+    let(:category) { FactoryBot.create(:published_category) }
 
     it 'includes category in resolved scope' do
       expect(resolved_scope).to include(category)
     end
 
     it { is_expected.to permit_action(:show) }
-    it do
-      is_expected.to forbid_actions([:new, :create, :edit, :update, :destroy])
-    end
+    it { is_expected.to forbid_actions(%i[new create edit update destroy]) }
     it { is_expected.to forbid_mass_assignment_of(:publish) }
   end
 
   context 'registered user accessing an unpublished category' do
-    let(:category) do
-      FactoryBot.create(:unpublished_category)
-    end
+    let(:category) { FactoryBot.create(:unpublished_category) }
 
     it 'excludes category from resolved scope' do
       expect(resolved_scope).not_to include(category)
     end
 
-    it do
-      is_expected.to forbid_actions([:show, :new, :create, :edit, :update])
-    end
+    it { is_expected.to forbid_actions(%i[show new create edit update]) }
     it { is_expected.to forbid_mass_assignment_of(:publish) }
   end
 

@@ -3,24 +3,18 @@ require 'rails_helper'
 describe SagaPolicy do
   subject { described_class.new(user, saga) }
 
-  let(:resolved_scope) do
-    described_class::Scope.new(user, Saga.all).resolve
-  end
+  let(:resolved_scope) { described_class::Scope.new(user, Saga.all).resolve }
 
   let(:user) { FactoryBot.create(:registered_user) }
 
   context 'registered user accessing a saga' do
-    let(:saga) do
-      FactoryBot.create(:valid_saga)
-    end
+    let(:saga) { FactoryBot.create(:valid_saga) }
 
     it 'includes saga in resolved scope' do
       expect(resolved_scope).to include(saga)
     end
 
     it { is_expected.to permit_action(:show) }
-    it do
-      is_expected.to forbid_actions([:new, :create, :edit, :update, :destroy])
-    end
+    it { is_expected.to forbid_actions(%i[new create edit update destroy]) }
   end
 end

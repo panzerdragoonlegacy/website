@@ -15,8 +15,9 @@ RSpec.describe QuizQuestion, type: :model do
 
   describe 'nested attributes' do
     it do
-      is_expected.to accept_nested_attributes_for(:quiz_answers)
-        .allow_destroy(true)
+      is_expected.to accept_nested_attributes_for(:quiz_answers).allow_destroy(
+        true
+      )
     end
   end
 end

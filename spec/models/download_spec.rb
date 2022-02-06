@@ -31,7 +31,8 @@ RSpec.describe Download, type: :model do
     end
     it { is_expected.to validate_presence_of(:description) }
     it do
-      is_expected.to validate_length_of(:description).is_at_least(2)
+      is_expected.to validate_length_of(:description)
+        .is_at_least(2)
         .is_at_most(250)
     end
     it { is_expected.to validate_presence_of(:category) }
@@ -39,10 +40,7 @@ RSpec.describe Download, type: :model do
     describe 'validation of contributor profiles' do
       context 'download has less than one contributor profile' do
         let(:download) do
-          FactoryBot.build(
-            :valid_download,
-            contributor_profiles: []
-          )
+          FactoryBot.build(:valid_download, contributor_profiles: [])
         end
 
         it 'should not be valid' do
@@ -71,12 +69,14 @@ RSpec.describe Download, type: :model do
     it { is_expected.to have_attached_file(:download) }
     it { is_expected.to validate_attachment_presence(:download) }
     it do
-      is_expected.to validate_attachment_content_type(:download)
-        .allowing('application/zip')
+      is_expected.to validate_attachment_content_type(:download).allowing(
+        'application/zip'
+      )
     end
     it do
-      is_expected.to validate_attachment_size(:download)
-        .less_than(500.megabytes)
+      is_expected.to validate_attachment_size(:download).less_than(
+        500.megabytes
+      )
     end
     it { is_expected.to have_attached_file(:download_picture) }
     it do
@@ -84,8 +84,9 @@ RSpec.describe Download, type: :model do
         .allowing('image/jpeg')
     end
     it do
-      is_expected.to validate_attachment_size(:download_picture)
-        .less_than(5.megabytes)
+      is_expected.to validate_attachment_size(:download_picture).less_than(
+        5.megabytes
+      )
     end
   end
 
@@ -101,9 +102,7 @@ RSpec.describe Download, type: :model do
 
   describe 'slug' do
     context 'creating a new download' do
-      let(:download) do
-        FactoryBot.build :valid_download, name: 'Download 1'
-      end
+      let(:download) { FactoryBot.build :valid_download, name: 'Download 1' }
 
       it 'sets the slug to be a parameterised version of the id + name' do
         download.save
@@ -112,12 +111,10 @@ RSpec.describe Download, type: :model do
     end
 
     context 'updating a download' do
-      let(:download) do
-        FactoryBot.create :valid_download, name: 'Download 1'
-      end
+      let(:download) { FactoryBot.create :valid_download, name: 'Download 1' }
 
       it 'sets the slug to be a parameterised version of the id + updated ' \
-        'name' do
+           'name' do
         download.name = 'Download 2'
         download.save
         expect(download.to_param).to eq download.id.to_s + '-download-2'

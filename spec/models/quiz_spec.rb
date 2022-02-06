@@ -37,19 +37,15 @@ RSpec.describe Quiz, type: :model do
     end
     it { is_expected.to validate_presence_of(:description) }
     it do
-      is_expected.to validate_length_of(:description).is_at_least(2)
+      is_expected.to validate_length_of(:description)
+        .is_at_least(2)
         .is_at_most(250)
     end
     it { is_expected.to validate_presence_of(:category) }
 
     describe 'validation of contributor profiles' do
       context 'quiz has less than one contributor profile' do
-        let(:quiz) do
-          FactoryBot.build(
-            :valid_quiz,
-            contributor_profiles: []
-          )
-        end
+        let(:quiz) { FactoryBot.build(:valid_quiz, contributor_profiles: []) }
 
         it 'should not be valid' do
           expect(quiz).not_to be_valid
@@ -75,9 +71,7 @@ RSpec.describe Quiz, type: :model do
 
   describe 'slug' do
     context 'creating a new quiz' do
-      let(:quiz) do
-        FactoryBot.build :valid_quiz, name: 'Quiz 1'
-      end
+      let(:quiz) { FactoryBot.build :valid_quiz, name: 'Quiz 1' }
 
       it 'generates a slug that is a parameterised version of the name' do
         quiz.save
@@ -86,9 +80,7 @@ RSpec.describe Quiz, type: :model do
     end
 
     context 'updating a quiz' do
-      let(:quiz) do
-        FactoryBot.create :valid_quiz, name: 'Quiz 1'
-      end
+      let(:quiz) { FactoryBot.create :valid_quiz, name: 'Quiz 1' }
 
       it 'synchronises the slug with the updated name' do
         quiz.name = 'Quiz 2'

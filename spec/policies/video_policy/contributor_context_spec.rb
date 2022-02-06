@@ -3,18 +3,11 @@ require 'rails_helper'
 describe VideoPolicy do
   subject { described_class.new(user, video) }
 
-  let(:resolved_scope) do
-    described_class::Scope.new(user, Video.all).resolve
-  end
+  let(:resolved_scope) { described_class::Scope.new(user, Video.all).resolve }
 
-  let(:contributor_profile) do
-    FactoryBot.create(:valid_contributor_profile)
-  end
+  let(:contributor_profile) { FactoryBot.create(:valid_contributor_profile) }
   let(:user) do
-    FactoryBot.create(
-      :contributor,
-      contributor_profile: contributor_profile
-    )
+    FactoryBot.create(:contributor, contributor_profile: contributor_profile)
   end
 
   context 'contributor creating a new video' do
@@ -36,7 +29,7 @@ describe VideoPolicy do
         end
 
         it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
+        it { is_expected.to forbid_actions(%i[edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
@@ -49,9 +42,7 @@ describe VideoPolicy do
           expect(resolved_scope).not_to include(video)
         end
 
-        it do
-          is_expected.to forbid_actions([:show, :edit, :update, :destroy])
-        end
+        it { is_expected.to forbid_actions(%i[show edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
@@ -72,7 +63,7 @@ describe VideoPolicy do
         end
 
         it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
+        it { is_expected.to forbid_actions(%i[edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
@@ -90,9 +81,7 @@ describe VideoPolicy do
           expect(resolved_scope).to include(video)
         end
 
-        it do
-          is_expected.to permit_actions([:show, :edit, :update, :destroy])
-        end
+        it { is_expected.to permit_actions(%i[show edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
@@ -110,7 +99,7 @@ describe VideoPolicy do
         end
 
         it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
+        it { is_expected.to forbid_actions(%i[edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
@@ -123,9 +112,7 @@ describe VideoPolicy do
           expect(resolved_scope).not_to include(video)
         end
 
-        it do
-          is_expected.to forbid_actions([:show, :edit, :update, :destroy])
-        end
+        it { is_expected.to forbid_actions(%i[show edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
@@ -146,7 +133,7 @@ describe VideoPolicy do
         end
 
         it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
+        it { is_expected.to forbid_actions(%i[edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
@@ -164,9 +151,7 @@ describe VideoPolicy do
           expect(resolved_scope).to include(video)
         end
 
-        it do
-          is_expected.to permit_actions([:show, :edit, :update, :destroy])
-        end
+        it { is_expected.to permit_actions(%i[show edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end

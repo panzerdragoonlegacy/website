@@ -33,12 +33,14 @@ RSpec.describe Tag, type: :model do
   describe 'file attachment' do
     it { is_expected.to have_attached_file(:tag_picture) }
     it do
-      is_expected.to validate_attachment_content_type(:tag_picture)
-        .allowing('image/jpeg')
+      is_expected.to validate_attachment_content_type(:tag_picture).allowing(
+        'image/jpeg'
+      )
     end
     it do
-      is_expected.to validate_attachment_size(:tag_picture)
-        .less_than(5.megabytes)
+      is_expected.to validate_attachment_size(:tag_picture).less_than(
+        5.megabytes
+      )
     end
   end
 end

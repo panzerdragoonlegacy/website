@@ -13,27 +13,36 @@ module LoadableForNewsEntry
   end
 
   def load_contributors_news_entries
-    @contributor_profile = find_contributor_profile_by_slug(
-      params[:contributor_profile_id]
-    )
-    @news_entries = policy_scope(
-      NewsEntry.where(contributor_profile_id: @contributor_profile.id)
-        .order('created_at desc').page(params[:page])
-    )
+    @contributor_profile =
+      find_contributor_profile_by_slug(params[:contributor_profile_id])
+    @news_entries =
+      policy_scope(
+        NewsEntry
+          .where(contributor_profile_id: @contributor_profile.id)
+          .order('created_at desc')
+          .page(params[:page])
+      )
   end
 
   def load_tagged_news_entries
     @tag = find_tag_by_slug params[:tag_id]
-    @news_entries = policy_scope(
-      NewsEntry.joins(:taggings).where(taggings: { tag_id: @tag.id })
-        .order('created_at desc').page(params[:page])
-    )
+    @news_entries =
+      policy_scope(
+        NewsEntry
+          .joins(:taggings)
+          .where(taggings: { tag_id: @tag.id })
+          .order('created_at desc')
+          .page(params[:page])
+      )
   end
 
   def load_draft_news_entries
-    @news_entries = policy_scope(
-      NewsEntry.where(publish: false).order('created_at desc')
-        .page(params[:page])
-    )
+    @news_entries =
+      policy_scope(
+        NewsEntry
+          .where(publish: false)
+          .order('created_at desc')
+          .page(params[:page])
+      )
   end
 end

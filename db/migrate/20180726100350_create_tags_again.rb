@@ -12,7 +12,7 @@ class CreateTagsAgain < ActiveRecord::Migration
       Tag.create(name: encyclopaedia_entry.name)
     end
   end
-  
+
   def down
     drop_table :tags
   end

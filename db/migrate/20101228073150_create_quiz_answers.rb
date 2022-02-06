@@ -3,7 +3,7 @@ class CreateQuizAnswers < ActiveRecord::Migration
     create_table :quiz_answers do |t|
       t.integer :quiz_question_id
       t.text :content
-      t.boolean :correct_answer, :default => :false
+      t.boolean :correct_answer, default: :false
       t.timestamps
     end
   end

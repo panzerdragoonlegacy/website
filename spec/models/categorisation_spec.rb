@@ -11,11 +11,14 @@ RSpec.describe Categorisation, type: :model do
 
   describe 'associations' do
     it do
-      is_expected.to belong_to(:parent).class_name('Category')
-        .with_foreign_key('parent_id').inverse_of(:categorisations)
+      is_expected.to belong_to(:parent)
+        .class_name('Category')
+        .with_foreign_key('parent_id')
+        .inverse_of(:categorisations)
     end
     it do
-      is_expected.to have_one(:subcategory).class_name('Category')
+      is_expected.to have_one(:subcategory)
+        .class_name('Category')
         .with_foreign_key('id')
     end
   end
@@ -24,12 +27,14 @@ RSpec.describe Categorisation, type: :model do
     it { is_expected.to validate_presence_of(:subcategory_id) }
     it { is_expected.to validate_presence_of(:short_name_in_parent) }
     it do
-      is_expected.to validate_length_of(:short_name_in_parent).is_at_least(1)
+      is_expected.to validate_length_of(:short_name_in_parent)
+        .is_at_least(1)
         .is_at_most(50)
     end
     it do
       is_expected.to validate_numericality_of(:sequence_number)
-        .is_greater_than(0).is_less_than(100)
+        .is_greater_than(0)
+        .is_less_than(100)
     end
   end
 end

@@ -4,9 +4,9 @@ class Admin::VideosController < ApplicationController
   include LoadableForVideo
   include PreviewSlugConcerns
   layout 'admin'
-  before_action :load_albums, except: [:index, :destroy]
-  before_action :load_categories, except: [:show, :destroy]
-  before_action :load_video, except: [:index, :new, :create]
+  before_action :load_albums, except: %i[index destroy]
+  before_action :load_categories, except: %i[show destroy]
+  before_action :load_video, except: %i[index new create]
   helper_method :custom_video_path
 
   def index
@@ -50,18 +50,13 @@ class Admin::VideosController < ApplicationController
 
   def destroy
     @video.destroy
-    redirect_to(
-      admin_videos_path,
-      notice: 'Successfully destroyed video.'
-    )
+    redirect_to(admin_videos_path, notice: 'Successfully destroyed video.')
   end
 
   private
 
   def video_params
-    params.require(:video).permit(
-      policy(@video || :video).permitted_attributes
-    )
+    params.require(:video).permit(policy(@video || :video).permitted_attributes)
   end
 
   def redirect_to_video
@@ -78,8 +73,8 @@ class Admin::VideosController < ApplicationController
 
   def make_current_user_a_contributor
     unless current_user.contributor_profile_id.to_s.in?(
-      params[:video][:contributor_profile_ids]
-    )
+             params[:video][:contributor_profile_ids]
+           )
       params[:video][:contributor_profile_ids] <<
         current_user.contributor_profile_id
     end

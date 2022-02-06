@@ -9,9 +9,10 @@ class LiteratureController < ApplicationController
       load_tagged_literature
     else
       load_category_groups
-      @pages = policy_scope(
-        Page.where(page_type: :literature).order(:name).page(params[:page])
-      )
+      @pages =
+        policy_scope(
+          Page.where(page_type: :literature).order(:name).page(params[:page])
+        )
     end
   end
 

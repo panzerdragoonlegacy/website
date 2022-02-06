@@ -22,6 +22,4 @@ require 'pundit/matchers'
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-RSpec.configure do |config|
-  config.include Paperclip::Shoulda::Matchers
-end
+RSpec.configure { |config| config.include Paperclip::Shoulda::Matchers }

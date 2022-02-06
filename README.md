@@ -1,12 +1,10 @@
-Panzer Dragoon Legacy CMS
-=========================
+# Panzer Dragoon Legacy CMS
 
 A custom content management system for
 [panzerdragoonlegacy.com](http://www.panzerdragoonlegacy.com). Code is provided
 here for demonstration purposes.
 
-Quick Reference
----------------
+## Quick Reference
 
 To stop the application in production, run:
 `cd /var/cms && sudo docker-compose -f docker-compose.prod.yml down`
@@ -18,8 +16,7 @@ To start and rebuild the application in production, run:
 `cd /var/cms && sudo docker-compose -f docker-compose.prod.yml up -d --build`
 This will re-run certbot and renew the SSL certificate if it has expired.
 
-Setup Guides
-------------
+## Setup Guides
 
 For instructions on setting up a development environment for the CMS, see
 [DEVELOPMENT.md](DEVELOPMENT.md).
@@ -36,10 +33,9 @@ There are a couple of Docker volumes which store the website's data called
 attachments). Ensure that the contents of these volumes are included in every
 backup.
 
-Copyright
----------
+## Copyright
 
-Source *code* files in this repository are © 2021 Chris Alley and are freely
+Source _code_ files in this repository are © 2021 Chris Alley and are freely
 available under the terms of the MIT license.
 
 However, most of the image assets and the Panzer Dragoon and Crimson Dragon

@@ -4,7 +4,7 @@ class AddTagsToTaggings < ActiveRecord::Migration
       if tagging.encyclopaedia_entry
         tag = Tag.where(name: tagging.encyclopaedia_entry.name).first
         tagging.tag = tag
-        tagging.save  
+        tagging.save
       else
         tagging.destroy!
       end

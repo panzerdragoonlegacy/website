@@ -18,11 +18,13 @@ class AlbumPolicy < ApplicationPolicy
     private
 
     def scope_user_contributes_to
-      scope.joins(:category, :contributions).where(
-        '(albums.publish = true AND categories.publish = true) OR ' \
-          'contributions.contributor_profile_id = ?',
-        user.contributor_profile_id
-      )
+      scope
+        .joins(:category, :contributions)
+        .where(
+          '(albums.publish = true AND categories.publish = true) OR ' \
+            'contributions.contributor_profile_id = ?',
+          user.contributor_profile_id
+        )
     end
   end
 
@@ -101,12 +103,6 @@ class AlbumPolicy < ApplicationPolicy
   end
 
   def shared_attributes
-    [
-      :sequence_number,
-      :source_url,
-      :name,
-      :description,
-      :information
-    ]
+    %i[sequence_number source_url name description information]
   end
 end

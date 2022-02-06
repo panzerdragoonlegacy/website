@@ -50,7 +50,7 @@ Step-by-step instructions for setting up a development environment for the site.
      email: 'admin@example.com',
      password: 'MyPa$$word',
      administrator: true,
-     confirmed_at: Time.now
+     confirmed_at: Time.now,
    )
 
    exit

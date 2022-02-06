@@ -10,7 +10,11 @@ class Saga < ApplicationRecord
   validates(
     :sequence_number,
     presence: true,
-    numericality: { only_integer: true, greater_than: 0, less_than: 100 }
+    numericality: {
+      only_integer: true,
+      greater_than: 0,
+      less_than: 100
+    }
   )
 
   before_save :set_slug

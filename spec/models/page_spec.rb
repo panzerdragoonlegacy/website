@@ -31,8 +31,9 @@ RSpec.describe Page, type: :model do
 
   describe 'nested attributes' do
     it do
-      is_expected.to accept_nested_attributes_for(:illustrations)
-        .allow_destroy(true)
+      is_expected.to accept_nested_attributes_for(:illustrations).allow_destroy(
+        true
+      )
     end
   end
 
@@ -46,13 +47,14 @@ RSpec.describe Page, type: :model do
   describe 'file attachment' do
     it { is_expected.to have_attached_file(:page_picture) }
     it do
-      is_expected.to validate_attachment_content_type(
-        :page_picture
-      ).allowing('image/jpeg')
+      is_expected.to validate_attachment_content_type(:page_picture).allowing(
+        'image/jpeg'
+      )
     end
     it do
-      is_expected.to validate_attachment_size(:page_picture)
-        .less_than(5.megabytes)
+      is_expected.to validate_attachment_size(:page_picture).less_than(
+        5.megabytes
+      )
     end
   end
 

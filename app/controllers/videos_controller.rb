@@ -14,9 +14,10 @@ class VideosController < ApplicationController
 
   def show
     load_video
-    @tags = TagPolicy::Scope.new(
-      current_user,
-      Tag.where(name: @video.tags.map { |tag| tag.name }).order(:name)
-    ).resolve
+    @tags =
+      TagPolicy::Scope.new(
+        current_user,
+        Tag.where(name: @video.tags.map { |tag| tag.name }).order(:name)
+      ).resolve
   end
 end

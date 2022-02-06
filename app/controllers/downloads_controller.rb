@@ -14,9 +14,10 @@ class DownloadsController < ApplicationController
 
   def show
     load_download
-    @tags = TagPolicy::Scope.new(
-      current_user,
-      Tag.where(name: @download.tags.map { |tag| tag.name }).order(:name)
-    ).resolve
+    @tags =
+      TagPolicy::Scope.new(
+        current_user,
+        Tag.where(name: @download.tags.map { |tag| tag.name }).order(:name)
+      ).resolve
   end
 end

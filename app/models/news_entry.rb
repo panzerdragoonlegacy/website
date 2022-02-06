@@ -26,8 +26,12 @@ class NewsEntry < ApplicationRecord
 
   validates_attachment(
     :news_entry_picture,
-    content_type: { content_type: 'image/jpeg' },
-    size: { in: 0..5.megabytes }
+    content_type: {
+      content_type: 'image/jpeg'
+    },
+    size: {
+      in: 0..5.megabytes
+    }
   )
   validates_attachment :news_entry_picture
 

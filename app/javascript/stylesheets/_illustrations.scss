@@ -55,7 +55,7 @@ div.left {
     padding: 9px;
     border: 0;
   }
-  
+
   p {
     @include caption-properties;
   }
@@ -73,7 +73,7 @@ div.right {
   background-color: $input-background-colour;
   background: linear-gradient(to top, #343434, #454545);
   padding-bottom: 10px;
-  
+
   img {
     padding: 9px;
     border: 0;
@@ -98,7 +98,7 @@ div.sidebysideleft {
   padding-bottom: 10px;
   border: $border-properties;
   background-color: $input-background-colour;
-  background: linear-gradient(to top, #343434, #454545); 
+  background: linear-gradient(to top, #343434, #454545);
 
   img {
     padding: 9px;
@@ -113,13 +113,13 @@ div.sidebysideleft {
 div.sidebysideright {
   border-radius: 10px;
   width: 298px;
-  text-align: center; 
+  text-align: center;
   margin-left: 323px;
   padding-bottom: 10px;
   border: $border-properties;
   background-color: $input-background-colour;
   background: linear-gradient(to top, #343434, #454545);
-  
+
   img {
     padding: 9px;
     border: 0;
@@ -141,12 +141,12 @@ div#popover_illustration {
   top: 5%;
   float: left;
   margin-left: 125px;
-  
+
   img {
     padding: 37px;
     padding-top: 0;
   }
-  
+
   p {
     margin-top: 0;
     margin-bottom: 37px;
@@ -155,7 +155,7 @@ div#popover_illustration {
     line-height: 2;
     text-align: center;
   }
-  
+
   button {
     margin-right: 6px;
     margin-top: 4px;
@@ -169,8 +169,8 @@ div#popover_illustration {
     line-height: 20px;
     color: white;
   }
-  
+
   button:hover {
     color: $link-colour-1;
-  }  
+  }
 }

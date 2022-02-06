@@ -30,7 +30,8 @@ RSpec.describe MusicTrack, type: :model do
     it { is_expected.to validate_presence_of(:track_number) }
     it do
       is_expected.to validate_numericality_of(:track_number)
-        .is_greater_than_or_equal_to(0).is_less_than_or_equal_to(50)
+        .is_greater_than_or_equal_to(0)
+        .is_less_than_or_equal_to(50)
     end
     it { is_expected.to validate_presence_of(:name) }
     it do
@@ -38,7 +39,8 @@ RSpec.describe MusicTrack, type: :model do
     end
     it { is_expected.to validate_presence_of(:description) }
     it do
-      is_expected.to validate_length_of(:description).is_at_least(2)
+      is_expected.to validate_length_of(:description)
+        .is_at_least(2)
         .is_at_most(250)
     end
     it { is_expected.to validate_presence_of(:category) }
@@ -46,10 +48,7 @@ RSpec.describe MusicTrack, type: :model do
     describe 'validation of contributor profiles' do
       context 'music track has less than one contributor profile' do
         let(:music_track) do
-          FactoryBot.build(
-            :valid_music_track,
-            contributor_profiles: []
-          )
+          FactoryBot.build(:valid_music_track, contributor_profiles: [])
         end
 
         it 'should not be valid' do
@@ -78,20 +77,22 @@ RSpec.describe MusicTrack, type: :model do
     it { is_expected.to have_attached_file(:mp3_music_track) }
     it { is_expected.to validate_attachment_presence(:mp3_music_track) }
     it do
-      is_expected.to validate_attachment_size(:mp3_music_track)
-        .less_than(25.megabytes)
+      is_expected.to validate_attachment_size(:mp3_music_track).less_than(
+        25.megabytes
+      )
     end
     it { is_expected.to have_attached_file(:flac_music_track) }
     it do
-      is_expected.to validate_attachment_size(:flac_music_track)
-        .less_than(50.megabytes)
+      is_expected.to validate_attachment_size(:flac_music_track).less_than(
+        50.megabytes
+      )
     end
     it { is_expected.to have_attached_file(:music_track_picture) }
     it do
-      is_expected.to validate_attachment_size(:music_track_picture)
-        .less_than(5.megabytes)
+      is_expected.to validate_attachment_size(:music_track_picture).less_than(
+        5.megabytes
+      )
     end
-
   end
 
   describe 'slug' do
@@ -114,7 +115,7 @@ RSpec.describe MusicTrack, type: :model do
       end
 
       it 'sets the slug to be a parameterised version of the id + updated ' \
-        'name' do
+           'name' do
         music_track.name = 'Music Track 2'
         music_track.save
         expect(music_track.to_param).to eq(

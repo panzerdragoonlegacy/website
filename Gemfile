@@ -7,7 +7,6 @@ group :development do
   gem 'brakeman' # It is recommended to always use the latest version.
   gem 'bundler-audit'
   gem 'listen'
-  gem 'rubocop', '~> 0.89.1', require: false
   gem 'spring', '~> 2.1.1'
   gem 'web-console', '~> 4.0.4'
 end
@@ -37,7 +36,9 @@ gem 'mini_magick', '~> 4.11.0'
 gem 'mini_racer', '~> 0.6.2'
 gem 'nokogiri', '1.12.5'
 gem 'onebox', '~> 2.2.19'
-gem 'kt-paperclip', git: 'https://github.com/kreeti/kt-paperclip', branch: 'master'
+gem 'kt-paperclip',
+    git: 'https://github.com/kreeti/kt-paperclip',
+    branch: 'master'
 gem 'paper_trail', '~> 12.1.0'
 gem 'pg', '~> 1.2.3'
 gem 'pundit', '~> 2.1.1'
@@ -45,6 +46,6 @@ gem 'puma', '~> 5.5.2'
 gem 'rails_autolink', '~> 1.1.6'
 gem 'ransack', '~> 2.5.0'
 gem 'sanitize', '~> 6.0.0'
-gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'sprockets-rails', require: 'sprockets/railtie'
 gem 'uglifier', '>= 4.2.0'
 gem 'webpacker', '~> 5.4.3'

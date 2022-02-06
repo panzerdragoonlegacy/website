@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   app:
     build:
@@ -49,8 +49,8 @@ services:
       - ./certbot/logs:/var/log/letsencrypt
       - ./certbot/data:/var/www/certbot
     # command: >
-    #  certonly --webroot --webroot-path=/var/www/certbot --email 
-    #  support@panzerdragoonlegacy.com --agree-tos --no-eff-email --staging -d 
+    #  certonly --webroot --webroot-path=/var/www/certbot --email
+    #  support@panzerdragoonlegacy.com --agree-tos --no-eff-email --staging -d
     #  panzerdragoonlegacy.com -d www.panzerdragoonlegacy.com
     command: >
       certonly --webroot --webroot-path=/var/www/certbot --email 

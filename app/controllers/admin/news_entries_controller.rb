@@ -2,7 +2,7 @@ class Admin::NewsEntriesController < ApplicationController
   include LoadableForNewsEntry
   include PreviewSlugConcerns
   layout 'admin'
-  before_action :load_news_entry, except: [:index, :new, :create]
+  before_action :load_news_entry, except: %i[index new create]
   helper_method :custom_news_entry_path
 
   def index
@@ -49,9 +49,9 @@ class Admin::NewsEntriesController < ApplicationController
   private
 
   def news_entry_params
-    params.require(:news_entry).permit(
-      policy(@news_entry || :news_entry).permitted_attributes
-    )
+    params
+      .require(:news_entry)
+      .permit(policy(@news_entry || :news_entry).permitted_attributes)
   end
 
   def redirect_to_news_entry

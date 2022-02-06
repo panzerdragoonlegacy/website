@@ -21,10 +21,6 @@ class RedirectPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [
-      :old_url,
-      :new_url,
-      :comment
-    ]
+    %i[old_url new_url comment]
   end
 end

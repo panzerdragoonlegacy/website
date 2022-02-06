@@ -5,7 +5,8 @@ FactoryBot.define do
       description { 'Test Description' }
       mp3_music_track do
         Rack::Test::UploadedFile.new(
-          'spec/fixtures/music_track.mp3', 'audio/mp3'
+          'spec/fixtures/music_track.mp3',
+          'audio/mp3'
         )
       end
 

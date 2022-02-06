@@ -3,18 +3,11 @@ require 'rails_helper'
 describe PagePolicy do
   subject { described_class.new(user, page) }
 
-  let(:resolved_scope) do
-    described_class::Scope.new(user, Page.all).resolve
-  end
+  let(:resolved_scope) { described_class::Scope.new(user, Page.all).resolve }
 
-  let(:contributor_profile) do
-    FactoryBot.create(:valid_contributor_profile)
-  end
+  let(:contributor_profile) { FactoryBot.create(:valid_contributor_profile) }
   let(:user) do
-    FactoryBot.create(
-      :contributor,
-      contributor_profile: contributor_profile
-    )
+    FactoryBot.create(:contributor, contributor_profile: contributor_profile)
   end
 
   context 'contributor creating a new page' do
@@ -27,16 +20,14 @@ describe PagePolicy do
   context 'contributor accessing pages in a published category' do
     context 'accessing pages that the user does not contribute to' do
       context 'accessing a published page' do
-        let(:page) do
-          FactoryBot.create(:published_page_in_published_category)
-        end
+        let(:page) { FactoryBot.create(:published_page_in_published_category) }
 
         it 'includes page in resolved scope' do
           expect(resolved_scope).to include(page)
         end
 
         it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions(%i(edit update destroy)) }
+        it { is_expected.to forbid_actions(%i[edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
@@ -49,9 +40,7 @@ describe PagePolicy do
           expect(resolved_scope).not_to include(page)
         end
 
-        it do
-          is_expected.to forbid_actions(%i(show edit update destroy))
-        end
+        it { is_expected.to forbid_actions(%i[show edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
@@ -72,7 +61,7 @@ describe PagePolicy do
         end
 
         it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions(%i(edit update destroy)) }
+        it { is_expected.to forbid_actions(%i[edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
@@ -90,9 +79,7 @@ describe PagePolicy do
           expect(resolved_scope).to include(page)
         end
 
-        it do
-          is_expected.to permit_actions(%i(show edit update destroy))
-        end
+        it { is_expected.to permit_actions(%i[show edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
@@ -101,16 +88,14 @@ describe PagePolicy do
   context 'contributor accessing pages in an unpublished category' do
     context 'accessing pages that the user does not contribute to' do
       context 'accessing a published page' do
-        let(:page) do
-          FactoryBot.create(:published_page_in_published_category)
-        end
+        let(:page) { FactoryBot.create(:published_page_in_published_category) }
 
         it 'includes page in resolved scope' do
           expect(resolved_scope).to include(page)
         end
 
         it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions(%i(edit update destroy)) }
+        it { is_expected.to forbid_actions(%i[edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
@@ -123,9 +108,7 @@ describe PagePolicy do
           expect(resolved_scope).not_to include(page)
         end
 
-        it do
-          is_expected.to forbid_actions(%i(show edit update destroy))
-        end
+        it { is_expected.to forbid_actions(%i[show edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end
@@ -146,7 +129,7 @@ describe PagePolicy do
         end
 
         it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions(%i(edit update destroy)) }
+        it { is_expected.to forbid_actions(%i[edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
 
@@ -164,9 +147,7 @@ describe PagePolicy do
           expect(resolved_scope).to include(page)
         end
 
-        it do
-          is_expected.to permit_actions(%i(show edit update destroy))
-        end
+        it { is_expected.to permit_actions(%i[show edit update destroy]) }
         it { is_expected.to forbid_mass_assignment_of(:publish) }
       end
     end

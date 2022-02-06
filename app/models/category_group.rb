@@ -8,7 +8,7 @@ class CategoryGroup < ApplicationRecord
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
 
   # The list of category group types.
-  CATEGORY_GROUP_TYPES = %w(
+  CATEGORY_GROUP_TYPES = %w[
     parent
     literature
     picture
@@ -16,7 +16,7 @@ class CategoryGroup < ApplicationRecord
     video
     download
     quiz
-  ).freeze
+  ].freeze
 
   before_save :set_slug
 end

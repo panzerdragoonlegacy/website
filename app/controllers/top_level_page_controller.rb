@@ -15,10 +15,11 @@ class TopLevelPageController < ApplicationController
 
   def load_categories
     @categories = {}
-    MediaType::all.each do |key, value|
-      @categories[key] = policy_scope(
-        @saga.categories.where(category_type: key.to_s).order(:name)
-      )
+    MediaType.all.each do |key, value|
+      @categories[key] =
+        policy_scope(
+          @saga.categories.where(category_type: key.to_s).order(:name)
+        )
     end
   end
 

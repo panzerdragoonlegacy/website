@@ -3,9 +3,7 @@ require 'rails_helper'
 describe QuizPolicy do
   subject { described_class.new(user, quiz) }
 
-  let(:resolved_scope) do
-    described_class::Scope.new(user, Quiz.all).resolve
-  end
+  let(:resolved_scope) { described_class::Scope.new(user, Quiz.all).resolve }
 
   let(:user) { FactoryBot.create(:registered_user) }
 
@@ -17,7 +15,7 @@ describe QuizPolicy do
     end
 
     it { is_expected.to permit_action(:show) }
-    it { is_expected.to forbid_actions([:edit, :update, :destroy]) }
+    it { is_expected.to forbid_actions(%i[edit update destroy]) }
     it { is_expected.to forbid_mass_assignment_of(:publish) }
   end
 
@@ -28,7 +26,7 @@ describe QuizPolicy do
       expect(resolved_scope).not_to include(quiz)
     end
 
-    it { is_expected.to forbid_actions([:show, :edit, :update, :destroy]) }
+    it { is_expected.to forbid_actions(%i[show edit update destroy]) }
     it { is_expected.to forbid_mass_assignment_of(:publish) }
   end
 end

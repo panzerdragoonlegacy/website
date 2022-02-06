@@ -1,25 +1,33 @@
-$(document).on('ready page:load', function() {
-
+$(document).on("ready page:load", function () {
   jQuery.fn.extend({
     getSelectedTextInTextArea: function () {
       var container = new selectionContainer();
-        this.each(function (i) {
-          if (document.selection) {
-            this.focus(); // this is needed or the cursor position won't be remember when no text is selected
-            var range = document.selection.createRange();
-            container.selection += range.text;
-            container.bookmark = range.getBookmark();
-          }
-          else if (this.selectionStart || this.selectionStart == '0') {
-            container.selection += this.value.substring(this.selectionStart, this.selectionEnd);
-          }
-        })
+      this.each(function (i) {
+        if (document.selection) {
+          this.focus(); // this is needed or the cursor position won't be remember when no text is selected
+          var range = document.selection.createRange();
+          container.selection += range.text;
+          container.bookmark = range.getBookmark();
+        } else if (this.selectionStart || this.selectionStart == "0") {
+          container.selection += this.value.substring(
+            this.selectionStart,
+            this.selectionEnd
+          );
+        }
+      });
       return container;
-    }
+    },
   });
 
   jQuery.fn.extend({
-    insertTextInTextArea: function (replacementText, openTag, closeTag, transformFunction, appendText, bookmark) {
+    insertTextInTextArea: function (
+      replacementText,
+      openTag,
+      closeTag,
+      transformFunction,
+      appendText,
+      bookmark
+    ) {
       return this.each(function (i) {
         if (document.selection) {
           this.focus();
@@ -30,7 +38,7 @@ $(document).on('ready page:load', function() {
             sel.moveStart("character", -length);
           }
 
-          var content = (replacementText.length > 0 ? replacementText : sel.text);
+          var content = replacementText.length > 0 ? replacementText : sel.text;
           if (transformFunction != null) {
             content = transformFunction(content);
           }
@@ -45,12 +53,17 @@ $(document).on('ready page:load', function() {
             sel.moveStart("character", -content.length); // move start of selection from the end point back to the start of the content (excluding the start tag)
           }
 
-          if (closeTag == "" && openTag == "") { // needed to set the selected text positions when no tags were used... 
+          if (closeTag == "" && openTag == "") {
+            // needed to set the selected text positions when no tags were used...
             sel.moveStart("character", -length);
           }
           sel.select();
 
-          if (typeof appendText != "undefined" && appendText != null && appendText.length > 0) {
+          if (
+            typeof appendText != "undefined" &&
+            appendText != null &&
+            appendText.length > 0
+          ) {
             //$(this).focus(); // not sure if needed
             range = document.selection.createRange();
 
@@ -68,19 +81,28 @@ $(document).on('ready page:load', function() {
             test.moveEnd("character", endPos);
             test.select(); // select the text between start and end position
           }
-        }
-        else if (this.selectionStart || this.selectionStart == '0') {
+        } else if (this.selectionStart || this.selectionStart == "0") {
           var startPos = this.selectionStart;
           var endPos = this.selectionEnd;
           var scrollTop = this.scrollTop;
-          var content = (replacementText.length > 0 ? replacementText : this.value.substring(startPos, endPos));
+          var content =
+            replacementText.length > 0
+              ? replacementText
+              : this.value.substring(startPos, endPos);
           if (transformFunction != null) {
             content = transformFunction(content);
           }
           content = openTag + content + closeTag;
-          this.value = this.value.substring(0, startPos) + content + this.value.substring(endPos, this.value.length);
+          this.value =
+            this.value.substring(0, startPos) +
+            content +
+            this.value.substring(endPos, this.value.length);
           this.focus();
-          if (typeof appendText != "undefined" && appendText != null && appendText.length > 0) {
+          if (
+            typeof appendText != "undefined" &&
+            appendText != null &&
+            appendText.length > 0
+          ) {
             this.value += appendText;
           }
           this.selectionStart = startPos + openTag.length;
@@ -90,32 +112,43 @@ $(document).on('ready page:load', function() {
           this.value += content + appendText;
           this.focus();
         }
-      })
-    }
+      });
+    },
   });
 
   // Search all elements with css class = "insert_tag" and add an inline function to their click event.
   $("#btnInsertLists").click(function (event) {
-    $('.data_entry').insertTextInTextArea("", "", "", transformTextIntoList);
-      event.preventDefault();
-    });
+    $(".data_entry").insertTextInTextArea("", "", "", transformTextIntoList);
+    event.preventDefault();
+  });
 
-    $(".insert_tag").click(function (event) {
-      // Get grandparent element and then get its child elements of type "img" to retrieve their image text
-      // this makes sure we get the image element that resides in the same parent div of the button we clicked.
-      var imageText = $(this).parent().parent().children("img").attr('src').split('/').pop();
+  $(".insert_tag").click(function (event) {
+    // Get grandparent element and then get its child elements of type "img" to retrieve their image text
+    // this makes sure we get the image element that resides in the same parent div of the button we clicked.
+    var imageText = $(this)
+      .parent()
+      .parent()
+      .children("img")
+      .attr("src")
+      .split("/")
+      .pop();
 
-      // Removes question mark and numbers from after the .jpg. 
-      imageText = imageText.substring(0, imageText.indexOf("jpg") + "jpg".length);
+    // Removes question mark and numbers from after the .jpg.
+    imageText = imageText.substring(0, imageText.indexOf("jpg") + "jpg".length);
 
-      // Removes "jpg" from the end of the caption and captialise the first character. 
-      captionText = imageText.replace(/-/g, " ").replace("jpg", "");
-      captionText = captionText.charAt(0).toUpperCase() + captionText.slice(1);
+    // Removes "jpg" from the end of the caption and captialise the first character.
+    captionText = imageText.replace(/-/g, " ").replace("jpg", "");
+    captionText = captionText.charAt(0).toUpperCase() + captionText.slice(1);
 
-      // Call the custom insertAtCaret function on the element with id = "article_content".
-      $('.data_entry').insertTextInTextArea("![" + captionText + "](" + imageText + ")", "", "", null);
+    // Call the custom insertAtCaret function on the element with id = "article_content".
+    $(".data_entry").insertTextInTextArea(
+      "![" + captionText + "](" + imageText + ")",
+      "",
+      "",
+      null
+    );
 
-      // Prevents the button from actually submitting the form like it normally would.
-      event.preventDefault();
-    });
+    // Prevents the button from actually submitting the form like it normally would.
+    event.preventDefault();
+  });
 });

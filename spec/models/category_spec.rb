@@ -16,14 +16,17 @@ RSpec.describe Category, type: :model do
 
   describe 'associations' do
     it do
-      is_expected.to have_many(:categorisations).with_foreign_key(:parent_id)
-        .dependent(:destroy).inverse_of(:parent)
+      is_expected.to have_many(:categorisations)
+        .with_foreign_key(:parent_id)
+        .dependent(:destroy)
+        .inverse_of(:parent)
     end
     it do
       is_expected.to belong_to(:categorisation).with_foreign_key(:id).optional
     end
     it do
-      is_expected.to have_many(:subcategories).through(:categorisations)
+      is_expected.to have_many(:subcategories)
+        .through(:categorisations)
         .with_foreign_key(:subcategory_id)
     end
     it { is_expected.to belong_to(:category_group) }
@@ -45,12 +48,14 @@ RSpec.describe Category, type: :model do
       is_expected.to validate_length_of(:short_name_for_saga).is_at_most(50)
     end
     it do
-      is_expected.to validate_length_of(:short_name_for_media_type)
-        .is_at_most(50)
+      is_expected.to validate_length_of(:short_name_for_media_type).is_at_most(
+        50
+      )
     end
     it { is_expected.to validate_presence_of(:description) }
     it do
-      is_expected.to validate_length_of(:description).is_at_least(2)
+      is_expected.to validate_length_of(:description)
+        .is_at_least(2)
         .is_at_most(250)
     end
     it { is_expected.to validate_presence_of(:category_type) }
@@ -58,14 +63,13 @@ RSpec.describe Category, type: :model do
     pending describe 'validation of category group' do
       context 'category type is also a category group type' do
         before do
-          @category_group = FactoryBot.create(
-            :valid_category_group,
-            category_group_type: :music_track
-          )
-          @category = FactoryBot.build(
-            :valid_category,
-            category_type: :music_track
-          )
+          @category_group =
+            FactoryBot.create(
+              :valid_category_group,
+              category_group_type: :music_track
+            )
+          @category =
+            FactoryBot.build(:valid_category, category_type: :music_track)
         end
 
         context 'category group is present' do
@@ -78,10 +82,11 @@ RSpec.describe Category, type: :model do
 
           context "category type does not match the group's type" do
             it 'should not be valid' do
-              different_category_group = FactoryBot.create(
-                :valid_category_group,
-                category_group_type: :video
-              )
+              different_category_group =
+                FactoryBot.create(
+                  :valid_category_group,
+                  category_group_type: :video
+                )
               @category.category_group = different_category_group
               expect(@category).not_to be_valid
             end
@@ -98,17 +103,15 @@ RSpec.describe Category, type: :model do
 
       context 'category type is not a category group type' do
         before do
-          @category = FactoryBot.build(
-            :valid_category,
-            category_type: :link
-          )
+          @category = FactoryBot.build(:valid_category, category_type: :link)
         end
 
         it 'should not validate if a category group is present' do
-          category_group = FactoryBot.create(
-            :valid_category_group,
-            category_group_type: :music_track
-          )
+          category_group =
+            FactoryBot.create(
+              :valid_category_group,
+              category_group_type: :music_track
+            )
           @category.category_group = category_group
           expect(@category).not_to be_valid
         end
@@ -128,16 +131,15 @@ RSpec.describe Category, type: :model do
         .allowing('image/jpeg')
     end
     it do
-      is_expected.to validate_attachment_size(:category_picture)
-        .less_than(5.megabytes)
+      is_expected.to validate_attachment_size(:category_picture).less_than(
+        5.megabytes
+      )
     end
   end
 
   describe 'slug' do
     context 'creating a new category' do
-      let(:category) do
-        FactoryBot.build :valid_category, name: 'Category 1'
-      end
+      let(:category) { FactoryBot.build :valid_category, name: 'Category 1' }
 
       it 'generates a slug that is a parameterised version of the name' do
         category.save
@@ -146,9 +148,7 @@ RSpec.describe Category, type: :model do
     end
 
     context 'updating a category' do
-      let(:category) do
-        FactoryBot.create :valid_category, name: 'Category 1'
-      end
+      let(:category) { FactoryBot.create :valid_category, name: 'Category 1' }
 
       it 'synchronises the slug with the updated name' do
         category.name = 'Category 2'

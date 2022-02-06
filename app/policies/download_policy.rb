@@ -18,11 +18,13 @@ class DownloadPolicy < ApplicationPolicy
     private
 
     def scope_user_contributes_to
-      scope.joins(:category, :contributions).where(
-        '(downloads.publish = true AND categories.publish = true) OR ' \
-          'contributions.contributor_profile_id = ?',
-        user.contributor_profile_id
-      )
+      scope
+        .joins(:category, :contributions)
+        .where(
+          '(downloads.publish = true AND categories.publish = true) OR ' \
+            'contributions.contributor_profile_id = ?',
+          user.contributor_profile_id
+        )
     end
   end
 

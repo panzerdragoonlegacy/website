@@ -14,9 +14,10 @@ class MusicTracksController < ApplicationController
 
   def show
     load_music_track
-    @tags = TagPolicy::Scope.new(
-      current_user,
-      Tag.where(name: @music_track.tags.map { |tag| tag.name }).order(:name)
-    ).resolve
+    @tags =
+      TagPolicy::Scope.new(
+        current_user,
+        Tag.where(name: @music_track.tags.map { |tag| tag.name }).order(:name)
+      ).resolve
   end
 end

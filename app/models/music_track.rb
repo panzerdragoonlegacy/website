@@ -44,13 +44,19 @@ class MusicTrack < ApplicationRecord
   validates_attachment(
     :mp3_music_track,
     presence: true,
-    size: { in: 0..25.megabytes }
+    size: {
+      in: 0..25.megabytes
+    }
   )
   validates_attachment :flac_music_track, size: { in: 0..50.megabytes }
   validates_attachment(
     :music_track_picture,
-    content_type: { content_type: 'image/jpeg' },
-    size: { in: 0..5.megabytes }
+    content_type: {
+      content_type: 'image/jpeg'
+    },
+    size: {
+      in: 0..5.megabytes
+    }
   )
 
   # There were issues specifying content types.

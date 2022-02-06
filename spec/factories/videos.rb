@@ -4,9 +4,7 @@ FactoryBot.define do
       sequence(:name) { |n| "Video #{n}" }
       description { 'Test Description' }
       mp4_video do
-        Rack::Test::UploadedFile.new(
-          'spec/fixtures/video.mp4', 'video/mp4'
-        )
+        Rack::Test::UploadedFile.new('spec/fixtures/video.mp4', 'video/mp4')
       end
 
       category { FactoryBot.create(:valid_category) }

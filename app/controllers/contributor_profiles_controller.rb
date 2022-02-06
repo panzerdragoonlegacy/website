@@ -2,9 +2,8 @@ class ContributorProfilesController < ApplicationController
   include LoadableForContributorProfile
 
   def index
-    @contributor_profiles = policy_scope(
-      ContributorProfile.order(:name).page(params[:page])
-    )
+    @contributor_profiles =
+      policy_scope(ContributorProfile.order(:name).page(params[:page]))
   end
 
   def show

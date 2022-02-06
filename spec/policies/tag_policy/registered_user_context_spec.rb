@@ -3,9 +3,7 @@ require 'rails_helper'
 describe TagPolicy do
   subject { described_class.new(user, tag) }
 
-  let(:resolved_scope) do
-    described_class::Scope.new(user, Tag.all).resolve
-  end
+  let(:resolved_scope) { described_class::Scope.new(user, Tag.all).resolve }
 
   let(:user) { FactoryBot.create(:registered_user) }
 
@@ -18,7 +16,7 @@ describe TagPolicy do
 
     it do
       is_expected.to permit_action :show
-      is_expected.to forbid_actions([:new, :create, :edit, :update, :destroy])
+      is_expected.to forbid_actions(%i[new create edit update destroy])
     end
   end
 end

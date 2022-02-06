@@ -20,11 +20,7 @@ class Page < ApplicationRecord
   validates :page_type, presence: true
 
   # The list of page types.
-  PAGE_TYPES = %w(
-    literature
-    literature_chapter
-    top_level
-  ).freeze
+  PAGE_TYPES = %w[literature literature_chapter top_level].freeze
 
   has_attached_file(
     :page_picture,
@@ -40,8 +36,12 @@ class Page < ApplicationRecord
 
   validates_attachment(
     :page_picture,
-    content_type: { content_type: 'image/jpeg' },
-    size: { in: 0..5.megabytes }
+    content_type: {
+      content_type: 'image/jpeg'
+    },
+    size: {
+      in: 0..5.megabytes
+    }
   )
 
   before_validation :validate_category
@@ -77,7 +77,8 @@ class Page < ApplicationRecord
     if literature? && category.blank?
       errors.add(page_type, 'pages must have a category.')
     end
-    if literature? && category.present? && category.category_type != :literature.to_s
+    if literature? && category.present? &&
+         category.category_type != :literature.to_s
       errors.add(page_type, 'pages must belong to a literature category.')
     end
     if !literature? && category.present?
@@ -112,7 +113,8 @@ class Page < ApplicationRecord
         errors.add(page_type, 'pages must have a description.')
       elsif description.length < 2 || description.length > 250
         errors.add(
-          page_type, 'page descriptions must be between 2 and 250 characters.'
+          page_type,
+          'page descriptions must be between 2 and 250 characters.'
         )
       end
     end

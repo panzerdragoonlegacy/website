@@ -4,10 +4,10 @@ class Admin::PicturesController < ApplicationController
   include LoadableForPicture
   include PreviewSlugConcerns
   layout 'admin'
-  before_action :load_replaceable_pictures, except: [:index, :destroy]
-  before_action :load_albums, except: [:index, :destroy]
-  before_action :load_categories, except: [:show, :destroy]
-  before_action :load_picture, except: [:index, :new, :create]
+  before_action :load_replaceable_pictures, except: %i[index destroy]
+  before_action :load_albums, except: %i[index destroy]
+  before_action :load_categories, except: %i[show destroy]
+  before_action :load_picture, except: %i[index new create]
   helper_method :custom_picture_path
 
   def index
@@ -57,9 +57,9 @@ class Admin::PicturesController < ApplicationController
   private
 
   def picture_params
-    params.require(:picture).permit(
-      policy(@picture || :picture).permitted_attributes
-    )
+    params
+      .require(:picture)
+      .permit(policy(@picture || :picture).permitted_attributes)
   end
 
   def redirect_to_picture
@@ -76,8 +76,8 @@ class Admin::PicturesController < ApplicationController
 
   def make_current_user_a_contributor
     unless current_user.contributor_profile_id.to_s.in?(
-      params[:picture][:contributor_profile_ids]
-    )
+             params[:picture][:contributor_profile_ids]
+           )
       params[:picture][:contributor_profile_ids] <<
         current_user.contributor_profile_id
     end

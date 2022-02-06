@@ -14,7 +14,7 @@ class ConvertToPages < ActiveRecord::Migration
       end
     end
 
-    category_types = %w(encyclopaedia_entry article poem story resource)
+    category_types = %w[encyclopaedia_entry article poem story resource]
 
     CategoryGroup.all.each do |category_group|
       if category_group.category_group_type.in?(category_types)
@@ -87,8 +87,7 @@ class ConvertToPages < ActiveRecord::Migration
         if klass == Poem
           page.category = poem_category
         elsif klass != SpecialPage
-          page.category =
-            Category.where(name: old_page.category.name).first
+          page.category = Category.where(name: old_page.category.name).first
         end
         if klass != SpecialPage && old_page.contributor_profiles.count > 0
           old_page.contributor_profiles.each do |contributor_profile|
@@ -102,11 +101,13 @@ class ConvertToPages < ActiveRecord::Migration
           if old_page.category.name.include? 'Fan Translations'
             page.description = 'An unofficial fan translation.'
           elsif old_page.category.name.include? 'Song Lyrics'
-            page.description = 'Official text from ' \
-              "#{old_page.category.saga.name}'s soundtrack."
+            page.description =
+              'Official text from ' \
+                "#{old_page.category.saga.name}'s soundtrack."
           else
-            page.description = 'Official text extracted from ' \
-              "#{old_page.category.saga.name}."
+            page.description =
+              'Official text extracted from ' \
+                "#{old_page.category.saga.name}."
           end
         elsif klass.in?([Article, Poem, Story])
           page.description = old_page.description
@@ -117,9 +118,7 @@ class ConvertToPages < ActiveRecord::Migration
         end
         page.content = old_page.content
         if klass != EncyclopaediaEntry && klass != SpecialPage
-          old_page.tags.each do |tag|
-            page.tags << tag
-          end
+          old_page.tags.each { |tag| page.tags << tag }
         end
         unless klass == Poem
           old_page.illustrations.each do |illustration|
@@ -147,50 +146,53 @@ class ConvertToPages < ActiveRecord::Migration
         end
         if klass == Story
           sequence_number = 1
-          %w(prologue regular_chapter epilogue).each do |old_chapter_type|
-            old_page.chapters.where(chapter_type: old_chapter_type)
-              .order(:number).each do |old_chapter|
-              puts 'Creating Literature Chapter page based on ' \
-                "#{old_chapter.chapter_type} #{old_chapter.number} " \
-                "#{old_chapter.name}"
-              chapter = Page.new
-              chapter.old_model_type = 'Chapter'
-              chapter.old_model_id = old_chapter.id
-              chapter.page_type = :literature_chapter.to_s
-              chapter.parent_page_id = page.id
-              chapter.sequence_number = sequence_number
-              old_page.contributor_profiles.each do |contributor_profile|
-                chapter.contributor_profiles << contributor_profile
-              end
-              if old_chapter_type.in?(%w(prologue epilogue))
-                if old_chapter.name.blank?
-                  chapter.name = old_chapter_type.titleize
-                else
-                  chapter.name = old_chapter.name
+          %w[prologue regular_chapter epilogue].each do |old_chapter_type|
+            old_page
+              .chapters
+              .where(chapter_type: old_chapter_type)
+              .order(:number)
+              .each do |old_chapter|
+                puts 'Creating Literature Chapter page based on ' \
+                       "#{old_chapter.chapter_type} #{old_chapter.number} " \
+                       "#{old_chapter.name}"
+                chapter = Page.new
+                chapter.old_model_type = 'Chapter'
+                chapter.old_model_id = old_chapter.id
+                chapter.page_type = :literature_chapter.to_s
+                chapter.parent_page_id = page.id
+                chapter.sequence_number = sequence_number
+                old_page.contributor_profiles.each do |contributor_profile|
+                  chapter.contributor_profiles << contributor_profile
                 end
-              end
-              if old_chapter_type == :regular_chapter.to_s
-                if old_chapter.name.blank?
-                  chapter.name = "Chapter #{old_chapter.number}"
-                else
-                  chapter.name =
-                    "Chapter #{old_chapter.number}: #{old_chapter.name}"
+                if old_chapter_type.in?(%w[prologue epilogue])
+                  if old_chapter.name.blank?
+                    chapter.name = old_chapter_type.titleize
+                  else
+                    chapter.name = old_chapter.name
+                  end
                 end
+                if old_chapter_type == :regular_chapter.to_s
+                  if old_chapter.name.blank?
+                    chapter.name = "Chapter #{old_chapter.number}"
+                  else
+                    chapter.name =
+                      "Chapter #{old_chapter.number}: #{old_chapter.name}"
+                  end
+                end
+                chapter.content = old_chapter.content
+                old_chapter.illustrations.each do |illustration|
+                  chapter.illustrations << illustration
+                end
+                chapter.publish = old_page.publish
+                chapter.created_at = old_chapter.created_at
+                chapter.updated_at = old_chapter.updated_at
+                chapter.published_at = old_chapter.created_at
+                unless chapter.save
+                  puts "Invalid literature chapter page for #{old_chapter.name}"
+                  puts "Errors: #{chapter.errors.full_messages}"
+                end
+                sequence_number = sequence_number + 1
               end
-              chapter.content = old_chapter.content
-              old_chapter.illustrations.each do |illustration|
-                chapter.illustrations << illustration
-              end
-              chapter.publish = old_page.publish
-              chapter.created_at = old_chapter.created_at
-              chapter.updated_at = old_chapter.updated_at
-              chapter.published_at = old_chapter.created_at
-              unless chapter.save
-                puts "Invalid literature chapter page for #{old_chapter.name}"
-                puts "Errors: #{chapter.errors.full_messages}"
-              end
-              sequence_number = sequence_number + 1
-            end
           end
         end
       end
@@ -212,43 +214,66 @@ class ConvertToPages < ActiveRecord::Migration
             new_section_slug = 'literature'
           end
           old_klass.all.each do |old_page|
-            ['content', 'information'].each do |field|
+            %w[content information].each do |field|
               if (
-                (
-                  (field == 'content' && klass_to_update.in?(page_klasses)) ||
-                  (field == 'information' && klass_to_update.in?(info_klasses))
-                ) && (
-                  updateable.send(field).present? && (
-                    updateable.send(field).include?(
-                      "](/#{old_section_slug}/#{old_page.url})"
-                    ) || updateable.send(field).include?(
-                      "](/#{old_section_slug}/#{old_page.id}-#{old_page.url})"
-                    ) || (
-                      old_klass == EncyclopaediaEntry &&
-                      updateable.send(field).include?("](#{old_page.url})")
-                    )
-                  )
-                )
-              )
+                   (
+                     (
+                       field == 'content' && klass_to_update.in?(page_klasses)
+                     ) ||
+                       (
+                         field == 'information' &&
+                           klass_to_update.in?(info_klasses)
+                       )
+                   ) &&
+                     (
+                       updateable.send(field).present? &&
+                         (
+                           updateable
+                             .send(field)
+                             .include?(
+                               "](/#{old_section_slug}/#{old_page.url})"
+                             ) ||
+                             updateable
+                               .send(field)
+                               .include?(
+                                 "](/#{old_section_slug}/#{old_page.id}-#{old_page.url})"
+                               ) ||
+                             (
+                               old_klass == EncyclopaediaEntry &&
+                                 updateable
+                                   .send(field)
+                                   .include?("](#{old_page.url})")
+                             )
+                         )
+                     )
+                 )
                 puts "Replacing URL for #{old_klass} #{old_page.url} in " \
-                  "#{klass_to_update} #{updateable.name}'s #{field} field"
-                page = Page.where(
-                  old_model_type: old_klass.to_s, old_model_id: old_page.id
-                ).first
+                       "#{klass_to_update} #{updateable.name}'s #{field} field"
+                page =
+                  Page.where(
+                    old_model_type: old_klass.to_s,
+                    old_model_id: old_page.id
+                  ).first
                 if page
-                  updateable.send(field).gsub!(
-                    /]\(\/#{old_section_slug}\/#{old_page.url}\)/,
-                    "](/#{new_section_slug}/#{page.id}-#{page.url})"
-                  )
-                  updateable.send(field).gsub!(
-                    /]\(\/#{old_section_slug}\/#{old_page.id}-#{old_page.url}\)/,
-                    "](/#{new_section_slug}/#{page.id}-#{page.url})"
-                  )
-                  if old_klass == EncyclopaediaEntry
-                    updateable.send(field).gsub!(
-                      /]\(#{old_page.url}\)/,
-                      "](#{page.id}-#{page.url})"
+                  updateable
+                    .send(field)
+                    .gsub!(
+                      %r{]\(\/#{old_section_slug}\/#{old_page.url}\)},
+                      "](/#{new_section_slug}/#{page.id}-#{page.url})"
                     )
+                  updateable
+                    .send(field)
+                    .gsub!(
+                      %r{]\(\/#{old_section_slug}\/#{old_page.id}-#{old_page.url}\)},
+                      "](/#{new_section_slug}/#{page.id}-#{page.url})"
+                    )
+                  if old_klass == EncyclopaediaEntry
+                    updateable
+                      .send(field)
+                      .gsub!(
+                        /]\(#{old_page.url}\)/,
+                        "](#{page.id}-#{page.url})"
+                      )
                   end
                   unless updateable.save
                     puts "Invalid #{klass_to_update} #{updateable.name}"

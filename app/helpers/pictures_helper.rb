@@ -9,9 +9,8 @@ module PicturesHelper
       end
     end
     if record.send(attachment_name).file?
-      image_file = Paperclip::Geometry.from_file(
-        record.send(attachment_name).path(style)
-      )
+      image_file =
+        Paperclip::Geometry.from_file(record.send(attachment_name).path(style))
       image_tag(
         record.send(attachment_name).url(style),
         alt: record.name,

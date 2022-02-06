@@ -3,9 +3,7 @@ require 'rails_helper'
 describe VideoPolicy do
   subject { described_class.new(user, video) }
 
-  let(:resolved_scope) do
-    described_class::Scope.new(user, Video.all).resolve
-  end
+  let(:resolved_scope) { described_class::Scope.new(user, Video.all).resolve }
 
   let(:user) { FactoryBot.create(:administrator) }
 
@@ -18,15 +16,13 @@ describe VideoPolicy do
 
   context 'administrator accessing videos in a published category' do
     context 'accessing a published video' do
-      let(:video) do
-        FactoryBot.create(:published_video_in_published_category)
-      end
+      let(:video) { FactoryBot.create(:published_video_in_published_category) }
 
       it 'includes video in resolved scope' do
         expect(resolved_scope).to include(video)
       end
 
-      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to permit_actions(%i[show edit update destroy]) }
       it { is_expected.to permit_mass_assignment_of(:publish) }
     end
 
@@ -39,7 +35,7 @@ describe VideoPolicy do
         expect(resolved_scope).to include(video)
       end
 
-      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to permit_actions(%i[show edit update destroy]) }
       it { is_expected.to permit_mass_assignment_of(:publish) }
     end
   end
@@ -54,7 +50,7 @@ describe VideoPolicy do
         expect(resolved_scope).to include(video)
       end
 
-      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to permit_actions(%i[show edit update destroy]) }
       it { is_expected.to permit_mass_assignment_of(:publish) }
     end
 
@@ -67,7 +63,7 @@ describe VideoPolicy do
         expect(resolved_scope).to include(video)
       end
 
-      it { is_expected.to permit_actions([:show, :edit, :update, :destroy]) }
+      it { is_expected.to permit_actions(%i[show edit update destroy]) }
       it { is_expected.to permit_mass_assignment_of(:publish) }
     end
   end

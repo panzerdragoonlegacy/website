@@ -17,8 +17,12 @@ class Illustration < ApplicationRecord
   validates_attachment(
     :illustration,
     presence: true,
-    content_type: { content_type: 'image/jpeg' },
-    size: { in: 0..5.megabytes }
+    content_type: {
+      content_type: 'image/jpeg'
+    },
+    size: {
+      in: 0..5.megabytes
+    }
   )
 
   before_save :sync_file_name

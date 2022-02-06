@@ -3,9 +3,12 @@ module ChaptersHelper
     numbers = sequence_numbers_in_order(chapter)
     return false if numbers.index(chapter.sequence_number) == 0
     prev_number = numbers[numbers.index(chapter.sequence_number) - 1]
-    return Page.where(
-      parent_page_id: chapter.parent_page.id, sequence_number: prev_number
-    ).first
+    return(
+      Page.where(
+        parent_page_id: chapter.parent_page.id,
+        sequence_number: prev_number
+      ).first
+    )
   end
 
   def next_chapter(chapter)
@@ -13,7 +16,8 @@ module ChaptersHelper
     return false if numbers.index(chapter.sequence_number) == numbers.length - 1
     next_number = numbers[numbers.index(chapter.sequence_number) + 1]
     Page.where(
-      parent_page_id: chapter.parent_page.id, sequence_number: next_number
+      parent_page_id: chapter.parent_page.id,
+      sequence_number: next_number
     ).first
   end
 

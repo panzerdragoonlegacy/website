@@ -19,10 +19,11 @@ class QuizzesController < ApplicationController
     else
       flash.now[:notice] = "You haven't filled out the quiz."
     end
-    @tags = TagPolicy::Scope.new(
-      current_user,
-      Tag.where(name: @quiz.tags.map { |tag| tag.name }).order(:name)
-    ).resolve
+    @tags =
+      TagPolicy::Scope.new(
+        current_user,
+        Tag.where(name: @quiz.tags.map { |tag| tag.name }).order(:name)
+      ).resolve
   end
 
   private

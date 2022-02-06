@@ -1,7 +1,7 @@
 class Admin::CategoryGroupsController < ApplicationController
   include LoadableForCategoryGroup
   layout 'admin'
-  before_action :load_category_group, except: [:index, :new, :create]
+  before_action :load_category_group, except: %i[index new create]
 
   def index
     @q = CategoryGroup.order(:name).ransack(params[:q])
@@ -9,9 +9,8 @@ class Admin::CategoryGroupsController < ApplicationController
   end
 
   def new
-    @category_group = CategoryGroup.new(
-      category_group_type: params[:category_group_type]
-    )
+    @category_group =
+      CategoryGroup.new(category_group_type: params[:category_group_type])
     authorize @category_group
   end
 
@@ -46,10 +45,7 @@ class Admin::CategoryGroupsController < ApplicationController
   private
 
   def category_group_params
-    params.require(:category_group).permit(
-      :name,
-      :category_group_type
-    )
+    params.require(:category_group).permit(:name, :category_group_type)
   end
 
   def redirect_to_category_group

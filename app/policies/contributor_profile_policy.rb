@@ -46,20 +46,20 @@ class ContributorProfilePolicy < ApplicationPolicy
   private
 
   def attributes_except_publish
-    [
-      :name,
-      :description,
-      :email_address,
-      :discourse_username,
-      :discord_user_id,
-      :fandom_username,
-      :avatar,
-      :website_name,
-      :website_url,
-      :facebook_username,
-      :twitter_username,
-      :instagram_username,
-      :deviantart_username
+    %i[
+      name
+      description
+      email_address
+      discourse_username
+      discord_user_id
+      fandom_username
+      avatar
+      website_name
+      website_url
+      facebook_username
+      twitter_username
+      instagram_username
+      deviantart_username
     ]
   end
 end

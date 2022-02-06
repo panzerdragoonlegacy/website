@@ -41,12 +41,18 @@ class Video < ApplicationRecord
   validates_attachment(
     :mp4_video,
     presence: true,
-    size: { in: 0..500.megabytes }
+    size: {
+      in: 0..500.megabytes
+    }
   )
   validates_attachment(
     :video_picture,
-    content_type: { content_type: 'image/jpeg' },
-    size: { in: 0..5.megabytes }
+    content_type: {
+      content_type: 'image/jpeg'
+    },
+    size: {
+      in: 0..5.megabytes
+    }
   )
 
   # There were issues specifying content types.

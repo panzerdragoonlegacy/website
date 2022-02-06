@@ -16,9 +16,7 @@ describe CategoryPolicy do
       expect(resolved_scope).to include(category)
     end
 
-    it do
-      is_expected.to permit_actions([:show, :new, :create, :edit, :update])
-    end
+    it { is_expected.to permit_actions(%i[show new create edit update]) }
     it { is_expected.to permit_mass_assignment_of(:publish) }
 
     context 'category has no children' do
@@ -27,9 +25,8 @@ describe CategoryPolicy do
 
     context 'category has children' do
       before do
-        category.pictures << FactoryBot.create(
-          :published_picture_in_published_category
-        )
+        category.pictures <<
+          FactoryBot.create(:published_picture_in_published_category)
       end
 
       it { is_expected.to forbid_action(:destroy) }
@@ -43,9 +40,7 @@ describe CategoryPolicy do
       expect(resolved_scope).to include(category)
     end
 
-    it do
-      is_expected.to permit_actions([:show, :new, :create, :edit, :update])
-    end
+    it { is_expected.to permit_actions(%i[show new create edit update]) }
     it { is_expected.to permit_mass_assignment_of(:publish) }
 
     context 'category has no children' do
@@ -54,9 +49,8 @@ describe CategoryPolicy do
 
     context 'category has children' do
       before do
-        category.pictures << FactoryBot.create(
-          :published_picture_in_published_category
-        )
+        category.pictures <<
+          FactoryBot.create(:published_picture_in_published_category)
       end
 
       it { is_expected.to forbid_action(:destroy) }
