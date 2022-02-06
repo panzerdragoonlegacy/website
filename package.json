@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "stylelint-scss-check": "stylelint-config-prettier-scss-check"
+    "stylelint-check": "stylelint-config-prettier-scss-check",
+    "eslint-check": "npx eslint-config-prettier '**/*.js'"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
