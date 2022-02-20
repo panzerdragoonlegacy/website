@@ -1,0 +1,15 @@
+<nav class="main-menu">
+  <% @main_menu_categories.each do |category| %>
+    <h2><%= category.name %></h2>
+    <ul>
+      <% category.categorisations.each do |categorisation| %>
+        <li>
+          <%= link_to(
+            categorisation.short_name_in_parent,
+            categorisation.subcategory
+          ) %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</nav>

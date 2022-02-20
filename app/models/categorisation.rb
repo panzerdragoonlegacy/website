@@ -3,7 +3,10 @@ class Categorisation < ApplicationRecord
              class_name: 'Category',
              foreign_key: 'parent_id',
              inverse_of: :categorisations
-  has_one :subcategory, class_name: 'Category', foreign_key: 'id'
+  belongs_to :subcategory,
+             class_name: 'Category',
+             foreign_key: 'subcategory_id',
+             inverse_of: :categorisation
 
   validates(
     :sequence_number,

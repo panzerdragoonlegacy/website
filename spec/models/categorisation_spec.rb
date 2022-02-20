@@ -17,9 +17,10 @@ RSpec.describe Categorisation, type: :model do
         .inverse_of(:categorisations)
     end
     it do
-      is_expected.to have_one(:subcategory)
+      is_expected.to belong_to(:subcategory)
         .class_name('Category')
-        .with_foreign_key('id')
+        .with_foreign_key('subcategory_id')
+        .inverse_of(:categorisation)
     end
   end
 
