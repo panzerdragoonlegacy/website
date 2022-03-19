@@ -1,0 +1,17 @@
+<article class="home-music-track">
+  <div class="home-music-track__picture">
+    <%= link_to(
+      show_picture(music_track, 'music_track_picture', :embedded),
+      music_track
+    ) %>
+  </div>
+  <h1 class="home-music-track__heading">
+    <%= link_to music_track.name, music_track %>
+  </h1>
+  <footer class="home-music-track__more">
+    <%= link_to(
+      'More Music',
+      contributions_path(media_type: 'music')
+    ) %>
+  </footer>
+</article>

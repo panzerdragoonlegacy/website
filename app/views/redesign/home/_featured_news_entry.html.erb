@@ -1,0 +1,32 @@
+<article class="home-featured-news-entry">
+  <header class="home-featured-news-entry__header">
+    <div class="home-featured-news-entry__picture">
+      <%= link_to(
+        show_picture(featured_news_entry, 'news_entry_picture', :embedded),
+        featured_news_entry
+      ) %>
+    </div>
+    <h1 class="home-featured-news-entry__heading">
+      <%= link_to featured_news_entry.name, featured_news_entry %>
+    </h1>
+  </header>
+  <div class="home-featured-news-entry__body">
+    <p class="home-featured-news-entry__author-date">
+      <%= render(
+        partial: 'redesign/home/contributor',
+        locals: { contributor_profile: featured_news_entry.contributor_profile }
+      ) %> |
+      <%= render(
+        partial: 'redesign/home/published_at',
+        locals: { publishable: featured_news_entry }
+      ) %>
+    </p>
+    <p class="home-featured-news-entry__summary">
+      <% if featured_news_entry.summary.present? %>
+        <p><%= featured_news_entry.summary %></p>
+      <% else %>
+        <p><%= truncated_text featured_news_entry.content %></p>
+      <% end %>
+    </p>
+  </div>
+</article>

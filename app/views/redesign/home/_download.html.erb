@@ -1,0 +1,17 @@
+<article class="home-download">
+  <div class="home-download__picture">
+    <%= link_to(
+      show_picture(download, 'download_picture', :embedded),
+      download
+    ) %>
+  </div>
+  <h1 class="home-download__heading">
+    <%= link_to download.name, download %>
+  </h1>
+  <footer class="home-download__more">
+    <%= link_to(
+      'More Downloads',
+      contributions_path(media_type: 'downloads')
+    ) %>
+  </footer>
+</article>

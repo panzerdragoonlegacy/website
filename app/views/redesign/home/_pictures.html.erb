@@ -1,0 +1,18 @@
+<section class="home-pictures">
+  <% pictures.each do |picture| %>
+    <article class="home-picture">
+      <div class="home-picture__picture">
+        <%= link_to show_picture(picture, 'picture', :thumbnail), picture %>
+      </div>
+      <h1 class="home-picture__heading">
+        <%= link_to picture.name, picture %>
+      </h1>
+    </article>
+  <% end %>
+  <footer class="home-pictures__more">
+    <%= link_to(
+      'More Pictures',
+      contributions_path(media_type: 'pictures')
+    ) %>
+  </footer>
+</section>

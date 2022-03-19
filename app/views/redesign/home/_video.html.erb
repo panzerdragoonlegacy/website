@@ -1,0 +1,14 @@
+<article class="home-video">
+  <div class="home-video__picture">
+    <%= link_to show_picture(video, 'video_picture', :embedded), video %>
+  </div>
+  <h1 class="home-video__heading">
+    <%= link_to video.name, video %>
+  </h1>
+  <footer class="home-video__more">
+    <%= link_to(
+      'More Videos',
+      contributions_path(media_type: 'videos')
+    ) %>
+  </footer>
+</article>

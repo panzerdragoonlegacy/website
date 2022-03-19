@@ -1,0 +1,17 @@
+<article class="home-page">
+  <div class="home-page__picture">
+    <%= link_to(
+      show_picture(page, 'page_picture', :embedded),
+      literature_path(page)
+    ) %>
+  </div>
+  <h1 class="home-page__heading">
+    <%= link_to page.name, literature_path(page) %>
+  </h1>
+  <footer class="home-page__more">
+    <%= link_to(
+      'More Literature',
+      contributions_path(media_type: 'literature')
+    ) %>
+  </footer>
+</article>
