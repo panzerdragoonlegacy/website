@@ -1,0 +1,16 @@
+<div class="category-media-types">
+  <ul class="category-media-types__list">
+    <% MediaType::all.each do |key, value| %>
+      <% if category_has_subcategories_of_media_type(category, key.to_s) %>
+        <%= render(
+          partial: 'redesign/categories/media_type',
+          locals: {
+            category: category,
+            media_type: key.to_s,
+            friendly_media_type: value
+          }
+        ) %>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

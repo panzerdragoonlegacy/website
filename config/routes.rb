@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   namespace :redesign do
     get '/', to: 'home#show'
+    resources :categories, only: :show
   end
 
   resources :searches
