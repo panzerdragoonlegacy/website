@@ -33,6 +33,14 @@ Rails.application.routes.draw do
     get '/', to: 'home#show'
     resources :categories, only: :show
     resources :news_entries, only: %i[index show], path: 'news'
+    resources :pictures, only: :show
+
+    resources :contributor_profiles, path: 'contributors' do
+      resources :pictures, only: :index
+    end
+    resources :tags do
+      resources :pictures, only: :index
+    end
   end
 
   resources :searches

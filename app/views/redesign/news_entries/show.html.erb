@@ -18,6 +18,10 @@
   </p>
 <% end %>
 
+<% unless @news_entry.publish %>
+  <%= render partial: 'redesign/shared/draft' %>
+<% end %>
+
 <article class="news-entry">
   <header class="news-entry__header">
     <% if @news_entry.news_entry_picture.present? %>

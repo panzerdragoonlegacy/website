@@ -1,0 +1,34 @@
+<section class="gallery">
+  <% pictures.each do |picture| %>
+    <article class="gallery-picture">
+      <div class="gallery-picture__picture">
+         <% if picture.controversial_content? %>
+          <%= link_to show_controversial_content_thumbnail, picture %>
+        <% else %>
+          <%= link_to show_picture(picture, 'picture', :thumbnail), picture %>
+        <% end %>
+      </div>
+      <h1 class="gallery-picture__heading">
+        <% if picture.album && group_pictures_into_albums %>
+          <%= link_to picture.album.name, picture %>
+        <% else %>
+          <%= link_to picture.name, picture %>
+        <% end %>
+      </h1>
+      <div class="gallery-picture__body">
+        <% unless picture.publish && picture.category.publish %>
+          <%= render partial: 'redesign/shared/draft' %>
+        <% end %>
+        <% if picture.album && group_pictures_into_albums %>
+          <p><%= picture.album.pictures.count %> pictures</p>
+          <p><%= picture.album.description %></p>
+        <% else %>
+          <p><%= picture.description %></p>
+        <% end %>
+      </div>
+    </article>
+  <% end %>
+  <footer class="pagination">
+    <%= paginate pictures %>
+  </footer>
+</section>

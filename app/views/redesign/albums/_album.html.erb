@@ -1,0 +1,33 @@
+<div class="album">
+  <h1 class="album__heading">
+    Also in the Album "<%= album.name %>"
+  </h1>
+  <div id="album__body">
+    <% album.ordered_pictures.each do |picture| %>
+      <% unless picture.id == picture_id %>
+        <%= link_to(
+          image_tag(
+            picture.picture.url(:mini_thumbnail),
+            alt: picture.name,
+            width: '75',
+            height: '75'
+          ),
+          picture
+        ) %>
+      <% end %>
+    <% end %>
+    <% album.ordered_videos.each do |video| %>
+      <% unless video.id == video_id %>
+        <%= link_to(
+          image_tag(
+            video.video_picture.url(:mini_thumbnail),
+            alt: video.name,
+            width: '75',
+            height: '75'
+          ),
+          video
+        ) %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
