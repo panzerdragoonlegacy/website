@@ -1,0 +1,22 @@
+<% if @contributor_profile %>
+  <% title "#{@contributor_profile.name}'s News Entries" %>
+<% elsif @tag %>
+  <% title "News Entries Tagged With #{@tag.name}" %>
+<% elsif params[:year] %>
+  <% title "News from #{params[:year]}" %>
+<% else %>
+  <% title 'News Archives' %>
+<% end %>
+<%= render partial: 'redesign/shared/meta_tags' %>
+
+<% if @news_entry_years %>
+  <%= render(
+    partial: 'redesign/news_entries/news_entry_years',
+    locals: { news_entry_years: @news_entry_years }
+  ) %>
+<% elsif @news_entries %>
+  <%= render(
+    partial: 'redesign/news_entries/news_entries',
+    locals: { news_entries: @news_entries }
+  ) %>
+<% end %>

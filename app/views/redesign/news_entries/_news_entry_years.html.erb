@@ -1,0 +1,10 @@
+<nav class="news-entry-years">
+  <h1 class="news-entry-years__heading">Browse by Year</h1>
+  <ul class="news-entry-years__list">
+    <% news_entry_years.each do |year| %>
+      <li class="news-entry-years__list-item">
+        <%= link_to year, "#{news_entries_path}?year=#{year}" %>
+      </li>
+    <% end %>
+  </ul>
+</div>

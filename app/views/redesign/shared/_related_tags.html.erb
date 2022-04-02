@@ -1,0 +1,13 @@
+<% unless tags.count == 0 %>
+  <div class="related-tags">
+    <h1 class="related-tags__heading">Related Tags</h1>
+    <ul class="related-tags__list">
+      <% tags.each do |tag| %>
+        <li class="related-tags__list-item">
+          <%= link_to show_picture(tag, 'tag_picture', :mini_thumbnail), tag %>
+          <%= link_to tag.name, tag %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

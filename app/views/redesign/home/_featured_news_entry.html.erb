@@ -13,11 +13,11 @@
   <div class="home-featured-news-entry__body">
     <p class="home-featured-news-entry__author-date">
       <%= render(
-        partial: 'redesign/home/contributor',
+        partial: 'redesign/shared/contributor',
         locals: { contributor_profile: featured_news_entry.contributor_profile }
       ) %> |
       <%= render(
-        partial: 'redesign/home/published_at',
+        partial: 'redesign/shared/published_at',
         locals: { publishable: featured_news_entry }
       ) %>
     </p>
