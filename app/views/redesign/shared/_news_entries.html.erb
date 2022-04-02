@@ -1,16 +1,16 @@
-<section class="news-archives">
+<section class="news-entries">
   <% news_entries.each do |news_entry| %>
-    <article class="news-archives-news-entry">
-      <div class="news-archives-news-entry__picture">
+    <article class="news-entries-news-entry">
+      <div class="news-entries-news-entry__picture">
         <%= link_to(
           show_picture(news_entry, 'news_entry_picture', :embedded),
           news_entry
         ) %>
       </div>
-      <h1 class="news-archives-news-entry__heading">
+      <h1 class="news-entries-news-entry__heading">
         <%= link_to news_entry.name, news_entry %>
       </h1>
-      <p class="news-archives-news-entry__author-date">
+      <p class="news-entries-news-entry__author-date">
         <%= render(
           partial: 'redesign/shared/contributor',
           locals: { contributor_profile: news_entry.contributor_profile }

@@ -37,7 +37,7 @@
   <% end %>
   <% if @news_entries && @news_entries.present? %>
     <%= render(
-      partial: 'redesign/home/news_entries',
+      partial: 'redesign/shared/news_entries',
       locals: { news_entries: @news_entries }
     ) %>
   <% end %>

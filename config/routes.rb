@@ -36,9 +36,11 @@ Rails.application.routes.draw do
     resources :pictures, only: :show
 
     resources :contributor_profiles, path: 'contributors' do
+      resources :news_entries, only: :index, path: 'news-entries'
       resources :pictures, only: :index
     end
     resources :tags do
+      resources :news_entries, only: :index, path: 'news-entries'
       resources :pictures, only: :index
     end
   end
