@@ -2,34 +2,43 @@
 <%= render partial: 'shared/meta_tags' %>
 
 <main class="home">
-  <%= render(
-    partial: 'redesign/home/featured_news_entry',
-    locals: { featured_news_entry: @featured_news_entry }
-  ) %>
-  <%= render(
-    partial: 'redesign/home/pictures',
-    locals: { pictures: @pictures }
-  ) %>
-  <section class="home-other-contributions">
+  <% if @featured_news_entry.present? %>
     <%= render(
-      partial: 'redesign/home/page',
-      locals: { page: @page }
+      partial: 'redesign/home/featured_news_entry',
+      locals: { featured_news_entry: @featured_news_entry }
     ) %>
+  <% end %>
+  <% if @pictures.present? %>
     <%= render(
-      partial: 'redesign/home/music_track',
-      locals: { music_track: @music_track }
+      partial: 'redesign/home/pictures',
+      locals: { pictures: @pictures }
     ) %>
+  <% end %>
+  <% if @page.present? && @music_track.present? && @video.present? &&
+        @download.present? %>
+    <section class="home-other-contributions">
+      <%= render(
+        partial: 'redesign/home/page',
+        locals: { page: @page }
+      ) %>
+      <%= render(
+        partial: 'redesign/home/music_track',
+        locals: { music_track: @music_track }
+      ) %>
+      <%= render(
+        partial: 'redesign/home/video',
+        locals: { video: @video }
+      ) %>
+      <%= render(
+        partial: 'redesign/home/download',
+        locals: { download: @download }
+      ) %>
+    </section>
+  <% end %>
+  <% if @news_entries && @news_entries.present? %>
     <%= render(
-      partial: 'redesign/home/video',
-      locals: { video: @video }
+      partial: 'redesign/home/news_entries',
+      locals: { news_entries: @news_entries }
     ) %>
-    <%= render(
-      partial: 'redesign/home/download',
-      locals: { download: @download }
-    ) %>
-  </section>
-  <%= render(
-    partial: 'redesign/home/news_entries',
-    locals: { news_entries: @news_entries }
-  ) %>
+  <% end %>
 </main>
