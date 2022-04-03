@@ -61,6 +61,8 @@ Rails.application.routes.draw do
       resources :downloads, only: :index
       resources :quizzes, only: :index
     end
+
+    get ':id', to: 'top_level_pages#show', as: 'top_level_page'
   end
 
   resources :searches

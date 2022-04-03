@@ -1,0 +1,30 @@
+<% title @page.name %>
+<% description @page.description %>
+<%= render(
+  partial: 'redesign/shared/pages/open_graph_metadata',
+  locals: { page: @page }
+) %>
+
+<%= render(
+  partial: 'redesign/shared/pages/admin_section',
+  locals: { page: @page }
+) %>
+
+<% unless @page.publish %>
+  <%= render partial: 'redesign/shared/draft' %>
+<% end %>
+
+<article class="page">
+  <header class="page__header">
+    <%= render(
+      partial: 'redesign/shared/pages/page_picture',
+      locals: { page: @page }
+    ) %>
+  </header>
+  <div class="page__body">
+    <%= render(
+      partial: 'redesign/shared/pages/content',
+      locals: { page: @page }
+    ) %>
+  </div>
+</article>
