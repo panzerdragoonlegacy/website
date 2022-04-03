@@ -1,0 +1,43 @@
+<% title @tag.name %>
+<% if @tag.description.present? %>
+  <% description truncated_text(@tag.description) %>
+<% end %>
+<% open_graph_type 'article' %>
+<% if @tag.tag_picture.present? %>
+  <% open_graph_image(
+    ENV['WEBSITE_URL'].chomp('/') + @tag.tag_picture.url(:original)
+  ) %>
+<% end %>
+
+<% if policy(@tag).edit? %>
+  <p class="admin-section">
+    <%= link_to 'Edit Tag', edit_admin_tag_path(@tag) %>
+  </p>
+<% end %>
+
+<article class="tag">
+  <header class="tag__header">
+    <% if @tag.tag_picture.present? %>
+      <%= show_picture @tag, 'tag_picture', :embedded %>
+    <% end %>
+  </header>
+  <div class="tag__body">
+    <% if @tag.description.present? %>
+      <p class="tag__description"><%= @tag.description %></p>
+    <% end %>
+    <% if @tag.information.present? %>
+      <div class="tag__extra-information">
+        <%= raw markdown_to_html @tag.information %>
+      </div>
+    <% end %>
+    <% if @tag.wiki_slug.present? %>
+      <p class="tag__wiki-link">
+        <%= link_to(
+          "#{@tag.name} on Panzer Dragoon Wiki",
+          "https://panzerdragoon.fandom.com/wiki/#{@tag.wiki_slug}"
+        ) %>
+      </p>
+    <% end %>
+    <%= render partial: 'redesign/tags/tagged_content', locals: { tag: @tag } %>
+  </div>
+</article>

@@ -1,4 +1,4 @@
-module AlbumsHelper
+module Shared::AlbumsHelper
   def previous_albumable(albumable)
     albumables = ordered_albumables(albumable.album)
     previous_index = albumables.index(albumable) - 1

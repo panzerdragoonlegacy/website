@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     resources :downloads, only: :show
     resources :quizzes, only: :show
 
-    resources :contributor_profiles, path: 'contributors' do
+    resources :contributor_profiles, only: :show, path: 'contributors' do
       resources :news_entries, only: :index, path: 'news-entries'
       resources :pictures, only: :index
       resources :literature, only: :index
@@ -52,7 +52,7 @@ Rails.application.routes.draw do
       resources :quizzes, only: :index
     end
 
-    resources :tags do
+    resources :tags, only: :show do
       resources :news_entries, only: :index, path: 'news-entries'
       resources :pictures, only: :index
       resources :literature, only: :index
