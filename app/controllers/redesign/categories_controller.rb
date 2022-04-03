@@ -1,13 +1,14 @@
 class Redesign::CategoriesController < ApplicationController
   layout 'redesign'
-  include PreviewSlugConcerns
+  include LoadableForCategory
 
   def show
-    @category =
-      Category
-        .where(slug: previewless_slug(params[:id]))
-        .includes(:categorisations)
-        .first
-    authorize @category
+    load_category
+    load_category_literature_pages
+    load_category_pictures
+    load_category_music_tracks
+    load_category_videos
+    load_category_downloads
+    load_category_quizzes
   end
 end

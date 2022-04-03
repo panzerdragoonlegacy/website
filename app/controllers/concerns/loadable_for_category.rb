@@ -28,7 +28,11 @@ module LoadableForCategory
   end
 
   def load_category
-    @category = Category.find_by slug: previewless_slug(params[:id])
+    @category =
+      Category
+        .where(slug: previewless_slug(params[:id]))
+        .includes(:categorisations)
+        .first
     authorize @category
   end
 
@@ -55,6 +59,7 @@ module LoadableForCategory
             .order(:name)
             .page(params[:page])
         ).resolve
+      # Todo: remove after redesign launches. Now defined in template:
       @group_pictures_into_albums = true
     end
   end
@@ -92,6 +97,19 @@ module LoadableForCategory
         DownloadPolicy::Scope.new(
           current_user,
           Download
+            .where(category_id: @category.id)
+            .order(:name)
+            .page(params[:page])
+        ).resolve
+    end
+  end
+
+  def load_category_quizzes
+    if @category.category_type == :quiz.to_s
+      @quizzes =
+        QuizPolicy::Scope.new(
+          current_user,
+          Quiz
             .where(category_id: @category.id)
             .order(:name)
             .page(params[:page])

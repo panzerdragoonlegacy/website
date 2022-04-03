@@ -46,6 +46,7 @@ module LoadableForPicture
           .order(:name)
           .page(params[:page])
       )
+    # Todo: remove after redesign launches. Now defined in template:
     @group_pictures_into_albums = false
   end
 
