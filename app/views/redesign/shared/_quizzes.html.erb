@@ -1,0 +1,18 @@
+<section class="cards">
+  <% quizzes.each do |quiz| %>
+    <article class="card">
+      <h1 class="card__heading">
+        <%= link_to quiz.name, quiz %>
+      </h1>
+      <div class="card__body">
+        <% unless quiz.publish && quiz.category.publish %>
+          <%= render partial: 'redesign/shared/draft' %>
+        <% end %>
+        <p><%= quiz.description %></p>
+      </div>
+    </article>
+  <% end %>
+  <footer class="cards__footer">
+    <%= paginate quizzes %>
+  </footer>
+</section>

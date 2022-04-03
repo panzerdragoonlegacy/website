@@ -1,0 +1,6 @@
+<% open_graph_type 'article' %>
+<% if page.page_picture.present? %>
+  <% open_graph_image(
+    ENV['WEBSITE_URL'].chomp('/') + page.page_picture.url(:original)
+  ) %>
+<% end %>

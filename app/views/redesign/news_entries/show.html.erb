@@ -27,11 +27,6 @@
     <% if @news_entry.news_entry_picture.present? %>
       <%= show_picture @news_entry, 'news_entry_picture', :embedded %>
     <% end %>
-    <h1 class="news-entry__heading">
-      <%= @news_entry.name %>
-    </h1>
-  </header>
-  <div class="news-entry__body">
     <div class="news-entry__contributor-avatar">
       <% if @news_entry.contributor_profile.avatar_file_name.blank? %>
         <%= image_pack_tag 'media/images/default-avatar.jpg' %>
@@ -53,6 +48,8 @@
     <% if @news_entry.summary.present? %>
       <p class="news-entry__summary"><%= @news_entry.summary %></p>
     <% end %>
+  </header>
+  <div class="news-entry__body">
     <div class="news-entry__content">
       <%= raw news_entry_markdown_to_html @news_entry.content %>
     </div> 

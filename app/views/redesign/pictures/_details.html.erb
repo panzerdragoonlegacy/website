@@ -1,30 +1,24 @@
-<div class="picture__details">
-  <p>
-    <% unless picture.source_url.blank? %>
-      View Source:
-        <%= link_to(
-          picture_source_link_text(picture.source_url),
-          picture.source_url
-        ) %>.
-    <% end %>
-    <% unless picture.instagram_post_id.blank? %>
-      View Post:
-        <%= link_to(
-          'Instagram',
-          "https://www.instagram.com/p/#{picture.instagram_post_id}"
-        ) %>.
-    <% end %>
-    <% if picture.full_size_link %>
-      Download Full Size Picture: <%= link_to "JPEG", picture.picture.url %>.
-    <% else %>
-      Full size downloads are disabled for this picture.
-    <% end %>
-    <% if picture.published_at %>
-      Published <%= local_date picture.published_at %>.
-    <% end %>
-  </p>
-  <p><%= picture.description %></p>
-  <% unless picture.information.blank? %>
-    <%= raw markdown_to_html picture.information %>
+<p class="picture__details">
+  <% unless picture.source_url.blank? %>
+    View Source:
+      <%= link_to(
+        picture_source_link_text(picture.source_url),
+        picture.source_url
+      ) %>.
   <% end %>
-</div>
+  <% unless picture.instagram_post_id.blank? %>
+    View Post:
+      <%= link_to(
+        'Instagram',
+        "https://www.instagram.com/p/#{picture.instagram_post_id}"
+      ) %>.
+  <% end %>
+  <% if picture.full_size_link %>
+    Download Full Size Picture: <%= link_to "JPEG", picture.picture.url %>.
+  <% else %>
+    Full size downloads are disabled for this picture.
+  <% end %>
+  <% if picture.published_at %>
+    Published <%= local_date picture.published_at %>.
+  <% end %>
+</p>

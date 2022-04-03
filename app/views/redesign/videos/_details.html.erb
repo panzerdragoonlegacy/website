@@ -1,0 +1,21 @@
+<p class="video__details">
+  <% unless @video.source_url.blank? %>
+    View Source:
+      <%=
+        link_to(
+          video_source_link_text(@video.source_url),
+          @video.source_url
+        )
+      %>.
+  <% end %>
+  <% unless @video.youtube_video_id.blank? %>
+    Watch Video:
+      <%=
+        link_to(
+          'YouTube',
+          "https://www.youtube.com/watch?v=#{@video.youtube_video_id}"
+        )
+      %>.
+  <% end %>
+  Download Video: <%= link_to 'MP4', @video.mp4_video.url %>
+</p>

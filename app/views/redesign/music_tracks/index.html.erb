@@ -1,0 +1,14 @@
+<% if @contributor_profile %>
+  <% title "#{@contributor_profile.name}'s Music" %>
+<% elsif @tag %>
+  <% title "Music Tagged With #{@tag.name}" %>
+<% else %>
+  <% title 'Music' %>
+<% end %>
+
+<% if @music_tracks %>
+  <%= render(
+    partial: 'redesign/shared/music_tracks',
+    locals: { music_tracks: @music_tracks }
+  ) %>
+<% end %>

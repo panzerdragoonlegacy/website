@@ -1,0 +1,34 @@
+<% title @quiz.name %>
+<% description @quiz.description %>
+
+<% if policy(@quiz).edit? %>
+  <p class="admin-section">
+    <%= link_to 'Edit Quiz', edit_admin_quiz_path(@quiz) %>
+  </p>
+<% end %>
+
+<% unless @quiz.publish %>
+  <%= render partial: 'redesign/shared/draft' %>
+<% end %>
+
+<article class="quiz">
+  <header class="quiz__header">
+    <%= render(
+      partial: 'redesign/shared/contributed_by',
+      locals: { contributor_profiles: @quiz.contributor_profiles }
+    ) %>
+  </header>
+  <div class="quiz__body">
+    <% if @show_results %>
+      <%= render 'results' %>
+    <% else %>
+      <%= render 'questions' %>
+    <% end %>
+  </div>
+   <footer class="quiz__footer">
+    <%= render(
+      partial: 'redesign/shared/related_tags',
+      locals: { tags: @tags }
+    ) %>
+  </footer>
+</article>

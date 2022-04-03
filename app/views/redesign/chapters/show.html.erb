@@ -1,0 +1,53 @@
+<% title @page.parent_page.name %>
+<% description @page.parent_page.description %>
+<%= render(
+  partial: 'redesign/shared/pages/open_graph_metadata',
+  locals: { page: @page }
+) %>
+
+<%= render(
+  partial: 'redesign/shared/pages/admin_section',
+  locals: { page: @page }
+) %>
+
+<% if !@page.publish %>
+  <%= render partial: 'redesign/shared/draft' %>
+<% elsif !@page.parent_page.publish %>
+  <p class="unpublished">Published in Unpublished Parent Page</p>
+<% elsif !@page.parent_page.category.publish %>
+  <p class="unpublished">Published in Unpublished Category</p>
+<% end %>
+
+<article class="page">
+  <header class="page__header">
+    <%= render(
+      partial: 'redesign/shared/pages/page_picture',
+      locals: { page: @page }
+    ) %>
+    <h1 class="page__heading"><%= @page.name %></h1>
+    <%= render(
+      partial: 'redesign/shared/contributed_by',
+      locals: { contributor_profiles: @page.contributor_profiles }
+    ) %>
+  </header>
+  <div class="page__body">
+    <%= render(
+      partial: 'redesign/shared/pages/content',
+      locals: { page: @page }
+    ) %>
+    <%= render(
+      partial: 'redesign/literature/chapters',
+      locals: { page: @page }
+    ) %>
+  </div>
+  <footer class="page__footer">
+    <%= render(
+      partial: 'redesign/shared/related_tags',
+      locals: { tags: @tags }
+    ) %>
+    <%= render(
+      partial: 'redesign/chapters/navigation',
+      locals: { page: @page }
+    ) %>
+  </footer>
+</article>

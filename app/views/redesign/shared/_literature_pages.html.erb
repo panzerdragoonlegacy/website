@@ -1,0 +1,26 @@
+<section class="cards">
+  <% pages.each do |page| %>
+    <article class="card">
+      <% if page.page_picture.present? %>
+        <div class="card__picture">
+          <%= link_to(
+            show_picture(page, 'page_picture', :thumbnail),
+            literature_path(page)
+          ) %>
+        </div>
+      <% end %>
+      <h1 class="card__heading">
+        <%= link_to page.name, literature_path(page) %>
+      </h1>
+      <div class="card__body">
+        <% unless page.publish && page.category.publish %>
+          <%= render partial: 'redesign/shared/draft' %>
+        <% end %>
+        <p><%= page.description %></p>
+      </div>
+    </article>
+  <% end %>
+  <footer class="cards__footer">
+    <%= paginate pages %>
+  </footer>
+</section>

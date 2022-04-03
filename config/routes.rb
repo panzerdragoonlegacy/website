@@ -34,14 +34,32 @@ Rails.application.routes.draw do
     resources :categories, only: :show
     resources :news_entries, only: %i[index show], path: 'news'
     resources :pictures, only: :show
+    resources :literature, only: :show do
+      resources :chapters, only: :show
+    end
+    resources :music_tracks, path: 'music', only: :show
+    resources :videos, only: :show
+    resources :downloads, only: :show
+    resources :quizzes, only: :show
 
     resources :contributor_profiles, path: 'contributors' do
       resources :news_entries, only: :index, path: 'news-entries'
       resources :pictures, only: :index
+      resources :literature, only: :index
+      resources :music_tracks, path: 'music-tracks', only: :index
+      resources :videos, only: :index
+      resources :downloads, only: :index
+      resources :quizzes, only: :index
     end
+
     resources :tags do
       resources :news_entries, only: :index, path: 'news-entries'
       resources :pictures, only: :index
+      resources :literature, only: :index
+      resources :music_tracks, path: 'music-tracks', only: :index
+      resources :videos, only: :index
+      resources :downloads, only: :index
+      resources :quizzes, only: :index
     end
   end
 

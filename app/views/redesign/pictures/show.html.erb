@@ -36,7 +36,7 @@
     ) %>
     <% if @picture.album %>
       <%= render(
-        partial: 'redesign/albums/navigation',
+        partial: 'redesign/shared/albums/navigation',
         locals: { albumable: @picture }
       ) %>
     <% end %>
@@ -55,16 +55,22 @@
       partial: 'redesign/pictures/details',
       locals: { picture: @picture }
     ) %>
+    <p class="picture__description"><%= @picture.description %></p>
+    <% unless @picture.information.blank? %>
+      <div class="picture__extra-information">
+        <%= raw markdown_to_html @picture.information %>
+      </div>
+    <% end %>
+  </div>
+  <footer class="picture__footer">
     <% if @picture.album && album_has_at_least_one_albumable(@picture.album) %>
       <%= render(
-        partial: 'redesign/albums/album',
+        partial: 'redesign/shared/albums/album',
         locals: {
           album: @picture.album, picture_id: @picture.id, video_id: nil
         }
       ) %>
     <% end %>
-  </div>
-  <footer class="picture__footer">
     <%= render(
       partial: 'redesign/shared/related_tags',
       locals: { tags: @tags }

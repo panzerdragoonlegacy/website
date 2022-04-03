@@ -1,0 +1,26 @@
+<section class="cards">
+  <% videos.each do |video| %>
+    <article class="card">
+      <% if video.video_picture.present? %>
+        <div class="card__picture">
+          <%= link_to(
+            show_picture(video, 'video_picture', :thumbnail),
+            video
+          ) %>
+        </div>
+      <% end %>
+      <h1 class="card__heading">
+        <%= link_to video.name, video %>
+      </h1>
+      <div class="card__body">
+        <% unless video.publish && video.category.publish %>
+          <%= render partial: 'redesign/shared/draft' %>
+        <% end %>
+        <p><%= video.description %></p>
+      </div>
+    </article>
+  <% end %>
+  <footer class="cards__footer">
+    <%= paginate videos %>
+  </footer>
+</section>

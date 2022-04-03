@@ -1,0 +1,45 @@
+<% title @page.name %>
+<% description @page.description %>
+<%= render(
+  partial: 'redesign/shared/pages/open_graph_metadata',
+  locals: { page: @page }
+) %>
+
+<%= render(
+  partial: 'redesign/shared/pages/admin_section',
+  locals: { page: @page }
+) %>
+
+<% unless @page.publish && @page.category.publish %>
+  <%= render partial: 'redesign/shared/draft' %>
+<% end %>
+
+<article class="page">
+  <header class="page__header">
+    <%= render(
+      partial: 'redesign/shared/pages/page_picture',
+      locals: { page: @page }
+    ) %>
+    <%= render(
+      partial: 'redesign/shared/contributed_by',
+      locals: { contributor_profiles: @page.contributor_profiles }
+    ) %>
+  </header>
+  <div class="page__body">
+    <p class="page__description"><%= @page.description %></p>
+    <%= render(
+      partial: 'redesign/shared/pages/content',
+      locals: { page: @page }
+    ) %>
+    <%= render(
+      partial: 'redesign/literature/chapters',
+      locals: { page: @page }
+    ) %>
+  </div>
+  <footer class="page__footer">
+    <%= render(
+      partial: 'redesign/shared/related_tags',
+      locals: { tags: @tags }
+    ) %>
+  </footer>
+</article>
