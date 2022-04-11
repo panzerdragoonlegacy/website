@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '7.0.0'
+gem 'rails', '7.0.2.3'
 gem 'rake', '13.0.1'
 
 group :development do
@@ -8,7 +8,7 @@ group :development do
   gem 'bundler-audit'
   gem 'listen'
   gem 'spring', '~> 2.1.1'
-  gem 'web-console', '~> 4.0.4'
+  gem 'web-console', '~> 4.2.0'
 end
 
 group :development, :test do
@@ -34,15 +34,13 @@ gem 'kramdown', '~> 2.3.1'
 gem 'local_time', '~> 2.1.0'
 gem 'mini_magick', '~> 4.11.0'
 gem 'mini_racer', '~> 0.6.2'
-gem 'nokogiri', '1.12.5'
+gem 'nokogiri', '1.13.3'
 gem 'onebox', '~> 2.2.19'
-gem 'kt-paperclip',
-    git: 'https://github.com/kreeti/kt-paperclip',
-    branch: 'master'
+gem 'kt-paperclip', '~> 7.1.1'
 gem 'paper_trail', '~> 12.1.0'
 gem 'pg', '~> 1.2.3'
 gem 'pundit', '~> 2.1.1'
-gem 'puma', '~> 5.5.2'
+gem 'puma', '~> 5.6.4'
 gem 'rails_autolink', '~> 1.1.6'
 gem 'ransack', '~> 2.5.0'
 gem 'sanitize', '~> 6.0.0'
