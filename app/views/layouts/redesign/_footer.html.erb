@@ -1,0 +1,13 @@
+<footer class="footer">
+  <nav class="footer-nav" aria-label="Main Menu">
+    <ul class="footer-nav__list">
+      <% {
+        'About the Site': '/redesign/about-the-site',
+        'How to Contribute': '/redesign/how-to-contribute',
+        'Copyright Information': '/redesign/copyright-information',
+      }.each do |key, value| %>
+        <li class="footer-nav__list-item"><%= link_to key, value %></li>
+      <% end %>
+    </ul>
+  </nav>
+</footer>
