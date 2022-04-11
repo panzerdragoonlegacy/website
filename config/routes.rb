@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     resources :quizzes
   end
 
-  resources :searches
+  resources :searches, only: :index
   resources :news_entries, path: 'news'
   get 'site-map', to: 'site_map#show', as: :site_map
   resources :site_map
