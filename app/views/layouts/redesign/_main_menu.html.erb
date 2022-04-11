@@ -30,6 +30,15 @@
               ) %>
             </li>
           <% end %>
+          <% if category.slug == 'more' %>
+            <li><hr /></li>
+            <li class="sub-menu__list-item">
+              <%= link_to(
+                'News Archives',
+                redesign_news_entries_path
+              ) %>
+            </li>
+          <% end %>
         </ul>
       </li>
     <% end %>
