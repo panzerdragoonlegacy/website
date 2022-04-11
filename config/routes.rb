@@ -65,7 +65,7 @@ Rails.application.routes.draw do
     get ':id', to: 'top_level_pages#show', as: 'top_level_page'
   end
 
-  resources :searches
+  resources :searches, only: :index
   resources :news_entries, path: 'news'
   get 'site-map', to: 'site_map#show', as: :site_map
   resources :site_map
