@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   namespace :redesign do
     get '/', to: 'home#show'
+    resources :search, only: :index
     resources :categories, only: :show
     resources :news_entries, only: %i[index show], path: 'news'
     resources :pictures, only: :show

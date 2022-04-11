@@ -95,8 +95,8 @@
       </ul>
     </li>
     <li class="main-menu__list-item main-menu__search">
-      <%= form_tag searches_path, method: :post, id: 'search' do %>
-        <%= text_field_tag :query, nil, placeholder: 'Search...' %>
+      <%= form_with url: redesign_search_index_path, method: :get do |form| %>
+        <%= form.text_field :query, placeholder: 'Search...' %>
       <% end %>
     </li>
   </ul>
