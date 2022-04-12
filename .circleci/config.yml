@@ -40,16 +40,15 @@ jobs:
           key: pdl-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-      # Temporarily disable security checks during development:
-      # - run:
-      #     name: Install Bundler Audit
-      #     command: gem install bundler-audit
-      # - run:
-      #     name: Running bundle audit check
-      #     command: bundle audit check --update
-      # - run:
-      #     name: Running Brakeman
-      #     command: bundle exec brakeman -w3 -q -o /dev/stderr
+      - run:
+          name: Install Bundler Audit
+          command: gem install bundler-audit
+      - run:
+          name: Running bundle audit check
+          command: bundle audit check --update
+      - run:
+          name: Running Brakeman
+          command: bundle exec brakeman -w3 -q -o /dev/stderr
       - run:
           name: Running Prettier
           command: npx prettier --check .
