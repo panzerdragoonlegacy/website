@@ -3,7 +3,7 @@
   <ul class="news-entry-years__list">
     <% news_entry_years.each do |year| %>
       <li class="news-entry-years__list-item">
-        <%= link_to year, "#{news_entries_path}?year=#{year}" %>
+        <%= link_to year, "#{redesign_news_entries_path}?year=#{year}" %>
       </li>
     <% end %>
   </ul>
