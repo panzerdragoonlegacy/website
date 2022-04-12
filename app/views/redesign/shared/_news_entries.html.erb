@@ -4,11 +4,11 @@
       <div class="news-entries-news-entry__picture">
         <%= link_to(
           show_picture(news_entry, 'news_entry_picture', :embedded),
-          news_entry
+          redesign_news_entry_path(news_entry)
         ) %>
       </div>
       <h1 class="news-entries-news-entry__heading">
-        <%= link_to news_entry.name, news_entry %>
+        <%= link_to news_entry.name, redesign_news_entry_path(news_entry) %>
       </h1>
       <p class="news-entries-news-entry__author-date">
         <%= render(

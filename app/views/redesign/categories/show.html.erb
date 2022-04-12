@@ -24,10 +24,17 @@
     <%= @category.description %>
   </p>
   <% if @category.category_type == :parent.to_s %>
-    <%= render(
-      partial: 'redesign/categories/media_types',
-      locals: { category: @category }
-    ) %>
+    <% if category_has_subcategories_of_multiple_types(@category) %>
+      <%= render(
+        partial: 'redesign/categories/media_types',
+        locals: { category: @category }
+      ) %>
+    <% else %>
+      <%= render(
+        partial: 'redesign/categories/sub_categories',
+        locals: { category: @category }
+      ) %>
+    <% end %>
   <% end %>
   <% if @category.category_type == :picture.to_s %>
     <%= render(

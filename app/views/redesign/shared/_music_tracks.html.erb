@@ -5,12 +5,12 @@
         <div class="card__picture">
           <%= link_to(
             show_picture(music_track, 'music_track_picture', :thumbnail),
-            music_track
+            redesign_music_track_path(music_track)
           ) %>
         </div>
       <% end %>
       <h1 class="card__heading">
-        <%= link_to music_track.name, music_track %>
+        <%= link_to music_track.name, redesign_music_track_path(music_track) %>
       </h1>
       <div class="card__body">
         <% unless music_track.publish && music_track.category.publish %>

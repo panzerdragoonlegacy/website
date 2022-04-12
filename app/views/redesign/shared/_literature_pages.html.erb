@@ -5,12 +5,12 @@
         <div class="card__picture">
           <%= link_to(
             show_picture(page, 'page_picture', :thumbnail),
-            literature_path(page)
+            redesign_literature_path(page)
           ) %>
         </div>
       <% end %>
       <h1 class="card__heading">
-        <%= link_to page.name, literature_path(page) %>
+        <%= link_to page.name, redesign_literature_path(page) %>
       </h1>
       <div class="card__body">
         <% unless page.publish && page.category.publish %>

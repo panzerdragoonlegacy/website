@@ -2,11 +2,11 @@
   <div class="home-download__picture">
     <%= link_to(
       show_picture(download, 'download_picture', :embedded),
-      download
+      redesign_download_path(download)
     ) %>
   </div>
   <h1 class="home-download__heading">
-    <%= link_to download.name, download %>
+    <%= link_to download.name, redesign_download_path(download) %>
   </h1>
   <footer class="home-download__more">
     <%= link_to(

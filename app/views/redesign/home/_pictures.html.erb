@@ -2,10 +2,13 @@
   <% pictures.each do |picture| %>
     <article class="home-picture">
       <div class="home-picture__picture">
-        <%= link_to show_picture(picture, 'picture', :thumbnail), picture %>
+        <%= link_to(
+          show_picture(picture, 'picture', :thumbnail),
+          redesign_picture_path(picture)
+        ) %>
       </div>
       <h1 class="home-picture__heading">
-        <%= link_to picture.name, picture %>
+        <%= link_to picture.name, redesign_picture_path(picture) %>
       </h1>
     </article>
   <% end %>

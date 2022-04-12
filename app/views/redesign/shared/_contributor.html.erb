@@ -1,3 +1,6 @@
 <span class="contributor">
-  By <%= link_to contributor_profile.name, contributor_profile  %>
+  By <%= link_to(
+    contributor_profile.name,
+    redesign_contributor_profile_path(contributor_profile)
+  ) %>
 </span>

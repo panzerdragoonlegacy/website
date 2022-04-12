@@ -4,8 +4,11 @@
     <ul class="related-tags__list">
       <% tags.each do |tag| %>
         <li class="related-tags__list-item">
-          <%= link_to show_picture(tag, 'tag_picture', :mini_thumbnail), tag %>
-          <%= link_to tag.name, tag %>
+          <%= link_to(
+            show_picture(tag, 'tag_picture', :mini_thumbnail),
+            redesign_tag_path(tag)
+          ) %>
+          <%= link_to tag.name, redesign_tag_path(tag) %>
         </li>
       <% end %>
     </ul>

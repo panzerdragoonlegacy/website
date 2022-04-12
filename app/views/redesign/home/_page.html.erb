@@ -2,11 +2,11 @@
   <div class="home-page__picture">
     <%= link_to(
       show_picture(page, 'page_picture', :embedded),
-      literature_path(page)
+      redesign_literature_path(page)
     ) %>
   </div>
   <h1 class="home-page__heading">
-    <%= link_to page.name, literature_path(page) %>
+    <%= link_to page.name, redesign_literature_path(page) %>
   </h1>
   <footer class="home-page__more">
     <%= link_to(

@@ -5,14 +5,17 @@
          <% if picture.controversial_content? %>
           <%= link_to show_controversial_content_thumbnail, picture %>
         <% else %>
-          <%= link_to show_picture(picture, 'picture', :thumbnail), picture %>
+          <%= link_to(
+            show_picture(picture, 'picture', :thumbnail),
+            redesign_picture_path(picture)
+          ) %>
         <% end %>
       </div>
       <h1 class="gallery-picture__heading">
         <% if picture.album && group_pictures_into_albums %>
-          <%= link_to picture.album.name, picture %>
+          <%= link_to picture.album.name, redesign_picture_path(picture) %>
         <% else %>
-          <%= link_to picture.name, picture %>
+          <%= link_to picture.name, redesign_picture_path(picture) %>
         <% end %>
       </h1>
       <div class="gallery-picture__body">

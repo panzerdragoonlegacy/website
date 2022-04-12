@@ -7,7 +7,10 @@
       ) %>
     </div>
     <h1 class="home-featured-news-entry__heading">
-      <%= link_to featured_news_entry.name, featured_news_entry %>
+      <%= link_to(
+        featured_news_entry.name,
+        redesign_news_entry_path(featured_news_entry)
+      ) %>
     </h1>
   </header>
   <div class="home-featured-news-entry__body">

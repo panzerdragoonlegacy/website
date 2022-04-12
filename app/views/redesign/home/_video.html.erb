@@ -1,9 +1,12 @@
 <article class="home-video">
   <div class="home-video__picture">
-    <%= link_to show_picture(video, 'video_picture', :embedded), video %>
+    <%= link_to(
+      show_picture(video, 'video_picture', :embedded),
+      redesign_video_path(video)
+    ) %>
   </div>
   <h1 class="home-video__heading">
-    <%= link_to video.name, video %>
+    <%= link_to video.name, redesign_video_path(video) %>
   </h1>
   <footer class="home-video__more">
     <%= link_to(

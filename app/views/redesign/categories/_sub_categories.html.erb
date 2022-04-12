@@ -1,0 +1,10 @@
+<ul class="category-subcategories__list">
+  <% category.categorisations.each do |categorisation| %>
+    <li class="category-subcategories__list-item">
+      <%= link_to(
+        categorisation.short_name_in_parent,
+        redesign_category_path(categorisation.subcategory)
+      ) %>
+    </li>
+  <% end %>
+</ul>

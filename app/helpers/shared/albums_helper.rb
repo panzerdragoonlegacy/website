@@ -19,4 +19,9 @@ module Shared::AlbumsHelper
     (album.pictures && album.pictures.count > 0) ||
       (album.videos && album.videos.count > 0)
   end
+
+  def albumable_path(albumable)
+    return redesign_picture_path(albumable) if albumable.class == Picture
+    return redesign_video_path(albumable) if albumable.class == Video
+  end
 end

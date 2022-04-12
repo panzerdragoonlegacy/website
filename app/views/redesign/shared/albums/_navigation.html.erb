@@ -1,13 +1,24 @@
 <nav class="album-navigation">
-  <% if previous_albumable(albumable) %>
-    <%= link_to '‹ Previous in Album', previous_albumable(albumable) %>
-  <% else %>
-    <s>‹ Previous in Album</s>
-  <% end %>
-    |
-  <% if next_albumable(albumable) %>
-    <%= link_to 'Next in Album ›', next_albumable(albumable) %>
-  <% else %>
-    <s>Next in Album ›</s>
-  <% end %>
+  <ul class="album-navigation__list">
+    <li class="album-navigation__list-item">
+      <% if previous_albumable(albumable) %>
+        <%= link_to(
+          '‹ Previous in Album',
+          albumable_path(previous_albumable(albumable))
+        ) %>
+      <% else %>
+        <s>‹ Previous in Album</s>
+      <% end %>
+    </li>
+    <li class="album-navigation__list-item">
+      <% if next_albumable(albumable) %>
+        <%= link_to(
+          'Next in Album ›',
+          albumable_path(next_albumable(albumable))
+        ) %>
+      <% else %>
+        <s>Next in Album ›</s>
+      <% end %>
+    </li>
+  </ul>
 </nav>
