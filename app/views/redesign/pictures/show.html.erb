@@ -3,7 +3,9 @@
 <% open_graph_type 'image' %>
 <% if @picture.picture.present? %>
   <% if @picture.controversial_content? %>
-    <% open_graph_image asset_path('controversial-content-embedded.jpg') %>
+    <% open_graph_image(
+      image_pack_tag('media/images/controversial-content-embedded.jpg')
+    ) %>
   <% else %>
     <% open_graph_image(
       ENV['WEBSITE_URL'].chomp('/') + @picture.picture.url(:original)
