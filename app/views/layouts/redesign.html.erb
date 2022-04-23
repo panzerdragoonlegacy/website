@@ -22,7 +22,9 @@
       </header>
       <%= render 'layouts/redesign/flash_messages' %>
       <%= render 'layouts/redesign/page_heading' %>
-      <%= yield %>
+      <main class="main-content">
+        <%= yield %>
+      </main>
       <%= render 'layouts/redesign/footer' %>
     </div>
   </body>

@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: $medium-viewport) {
     flex-direction: row;
   }
 }
@@ -32,7 +32,7 @@
 .main-menu__radio-button {
   display: none;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: $medium-viewport) {
     &:checked ~ .sub-menu__list {
       display: block;
     }
@@ -48,7 +48,7 @@
 }
 
 .sub-menu {
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: $medium-viewport) {
     &:hover,
     &:focus-within {
       .sub-menu__title {
@@ -81,13 +81,13 @@
   width: 250px;
   display: flex;
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: $medium-viewport) {
     position: absolute;
     display: none;
     flex-direction: row;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: $medium-viewport) {
     display: none;
     flex-direction: column;
   }

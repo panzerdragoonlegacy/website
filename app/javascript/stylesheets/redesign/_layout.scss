@@ -1,0 +1,23 @@
+body {
+  background-color: var(--gray-2);
+}
+
+.overall {
+  color: var(--gray-8);
+  font-family: var(--font-sans);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-content {
+  a {
+    color: var(--link-colour);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--link-hover-colour);
+    text-decoration: dotted underline;
+  }
+}
