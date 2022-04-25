@@ -5,6 +5,7 @@
       Panzer Dragoon Legacy
       <% if yield(:title).present? %> - <%= yield(:title) %><% end %>
     </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="<%= yield(:description) %>" />
     <%= render 'layouts/open_graph_metadata' %>
@@ -15,14 +16,16 @@
     <%= csrf_meta_tags %>
   </head>
   <body tabindex="-1">
-    <div class="overall">
-      <header>
-        <h1>Panzer Dragoon Legacy</h1>
+    <div class="layout">
+      <header class="layout__header">
+        <h1 class="layout__site-heading">Panzer Dragoon Legacy</h1>
         <%= render 'layouts/redesign/main_menu' %>
       </header>
       <%= render 'layouts/redesign/flash_messages' %>
-      <%= render 'layouts/redesign/page_heading' %>
-      <main class="main-content">
+      <% if yield(:title).present? %>
+        <h1 class="layout__page-heading"><%= yield(:title) %></h1>
+      <% end %>
+      <main class="layout__page-content">
         <%= yield %>
       </main>
       <%= render 'layouts/redesign/footer' %>

@@ -109,29 +109,24 @@ module Redesign::PagesHelper
             Paperclip::Geometry.from_file(
               illustration.illustration.path(:original)
             )
+          legacy_url = illustration.illustration.url(:legacy)
 
-          # Use small and medium image sizes only if the image exceeds the
-          # original 280 pixel width from images created in the early 2000s.
-          # This ensures that older images are not generated in new, pixelated
-          # versions, but displayed on the page in their original resolution.
-          if original_image_file.width.to_i > 280
-            small_url = illustration.illustration.url(:small)
-            medium_url = illustration.illustration.url(:medium2)
+          # Use "modern" image sizes only if the image exceeds 320 pixels wide,
+          # the smallest mobile size in Chrome Dev Tools. These "legacy" images
+          # were mostly captured in the early 2000s at 280 pixels or smaller and
+          # don't look good upscaled to a higher resolution than 320 pixels.
+          if original_image_file.width.to_i > 320
+            modern_url = illustration.illustration.url(:modern)
             img.set_attribute(
-              'srcset', "#{small_url} 480w, #{medium_url} 700w"
+              'srcset', "#{legacy_url} 320w, #{modern_url} 768w"
             )
             img.set_attribute(
-              'sizes', "(max-width: 700px) 480px, 700px"
+              'sizes', "(max-width: 320px) 320px, 768px"
             )
-            img.set_attribute('src', medium_url)
+            img.set_attribute('src', modern_url)
             img.set_attribute('class', 'illustration__image--modern')
           else
-            img.set_attribute('src', illustration.illustration.url(:original))
-
-            # Todo: replace with multiple image sizes for different screen sizes
-            img.set_attribute('width', original_image_file.width.to_i.to_s)
-            img.set_attribute('height', original_image_file.height.to_i.to_s)
-
+            img.set_attribute('src', legacy_url)
             img.append_class('illustration__image--legacy')
           end
         else

@@ -1,23 +1,36 @@
 body {
   background-color: var(--gray-2);
+  padding: 0;
+  margin: 0;
 }
 
-.overall {
+.layout {
   color: var(--gray-8);
   font-family: var(--font-sans);
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
 
-.main-content {
-  a {
-    color: var(--link-colour);
-    text-decoration: none;
+  &__site-heading {
+    text-align: center;
   }
 
-  a:hover {
-    color: var(--link-hover-colour);
-    text-decoration: dotted underline;
+  &__page-heading {
+    font-weight: var(--font-weight-8);
+    text-align: center;
+  }
+
+  &__page-content {
+    font-size: var(--font-size-2);
+    letter-spacing: var(--font-letterspacing-1);
+    line-height: var(--font-lineheight-3);
+    text-align: justify;
+
+    a {
+      color: var(--link-colour);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--link-hover-colour);
+      text-decoration: dotted underline;
+    }
   }
 }
