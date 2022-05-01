@@ -56,13 +56,13 @@ Step-by-step instructions for setting up a development environment for the site.
    exit
    ```
 
-10. Open http://localhost:3000/admin to log in as the admin user.
-
-11. For automatic reloading of webpack-dev-server, open a seperate tab and run:
+10. For automatic reloading of webpack-dev-server, open a seperate tab and run:
 
     `docker-compose exec app bash`
 
     `WEBPACKER_DEV_SERVER_HOST=0.0.0.0 ./bin/webpack-dev-server`
+
+11. Open http://localhost:3000/admin to log in as the admin user.
 
 ## Restore a Database Backup into Docker Volume
 
@@ -70,7 +70,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
    `cd ~/Code/cms`
 
-2. Stop the app and start the database container only.
+2. Stop the app (if it is running) and start the database container only.
 
    `docker-compose stop`
 
