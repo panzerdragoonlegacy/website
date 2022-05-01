@@ -142,6 +142,13 @@ Step-by-step instructions for setting up a development environment for the site.
 
    `docker-compose up`
 
+4. If new attachment styles have been added to the codebase since the backup was
+   created you can generate these inside the container:
+
+   `docker-compose exec app bash`
+
+   `bundle exec rake paperclip:refresh:missing_styles`
+
 ## Running the Test Suite
 
 1. If it does not already exist, create the test database:
