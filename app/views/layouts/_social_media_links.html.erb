@@ -9,7 +9,9 @@
     'discord': 'https://discordapp.com/invite/N3mrMh6'
   }.each do |key, value| %>
     <li>
-      <a href="<%= value %>"><i class="fab fa-<%= key %>"></i></a>
+      <a rel="me" href="<%= value %>">
+        <i class="fab fa-<%= key %>"></i>
+      </a>
     </li>
   <% end %>
   <li>
