@@ -4,7 +4,9 @@ RSpec.describe ContributorProfile, type: :model do
   describe 'fields' do
     it { is_expected.to respond_to(:name) }
     it { is_expected.to respond_to(:slug) }
+    it { is_expected.to respond_to(:roles) }
     it { is_expected.to respond_to(:description) }
+    it { is_expected.to respond_to(:information) }
     it { is_expected.to respond_to(:email_address) }
     it { is_expected.to respond_to(:discourse_username) }
     it { is_expected.to respond_to(:discord_user_id) }
@@ -12,6 +14,8 @@ RSpec.describe ContributorProfile, type: :model do
     it { is_expected.to respond_to(:avatar) }
     it { is_expected.to respond_to(:website_name) }
     it { is_expected.to respond_to(:website_url) }
+    it { is_expected.to respond_to(:fediverse_username) }
+    it { is_expected.to respond_to(:fediverse_url) }
     it { is_expected.to respond_to(:facebook_username) }
     it { is_expected.to respond_to(:twitter_username) }
     it { is_expected.to respond_to(:instagram_username) }

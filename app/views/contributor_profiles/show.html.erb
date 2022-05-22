@@ -44,6 +44,8 @@
       @contributor_profile.discord_user_id.blank? &&
       @contributor_profile.fandom_username.blank? &&
       @contributor_profile.website_url.blank? &&
+      @contributor_profile.fediverse_username.blank? &&
+      @contributor_profile.fediverse_url.blank? &&
       @contributor_profile.facebook_username.blank? &&
       @contributor_profile.twitter_username.blank? &&
       @contributor_profile.instagram_username.blank? &&
@@ -102,6 +104,18 @@
           <% end %>
         </dd>
       <% end %>
+      <% unless @contributor_profile.fediverse_username.blank? ||
+        @contributor_profile.fediverse_url.blank? %>
+        <dt>Fediverse</dt>
+        <dd>
+          <%=
+            link_to(
+              @contributor_profile.fediverse_username,
+              @contributor_profile.fediverse_url
+            )
+          %>
+        </dd>
+      <% end %>
       <% unless @contributor_profile.facebook_username.blank? %>
         <dt>Facebook</dt>
         <dd>
@@ -153,7 +167,13 @@
   <% end %>
 </div>
 
-<%= @contributor_profile.description %>
+<p><%= @contributor_profile.roles %></p>
+
+<p><%= @contributor_profile.description %></p>
+
+<% unless @contributor_profile.information.blank? %>
+  <%= raw markdown_to_html @contributor_profile.information %>
+<% end %>
 
 <% unless website_contributions_count(@contributor_profile) == 0 %>
   <h4>Website Contributions</h4>
