@@ -49,6 +49,8 @@ class ContributorProfilePolicy < ApplicationPolicy
     %i[
       name
       description
+      information
+      roles
       email_address
       discourse_username
       discord_user_id
@@ -56,6 +58,8 @@ class ContributorProfilePolicy < ApplicationPolicy
       avatar
       website_name
       website_url
+      fediverse_username
+      fediverse_url
       facebook_username
       twitter_username
       instagram_username

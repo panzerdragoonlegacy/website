@@ -8,7 +8,9 @@
         '"Solo Wing" rather than "solo_wing_98".'
     }
   ) %>
+  <%= render 'roles', f: f %>
   <%= render 'description', f: f %>
+  <%= render partial: 'admin/shared/form/extra_information', locals: { f: f } %>
   <%= render 'email_address', f: f %>
   <%= render 'discourse_username', f: f %>
   <%= render 'discord_user_id', f: f %>
@@ -16,6 +18,8 @@
   <%= render 'avatar', f: f, contributor_profile: @contributor_profile %>
   <%= render 'website_name', f: f %>
   <%= render 'website_url', f: f %>
+  <%= render 'fediverse_username', f: f %>
+  <%= render 'fediverse_url', f: f %>
   <%= render 'facebook_username', f: f %>
   <%= render 'twitter_username', f: f %>
   <%= render 'instagram_username', f: f %>
