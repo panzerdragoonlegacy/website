@@ -20,12 +20,14 @@
   padding: 10px;
 }
 
-.home-link {
+.home-link,
+.about-link {
   color: var(--link-colour);
   text-decoration: none;
 }
 
-.home-link:hover {
+.home-link:hover,
+.about-link:hover {
   color: var(--main-text-colour);
 }
 

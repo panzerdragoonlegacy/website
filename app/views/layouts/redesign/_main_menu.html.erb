@@ -5,6 +5,11 @@
         <%= link_to 'Home', redesign_path, class: 'home-link' %>
       </label>
     </li>
+    <li class="main-menu__list-item">
+      <label class="main-menu__label">
+        <%= link_to 'About', '/redesign/about', class: 'about-link' %>
+      </label>
+    </li>
     <% @main_menu_categories.each do |category| %>
       <li class="main-menu__list-item sub-menu">
         <input
