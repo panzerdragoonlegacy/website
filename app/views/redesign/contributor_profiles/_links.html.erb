@@ -4,8 +4,10 @@
   contributor_profile.discord_user_id.blank? &&
   contributor_profile.fandom_username.blank? &&
   contributor_profile.website_url.blank? &&
-  contributor_profile.facebook_username.blank? &&
+  contributor_profile.fediverse_username.blank? &&
+  contributor_profile.fediverse_url.blank? &&
   contributor_profile.twitter_username.blank? &&
+  contributor_profile.facebook_username.blank? &&
   contributor_profile.instagram_username.blank? &&
   contributor_profile.deviantart_username.blank?
 ) %>
@@ -53,13 +55,13 @@
         <% end %>
       </dd>
     <% end %>
-    <% if @contributor_profile.facebook_username.present? %>
-      <dt>Facebook</dt>
+    <% if @contributor_profile.fediverse_username.present? &&
+      @contributor_profile.fediverse_url.present? %>
+      <dt>Fediverse</dt>
       <dd>
         <%= link_to(
-          @contributor_profile.facebook_username,
-          'https://www.facebook.com/' +
-            @contributor_profile.facebook_username
+          @contributor_profile.fediverse_username,
+          @contributor_profile.fediverse_url
         ) %>
       </dd>
     <% end %>
@@ -69,6 +71,16 @@
         <%= link_to(
           @contributor_profile.twitter_username,
           "https://twitter.com/#{@contributor_profile.twitter_username}"
+        ) %>
+      </dd>
+    <% end %>
+    <% if @contributor_profile.facebook_username.present? %>
+      <dt>Facebook</dt>
+      <dd>
+        <%= link_to(
+          @contributor_profile.facebook_username,
+          'https://www.facebook.com/' +
+            @contributor_profile.facebook_username
         ) %>
       </dd>
     <% end %>

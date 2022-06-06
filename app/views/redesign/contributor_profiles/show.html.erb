@@ -34,9 +34,17 @@
         <%= image_tag @contributor_profile.avatar.url(:embedded) %>
       <% end %>
     </div>
+    <p class="contributor-profile__roles">
+      <%= @contributor_profile.roles %>
+    </p>
     <p class="contributor-profile__description">
       <%= @contributor_profile.description %>
     </p>
+    <% if @contributor_profile.information.present? %>
+      <div class="contributor-profile__information">
+        <%= raw markdown_to_html @contributor_profile.information %>
+      </div>
+    <% end %>
     <%= render(
       partial: 'redesign/contributor_profiles/links',
       locals: { contributor_profile: @contributor_profile }
