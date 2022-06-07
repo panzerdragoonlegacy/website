@@ -1,3 +1,14 @@
+$menu-label-padding: 10px;
+
+.main-menu {
+  margin-left: auto;
+  margin-right: auto;
+
+  @media only screen and (min-width: $tablet-min) {
+    max-width: fit-content;
+  }
+}
+
 .main-menu__list {
   display: flex;
   flex-direction: column;
@@ -12,12 +23,15 @@
 
 .main-menu__label {
   text-decoration: none;
-  text-align: center;
   display: inline-block;
   color: var(--link-colour);
   font-size: 1.125rem;
   background-color: var(--menu-background-colour);
-  padding: 10px;
+  padding: $menu-label-padding;
+
+  @media only screen and (max-width: $mobile-max) {
+    width: calc(100vw - ($menu-label-padding * 2));
+  }
 }
 
 .home-link,
@@ -80,13 +94,14 @@
   padding: 0;
   background-color: var(--menu-background-colour);
   min-width: 15ch;
-  width: 250px;
   display: flex;
+  z-index: 2;
 
   @media only screen and (min-width: $tablet-min) {
     position: absolute;
     display: none;
     flex-direction: row;
+    width: 250px;
   }
 
   @media only screen and (max-width: $mobile-max) {
@@ -99,7 +114,7 @@
   list-style: none;
 
   a {
-    padding: 10px;
+    padding: $menu-label-padding;
     color: var(--link-colour);
     display: block;
     text-decoration: none;

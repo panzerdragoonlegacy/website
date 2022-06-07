@@ -1,0 +1,13 @@
+.news-entry {
+  &__header {
+    text-align: center;
+  }
+
+  &__picture {
+    @include header-picture-container;
+
+    img {
+      @include header-picture;
+    }
+  }
+}

@@ -25,7 +25,9 @@
 <article class="news-entry">
   <header class="news-entry__header">
     <% if @news_entry.news_entry_picture.present? %>
-      <%= show_picture @news_entry, 'news_entry_picture', :embedded %>
+      <div class="news-entry__picture">
+        <%= show_picture @news_entry, 'news_entry_picture', :original %>
+      </div>
     <% end %>
     <div class="news-entry__contributor-avatar">
       <% if @news_entry.contributor_profile.avatar_file_name.blank? %>
