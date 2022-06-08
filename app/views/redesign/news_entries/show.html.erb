@@ -29,24 +29,27 @@
         <%= show_picture @news_entry, 'news_entry_picture', :original %>
       </div>
     <% end %>
-    <div class="news-entry__contributor-avatar">
-      <% if @news_entry.contributor_profile.avatar_file_name.blank? %>
-        <%= image_pack_tag 'media/images/default-avatar.jpg' %>
-      <% else %>
-        <%= image_tag @news_entry.contributor_profile.avatar.url(:thumbnail) %>
-        <br />
-      <% end %>
+    <div class="news-entry__contributor">
+      <div class="news-entry__contributor-avatar">
+        <% if @news_entry.contributor_profile.avatar_file_name.blank? %>
+          <%= image_pack_tag 'media/images/default-avatar.jpg' %>
+        <% else %>
+          <%= image_tag @news_entry.contributor_profile.avatar.url(:thumbnail) %>
+        <% end %>
+      </div>
+      <div class="news-entry__contributor-name">
+        <%= render(
+          partial: 'redesign/shared/contributor',
+          locals: { contributor_profile: @news_entry.contributor_profile }
+        ) %>
+      </div>
     </div>
-    <p class="news-entry__author-date">
-      <%= render(
-        partial: 'redesign/shared/contributor',
-        locals: { contributor_profile: @news_entry.contributor_profile }
-      ) %> |
+    <div class="news-entry__date">
       <%= render(
         partial: 'redesign/shared/published_at',
         locals: { publishable: @news_entry }
       ) %>
-    </p>
+    </div>  
     <% if @news_entry.summary.present? %>
       <p class="news-entry__summary"><%= @news_entry.summary %></p>
     <% end %>

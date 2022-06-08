@@ -4,6 +4,7 @@
 
   &__heading {
     font-size: var(--font-size-2);
+    margin-top: var(--size-6);
   }
 
   &__list {
@@ -14,9 +15,10 @@
     justify-content: center;
     gap: var(--size-4);
     flex-wrap: wrap;
- }
+  }
 
   &__list-item {
+    margin-top: var(--size-00);
     white-space: nowrap;
   }
 
@@ -33,4 +35,13 @@
       border-radius: var(--radius-round);
     }
   }
+}
+
+// Todo: replace later with a site footer:
+.related-tags {
+  margin-bottom: var(--size-8);
+}
+
+.related-tags__heading {
+  margin-bottom: var(--size-6);
 }
