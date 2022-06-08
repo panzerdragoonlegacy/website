@@ -8,7 +8,7 @@
 <% end %>
 
 <% if policy(@category).edit? %>
-  <div class="admin-controls">
+  <div class="admin-section">
     <%= link_to 'Edit Category', edit_admin_category_path(@category) %>
   </div>
 <% end %>
@@ -17,12 +17,16 @@
 <% end %>
 
 <main class="category">
-  <div class="category__picture">
-    <%= show_picture @category, 'category_picture', :embedded %>
-  </div>
-  <p class="category__description">
-    <%= @category.description %>
-  </p>
+  <header class="category__header">
+    <% if @category.category_picture.present? %>
+      <div class="category__picture">
+        <%= show_picture @category, 'category_picture', :original %>
+      </div>
+    <% end %>
+    <p class="category__description">
+      <%= @category.description %>
+    </p>
+  </header>
   <% if @category.category_type == :parent.to_s %>
     <% if category_has_subcategories_of_multiple_types(@category) %>
       <%= render(

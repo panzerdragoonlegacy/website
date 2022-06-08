@@ -5,7 +5,7 @@
         <li class="category-media-types__list-item">
           <h1 class="category-media-type__heading"><%= value %></h1>
           <ul class="category-subcategories__list">
-            <% category.categorisations.each do |categorisation| %>
+            <% category.ordered_categorisations.each do |categorisation| %>
               <% if categorisation.subcategory.category_type == key.to_s %>
                 <li class="category-subcategories__list-item">
                   <%= link_to(
