@@ -1,0 +1,24 @@
+.cards {
+  &__footer {
+    margin-bottom: var(--size-8);
+  }
+}
+
+.card {
+  margin-left: var(--size-2);
+  margin-right: var(--size-2);
+  margin-bottom: var(--size-3);
+
+  padding-top: var(--size-1);
+  padding-bottom: var(--size-2);
+  padding-left: var(--size-5);
+  padding-right: var(--size-5);
+
+  border-radius: var(--radius-4);
+  
+  @include card-background-colour;
+
+  &__picture {
+    display: none; // Todo: revisit this and show thumbnails on cards.
+  }
+}

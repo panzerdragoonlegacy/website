@@ -16,7 +16,9 @@
         <% unless page.publish && page.category.publish %>
           <%= render partial: 'redesign/shared/draft' %>
         <% end %>
-        <p><%= page.description %></p>
+        <% unless descriptions_are_identical?(pages) %>
+          <p><%= page.description %></p>
+        <% end %>
       </div>
     </article>
   <% end %>
