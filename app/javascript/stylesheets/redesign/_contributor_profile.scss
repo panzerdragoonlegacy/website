@@ -1,0 +1,39 @@
+.contributor-profile {
+  &__body {
+    padding: var(--size-2);
+  }
+
+  &__avatar {
+    text-align: center;
+    img {
+      border-radius: var(--radius-round);
+    }
+  }
+
+  &__roles {
+    @include summary-or-description;
+    text-align: center;
+  }
+}
+
+.contributor-profile-links {
+  padding-bottom: var(--size-2);
+
+  dt {
+    clear: both;
+    font-weight: bold;
+  }
+
+  dt:after {
+    content: ':';
+  }
+
+  dd {
+    margin-top: -27px;
+    margin-left: 20%;
+  }
+}
+
+.contributor-profile-contributions {
+  margin-bottom: var(--size-8);
+}
