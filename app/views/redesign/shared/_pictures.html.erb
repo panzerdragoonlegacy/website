@@ -1,5 +1,5 @@
 <section class="gallery">
-  <ul class="gallery__list">
+  <ul class="gallery__list<%= '--for-tag' unless group_pictures_into_albums %>">
     <% pictures.each do |picture| %>
       <li class="gallery-picture">
         <div class="gallery-picture__picture">
@@ -16,8 +16,7 @@
         <div class="gallery-picture__details">
           <% if !picture.publish || !picture.category.publish %>
             <p class="draft">Draft</p>
-          <% end %>
-          <% if group_pictures_into_albums %>
+          <% elsif group_pictures_into_albums %>
             <p class="gallery-picture__count">
               <% if picture.album %>
                 <%= picture.album.pictures.count %> pictures
