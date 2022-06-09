@@ -58,6 +58,7 @@ module LoadableForCategory
             .where(category_id: @category.id, sequence_number: [0, 1])
             .order(:name)
             .page(params[:page])
+            .per(24)
         ).resolve
       # Todo: remove after redesign launches. Now defined in template:
       @group_pictures_into_albums = true

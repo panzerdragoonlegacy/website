@@ -1,37 +1,35 @@
 <section class="gallery">
-  <% pictures.each do |picture| %>
-    <article class="gallery-picture">
-      <div class="gallery-picture__picture">
-         <% if picture.controversial_content? %>
-          <%= link_to show_controversial_content_thumbnail, picture %>
-        <% else %>
-          <%= link_to(
-            show_picture(picture, 'picture', :thumbnail),
-            redesign_picture_path(picture)
-          ) %>
-        <% end %>
-      </div>
-      <h1 class="gallery-picture__heading">
-        <% if picture.album && group_pictures_into_albums %>
-          <%= link_to picture.album.name, redesign_picture_path(picture) %>
-        <% else %>
-          <%= link_to picture.name, redesign_picture_path(picture) %>
-        <% end %>
-      </h1>
-      <div class="gallery-picture__body">
-        <% unless picture.publish && picture.category.publish %>
-          <%= render partial: 'redesign/shared/draft' %>
-        <% end %>
-        <% if picture.album && group_pictures_into_albums %>
-          <p><%= picture.album.pictures.count %> pictures</p>
-          <p><%= picture.album.description %></p>
-        <% else %>
-          <p><%= picture.description %></p>
-        <% end %>
-      </div>
-    </article>
-  <% end %>
-  <footer class="pictures__footer">
+  <ul class="gallery__list">
+    <% pictures.each do |picture| %>
+      <li class="gallery-picture">
+        <div class="gallery-picture__picture">
+          <% if picture.controversial_content? %>
+            <%= link_to show_controversial_content_thumbnail, picture %>
+          <% else %>
+            <%= link_to(
+              show_picture(picture, 'picture', :triple_thumbnail),
+              redesign_picture_path(picture),
+              title: picture.name
+            ) %>
+          <% end %>
+        </div>
+        <div class="gallery-picture__details">
+          <% if !picture.publish || !picture.category.publish %>
+            <p class="draft">Draft</p>
+          <% else %>
+            <p class="gallery-picture__count">
+              <% if picture.album && group_pictures_into_albums %>
+                <%= picture.album.pictures.count %> pictures
+              <% else %>
+                1 picture
+              <% end %>
+            </p>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <footer class="gallery__footer">
     <%= paginate pictures %>
   </footer>
 </section>
