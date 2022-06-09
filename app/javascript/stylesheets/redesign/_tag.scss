@@ -1,4 +1,4 @@
-.category {
+.tag {
   &__header {
     text-align: center;
   }
@@ -13,16 +13,18 @@
 
   &__description {
     @include summary-or-description;
+  }
+
+  &__extra-information {
+    text-align: justify;
+    padding: 0 var(--size-2);
+  }
+
+  &__wiki-link {
     text-align: center;
   }
 }
 
-.category-media-types {
-  &__list {
-    margin: 0;
-    padding-left: var(--size-2);
-    padding-right: var(--size-2);
-    margin-bottom: var(--size-6);
-    list-style: none;
-  }
+.tagged-content {
+  padding: 0 var(--size-2);
 }

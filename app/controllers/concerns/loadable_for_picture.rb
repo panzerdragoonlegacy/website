@@ -2,6 +2,8 @@ module LoadableForPicture
   extend ActiveSupport::Concern
   include FindBySlugConcerns
 
+  PICTURES_PER_PAGE = 24
+
   private
 
   def load_replaceable_pictures
@@ -45,6 +47,7 @@ module LoadableForPicture
           )
           .order(:name)
           .page(params[:page])
+          .per(PICTURES_PER_PAGE)
       )
     # Todo: remove after redesign launches. Now defined in template:
     @group_pictures_into_albums = false
@@ -59,6 +62,7 @@ module LoadableForPicture
           .where(taggings: { tag_id: @tag.id })
           .order(:name)
           .page(params[:page])
+          .per(PICTURES_PER_PAGE)
       )
   end
 

@@ -18,7 +18,9 @@
 <article class="tag">
   <header class="tag__header">
     <% if @tag.tag_picture.present? %>
-      <%= show_picture @tag, 'tag_picture', :embedded %>
+      <div class="tag__picture">
+        <%= show_picture @tag, 'tag_picture', :original %>
+      </div>
     <% end %>
   </header>
   <div class="tag__body">

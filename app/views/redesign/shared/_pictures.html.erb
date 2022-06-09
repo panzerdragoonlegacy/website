@@ -16,9 +16,10 @@
         <div class="gallery-picture__details">
           <% if !picture.publish || !picture.category.publish %>
             <p class="draft">Draft</p>
-          <% else %>
+          <% end %>
+          <% if group_pictures_into_albums %>
             <p class="gallery-picture__count">
-              <% if picture.album && group_pictures_into_albums %>
+              <% if picture.album %>
                 <%= picture.album.pictures.count %> pictures
               <% else %>
                 1 picture

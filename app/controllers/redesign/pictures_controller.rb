@@ -14,7 +14,7 @@ class Redesign::PicturesController < ApplicationController
             .where(sequence_number: [0, 1])
             .order(:name)
             .page(params[:page])
-            .per(24)
+            .per(PICTURES_PER_PAGE)
         )
     end
   end
