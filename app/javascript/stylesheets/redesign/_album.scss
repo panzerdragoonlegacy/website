@@ -1,0 +1,49 @@
+.album-navigation {
+  @include card-common-properties;
+  @include card-background-colour;
+
+  margin-top: var(--size-4);
+  padding-top: 0;
+
+  &__list {
+    list-style: none;
+    display: inline-flex;
+    justify-content: center;
+    gap: var(--size-4);
+    flex-wrap: wrap;
+    margin-bottom: 0;
+  }
+
+  &__list-item {
+    width: 170px;
+    a,
+    s {
+      float: left;
+    }
+  }
+}
+
+.album {
+  @include card-common-properties;
+  @include card-background-colour;
+
+  padding-bottom: var(--size-5);
+
+  &__heading {
+    font-size: var(--font-size-2);
+    margin-bottom: var(--size-6);
+  }
+
+  &__body {
+    display: inline-flex;
+    justify-content: center;
+    gap: var(--size-2);
+    flex-wrap: wrap;
+  }
+
+  &__albumable {
+    img {
+      border-radius: var(--radius-2);
+    }
+  }
+}

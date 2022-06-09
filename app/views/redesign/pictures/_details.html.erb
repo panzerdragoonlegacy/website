@@ -18,7 +18,9 @@
   <% else %>
     Full size downloads are disabled for this picture.
   <% end %>
-  <% if picture.published_at %>
-    Published <%= local_date picture.published_at %>.
-  <% end %>
 </p>
+<% if picture.published_at %>
+  <div class="picture__date">
+    Published <%= local_date picture.published_at %>.
+  </div>
+<% end %>
