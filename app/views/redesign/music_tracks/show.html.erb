@@ -25,7 +25,9 @@
 <article class="music-track">
   <header class="music-track__header">
     <% if @music_track.music_track_picture.present? %>
-      <%= show_picture @music_track, 'music_track_picture', :embedded %>
+      <div class="music-track__picture">
+        <%= show_picture @music_track, 'music_track_picture', :embedded %>
+      </div>
     <% end %>
     <%= render(
       partial: 'redesign/shared/contributed_by',
@@ -33,16 +35,15 @@
     ) %>
   </header>
   <div class="music-track__body">
-    <audio controls="true" autobuffer="true" class="music-track__audio">
-      <source type="audio/mp3" src="<%= @music_track.mp3_music_track.url %>" />
-      Your browser does not support the <code>audio</code> element.
-    </audio>
-    <p class="music-track__description"><%= @music_track.description %></p>
-    <% unless @music_track.information.blank? %>
-      <div class="music_track__extra-information">
-        <%= raw markdown_to_html @music_track.information %>
-      </div>
-    <% end %>
+    <div class="music-track__audio">
+      <audio controls="true" autobuffer="true">
+        <source
+          type="audio/mp3"
+          src="<%= @music_track.mp3_music_track.url %>"
+        />
+        Your browser does not support the <code>audio</code> element.
+      </audio>
+    </div>
     <p class="music-track__details">
       <% unless @music_track.track_number == 0 %>
         Track <%= @music_track.track_number.to_s %> of
@@ -54,6 +55,14 @@
         | <%= link_to 'FLAC', @music_track.flac_music_track.url %>
       <% end %>
     </p>
+    <p class="music-track__description">
+      <%= @music_track.description %>
+    </p>
+    <% unless @music_track.information.blank? %>
+      <div class="music-track__extra-information">
+        <%= raw markdown_to_html @music_track.information %>
+      </div>
+    <% end %>
   </div>
   <footer class="music-track__footer">
     <%= render(

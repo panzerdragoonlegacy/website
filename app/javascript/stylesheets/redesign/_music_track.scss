@@ -1,0 +1,10 @@
+.music-track {
+  text-align: center;
+
+  &__audio {
+    margin-top: var(--size-5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

@@ -38,22 +38,23 @@
     <% end %>
   </header>
   <div class="video__body">
-    <video
-      width="620"
-      height="349"
-      controls="true"
-      autobuffer="true"
-      poster="<%= @video.video_picture.url(:embedded) %>"
-      class="video__video"
-    >
-      <source type="video/mp4" src="<%= @video.mp4_video.url %>" />
-      Your browser does not support the <code>video</code> element.
-    </video>
+    <div class="video__video">
+      <video
+        controls="true"
+        autobuffer="true"
+        poster="<%= @video.video_picture.url(:embedded) %>"
+      >
+        <source type="video/mp4" src="<%= @video.mp4_video.url %>" />
+        Your browser does not support the <code>video</code> element.
+      </video>
+    </div>
     <%= render(
       partial: 'redesign/videos/details',
       locals: { video: @video }
     ) %>
-    <p class="video__description"><%= @video.description %></p>
+    <p class="video__description">
+      <%= @video.description %>
+    </p>
     <% unless @video.information.blank? %>
       <div class="video__extra-information">
         <%= raw markdown_to_html @video.information %>

@@ -27,11 +27,17 @@
     ) %>
   </header>
   <div class="download__body">
-    <p class="download__description"><%= @download.description %></p>
+    <div class="download__details">
+      <%= link_to 'Download File', @download.download.url %>
+    </div>
+    <p class="download__description">
+      <%= @download.description %>
+    </p>
     <% unless @download.information.blank? %>
-      <%= raw markdown_to_html @download.information %>
+      <div class="download__extra-information">
+        <%= raw markdown_to_html @download.information %>
+      </div>
     <% end %>
-    <%= link_to 'Download File', @download.download.url %>
   </div>
   <footer class="download__footer">
     <%= render(

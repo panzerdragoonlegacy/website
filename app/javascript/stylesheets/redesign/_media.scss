@@ -1,0 +1,13 @@
+.music-track,
+.video,
+.download {
+  &__description {
+    @include summary-or-description;
+    text-align: center;
+  }
+
+  &__extra-information {
+    padding: 0 var(--size-2);
+    text-align: center;
+  }
+}
