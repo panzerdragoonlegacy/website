@@ -4,22 +4,21 @@
       <% if page.page_picture.present? %>
         <div class="card__picture">
           <%= link_to(
-            show_picture(page, 'page_picture', :thumbnail),
+            show_picture(page, 'page_picture', :original),
             redesign_literature_path(page)
           ) %>
         </div>
       <% end %>
-      <h1 class="card__heading">
-        <%= link_to page.name, redesign_literature_path(page) %>
-      </h1>
-      <div class="card__body">
-        <% unless page.publish && page.category.publish %>
-          <%= render partial: 'redesign/shared/draft' %>
-        <% end %>
-        <% unless descriptions_are_identical?(pages) %>
-          <p><%= page.description %></p>
-        <% end %>
-      </div>
+      <%= render(
+        partial: 'redesign/shared/card_details',
+        locals: {
+          record: page,
+          record_path: redesign_literature_path(page),
+          show_description: !descriptions_are_identical?(pages),
+          has_picture: page.page_picture.present?
+        }
+      ) %>
+      <div class="card__footer"></div>
     </article>
   <% end %>
   <footer class="cards__footer">

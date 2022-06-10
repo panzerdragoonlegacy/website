@@ -35,6 +35,7 @@
   padding-top: var(--size-1);
 }
 
+// Todo: replace with something more universal:
 @mixin card-common-properties {
   margin-left: var(--size-2);
   margin-right: var(--size-2);

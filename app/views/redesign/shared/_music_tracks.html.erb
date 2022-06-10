@@ -4,20 +4,21 @@
       <% if music_track.music_track_picture.present? %>
         <div class="card__picture">
           <%= link_to(
-            show_picture(music_track, 'music_track_picture', :thumbnail),
+            show_picture(music_track, 'music_track_picture', :original),
             redesign_music_track_path(music_track)
           ) %>
         </div>
       <% end %>
-      <h1 class="card__heading">
-        <%= link_to music_track.name, redesign_music_track_path(music_track) %>
-      </h1>
-      <div class="card__body">
-        <% unless music_track.publish && music_track.category.publish %>
-          <%= render partial: 'redesign/shared/draft' %>
-        <% end %>
-        <p><%= music_track.description %></p>
-      </div>
+      <%= render(
+        partial: 'redesign/shared/card_details',
+        locals: {
+          record: music_track,
+          record_path: redesign_music_track_path(music_track),
+          show_description: !descriptions_are_identical?(music_tracks),
+          has_picture: music_track.music_track_picture.present?
+        }
+      ) %>
+      <div class="card__footer"></div>
     </article>
   <% end %>
   <footer class="cards__footer">

@@ -4,20 +4,21 @@
       <% if video.video_picture.present? %>
         <div class="card__picture">
           <%= link_to(
-            show_picture(video, 'video_picture', :thumbnail),
+            show_picture(video, 'video_picture', :original),
             redesign_video_path(video)
           ) %>
         </div>
       <% end %>
-      <h1 class="card__heading">
-        <%= link_to video.name, redesign_video_path(video) %>
-      </h1>
-      <div class="card__body">
-        <% unless video.publish && video.category.publish %>
-          <%= render partial: 'redesign/shared/draft' %>
-        <% end %>
-        <p><%= video.description %></p>
-      </div>
+      <%= render(
+        partial: 'redesign/shared/card_details',
+        locals: {
+          record: video,
+          record_path: redesign_video_path(video),
+          show_description: !descriptions_are_identical?(videos),
+          has_picture: video.video_picture.present?
+        }
+      ) %>
+      <div class="card__footer"></div>
     </article>
   <% end %>
   <footer class="cards__footer">
