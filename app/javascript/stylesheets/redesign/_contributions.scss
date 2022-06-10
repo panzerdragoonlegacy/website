@@ -1,0 +1,13 @@
+.contributions-nav {
+  &__list {
+    list-style: none;
+    text-align: center;
+    margin-bottom: var(--size-6);
+  }
+
+  &__list-item {
+    display: inline-block;
+    margin-left: var(--size-2);
+    margin-right: var(--size-2);
+  }
+}

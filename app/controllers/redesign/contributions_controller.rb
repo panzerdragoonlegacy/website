@@ -1,5 +1,6 @@
 class Redesign::ContributionsController < ApplicationController
   layout 'redesign'
+  include LoadableForPicture
 
   def index
     if params[:media_type] == 'pictures' || !params[:media_type]
@@ -9,6 +10,7 @@ class Redesign::ContributionsController < ApplicationController
             .where(publish: true)
             .order(published_at: :desc)
             .page(params[:page])
+            .per(PICTURES_PER_PAGE)
         )
     elsif params[:media_type] == 'literature'
       @pages =
