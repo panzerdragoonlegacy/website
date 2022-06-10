@@ -36,6 +36,11 @@ module PicturesHelper
     )
   end
 
+  def title_in_gallery(group_into_albums, picture)
+    return picture.album.name if group_into_albums && picture.album
+    picture.name
+  end
+
   def picture_source_link_text(source_url)
     return 'DeviantArt' if source_url.include? 'deviantart.com'
     return 'Instagram' if source_url.include? 'instagram.com'

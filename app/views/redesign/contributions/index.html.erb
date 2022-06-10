@@ -6,7 +6,7 @@
 <% if params[:media_type] == 'pictures' || !params[:media_type] %>
   <%= render(
     partial: 'redesign/shared/pictures',
-    locals: { pictures: @pictures, group_pictures_into_albums: false }
+    locals: { pictures: @pictures, group_into_albums: false }
   ) %>
 <% end %>
 <% if params[:media_type] == 'literature' %>

@@ -43,7 +43,7 @@
   <% if @category.category_type == :picture.to_s %>
     <%= render(
       partial: 'redesign/shared/pictures',
-      locals: { pictures: @pictures, group_pictures_into_albums: true }
+      locals: { pictures: @pictures, group_into_albums: true }
     ) %>
   <% end %>
   <% if @category.category_type == :literature.to_s %>

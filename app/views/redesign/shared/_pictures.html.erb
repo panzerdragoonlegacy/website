@@ -1,7 +1,5 @@
 <section class="gallery">
-  <ul
-    class="gallery__list<%= '--no-albums' unless group_pictures_into_albums %>"
-  >
+  <ul class="gallery__list<%= '--no-albums' unless group_into_albums %>">
     <% pictures.each do |picture| %>
       <li class="gallery-picture">
         <div class="gallery-picture__picture">
@@ -11,14 +9,14 @@
             <%= link_to(
               show_picture(picture, 'picture', :triple_thumbnail),
               redesign_picture_path(picture),
-              title: picture.name
+              title: title_in_gallery(group_into_albums, picture)
             ) %>
           <% end %>
         </div>
         <div class="gallery-picture__details">
           <% if !picture.publish || !picture.category.publish %>
             <p class="draft">Draft</p>
-          <% elsif group_pictures_into_albums %>
+          <% elsif group_into_albums %>
             <p class="gallery-picture__count">
               <% if picture.album %>
                 <%= picture.album.pictures.count %> pictures
