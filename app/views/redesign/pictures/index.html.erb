@@ -11,7 +11,7 @@
     partial: 'redesign/shared/pictures',
     locals: {
       pictures: @pictures,
-      group_pictures_into_albums: (@contributor_profile ? true : false)
+      group_pictures_into_albums: (!@contributor_profile && !@tag)
     }
   ) %>
 <% end %>
