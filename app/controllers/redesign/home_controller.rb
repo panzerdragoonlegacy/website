@@ -13,7 +13,7 @@ class Redesign::HomeController < ApplicationController
         Picture
           .where(publish: true)
           .order('published_at desc')
-          .limit(4)
+          .limit(12)
       )
     @page =
       policy_scope(

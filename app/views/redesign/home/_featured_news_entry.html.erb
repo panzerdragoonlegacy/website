@@ -2,7 +2,7 @@
   <header class="home-featured-news-entry__header">
     <div class="home-featured-news-entry__picture">
       <%= link_to(
-        show_picture(featured_news_entry, 'news_entry_picture', :embedded),
+        show_picture(featured_news_entry, 'news_entry_picture', :original),
         featured_news_entry
       ) %>
     </div>
@@ -14,7 +14,7 @@
     </h1>
   </header>
   <div class="home-featured-news-entry__body">
-    <p class="home-featured-news-entry__author-date">
+    <p class="home-featured-news-entry__date">
       <%= render(
         partial: 'redesign/shared/contributor',
         locals: { contributor_profile: featured_news_entry.contributor_profile }
@@ -26,9 +26,9 @@
     </p>
     <p class="home-featured-news-entry__summary">
       <% if featured_news_entry.summary.present? %>
-        <p><%= featured_news_entry.summary %></p>
+        <%= featured_news_entry.summary %>
       <% else %>
-        <p><%= truncated_text featured_news_entry.content %></p>
+        <%= truncated_text featured_news_entry.content %>
       <% end %>
     </p>
   </div>

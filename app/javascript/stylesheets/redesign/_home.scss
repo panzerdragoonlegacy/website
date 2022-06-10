@@ -1,0 +1,108 @@
+.home-featured-news-entry {
+  margin: var(--size-2);
+  border-radius: var(--radius-4);
+
+  @include card-background-colour;
+
+  &__picture {
+    img {
+      width: 100%;
+      height: fit-content;
+      object-fit: fill;
+      border-top-left-radius: var(--radius-4);
+      border-top-right-radius: var(--radius-4);
+    }
+  }
+
+  &__heading {
+    font-size: var(--font-size-3);
+    margin: var(--size-2) var(--size-4);
+  }
+
+  &__body {
+    padding-bottom: var(--size-1);
+  }
+
+  &__date {
+    font-size: var(--font-size-1);
+    margin: var(--size-4);
+  }
+
+  &__summary {
+    font-size: var(--font-size-2);
+    margin: var(--size-4);
+  }
+}
+
+.home-pictures {
+  padding-top: var(--size-5);
+  padding-bottom: var(--size-2);
+  margin: var(--size-2);
+  margin-top: var(--size-6);
+  border-radius: var(--radius-4);
+  text-align: center;
+
+  @include card-background-colour;
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-flex;
+    justify-content: center;
+    gap: var(--size-2);
+    flex-wrap: wrap;
+  }
+
+  &__more {
+    margin-top: var(--size-4);
+    margin-bottom: var(--size-3);
+    font-size: var(--font-size-1);
+  }
+}
+
+.home-picture {
+  &__picture {
+    width: 150px;
+    height: 150px;
+    
+    img {
+      border-radius: var(--radius-2);
+    }
+  }
+}
+
+.home-page,
+.home-music-track,
+.home-video,
+.home-download {
+  margin: var(--size-2);
+  margin-top: var(--size-6);
+  border-radius: var(--radius-4);
+  text-align: center;
+  padding-bottom: var(--size-2);
+
+  @include card-background-colour;
+
+
+  &__picture {
+    img {
+      width: 100%;
+      object-fit: cover;
+      border-top-left-radius: var(--radius-4);
+      border-top-right-radius: var(--radius-4);
+      max-height: var(--size-14);
+    }
+  }
+
+  &__heading {
+    font-size: var(--font-size-3);
+    margin: var(--size-2) var(--size-4);
+  }
+
+  &__more {
+    margin-top: var(--size-4);
+    margin-bottom: var(--size-3);
+    font-size: var(--font-size-1);
+  }
+}
