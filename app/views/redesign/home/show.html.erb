@@ -36,9 +36,12 @@
     </section>
   <% end %>
   <% if @news_entries && @news_entries.present? %>
-    <%= render(
-      partial: 'redesign/shared/news_entries',
-      locals: { news_entries: @news_entries }
-    ) %>
+    <section class="home-news-entries">
+      <%= render(
+        partial: 'redesign/shared/news_entries',
+        locals: { news_entries: @news_entries }
+      ) %>
+    </section>
   <% end %>
+  <footer class="home__footer"></footer>
 </main>

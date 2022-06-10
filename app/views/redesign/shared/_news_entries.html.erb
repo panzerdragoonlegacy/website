@@ -1,25 +1,22 @@
-<section class="news-entries">
+<section class="cards">
   <% news_entries.each do |news_entry| %>
-    <article class="news-entries-news-entry">
-      <div class="news-entries-news-entry__picture">
-        <%= link_to(
-          show_picture(news_entry, 'news_entry_picture', :embedded),
-          redesign_news_entry_path(news_entry)
-        ) %>
-      </div>
-      <h1 class="news-entries-news-entry__heading">
-        <%= link_to news_entry.name, redesign_news_entry_path(news_entry) %>
-      </h1>
-      <p class="news-entries-news-entry__author-date">
-        <%= render(
-          partial: 'redesign/shared/contributor',
-          locals: { contributor_profile: news_entry.contributor_profile }
-        ) %> |
-        <%= render(
-          partial: 'redesign/shared/published_at',
-          locals: { publishable: news_entry }
-        ) %>
-      </p>
+    <article class="card">
+      <% if news_entry.news_entry_picture.present? %>
+        <div class="card__picture">
+          <%= link_to(
+            show_picture(news_entry, 'news_entry_picture', :original),
+            redesign_news_entry_path(news_entry)
+          ) %>
+        </div>
+      <% end %>
+      <%= render(
+        partial: 'redesign/shared/news_entries/news_entry_details',
+        locals: {
+          news_entry: news_entry,
+          has_picture: news_entry.news_entry_picture.present?
+        }
+      ) %>
+      <div class="card__footer"></div>
     </article>
   <% end %>
   <footer class="news-entries__footer">
