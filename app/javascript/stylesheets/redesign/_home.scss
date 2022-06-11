@@ -1,6 +1,7 @@
 .home-featured-news-entry {
   margin: var(--size-2);
   border-radius: var(--radius-4);
+  text-align: left;
 
   @include card-background-colour;
 
