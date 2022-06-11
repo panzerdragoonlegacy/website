@@ -1,4 +1,4 @@
-$menu-label-padding: 10px;
+$menu-label-padding: calc(var(--size-2) + var(--size-1));
 
 .main-menu {
   margin-left: auto;
@@ -25,7 +25,7 @@ $menu-label-padding: 10px;
   text-decoration: none;
   display: inline-block;
   color: var(--link-colour);
-  font-size: 1.125rem;
+  font-size: var(--font-size-3);
   background-color: var(--menu-background-colour);
   padding: $menu-label-padding;
 
@@ -87,6 +87,12 @@ $menu-label-padding: 10px;
     margin-left: 0.4em;
     font-size: 0.8rem;
   }
+
+  @media only screen and (max-width: $mobile-max) {
+    &:hover {
+      color: var(--link-hover-color);
+    }
+  }
 }
 
 .sub-menu__list {
@@ -129,5 +135,15 @@ $menu-label-padding: 10px;
 
   &:hover {
     background-color: var(--block-hover-color);
+  }
+}
+
+.sub-menu__divider {
+  hr {
+    border: none;
+    border-radius: var(--radius-1);
+    height: var(--size-1);
+    margin: var(--size-2);
+    background: var(--link-colour);
   }
 }

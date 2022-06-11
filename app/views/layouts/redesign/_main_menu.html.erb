@@ -36,7 +36,7 @@
             </li>
           <% end %>
           <% if category.slug == 'more' %>
-            <li><hr /></li>
+            <li class="sub-menu__divider"><hr /></li>
             <li class="sub-menu__list-item">
               <%= link_to(
                 'News Archives',
@@ -73,7 +73,7 @@
             <i class="fab fa-discord"></i> Discord
           </a>
         </li>
-        <li>
+        <li class="sub-menu__divider">
           <hr />
         </li>
         <li class="sub-menu__list-item">
@@ -101,7 +101,7 @@
             <i class="fab fa-youtube"></i> YouTube
           </a>
         </li>
-        <li>
+        <li class="sub-menu__divider">
           <hr />
         </li>
         <li class="sub-menu__list-item">
@@ -116,7 +116,7 @@
         </li>
       </ul>
     </li>
-    <li class="main-menu__list-item main-menu__search">
+    <li class="main-menu__list-item search">
       <%= form_with url: redesign_search_index_path, method: :get do |form| %>
         <%= form.text_field :query, placeholder: 'Search...' %>
       <% end %>

@@ -1,0 +1,12 @@
+.search {
+  background-color: var(--menu-background-colour);
+  padding: $menu-label-padding;
+
+  input {
+    font-family: var(--font-sans);
+    background-color: var(--link-colour);
+    border: 0;
+    padding: var(--size-1);
+    border-radius: var(--radius-1);
+  }
+}
