@@ -51,4 +51,8 @@ body {
       text-decoration: dotted underline;
     }
   }
+
+  &__footer {
+    margin-bottom: var(--size-8);
+  }
 }
