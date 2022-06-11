@@ -25,3 +25,21 @@
     list-style: none;
   }
 }
+
+.category-subcategories {
+  &__list--for-sub-category {
+    list-style: none;
+    padding-left: var(--size-2);
+    padding-right: var(--size-2);
+  }
+
+  &__list--for-media-type {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__list-item {
+    margin: 0;
+    padding: 0;
+  }
+}

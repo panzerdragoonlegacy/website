@@ -24,11 +24,11 @@
       partial: 'redesign/shared/pages/page_picture',
       locals: { page: @page }
     ) %>
-    <h1 class="page__heading"><%= @page.name %></h1>
     <%= render(
       partial: 'redesign/shared/contributed_by',
       locals: { contributor_profiles: @page.contributor_profiles }
     ) %>
+    <h1 class="page__chapter-heading"><%= @page.name %></h1>
   </header>
   <div class="page__body">
     <%= render(

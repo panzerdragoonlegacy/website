@@ -27,12 +27,10 @@
   </header>
   <div class="page__body">
     <p class="page__description"><%= @page.description %></p>
-    <div class="page__content">
-      <%= render(
-        partial: 'redesign/shared/pages/content',
-        locals: { page: @page }
-      ) %>
-    </div>
+    <%= render(
+      partial: 'redesign/shared/pages/content',
+      locals: { page: @page }
+    ) %>
     <%= render(
       partial: 'redesign/literature/chapters',
       locals: { page: @page }

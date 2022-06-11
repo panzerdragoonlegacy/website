@@ -7,6 +7,10 @@
     }
   }
 
+  &__chapter-heading {
+    padding: 0 var(--size-2);
+  }
+
   &__description {
     @include summary-or-description;
   }
@@ -26,6 +30,38 @@
     blockquote p {
       @include blockquote-paragraph;
     }
+    
+    hr {
+      border: none;
+      border-radius: var(--radius-2);
+      height: var(--size-1);
+      margin: var(--size-2);
+
+      background: var(--gray-8);
+      @media (prefers-color-scheme: dark) {
+        background: var(--gray-2);
+      }
+    }
+  }
+}
+
+.literature-chapters {
+  &__heading {
+    margin: var(--size-2);
+  }
+}
+
+.chapter-navigation {
+  &__list {
+    list-style: none;
+    text-align: center;
+    margin-bottom: var(--size-6);
+  }
+
+  &__list-item {
+    display: inline-block;
+    margin-left: var(--size-2);
+    margin-right: var(--size-2);
   }
 }
 

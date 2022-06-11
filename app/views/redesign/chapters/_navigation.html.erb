@@ -4,20 +4,20 @@
       <li class="chapter-navigation__list-item">
         <%= link_to(
           "‹ #{previous_chapter(page).name}",
-          literature_chapter_path(
+          redesign_literature_chapter_path(
             page.parent_page.to_param, previous_chapter(page)
           )
         ) %>
       </li>
     <% end %>
     <li class="chapter-navigation__list-item">
-      <%= link_to 'Table of Contents', literature_path(page.parent_page) %>
+      <%= link_to 'Table of Contents', redesign_literature_path(page.parent_page) %>
     </li>
     <% if next_chapter(page) %>
       <li class="chapter-navigation__list-item">
         <%= link_to(
           "#{next_chapter(page).name} ›",
-          literature_chapter_path(page.parent_page.to_param, next_chapter(page))
+          redesign_literature_chapter_path(page.parent_page.to_param, next_chapter(page))
         ) %>
       </li>
     <% end %>
