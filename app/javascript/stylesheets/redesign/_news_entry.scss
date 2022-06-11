@@ -47,3 +47,18 @@
     }
   }
 }
+
+.news-entry-years {
+  text-align: center;
+
+  &__heading {
+    padding: var(--size-2);
+  }
+
+  &__list {
+    margin: 0;
+    padding-left: var(--size-2);
+    padding-right: var(--size-2);
+    list-style: none;
+  }
+}
