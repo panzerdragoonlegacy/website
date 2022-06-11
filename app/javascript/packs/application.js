@@ -16,3 +16,24 @@ const imagePath = (name) => images(name, true);
 
 import "core-js/stable";
 import "regenerator-runtime/runtime";
+
+// Automatically close other submenus in mobile layout when a submenu opens:
+window.onload = function() {
+  const subMenuSlugs = ['games', 'gallery', 'more', 'beyond'];
+  const subMenuCheckboxes = [];
+  subMenuSlugs.forEach(subMenuSlug => {
+    subMenuCheckboxes.push(document.getElementById(`${subMenuSlug}-checkbox`))
+  });
+
+  function closeOtherSubMenus(event) {
+    subMenuCheckboxes.forEach(subMenuCheckbox => {
+      if (subMenuCheckbox.id !== event.srcElement.id) {
+        subMenuCheckbox.checked = false;
+      }
+    })
+  }
+
+  subMenuCheckboxes.forEach(subMenuCheckbox => {
+    subMenuCheckbox.addEventListener('click', closeOtherSubMenus);
+  })
+};

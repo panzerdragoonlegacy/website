@@ -13,13 +13,13 @@
     <% @main_menu_categories.each do |category| %>
       <li class="main-menu__list-item sub-menu">
         <input
-          type="radio"
-          id="<%= category.slug %>-radio-button"
+          type="checkbox"
+          id="<%= category.slug %>-checkbox"
           name="menu-selection"
-          class="main-menu__radio-button"
+          class="main-menu__checkbox"
         />
         <label
-          for="<%= category.slug %>-radio-button"
+          for="<%= category.slug %>-checkbox"
           class="main-menu__label sub-menu__title"
           aria-expanded="false"
           aria-controls="<%= category.slug %>-dropdown"
@@ -49,13 +49,13 @@
     <% end %>
     <li class="main-menu__list-item sub-menu">
       <input
-        type="radio"
-        id="beyond-radio-button"
+        type="checkbox"
+        id="beyond-checkbox"
         name="menu-selection"
-        class="main-menu__radio-button"
+        class="main-menu__checkbox"
       />
       <label
-        for="beyond-radio-button"
+        for="beyond-checkbox"
         class="main-menu__label sub-menu__title"
         aria-expanded="false"
         aria-controls="beyond-dropdown"

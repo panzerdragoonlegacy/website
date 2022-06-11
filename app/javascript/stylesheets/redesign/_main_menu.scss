@@ -45,7 +45,7 @@ $menu-label-padding: calc(var(--size-2) + var(--size-1));
   color: var(--main-text-colour);
 }
 
-.main-menu__radio-button {
+.main-menu__checkbox {
   display: none;
 
   @media only screen and (max-width: $mobile-max) {
