@@ -19,9 +19,12 @@
     <div class="layout">
       <header class="layout__header">
         <div class="layout__logo">
-          <%= image_pack_tag(
-            'media/images/redesign-logo.png',
-            alt: 'Panzer Dragoon Legacy logo'
+          <%= link_to(
+            image_pack_tag(
+              'media/images/redesign-logo.png',
+              alt: 'Panzer Dragoon Legacy logo'
+            ),
+            redesign_path
           ) %>
         </div>
         <%= render 'layouts/redesign/main_menu' %>
