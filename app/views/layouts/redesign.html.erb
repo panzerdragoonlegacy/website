@@ -18,7 +18,12 @@
   <body tabindex="-1">
     <div class="layout">
       <header class="layout__header">
-        <h1 class="layout__site-heading">Panzer Dragoon Legacy</h1>
+        <div class="layout__logo">
+          <%= image_pack_tag(
+            'media/images/redesign-logo.png',
+            alt: 'Panzer Dragoon Legacy logo'
+          ) %>
+        </div>
         <%= render 'layouts/redesign/main_menu' %>
       </header>
       <%= render 'layouts/redesign/flash_messages' %>
