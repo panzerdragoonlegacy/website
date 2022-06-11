@@ -28,8 +28,10 @@
     content: ':';
   }
 
-  dd {
-    margin-top: -27px;
-    margin-left: 20%;
+  @media only screen and (min-width: $tablet-min) {
+    dd {
+      margin-top: -27px;
+      margin-left: 20%;
+    }
   }
 }
