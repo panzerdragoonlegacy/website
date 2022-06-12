@@ -109,14 +109,14 @@ module Redesign::PagesHelper
             Paperclip::Geometry.from_file(
               illustration.illustration.path(:original)
             )
-          legacy_url = illustration.illustration.url(:legacy)
+          legacy_url = illustration.illustration.url(:original)
 
           # Use "modern" image sizes only if the image exceeds 320 pixels wide,
           # the smallest mobile size in Chrome Dev Tools. These "legacy" images
           # were mostly captured in the early 2000s at 280 pixels or smaller and
           # don't look good upscaled to a higher resolution than 320 pixels.
           if original_image_file.width.to_i > 320
-            modern_url = illustration.illustration.url(:modern)
+            modern_url = illustration.illustration.url(:original)
             img.set_attribute(
               'srcset', "#{legacy_url} 320w, #{modern_url} 768w"
             )
@@ -125,9 +125,11 @@ module Redesign::PagesHelper
             )
             img.set_attribute('src', modern_url)
             img.set_attribute('class', 'illustration__image--modern')
+            img.parent.set_attribute('class', 'illustration illustration--modern')
           else
             img.set_attribute('src', legacy_url)
             img.append_class('illustration__image--legacy')
+            img.parent.set_attribute('class', 'illustration illustration--legacy')
           end
         else
           img.set_attribute('src', '')
@@ -138,7 +140,6 @@ module Redesign::PagesHelper
     # Replace the paragraphs wrapping the illustration images with figures:
     html.css('img').each do |img|
       img.parent.name = 'figure'
-      img.parent.set_attribute('class', 'illustration')
     end
 
     # Add figure captions extracted from the image alt text:
@@ -159,10 +160,11 @@ module Redesign::PagesHelper
             '</figcaption>'
           )
         elsif captions.count == 1
+          figure.append_class('illustration--single-image')
           if image_class == 'illustration__image--legacy'
             # For individual legacy images, alternate between aligning the
             # figure to the left or the right of the text.
-            figure.set_attribute('class', 'illustration--' + alignment)
+            figure.append_class('illustration--' + alignment)
             alignment == 'left' ? alignment = 'right' : alignment = 'left'
           end
           figure.add_child(
@@ -171,6 +173,7 @@ module Redesign::PagesHelper
             '</figcaption>'
           )
         elsif captions.count == 2
+          figure.append_class('illustration--double-image')
           figure.add_child(
             '<figcaption class="illustration__caption--double-image">' +
             '<span class="caption-alignment--top">Top</span>' +

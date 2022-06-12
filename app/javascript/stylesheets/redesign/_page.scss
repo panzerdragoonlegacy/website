@@ -90,11 +90,6 @@
     margin-bottom: var(--size-2);
   }
 
-  @media only screen and (min-width: $tablet-min) {
-    padding: var(--size-2);
-    border-radius: var(--radius-2);
-  }
-
   &__image {
     &--legacy,
     &--modern {
@@ -112,15 +107,51 @@
     &--double-image,
     &--images-exceeded {
       font-size: var(--font-size-1);
-      padding: var(--size-2);
-      padding-top: calc(var(--size-2) + var(--size-00));
+      padding: var(--size-4);
+      padding-top: calc(var(--size-2) + var(--size-1));
 
       @media only screen and (max-width: $mobile-max) {
         text-align: center;
       }
+    }
+  }
+}
 
-      @media only screen and (min-width: $tablet-min) {
-      }
+.illustration--legacy,
+.illustration--modern.illustration--double-image {
+  @media only screen and (min-width: $tablet-min) {
+    border-radius: var(--radius-2);
+    margin: var(--size-2);
+    padding: var(--size-2);
+    text-align: center;
+  }
+}
+
+.illustration--modern.illustration--single-image {
+  @media only screen and (min-width: $tablet-min) {
+    border-radius: var(--radius-2);
+    width: calc($tablet-min - (var(--size-2) + var(--size-2)));
+    margin: var(--size-2);
+    text-align: center;
+
+    img {
+      width: calc($tablet-min - (var(--size-2) + var(--size-2)));
+      border-top-left-radius: var(--radius-2);
+      border-top-right-radius: var(--radius-2);
+    }
+  }
+}
+
+.illustration--double-image {
+  @media only screen and (min-width: $tablet-min) {
+    width: calc($tablet-min - (var(--size-2) * 4));
+
+    img:first-of-type {
+      margin-right: 3px;
+    }
+
+    img {
+      width: calc(($tablet-min / 2) - (var(--size-5) - var(--size-1)));
     }
   }
 }
@@ -132,7 +163,12 @@
   }
 
   @media only screen and (min-width: $tablet-min) {
-    width: 320px;
+    padding-top: var(--size-2);
+    width: calc(($tablet-min / 2) - (var(--size-2) * 4));
+
+    img {
+      width: calc(($tablet-min / 2) - (var(--size-7)));
+    }
   }
 
   .illustration__caption--individual {
@@ -142,14 +178,18 @@
 
 .illustration--left {
   float: left;
-  margin-left: var(--size-2);
-  margin-right: var(--size-4);
+
+  @media only screen and (min-width: $tablet-min) {
+    margin-right: var(--size-4);
+  }
 }
 
 .illustration--right {
   float: right;
-  margin-left: var(--size-4);
-  margin-right: var(--size-2);
+
+  @media only screen and (min-width: $tablet-min) {
+    margin-left: var(--size-4);
+  }
 }
 
 .caption-alignment {

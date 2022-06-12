@@ -8,9 +8,7 @@ class Illustration < ApplicationRecord
     :illustration,
     styles: {
       embedded: '280x280>',
-      legacy: '320x320>',
-      popover: '625x625',
-      modern: '768x768>'
+      popover: '625x625'
     },
     path: ':rails_root/public/system/:attachment/:id/:style/:filename',
     url: '/system/:attachment/:id/:style/:filename'
