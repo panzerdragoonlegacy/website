@@ -31,6 +31,7 @@
     h2,
     h3,
     dl,
+    pre,
     p {
       padding: var(--size-2);
 
@@ -43,7 +44,7 @@
     blockquote p {
       @include blockquote-paragraph;
     }
-    
+
     hr {
       border: none;
       border-radius: var(--radius-2);
