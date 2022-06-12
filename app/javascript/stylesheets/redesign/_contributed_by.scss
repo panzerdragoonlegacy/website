@@ -28,12 +28,21 @@
     display: flex;
     justify-content: center;
     gap: var(--size-2);
+
+    @media only screen and (max-width: $mobile-max) {
+      max-width: $mobile-s;
+    }
   }
 
   &__picture-link {
     img {
       border-radius: var(--radius-round);
     }
+  }
+
+  &__text-link {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
