@@ -16,7 +16,20 @@
   }
 
   &__content {
+    ul {
+      margin: 0;
+    }
+
+    li {
+      text-align: left;
+    }
+
+    dt:after {
+      content: ':';
+    }
+
     h2,
+    h3,
     dl,
     p {
       padding: var(--size-2);
