@@ -1,12 +1,21 @@
 .search {
   background-color: var(--menu-background-colour);
-  padding: $menu-label-padding;
 
   input {
     font-family: var(--font-sans);
     background-color: var(--link-colour);
     border: 0;
     padding: var(--size-1);
-    border-radius: var(--radius-1);
+    border-radius: var(--radius-2);
+    color: black;
+  }
+
+  input::placeholder {
+    color: var(--gray-8);
+  }
+
+  input::selection {
+    background-color: var(--link-colour);
+    color: var(--gray-8);
   }
 }
