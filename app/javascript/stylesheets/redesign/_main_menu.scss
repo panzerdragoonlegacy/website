@@ -4,8 +4,7 @@ $menu-border-radius: var(--size-2);
 .main-menu {
   margin-left: auto;
   margin-right: auto;
-
-  background-color: black;
+  overflow: hidden;
 
   @media only screen and (min-width: $tablet-min) {
     max-width: fit-content;

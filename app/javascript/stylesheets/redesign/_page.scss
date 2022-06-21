@@ -1,3 +1,5 @@
+$padding-both-sides: calc(var(--size-2) + var(--size-2));
+
 .page {
   &__picture {
     @include header-picture-container;
@@ -85,15 +87,19 @@
     background-color: var(--gray-7);
   // }
 
-  @media only screen and (max-width: $mobile-max) {
-    width: 100vw;
+  @media only screen and (max-width: $mobile-max-plus-padding) {
+    max-width: calc(100vw - $padding-both-sides);
     margin-bottom: var(--size-2);
+
+    img {
+      max-width: calc(100vw - $padding-both-sides);
+    }
   }
 
   &__image {
     &--legacy,
     &--modern {
-      @media only screen and (max-width: $mobile-max) {
+      @media only screen and (max-width: $mobile-max-plus-padding) {
         width: 100vw;
         padding: 0;
         margin-bottom: var(--size-00);
@@ -119,7 +125,7 @@
 
 .illustration--legacy,
 .illustration--modern.illustration--double-image {
-  @media only screen and (min-width: $tablet-min) {
+  @media only screen and (min-width: $tablet-min-plus-padding) {
     border-radius: var(--radius-2);
     margin: var(--size-2);
     padding: var(--size-2);
@@ -128,22 +134,22 @@
 }
 
 .illustration--modern.illustration--single-image {
-  @media only screen and (min-width: $tablet-min) {
+  @media only screen and (min-width: $tablet-min-plus-padding) {
     border-radius: var(--radius-2);
-    width: calc($tablet-min - (var(--size-2) + var(--size-2)));
+    width: calc($tablet-min - $padding-both-sides);
     margin: var(--size-2);
     text-align: center;
 
     img {
-      width: calc($tablet-min - (var(--size-2) + var(--size-2)));
       border-top-left-radius: var(--radius-2);
       border-top-right-radius: var(--radius-2);
+      width: calc($tablet-min - $padding-both-sides);
     }
   }
 }
 
 .illustration--double-image {
-  @media only screen and (min-width: $tablet-min) {
+  @media only screen and (min-width: $tablet-min-plus-padding) {
     width: calc($tablet-min - (var(--size-2) * 4));
 
     img:first-of-type {
@@ -158,11 +164,11 @@
 
 .illustration--left,
 .illustration--right {
-  @media only screen and (max-width: $mobile-max) {
+  @media only screen and (max-width: $mobile-max-plus-padding) {
     width: 100vw;
   }
 
-  @media only screen and (min-width: $tablet-min) {
+  @media only screen and (min-width: $tablet-min-plus-padding) {
     padding-top: var(--size-2);
     width: calc(($tablet-min / 2) - (var(--size-2) * 4));
 
@@ -179,7 +185,7 @@
 .illustration--left {
   float: left;
 
-  @media only screen and (min-width: $tablet-min) {
+  @media only screen and (min-width: $tablet-min-plus-padding) {
     margin-right: var(--size-4);
   }
 }
@@ -187,7 +193,7 @@
 .illustration--right {
   float: right;
 
-  @media only screen and (min-width: $tablet-min) {
+  @media only screen and (min-width: $tablet-min-plus-padding) {
     margin-left: var(--size-4);
   }
 }
@@ -210,14 +216,14 @@
     margin-left: var(--size-1);
   }
 
-  @media only screen and (min-width: $tablet-min) {
+  @media only screen and (min-width: $tablet-min-plus-padding) {
     &--top,
     &--bottom {
       display: none;
     }
   }
 
-  @media only screen and (max-width: $mobile-max) {
+  @media only screen and (max-width: $mobile-max-plus-padding) {
     &--left,
     &--right {
       display: none;
