@@ -64,6 +64,9 @@ $padding-both-sides: calc(var(--size-2) + var(--size-2));
 }
 
 .chapter-navigation {
+  clear: both;
+  padding-top: var(--size-2);
+
   &__list {
     list-style: none;
     text-align: center;
