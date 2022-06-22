@@ -1,5 +1,3 @@
-$padding-both-sides: calc(var(--size-2) + var(--size-2));
-
 .page {
   &__picture {
     @include header-picture-container;

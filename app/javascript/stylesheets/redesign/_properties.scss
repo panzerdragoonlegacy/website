@@ -20,3 +20,5 @@ $laptop-l: 1440px;
 // Equivalent to viewport sizes + 1rem (16px)
 $mobile-max-plus-padding: 783px;
 $tablet-min-plus-padding: 784px;
+
+$padding-both-sides: calc(var(--size-2) + var(--size-2));
