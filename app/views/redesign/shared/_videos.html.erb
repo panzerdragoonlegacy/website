@@ -4,7 +4,7 @@
       <% if video.video_picture.present? %>
         <div class="card__picture">
           <%= link_to(
-            show_picture(video, 'video_picture', :original),
+            show_picture(video, 'video_picture', :embedded),
             redesign_video_path(video)
           ) %>
         </div>

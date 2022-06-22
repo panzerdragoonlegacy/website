@@ -4,7 +4,7 @@
       <% if news_entry.news_entry_picture.present? %>
         <div class="card__picture">
           <%= link_to(
-            show_picture(news_entry, 'news_entry_picture', :original),
+            show_picture(news_entry, 'news_entry_picture', :embedded),
             redesign_news_entry_path(news_entry)
           ) %>
         </div>

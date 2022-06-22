@@ -4,7 +4,7 @@
       <% if page.page_picture.present? %>
         <div class="card__picture">
           <%= link_to(
-            show_picture(page, 'page_picture', :original),
+            show_picture(page, 'page_picture', :embedded),
             redesign_literature_path(page)
           ) %>
         </div>

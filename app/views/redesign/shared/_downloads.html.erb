@@ -4,7 +4,7 @@
       <% if download.download_picture.present? %>
         <div class="card__picture">
           <%= link_to(
-            show_picture(download, 'download_picture', :original),
+            show_picture(download, 'download_picture', :embedded),
             redesign_download_path(download)
           ) %>
         </div>

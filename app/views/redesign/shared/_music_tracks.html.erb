@@ -4,7 +4,7 @@
       <% if music_track.music_track_picture.present? %>
         <div class="card__picture">
           <%= link_to(
-            show_picture(music_track, 'music_track_picture', :original),
+            show_picture(music_track, 'music_track_picture', :embedded),
             redesign_music_track_path(music_track)
           ) %>
         </div>
