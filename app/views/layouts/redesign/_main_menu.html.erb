@@ -27,7 +27,7 @@
           <%= category.name %>
         </label>
         <ul class="sub-menu__list" id="<%= category.slug %>-dropdown">
-          <% category.categorisations.each do |categorisation| %>
+          <% category.ordered_categorisations.each do |categorisation| %>
             <li class="sub-menu__list-item">
               <%= link_to(
                 categorisation.short_name_in_parent,
