@@ -111,11 +111,11 @@ module Redesign::PagesHelper
             )
           legacy_url = illustration.illustration.url(:original)
 
-          # Use "modern" image sizes only if the image exceeds 320 pixels wide,
-          # the smallest mobile size in Chrome Dev Tools. These "legacy" images
-          # were mostly captured in the early 2000s at 280 pixels or smaller and
-          # don't look good upscaled to a higher resolution than 320 pixels.
-          if original_image_file.width.to_i > 320
+          # Use "modern" image sizes only if the image exceeds 768 pixels wide.
+          # The "legacy" images were mostly captured in the early 2000s at 280
+          # pixels or smaller and don't look good upscaled to a higher
+          # resolutions, so they are displayed at half the tablet layout width.
+          if original_image_file.width.to_i > 768
             modern_url = illustration.illustration.url(:original)
             img.set_attribute(
               'srcset', "#{legacy_url} 320w, #{modern_url} 768w"
