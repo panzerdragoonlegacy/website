@@ -3,7 +3,6 @@
 
   &__video {
     margin-top: var(--size-5);
-    background-color: red;
 
     @media only screen and (max-width: $mobile-max-plus-padding) {
       width: calc(100vw - $padding-both-sides);
