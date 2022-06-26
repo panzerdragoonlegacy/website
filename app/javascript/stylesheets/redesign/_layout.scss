@@ -14,6 +14,7 @@ body {
   // Prevent horizontal scrollbar:
   overflow-x: hidden;
   position: relative;
+  height: 100%;
 
   &__header {
     background-color: black;
