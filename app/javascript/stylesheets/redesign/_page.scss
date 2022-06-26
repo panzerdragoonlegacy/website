@@ -89,11 +89,11 @@
   // }
 
   @media only screen and (max-width: $mobile-max-plus-padding) {
-    max-width: calc(100vw - $padding-both-sides);
+    width: 100%;
     margin-bottom: var(--size-2);
 
     img {
-      max-width: calc(100vw - $padding-both-sides);
+      width: 100%;
     }
   }
 
@@ -101,7 +101,6 @@
     &--legacy,
     &--modern {
       @media only screen and (max-width: $mobile-max-plus-padding) {
-        width: 100vw;
         padding: 0;
         margin-bottom: var(--size-00);
       }
