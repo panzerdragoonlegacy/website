@@ -1,4 +1,12 @@
+html, body {
+  // Prevent horizontal scrollbar:
+  overflow-x: hidden;
+}
+
 body {
+  // Prevent horizontal scrollbar:
+  height: 100%;
+
   padding: 0;
   margin: 0;
 
@@ -10,11 +18,6 @@ body {
 
 .layout {
   font-family: var(--font-sans);
-
-  // Prevent horizontal scrollbar:
-  overflow-x: hidden;
-  position: relative;
-  height: 100%;
 
   &__header {
     background-color: black;

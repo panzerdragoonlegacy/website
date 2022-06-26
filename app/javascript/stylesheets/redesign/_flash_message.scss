@@ -1,0 +1,16 @@
+@mixin flash-message {
+  text-align: center;
+  margin: var(--size-4);
+}
+
+.flash {
+  &-alert {
+    @include flash-message;
+    color: var(--red-7);
+  }
+
+  &-notice {
+    @include flash-message;
+    color: var(--green-7);
+  }
+}

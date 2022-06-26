@@ -1,5 +1,5 @@
- <% flash.each do |name, message| %>
+<% flash.each do |name, message| %>
   <% unless name.to_s == 'timedout' %>
-    <%= content_tag :div, message, id: "flash_#{name}" %>
+    <%= content_tag :div, message, class: "flash-#{name}" %>
   <% end %>
 <% end %>
