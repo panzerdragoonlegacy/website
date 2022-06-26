@@ -1,0 +1,24 @@
+<div class="card__details--<%= has_picture ? 'has-picture' : 'no-picture' %>">
+  <h1 class="card__heading--<%= has_picture ? 'has-picture' : 'no-picture' %>">
+    <%= link_to news_entry.name, news_entry_path(news_entry) %>
+  </h1>
+  <div class="card__body--<%= has_picture ? 'has-picture' : 'no-picture' %>">
+    <p>
+      <%= render(
+        partial: 'shared/contributor',
+        locals: { contributor_profile: news_entry.contributor_profile }
+      ) %> |
+      <%= render(
+        partial: 'shared/published_at',
+        locals: { publishable: news_entry }
+      ) %>
+    </p>
+    <p>
+      <% if news_entry.summary.present? %>
+        <%= news_entry.summary %>
+      <% else %>
+        <%= truncated_text news_entry.content %>
+      <% end %>
+    </p>
+  </div>
+</div>

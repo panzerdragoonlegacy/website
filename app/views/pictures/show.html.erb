@@ -14,7 +14,7 @@
 <% end %>
 
 <% if policy(@picture).edit? %>
-  <p>
+  <p class="admin-section">
     <%= link_to 'Edit Picture', edit_admin_picture_path(@picture) %>
     <% if @picture.album && policy(@picture.album).edit? %>
       | <%= link_to 'Edit Album', edit_admin_album_path(@picture.album) %>
@@ -22,147 +22,60 @@
   </p>
 <% end %>
 
-<% if !@picture.publish %>
-  <p class="unpublished">
-    This picture is not published. Please inform an administrator when it and
-    the associated news entry are ready to be published.
-  </p>
-<% elsif !@picture.category.publish %>
-  <p class="unpublished">Published in Unpublished Category</p>
-<% end %>
-<% if !@picture.publish || !@picture.category.publish %>
-  <p class="unpublished">
+<% unless @picture.publish && @picture.category.publish %>
+  <%= render partial: 'shared/draft' %>
+  <p class="draft">
     Use this Markdown to embed the picture in a news entry:
     <code>![](<%= @picture.id %>-<%= @picture.url %>.jpg)</code>
   </p>
 <% end %>
 
-<% if @picture_to_replace %>
-  <h2>Picture to Replace:</h2>
-  <%=
-    link_to(
-      show_picture(@picture_to_replace, 'picture', :thumbnail),
-      @picture_to_replace
-    )
-  %>
-  <p class="unpublished">
-    <%= @picture_to_replace.name_and_id %> will be replaced when
-    <%= @picture.name_and_id %> is published.
-  </p>
-<% end %>
-
-<h2>Contributed By:</h2>
-<ul class="thumbnail_and_name_list">
-  <% @picture.contributor_profiles.each do |contributor_profile| %>
-    <li>
-      <%=
-        link_to(
-          show_avatar(contributor_profile, :mini_thumbnail),
-          contributor_profile
-        )
-      %>
-      <h3><%= link_to contributor_profile.name, contributor_profile %></h3>
-    </li>
-  <% end %>
-</ul>
-
-<% if @picture.album %>
-  <%= render(
-    partial: 'albums/album_navigation', locals: { albumable: @picture }
-  ) %>
-<% end %>
-
-<div class="embedded_picture_container">
-  <% if @picture.full_size_link %>
-    <%=
-      link_to(
-        show_picture(@picture, 'picture', :embedded), @picture.picture.url
-      )
-    %>
-  <% else %>
-    <%= show_picture @picture, 'picture', :embedded %>
-  <% end %>
-</div>
-
-<p>
-  <% unless @picture.source_url.blank? %>
-    View Source:
-      <%=
-        link_to(
-          picture_source_link_text(@picture.source_url),
-          @picture.source_url
-        )
-      %>.
-  <% end %>
-  <% unless @picture.instagram_post_id.blank? %>
-    View Post:
-      <%=
-        link_to(
-          'Instagram',
-          "https://www.instagram.com/p/#{@picture.instagram_post_id}"
-        )
-      %>.
-  <% end %>
-  <% if @picture.full_size_link %>
-    Download Full Size Picture: <%= link_to "JPEG", @picture.picture.url %>.
-  <% else %>
-    Full size downloads are disabled for this picture.
-  <% end %>
-  <% if @picture.publish %>
-    Published <%= local_date @picture.published_at %>.
-  <% end %>
-</p>
-
-<p><%= @picture.description %></p>
-
-<% unless @picture.information.blank? %>
-  <%= raw markdown_to_html @picture.information %>
-<% end %>
-
-<% if @picture.album && (@picture.album.pictures || @picture.album.videos) %>
-  <% unless @picture.album.pictures == 0 && @picture.album.videos == 0 %>
-    <h2>Also in the Album "<%= @picture.album.name %>"</h2>
-    <div id="other_pictures_in_album">
-      <% @picture.album.ordered_pictures.each do |picture| %>
-        <% unless picture.id == @picture.id %>
-          <%=
-            link_to(
-              image_tag(
-                picture.picture.url(:mini_thumbnail),
-                alt: picture.name,
-                width: '75',
-                height: '75'
-              ),
-              picture
-            )
-          %>
-        <% end %>
-      <% end %>
-      <% @picture.album.ordered_videos.each do |video| %>
-        <%=
-          link_to(
-            image_tag(
-              video.video_picture.url(:mini_thumbnail),
-              alt: video.name,
-              width: '75',
-              height: '75'
-            ),
-            video
-          )
-        %>
+<article class="picture">
+  <header class="picture__header">
+    <%= render(
+      partial: 'shared/contributed_by',
+      locals: { contributor_profiles: @picture.contributor_profiles }
+    ) %>
+    <% if @picture.album %>
+      <%= render(
+        partial: 'shared/albums/navigation',
+        locals: { albumable: @picture }
+      ) %>
+    <% end %>
+  </header>
+  <div class="picture__body">
+    <div class="picture__picture">
+      <% if @picture.full_size_link %>
+        <%= link_to(
+          show_picture(@picture, 'picture', :embedded), @picture.picture.url
+        ) %>
+      <% else %>
+        <%= show_picture @picture, 'picture', :embedded %>
       <% end %>
     </div>
-  <% end %>
-<% end %>
-
-<%= render partial: 'shared/related_tags' %>
-
-<p class="links">
-  <% if @picture.category.saga %>
-    <%= link_to(
-      @picture.category.saga.name, top_level_page_path(@picture.category.saga)
-    ) %> |
-  <% end %>
-  <%= link_to 'Pictures', pictures_path %> |
-  <%= link_to @picture.category.name, category_path(@picture.category) %>
-</p>
+    <%= render(
+      partial: 'pictures/details',
+      locals: { picture: @picture }
+    ) %>
+    <p class="picture__description"><%= @picture.description %></p>
+    <% unless @picture.information.blank? %>
+      <div class="picture__extra-information">
+        <%= raw markdown_to_html @picture.information %>
+      </div>
+    <% end %>
+  </div>
+  <footer class="picture__footer">
+    <% if @picture.album && album_has_at_least_one_albumable(@picture.album) %>
+      <%= render(
+        partial: 'shared/albums/album',
+        locals: {
+          album: @picture.album, picture_id: @picture.id, video_id: nil
+        }
+      ) %>
+    <% end %>
+    <%= render(
+      partial: 'shared/related_tags',
+      locals: { tags: @tags }
+    ) %>
+  </footer>
+</article>

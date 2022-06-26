@@ -7,7 +7,6 @@ class MusicTracksController < ApplicationController
     elsif params[:tag_id]
       load_tagged_music_tracks
     else
-      load_category_groups
       @music_tracks = policy_scope(MusicTrack.order(:name).page(params[:page]))
     end
   end

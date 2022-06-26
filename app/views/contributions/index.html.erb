@@ -1,51 +1,35 @@
-<% title "What's New? - Contributions" %>
+<% title "Contributions By Date" %>
 <%= render partial: 'shared/meta_tags' %>
 
-<p class="news_entry_category_selector">
-  <%= link_to 'News', root_path %> |
-  Contributions
-</p>
-
-<p>
-  <% if params[:media_type] == 'pictures' || !params[:media_type] %>
-    Pictures
-  <% else %>
-    <%= link_to 'Pictures', contributions_path(media_type: 'pictures') %>
-  <% end %> |
-  <% if params[:media_type] == 'literature' %>
-    Literature
-  <% else %>
-    <%= link_to 'Literature', contributions_path(media_type: 'literature') %>
-  <% end %> |
-  <% if params[:media_type] == 'music' %>
-    Music
-  <% else %>
-    <%= link_to 'Music', contributions_path(media_type: 'music') %>
-  <% end %> |
-  <% if params[:media_type] == 'videos' %>
-    Videos
-  <% else %>
-    <%= link_to 'Videos', contributions_path(media_type: 'videos') %>
-  <% end %> |
-  <% if params[:media_type] == 'downloads' %>
-    Downloads
-  <% else %>
-    <%= link_to 'Downloads', contributions_path(media_type: 'downloads') %>
-  <% end %>
-</p>
+<%= render partial: 'contributions/navigation' %>
 
 <% if params[:media_type] == 'pictures' || !params[:media_type] %>
-  <%= render 'pictures' %>
+  <%= render(
+    partial: 'shared/pictures',
+    locals: { pictures: @pictures, group_into_albums: false }
+  ) %>
 <% end %>
 <% if params[:media_type] == 'literature' %>
-  <%= render 'literature' %>
+  <%= render(
+    partial: 'shared/literature_pages',
+    locals: { pages: @pages }
+  ) %>
 <% end %>
 <% if params[:media_type] == 'music' %>
-  <%= render 'music' %>
+  <%= render(
+    partial: 'shared/music_tracks',
+    locals: { music_tracks: @music_tracks }
+  ) %>
 <% end %>
 <% if params[:media_type] == 'videos' %>
-  <%= render 'videos' %>
+  <%= render(
+    partial: 'shared/videos',
+    locals: { videos: @videos }
+  ) %>
 <% end %>
 <% if params[:media_type] == 'downloads' %>
-  <%= render 'downloads' %>
+  <%= render(
+    partial: 'shared/downloads',
+    locals: { downloads: @downloads }
+  ) %>
 <% end %>

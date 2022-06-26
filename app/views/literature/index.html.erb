@@ -6,22 +6,9 @@
   <% title 'Literature' %>
 <% end %>
 
-<% unless params[:contributor_profile_id] || params[:tag_id] %>
-  <% if @category_groups.present? %>
-    <h2>Literature Categories</h2>
-    <%=
-      render(
-        partial: 'site_map/category_groups',
-        locals: { category_groups: @category_groups }
-      )
-    %>
-  <% end %>
-  <% if @pages.present? %>
-    <h2>All Literature</h2>
-  <% end %>
-<% end %>
-
 <% if @pages %>
-  <%= render 'list', pages: @pages %>
-  <%= paginate @pages %>
+  <%= render(
+    partial: 'shared/literature_pages',
+    locals: { pages: @pages }
+  ) %>
 <% end %>

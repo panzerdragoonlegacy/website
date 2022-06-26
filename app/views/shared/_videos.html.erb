@@ -1,0 +1,27 @@
+<section class="cards">
+  <% videos.each do |video| %>
+    <article class="card">
+      <% if video.video_picture.present? %>
+        <div class="card__picture">
+          <%= link_to(
+            show_picture(video, 'video_picture', :embedded),
+            video_path(video)
+          ) %>
+        </div>
+      <% end %>
+      <%= render(
+        partial: 'shared/card_details',
+        locals: {
+          record: video,
+          record_path: video_path(video),
+          show_description: !descriptions_are_identical?(videos),
+          has_picture: video.video_picture.present?
+        }
+      ) %>
+      <div class="card__footer"></div>
+    </article>
+  <% end %>
+  <footer class="cards__footer">
+    <%= paginate videos %>
+  </footer>
+</section>

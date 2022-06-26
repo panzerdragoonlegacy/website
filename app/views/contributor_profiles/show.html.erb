@@ -8,7 +8,7 @@
 <% end %>
 
 <% if policy(@contributor_profile).edit? %>
-  <p>
+  <p class="admin-section">
     <%= link_to(
       'Edit Contributor Profile',
       edit_admin_contributor_profile_path(@contributor_profile)
@@ -17,248 +17,41 @@
 <% end %>
 
 <% unless @contributor_profile.publish %>
-  <p class="unpublished">
-    This contributor profile is not published. Please inform an administrator
-    when it and the associated news entry are ready to be published.
-  </p>
+  <%= render partial: 'shared/draft' %>
 <% end %>
 
-<div id="information">
-  <% if @contributor_profile.avatar_file_name.blank? %>
-    <%=
-      image_pack_tag(
-        'media/images/sorry-no-image-embedded.jpg',
-        alt: 'Sorry No Image',
-        width: '280',
-        height: '280'
-      )
-    %>
-    <br />
-  <% else %>
-    <%= image_tag @contributor_profile.avatar.url(:embedded) %><br />
-  <% end %>
-  <%
-    unless (
-      @contributor_profile.email_address.blank? &&
-      @contributor_profile.discourse_username.blank? &&
-      @contributor_profile.discord_user_id.blank? &&
-      @contributor_profile.fandom_username.blank? &&
-      @contributor_profile.website_url.blank? &&
-      @contributor_profile.fediverse_username.blank? &&
-      @contributor_profile.fediverse_url.blank? &&
-      @contributor_profile.facebook_username.blank? &&
-      @contributor_profile.twitter_username.blank? &&
-      @contributor_profile.instagram_username.blank? &&
-      @contributor_profile.deviantart_username.blank?
-    )
-  %>
-    <dl>
-      <% if @contributor_profile.email_address.present? && user_signed_in? %>
-        <% if current_user.administrator %>
-          <dt>Email</dt>
-          <dd>
-            <%= mail_to @contributor_profile.email_address, 'Send Email' %>
-          </dd>
-        <% end %>
+<article class="contributor-profile">
+  <div class="contributor-profile__body">
+    <div class="contributor-profile__avatar">
+      <% if @contributor_profile.avatar_file_name.blank? %>
+        <%= image_pack_tag(
+          'media/images/sorry-no-image-embedded.jpg',
+          alt: 'Sorry No Image',
+          width: '280',
+          height: '280'
+        ) %>
+      <% else %>
+        <%= image_tag @contributor_profile.avatar.url(:embedded) %>
       <% end %>
-      <% unless @contributor_profile.discourse_username.blank? %>
-        <dt>Forum Profile</dt>
-        <dd>
-          <%=
-            link_to(
-              @contributor_profile.discourse_username,
-              'https://discuss.panzerdragoonlegacy.com/u/' +
-                @contributor_profile.discourse_username.to_s.downcase
-            )
-          %>
-        </dd>
-      <% end %>
-      <% unless @contributor_profile.discord_user_id.blank? %>
-        <dt>Discord</dt>
-        <dd><%= @contributor_profile.discord_user_id %></dd>
-      <% end %>
-      <% unless @contributor_profile.fandom_username.blank? %>
-        <dt>Fandom</dt>
-        <dd>
-          <%=
-            link_to(
-              @contributor_profile.fandom_username,
-              'https://panzerdragoon.fandom.com/wiki/User:' +
-                @contributor_profile.fandom_username
-            )
-          %>
-        </dd>
-      <% end %>
-      <% unless @contributor_profile.website_url.blank? %>
-        <dt>Website</dt>
-        <dd>
-          <% if @contributor_profile.website_name.present? %>
-            <%=
-              link_to(
-                @contributor_profile.website_name,
-                @contributor_profile.website_url
-              )
-            %>
-          <% else %>
-            <%= link_to 'Visit Website', @contributor_profile.website_url %>
-          <% end %>
-        </dd>
-      <% end %>
-      <% unless @contributor_profile.fediverse_username.blank? ||
-        @contributor_profile.fediverse_url.blank? %>
-        <dt>Fediverse</dt>
-        <dd>
-          <%=
-            link_to(
-              @contributor_profile.fediverse_username,
-              @contributor_profile.fediverse_url
-            )
-          %>
-        </dd>
-      <% end %>
-      <% unless @contributor_profile.facebook_username.blank? %>
-        <dt>Facebook</dt>
-        <dd>
-          <%=
-            link_to(
-              @contributor_profile.facebook_username,
-              'https://www.facebook.com/' +
-                @contributor_profile.facebook_username
-            )
-           %>
-        </dd>
-      <% end %>
-      <% unless @contributor_profile.twitter_username.blank? %>
-        <dt>Twitter</dt>
-        <dd>
-          <%=
-            link_to(
-              @contributor_profile.twitter_username,
-              "https://twitter.com/#{@contributor_profile.twitter_username}"
-            )
-          %>
-        </dd>
-      <% end %>
-      <% unless @contributor_profile.instagram_username.blank? %>
-        <dt>Instagram</dt>
-        <dd>
-          <%=
-            link_to(
-              @contributor_profile.instagram_username,
-              'https://www.instagram.com/' +
-                @contributor_profile.instagram_username
-            )
-          %>
-        </dd>
-      <% end %>
-      <% unless @contributor_profile.deviantart_username.blank? %>
-        <dt>DeviantArt</dt>
-        <dd>
-          <%=
-            link_to(
-              @contributor_profile.deviantart_username,
-              'https://www.deviantart.com/' +
-                @contributor_profile.deviantart_username
-            )
-          %>
-        </dd>
-      <% end %>
-    </dl>
-  <% end %>
+    </div>
+    <p class="contributor-profile__roles">
+      <%= @contributor_profile.roles %>
+    </p>
+    <p class="contributor-profile__description">
+      <%= @contributor_profile.description %>
+    </p>
+    <% if @contributor_profile.information.present? %>
+      <div class="contributor-profile__information">
+        <%= raw markdown_to_html @contributor_profile.information %>
+      </div>
+    <% end %>
+    <%= render(
+      partial: 'contributor_profiles/links',
+      locals: { contributor_profile: @contributor_profile }
+    ) %>
+    <%= render(
+      partial: 'contributor_profiles/contributions',
+      locals: { contributor_profile: @contributor_profile }
+    ) %>
+  </div>
 </div>
-
-<p><%= @contributor_profile.roles %></p>
-
-<p><%= @contributor_profile.description %></p>
-
-<% unless @contributor_profile.information.blank? %>
-  <%= raw markdown_to_html @contributor_profile.information %>
-<% end %>
-
-<% unless website_contributions_count(@contributor_profile) == 0 %>
-  <h4>Website Contributions</h4>
-  <ul>
-    <% unless news_entry_count(@contributor_profile) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(news_entry_count(@contributor_profile), 'news entry'),
-            contributor_profile_news_entries_path(@contributor_profile)
-          )
-        %>
-      </li>
-    <% end %>
-    <% unless literature_count(@contributor_profile) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(literature_count(@contributor_profile), 'work') +
-              ' of literature',
-            contributor_profile_literature_index_path(@contributor_profile)
-          )
-        %>
-      </li>
-    <% end %>
-    <% unless picture_count(@contributor_profile) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(picture_count(@contributor_profile), 'picture'),
-            contributor_profile_pictures_path(@contributor_profile)
-          )
-        %>
-      </li>
-    <% end %>
-   <% unless music_track_count(@contributor_profile) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(music_track_count(@contributor_profile), 'music track'),
-            contributor_profile_music_tracks_path(@contributor_profile)
-          )
-        %>
-      </li>
-    <% end %>
-    <% unless video_count(@contributor_profile) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(video_count(@contributor_profile), 'video'),
-            contributor_profile_videos_path(@contributor_profile)
-          )
-        %>
-      </li>
-    <% end %>
-    <% unless download_count(@contributor_profile) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(download_count(@contributor_profile), 'download'),
-            contributor_profile_downloads_path(@contributor_profile)
-          )
-        %>
-      </li>
-    <% end %>
-    <% unless quiz_count(@contributor_profile) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(quiz_count(@contributor_profile), 'quiz'),
-            contributor_profile_quizzes_path(@contributor_profile)
-          )
-        %>
-      </li>
-    <% end %>
-  </ul>
-  <p>
-    Total:
-    <%=
-      pluralize(
-        website_contributions_count(@contributor_profile),
-        'website contribution'
-      )
-    %>.
-  </p>
-<% end %>
-
-<p class="links"><%= link_to 'Contributors', contributor_profiles_path %></p>

@@ -7,53 +7,42 @@
 <% end %>
 
 <% if policy(@download).edit? %>
-  <p><%= link_to 'Edit Download', edit_admin_download_path(@download) %></p>
-<% end %>
-
-<% if !@download.publish %>
-  <p class="unpublished">
-    This download is not published. Please inform an administrator when it and
-    the associated news entry are ready to be published.
+  <p class="admin-section">
+    <%= link_to 'Edit Download', edit_admin_download_path(@download) %>
   </p>
-<% elsif !@download.category.publish %>
-  <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<h2>Contributed By:</h2>
-<ul class="thumbnail_and_name_list">
-  <% @download.contributor_profiles.each do |contributor_profile| %>
-    <li>
-      <%=
-        link_to(
-          show_avatar(contributor_profile, :mini_thumbnail),
-          contributor_profile
-        )
-      %>
-      <h3><%= link_to contributor_profile.name, contributor_profile %></h3>
-    </li>
-  <% end %>
-</ul>
-
-<p><%= @download.description %></p>
-
-<% unless @download.information.blank? %>
-  <%= raw markdown_to_html @download.information %>
+<% unless @download.publish && @download.category.publish %>
+  <%= render partial: 'shared/draft' %>
 <% end %>
 
-<%= link_to 'Download File', @download.download.url %>
-
-<div class="embedded_picture_container">
-  <%= show_picture(@download, 'download_picture', :embedded) %>
-</div>
-
-<%= render partial: 'shared/related_tags' %>
-
-<p class="links">
-  <% if @download.category.saga %>
-    <%= link_to(
-      @download.category.saga.name, top_level_page_path(@download.category.saga)
-    ) %> |
-  <% end %>
-  <%= link_to 'Downloads', downloads_path %> |
-  <%= link_to @download.category.name, category_path(@download.category) %>
-</p>
+<article class="download">
+  <header class="download__header">
+    <% if @download.download_picture.present? %>
+      <%= show_picture @download, 'download_picture', :embedded %>
+    <% end %>
+    <%= render(
+      partial: 'shared/contributed_by',
+      locals: { contributor_profiles: @download.contributor_profiles }
+    ) %>
+  </header>
+  <div class="download__body">
+    <div class="download__details">
+      <%= link_to 'Download File', @download.download.url %>
+    </div>
+    <p class="download__description">
+      <%= @download.description %>
+    </p>
+    <% unless @download.information.blank? %>
+      <div class="download__extra-information">
+        <%= raw markdown_to_html @download.information %>
+      </div>
+    <% end %>
+  </div>
+  <footer class="download__footer">
+    <%= render(
+      partial: 'shared/related_tags',
+      locals: { tags: @tags }
+    ) %>
+  </footer>
+</article>

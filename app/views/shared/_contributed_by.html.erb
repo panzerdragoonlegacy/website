@@ -1,0 +1,21 @@
+<div class="contributed-by">
+  <h1 class="contributed-by__heading">Contributed By</h1>
+  <ul class="contributed-by__list">
+    <% contributor_profiles.each do |contributor_profile| %>
+      <li class="contributed-by__list-item">
+        <div class="contributed-by__contributor">
+          <%= link_to(
+            show_avatar(contributor_profile, :mini_thumbnail),
+            contributor_profile,
+            class: 'contributed-by__picture-link'
+          ) %>
+          <%= link_to(
+            contributor_profile.name,
+            contributor_profile_path(contributor_profile),
+            class: 'contributed-by__text-link'
+          ) %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

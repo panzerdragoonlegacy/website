@@ -34,12 +34,13 @@ module NewsEntriesHelper
     ]
     allowed_attributes = {
       'a' => ['href'],
-      'img' => %w[src alt],
+      'img' => %w[src alt title],
       'iframe' => %w[width height src frameborder allowfullscreen],
       'video' => %w[width height controls poster],
       'audio' => ['controls'],
       'source' => %w[type src],
-      'div' => ['class']
+      'div' => ['class'],
+      'p' => ['class']
     }
     allowed_protocols = {
       'a' => {
@@ -84,6 +85,7 @@ module NewsEntriesHelper
 
             # Add view details link below embedded audio.
             p_tag = html.create_element('p')
+            p_tag.set_attribute('class', 'news-entry__audio-details')
             a_tag = html.create_element('a')
             a_tag.set_attribute('href', music_track_path(music_track))
             a_tag.content = 'Audio Details for "' + music_track.name + '"'
@@ -117,6 +119,7 @@ module NewsEntriesHelper
 
             # Add view details link below embedded video.
             p_tag = html.create_element('p')
+            p_tag.set_attribute('class', 'news-entry__video-details')
             a_tag = html.create_element('a')
             a_tag.set_attribute('href', video_path(video))
             a_tag.content = 'Video Details for "' + video.name + '"'
@@ -126,18 +129,31 @@ module NewsEntriesHelper
         end
       end
 
-    # Replace paragraphs wrapping the images with divs.
-    html.css('img').each { |img| img.parent.name = 'div' }
+    # Wrap each audio in a div.
+    html.css('audio').each do |audio|
+      audio.wrap('<div class="news-entry__audio-container"></div>')
+    end
 
-    # Wrap picture with a link.
+    # Wrap each video in a div.
+    html.css('video').each do |video|
+      video.wrap('<div class="news-entry__video-container"></div>')
+    end
+
+    # Replace paragraphs wrapping the images with divs.
+    html.css('img').each do |img|
+      img.parent.name = 'div'
+      img.parent.set_attribute('class', 'news-entry__picture-container')
+    end
+
+    # Wrap each picture with a link.
     html.css('div').each { |div| div.search('img').wrap('<a></a>') }
 
     # Finds out how many images are in the news entry.
     img_count = 0
     html.css('img').each { |img| img_count = img_count + 1 }
 
-    # Sets correct id, src, width, and height attributes for the picture's
-    # thumbnails.
+    # Sets correct id, src, title, width, and height attributes for the
+    # picture's thumbnails.
     html
       .css('img')
       .each do |img|
@@ -145,34 +161,15 @@ module NewsEntriesHelper
         picture_id = file_name.split('-')[0].to_i
         picture = Picture.find(picture_id) unless picture_id == 0
         if picture
-          if img_count == 1
-            img.set_attribute('src', picture.picture.url(:single_thumbnail))
-            image_file =
-              Paperclip::Geometry.from_file(
-                picture.picture.path(:single_thumbnail)
-              )
-          elsif img_count == 2
-            img.set_attribute('src', picture.picture.url(:double_thumbnail))
-            image_file =
-              Paperclip::Geometry.from_file(
-                picture.picture.path(:double_thumbnail)
-              )
-          elsif img_count == 3
-            img.set_attribute('src', picture.picture.url(:triple_thumbnail))
-            image_file =
-              Paperclip::Geometry.from_file(
-                picture.picture.path(:triple_thumbnail)
-              )
-          else
-            img.set_attribute('src', picture.picture.url(:news_entry_thumbnail))
-            image_file =
-              Paperclip::Geometry.from_file(
-                picture.picture.path(:news_entry_thumbnail)
-              )
-          end
+          img.set_attribute('src', picture.picture.url(:embedded))
+          image_file =
+            Paperclip::Geometry.from_file(
+              picture.picture.path(:embedded)
+            ) 
           img.set_attribute('width', image_file.width.to_i.to_s)
           img.set_attribute('height', image_file.height.to_i.to_s)
           img.set_attribute('alt', picture.name)
+          img.set_attribute('title', picture.name)
 
           # Sets the parent link's href attribute.
           img.parent.set_attribute(

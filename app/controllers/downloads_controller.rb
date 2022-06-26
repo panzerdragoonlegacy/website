@@ -7,7 +7,6 @@ class DownloadsController < ApplicationController
     elsif params[:tag_id]
       load_tagged_downloads
     else
-      load_category_groups
       @downloads = policy_scope(Download.order(:name).page(params[:page]))
     end
   end

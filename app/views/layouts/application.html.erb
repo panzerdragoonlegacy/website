@@ -1,38 +1,42 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
     <title>
       Panzer Dragoon Legacy
       <% if yield(:title).present? %> - <%= yield(:title) %><% end %>
     </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="<%= yield(:description) %>" />
     <%= render 'layouts/open_graph_metadata' %>
     <%= favicon_pack_tag 'media/images/favicon.ico' %>
     <%= auto_discovery_link_tag(:atom, news_entries_path(:atom)) %>
     <%= stylesheet_pack_tag 'application', media: 'all' %>
-    <%= javascript_pack_tag "application" %>
+    <%= javascript_pack_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
-    <div id="overall">
-      <%= render 'layouts/header' %>
-      <%= render 'layouts/top_navigation' %>
-      <div id="main">
-        <%= render 'layouts/left_navigation' %>
-        <div id="content">
-          <% flash.each do |name, msg| %>
-            <% unless name.to_s == 'timedout' %>
-              <%= content_tag :div, msg, id: "flash_#{name}" %>
-            <% end %>
-          <% end %>
-          <% if yield(:title).present? %>
-            <h1><%= yield(:title) %></h1>
-          <% end %>
-          <%= yield %>
+  <body tabindex="-1">
+    <div class="layout">
+      <header class="layout__header">
+        <div class="layout__logo">
+          <%= link_to(
+            image_pack_tag(
+              'media/images/logo.png',
+              alt: 'Panzer Dragoon Legacy logo'
+            ),
+            root_url
+          ) %>
         </div>
-      </div>
-      <%= render 'layouts/footer' %>
+        <%= render 'layouts/main_menu' %>
+      </header>
+      <%= render 'layouts/flash_messages' %>
+      <% if yield(:title).present? %>
+        <h1 class="layout__page-heading"><%= yield(:title) %></h1>
+      <% end %>
+      <main class="layout__page-content">
+        <%= yield %>
+      </main>
+      <footer class="layout__footer"></footer>
     </div>
   </body>
 </html>

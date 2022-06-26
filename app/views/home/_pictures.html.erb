@@ -1,0 +1,21 @@
+<section class="home-pictures">
+  <ul class="home-pictures__list">
+    <% pictures.each do |picture| %>
+      <li class="home-picture">
+        <div class="home-picture__picture">
+          <%= link_to(
+            show_picture(picture, 'picture', :triple_thumbnail),
+            picture_path(picture),
+            title: title_in_gallery(false, picture)
+          ) %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <footer class="home-pictures__more">
+    <%= link_to(
+      'More Pictures',
+      contributions_path(media_type: 'pictures')
+    ) %>
+  </footer>
+</section>

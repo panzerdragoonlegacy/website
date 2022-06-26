@@ -1,11 +1,23 @@
-<% unless @tags.count == 0 %>
-  <h2>Related Tags</h2>
-  <ul class="thumbnail_and_name_list">
-    <% @tags.each do |tag| %>
-      <li>
-        <%= link_to show_picture(tag, 'tag_picture', :mini_thumbnail), tag %>
-        <h3><%= link_to tag.name, tag %></h3>
-      </li>
-    <% end %>
-  </ul>
+<% unless tags.count == 0 %>
+  <div class="related-tags">
+    <h1 class="related-tags__heading">Related Tags</h1>
+    <ul class="related-tags__list">
+      <% tags.each do |tag| %>
+        <li class="related-tags__list-item">
+          <div class="related-tags__tag">
+            <%= link_to(
+              show_picture(tag, 'tag_picture', :mini_thumbnail),
+              tag_path(tag),
+              class: 'related-tags__picture-link'
+            ) %>
+            <%= link_to(
+              tag.name,
+              tag_path(tag),
+              class: 'related-tags__text-link'
+            ) %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>

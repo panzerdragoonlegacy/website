@@ -8,23 +8,72 @@
 <% end %>
 
 <% if policy(@category).edit? %>
-  <p><%= link_to 'Edit Category', edit_admin_category_path(@category) %></p>
-<% end %>
-
-<% unless @category.publish %>
-  <p class="unpublished">Unpublished</p>
-<% end %>
-
-<% if @category.category_picture.present? %>
-  <div class="category_picture_container">
-    <%= show_picture @category, 'category_picture', :embedded %>
+  <div class="admin-section">
+    <%= link_to 'Edit Category', edit_admin_category_path(@category) %>
   </div>
 <% end %>
+<% unless @category.publish %>
+  <p class="draft">Draft</p>
+<% end %>
 
-<%= @category.description %>
-
-<%= render 'categories/show/literature_pages' if @literature_pages %>
-<%= render 'categories/show/pictures' if @pictures %>
-<%= render 'categories/show/music_tracks' if @music_tracks %>
-<%= render 'categories/show/videos' if @videos %>
-<%= render 'categories/show/downloads' if @downloads %>
+<main class="category">
+  <header class="category__header">
+    <% if @category.category_picture.present? %>
+      <div class="category__picture">
+        <%= show_picture @category, 'category_picture', :original %>
+      </div>
+    <% end %>
+    <p class="category__description">
+      <%= @category.description %>
+    </p>
+  </header>
+  <% if @category.category_type == :parent.to_s %>
+    <% if category_has_subcategories_of_multiple_types(@category) %>
+      <%= render(
+        partial: 'categories/media_types',
+        locals: { category: @category }
+      ) %>
+    <% else %>
+      <%= render(
+        partial: 'categories/sub_categories',
+        locals: { category: @category }
+      ) %>
+    <% end %>
+  <% end %>
+  <% if @category.category_type == :picture.to_s %>
+    <%= render(
+      partial: 'shared/pictures',
+      locals: { pictures: @pictures, group_into_albums: true }
+    ) %>
+  <% end %>
+  <% if @category.category_type == :literature.to_s %>
+    <%= render(
+      partial: 'shared/literature_pages',
+      locals: { pages: @literature_pages }
+    ) %>
+  <% end %>
+  <% if @category.category_type == :music_track.to_s %>
+    <%= render(
+      partial: 'shared/music_tracks',
+      locals: { music_tracks: @music_tracks }
+    ) %>
+  <% end %>
+  <% if @category.category_type == :video.to_s %>
+    <%= render(
+      partial: 'shared/videos',
+      locals: { videos: @videos }
+    ) %>
+  <% end %>
+  <% if @category.category_type == :download.to_s %>
+    <%= render(
+      partial: 'shared/downloads',
+      locals: { downloads: @downloads }
+    ) %>
+  <% end %>
+  <% if @category.category_type == :quiz.to_s %>
+    <%= render(
+      partial: 'shared/quizzes',
+      locals: { quizzes: @quizzes }
+    ) %>
+  <% end %>
+</main>

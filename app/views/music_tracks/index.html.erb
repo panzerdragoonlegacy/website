@@ -6,22 +6,9 @@
   <% title 'Music' %>
 <% end %>
 
-<% unless params[:contributor_profile_id] || params[:tag_id] %>
-  <% if @category_groups.present? %>
-    <h2>Music Categories</h2>
-    <%=
-      render(
-        partial: 'site_map/category_groups',
-        locals: { category_groups: @category_groups }
-      )
-    %>
-  <% end %>
-  <% if @music_tracks.present? %>
-    <h2>All Music Tracks</h2>
-  <% end %>
-<% end %>
-
 <% if @music_tracks %>
-  <%= render 'list' %>
-  <%= paginate @music_tracks %>
+  <%= render(
+    partial: 'shared/music_tracks',
+    locals: { music_tracks: @music_tracks }
+  ) %>
 <% end %>

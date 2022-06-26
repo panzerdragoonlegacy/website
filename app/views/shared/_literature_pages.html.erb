@@ -1,0 +1,27 @@
+<section class="cards">
+  <% pages.each do |page| %>
+    <article class="card">
+      <% if page.page_picture.present? %>
+        <div class="card__picture">
+          <%= link_to(
+            show_picture(page, 'page_picture', :embedded),
+            literature_path(page)
+          ) %>
+        </div>
+      <% end %>
+      <%= render(
+        partial: 'shared/card_details',
+        locals: {
+          record: page,
+          record_path: literature_path(page),
+          show_description: !descriptions_are_identical?(pages),
+          has_picture: page.page_picture.present?
+        }
+      ) %>
+      <div class="card__footer"></div>
+    </article>
+  <% end %>
+  <footer class="cards__footer">
+    <%= paginate pages %>
+  </footer>
+</section>

@@ -10,18 +10,13 @@
 <%= render partial: 'shared/meta_tags' %>
 
 <% if @news_entry_years %>
-  <p>Browse by Year</p>
-  <ul>
-    <% @news_entry_years.each do |year| %>
-      <li><%= link_to year, "#{news_entries_path}?year=#{year}" %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <% if @news_entries %>
-    <%= render 'list' %>
-    <%= paginate @news_entries %>
-    <p class="links">
-      <%= link_to 'News Archives', news_entries_path %>
-    </p>
-  <% end %>
+  <%= render(
+    partial: 'news_entries/news_entry_years',
+    locals: { news_entry_years: @news_entry_years }
+  ) %>
+<% elsif @news_entries %>
+  <%= render(
+    partial: 'shared/news_entries',
+    locals: { news_entries: @news_entries }
+  ) %>
 <% end %>

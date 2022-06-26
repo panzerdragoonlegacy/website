@@ -6,22 +6,9 @@
   <% title 'Videos' %>
 <% end %>
 
-<% unless params[:contributor_profile_id] || params[:tag_id] %>
-  <% if @category_groups.present? %>
-    <h2>Video Categories</h2>
-    <%=
-      render(
-        partial: 'site_map/category_groups',
-        locals: { category_groups: @category_groups }
-      )
-    %>
-  <% end %>
-  <% if @videos.present? %>
-    <h2>All Videos</h2>
-  <% end %>
-<% end %>
-
 <% if @videos %>
-  <%= render 'list' %>
-  <%= paginate @videos %>
+  <%= render(
+    partial: 'shared/videos',
+    locals: { videos: @videos }
+  ) %>
 <% end %>

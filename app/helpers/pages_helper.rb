@@ -68,9 +68,9 @@ module PagesHelper
     require 'nokogiri'
     html = Nokogiri::HTML.parse(html)
 
-    # Remove the "Contents", "References", and "External Wikis" list items and
-    # links from the table of contents.
-    links_to_remove = %w[#contents #references #external-wikis]
+    # Remove the "Contents" and "References" list items and links from the
+    # table of contents.
+    links_to_remove = %w[#contents #references]
     html
       .css('li')
       .each do |li|
@@ -81,13 +81,13 @@ module PagesHelper
           end
       end
 
-    # Remove the table of contents heading and list if the list is empty.
+    # Remove the table of contents heading and list contains only 1 or no items.
     html
       .css('ul')
       .each do |ul|
         li_count = 0
         ul.css('li').each { |li| li_count = li_count + 1 }
-        if li_count == 0
+        if li_count <= 1
           ul.remove
           html
             .css('h2')
@@ -95,100 +95,106 @@ module PagesHelper
         end
       end
 
-    # Replace paragraphs wrapping the images with divs.
-    html.css('img').each { |img| img.parent.name = 'div' }
-
-    # Sets correct src, width, and height attributes for the illustration.
+    # Sets correct src, srcset, and class attributes for each illustration.
     html
       .css('img')
       .each do |img|
         file_name = img.get_attribute('src')
         if illustration =
-             Illustration.where(
-               page_id: page.id,
-               illustration_file_name: file_name
-             ).first
-          img.set_attribute('src', illustration.illustration.url(:embedded))
-          image_file =
+              Illustration.where(
+                page_id: page.id,
+                illustration_file_name: file_name
+              ).first
+          original_image_file =
             Paperclip::Geometry.from_file(
-              illustration.illustration.path(:embedded)
+              illustration.illustration.path(:original)
             )
-          img.set_attribute('width', image_file.width.to_i.to_s)
-          img.set_attribute('height', image_file.height.to_i.to_s)
+          legacy_url = illustration.illustration.url(:original)
+
+          # Use "modern" image sizes only if the image exceeds 768 pixels wide.
+          # The "legacy" images were mostly captured in the early 2000s at 280
+          # pixels or smaller and don't look good upscaled to a higher
+          # resolutions, so they are displayed at half the tablet layout width.
+          if original_image_file.width.to_i > 768
+            modern_url = illustration.illustration.url(:original)
+            img.set_attribute(
+              'srcset', "#{legacy_url} 320w, #{modern_url} 768w"
+            )
+            img.set_attribute(
+              'sizes', "(max-width: 320px) 320px, 768px"
+            )
+            img.set_attribute('src', modern_url)
+            img.set_attribute('class', 'illustration__image--modern')
+            img.parent.set_attribute('class', 'illustration illustration--modern')
+          else
+            img.set_attribute('src', legacy_url)
+            img.append_class('illustration__image--legacy')
+            img.parent.set_attribute('class', 'illustration illustration--legacy')
+          end
         else
           img.set_attribute('src', '')
+          img.append_class('illustration__image--missing')
         end
       end
 
-    # Alternate between aligning the divs left, right, or in a side by side
-    # container.
-    div_class = 'left'
+    # Replace the paragraphs wrapping the illustration images with figures:
+    html.css('img').each do |img|
+      img.parent.name = 'figure'
+    end
+
+    # Add figure captions extracted from the image alt text:
+    alignment = 'left'
     html
-      .css('div')
-      .each do |div|
-        unless div.get_attribute('class') == 'footnotes'
-          image_count = 0
-          div.css('img').each { |img| image_count = image_count + 1 }
-          if image_count == 2
-            div.set_attribute('class', 'sidebyside')
-          else
-            if div_class == 'left'
-              div.set_attribute('class', div_class)
-              div_class = 'right'
-            else
-              div.set_attribute('class', div_class)
-              div_class = 'left'
-            end
-          end
+      .css('figure')
+      .each do |figure|
+        captions = []
+        image_class = ''
+        figure.css('img').each do |img|
+          captions << img.get_attribute('alt')
+          image_class = img.get_attribute('class')
         end
-      end
-
-    # Align side by side images left and right by placing them inside divs.
-    html
-      .css('div.sidebyside')
-      .each do |div|
-        div.search('img').wrap('<div></div>')
-        div_class = 'sidebysideleft'
-        div
-          .css('div')
-          .each do |innerdiv|
-            if div_class == 'sidebysideleft'
-              innerdiv.set_attribute('class', div_class)
-              div_class = 'sidebysideright'
-            else
-              innerdiv.set_attribute('class', div_class)
-            end
+        if captions.count < 1
+          figure.add_child(
+            '<figcaption class="illustration__caption--image-missing">' +
+            'Missing image' +
+            '</figcaption>'
+          )
+        elsif captions.count == 1
+          figure.append_class('illustration--single-image')
+          if image_class == 'illustration__image--legacy'
+            # For individual legacy images, alternate between aligning the
+            # figure to the left or the right of the text.
+            figure.append_class('illustration--' + alignment)
+            alignment == 'left' ? alignment = 'right' : alignment = 'left'
           end
-      end
-
-    # Add image captions based on alternate text.
-    html
-      .css('img')
-      .each do |img|
-        caption = img.get_attribute('alt')
-        img.add_next_sibling('<p>' + caption + '</p>')
+          figure.add_child(
+            '<figcaption class="illustration__caption--single-image">' +
+            captions[0] +
+            '</figcaption>'
+          )
+        elsif captions.count == 2
+          figure.append_class('illustration--double-image')
+          figure.add_child(
+            '<figcaption class="illustration__caption--double-image">' +
+            '<span class="caption-alignment--top">Top</span>' +
+            '<span class="caption-alignment--left">Left</span>' +
+            captions[0] +
+            '<span class="caption-alignment--bottom">Bottom</span>' +
+            '<span class="caption-alignment--right">Right</span>' +
+            captions[1] +
+            '</figcaption>'
+          )
+        elsif captions.count > 2
+          figure.add_child(
+            '<figcaption class="illustration__caption--images-exceeded">' +
+            'Limit of 2 images per figure exceeded.' +
+            '</figcaption>'
+          )
+        end
       end
 
     # Converts nokogiri variable to html.
     html = html.to_html
-
-    # Sanitize html of extra markup that Nokogiri adds.
-    allowed_attributes['img'] +=
-      %w[
-        id
-        width
-        height
-        data-popover-src
-        data-popover-width
-        data-popover-height
-      ]
-    html =
-      Sanitize.clean(
-        html,
-        elements: allowed_elements,
-        attributes: allowed_attributes,
-        protocols: allowed_protocols
-      )
 
     # Converts non-html links to html links.
     require 'rails_autolink'

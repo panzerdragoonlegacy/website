@@ -1,0 +1,27 @@
+<section class="cards">
+  <% downloads.each do |download| %>
+    <article class="card">
+      <% if download.download_picture.present? %>
+        <div class="card__picture">
+          <%= link_to(
+            show_picture(download, 'download_picture', :embedded),
+            download_path(download)
+          ) %>
+        </div>
+      <% end %>
+      <%= render(
+        partial: 'shared/card_details',
+        locals: {
+          record: download,
+          record_path: download_path(download),
+          show_description: !descriptions_are_identical?(downloads),
+          has_picture: download.download_picture.present?
+        }
+      ) %>
+      <div class="card__footer"></div>
+    </article>
+  <% end %>
+  <footer class="cards__footer">
+    <%= paginate downloads %>
+  </footer>
+</section>

@@ -7,7 +7,6 @@ class VideosController < ApplicationController
     elsif params[:tag_id]
       load_tagged_videos
     else
-      load_category_groups
       @videos = policy_scope(Video.order(:name).page(params[:page]))
     end
   end

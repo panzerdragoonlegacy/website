@@ -21,7 +21,7 @@ module Shared::AlbumsHelper
   end
 
   def albumable_path(albumable)
-    return redesign_picture_path(albumable) if albumable.class == Picture
-    return redesign_video_path(albumable) if albumable.class == Video
+    return picture_path(albumable) if albumable.class == Picture
+    return video_path(albumable) if albumable.class == Video
   end
 end

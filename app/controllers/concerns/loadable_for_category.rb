@@ -60,8 +60,6 @@ module LoadableForCategory
             .page(params[:page])
             .per(24)
         ).resolve
-      # Todo: remove after redesign launches. Now defined in template:
-      @group_pictures_into_albums = true
     end
   end
 

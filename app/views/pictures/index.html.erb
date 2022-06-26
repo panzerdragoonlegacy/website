@@ -6,22 +6,12 @@
   <% title 'Pictures' %>
 <% end %>
 
-<% unless params[:contributor_profile_id] || params[:tag_id] %>
-  <% if @category_groups.present? %>
-    <h2>Picture Categories</h2>
-    <%=
-      render(
-        partial: 'site_map/category_groups',
-        locals: { category_groups: @category_groups }
-      )
-    %>
-  <% end %>
-  <% if @pictures.present? %>
-    <h2>All Pictures</h2>
-  <% end %>
-<% end %>
-
 <% if @pictures %>
-  <%= render 'list' %>
-  <%= paginate @pictures %>
+  <%= render(
+    partial: 'shared/pictures',
+    locals: {
+      pictures: @pictures,
+      group_into_albums: (!@contributor_profile && !@tag)
+    }
+  ) %>
 <% end %>

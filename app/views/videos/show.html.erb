@@ -8,7 +8,7 @@
 <% end %>
 
 <% if policy(@video).edit? %>
-  <p>
+  <p class="admin-section">
     <%= link_to 'Edit Video', edit_admin_video_path(@video) %>
     <% if @video.album && policy(@video.album).edit? %>
       | <%= link_to 'Edit Album', edit_admin_album_path(@video.album) %>
@@ -16,126 +16,61 @@
   </p>
 <% end %>
 
-<% if !@video.publish %>
-  <p class="unpublished">
-    This video is not published. Please inform an administrator when it and the
-    associated news entry are ready to be published.
-  </p>
-<% elsif !@video.category.publish %>
-  <p class="unpublished">Published in Unpublished Category</p>
-<% end %>
-<% if !@video.publish || !@video.category.publish %>
-  <p class="unpublished">
+<% unless @video.publish && @video.category.publish %>
+  <%= render partial: 'shared/draft' %>
+  <p class="draft">
     Use this Markdown to embed the video in a news entry:
     <code>![](<%= @video.id %>-<%= @video.url %>.mp4)</code>
   </p>
 <% end %>
 
-<h2>Contributed By:</h2>
-<ul class="thumbnail_and_name_list">
-  <% @video.contributor_profiles.each do |contributor_profile| %>
-    <li>
-      <%=
-        link_to(
-          show_avatar(contributor_profile, :mini_thumbnail),
-          contributor_profile
-        )
-      %>
-      <h3><%= link_to contributor_profile.name, contributor_profile %></h3>
-    </li>
-  <% end %>
-</ul>
-
-<% if @video.album %>
-  <%= render(
-    partial: 'albums/album_navigation', locals: { albumable: @video }
-  ) %>
-<% end %>
-
-<div class="embedded_picture_container">
-  <video
-    width="620"
-    height="349"
-    controls="true"
-    autobuffer="true"
-    poster="<%= @video.video_picture.url(:embedded) %>">
-    <source type="video/mp4" src="<%= @video.mp4_video.url %>" />
-    Your browser does not support the <code>video</code> element.
-  </video>
-</div>
-
-<p><%= @video.description %></p>
-
-<% unless @video.information.blank? %>
-  <%= raw markdown_to_html @video.information %>
-<% end %>
-
-<p>
-  <% unless @video.source_url.blank? %>
-    View Source:
-      <%=
-        link_to(
-          video_source_link_text(@video.source_url),
-          @video.source_url
-        )
-      %>.
-  <% end %>
-  <% unless @video.youtube_video_id.blank? %>
-    Watch Video:
-      <%=
-        link_to(
-          'YouTube',
-          "https://www.youtube.com/watch?v=#{@video.youtube_video_id}"
-        )
-      %>.
-  <% end %>
-   Download Video: <%= link_to 'MP4', @video.mp4_video.url %>
-</p>
-
-<% if @video.album && (@video.album.pictures || @video.album.videos) %>
-  <% unless @video.album.pictures == 0 && @video.album.videos == 0 %>
-    <h2>Also in the Album "<%= @video.album.name %>"</h2>
-    <div id="other_pictures_in_album">
-      <% @video.album.ordered_videos.each do |video| %>
-        <% unless video.id == @video.id %>
-          <%=
-            link_to(
-              image_tag(
-                video.video_picture.url(:mini_thumbnail),
-                alt: video.name,
-                width: '75',
-                height: '75'
-              ),
-              video
-            )
-          %>
-        <% end %>
-      <% end %>
-      <% @video.album.ordered_pictures.each do |picture| %>
-        <%=
-          link_to(
-            image_tag(
-              picture.picture.url(:mini_thumbnail),
-              alt: picture.name,
-              width: '75',
-              height: '75'
-            ),
-            picture
-          )
-        %>
-      <% end %>
+<article class="video">
+  <header class="video__header">
+    <%= render(
+      partial: 'shared/contributed_by',
+      locals: { contributor_profiles: @video.contributor_profiles }
+    ) %>
+    <% if @video.album %>
+      <%= render(
+        partial: 'shared/albums/navigation',
+        locals: { albumable: @video }
+      ) %>
+    <% end %>
+  </header>
+  <div class="video__body">
+    <div class="video__video">
+      <video
+        controls="true"
+        autobuffer="true"
+        poster="<%= @video.video_picture.url(:embedded) %>"
+      >
+        <source type="video/mp4" src="<%= @video.mp4_video.url %>" />
+        Your browser does not support the <code>video</code> element.
+      </video>
     </div>
-  <% end %>
-<% end %>
-
-<%= render partial: 'shared/related_tags' %>
-
-<p class="links">
-  <% if @video.category.saga %>
-    <%= link_to(
-      @video.category.saga.name, top_level_page_path(@video.category.saga)
-    ) %> |
-  <% end %>
-  <%= link_to 'Videos', videos_path %> |
-  <%= link_to @video.category.name, category_path(@video.category) %>
-</p>
+    <%= render(
+      partial: 'videos/details',
+      locals: { video: @video }
+    ) %>
+    <p class="video__description">
+      <%= @video.description %>
+    </p>
+    <% unless @video.information.blank? %>
+      <div class="video__extra-information">
+        <%= raw markdown_to_html @video.information %>
+      </div>
+    <% end %>
+  </div>
+  <footer class="video__footer">
+    <% if @video.album && album_has_at_least_one_albumable(@video.album) %>
+      <%= render(
+        partial: 'shared/albums/album',
+        locals: { album: @video.album, picture_id: nil, video_id: @video.id }
+      ) %>
+    <% end %>
+    <%= render(
+      partial: 'shared/related_tags',
+      locals: { tags: @tags }
+    ) %>
+  </footer>
+</article>

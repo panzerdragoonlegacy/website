@@ -49,8 +49,6 @@ module LoadableForPicture
           .page(params[:page])
           .per(PICTURES_PER_PAGE)
       )
-    # Todo: remove after redesign launches. Now defined in template:
-    @group_pictures_into_albums = false
   end
 
   def load_tagged_pictures

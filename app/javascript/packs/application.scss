@@ -1,13 +1,33 @@
 @import "stylesheets/fontawesome";
-@import "stylesheets/variables";
+@import "stylesheets/open-props";
+
+@import "stylesheets/properties";
 @import "stylesheets/mixins";
-@import "stylesheets/main";
+
 @import "stylesheets/layout";
-@import "stylesheets/forms";
-@import "stylesheets/illustrations";
-@import "stylesheets/searches";
-@import "stylesheets/social_media_links";
-@import "stylesheets/icon_colours";
-@import "stylesheets/news_entries";
-@import "stylesheets/pictures";
-@import "stylesheets/categories";
+@import "stylesheets/main_menu";
+@import "stylesheets/search";
+@import "stylesheets/flash_message";
+@import "stylesheets/admin_section";
+@import "stylesheets/contributed_by";
+@import "stylesheets/pagination";
+
+@import "stylesheets/category";
+@import "stylesheets/cards";
+@import "stylesheets/gallery";
+
+@import "stylesheets/contributor_profile";
+@import "stylesheets/tag";
+
+@import "stylesheets/home";
+@import "stylesheets/contributions";
+
+@import "stylesheets/news_entry";
+@import "stylesheets/page";
+
+@import "stylesheets/media";
+@import "stylesheets/album";
+@import "stylesheets/picture";
+@import "stylesheets/music_track";
+@import "stylesheets/video";
+@import "stylesheets/download";

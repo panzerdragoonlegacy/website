@@ -6,23 +6,9 @@
   <% title 'Downloads' %>
 <% end %>
 
-<% unless params[:contributor_profile_id] || params[:tag_id] %>
-  <% if @category_groups.present? %>
-    <h2>Download Categories</h2>
-    <%=
-      render(
-        partial: 'site_map/category_groups',
-        locals: { category_groups: @category_groups }
-      )
-    %>
-  <% end %>
-
-  <% if @downloads.present? %>
-    <h2>All Downloads</h2>
-  <% end %>
-<% end %>
-
 <% if @downloads %>
-  <%= render 'list' %>
-  <%= paginate @downloads %>
+  <%= render(
+    partial: 'shared/downloads',
+    locals: { downloads: @downloads }
+  ) %>
 <% end %>

@@ -1,0 +1,75 @@
+<% unless website_contributions_count(@contributor_profile) == 0 %>
+  <div class="contributor-profile-contributions">
+    <h1 class="contributor-profile-contributions__heading">
+      Website Contributions
+    </h1>
+    <ul class="contributor-profile-contributions__list">
+      <% unless news_entry_count(@contributor_profile) == 0 %>
+        <li class="contributor-profile-contributions__list-item">
+          <%= link_to(
+            pluralize(news_entry_count(@contributor_profile), 'news entry'),
+            contributor_profile_news_entries_path(@contributor_profile)
+          ) %>
+        </li>
+      <% end %>
+      <% unless literature_count(@contributor_profile) == 0 %>
+        <li class="contributor-profile-contributions__list-item">
+          <%= link_to(
+            pluralize(literature_count(@contributor_profile), 'work') +
+              ' of literature',
+            contributor_profile_literature_index_path(
+              @contributor_profile
+            )
+          ) %>
+        </li>
+      <% end %>
+      <% unless picture_count(@contributor_profile) == 0 %>
+        <li class="contributor-profile-contributions__list-item">
+          <%= link_to(
+            pluralize(picture_count(@contributor_profile), 'picture'),
+            contributor_profile_pictures_path(@contributor_profile)
+          ) %>
+        </li>
+      <% end %>
+      <% unless music_track_count(@contributor_profile) == 0 %>
+        <li class="contributor-profile-contributions__list-item">
+          <%= link_to(
+            pluralize(music_track_count(@contributor_profile), 'music track'),
+            contributor_profile_music_tracks_path(@contributor_profile)
+          ) %>
+        </li>
+      <% end %>
+      <% unless video_count(@contributor_profile) == 0 %>
+        <li class="contributor-profile-contributions__list-item">
+          <%= link_to(
+            pluralize(video_count(@contributor_profile), 'video'),
+            contributor_profile_videos_path(@contributor_profile)
+          ) %>
+        </li>
+      <% end %>
+      <% unless download_count(@contributor_profile) == 0 %>
+        <li class="contributor-profile-contributions__list-item">
+          <%= link_to(
+            pluralize(download_count(@contributor_profile), 'download'),
+            contributor_profile_downloads_path(@contributor_profile)
+          ) %>
+        </li>
+      <% end %>
+      <% unless quiz_count(@contributor_profile) == 0 %>
+        <li class="contributor-profile-contributions__list-item">
+          <%= link_to(
+            pluralize(quiz_count(@contributor_profile), 'quiz'),
+            contributor_profile_quizzes_path(@contributor_profile)
+          ) %>
+        </li>
+      <% end %>
+    </ul>
+    <p class="contributor-profile-contributions__total">
+      Total:
+        <%= pluralize(
+          website_contributions_count(@contributor_profile),
+          'website contribution'
+        ) %>.
+    </p>
+  </div>
+<% end %>

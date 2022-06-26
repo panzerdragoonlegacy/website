@@ -1,39 +1,53 @@
 <% title @page.parent_page.name %>
 <% description @page.parent_page.description %>
-<%= render 'pages/show/open_graph_metadata' %>
+<%= render(
+  partial: 'shared/pages/open_graph_metadata',
+  locals: { page: @page }
+) %>
 
-<h2><%= @page.name %></h2>
-
-<%= render 'pages/show/edit_page_link' %>
+<%= render(
+  partial: 'shared/pages/admin_section',
+  locals: { page: @page }
+) %>
 
 <% if !@page.publish %>
-  <p class="unpublished">
-    This page is not published. Please inform an administrator when it and
-    the associated news entry are ready to be published.
-  </p>
+  <%= render partial: 'shared/draft' %>
 <% elsif !@page.parent_page.publish %>
   <p class="unpublished">Published in Unpublished Parent Page</p>
 <% elsif !@page.parent_page.category.publish %>
   <p class="unpublished">Published in Unpublished Category</p>
 <% end %>
 
-<%= render 'pages/show/page_picture' %>
-<%= render 'pages/show/contributors' %>
-<%= render 'pages/show/content' %>
-
-<%= render partial: 'shared/related_tags' %>
-
-<%= render partial: 'chapter_navigation' %>
-
-<p class="links">
-  <% if @page.parent_page.category.saga %>
-    <%= link_to(
-      @page.parent_page.category.saga.name,
-      top_level_page_path(@page.parent_page.category.saga)
-    ) %> |
-  <% end %>
-  <%= link_to 'Literature', literature_index_path %> |
-  <%= link_to(
-    @page.parent_page.category.name, category_path(@page.parent_page.category)
-  ) %>
-</p>
+<article class="page">
+  <header class="page__header">
+    <%= render(
+      partial: 'shared/pages/page_picture',
+      locals: { page: @page }
+    ) %>
+    <%= render(
+      partial: 'shared/contributed_by',
+      locals: { contributor_profiles: @page.contributor_profiles }
+    ) %>
+    <h1 class="page__chapter-heading"><%= @page.name %></h1>
+  </header>
+  <div class="page__body">
+    <%= render(
+      partial: 'shared/pages/content',
+      locals: { page: @page }
+    ) %>
+    <%= render(
+      partial: 'literature/chapters',
+      locals: { page: @page }
+    ) %>
+  </div>
+  <footer class="page__footer">
+    <%= render(
+      partial: 'shared/related_tags',
+      locals: { tags: @tags }
+    ) %>
+    <%= render(
+      partial: 'chapters/navigation',
+      locals: { page: @page }
+    ) %>
+  </footer>
+</article>

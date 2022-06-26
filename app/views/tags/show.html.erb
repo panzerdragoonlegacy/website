@@ -10,108 +10,36 @@
 <% end %>
 
 <% if policy(@tag).edit? %>
-  <p><%= link_to 'Edit Tag', edit_admin_tag_path(@tag) %></p>
-<% end %>
-
-<% if @tag.tag_picture.present? %>
-  <div class="category_picture_container">
-    <%= show_picture @tag, 'tag_picture', :embedded %>
-  </div>
-<% end %>
-
-<p><%= @tag.description if @tag.description.present? %></p>
-
-<% if @tag.information.present? %></p>
-  <%= raw markdown_to_html @tag.information %>
-<% end %>
-
-<% if @tag.wiki_slug.present? %>
-  <p>
-    <%= link_to(
-      "#{@tag.name} on Panzer Dragoon Wiki",
-      "https://panzerdragoon.fandom.com/wiki/#{@tag.wiki_slug}"
-    ) %>
+  <p class="admin-section">
+    <%= link_to 'Edit Tag', edit_admin_tag_path(@tag) %>
   </p>
 <% end %>
 
-<h4>Tagged Content</h4>
-
-<% unless tagged_count(@tag) == 0 %>
-  <ul>
-    <% unless news_entry_count(@tag) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(news_entry_count(@tag), 'news entry'),
-            tag_news_entries_path(@tag)
-          )
-        %>
-      </li>
+<article class="tag">
+  <header class="tag__header">
+    <% if @tag.tag_picture.present? %>
+      <div class="tag__picture">
+        <%= show_picture @tag, 'tag_picture', :original %>
+      </div>
     <% end %>
-    <% unless literature_count(@tag) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(literature_count(@tag), 'work') +
-              ' of literature',
-            tag_literature_index_path(@tag)
-          )
-        %>
-      </li>
+  </header>
+  <div class="tag__body">
+    <% if @tag.description.present? %>
+      <p class="tag__description"><%= @tag.description %></p>
     <% end %>
-    <% unless picture_count(@tag) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(picture_count(@tag), 'picture'),
-            tag_pictures_path(@tag)
-          )
-        %>
-      </li>
+    <% if @tag.information.present? %>
+      <div class="tag__extra-information">
+        <%= raw markdown_to_html @tag.information %>
+      </div>
     <% end %>
-   <% unless music_track_count(@tag) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(music_track_count(@tag), 'music track'),
-            tag_music_tracks_path(@tag)
-          )
-        %>
-      </li>
+    <% if @tag.wiki_slug.present? %>
+      <p class="tag__wiki-link">
+        <%= link_to(
+          "#{@tag.name} on Panzer Dragoon Wiki",
+          "https://panzerdragoon.fandom.com/wiki/#{@tag.wiki_slug}"
+        ) %>
+      </p>
     <% end %>
-    <% unless video_count(@tag) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(video_count(@tag), 'video'),
-            tag_videos_path(@tag)
-          )
-        %>
-      </li>
-    <% end %>
-    <% unless download_count(@tag) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(download_count(@tag), 'download'),
-            tag_downloads_path(@tag)
-          )
-        %>
-      </li>
-    <% end %>
-    <% unless quiz_count(@tag) == 0 %>
-      <li>
-        <%=
-          link_to(
-            pluralize(quiz_count(@tag), 'quiz'),
-            tag_quizzes_path(@tag)
-          )
-        %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-
-<p class="links">
-  <%= link_to 'Site Map', site_map_path(browse_by: 'tag') %>
-</p>
+    <%= render partial: 'tags/tagged_content', locals: { tag: @tag } %>
+  </div>
+</article>
