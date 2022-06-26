@@ -12,7 +12,14 @@
       object-fit: cover;
       border-top-left-radius: var(--radius-4);
       border-top-right-radius: var(--radius-4);
-      max-height: var(--size-14);
+
+      @media only screen and (max-width: $mobile-max) {
+        max-height: var(--size-13);
+      }
+
+      @media only screen and (min-width: $tablet-min) {
+        max-height: var(--size-14);
+      }
     }
   }
 
@@ -92,7 +99,14 @@
       object-fit: cover;
       border-top-left-radius: var(--radius-4);
       border-top-right-radius: var(--radius-4);
-      max-height: var(--size-14);
+
+      @media only screen and (max-width: $mobile-max) {
+        max-height: var(--size-13);
+      }
+
+      @media only screen and (min-width: $tablet-min) {
+        max-height: var(--size-14);
+      }
     }
   }
 

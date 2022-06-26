@@ -3,21 +3,40 @@
   margin-left: var(--size-2);
   margin-right: var(--size-2);
   border-radius: var(--radius-4);
-  padding-bottom: var(--size-4);
+
+  @media only screen and (max-width: $mobile-max) {
+    padding-bottom: var(--size-3);
+  }
+
+  @media only screen and (min-width: $tablet-min) {
+    padding-bottom: var(--size-4);
+  }
 
   @include card-background-colour;
 
   &__picture {
-    padding-top: var(--size-4);
-    padding-left: var(--size-4);
-    padding-right: var(--size-4);
+    @media only screen and (max-width: $mobile-max) {
+      img {
+        width: 100%;
+        object-fit: cover;
+        border-top-left-radius: var(--radius-4);
+        border-top-right-radius: var(--radius-4);
+        max-height: var(--size-13);
+      }
+    }
 
-    img {
-      float: left;
-      border-radius: var(--radius-3);
-      width: var(--size-12);
-      height: var(--size-12);
-      object-fit: cover;
+    @media only screen and (min-width: $tablet-min) {
+      padding-top: var(--size-4);
+      padding-left: var(--size-4);
+      padding-right: var(--size-4);
+
+      img {
+        float: left;
+        border-radius: var(--radius-3);
+        width: var(--size-12);
+        height: var(--size-12);
+        object-fit: cover;
+      }
     }
   }
 
@@ -25,21 +44,43 @@
   &__details--has-picture {
     padding: var(--size-4);
     padding-bottom: 0;
-    margin-bottom: -15px;
     text-align: left;
+
+    @media only screen and (min-width: $tablet-min) {
+      margin-bottom: -15px;
+    }
   }
 
   &__details--no-picture {
-    padding-top: var(--size-2);
+    @media only screen and (max-width: $mobile-max) {
+      padding-top: var(--size-1);
+    }
+
+    @media only screen and (min-width: $tablet-min) {
+      padding-top: var(--size-2);
+    }
   }
 
   &__details--has-picture {
-    padding-left: calc(var(--size-12) + var(--size-7) + var(--size-2));
+    @media only screen and (max-width: $mobile-max) {
+      padding-top: var(--size-7);
+    }
+
+    @media only screen and (min-width: $tablet-min) {
+      padding-left: calc(var(--size-12) + var(--size-7) + var(--size-2));
+    }
   }
 
   &__heading--no-picture {
     margin-top: var(--size-2);
-    margin-bottom: calc(var(--size-2) + var(--size-1));
+
+    @media only screen and (max-width: $mobile-max) {
+      margin-bottom: 0;
+    }
+
+    @media only screen and (min-width: $tablet-min) {
+      margin-bottom: calc(var(--size-2) + var(--size-1));
+    }
   }
 
   &__heading--has-picture {
