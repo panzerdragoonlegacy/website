@@ -1,4 +1,9 @@
 <nav class="news-entry-years">
+  <div class="news-entry-years__feed">
+    <a href="<%= redesign_news_entries_path(:atom) %>">
+      Atom Feed <i class="fas fa-rss"></i>
+    </a>
+  </div>
   <h1 class="news-entry-years__heading">Browse by Year</h1>
   <ul class="news-entry-years__list">
     <% news_entry_years.each do |year| %>

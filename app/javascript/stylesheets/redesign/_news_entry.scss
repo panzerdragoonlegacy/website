@@ -95,6 +95,12 @@
 .news-entry-years {
   text-align: center;
 
+  &__feed {
+    i {
+      margin-left: var(--size-1);
+    }
+  }
+
   &__heading {
     padding: var(--size-2);
   }
