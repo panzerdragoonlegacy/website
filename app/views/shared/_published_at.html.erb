@@ -1,6 +1,6 @@
 <% if publishable.publish %>
   <span class="published-at">
-    <%= local_time_ago publishable.published_at %>
+    <%= local_date publishable.published_at %>
   </span>
 <% else %>
   <span class="draft">Draft</span>
