@@ -17,6 +17,10 @@ const imagePath = (name) => images(name, true);
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
+// Allow local time to be used in erb templates:
+import LocalTime from "local-time";
+LocalTime.start();
+
 // Automatically close other submenus in mobile layout when a submenu opens:
 window.onload = function() {
   const subMenuSlugs = ['games', 'gallery', 'more', 'beyond'];
