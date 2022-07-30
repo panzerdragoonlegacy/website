@@ -5,19 +5,49 @@ $menu-border-radius: var(--size-2);
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
+  text-align: center;
 
   @media only screen and (min-width: $tablet-min) {
     max-width: fit-content;
   }
 }
 
+.main-menu-opener__label {
+  @media only screen and (max-width: $mobile-max) {
+    display: inline-block;
+    margin-bottom: var(--size-3);
+    cursor: pointer;
+
+    i {
+      font-size: var(--font-size-6);
+    }
+  }
+
+  @media only screen and (min-width: $tablet-min) {
+    display: none;
+  }
+}
+
+.main-menu-opener__checkbox {
+  display: none;
+}
+
+.main-menu-opener__checkbox:checked ~ .main-menu__list {
+  display: flex;
+}
+
 .main-menu__list {
+  text-align: left;
   display: flex;
   flex-direction: column;
   list-style: none;
   margin: 0;
   padding: 0;
   background-color: var(--menu-background-colour);
+
+  @media only screen and (max-width: $mobile-max) {
+    display: none;
+  }
 
   @media only screen and (min-width: $tablet-min) {
     flex-direction: row;
