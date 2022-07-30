@@ -1,8 +1,7 @@
 # Panzer Dragoon Legacy CMS
 
-A custom content management system for
-[panzerdragoonlegacy.com](http://www.panzerdragoonlegacy.com). Code is provided
-here for demonstration purposes.
+The source code for the website and single purpose content management system of
+[panzerdragoonlegacy.com](https://www.panzerdragoonlegacy.com).
 
 ## Quick Reference
 
@@ -35,9 +34,6 @@ backup.
 
 ## Copyright
 
-Source _code_ files in this repository are © 2021 Chris Alley and are freely
-available under the terms of the MIT license.
-
-However, most of the image assets and the Panzer Dragoon and Crimson Dragon
-trademarks are the property of SEGA and/or Microsoft and are provided for
-demonstration purposes only.
+Source _code_ files in this repository are © 2022 Chris Alley and are freely
+available under the terms of the MIT license. However image assets included in
+this repository are provided for demonstration purposes only.
