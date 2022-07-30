@@ -130,7 +130,7 @@
 .illustration--legacy,
 .illustration--modern.illustration--double-image {
   @media only screen and (min-width: $tablet-min-plus-padding) {
-    border-radius: var(--radius-2);
+    border-radius: $image-radius;
     margin: var(--size-2);
     padding: var(--size-2);
     text-align: center;
@@ -139,14 +139,14 @@
 
 .illustration--modern.illustration--single-image {
   @media only screen and (min-width: $tablet-min-plus-padding) {
-    border-radius: var(--radius-2);
+    border-radius: $image-radius;
     width: calc($tablet-min - $padding-both-sides);
     margin: var(--size-2);
     text-align: center;
 
     img {
-      border-top-left-radius: var(--radius-2);
-      border-top-right-radius: var(--radius-2);
+      border-top-left-radius: $image-radius;
+      border-top-right-radius: $image-radius;
       width: calc($tablet-min - $padding-both-sides);
     }
   }

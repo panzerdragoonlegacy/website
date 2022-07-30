@@ -2,7 +2,7 @@
   margin-bottom: var(--size-5);
   margin-left: var(--size-2);
   margin-right: var(--size-2);
-  border-radius: var(--radius-4);
+  border-radius: $card-radius;
 
   @media only screen and (max-width: $mobile-max) {
     padding-bottom: var(--size-3);
@@ -19,8 +19,8 @@
       img {
         width: 100%;
         object-fit: cover;
-        border-top-left-radius: var(--radius-4);
-        border-top-right-radius: var(--radius-4);
+        border-top-left-radius: $card-radius;
+        border-top-right-radius: $card-radius;
         max-height: var(--size-13);
       }
     }
@@ -32,7 +32,7 @@
 
       img {
         float: left;
-        border-radius: var(--radius-3);
+        border-radius: calc(var(--radius-2) + var(--radius-1));
         width: var(--size-12);
         height: var(--size-12);
         object-fit: cover;

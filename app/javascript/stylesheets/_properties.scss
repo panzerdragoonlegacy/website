@@ -22,3 +22,7 @@ $mobile-max-plus-padding: 783px;
 $tablet-min-plus-padding: 784px;
 
 $padding-both-sides: calc(var(--size-2) + var(--size-2));
+
+// Border radius sizes:
+$image-radius: var(--radius-2);
+$card-radius: var(--radius-3);

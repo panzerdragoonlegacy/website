@@ -1,7 +1,7 @@
 .home-featured-news-entry {
   margin: var(--size-2);
   margin-top: var(--size-5);
-  border-radius: var(--radius-4);
+  border-radius: $card-radius;
   text-align: left;
 
   @include card-background-colour;
@@ -10,8 +10,8 @@
     img {
       width: 100%;
       object-fit: cover;
-      border-top-left-radius: var(--radius-4);
-      border-top-right-radius: var(--radius-4);
+      border-top-left-radius: $card-radius;
+      border-top-right-radius: $card-radius;
 
       @media only screen and (max-width: $mobile-max) {
         max-height: var(--size-13);
@@ -48,7 +48,7 @@
   padding-bottom: var(--size-2);
   margin: var(--size-2);
   margin-top: var(--size-5);
-  border-radius: var(--radius-4);
+  border-radius: $card-radius;
   text-align: center;
 
   @include card-background-colour;
@@ -76,7 +76,7 @@
     height: 150px;
     
     img {
-      border-radius: var(--radius-2);
+      border-radius: $image-radius;
     }
   }
 }
@@ -87,7 +87,7 @@
 .home-download {
   margin: var(--size-2);
   margin-top: var(--size-5);
-  border-radius: var(--radius-4);
+  border-radius: $card-radius;
   text-align: center;
   padding-bottom: var(--size-2);
 
@@ -97,8 +97,8 @@
     img {
       width: 100%;
       object-fit: cover;
-      border-top-left-radius: var(--radius-4);
-      border-top-right-radius: var(--radius-4);
+      border-top-left-radius: $card-radius;
+      border-top-right-radius: $card-radius;
 
       @media only screen and (max-width: $mobile-max) {
         max-height: var(--size-13);

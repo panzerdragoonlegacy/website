@@ -4,7 +4,7 @@
   margin-right: var(--size-2);
   padding-left: var(--size-5);
   padding-right: var(--size-5);
-  border-radius: var(--radius-4);
+  border-radius: $card-radius;
 
   @include card-background-colour;
 
@@ -45,7 +45,7 @@
   padding-top: var(--size-1);
   padding-left: var(--size-5);
   padding-right: var(--size-5);
-  border-radius: var(--radius-4);
+  border-radius: $card-radius;
 
   @include card-background-colour;
 
@@ -67,7 +67,7 @@
     margin-bottom: -6px;
 
     img {
-      border-radius: var(--radius-2);
+      border-radius: $image-radius;
     }
   }
 }
