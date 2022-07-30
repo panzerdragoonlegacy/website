@@ -52,6 +52,9 @@
           <% if category.slug == 'more' %>
             <li class="sub-menu__divider"><hr /></li>
             <li class="sub-menu__list-item">
+              <%= link_to 'Links', '/links' %>
+            </li>
+            <li class="sub-menu__list-item">
               <%= link_to(
                 'News Archives',
                 news_entries_path
