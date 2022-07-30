@@ -157,11 +157,11 @@
     width: calc($tablet-min - (var(--size-2) * 4));
 
     img:first-of-type {
-      margin-right: 3px;
+      margin-right: var(--size-1);
     }
 
     img {
-      width: calc(($tablet-min / 2) - (var(--size-5) - var(--size-1)));
+      width: calc((($tablet-min / 2) + 3px) - var(--size-5));
     }
   }
 }
