@@ -12,6 +12,7 @@
   }
 
   &__description {
+    margin-top: calc(var(--size-1) + var(--size-2));
     @include summary-or-description;
     text-align: center;
   }

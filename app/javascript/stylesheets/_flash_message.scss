@@ -1,6 +1,7 @@
 @mixin flash-message {
   text-align: center;
   margin: var(--size-4);
+  margin-top: var(--size-6);
 }
 
 .flash {

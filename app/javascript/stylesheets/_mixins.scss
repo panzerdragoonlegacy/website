@@ -1,4 +1,5 @@
 @mixin header-picture-container {
+  margin-top: var(--size-5);
   max-width: 100vw;
   position: relative;
   left: 50%;
