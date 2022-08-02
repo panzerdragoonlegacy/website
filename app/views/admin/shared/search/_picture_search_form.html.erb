@@ -1,0 +1,17 @@
+<%= search_form_for q, url: path do |f| %>
+  <div class="form-group">
+    <%= f.label :name_cont, 'Name:', class: 'mr-1' %>
+    <%= f.search_field :name_cont, class: 'mr-2' %>
+    <%= f.label :publish_false, 'Drafts Only:', class: 'ml-2 mr-1' %>
+    <%= f.check_box :publish_false, class: 'mr-4' %>
+    <%= f.label(
+      :instagram_post_id_blank, 'No Instagram Post:', class: 'ml-2 mr-1'
+    ) %>
+    <%= f.check_box :instagram_post_id_blank, class: 'mr-4' %>
+    <%= f.label(
+      :instagram_post_id_present, 'Has Instagram Post:', class: 'ml-2 mr-1'
+    ) %>
+    <%= f.check_box :instagram_post_id_present, class: 'mr-4' %>
+    <%= render partial: 'admin/shared/search/search_button', locals: { f: f } %>
+  </div>
+<% end %>
