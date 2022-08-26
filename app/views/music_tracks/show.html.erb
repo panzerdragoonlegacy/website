@@ -1,6 +1,5 @@
 <% title @music_track.name %>
 <% description @music_track.description %>
-<% open_graph_type 'music' %>
 <% if @music_track.music_track_picture.present? %>
   <% open_graph_image(
     ENV['WEBSITE_URL'].chomp('/') +

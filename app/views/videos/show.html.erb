@@ -1,6 +1,5 @@
 <% title @video.name %>
 <% description @video.description %>
-<% open_graph_type 'video' %>
 <% if @video.video_picture.present? %>
   <% open_graph_image(
     ENV['WEBSITE_URL'].chomp('/') + @video.video_picture.url(:original)
