@@ -55,14 +55,6 @@
           ) %>
         </li>
       <% end %>
-      <% unless quiz_count(@contributor_profile) == 0 %>
-        <li class="contributor-profile-contributions__list-item">
-          <%= link_to(
-            pluralize(quiz_count(@contributor_profile), 'quiz'),
-            contributor_profile_quizzes_path(@contributor_profile)
-          ) %>
-        </li>
-      <% end %>
     </ul>
     <p class="contributor-profile-contributions__total">
       Total:

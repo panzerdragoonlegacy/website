@@ -27,7 +27,6 @@ module ContributorProfilesHelper
 
   def website_contributions_count(owner)
     news_entry_count(owner) + literature_count(owner) + picture_count(owner) +
-      music_track_count(owner) + video_count(owner) + download_count(owner) +
-      quiz_count(owner)
+      music_track_count(owner) + video_count(owner) + download_count(owner)
   end
 end
