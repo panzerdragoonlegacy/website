@@ -101,10 +101,10 @@ module PagesHelper
       .each do |img|
         file_name = img.get_attribute('src')
         if illustration =
-              Illustration.where(
-                page_id: page.id,
-                illustration_file_name: file_name
-              ).first
+             Illustration.where(
+               page_id: page.id,
+               illustration_file_name: file_name
+             ).first
           original_image_file =
             Paperclip::Geometry.from_file(
               illustration.illustration.path(:original)
@@ -118,18 +118,23 @@ module PagesHelper
           if original_image_file.width.to_i > 768
             modern_url = illustration.illustration.url(:original)
             img.set_attribute(
-              'srcset', "#{legacy_url} 320w, #{modern_url} 768w"
+              'srcset',
+              "#{legacy_url} 320w, #{modern_url} 768w"
             )
-            img.set_attribute(
-              'sizes', "(max-width: 320px) 320px, 768px"
-            )
+            img.set_attribute('sizes', '(max-width: 320px) 320px, 768px')
             img.set_attribute('src', modern_url)
             img.set_attribute('class', 'illustration__image--modern')
-            img.parent.set_attribute('class', 'illustration illustration--modern')
+            img.parent.set_attribute(
+              'class',
+              'illustration illustration--modern'
+            )
           else
             img.set_attribute('src', legacy_url)
             img.append_class('illustration__image--legacy')
-            img.parent.set_attribute('class', 'illustration illustration--legacy')
+            img.parent.set_attribute(
+              'class',
+              'illustration illustration--legacy'
+            )
           end
         else
           img.set_attribute('src', '')
@@ -138,9 +143,7 @@ module PagesHelper
       end
 
     # Replace the paragraphs wrapping the illustration images with figures:
-    html.css('img').each do |img|
-      img.parent.name = 'figure'
-    end
+    html.css('img').each { |img| img.parent.name = 'figure' }
 
     # Add figure captions extracted from the image alt text:
     alignment = 'left'
@@ -149,15 +152,16 @@ module PagesHelper
       .each do |figure|
         captions = []
         image_class = ''
-        figure.css('img').each do |img|
-          captions << img.get_attribute('alt')
-          image_class = img.get_attribute('class')
-        end
+        figure
+          .css('img')
+          .each do |img|
+            captions << img.get_attribute('alt')
+            image_class = img.get_attribute('class')
+          end
         if captions.count < 1
           figure.add_child(
             '<figcaption class="illustration__caption--image-missing">' +
-            'Missing image' +
-            '</figcaption>'
+              'Missing image' + '</figcaption>'
           )
         elsif captions.count == 1
           figure.append_class('illustration--single-image')
@@ -169,26 +173,23 @@ module PagesHelper
           end
           figure.add_child(
             '<figcaption class="illustration__caption--single-image">' +
-            captions[0] +
-            '</figcaption>'
+              captions[0] + '</figcaption>'
           )
         elsif captions.count == 2
           figure.append_class('illustration--double-image')
           figure.add_child(
             '<figcaption class="illustration__caption--double-image">' +
-            '<span class="caption-alignment--top">Top</span>' +
-            '<span class="caption-alignment--left">Left</span>' +
-            captions[0] +
-            '<span class="caption-alignment--bottom">Bottom</span>' +
-            '<span class="caption-alignment--right">Right</span>' +
-            captions[1] +
-            '</figcaption>'
+              '<span class="caption-alignment--top">Top</span>' +
+              '<span class="caption-alignment--left">Left</span>' +
+              captions[0] +
+              '<span class="caption-alignment--bottom">Bottom</span>' +
+              '<span class="caption-alignment--right">Right</span>' +
+              captions[1] + '</figcaption>'
           )
         elsif captions.count > 2
           figure.add_child(
             '<figcaption class="illustration__caption--images-exceeded">' +
-            'Limit of 2 images per figure exceeded.' +
-            '</figcaption>'
+              'Limit of 2 images per figure exceeded.' + '</figcaption>'
           )
         end
       end

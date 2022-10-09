@@ -2,3 +2,9 @@
 build
 coverage
 vendor/bundle/ruby/**
+
+# Ignore files controlled by Rails:
+db/schema.rb
+public/assets
+public/packs
+public/system

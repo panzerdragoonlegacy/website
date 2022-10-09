@@ -130,20 +130,26 @@ module NewsEntriesHelper
       end
 
     # Wrap each audio in a div.
-    html.css('audio').each do |audio|
-      audio.wrap('<div class="news-entry__audio-container"></div>')
-    end
+    html
+      .css('audio')
+      .each do |audio|
+        audio.wrap('<div class="news-entry__audio-container"></div>')
+      end
 
     # Wrap each video in a div.
-    html.css('video').each do |video|
-      video.wrap('<div class="news-entry__video-container"></div>')
-    end
+    html
+      .css('video')
+      .each do |video|
+        video.wrap('<div class="news-entry__video-container"></div>')
+      end
 
     # Replace paragraphs wrapping the images with divs.
-    html.css('img').each do |img|
-      img.parent.name = 'div'
-      img.parent.set_attribute('class', 'news-entry__picture-container')
-    end
+    html
+      .css('img')
+      .each do |img|
+        img.parent.name = 'div'
+        img.parent.set_attribute('class', 'news-entry__picture-container')
+      end
 
     # Wrap each picture with a link.
     html.css('div').each { |div| div.search('img').wrap('<a></a>') }
@@ -163,9 +169,7 @@ module NewsEntriesHelper
         if picture
           img.set_attribute('src', picture.picture.url(:embedded))
           image_file =
-            Paperclip::Geometry.from_file(
-              picture.picture.path(:embedded)
-            ) 
+            Paperclip::Geometry.from_file(picture.picture.path(:embedded))
           img.set_attribute('width', image_file.width.to_i.to_s)
           img.set_attribute('height', image_file.height.to_i.to_s)
           img.set_attribute('alt', picture.name)

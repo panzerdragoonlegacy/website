@@ -49,9 +49,9 @@ jobs:
       - run:
           name: Running Brakeman
           command: bundle exec brakeman -w3 -q -o /dev/stderr
-      # - run:
-      #     name: Running Prettier
-      #     command: npx prettier --check .
+      - run:
+          name: Running Prettier
+          command: npx prettier --check .
       # - run:
       #     name: Running Stylelint
       #     command: npx stylelint "**/*.scss"

@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   // Prevent horizontal scrollbar:
   overflow-x: hidden;
 }
@@ -12,7 +13,7 @@ body {
 
   // background-color: var(--gray-2);
   // @media (prefers-color-scheme: dark) {
-    background-color: var(--gray-8);
+  background-color: var(--gray-8);
   // }
 }
 
@@ -25,7 +26,7 @@ body {
 
   // color: var(--gray-8);
   // @media (prefers-color-scheme: dark) {
-    color: var(--gray-2);
+  color: var(--gray-2);
   // }
 
   &__logo {
@@ -70,7 +71,7 @@ body {
     }
 
     @media only screen and (min-width: $tablet-min) {
-      max-width: $tablet-min // Enough room for two side by side illustrations.
+      max-width: $tablet-min; // Enough room for two side by side illustrations.
     }
 
     a {

@@ -152,7 +152,7 @@ $menu-border-radius: var(--size-2);
   display: flex;
   z-index: 2;
   border-bottom-left-radius: $menu-border-radius;
-  border-bottom-right-radius:$menu-border-radius;
+  border-bottom-right-radius: $menu-border-radius;
 
   @media only screen and (min-width: $tablet-min) {
     position: absolute;

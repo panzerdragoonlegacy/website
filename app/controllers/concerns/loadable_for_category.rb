@@ -108,10 +108,7 @@ module LoadableForCategory
       @quizzes =
         QuizPolicy::Scope.new(
           current_user,
-          Quiz
-            .where(category_id: @category.id)
-            .order(:name)
-            .page(params[:page])
+          Quiz.where(category_id: @category.id).order(:name).page(params[:page])
         ).resolve
     end
   end
