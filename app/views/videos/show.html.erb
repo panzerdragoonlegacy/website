@@ -29,7 +29,7 @@
       partial: 'shared/contributed_by',
       locals: { contributor_profiles: @video.contributor_profiles }
     ) %>
-    <% if @video.album %>
+    <% if @video.album && album_has_at_least_two_albumables(@video.album) %>
       <%= render(
         partial: 'shared/albums/navigation',
         locals: { albumable: @video }
@@ -61,7 +61,7 @@
     <% end %>
   </div>
   <footer class="video__footer">
-    <% if @video.album && album_has_at_least_one_albumable(@video.album) %>
+    <% if @video.album && album_has_at_least_two_albumables(@video.album) %>
       <%= render(
         partial: 'shared/albums/album',
         locals: { album: @video.album, picture_id: nil, video_id: @video.id }

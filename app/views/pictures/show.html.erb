@@ -35,7 +35,7 @@
       partial: 'shared/contributed_by',
       locals: { contributor_profiles: @picture.contributor_profiles }
     ) %>
-    <% if @picture.album %>
+    <% if @picture.album && album_has_at_least_two_albumables(@picture.album) %>
       <%= render(
         partial: 'shared/albums/navigation',
         locals: { albumable: @picture }
@@ -64,7 +64,7 @@
     <% end %>
   </div>
   <footer class="picture__footer">
-    <% if @picture.album && album_has_at_least_one_albumable(@picture.album) %>
+    <% if @picture.album && album_has_at_least_two_albumables(@picture.album) %>
       <%= render(
         partial: 'shared/albums/album',
         locals: {

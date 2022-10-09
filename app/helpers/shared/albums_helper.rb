@@ -15,9 +15,9 @@ module Shared::AlbumsHelper
     album.ordered_pictures + album.ordered_videos
   end
 
-  def album_has_at_least_one_albumable(album)
-    (album.pictures && album.pictures.count > 0) ||
-      (album.videos && album.videos.count > 0)
+  def album_has_at_least_two_albumables(album)
+    (album.pictures && album.pictures.count >= 2) ||
+      (album.videos && album.videos.count >= 2)
   end
 
   def albumable_path(albumable)
