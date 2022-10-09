@@ -1,0 +1,38 @@
+<li class="main-menu__list-item sub-menu">
+  <input
+    type="checkbox"
+    id="<%= category.slug %>-checkbox"
+    name="menu-selection"
+    class="main-menu__checkbox"
+  />
+  <label
+    for="<%= category.slug %>-checkbox"
+    class="main-menu__label sub-menu__title"
+    aria-expanded="false"
+    aria-controls="<%= category.slug %>-dropdown"
+  >
+    <%= category.name %>
+  </label>
+  <ul class="sub-menu__list" id="<%= category.slug %>-dropdown">
+    <% category.ordered_categorisations.each do |categorisation| %>
+      <li class="sub-menu__list-item">
+        <%= link_to(
+          categorisation.short_name_in_parent,
+          category_path(categorisation.subcategory)
+        ) %>
+      </li>
+    <% end %>
+    <% if category.slug == 'more' %>
+      <li class="sub-menu__divider"><hr /></li>
+      <li class="sub-menu__list-item">
+        <%= link_to 'Links', '/links' %>
+      </li>
+      <li class="sub-menu__list-item">
+        <%= link_to(
+          'News Archives',
+          news_entries_path
+        ) %>
+      </li>
+    <% end %>
+  </ul>
+</li>

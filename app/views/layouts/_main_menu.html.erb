@@ -24,50 +24,13 @@
         <%= link_to 'About', '/about', class: 'about-link' %>
       </label>
     </li>
-    <!-- The top level menu items are hardcoded to prevent layout shift. -->
-    <% %w[games gallery more].each do |category_slug| %>
-      <li class="main-menu__list-item sub-menu">
-        <input
-          type="checkbox"
-          id="<%= category_slug %>-checkbox"
-          name="menu-selection"
-          class="main-menu__checkbox"
-        />
-        <label
-          for="<%= category_slug %>-checkbox"
-          class="main-menu__label sub-menu__title"
-          aria-expanded="false"
-          aria-controls="<%= category_slug %>-dropdown"
-        >
-          <%= category_slug.capitalize %>
-        </label>
-        <% @main_menu_categories.each do |category| %>
-          <% if category.slug == category_slug %>
-            <ul class="sub-menu__list" id="<%= category_slug %>-dropdown">
-              <% category.ordered_categorisations.each do |categorisation| %>
-                <li class="sub-menu__list-item">
-                  <%= link_to(
-                    categorisation.short_name_in_parent,
-                    category_path(categorisation.subcategory)
-                  ) %>
-                </li>
-              <% end %>
-              <% if category.slug == 'more' %>
-                <li class="sub-menu__divider"><hr /></li>
-                <li class="sub-menu__list-item">
-                  <%= link_to 'Links', '/links' %>
-                </li>
-                <li class="sub-menu__list-item">
-                  <%= link_to(
-                    'News Archives',
-                    news_entries_path
-                  ) %>
-                </li>
-              <% end %>
-            </ul>
-          <% end %>
-        <% end %>
-      </li>
+    <% @main_menu_categories.each do |category| %>
+      <% cache category do %>
+        <%= render(
+          partial: 'layouts/sub_menu',
+          locals: { category: category }
+        ) %>
+      <% end %>
     <% end %>
     <li class="main-menu__list-item sub-menu">
       <input

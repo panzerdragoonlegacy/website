@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
   # after_filter :verify_policy_scoped, only: :index
 
   before_action :set_paper_trail_whodunnit
-  before_action :sagas_for_left_nav
   before_action :main_menu_categories
   after_action :conditionally_set_session_cookie
 
@@ -29,10 +28,6 @@ class ApplicationController < ActionController::Base
     else
       raise ActionController::RoutingError, 404
     end
-  end
-
-  def sagas_for_left_nav
-    @sagas_for_left_nav = policy_scope Saga.order(:sequence_number)
   end
 
   def main_menu_categories
