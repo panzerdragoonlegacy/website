@@ -1,5 +1,7 @@
 # Panzer Dragoon Legacy CMS
 
+[![CircleCI Build Status](https://circleci.com/gh/panzerdragoonlegacy/cms.svg?style=shield)](https://circleci.com/gh/panzerdragoonlegacy/cms)
+
 The source code for the website and single purpose content management system of
 [panzerdragoonlegacy.com](https://www.panzerdragoonlegacy.com).
 
