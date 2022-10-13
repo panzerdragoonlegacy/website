@@ -102,14 +102,4 @@ module LoadableForCategory
         ).resolve
     end
   end
-
-  def load_category_quizzes
-    if @category.category_type == :quiz.to_s
-      @quizzes =
-        QuizPolicy::Scope.new(
-          current_user,
-          Quiz.where(category_id: @category.id).order(:name).page(params[:page])
-        ).resolve
-    end
-  end
 end

@@ -70,10 +70,4 @@
       locals: { downloads: @downloads }
     ) %>
   <% end %>
-  <% if @category.category_type == :quiz.to_s %>
-    <%= render(
-      partial: 'shared/quizzes',
-      locals: { quizzes: @quizzes }
-    ) %>
-  <% end %>
 </main>
