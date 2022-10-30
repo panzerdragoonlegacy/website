@@ -46,11 +46,7 @@ class CategoryPolicy < ApplicationPolicy
     [
       :category_picture,
       :category_type,
-      :category_group_id,
-      :saga_id,
       :name,
-      :short_name_for_saga,
-      :short_name_for_media_type,
       :description,
       categorisations_attributes: categorisations_attributes
     ]

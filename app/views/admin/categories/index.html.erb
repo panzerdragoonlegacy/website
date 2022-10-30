@@ -25,21 +25,7 @@
         <th scope="col"></th>
         <th scope="col"><%= sort_link @q, :name %></th>
         <th scope="col">
-          <%= sort_link @q, :short_name_for_saga, 'Short Name for Saga' %>
-        </th>
-        <th scope="col">
-          <%= sort_link(
-            @q, :short_name_for_media_type, 'Short Name for Media Type'
-          ) %>
-        </th>
-        <th scope="col">
           <%= sort_link @q, :category_type, 'Category Type' %>
-        </th>
-        <th scope="col">
-          <%= sort_link @q, :category_group_name, 'Category Group' %>
-        </th>
-        <th scope="col">
-          <%= sort_link @q, :saga_name, 'Saga' %>
         </th>
         <th scope="col"><%= sort_link @q, :created_at, 'Created' %></th>
         <th scope="col"><%= sort_link @q, :updated_at, 'Modified' %></th>
@@ -73,23 +59,7 @@
             )
           %>
           <td>
-            <% if category.short_name_for_saga.present? %>
-              <%= category.short_name_for_saga %>
-            <% end %>
-          </td>
-          <td>
-            <% if category.short_name_for_media_type.present? %>
-              <%= category.short_name_for_media_type %>
-            <% end %>
-          </td>
-          <td>
             <%= category.category_type.titleize %>
-          </td>
-          <td>
-            <%= category.category_group.name if category.category_group %>
-          </td>
-          <td>
-            <%= category.saga.name if category.saga %>
           </td>
           <%=
             render(

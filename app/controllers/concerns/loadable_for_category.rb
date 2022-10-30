@@ -4,16 +4,6 @@ module LoadableForCategory
 
   private
 
-  def load_category_groups
-    @category_groups =
-      CategoryGroupPolicy::Scope.new(current_user, CategoryGroup.order(:name))
-        .resolve
-  end
-
-  def load_sagas
-    @sagas = SagaPolicy::Scope.new(current_user, Saga.order(:name)).resolve
-  end
-
   def load_all_subcategories
     @subcategories =
       CategoryPolicy::Scope.new(current_user, Category.order(:name)).resolve

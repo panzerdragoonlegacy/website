@@ -8,7 +8,6 @@ class Page < ApplicationRecord
   has_paper_trail
 
   belongs_to :category, optional: true
-  has_one :saga
   has_many :illustrations, dependent: :destroy
   accepts_nested_attributes_for(
     :illustrations,

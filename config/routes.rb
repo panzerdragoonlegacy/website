@@ -11,9 +11,7 @@ Rails.application.routes.draw do
     get '/', to: 'home#index'
 
     resources :albums
-    resources :category_groups, path: 'category-groups'
     resources :categories
-    resources :sagas
     resources :tags
     resources :redirects
 
@@ -26,7 +24,6 @@ Rails.application.routes.draw do
     resources :music_tracks, path: 'music-tracks'
     resources :videos
     resources :downloads
-    resources :quizzes
   end
 
   get '/', to: 'home#show'
@@ -49,7 +46,6 @@ Rails.application.routes.draw do
     resources :music_tracks, path: 'music-tracks', only: :index
     resources :videos, only: :index
     resources :downloads, only: :index
-    resources :quizzes, only: :index
   end
 
   resources :tags, only: :show do
@@ -59,7 +55,6 @@ Rails.application.routes.draw do
     resources :music_tracks, path: 'music-tracks', only: :index
     resources :videos, only: :index
     resources :downloads, only: :index
-    resources :quizzes, only: :index
   end
 
   get ':id', to: 'top_level_pages#show', as: 'top_level_page'

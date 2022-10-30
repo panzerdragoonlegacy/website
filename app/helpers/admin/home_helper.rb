@@ -35,14 +35,9 @@ module Admin::HomeHelper
     policy_scope(Download.where(publish: false)).count
   end
 
-  def draft_quiz_count
-    policy_scope(Quiz.where(publish: false)).count
-  end
-
   def draft_count
     draft_album_count + draft_category_count + draft_contributor_profile_count +
       draft_news_entry_count + draft_page_count + draft_picture_count +
-      draft_music_track_count + draft_video_count + draft_download_count +
-      draft_quiz_count
+      draft_music_track_count + draft_video_count + draft_download_count
   end
 end

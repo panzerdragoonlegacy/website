@@ -35,7 +35,6 @@ RSpec.describe ContributorProfile, type: :model do
     it { is_expected.to have_many(:music_tracks) }
     it { is_expected.to have_many(:videos) }
     it { is_expected.to have_many(:downloads) }
-    it { is_expected.to have_many(:quizzes) }
   end
 
   describe 'validations' do

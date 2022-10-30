@@ -38,11 +38,4 @@ module LoadableForLiterature
           .page(params[:page])
       )
   end
-
-  def load_category_groups
-    @category_groups =
-      policy_scope(
-        CategoryGroup.where(category_group_type: :literature).order(:name)
-      )
-  end
 end

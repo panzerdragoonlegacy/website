@@ -22,8 +22,4 @@ module Shared::CountHelper
   def download_count(owner)
     policy_scope(owner.downloads).count
   end
-
-  def quiz_count(owner)
-    policy_scope(owner.quizzes).count
-  end
 end

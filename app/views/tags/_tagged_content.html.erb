@@ -49,14 +49,6 @@
           tag_downloads_path(tag)
         ) %>
       </li>
-      <% unless quiz_count(tag) == 0 %>
-        <li class="tagged-content__list-item">
-          <%= link_to(
-            pluralize(quiz_count(tag), 'quiz'),
-            tag_quizzes_path(tag)
-          ) %>
-        </li>
-      <% end %>
     <% end %>
   </ul>
 <% end %>

@@ -32,7 +32,6 @@ class Tag < ApplicationRecord
     source: :taggable,
     source_type: 'Download'
   )
-  has_many(:quizzes, through: :taggings, source: :taggable, source_type: 'Quiz')
 
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
 
