@@ -46,6 +46,7 @@
               locals: { resource: page, path: custom_page_path(page) }
             )
           %>
+          <td><%= page.page_type.humanize %></td>
           <% if page.category %>
             <%=
               render(
