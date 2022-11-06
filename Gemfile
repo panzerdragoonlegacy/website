@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '7.0.3.1'
+gem 'rails', '7.0.4'
 gem 'rake', '13.0.1'
 
 group :development do
@@ -19,7 +19,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'pundit-matchers', '~> 1.7.0'
+  gem 'pundit-matchers', '~> 1.8.4'
   gem 'rspec_junit_formatter' # Used for formatting CircleCI output
   gem 'shoulda-matchers', '~> 5.1.0'
 end
