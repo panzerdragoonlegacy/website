@@ -339,48 +339,136 @@ enabled (for Let's Encrypt).
 
 ## Create a Full Backup to Your Local Machine
 
-1. On the server, back up the database to your home directory:
-
-   `sudo docker exec -t database pg_dumpall -c -U postgres > ~/backup.sql`
-
-2. Back up the Paperclip attachments to your home directory:
-
-   `sudo docker cp app:/cms/public/system ~/system`
-
-3. On your local machine, make a folder for the various parts of the backup:
-
-   `mkdir ~/backups/cms-backup`
-
-4. Clone the current version of the code repository into the local backup
+1. Clone the current version of the code repository into a local backup
    directory. This ensures that data can be restored to the same point in time
    as the code, if required:
 
-   `cd ~/backups/cms-backup`
+   `mkdir ~/Backups` (called `Backups` here, but it could be anything)
 
-   `git clone git@github.com:panzerdragoonlegacy/cms.git`
+   `mkdir ~/Backups/cms-backup`
 
-5. Download the database backup from the server:
+   `cd ~/Backups/cms-backup`
 
-   `scp kyle@servername:~/backup.sql ~/backups/cms-backup`
+   `git clone https://github.com/panzerdragoonlegacy/cms.git`
 
-6. Download the Paperclip attachments from the server. This will take a while,
-   so if there is enough free space on the server you may want to create a
-   tarball of the folder first:
+2. On the server, back up the database to your home directory:
 
-   `scp -r kyle@servername:~/system ~/backups/cms-backup/system`
+   `sudo docker exec -t database pg_dumpall -c -U postgres > ~/backup.sql`
 
-7. Create a tarball of the folder containing the three parts of the backup:
+3. From your local machine, download the database backup from the server:
 
-   `cd ~/backups`
+   `scp kyle@servername:~/backup.sql ~/Backups/cms-backup`
 
-   `tar cvzf ~/backups/cms-backup.tar.gz cms-backup`
-
-8. Rename the tarball to the date of the backup and archive it:
-
-   `mv cms-backup.tar.gz cms-backup-2021-06-23.tar.gz`
-
-9. On the server, delete the backup files:
+4. On the server, delete the backup files:
 
    `sudo rm ~/backup.sql`
 
-   `sudo rm -rf ~/system`
+5. Because the Paperclip attachments are quite large, there likely won't be
+   enough disk space to back them up all at once. First, create a copy of the
+   system directory on the server to put these in:
+
+   `mkdir ~/system`
+
+6. Copy each pictures subdirectory from the Docker volume into the new system
+   directory:
+
+   ```
+   sudo docker cp app:/cms/public/system/avatars ~/system/avatars
+   sudo docker cp app:/cms/public/system/category_pictures ~/system/category_pictures
+   sudo docker cp app:/cms/public/system/download_pictures ~/system/download_pictures
+   sudo docker cp app:/cms/public/system/illustrations ~/system/illustrations
+   sudo docker cp app:/cms/public/system/music_track_pictures ~/system/music_track_pictures
+   sudo docker cp app:/cms/public/system/news_entry_pictures ~/system/news_entry_pictures
+   sudo docker cp app:/cms/public/system/page_pictures ~/system/page_pictures
+   sudo docker cp app:/cms/public/system/pictures ~/system/pictures
+   sudo docker cp app:/cms/public/system/tag_pictures ~/system/tag_pictures
+   sudo docker cp app:/cms/public/system/video_pictures ~/system/video_pictures
+   ```
+
+7. Create a tarball of the pictures:
+
+   `tar cvzf ~/system-pictures.tar.gz ~/system`
+
+8. From your local machine, download the pictures tarball:
+
+   `scp kyle@servername:~/system-pictures.tar.gz ~/Backups`
+
+9. Once the download is complete, remove the files from the server:
+
+   `sudo rm -rf ~/system/*`
+
+   `sudo rm ~/system-pictures.tar.gz`
+
+10. On your local machine, untar the pictures into the system folder and delete
+    the tarball.
+
+    `mkdir ~/Backups/cms-backup/system`
+
+    `cd ~/Backups/cms-backup/system`
+
+    `tar -xvkf ~/Backups/system-pictures.tar.gz`
+
+    `rm ~/Backups/system-pictures.tar.gz`
+
+11. On the server, copy the remaining files from the Docker volume in the same
+    way:
+
+    ```
+    sudo docker cp app:/cms/public/system/paperclip_attachments.yml ~/system/paperclip_attachments.yml
+    sudo docker cp app:/cms/public/system/flac_music_tracks ~/system/flac_music_tracks
+    sudo docker cp app:/cms/public/system/mp3_music_tracks ~/system/mp3_music_tracks
+    sudo docker cp app:/cms/public/system/mp4_videos ~/system/mp4_videos
+    sudo docker cp app:/cms/public/system/downloads ~/system/downloads
+    ```
+
+12. Since there are fewer large files, we will skip creating a tarball. Download
+    each set of large files seperately:
+
+    ```
+    scp -r kyle@servername:~/system/paperclip_attachments.yml ~/backups/cms-backup/system/paperclip_attachments.yml
+    scp -r kyle@servername:~/system/flac_music_tracks ~/backups/cms-backup/system/flac_music_tracks
+    scp -r kyle@servername:~/system/mp3_music_tracks ~/backups/cms-backup/system/mp3_music_tracks
+    scp -r kyle@servername:~/system/mp4_videos ~/backups/cms-backup/system/mp4_videos
+    scp -r kyle@servername:~/system/downloads ~/backups/cms-backup/system/downloads
+    ```
+
+13. Remove the copied files from the server, checking that there are no files
+    remaining in your home directory taking up valuable space on the server:
+
+    `sudo rm -rf ~/system`
+
+    `ls ~`
+
+14. Locally, confirm that the expected directories are present:
+
+    `ls ~/Backups/cms-backup`
+
+    ```
+    backup.sql          cms                     system
+    ```
+
+    `ls ~/Backups/cms-backup/system`
+
+    Expected output:
+
+    ```
+    avatars              illustrations           page_pictures
+    category_pictures    mp3_music_tracks        paperclip_attachments.yml
+    download_pictures    mp4_videos              pictures
+    downloads            music_track_pictures    tag_pictures
+    flac_music_tracks    news_entry_pictures     video_pictures
+    ```
+
+15. Create a tarball of the folder containing the three parts of the backup:
+
+    `cd ~/Backups`
+
+    `tar cvzf ~/Backups/cms-backup.tar.gz cms-backup`
+
+16. Rename the tarball to the date of the backup and archive it:
+
+    `mv cms-backup.tar.gz panzer-dragoon-legacy-1998-01-29.tar.gz`
+
+17. On your local machine, remove the cms-backup directory to free up space:
+
+    `rm -rf ~/Backups/cms-backup`
