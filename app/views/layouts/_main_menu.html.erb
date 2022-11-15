@@ -26,9 +26,46 @@
     </li>
     <%= render(
       partial: 'layouts/sub_menu',
-      collection: @main_menu_categories,
-      as: :category,
-      cached: true
+      locals: {
+        category_name: 'Games',
+        subcategory_names: [
+          'Panzer Dragoon',
+          'Panzer Dragoon II Zwei',
+          'Panzer Dragoon Mini',
+          'Panzer Dragoon Saga',
+          'Panzer Dragoon Orta',
+          'Panzer Dragoon: Remake',
+          'Panzer Dragoon II Zwei: Remake',
+          'Panzer Dragoon Voyage Record'
+        ]
+      }
+    ) %>
+    <%= render(
+      partial: 'layouts/sub_menu',
+      locals: {
+        category_name: 'Gallery',
+        subcategory_names: [
+          'Fan Pictures',
+          'Screenshots',
+          'Product Pictures',
+          'Official Art',
+          'Maps',
+          'Photos',
+          'Magazine Scans'
+        ]
+      }
+    ) %>
+    <%= render(
+      partial: 'layouts/sub_menu',
+      locals: {
+        category_name: 'More',
+        subcategory_names: [
+          'Literature',
+          'Music',
+          'Videos',
+          'Downloads'
+        ]
+      }
     ) %>
     <li class="main-menu__list-item sub-menu">
       <input

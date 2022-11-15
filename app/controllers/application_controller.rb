@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
   # after_filter :verify_policy_scoped, only: :index
 
   before_action :set_paper_trail_whodunnit
-  before_action :main_menu_categories
   after_action :conditionally_set_session_cookie
 
   private
@@ -28,18 +27,6 @@ class ApplicationController < ActionController::Base
     else
       raise ActionController::RoutingError, 404
     end
-  end
-
-  def main_menu_categories
-    category_names = %w[Games Gallery More]
-    @main_menu_categories =
-      CategoryPolicy::Scope
-        .new(
-          current_user,
-          Category.where(name: category_names).includes(:categorisations)
-        )
-        .resolve
-        .sort_by { |category| category_names.index(category.name) }
   end
 
   # Disable the session cookie unless you were going to a page with Devise (e.g.
