@@ -19,9 +19,9 @@ Step-by-step instructions for setting up a development environment for the site.
 
    `cd ~/Code`
 
-   `git clone https://github.com/panzerdragoonlegacy/cms.git`
+   `git clone https://github.com/panzerdragoonlegacy/website.git`
 
-   `cd cms`
+   `cd website`
 
 5. Create a .env from the example file:
 
@@ -68,7 +68,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 1. Change into the project's directory:
 
-   `cd ~/Code/cms`
+   `cd ~/Code/website`
 
 2. Stop the app (if it is running) and start the database container only.
 
@@ -78,7 +78,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 3. Open psql in an interactive terminal.
 
-   `docker exec -it cms_database_1 psql -U postgres`
+   `docker exec -it website_database_1 psql -U postgres`
 
 4. Create a user for the webapp that matches what is in the backup:
 
@@ -130,11 +130,11 @@ Step-by-step instructions for setting up a development environment for the site.
 1. Copy the system folder from the backup on your local machine into the volume
    (this will take a while):
 
-   `docker cp /My/Path/system cms_app_1:cms/public`
+   `docker cp /My/Path/system website_app_1:cms/public`
 
 2. Change into the project's directory:
 
-   `cd ~/Code/cms`
+   `cd ~/Code/website`
 
 3. Restart the app
 

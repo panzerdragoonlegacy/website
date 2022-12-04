@@ -137,7 +137,7 @@ enabled (for Let's Encrypt).
 
    `cd /var`
 
-   `sudo git clone https://github.com/panzerdragoonlegacy/cms.git`
+   `sudo git clone https://github.com/panzerdragoonlegacy/website.git cms`
 
    `cd cms`
 
