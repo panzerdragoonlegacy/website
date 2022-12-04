@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_22_011032) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_15_055507) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "albums", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.string "url"
     t.string "description"
     t.integer "category_id"
     t.datetime "created_at", precision: nil, null: false
@@ -32,23 +31,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_011032) do
 
   create_table "categories", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
-    t.string "url", limit: 255
     t.string "description", limit: 255
     t.string "category_type", limit: 255
     t.boolean "publish", default: false
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
-    t.integer "category_group_id"
-    t.integer "saga_id"
-    t.string "short_name_for_saga"
-    t.string "short_name_for_media_type"
     t.datetime "published_at", precision: nil
     t.string "category_picture_file_name"
     t.string "category_picture_content_type"
     t.integer "category_picture_file_size"
     t.datetime "category_picture_updated_at", precision: nil
     t.string "slug"
-    t.index ["saga_id"], name: "index_categories_on_saga_id"
   end
 
   create_table "categorisations", force: :cascade do |t|
@@ -62,15 +55,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_011032) do
     t.index ["subcategory_id"], name: "index_categorisations_on_subcategory_id"
   end
 
-  create_table "category_groups", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "url"
-    t.string "category_group_type"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.string "slug"
-  end
-
   create_table "contributions", id: :serial, force: :cascade do |t|
     t.integer "contributor_profile_id"
     t.integer "contributable_id"
@@ -81,7 +65,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_011032) do
 
   create_table "contributor_profiles", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
-    t.string "url", limit: 255
     t.string "email_address", limit: 255
     t.string "avatar_file_name", limit: 255
     t.string "avatar_content_type", limit: 255
@@ -110,7 +93,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_011032) do
 
   create_table "downloads", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
-    t.string "url", limit: 255
     t.string "description", limit: 255
     t.text "information"
     t.string "download_file_name", limit: 255
@@ -141,7 +123,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_011032) do
 
   create_table "music_tracks", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
-    t.string "url", limit: 255
     t.string "description", limit: 255
     t.text "information"
     t.string "mp3_music_track_file_name", limit: 255
@@ -167,7 +148,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_011032) do
 
   create_table "news_entries", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
-    t.string "url", limit: 255
     t.text "content"
     t.integer "contributor_profile_id"
     t.datetime "created_at", precision: nil
@@ -185,7 +165,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_011032) do
 
   create_table "pages", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.string "url"
     t.string "description"
     t.text "information"
     t.text "content"
@@ -201,14 +180,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_011032) do
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.datetime "published_at", precision: nil
-    t.string "old_model_type"
-    t.integer "old_model_id"
     t.string "slug"
   end
 
   create_table "pictures", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
-    t.string "url", limit: 255
     t.string "description", limit: 255
     t.text "information"
     t.string "picture_file_name", limit: 255
@@ -230,60 +206,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_011032) do
     t.string "slug"
   end
 
-  create_table "quiz_answers", id: :serial, force: :cascade do |t|
-    t.integer "quiz_question_id"
-    t.text "content"
-    t.boolean "correct_answer", default: false
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-  end
-
-  create_table "quiz_questions", id: :serial, force: :cascade do |t|
-    t.integer "quiz_id"
-    t.text "content"
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-  end
-
-  create_table "quizzes", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
-    t.string "url", limit: 255
-    t.string "description", limit: 255
-    t.boolean "publish", default: false
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-    t.datetime "published_at", precision: nil
-    t.integer "category_id"
-    t.string "slug"
-  end
-
   create_table "redirects", id: :serial, force: :cascade do |t|
     t.string "old_url"
     t.string "new_url"
     t.text "comment"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
-  end
-
-  create_table "resources", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
-    t.string "url", limit: 255
-    t.text "content"
-    t.boolean "publish", default: false
-    t.integer "category_id"
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-    t.datetime "published_at", precision: nil
-  end
-
-  create_table "sagas", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "url"
-    t.integer "sequence_number", default: 1
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.integer "tag_id"
-    t.string "slug"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -296,7 +224,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_011032) do
 
   create_table "tags", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.string "url"
     t.string "description"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
@@ -350,7 +277,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_011032) do
 
   create_table "videos", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
-    t.string "url", limit: 255
     t.string "description", limit: 255
     t.text "information"
     t.string "mp4_video_file_name", limit: 255

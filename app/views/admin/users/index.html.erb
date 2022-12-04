@@ -23,7 +23,7 @@
   </div>
 <% end %>
 
-<% if @users %>
+<% if @users && @users.count > 0 %>
   <table class="table">
     <tr>
       <th scope="col"><%= sort_link @q, :administrator, 'Admin' %></th>
@@ -107,6 +107,7 @@
       </tr>
     <% end %>
   </table>
+  <%= paginate @users, views_prefix: 'admin' %>
+
 <% end %>
 
-<%= paginate @users, views_prefix: 'admin' %>

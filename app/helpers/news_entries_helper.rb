@@ -178,7 +178,7 @@ module NewsEntriesHelper
           # Sets the parent link's href attribute.
           img.parent.set_attribute(
             'href',
-            "/pictures/#{picture.id.to_s}-#{picture.url}"
+            "/pictures/#{picture.id.to_s}-#{picture.slug}"
           )
         else
           img.set_attribute('src', '')
