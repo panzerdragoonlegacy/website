@@ -25,7 +25,7 @@
   <%= render partial: 'shared/draft' %>
   <p class="draft">
     Use this Markdown to embed the picture in a news entry:
-    <code>![](<%= @picture.id %>-<%= @picture.url %>.jpg)</code>
+    <code>![](<%= @picture.id %>-<%= @picture.slug %>.jpg)</code>
   </p>
 <% end %>
 

@@ -17,7 +17,7 @@
   <%= render partial: 'shared/draft' %>
   <p class="draft">
     Use this Markdown to embed the music track in a news entry:
-    <code>![](<%= @music_track.id %>-<%= @music_track.url %>.mp3)</code>
+    <code>![](<%= @music_track.id %>-<%= @music_track.slug %>.mp3)</code>
   </p>
 <% end %>
 

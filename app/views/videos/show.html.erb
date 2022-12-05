@@ -19,7 +19,7 @@
   <%= render partial: 'shared/draft' %>
   <p class="draft">
     Use this Markdown to embed the video in a news entry:
-    <code>![](<%= @video.id %>-<%= @video.url %>.mp4)</code>
+    <code>![](<%= @video.id %>-<%= @video.slug %>.mp4)</code>
   </p>
 <% end %>
 
