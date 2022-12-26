@@ -38,5 +38,13 @@ describe CategoryPolicy do
     let(:category) { FactoryBot.create(:valid_parent_category) }
 
     it { is_expected.to forbid_action(:destroy) }
+
+    context 'category has subcategories' do
+      before do
+        category.categorisations << FactoryBot.create(:valid_categorisation)
+      end
+
+      it { is_expected.to forbid_action(:destroy) }
+    end
   end
 end
