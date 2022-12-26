@@ -44,12 +44,6 @@ class ContributorProfile < ApplicationRecord
     source: :contributable,
     source_type: 'Download'
   )
-  has_many(
-    :quizzes,
-    through: :contributions,
-    source: :contributable,
-    source_type: 'Quiz'
-  )
 
   validates :name, presence: true, length: { in: 2..50 }, uniqueness: true
 

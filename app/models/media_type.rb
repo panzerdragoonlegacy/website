@@ -6,8 +6,7 @@ class MediaType
       picture: 'Pictures',
       music_track: 'Music',
       video: 'Videos',
-      download: 'Downloads',
-      quiz: 'Quizzes'
+      download: 'Downloads'
     }
   end
 end

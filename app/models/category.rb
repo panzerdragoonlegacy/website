@@ -24,7 +24,6 @@ class Category < ApplicationRecord
   has_many :music_tracks, dependent: :destroy
   has_many :videos, dependent: :destroy
   has_many :downloads, dependent: :destroy
-  has_many :quizzes, dependent: :destroy
 
   validates :name, presence: true, length: { in: 2..100 }, uniqueness: true
 
@@ -39,7 +38,6 @@ class Category < ApplicationRecord
     music_track
     video
     download
-    quiz
   ].freeze
 
   has_attached_file(
