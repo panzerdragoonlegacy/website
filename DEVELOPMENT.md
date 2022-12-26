@@ -78,15 +78,17 @@ Step-by-step instructions for setting up a development environment for the site.
 
 3. Open psql in an interactive terminal.
 
-   `docker exec -it website_database_1 psql -U postgres`
+   `docker exec -it website-database-1 psql -U postgres`
 
-4. Create a user for the webapp that matches what is in the backup:
+4. Delete any old versions of the webapp database and user (if required):
 
-   `CREATE USER panzerdragoonlegacy WITH ENCRYPTED PASSWORD 'PASSWORDHERE';`
+   `DROP DATABASE panzerdragoonlegacy;`
 
-5. Create a database (drop old database first if required):
+   `DROP USER panzerdragoonlegacy;`
 
-   `DROP DATABASE panzerdragoonlegacy;` (if required)
+5. Create a user and database for the webapp that matches what is in the backup:
+
+   `CREATE USER panzerdragoonlegacy;`
 
    `CREATE DATABASE panzerdragoonlegacy;`
 
@@ -104,9 +106,17 @@ Step-by-step instructions for setting up a development environment for the site.
 
 9. Restore the database from a backup .sql file:
 
-   `cat /My/Path/backup.sql | docker exec -i cms_database_1 psql -U panzerdragoonlegacy`
+   `cat /My/Path/backup.sql | docker exec -i website-database-1 psql -U postgres -d panzerdragoonlegacy`
 
-10. Update `.env` with the database user, password, and name you used.
+10. Set a password for the webapp user:
+
+   `docker exec -it website-database-1 psql -U postgres`
+
+   `ALTER USER panzerdragoonlegacy WITH PASSWORD 'PASSWORDHERE';`
+
+   `\q`
+
+11. Update `.env` with the database user, password and name you used.
 
     ```
     DB_USER=panzerdragoonlegacy
@@ -115,13 +125,13 @@ Step-by-step instructions for setting up a development environment for the site.
     DB_HOST=database
     ```
 
-11. Restart the containers to reload from `.env`
+12. Restart the containers to reload from `.env`
 
     `docker-compose down`
 
     `docker-compose up`
 
-12. Run any outstanding migrations on the restored database
+13. Run any outstanding migrations on the restored database
 
     `docker-compose exec app bin/rails db:migrate`
 
@@ -130,9 +140,9 @@ Step-by-step instructions for setting up a development environment for the site.
 1. Copy the system folder from the backup on your local machine into the volume
    (this will take a while):
 
-   `docker cp /My/Path/system website_app_1:cms/public`
+   `docker cp /My/Path/system website-app-1:cms/public`
 
-2. Change into the project's directory:
+2. Change into the project's directory (if not already there):
 
    `cd ~/Code/website`
 
@@ -143,18 +153,36 @@ Step-by-step instructions for setting up a development environment for the site.
    `docker-compose up`
 
 4. If new attachment styles have been added to the codebase since the backup was
-   created you can generate these inside the container:
+   created you can generate these inside the container (this will take a while):
 
    `docker-compose exec app bash`
 
    `bundle exec rake paperclip:refresh:missing_styles`
 
+5. Open http://localhost:3000 in a web browser and confirm that the complete
+   website (database and file attachments) has been restored as expected.
+
 ## Running the Test Suite
 
-1. If it does not already exist, create the test database:
+1. If it does not already exist, create the test database, reusing the database
+   user and password that we set up for the development database:
 
-   `docker-compose exec app bin/rails db:create RAILS_ENV=test`
+   `docker exec -it website-database-1 psql -U postgres`
 
-2. Run this test suite:
+   `DROP DATABASE panzerdragoonlegacy_test;` (if required)
+
+   `CREATE DATABASE panzerdragoonlegacy_test;`
+
+   `GRANT ALL PRIVILEGES ON DATABASE panzerdragoonlegacy_test TO panzerdragoonlegacy;`
+
+   `ALTER DATABASE panzerdragoonlegacy_test OWNER TO panzerdragoonlegacy;`
+
+   `\q`
+
+2. Load the database schema into the test database:
+
+   `docker-compose exec app rails db:schema:load RAILS_ENV=test`
+
+3. Run the test suite (this will take a while):
 
    `docker-compose exec app bin/rspec`

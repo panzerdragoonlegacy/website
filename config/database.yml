@@ -20,9 +20,9 @@ test:
   encoding: unicode
   pool: 10
   host: <%= ENV["DB_HOST"] || 'localhost' %>
-  username: postgres
-  password: postgres
-  database: cms_test
+  username: <%= ENV['DB_USER'] || 'postgres' %>
+  password: <%= ENV['POSTGRES_PASSWORD'] || 'postgres' %>
+  database: panzerdragoonlegacy_test
 
 production:
   <<: *default
