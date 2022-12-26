@@ -12,7 +12,7 @@ class VideoPolicy < ApplicationPolicy
         return scope if user.administrator?
         return scope_user_contributes_to if user.contributor_profile
       end
-      scope.joins(:category).where(publish: true, categories: { publish: true })
+      scope.where(publish: true)
     end
 
     private
@@ -32,7 +32,7 @@ class VideoPolicy < ApplicationPolicy
       return true if user.administrator?
       return true if user_contributes_to_record?
     end
-    record.publish? && record.category.publish?
+    record.publish?
   end
 
   def new?

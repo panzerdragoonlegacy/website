@@ -12,17 +12,16 @@ class PagePolicy < ApplicationPolicy
         return scope if user.administrator?
         return scope_user_contributes_to if user.contributor_profile
       end
-      scope.joins(:category).where(publish: true, categories: { publish: true })
+      scope.where(publish: true)
     end
 
     private
 
     def scope_user_contributes_to
       scope
-        .joins(:category, :contributions)
+        .joins(:contributions)
         .where(
-          '(pages.publish = true AND categories.publish = true) OR ' \
-            'contributions.contributor_profile_id = ?',
+          'pages.publish = true OR contributions.contributor_profile_id = ?',
           user.contributor_profile_id
         )
     end
@@ -33,7 +32,7 @@ class PagePolicy < ApplicationPolicy
       return true if user.administrator?
       return true if user_contributes_to_record?
     end
-    true if record_and_category_are_published?
+    true if record.publish?
   end
 
   def new?
@@ -81,13 +80,5 @@ class PagePolicy < ApplicationPolicy
       tag_ids: [],
       illustrations_attributes: %i[id illustration _destroy]
     ]
-  end
-
-  def record_and_category_are_published?
-    if record.category
-      return true if record.publish? && record.category.publish?
-    elsif record.publish?
-      true
-    end
   end
 end

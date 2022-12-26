@@ -12,16 +12,16 @@ class DownloadPolicy < ApplicationPolicy
         return scope if user.administrator?
         return scope_user_contributes_to if user.contributor_profile
       end
-      scope.joins(:category).where(publish: true, categories: { publish: true })
+      scope.where(publish: true)
     end
 
     private
 
     def scope_user_contributes_to
       scope
-        .joins(:category, :contributions)
+        .joins(:contributions)
         .where(
-          '(downloads.publish = true AND categories.publish = true) OR ' \
+          'downloads.publish = true OR ' \
             'contributions.contributor_profile_id = ?',
           user.contributor_profile_id
         )
@@ -33,7 +33,7 @@ class DownloadPolicy < ApplicationPolicy
       return true if user.administrator?
       return true if user_contributes_to_record?
     end
-    record.publish? && record.category.publish?
+    record.publish?
   end
 
   def new?

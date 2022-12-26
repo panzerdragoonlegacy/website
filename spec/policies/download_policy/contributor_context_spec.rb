@@ -19,143 +19,68 @@ describe DownloadPolicy do
     it { is_expected.to forbid_mass_assignment_of(:publish) }
   end
 
-  context 'contributor accessing downloads in a published category' do
-    context 'accessing downloads that the user does not contribute to' do
-      context 'accessing a published download' do
-        let(:download) do
-          FactoryBot.create(:published_download_in_published_category)
-        end
+  context 'contributor accessing downloads that they do not contribute to' do
+    context 'accessing a published download' do
+      let(:download) { FactoryBot.create(:published_download) }
 
-        it 'includes download in resolved scope' do
-          expect(resolved_scope).to include(download)
-        end
-
-        it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions(%i[edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it 'includes download in resolved scope' do
+        expect(resolved_scope).to include(download)
       end
 
-      context 'accessing an unpublished download' do
-        let(:download) do
-          FactoryBot.create(:unpublished_download_in_published_category)
-        end
-
-        it 'excludes download from resolved scope' do
-          expect(resolved_scope).not_to include(download)
-        end
-
-        it { is_expected.to forbid_actions(%i[show edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
-      end
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to forbid_actions(%i[edit update destroy]) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
-    context 'accessing downloads the user contributes to' do
-      context 'accessing a published download' do
-        let(:download) do
-          FactoryBot.create(
-            :published_download_in_published_category,
-            contributions: [
-              Contribution.new(contributor_profile: contributor_profile)
-            ]
-          )
-        end
+    context 'accessing an unpublished download' do
+      let(:download) { FactoryBot.create(:unpublished_download) }
 
-        it 'includes download in resolved scope' do
-          expect(resolved_scope).to include(download)
-        end
-
-        it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions(%i[edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it 'excludes download from resolved scope' do
+        expect(resolved_scope).not_to include(download)
       end
 
-      context 'accessing an unpublished download' do
-        let(:download) do
-          FactoryBot.create(
-            :unpublished_download_in_published_category,
-            contributions: [
-              Contribution.new(contributor_profile: contributor_profile)
-            ]
-          )
-        end
-
-        it 'includes download in resolved scope' do
-          expect(resolved_scope).to include(download)
-        end
-
-        it { is_expected.to permit_actions(%i[show edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
-      end
+      it { is_expected.to forbid_actions(%i[show edit update destroy]) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end
 
-  context 'contributor accessing downloads in an unpublished category' do
-    context 'accessing downloads that the user does not contribute to' do
-      context 'accessing a published download' do
-        let(:download) do
-          FactoryBot.create(:published_download_in_published_category)
-        end
-
-        it 'includes download in resolved scope' do
-          expect(resolved_scope).to include(download)
-        end
-
-        it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions(%i[edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
+  context 'contributor accessing downloads that they contribute to' do
+    context 'accessing a published download' do
+      let(:download) do
+        FactoryBot.create(
+          :published_download,
+          contributions: [
+            Contribution.new(contributor_profile: contributor_profile)
+          ]
+        )
       end
 
-      context 'accessing an unpublished download' do
-        let(:download) do
-          FactoryBot.create(:unpublished_download_in_published_category)
-        end
-
-        it 'excludes download from resolved scope' do
-          expect(resolved_scope).not_to include(download)
-        end
-
-        it { is_expected.to forbid_actions(%i[show edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it 'includes download in resolved scope' do
+        expect(resolved_scope).to include(download)
       end
+
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to forbid_actions(%i[edit update destroy]) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
-    context 'accessing downloads that the user contributes to' do
-      context 'accessing a published download' do
-        let(:download) do
-          FactoryBot.create(
-            :published_download_in_unpublished_category,
-            contributions: [
-              Contribution.new(contributor_profile: contributor_profile)
-            ]
-          )
-        end
-
-        it 'includes download in resolved scope' do
-          expect(resolved_scope).to include(download)
-        end
-
-        it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions(%i[edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
+    context 'accessing an unpublished download' do
+      let(:download) do
+        FactoryBot.create(
+          :unpublished_download,
+          contributions: [
+            Contribution.new(contributor_profile: contributor_profile)
+          ]
+        )
       end
 
-      context 'accessing an unpublished download' do
-        let(:download) do
-          FactoryBot.create(
-            :unpublished_download_in_unpublished_category,
-            contributions: [
-              Contribution.new(contributor_profile: contributor_profile)
-            ]
-          )
-        end
-
-        it 'includes download in resolved scope' do
-          expect(resolved_scope).to include(download)
-        end
-
-        it { is_expected.to permit_actions(%i[show edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it 'includes download in resolved scope' do
+        expect(resolved_scope).to include(download)
       end
+
+      it { is_expected.to permit_actions(%i[show edit update destroy]) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end
 end
+

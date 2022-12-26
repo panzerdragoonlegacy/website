@@ -10,24 +10,12 @@ FactoryBot.define do
       category { FactoryBot.create(:valid_picture_category) }
       contributor_profiles { [FactoryBot.create(:valid_contributor_profile)] }
 
-      factory :published_picture_in_published_category do
+      factory :published_picture do
         publish { true }
-        category { FactoryBot.create(:published_category) }
       end
 
-      factory :unpublished_picture_in_published_category do
+      factory :unpublished_picture do
         publish { false }
-        category { FactoryBot.create(:published_category) }
-      end
-
-      factory :published_picture_in_unpublished_category do
-        publish { true }
-        category { FactoryBot.create(:unpublished_category) }
-      end
-
-      factory :unpublished_picture_in_unpublished_category do
-        publish { false }
-        category { FactoryBot.create(:unpublished_category) }
       end
     end
   end

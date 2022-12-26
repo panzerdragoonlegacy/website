@@ -25,8 +25,7 @@ describe CategoryPolicy do
 
     context 'category has children' do
       before do
-        category.pictures <<
-          FactoryBot.create(:published_picture_in_published_category)
+        category.pictures << FactoryBot.create(:published_picture)
       end
 
       it { is_expected.to forbid_action(:destroy) }
@@ -49,8 +48,7 @@ describe CategoryPolicy do
 
     context 'category has children' do
       before do
-        category.pictures <<
-          FactoryBot.create(:published_picture_in_published_category)
+        category.pictures << FactoryBot.create(:published_picture)
       end
 
       it { is_expected.to forbid_action(:destroy) }

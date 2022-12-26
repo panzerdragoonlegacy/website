@@ -18,24 +18,12 @@ FactoryBot.define do
         description { 'Test Description' }
         category { FactoryBot.create(:valid_literature_category) }
 
-        factory :published_page_in_published_category do
+        factory :published_page do
           publish { true }
-          category { FactoryBot.create(:published_category) }
         end
 
-        factory :unpublished_page_in_published_category do
+        factory :unpublished_page do
           publish { false }
-          category { FactoryBot.create(:published_category) }
-        end
-
-        factory :published_page_in_unpublished_category do
-          publish { true }
-          category { FactoryBot.create(:unpublished_category) }
-        end
-
-        factory :unpublished_page_in_unpublished_category do
-          publish { false }
-          category { FactoryBot.create(:unpublished_category) }
         end
       end
     end

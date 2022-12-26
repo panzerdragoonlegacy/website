@@ -14,57 +14,25 @@ describe VideoPolicy do
     it { is_expected.to permit_mass_assignment_of(:publish) }
   end
 
-  context 'administrator accessing videos in a published category' do
-    context 'accessing a published video' do
-      let(:video) { FactoryBot.create(:published_video_in_published_category) }
+  context 'administrator accessing a published video' do
+    let(:video) { FactoryBot.create(:published_video) }
 
-      it 'includes video in resolved scope' do
-        expect(resolved_scope).to include(video)
-      end
-
-      it { is_expected.to permit_actions(%i[show edit update destroy]) }
-      it { is_expected.to permit_mass_assignment_of(:publish) }
+    it 'includes video in resolved scope' do
+      expect(resolved_scope).to include(video)
     end
 
-    context 'accessing an unpublished video' do
-      let(:video) do
-        FactoryBot.create(:unpublished_video_in_published_category)
-      end
-
-      it 'includes video in resolved scope' do
-        expect(resolved_scope).to include(video)
-      end
-
-      it { is_expected.to permit_actions(%i[show edit update destroy]) }
-      it { is_expected.to permit_mass_assignment_of(:publish) }
-    end
+    it { is_expected.to permit_actions(%i[show edit update destroy]) }
+    it { is_expected.to permit_mass_assignment_of(:publish) }
   end
 
-  context 'administrator accessing videos in an unpublished category' do
-    context 'accessing a published video' do
-      let(:video) do
-        FactoryBot.create(:published_video_in_unpublished_category)
-      end
+  context 'administrator accessing an unpublished video' do
+    let(:video) { FactoryBot.create(:unpublished_video) }
 
-      it 'includes video in resolved scope' do
-        expect(resolved_scope).to include(video)
-      end
-
-      it { is_expected.to permit_actions(%i[show edit update destroy]) }
-      it { is_expected.to permit_mass_assignment_of(:publish) }
+    it 'includes video in resolved scope' do
+      expect(resolved_scope).to include(video)
     end
 
-    context 'accessing an unpublished video' do
-      let(:video) do
-        FactoryBot.create(:unpublished_video_in_unpublished_category)
-      end
-
-      it 'includes video in resolved scope' do
-        expect(resolved_scope).to include(video)
-      end
-
-      it { is_expected.to permit_actions(%i[show edit update destroy]) }
-      it { is_expected.to permit_mass_assignment_of(:publish) }
-    end
+    it { is_expected.to permit_actions(%i[show edit update destroy]) }
+    it { is_expected.to permit_mass_assignment_of(:publish) }
   end
 end

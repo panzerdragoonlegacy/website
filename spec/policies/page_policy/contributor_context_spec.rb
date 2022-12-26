@@ -17,139 +17,67 @@ describe PagePolicy do
     it { is_expected.to forbid_mass_assignment_of(:publish) }
   end
 
-  context 'contributor accessing pages in a published category' do
-    context 'accessing pages that the user does not contribute to' do
-      context 'accessing a published page' do
-        let(:page) { FactoryBot.create(:published_page_in_published_category) }
+  context 'contributor accessing pages that they do not contribute to' do
+    context 'accessing a published page' do
+      let(:page) { FactoryBot.create(:published_page) }
 
-        it 'includes page in resolved scope' do
-          expect(resolved_scope).to include(page)
-        end
-
-        it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions(%i[edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it 'includes page in resolved scope' do
+        expect(resolved_scope).to include(page)
       end
 
-      context 'accessing an unpublished page' do
-        let(:page) do
-          FactoryBot.create(:unpublished_page_in_published_category)
-        end
-
-        it 'excludes page from resolved scope' do
-          expect(resolved_scope).not_to include(page)
-        end
-
-        it { is_expected.to forbid_actions(%i[show edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
-      end
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to forbid_actions(%i[edit update destroy]) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
-    context 'accessing pages the user contributes to' do
-      context 'accessing a published page' do
-        let(:page) do
-          FactoryBot.create(
-            :published_page_in_published_category,
-            contributions: [
-              Contribution.new(contributor_profile: contributor_profile)
-            ]
-          )
-        end
+    context 'accessing an unpublished page' do
+      let(:page) { FactoryBot.create(:unpublished_page) }
 
-        it 'includes page in resolved scope' do
-          expect(resolved_scope).to include(page)
-        end
-
-        it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions(%i[edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it 'excludes page from resolved scope' do
+        expect(resolved_scope).not_to include(page)
       end
 
-      context 'accessing an unpublished page' do
-        let(:page) do
-          FactoryBot.create(
-            :unpublished_page_in_published_category,
-            contributions: [
-              Contribution.new(contributor_profile: contributor_profile)
-            ]
-          )
-        end
-
-        it 'includes page in resolved scope' do
-          expect(resolved_scope).to include(page)
-        end
-
-        it { is_expected.to permit_actions(%i[show edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
-      end
+      it { is_expected.to forbid_actions(%i[show edit update destroy]) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end
 
-  context 'contributor accessing pages in an unpublished category' do
-    context 'accessing pages that the user does not contribute to' do
-      context 'accessing a published page' do
-        let(:page) { FactoryBot.create(:published_page_in_published_category) }
-
-        it 'includes page in resolved scope' do
-          expect(resolved_scope).to include(page)
-        end
-
-        it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions(%i[edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
+  context 'contributor accessing pages that they contribute to' do
+    context 'accessing a published page' do
+      let(:page) do
+        FactoryBot.create(
+          :published_page,
+          contributions: [
+            Contribution.new(contributor_profile: contributor_profile)
+          ]
+        )
       end
 
-      context 'accessing an unpublished page' do
-        let(:page) do
-          FactoryBot.create(:unpublished_page_in_published_category)
-        end
-
-        it 'excludes page from resolved scope' do
-          expect(resolved_scope).not_to include(page)
-        end
-
-        it { is_expected.to forbid_actions(%i[show edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it 'includes page in resolved scope' do
+        expect(resolved_scope).to include(page)
       end
+
+      it { is_expected.to permit_action(:show) }
+      it { is_expected.to forbid_actions(%i[edit update destroy]) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
 
-    context 'accessing pages that the user contributes to' do
-      context 'accessing a published page' do
-        let(:page) do
-          FactoryBot.create(
-            :published_page_in_unpublished_category,
-            contributions: [
-              Contribution.new(contributor_profile: contributor_profile)
-            ]
-          )
-        end
-
-        it 'includes page in resolved scope' do
-          expect(resolved_scope).to include(page)
-        end
-
-        it { is_expected.to permit_action(:show) }
-        it { is_expected.to forbid_actions(%i[edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
+    context 'accessing an unpublished page' do
+      let(:page) do
+        FactoryBot.create(
+          :unpublished_page,
+          contributions: [
+            Contribution.new(contributor_profile: contributor_profile)
+          ]
+        )
       end
 
-      context 'accessing an unpublished page' do
-        let(:page) do
-          FactoryBot.create(
-            :unpublished_page_in_unpublished_category,
-            contributions: [
-              Contribution.new(contributor_profile: contributor_profile)
-            ]
-          )
-        end
-
-        it 'includes page in resolved scope' do
-          expect(resolved_scope).to include(page)
-        end
-
-        it { is_expected.to permit_actions(%i[show edit update destroy]) }
-        it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it 'includes page in resolved scope' do
+        expect(resolved_scope).to include(page)
       end
+
+      it { is_expected.to permit_actions(%i[show edit update destroy]) }
+      it { is_expected.to forbid_mass_assignment_of(:publish) }
     end
   end
 end

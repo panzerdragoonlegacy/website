@@ -16,60 +16,26 @@ describe DownloadPolicy do
     it { is_expected.to forbid_mass_assignment_of(:publish) }
   end
 
-  context 'registered user accessing downloads in a published category' do
-    context 'accessing a published download' do
-      let(:download) do
-        FactoryBot.create(:published_download_in_published_category)
-      end
+  context 'registered user accessing a published download' do
+    let(:download) { FactoryBot.create(:published_download) }
 
-      it 'includes download in resolved scope' do
-        expect(resolved_scope).to include(download)
-      end
-
-      it { is_expected.to permit_action(:show) }
-      it { is_expected.to forbid_actions(%i[edit update destroy]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
+    it 'includes download in resolved scope' do
+      expect(resolved_scope).to include(download)
     end
 
-    context 'accessing an unpublished download' do
-      let(:download) do
-        FactoryBot.create(:unpublished_download_in_published_category)
-      end
-
-      it 'excludes download from resolved scope' do
-        expect(resolved_scope).not_to include(download)
-      end
-
-      it { is_expected.to forbid_actions(%i[show edit update destroy]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
-    end
+    it { is_expected.to permit_action(:show) }
+    it { is_expected.to forbid_actions(%i[edit update destroy]) }
+    it { is_expected.to forbid_mass_assignment_of(:publish) }
   end
 
-  context 'registered user accessing downloads in an unpublished category' do
-    context 'accessing a published download' do
-      let(:download) do
-        FactoryBot.create(:published_download_in_unpublished_category)
-      end
+  context 'registered user accessing an unpublished download' do
+    let(:download) { FactoryBot.create(:unpublished_download) }
 
-      it 'excludes download from resolved scope' do
-        expect(resolved_scope).not_to include(download)
-      end
-
-      it { is_expected.to forbid_actions(%i[show edit update destroy]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
+    it 'excludes download from resolved scope' do
+      expect(resolved_scope).not_to include(download)
     end
 
-    context 'accessing an unpublished download' do
-      let(:download) do
-        FactoryBot.create(:unpublished_download_in_unpublished_category)
-      end
-
-      it 'excludes download from resolved scope' do
-        expect(resolved_scope).not_to include(download)
-      end
-
-      it { is_expected.to forbid_actions(%i[show edit update destroy]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
-    end
+    it { is_expected.to forbid_actions(%i[show edit update destroy]) }
+    it { is_expected.to forbid_mass_assignment_of(:publish) }
   end
 end

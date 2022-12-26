@@ -16,59 +16,25 @@ describe DownloadPolicy do
     it { is_expected.to permit_mass_assignment_of(:publish) }
   end
 
-  context 'administrator accessing downloads in a published category' do
-    context 'accessing a published download' do
-      let(:download) do
-        FactoryBot.create(:published_download_in_published_category)
-      end
+  context 'administrator accessing a published download' do
+    let(:download) { FactoryBot.create(:published_download) }
 
-      it 'includes download in resolved scope' do
-        expect(resolved_scope).to include(download)
-      end
-
-      it { is_expected.to permit_actions(%i[show edit update destroy]) }
-      it { is_expected.to permit_mass_assignment_of(:publish) }
+    it 'includes download in resolved scope' do
+      expect(resolved_scope).to include(download)
     end
 
-    context 'accessing an unpublished download' do
-      let(:download) do
-        FactoryBot.create(:unpublished_download_in_published_category)
-      end
-
-      it 'includes download in resolved scope' do
-        expect(resolved_scope).to include(download)
-      end
-
-      it { is_expected.to permit_actions(%i[show edit update destroy]) }
-      it { is_expected.to permit_mass_assignment_of(:publish) }
-    end
+    it { is_expected.to permit_actions(%i[show edit update destroy]) }
+    it { is_expected.to permit_mass_assignment_of(:publish) }
   end
 
-  context 'administrator accessing downloads in an unpublished category' do
-    context 'accessing a published download' do
-      let(:download) do
-        FactoryBot.create(:published_download_in_unpublished_category)
-      end
+  context 'accessing an unpublished download' do
+    let(:download) { FactoryBot.create(:unpublished_download) }
 
-      it 'includes download in resolved scope' do
-        expect(resolved_scope).to include(download)
-      end
-
-      it { is_expected.to permit_actions(%i[show edit update destroy]) }
-      it { is_expected.to permit_mass_assignment_of(:publish) }
+    it 'includes download in resolved scope' do
+      expect(resolved_scope).to include(download)
     end
 
-    context 'accessing an unpublished download' do
-      let(:download) do
-        FactoryBot.create(:unpublished_download_in_unpublished_category)
-      end
-
-      it 'includes download in resolved scope' do
-        expect(resolved_scope).to include(download)
-      end
-
-      it { is_expected.to permit_actions(%i[show edit update destroy]) }
-      it { is_expected.to permit_mass_assignment_of(:publish) }
-    end
+    it { is_expected.to permit_actions(%i[show edit update destroy]) }
+    it { is_expected.to permit_mass_assignment_of(:publish) }
   end
 end
