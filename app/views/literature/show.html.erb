@@ -24,6 +24,9 @@
       partial: 'shared/contributed_by',
       locals: { contributor_profiles: @page.contributor_profiles }
     ) %>
+    <% if @page.published_at %>
+      <p>Published <%= local_date @page.published_at %></p>
+    <% end %>
   </header>
   <div class="page__body">
     <p class="page__description"><%= @page.description %></p>

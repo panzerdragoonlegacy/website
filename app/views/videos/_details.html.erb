@@ -1,21 +1,26 @@
-<p class="video__details">
+<ul class="video__details">
+  <% if @video.published_at %>
+    <li>Published <%= local_date @video.published_at %></li>
+  <% end %>
   <% unless @video.source_url.blank? %>
-    View Source:
+    <li>
       <%=
         link_to(
-          video_source_link_text(@video.source_url),
+          "Source Video: #{video_source_link_text(@video.source_url)}",
           @video.source_url
         )
-      %>.
+      %>
+    </li>
   <% end %>
   <% unless @video.youtube_video_id.blank? %>
-    Watch Video:
+    <li>
       <%=
         link_to(
-          'YouTube',
+          'YouTube (Our Channel)',
           "https://www.youtube.com/watch?v=#{@video.youtube_video_id}"
         )
-      %>.
+      %>
+    </li>
   <% end %>
-  Download Video: <%= link_to 'MP4', @video.mp4_video.url %>
-</p>
+  <li><%= link_to 'Download MP4', @video.mp4_video.url %></li>
+</ul>

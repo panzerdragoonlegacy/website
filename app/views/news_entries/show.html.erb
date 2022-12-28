@@ -49,7 +49,7 @@
         partial: 'shared/published_at',
         locals: { publishable: @news_entry }
       ) %>
-    </div>  
+    </div>
     <% if @news_entry.summary.present? %>
       <p class="news-entry__summary"><%= @news_entry.summary %></p>
     <% end %>

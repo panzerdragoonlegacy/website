@@ -43,17 +43,25 @@
         Your browser does not support the <code>audio</code> element.
       </audio>
     </div>
-    <p class="music-track__details">
+    <ul class="music-track__details">
+      <% if @music_track.published_at %>
+        <li>Published <%= local_date @music_track.published_at %></li>
+      <% end %>
       <% unless @music_track.track_number == 0 %>
-        Track <%= @music_track.track_number.to_s %> of
-        <%= @music_track.category.music_tracks.count %>.
+        <li>
+          Track <%= @music_track.track_number.to_s %> of
+          <%= @music_track.category.music_tracks.count %>
+        </li>
       <% end %>
-      Download Music Track:
-        <%= link_to 'MP3', @music_track.mp3_music_track.url %>
+      <li>
+        <%= link_to 'Download MP3', @music_track.mp3_music_track.url %>
+      </li>
       <% if @music_track.flac_music_track.present? %>
-        | <%= link_to 'FLAC', @music_track.flac_music_track.url %>
+        <li>
+          <%= link_to 'Download FLAC', @music_track.flac_music_track.url %>
+        </li>
       <% end %>
-    </p>
+    </ul>
     <p class="music-track__description">
       <%= @music_track.description %>
     </p>

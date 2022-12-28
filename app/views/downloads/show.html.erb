@@ -27,9 +27,12 @@
     ) %>
   </header>
   <div class="download__body">
-    <div class="download__details">
-      <%= link_to 'Download File', @download.download.url %>
-    </div>
+    <ul class="download__details">
+      <% if @download.published_at %>
+        <li>Published <%= local_date @download.published_at %></li>
+      <% end %>
+      <li><%= link_to 'Download Zip File', @download.download.url %></li>
+    </ul>
     <p class="download__description">
       <%= @download.description %>
     </p>

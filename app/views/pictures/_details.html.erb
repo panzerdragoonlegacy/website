@@ -1,26 +1,28 @@
-<p class="picture__details">
+<ul class="picture__details">
+  <% if @picture.published_at %>
+    <li>Published <%= local_date @picture.published_at %></li>
+  <% end %>
   <% unless picture.source_url.blank? %>
-    View Source:
+    <li>
       <%= link_to(
-        picture_source_link_text(picture.source_url),
+        "View Source: #{picture_source_link_text(picture.source_url)}",
         picture.source_url
-      ) %>.
+      ) %>
+    </li>
   <% end %>
   <% unless picture.instagram_post_id.blank? %>
-    View Post:
+    <li>
       <%= link_to(
-        'Instagram',
+        'Instagram (Our Page)',
         "https://www.instagram.com/p/#{picture.instagram_post_id}"
-      ) %>.
+      ) %>
+    </li>
   <% end %>
-  <% if picture.full_size_link %>
-    Download Full Size Picture: <%= link_to "JPEG", picture.picture.url %>.
-  <% else %>
-    Full size downloads are disabled for this picture.
-  <% end %>
-</p>
-<% if picture.published_at %>
-  <div class="picture__date">
-    Published <%= local_date picture.published_at %>.
-  </div>
-<% end %>
+  <li>
+    <% if picture.full_size_link %>
+      <%= link_to "Download Full Size Picture", picture.picture.url %>
+    <% else %>
+      Full size downloads are disabled for this picture.
+    <% end %>
+  </li>
+</ul>
