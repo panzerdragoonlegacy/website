@@ -45,6 +45,10 @@
     blockquote p {
       @include blockquote-paragraph;
     }
+
+    .onebox {
+      margin: var(--size-2);
+    }
   }
 
   &__picture-container {
