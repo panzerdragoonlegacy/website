@@ -1,7 +1,10 @@
 <nav class="album-navigation">
   <ul class="album-navigation__list">
     <li class="album-navigation__list-item">
-      <% if previous_albumable(albumable) %>
+      <% if (
+        previous_albumable(albumable) &&
+        policy(previous_albumable(albumable)).show?
+      ) %>
         <%= link_to(
           '‹ Previous in Album',
           albumable_path(previous_albumable(albumable))
@@ -11,7 +14,10 @@
       <% end %>
     </li>
     <li class="album-navigation__list-item">
-      <% if next_albumable(albumable) %>
+      <% if (
+        next_albumable(albumable) &&
+        policy(next_albumable(albumable)).show?
+      ) %>
         <%= link_to(
           'Next in Album ›',
           albumable_path(next_albumable(albumable))

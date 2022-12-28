@@ -4,7 +4,7 @@
   </h1>
   <div class="album__body">
     <% album.ordered_pictures.each do |picture| %>
-      <% unless picture.id == picture_id %>
+      <% if policy(picture).show? && picture.id != picture_id %>
         <div class="album__albumable">
           <%= link_to(
             image_tag(
@@ -19,7 +19,7 @@
       <% end %>
     <% end %>
     <% album.ordered_videos.each do |video| %>
-      <% unless video.id == video_id %>
+      <% if policy(video).show? && video.id != video_id %>
         <div class="album__albumable">
           <%= link_to(
             image_tag(
