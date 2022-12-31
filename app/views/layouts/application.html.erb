@@ -18,14 +18,30 @@
   <body tabindex="-1">
     <div class="layout">
       <header class="layout__header">
-        <div class="layout__logo">
-          <%= link_to(
-            image_pack_tag(
-              'media/images/logo.png',
-              alt: 'Panzer Dragoon Legacy logo'
-            ),
-            root_url
-          ) %>
+        <div class="layout__logo-and-main-menu-opener">
+          <div class="layout__logo">
+            <%= link_to(
+              image_pack_tag(
+                'media/images/logo-small.png',
+                alt: 'Panzer Dragoon Legacy logo',
+                srcset: [
+                  ['media/images/logo-small.png', '767w'],
+                  ['media/images/logo-medium.png', '768w']
+                ],
+                sizes: '(max-width: 767px) 285px, 768px'
+              ),
+              root_url
+            ) %>
+          </div>
+          <div class="layout__main-menu-opener">
+            <label
+              for="main-menu__checkbox"
+              aria-expanded="true"
+              aria-controls="main-menu__list"
+            >
+              <i class="fas fa-bars"></i>
+            </label>
+          </div>
         </div>
         <%= render 'layouts/main_menu' %>
       </header>
