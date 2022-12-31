@@ -43,10 +43,18 @@ body {
 
   &__logo {
     img {
-      @media only screen and (max-width: $mobile-max) {
-        height: var(--size-8);
-        float: left;
+      @media only screen and (max-width: $mobile-l) {
+        padding-top: 6px;
+        width: 310px;
+      }
+
+      @media only screen and (min-width: $mobile-l) and (max-width: $mobile-max) {
         padding-top: var(--size-1);
+        width: 335px;
+      }
+
+      @media only screen and (max-width: $mobile-max) {
+        float: left;
         padding-left: var(--size-2);
         padding-bottom: var(--size-2);
       }
