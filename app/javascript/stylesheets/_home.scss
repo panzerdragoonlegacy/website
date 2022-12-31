@@ -1,10 +1,17 @@
 .home-featured-news-entry {
   margin: var(--size-2);
-  margin-top: var(--size-5);
   border-radius: $card-radius;
   text-align: left;
 
   @include card-background-colour;
+
+  @media only screen and (max-width: $mobile-max) {
+    margin-top: var(--size-2);
+  }
+
+  @media only screen and (min-width: $tablet-min) {
+    margin-top: var(--size-5);
+  }
 
   &__picture {
     img {
@@ -44,14 +51,22 @@
 }
 
 .home-pictures {
-  padding-top: var(--size-5);
   padding-bottom: var(--size-2);
   margin: var(--size-2);
-  margin-top: var(--size-5);
   border-radius: $card-radius;
   text-align: center;
 
   @include card-background-colour;
+
+  @media only screen and (max-width: $mobile-max) {
+    margin-top: var(--size-2);
+    padding: var(--size-2);
+  }
+
+  @media only screen and (min-width: $tablet-min) {
+    margin-top: var(--size-5);
+    padding-top: var(--size-5);
+  }
 
   &__list {
     margin: 0;
@@ -86,12 +101,19 @@
 .home-video,
 .home-download {
   margin: var(--size-2);
-  margin-top: var(--size-5);
   border-radius: $card-radius;
   text-align: center;
   padding-bottom: var(--size-2);
 
   @include card-background-colour;
+
+  @media only screen and (max-width: $mobile-max) {
+    margin-top: var(--size-2);
+  }
+
+  @media only screen and (min-width: $tablet-min) {
+    margin-top: var(--size-5);
+  }
 
   &__picture {
     img {
@@ -123,5 +145,11 @@
 }
 
 .home-news-entries {
-  margin-top: var(--size-5);
+  @media only screen and (max-width: $mobile-max) {
+    margin-top: var(--size-2);
+  }
+
+  @media only screen and (min-width: $tablet-min) {
+    margin-top: var(--size-5);
+  }
 }

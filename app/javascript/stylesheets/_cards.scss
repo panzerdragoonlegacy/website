@@ -1,15 +1,24 @@
+.cards {
+  &__footer {
+    @media only screen and (max-width: $mobile-max) {
+      margin-top: var(--size-5);
+    }
+  }
+}
+
 .card {
-  margin-bottom: var(--size-5);
   margin-left: var(--size-2);
   margin-right: var(--size-2);
   border-radius: $card-radius;
 
   @media only screen and (max-width: $mobile-max) {
     padding-bottom: var(--size-3);
+    margin-bottom: var(--size-2);
   }
 
   @media only screen and (min-width: $tablet-min) {
     padding-bottom: var(--size-4);
+    margin-bottom: var(--size-5);
   }
 
   @include card-background-colour;
