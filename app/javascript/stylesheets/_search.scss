@@ -8,6 +8,7 @@
     padding: var(--size-1);
     border-radius: var(--radius-2);
     color: black;
+    user-select: text;
   }
 
   input::placeholder {
