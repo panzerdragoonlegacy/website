@@ -16,7 +16,7 @@ module PagesHelper
     require 'kramdown'
     html = Kramdown::Document.new(updated_markdown, auto_ids: true).to_html
 
-    # Setup whitelist of html elements, attributes, and protocols.
+    # Setup allow list of html elements, attributes, and protocols.
     allowed_elements = %w[
       h2
       h3

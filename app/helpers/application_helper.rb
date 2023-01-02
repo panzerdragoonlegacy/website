@@ -29,7 +29,7 @@ module ApplicationHelper
     require 'kramdown'
     html = Kramdown::Document.new(markdown_text, auto_ids: false).to_html
 
-    # Setup whitelist of html elements, attributes, and protocols.
+    # Setup allow list of html elements, attributes, and protocols.
     allowed_elements = %w[
       a
       p
