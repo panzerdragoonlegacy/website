@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '7.0.4'
+gem 'rails', '7.0.4.2'
 gem 'rake', '13.0.1'
 
 group :development do
