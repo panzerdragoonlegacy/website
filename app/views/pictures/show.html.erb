@@ -3,7 +3,7 @@
 <% if @picture.picture.present? %>
   <% if @picture.controversial_content? %>
     <% open_graph_image(
-      image_pack_tag('media/images/controversial-content-embedded.jpg')
+      asset_pack_path('media/images/controversial-content-embedded.jpg')
     ) %>
   <% else %>
     <% open_graph_image(
