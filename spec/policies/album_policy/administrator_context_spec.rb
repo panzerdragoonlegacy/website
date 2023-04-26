@@ -25,12 +25,14 @@ describe AlbumPolicy do
 
     context 'album has no children' do
       it { is_expected.to permit_action(:destroy) }
+      it { is_expected.to permit_all_actions }
     end
 
     context 'album has children' do
       before { album.pictures << FactoryBot.create(:valid_picture) }
 
       it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to permit_only_actions(%i[new create show edit update]) }
     end
 
     it { is_expected.to permit_mass_assignment_of(:publish) }
@@ -47,12 +49,14 @@ describe AlbumPolicy do
 
     context 'album has no children' do
       it { is_expected.to permit_action(:destroy) }
+      it { is_expected.to permit_all_actions }
     end
 
     context 'album has children' do
       before { album.pictures << FactoryBot.create(:valid_picture) }
 
       it { is_expected.to forbid_action(:destroy) }
+      it { is_expected.to permit_only_actions(%i[new create show edit update]) }
     end
 
     it { is_expected.to permit_mass_assignment_of(:publish) }
