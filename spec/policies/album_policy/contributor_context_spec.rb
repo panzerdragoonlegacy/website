@@ -15,10 +15,8 @@ describe AlbumPolicy do
     let(:album) { Album.new }
 
     it { is_expected.to permit_new_and_create_actions }
-    it { is_expected.to forbid_mass_assignment_of(:publish) }
-    it do
-      is_expected.to permit_mass_assignment_of(album_attributes_except_publish)
-    end
+    it { is_expected.to forbid_attribute(:publish) }
+    it { is_expected.to permit_attributes(album_attributes_except_publish) }
   end
 
   context 'contributor accessing albums that the user does not contribute to' do
@@ -32,12 +30,8 @@ describe AlbumPolicy do
       it { is_expected.to permit_action(:show) }
       it { is_expected.to forbid_actions(%i[edit update destroy]) }
       it { is_expected.to permit_only_actions(%i[new create show]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
-      it do
-        is_expected.to permit_mass_assignment_of(
-          album_attributes_except_publish
-        )
-      end
+      it { is_expected.to forbid_attribute(:publish) }
+      it { is_expected.to permit_attributes(album_attributes_except_publish) }
     end
 
     context 'accessing an unpublished album' do
@@ -49,12 +43,8 @@ describe AlbumPolicy do
 
       it { is_expected.to forbid_actions(%i[show edit update destroy]) }
       it { is_expected.to permit_only_actions(%i[new create]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
-      it do
-        is_expected.to permit_mass_assignment_of(
-          album_attributes_except_publish
-        )
-      end
+      it { is_expected.to forbid_attribute(:publish) }
+      it { is_expected.to permit_attributes(album_attributes_except_publish) }
     end
   end
 
@@ -76,12 +66,8 @@ describe AlbumPolicy do
       it { is_expected.to permit_action(:show) }
       it { is_expected.to forbid_actions(%i[edit update destroy]) }
       it { is_expected.to permit_only_actions(%i[new create show]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
-      it do
-        is_expected.to permit_mass_assignment_of(
-          album_attributes_except_publish
-        )
-      end
+      it { is_expected.to forbid_attribute(:publish) }
+      it { is_expected.to permit_attributes(album_attributes_except_publish) }
     end
 
     context 'accessing an unpublished album' do
@@ -101,12 +87,8 @@ describe AlbumPolicy do
       it { is_expected.to permit_actions(%i[show edit update destroy]) }
       it { is_expected.to permit_all_actions }
 
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
-      it do
-        is_expected.to permit_mass_assignment_of(
-          album_attributes_except_publish
-        )
-      end
+      it { is_expected.to forbid_attribute(:publish) }
+      it { is_expected.to permit_attributes(album_attributes_except_publish) }
     end
   end
 end
