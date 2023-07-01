@@ -18,7 +18,7 @@ describe CategoryPolicy do
 
     it { is_expected.to permit_action(:show) }
     it { is_expected.to forbid_actions(%i[new create edit update destroy]) }
-    it { is_expected.to forbid_mass_assignment_of(:publish) }
+    it { is_expected.to forbid_attribute(:publish) }
   end
 
   context 'visitor accessing an unpublished category' do
@@ -31,7 +31,7 @@ describe CategoryPolicy do
     it do
       is_expected.to forbid_actions(%i[show new create edit update destroy])
     end
-    it { is_expected.to forbid_mass_assignment_of(:publish) }
+    it { is_expected.to forbid_attribute(:publish) }
   end
 
   context 'visitor is accessing a parent category' do

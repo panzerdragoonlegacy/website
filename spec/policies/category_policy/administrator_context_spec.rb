@@ -17,16 +17,14 @@ describe CategoryPolicy do
     end
 
     it { is_expected.to permit_actions(%i[show new create edit update]) }
-    it { is_expected.to permit_mass_assignment_of(:publish) }
+    it { is_expected.to permit_attribute(:publish) }
 
     context 'category has no children' do
       it { is_expected.to permit_action(:destroy) }
     end
 
     context 'category has children' do
-      before do
-        category.pictures << FactoryBot.create(:published_picture)
-      end
+      before { category.pictures << FactoryBot.create(:published_picture) }
 
       it { is_expected.to forbid_action(:destroy) }
     end
@@ -40,16 +38,14 @@ describe CategoryPolicy do
     end
 
     it { is_expected.to permit_actions(%i[show new create edit update]) }
-    it { is_expected.to permit_mass_assignment_of(:publish) }
+    it { is_expected.to permit_attribute(:publish) }
 
     context 'category has no children' do
       it { is_expected.to permit_action(:destroy) }
     end
 
     context 'category has children' do
-      before do
-        category.pictures << FactoryBot.create(:published_picture)
-      end
+      before { category.pictures << FactoryBot.create(:published_picture) }
 
       it { is_expected.to forbid_action(:destroy) }
     end

@@ -16,7 +16,7 @@ describe DownloadPolicy do
     let(:download) { Download.new }
 
     it { is_expected.to permit_new_and_create_actions }
-    it { is_expected.to forbid_mass_assignment_of(:publish) }
+    it { is_expected.to forbid_attribute(:publish) }
   end
 
   context 'contributor accessing downloads that they do not contribute to' do
@@ -29,7 +29,7 @@ describe DownloadPolicy do
 
       it { is_expected.to permit_action(:show) }
       it { is_expected.to forbid_actions(%i[edit update destroy]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_attribute(:publish) }
     end
 
     context 'accessing an unpublished download' do
@@ -40,7 +40,7 @@ describe DownloadPolicy do
       end
 
       it { is_expected.to forbid_actions(%i[show edit update destroy]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_attribute(:publish) }
     end
   end
 
@@ -61,7 +61,7 @@ describe DownloadPolicy do
 
       it { is_expected.to permit_action(:show) }
       it { is_expected.to forbid_actions(%i[edit update destroy]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_attribute(:publish) }
     end
 
     context 'accessing an unpublished download' do
@@ -79,8 +79,7 @@ describe DownloadPolicy do
       end
 
       it { is_expected.to permit_actions(%i[show edit update destroy]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_attribute(:publish) }
     end
   end
 end
-

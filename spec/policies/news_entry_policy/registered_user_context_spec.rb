@@ -13,8 +13,8 @@ describe NewsEntryPolicy do
     let(:news_entry) { NewsEntry.new }
 
     it { is_expected.to forbid_new_and_create_actions }
-    it { is_expected.to forbid_mass_assignment_of(:publish) }
-    it { is_expected.to forbid_mass_assignment_of(:contributor_profile_id) }
+    it { is_expected.to forbid_attribute(:publish) }
+    it { is_expected.to forbid_attribute(:contributor_profile_id) }
   end
 
   context 'registered user accessing a published news entry' do
@@ -26,8 +26,8 @@ describe NewsEntryPolicy do
 
     it { is_expected.to permit_action(:show) }
     it { is_expected.to forbid_actions(%i[edit update destroy]) }
-    it { is_expected.to forbid_mass_assignment_of(:publish) }
-    it { is_expected.to forbid_mass_assignment_of(:contributor_profile_id) }
+    it { is_expected.to forbid_attribute(:publish) }
+    it { is_expected.to forbid_attribute(:contributor_profile_id) }
   end
 
   context 'registered user accessing an unpublished news entry' do
@@ -38,7 +38,7 @@ describe NewsEntryPolicy do
     end
 
     it { is_expected.to forbid_actions(%i[show edit update destroy]) }
-    it { is_expected.to forbid_mass_assignment_of(:publish) }
-    it { is_expected.to forbid_mass_assignment_of(:contributor_profile_id) }
+    it { is_expected.to forbid_attribute(:publish) }
+    it { is_expected.to forbid_attribute(:contributor_profile_id) }
   end
 end

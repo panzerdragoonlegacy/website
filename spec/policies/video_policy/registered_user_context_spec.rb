@@ -11,7 +11,7 @@ describe VideoPolicy do
     let(:video) { Video.new }
 
     it { is_expected.to forbid_new_and_create_actions }
-    it { is_expected.to forbid_mass_assignment_of(:publish) }
+    it { is_expected.to forbid_attribute(:publish) }
   end
 
   context 'registered user accessing a published video' do
@@ -23,7 +23,7 @@ describe VideoPolicy do
 
     it { is_expected.to permit_action(:show) }
     it { is_expected.to forbid_actions(%i[edit update destroy]) }
-    it { is_expected.to forbid_mass_assignment_of(:publish) }
+    it { is_expected.to forbid_attribute(:publish) }
   end
 
   context 'registered user accessing an unpublished video' do
@@ -34,6 +34,6 @@ describe VideoPolicy do
     end
 
     it { is_expected.to forbid_actions(%i[show edit update destroy]) }
-    it { is_expected.to forbid_mass_assignment_of(:publish) }
+    it { is_expected.to forbid_attribute(:publish) }
   end
 end

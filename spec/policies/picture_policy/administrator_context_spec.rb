@@ -11,7 +11,7 @@ describe PicturePolicy do
     let(:picture) { Picture.new }
 
     it { is_expected.to permit_new_and_create_actions }
-    it { is_expected.to permit_mass_assignment_of(:publish) }
+    it { is_expected.to permit_attribute(:publish) }
   end
 
   context 'administrator accessing a published picture' do
@@ -22,7 +22,7 @@ describe PicturePolicy do
     end
 
     it { is_expected.to permit_actions(%i[show edit update destroy]) }
-    it { is_expected.to permit_mass_assignment_of(:publish) }
+    it { is_expected.to permit_attribute(:publish) }
   end
 
   context 'administrator accessing an unpublished picture' do
@@ -33,6 +33,6 @@ describe PicturePolicy do
     end
 
     it { is_expected.to permit_actions(%i[show edit update destroy]) }
-    it { is_expected.to permit_mass_assignment_of(:publish) }
+    it { is_expected.to permit_attribute(:publish) }
   end
 end

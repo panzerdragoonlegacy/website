@@ -14,7 +14,7 @@ describe PicturePolicy do
     let(:picture) { Picture.new }
 
     it { is_expected.to permit_new_and_create_actions }
-    it { is_expected.to forbid_mass_assignment_of(:publish) }
+    it { is_expected.to forbid_attribute(:publish) }
   end
 
   context 'contributor accessing pictures that they do not contribute to' do
@@ -27,7 +27,7 @@ describe PicturePolicy do
 
       it { is_expected.to permit_action(:show) }
       it { is_expected.to forbid_actions(%i[edit update destroy]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_attribute(:publish) }
     end
 
     context 'accessing an unpublished picture' do
@@ -38,7 +38,7 @@ describe PicturePolicy do
       end
 
       it { is_expected.to forbid_actions(%i[show edit update destroy]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_attribute(:publish) }
     end
   end
 
@@ -59,7 +59,7 @@ describe PicturePolicy do
 
       it { is_expected.to permit_action(:show) }
       it { is_expected.to forbid_actions(%i[edit update destroy]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_attribute(:publish) }
     end
 
     context 'accessing an unpublished picture' do
@@ -77,7 +77,7 @@ describe PicturePolicy do
       end
 
       it { is_expected.to permit_actions(%i[show edit update destroy]) }
-      it { is_expected.to forbid_mass_assignment_of(:publish) }
+      it { is_expected.to forbid_attribute(:publish) }
     end
   end
 end
