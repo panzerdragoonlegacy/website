@@ -16,7 +16,7 @@ describe CategoryPolicy do
       expect(resolved_scope).to include(category)
     end
 
-    it { is_expected.to permit_action(:show) }
+    it { is_expected.to permit_only_actions(:show) }
     it { is_expected.to forbid_actions(%i[new create edit update destroy]) }
     it { is_expected.to forbid_attribute(:publish) }
   end
@@ -28,15 +28,14 @@ describe CategoryPolicy do
       expect(resolved_scope).not_to include(category)
     end
 
-    it do
-      is_expected.to forbid_actions(%i[show new create edit update destroy])
-    end
+    it { is_expected.to forbid_all_actions }
     it { is_expected.to forbid_attribute(:publish) }
   end
 
   context 'visitor is accessing a parent category' do
     let(:category) { FactoryBot.create(:valid_parent_category) }
 
+    it { is_expected.to forbid_all_actions }
     it { is_expected.to forbid_action(:destroy) }
 
     context 'category has subcategories' do

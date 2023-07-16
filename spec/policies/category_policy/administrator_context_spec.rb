@@ -16,7 +16,11 @@ describe CategoryPolicy do
       expect(resolved_scope).to include(category)
     end
 
-    it { is_expected.to permit_actions(%i[show new create edit update]) }
+    it do
+      is_expected.to permit_only_actions(
+        %i[show new create edit update destroy]
+      )
+    end
     it { is_expected.to permit_attribute(:publish) }
 
     context 'category has no children' do
@@ -37,7 +41,11 @@ describe CategoryPolicy do
       expect(resolved_scope).to include(category)
     end
 
-    it { is_expected.to permit_actions(%i[show new create edit update]) }
+    it do
+      is_expected.to permit_only_actions(
+        %i[show new create edit update destroy]
+      )
+    end
     it { is_expected.to permit_attribute(:publish) }
 
     context 'category has no children' do
