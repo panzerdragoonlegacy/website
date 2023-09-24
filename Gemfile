@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '7.0.6'
+gem 'rails', '7.0.8'
 gem 'rake', '13.0.6'
 
 group :development do
@@ -40,7 +40,7 @@ gem 'kt-paperclip', '~> 7.1.1'
 gem 'paper_trail', '~> 14.0.0'
 gem 'pg', '~> 1.4.6'
 gem 'pundit', '~> 2.3.0'
-gem 'puma', '~> 6.2.1'
+gem 'puma', '~> 6.4.0'
 gem 'rails_autolink', '~> 1.1.8'
 gem 'ransack', '~> 3.2.1' # 4.x contains breaking change. 
 gem 'sanitize', '~> 6.0.1'
