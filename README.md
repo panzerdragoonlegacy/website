@@ -36,6 +36,6 @@ backup.
 
 ## Copyright
 
-Source _code_ files in this repository are © 2022 Chris Alley and are freely
-available under the terms of the MIT license. However image assets included in
-this repository are provided for demonstration purposes only.
+Built by Chris Alley. Source _code_ files in this repository may be used with
+attribution, following the MIT license. However image assets included in this
+repository are provided for demonstration purposes only.
