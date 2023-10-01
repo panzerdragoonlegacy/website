@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :categories, only: :show
       resources :news_entries, only: %i[index show], path: 'news'
     end
   end
