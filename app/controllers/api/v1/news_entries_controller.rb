@@ -1,4 +1,4 @@
-class NewsEntriesController < ApplicationController
+class Api::V1::NewsEntriesController < ApplicationController
   include LoadableForNewsEntry
 
   def index
@@ -8,10 +8,8 @@ class NewsEntriesController < ApplicationController
       load_tagged_news_entries
     elsif params[:year]
       load_news_entries_for_year
-    else
-      load_news_entry_years
-      load_news_entries_for_atom_feed
     end
+    render template: 'api/v1/news_entries/index', formats: :json
   end
 
   def show
@@ -21,5 +19,6 @@ class NewsEntriesController < ApplicationController
         current_user,
         Tag.where(name: @news_entry.tags.map { |tag| tag.name }).order(:name)
       ).resolve
+    render template: 'api/v1/news_entries/show', formats: :json
   end
 end

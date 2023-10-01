@@ -26,6 +26,12 @@ Rails.application.routes.draw do
     resources :downloads
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :news_entries, only: %i[index show], path: 'news'
+    end
+  end
+
   get '/', to: 'home#show'
   resources :search, only: :index
   resources :categories, only: :show
