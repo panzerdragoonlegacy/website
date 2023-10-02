@@ -1,7 +1,7 @@
 json.merge! @category.attributes
 json.categorisations @category.ordered_categorisations do |categorisation|
   json.merge! categorisation.attributes
-  json.subcategory json.merge! categorisation.subcategory.attributes
+  json.subcategory categorisation.subcategory.attributes
 end
 json.literature_pages @literature_pages do |page|
   json.merge! page.attributes
