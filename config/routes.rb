@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :categories, only: :show
+      resources :contributions, only: :index
       resources :literature, only: %i[index show] do
         resources :chapters, only: :show
       end
