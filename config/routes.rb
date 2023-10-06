@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :categories, only: :show
       resources :contributions, only: :index
+      resources :contributor_profiles, only: :show, path: 'contributors'
       resources :literature, only: %i[index show] do
         resources :chapters, only: :show
       end
