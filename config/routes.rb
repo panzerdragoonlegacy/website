@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get '/home', to: 'home#show'
       resources :categories, only: :show
       resources :contributions, only: :index
       resources :contributor_profiles, only: :show, path: 'contributors'
