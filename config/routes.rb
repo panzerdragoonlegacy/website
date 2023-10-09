@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       resources :categories, only: :show
       resources :contributions, only: :index
       resources :contributor_profiles, only: :show, path: 'contributors'
+      resources :downloads, only: %i[index show]
       resources :literature, only: %i[index show] do
         resources :chapters, only: :show
       end
