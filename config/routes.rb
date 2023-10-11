@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       resources :literature, only: %i[index show] do
         resources :chapters, only: :show
       end
+      resources :music_tracks, only: %i[index show], path: 'music'
       resources :news_entries, only: %i[index show], path: 'news'
     end
   end
