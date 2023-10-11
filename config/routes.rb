@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       end
       resources :music_tracks, only: %i[index show], path: 'music'
       resources :news_entries, only: %i[index show], path: 'news'
+      resources :pictures, only: %i[index show]
     end
   end
 
