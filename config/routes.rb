@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       resources :news_entries, only: %i[index show], path: 'news'
       resources :pictures, only: %i[index show]
       resources :tags, only: :show
+      resources :top_level_pages, only: :show, path: 'top-level-pages'
     end
   end
 
