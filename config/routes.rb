@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       resources :pictures, only: %i[index show]
       resources :tags, only: :show
       resources :top_level_pages, only: :show, path: 'top-level-pages'
+      resources :videos, only: %i[index show]
     end
   end
 
