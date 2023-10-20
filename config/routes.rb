@@ -3,8 +3,7 @@ Rails.application.routes.draw do
              path: '',
              path_names: {
                sign_in: 'log-in',
-               sign_out: 'log-out',
-               edit: 'edit-profile'
+               sign_out: 'log-out'
              }
 
   namespace :admin do
