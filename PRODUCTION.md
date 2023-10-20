@@ -162,7 +162,6 @@ enabled (for Let's Encrypt).
    SECRET_KEY_BASE=abcd1234
 
    SMTP_ADDRESS=smtp.mailgun.org
-   SMTP_PORT=587
    SMTP_USER_NAME=postmaster@mg.panzerdragoonlegacy.com
    SMTP_PASSWORD=PASSWORDHERE
    ```

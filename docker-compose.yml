@@ -3,7 +3,8 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - 3000:3000
+      - 587:587
     volumes:
       - .:/cms
       - public_data:/cms/public

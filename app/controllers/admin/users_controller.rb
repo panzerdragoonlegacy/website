@@ -23,7 +23,10 @@ class Admin::UsersController < ApplicationController
 
   def update
     if @user.update user_params
-      flash[:notice] = 'Successfully updated user.'
+      flash[:notice] =
+        "Successfully updated user. If the user's email was changed, a " \
+          'confirmation email has been sent to the new email address. The ' \
+          'old email will be displayed here until the new email is confirmed.'
       redirect_to admin_users_path
     else
       render :edit
