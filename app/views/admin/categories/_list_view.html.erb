@@ -1,0 +1,13 @@
+<div class="form-group form-check">
+  <%= f.check_box :list_view, class: 'form-check-input' %>
+  <%= f.label :list_view, 'List View?', class: 'form-check-label' %>
+  <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: 'For categories of type picture, the category content will be ' \
+          'displayed as a list instead of a gallery.'
+      }
+    )
+  %>
+</div>

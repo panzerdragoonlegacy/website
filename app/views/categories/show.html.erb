@@ -41,10 +41,17 @@
     <% end %>
   <% end %>
   <% if @category.category_type == :picture.to_s %>
-    <%= render(
-      partial: 'shared/pictures',
-      locals: { pictures: @pictures, group_into_albums: true }
-    ) %>
+    <% if @category.list_view %>
+      <%= render(
+        partial: 'picture_list',
+        locals: { pictures: @pictures }
+      ) %>
+    <% else %>
+      <%= render(
+        partial: 'shared/picture_gallery',
+        locals: { pictures: @pictures, group_into_albums: true }
+      ) %>
+    <% end %>
   <% end %>
   <% if @category.category_type == :literature.to_s %>
     <%= render(

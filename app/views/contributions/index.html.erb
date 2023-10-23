@@ -5,7 +5,7 @@
 
 <% if params[:media_type] == 'pictures' || !params[:media_type] %>
   <%= render(
-    partial: 'shared/pictures',
+    partial: 'shared/picture_gallery',
     locals: { pictures: @pictures, group_into_albums: false }
   ) %>
 <% end %>

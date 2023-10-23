@@ -8,7 +8,7 @@
 
 <% if @pictures %>
   <%= render(
-    partial: 'shared/pictures',
+    partial: 'shared/picture_gallery',
     locals: {
       pictures: @pictures,
       group_into_albums: (!@contributor_profile && !@tag)

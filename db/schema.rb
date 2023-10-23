@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_15_055507) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_22_234246) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_055507) do
     t.integer "category_picture_file_size"
     t.datetime "category_picture_updated_at", precision: nil
     t.string "slug"
+    t.boolean "list_view", default: false
   end
 
   create_table "categorisations", force: :cascade do |t|

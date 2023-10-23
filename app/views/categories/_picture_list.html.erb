@@ -1,0 +1,39 @@
+<section class="cards">
+  <% pictures.each do |picture| %>
+    <article class="card">
+      <% if picture.picture.present? %>
+        <div class="card__picture">
+          <%= link_to(
+            show_picture(picture, 'picture', :embedded),
+            picture_path(picture)
+          ) %>
+        </div>
+      <% end %>
+      <div class="card__details--has-picture">
+        <h1 class="card__heading--has-picture">
+          <% if picture.album %>
+            <%= link_to picture.album.name, picture_path(picture) %>
+          <% else %>
+            <%= link_to picture.name, picture_path(picture) %>
+          <% end %>
+        </h1>
+        <div class="card__body--has-picture">
+          <% unless picture.publish && picture.category.publish %>
+            <%= render partial: 'shared/draft' %>
+          <% end %>
+          <p>
+            <% if picture.album %>
+              <%= picture.album.description %>
+            <% else %>
+              <%= picture.description %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+      <div class="card__footer"></div>
+    </article>
+  <% end %>
+  <footer class="gallery__footer">
+    <%= paginate pictures %>
+  </footer>
+</section>

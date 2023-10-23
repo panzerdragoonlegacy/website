@@ -46,6 +46,7 @@ class CategoryPolicy < ApplicationPolicy
     [
       :category_picture,
       :category_type,
+      :list_view,
       :name,
       :description,
       categorisations_attributes: categorisations_attributes
