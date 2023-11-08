@@ -348,7 +348,7 @@ enabled (for Let's Encrypt).
 
    `cd ~/Backups/cms-backup`
 
-   `git clone https://github.com/panzerdragoonlegacy/cms.git`
+   `git clone https://github.com/panzerdragoonlegacy/website.git`
 
 2. On the server, back up the database to your home directory:
 
@@ -368,8 +368,8 @@ enabled (for Let's Encrypt).
 
    `mkdir ~/system`
 
-6. Copy each pictures subdirectory from the Docker volume into the new system
-   directory:
+6. Copy each non-main (other) pictures subdirectory from the Docker volume into
+   the new system directory:
 
    ```
    sudo docker cp app:/cms/public/system/avatars ~/system/avatars
@@ -379,37 +379,61 @@ enabled (for Let's Encrypt).
    sudo docker cp app:/cms/public/system/music_track_pictures ~/system/music_track_pictures
    sudo docker cp app:/cms/public/system/news_entry_pictures ~/system/news_entry_pictures
    sudo docker cp app:/cms/public/system/page_pictures ~/system/page_pictures
-   sudo docker cp app:/cms/public/system/pictures ~/system/pictures
    sudo docker cp app:/cms/public/system/tag_pictures ~/system/tag_pictures
    sudo docker cp app:/cms/public/system/video_pictures ~/system/video_pictures
    ```
 
-7. Create a tarball of the pictures:
+7. Create a tarball of the other pictures:
 
-   `tar cvzf ~/system-pictures.tar.gz ~/system`
+   `tar cvzf ~/system-other-pictures.tar.gz ~/system`
 
-8. From your local machine, download the pictures tarball:
+8. From your local machine, download the other pictures tarball:
 
-   `scp kyle@servername:~/system-pictures.tar.gz ~/Backups`
+   `scp kyle@servername:~/system-other-pictures.tar.gz ~/Backups`
 
-9. Once the download is complete, remove the files from the server:
+9. Once the download is complete, remove the other pictures from the server to
+   free up space:
 
    `sudo rm -rf ~/system/*`
 
-   `sudo rm ~/system-pictures.tar.gz`
+   `sudo rm ~/system-other-pictures.tar.gz`
 
-10. On your local machine, untar the pictures into the system folder and delete
+10. Copy the main pictures subdirectory from the Docker volume into the system
+    directory:
+
+    `sudo docker cp app:/cms/public/system/pictures ~/system/pictures`
+
+11. Create a tarball of the main pictures:
+
+    `tar cvzf ~/system-main-pictures.tar.gz ~/system`
+
+12. From your local machine, download the main pictures tarball:
+
+    `scp kyle@servername:~/system-main-pictures.tar.gz ~/Backups`
+
+13. Once the download is complete, remove the main pictures from the server to
+    free up space:
+
+    `sudo rm -rf ~/system/*`
+
+    `sudo rm ~/system-main-pictures.tar.gz`
+
+14. On your local machine, untar the pictures into the system folder and delete
     the tarball.
 
     `mkdir ~/Backups/cms-backup/system`
 
     `cd ~/Backups/cms-backup/system`
 
-    `tar -xvkf ~/Backups/system-pictures.tar.gz`
+    `tar -xvkf ~/Backups/system-other-pictures.tar.gz`
 
-    `rm ~/Backups/system-pictures.tar.gz`
+    `tar -xvkf ~/Backups/system-main-pictures.tar.gz`
 
-11. On the server, copy the remaining files from the Docker volume in the same
+    `rm ~/Backups/system-other-pictures.tar.gz`
+
+    `rm ~/Backups/system-main-pictures.tar.gz`
+
+15. On the server, copy the remaining files from the Docker volume in the same
     way:
 
     ```
@@ -420,7 +444,7 @@ enabled (for Let's Encrypt).
     sudo docker cp app:/cms/public/system/downloads ~/system/downloads
     ```
 
-12. Since there are fewer large files, we will skip creating a tarball. Download
+16. Since there are fewer large files, we will skip creating a tarball. Download
     each set of large files seperately:
 
     ```
@@ -431,19 +455,19 @@ enabled (for Let's Encrypt).
     scp -r kyle@servername:~/system/downloads ~/backups/cms-backup/system/downloads
     ```
 
-13. Remove the copied files from the server, checking that there are no files
+17. Remove the copied files from the server, checking that there are no files
     remaining in your home directory taking up valuable space on the server:
 
     `sudo rm -rf ~/system`
 
     `ls ~`
 
-14. Locally, confirm that the expected directories are present:
+18. Locally, confirm that the expected directories are present:
 
     `ls ~/Backups/cms-backup`
 
     ```
-    backup.sql          cms                     system
+    backup.sql           system                  website
     ```
 
     `ls ~/Backups/cms-backup/system`
@@ -458,16 +482,16 @@ enabled (for Let's Encrypt).
     flac_music_tracks    news_entry_pictures     video_pictures
     ```
 
-15. Create a tarball of the folder containing the three parts of the backup:
+19. Create a tarball of the folder containing the three parts of the backup:
 
     `cd ~/Backups`
 
     `tar cvzf ~/Backups/cms-backup.tar.gz cms-backup`
 
-16. Rename the tarball to the date of the backup and archive it:
+20. Rename the tarball to the date of the backup and archive it:
 
     `mv cms-backup.tar.gz panzer-dragoon-legacy-1998-01-29.tar.gz`
 
-17. On your local machine, remove the cms-backup directory to free up space:
+21. On your local machine, remove the cms-backup directory to free up space:
 
     `rm -rf ~/Backups/cms-backup`
