@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_22_234246) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_11_055724) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_22_234246) do
   create_table "categorisations", force: :cascade do |t|
     t.bigint "parent_id"
     t.bigint "subcategory_id"
-    t.integer "sequence_number", default: 0
+    t.integer "sequence_number", default: 1
     t.string "short_name_in_parent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -201,7 +201,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_22_234246) do
     t.string "source_url"
     t.datetime "published_at", precision: nil
     t.boolean "full_size_link", default: true
-    t.integer "sequence_number", default: 0
+    t.integer "sequence_number", default: 1
     t.boolean "controversial_content", default: false
     t.string "instagram_post_id"
     t.string "slug"
@@ -296,7 +296,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_22_234246) do
     t.datetime "published_at", precision: nil
     t.string "source_url"
     t.integer "album_id"
-    t.integer "sequence_number", default: 0
+    t.integer "sequence_number", default: 1
     t.string "slug"
   end
 

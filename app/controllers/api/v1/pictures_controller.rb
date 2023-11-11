@@ -10,7 +10,7 @@ class Api::V1::PicturesController < ApplicationController
       @pictures =
         policy_scope(
           Picture
-            .where(sequence_number: [0, 1])
+            .where(sequence_number: 1)
             .order(:name)
             .page(params[:page])
             .per(PICTURES_PER_PAGE)

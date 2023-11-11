@@ -45,7 +45,7 @@ module LoadableForCategory
         PicturePolicy::Scope.new(
           current_user,
           Picture
-            .where(category_id: @category.id, sequence_number: [0, 1])
+            .where(category_id: @category.id, sequence_number: 1)
             .order(:name)
             .page(params[:page])
             .per(24)

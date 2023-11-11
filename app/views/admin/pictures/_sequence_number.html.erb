@@ -3,7 +3,7 @@
   <%=
     f.number_field(
       :sequence_number,
-      { min: 0, max: 999, class: 'form-control' }
+      { min: 1, max: 999, class: 'form-control' }
     )
   %>
   <%=
@@ -11,12 +11,10 @@
       partial: 'admin/shared/form/info',
       locals: {
         info: 'Used to determine the order of pictures and videos within an ' \
-          "album. Set this value to 0 for pictures which don't belong to an " \
-          "album, 1 through 999 for pictures which are. All pictures/videos " \
-          "in an album should have a non-0 sequence number. The first " \
-          "picture in the album should have a sequence number of 1 so that " \
-          "the album will show up in lists. Only pictures with a sequence " \
-          "number of 0 or 1 will show up in lists throughout the site."
+          "album. The first picture in the album should have a sequence " \
+          "number of 1 so that the album will show up in lists. Only " \
+          "pictures with a sequence number of 1 will show up in lists " \
+          "throughout the site."
       }
     )
   %>
