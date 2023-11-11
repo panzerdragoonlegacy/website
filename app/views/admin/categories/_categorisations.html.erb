@@ -1,8 +1,4 @@
 <div class="form-group">
-  <%= render(
-    partial: 'admin/shared/form/warning',
-    locals: { warning: 'Subcategories are an experimental feature.' }
-  ) %>
   <label>Subcategories</label>
   <%= f.fields_for(
     :categorisations, f.object.ordered_categorisations
