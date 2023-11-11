@@ -6,7 +6,7 @@ RSpec.describe Category, type: :model do
     it { is_expected.to respond_to(:slug) }
     it { is_expected.to respond_to(:description) }
     it { is_expected.to respond_to(:category_type) }
-    is { is_expected.to respond_to(:list_view) }
+    it { is_expected.to respond_to(:list_view) }
     it { is_expected.to respond_to(:category_picture) }
     it { is_expected.to respond_to(:publish) }
     it { is_expected.to respond_to(:created_at) }
