@@ -34,8 +34,8 @@ RSpec.describe Categorisation, type: :model do
     end
     it do
       is_expected.to validate_numericality_of(:sequence_number)
-        .is_greater_than(1)
-        .is_less_than(100)
+        .is_greater_than_or_equal_to(1)
+        .is_less_than_or_equal_to(99)
     end
   end
 end

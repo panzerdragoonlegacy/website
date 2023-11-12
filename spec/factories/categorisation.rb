@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :categorisation do
     factory :valid_categorisation do
-      sequence(:sequence_number) { |n| n + 1 }
+      sequence(:sequence_number) { |n| n }
       short_name_in_parent { 'Test Short Name' }
       parent { FactoryBot.create(:valid_category) }
       subcategory_id do

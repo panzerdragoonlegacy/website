@@ -13,8 +13,8 @@ class Categorisation < ApplicationRecord
     presence: true,
     numericality: {
       only_integer: true,
-      greater_than: 1,
-      less_than: 100
+      greater_than_or_equal_to: 1,
+      less_than_or_equal_to: 99
     }
   )
   validates :subcategory_id, presence: true
