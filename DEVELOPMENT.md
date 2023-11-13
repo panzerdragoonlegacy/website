@@ -110,11 +110,11 @@ Step-by-step instructions for setting up a development environment for the site.
 
 10. Set a password for the webapp user:
 
-   `docker exec -it website-database-1 psql -U postgres`
+    `docker exec -it website-database-1 psql -U postgres`
 
-   `ALTER USER panzerdragoonlegacy WITH PASSWORD 'PASSWORDHERE';`
+    `ALTER USER panzerdragoonlegacy WITH PASSWORD 'PASSWORDHERE';`
 
-   `\q`
+    `\q`
 
 11. Update `.env` with the database user, password and name you used.
 
