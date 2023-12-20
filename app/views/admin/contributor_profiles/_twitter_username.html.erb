@@ -1,4 +1,12 @@
 <div class="form-group">
-  <%= f.label :twitter_username, 'Twitter Username' %>
+  <%= f.label :twitter_username, 'X (Twitter) Username' %>
   <%= f.text_field :twitter_username, class: 'form-control' %>
+  <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: "E.g. username (leave off the @ prefix)"
+      }
+    )
+  %>
 </div>
