@@ -54,6 +54,15 @@
         <% end %>
       </dd>
     <% end %>
+    <% if @contributor_profile.bluesky_username.present? %>
+      <dt>Bluesky</dt>
+      <dd>
+        <%= link_to(
+          "@#{@contributor_profile.bluesky_username}",
+          "https://bsky.app/profile/#{@contributor_profile.bluesky_username}"
+        ) %>
+      </dd>
+    <% end %>
     <% if @contributor_profile.fediverse_username.present? %>
       <dt>Fediverse</dt>
       <dd>

@@ -1,0 +1,12 @@
+<div class="form-group">
+  <%= f.label :bluesky_username, 'Bluesky Username' %>
+  <%= f.text_field :bluesky_username, class: 'form-control' %>
+  <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: "E.g. username.bsky.social (leave off the @ prefix)"
+      }
+    )
+  %>
+</div>

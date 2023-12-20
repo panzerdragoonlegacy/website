@@ -50,6 +50,7 @@ class ContributorProfile < ApplicationRecord
   before_save :set_published_at
   before_save :set_slug
   before_save :strip_discourse_url_to_just_username
+  before_save :strip_bluesky_username_to_just_username
   before_save :strip_fediverse_username_to_just_username
   before_save :strip_facebook_url_to_just_username
   before_save :strip_twitter_url_to_just_username
@@ -100,6 +101,16 @@ class ContributorProfile < ApplicationRecord
           .discourse_username
           .sub('https://discuss.panzerdragoonlegacy.com/u/', '')
           .chomp('/')
+    end
+  end
+
+  def strip_bluesky_username_to_just_username
+    if self.bluesky_username
+      self.bluesky_username =
+        self
+          .bluesky_username
+          .sub('https://bsky.app/profile/', '')
+          .delete_prefix('@')
     end
   end
 

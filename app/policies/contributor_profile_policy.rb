@@ -58,6 +58,7 @@ class ContributorProfilePolicy < ApplicationPolicy
       avatar
       website_name
       website_url
+      bluesky_username
       fediverse_username
       fediverse_url
       facebook_username
