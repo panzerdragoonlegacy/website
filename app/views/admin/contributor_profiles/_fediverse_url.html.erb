@@ -1,4 +1,14 @@
 <div class="form-group">
   <%= f.label :fediverse_url, 'Fediverse URL' %>
   <%= f.url_field :fediverse_url, class: 'form-control' %>
+   <%=
+    render(
+      partial: 'admin/shared/form/info',
+      locals: {
+        info: "E.g. https://mastodon.social/@username. This field can be " \
+          "omitted if the URL can be composed from the Fediverse username " \
+          "field (based on the URL format that Mastodon uses)."
+      }
+    )
+  %>
 </div>

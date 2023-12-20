@@ -50,6 +50,7 @@ class ContributorProfile < ApplicationRecord
   before_save :set_published_at
   before_save :set_slug
   before_save :strip_discourse_url_to_just_username
+  before_save :strip_fediverse_username_to_just_username
   before_save :strip_facebook_url_to_just_username
   before_save :strip_twitter_url_to_just_username
   before_save :strip_instagram_url_to_just_username
@@ -102,6 +103,12 @@ class ContributorProfile < ApplicationRecord
     end
   end
 
+  def strip_fediverse_username_to_just_username
+    if self.fediverse_username
+      self.fediverse_username = self.fediverse_username.delete_prefix('@')
+    end
+  end
+
   def strip_facebook_url_to_just_username
     if self.facebook_username
       self.facebook_username =
@@ -112,7 +119,11 @@ class ContributorProfile < ApplicationRecord
   def strip_twitter_url_to_just_username
     if self.twitter_username
       self.twitter_username =
-        self.twitter_username.sub('https://twitter.com/', '')
+        self
+          .twitter_username
+          .sub('https://x.com/', '')
+          .sub('https://twitter.com/', '')
+          .delete_prefix('@')
     end
   end
 

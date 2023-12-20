@@ -25,6 +25,15 @@ module ContributorProfilesHelper
     end
   end
 
+  def fediverse_url(contributor_profile)
+    if contributor_profile.fediverse_url.present?
+      return contributor_profile.fediverse_url
+    end
+    parts = contributor_profile.fediverse_username.delete_prefix('@').split('@')
+    return "https://#{parts[1]}/@#{parts[0]}" if parts.count == 2
+    contributor_profile.fediverse_username
+  end
+
   def website_contributions_count(owner)
     news_entry_count(owner) + literature_count(owner) + picture_count(owner) +
       music_track_count(owner) + video_count(owner) + download_count(owner)

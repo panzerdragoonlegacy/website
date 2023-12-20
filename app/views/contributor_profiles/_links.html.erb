@@ -5,7 +5,6 @@
   contributor_profile.fandom_username.blank? &&
   contributor_profile.website_url.blank? &&
   contributor_profile.fediverse_username.blank? &&
-  contributor_profile.fediverse_url.blank? &&
   contributor_profile.twitter_username.blank? &&
   contributor_profile.facebook_username.blank? &&
   contributor_profile.instagram_username.blank? &&
@@ -55,21 +54,20 @@
         <% end %>
       </dd>
     <% end %>
-    <% if @contributor_profile.fediverse_username.present? &&
-      @contributor_profile.fediverse_url.present? %>
+    <% if @contributor_profile.fediverse_username.present? %>
       <dt>Fediverse</dt>
       <dd>
         <%= link_to(
-          @contributor_profile.fediverse_username,
-          @contributor_profile.fediverse_url
+          "@#{@contributor_profile.fediverse_username}",
+          fediverse_url(@contributor_profile)
         ) %>
       </dd>
     <% end %>
     <% if @contributor_profile.twitter_username.present? %>
-      <dt>Twitter</dt>
+      <dt>X (Twitter)</dt>
       <dd>
         <%= link_to(
-          @contributor_profile.twitter_username,
+          "@#{@contributor_profile.twitter_username}",
           "https://twitter.com/#{@contributor_profile.twitter_username}"
         ) %>
       </dd>
