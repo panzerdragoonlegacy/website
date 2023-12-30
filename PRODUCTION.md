@@ -176,7 +176,7 @@ enabled (for Let's Encrypt).
      listen [::]:80;
      listen 80;
 
-     server_name panzerdragoonlegacy.com www.panzerdragoonlegacy.com;
+     server_name www.panzerdragoonlegacy.com panzerdragoonlegacy.com;
 
      location ~ /.well-known/acme-challenge {
        allow all;
@@ -206,7 +206,7 @@ enabled (for Let's Encrypt).
    `sudo docker-compose -f docker-compose.prod.yml up -d`
 
 8. Ensure that there are no errors in the output. If you go to
-   https://www.panzerdragoonlegacy.com in your web browser you should see the
+   https://panzerdragoonlegacy.com in your web browser you should see the
    custom 404 error page. Once the database and Paperclip attachments are
    restored into the volumes that were created by Docker Compose you can verify
    that the app is fully working (see next steps).

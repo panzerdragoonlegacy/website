@@ -3,7 +3,7 @@
 [![CircleCI Build Status](https://circleci.com/gh/panzerdragoonlegacy/website.svg?style=shield)](https://circleci.com/gh/panzerdragoonlegacy/website)
 
 The source code for the website and single purpose content management system of
-[panzerdragoonlegacy.com](https://www.panzerdragoonlegacy.com).
+[panzerdragoonlegacy.com](https://panzerdragoonlegacy.com).
 
 ## Quick Reference
 
