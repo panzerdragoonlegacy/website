@@ -49,3 +49,12 @@
 .related-tags__heading {
   margin-bottom: var(--size-6);
 }
+
+// Add extra padding bottom for particular media types:
+.picture,
+.music-track,
+.video {
+  .contributed-by__contributor {
+    padding-bottom: var(--size-3);
+  }
+}

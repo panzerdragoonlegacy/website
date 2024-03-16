@@ -31,10 +31,6 @@
 
 <article class="picture">
   <header class="picture__header">
-    <%= render(
-      partial: 'shared/contributed_by',
-      locals: { contributor_profiles: @picture.contributor_profiles }
-    ) %>
     <% if @picture.album && album_has_at_least_two_albumables(@picture.album) %>
       <%= render(
         partial: 'shared/albums/navigation',
@@ -52,6 +48,10 @@
         <%= show_picture @picture, 'picture', :embedded %>
       <% end %>
     </div>
+    <%= render(
+      partial: 'shared/contributed_by',
+      locals: { contributor_profiles: @picture.contributor_profiles }
+    ) %>
     <%= render(
       partial: 'pictures/details',
       locals: { picture: @picture }

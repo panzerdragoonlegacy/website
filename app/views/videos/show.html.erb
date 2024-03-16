@@ -25,10 +25,6 @@
 
 <article class="video">
   <header class="video__header">
-    <%= render(
-      partial: 'shared/contributed_by',
-      locals: { contributor_profiles: @video.contributor_profiles }
-    ) %>
     <% if @video.album && album_has_at_least_two_albumables(@video.album) %>
       <%= render(
         partial: 'shared/albums/navigation',
@@ -47,6 +43,10 @@
         Your browser does not support the <code>video</code> element.
       </video>
     </div>
+    <%= render(
+      partial: 'shared/contributed_by',
+      locals: { contributor_profiles: @video.contributor_profiles }
+    ) %>
     <%= render(
       partial: 'videos/details',
       locals: { video: @video }

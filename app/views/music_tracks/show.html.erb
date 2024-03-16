@@ -28,10 +28,6 @@
         <%= show_picture @music_track, 'music_track_picture', :embedded %>
       </div>
     <% end %>
-    <%= render(
-      partial: 'shared/contributed_by',
-      locals: { contributor_profiles: @music_track.contributor_profiles }
-    ) %>
   </header>
   <div class="music-track__body">
     <div class="music-track__audio">
@@ -43,6 +39,10 @@
         Your browser does not support the <code>audio</code> element.
       </audio>
     </div>
+    <%= render(
+      partial: 'shared/contributed_by',
+      locals: { contributor_profiles: @music_track.contributor_profiles }
+    ) %>
     <ul class="music-track__details">
       <% if @music_track.published_at %>
         <li>Published <%= local_date @music_track.published_at %></li>
