@@ -130,11 +130,7 @@ class ContributorProfile < ApplicationRecord
   def strip_twitter_url_to_just_username
     if self.twitter_username
       self.twitter_username =
-        self
-          .twitter_username
-          .sub('https://x.com/', '')
-          .sub('https://twitter.com/', '')
-          .delete_prefix('@')
+        self.twitter_username.sub('https://x.com/', '').delete_prefix('@')
     end
   end
 
