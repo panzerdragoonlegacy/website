@@ -82,4 +82,61 @@ RSpec.describe ContributorProfile, type: :model do
       end
     end
   end
+
+  describe 'social media fields' do
+    let(:contributor_profile) do
+      FactoryBot.build :valid_contributor_profile,
+                       discourse_username:
+                         'https://discuss.panzerdragoonlegacy.com/u/solo_wing/',
+                       bluesky_username:
+                         'https://bsky.app/profile/panzerdragoonlegacy.com',
+                       fediverse_username: '@PanzerDragoonLegacy',
+                       facebook_username:
+                         'https://www.facebook.com/panzerdragoonlegacy',
+                       twitter_username: 'https://x.com/PanzerLegacy',
+                       instagram_username:
+                         'https://www.instagram.com/panzerdragoonlegacy',
+                       deviantart_username:
+                         'https://www.deviantart.com/panzerdragoonlegacy'
+    end
+
+    it 'removes discourse username url prefix when saved' do
+      contributor_profile.save
+      expect(contributor_profile.discourse_username).to eq 'solo_wing'
+    end
+
+    it 'removes bluesky username url prefix when saved' do
+      contributor_profile.save
+      expect(
+        contributor_profile.bluesky_username
+      ).to eq 'panzerdragoonlegacy.com'
+    end
+
+    it 'removes fediverse username prefix when saved' do
+      contributor_profile.save
+      expect(contributor_profile.fediverse_username).to eq 'PanzerDragoonLegacy'
+    end
+
+    it 'removes facebook username url prefix when saved' do
+      contributor_profile.save
+      expect(contributor_profile.facebook_username).to eq 'panzerdragoonlegacy'
+    end
+
+    it 'removes x username prefix url when saved' do
+      contributor_profile.save
+      expect(contributor_profile.twitter_username).to eq 'PanzerLegacy'
+    end
+
+    it 'removes instagram username url prefix when saved' do
+      contributor_profile.save
+      expect(contributor_profile.instagram_username).to eq 'panzerdragoonlegacy'
+    end
+
+    it 'removes deviantart username url prefix when saved' do
+      contributor_profile.save
+      expect(
+        contributor_profile.deviantart_username
+      ).to eq 'panzerdragoonlegacy'
+    end
+  end
 end
