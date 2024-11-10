@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :contributor_profile do
     factory :valid_contributor_profile do
-      sequence(:name) { |n| "Contributor #{n}" }
+      sequence(:name) { |n| "Contributor #{n + 10}" }
 
       factory :published_contributor_profile do
         publish { true }

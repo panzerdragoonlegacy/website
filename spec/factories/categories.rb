@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :category do
     factory :valid_category do
-      sequence(:name) { |n| "Category #{n}" }
+      sequence(:name) { |n| "Category #{n + 10}" }
       description { 'Test Description' }
       category_type { :literature }
 

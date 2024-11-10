@@ -61,24 +61,24 @@ RSpec.describe ContributorProfile, type: :model do
   describe 'slug' do
     context 'creating a new contributor profile' do
       let(:contributor_profile) do
-        FactoryBot.build :valid_contributor_profile, name: 'Contributor 1'
+        FactoryBot.build :valid_contributor_profile, name: 'Contributor A'
       end
 
       it 'generates a slug that is a parameterised version of the name' do
         contributor_profile.save
-        expect(contributor_profile.slug).to eq 'contributor-1'
+        expect(contributor_profile.slug).to eq 'contributor-a'
       end
     end
 
     context 'updating a contributor profile' do
       let(:contributor_profile) do
-        FactoryBot.create :valid_contributor_profile, name: 'Contributor 1'
+        FactoryBot.create :valid_contributor_profile, name: 'Contributor A'
       end
 
       it 'synchronises the slug with the updated name' do
-        contributor_profile.name = 'Contributor 2'
+        contributor_profile.name = 'Contributor B'
         contributor_profile.save
-        expect(contributor_profile.slug).to eq 'contributor-2'
+        expect(contributor_profile.slug).to eq 'contributor-b'
       end
     end
   end

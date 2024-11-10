@@ -65,21 +65,21 @@ RSpec.describe Category, type: :model do
 
   describe 'slug' do
     context 'creating a new category' do
-      let(:category) { FactoryBot.build :valid_category, name: 'Category 1' }
+      let(:category) { FactoryBot.build :valid_category, name: 'Category A' }
 
       it 'generates a slug that is a parameterised version of the name' do
         category.save
-        expect(category.slug).to eq 'category-1'
+        expect(category.slug).to eq 'category-a'
       end
     end
 
     context 'updating a category' do
-      let(:category) { FactoryBot.create :valid_category, name: 'Category 1' }
+      let(:category) { FactoryBot.create :valid_category, name: 'Category A' }
 
       it 'synchronises the slug with the updated name' do
-        category.name = 'Category 2'
+        category.name = 'Category B'
         category.save
-        expect(category.slug).to eq 'category-2'
+        expect(category.slug).to eq 'category-b'
       end
     end
   end
