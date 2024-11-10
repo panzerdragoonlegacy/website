@@ -1,6 +1,39 @@
 require 'rails_helper'
 
 RSpec.describe PicturesHelper, type: :helper do
+  describe 'title in gallery' do
+    context 'grouping into albums' do
+      group_into_albums = true
+
+      it 'displays album name when there is an album' do
+        picture = FactoryBot.create :valid_picture
+        album =
+          FactoryBot.create :valid_album,
+                            category: picture.category,
+                            pictures: [picture]
+        expect(title_in_gallery(group_into_albums, picture)).to eq album.name
+      end
+
+      it 'displays picture name when there is no album' do
+        picture = FactoryBot.create :valid_picture
+        expect(title_in_gallery(group_into_albums, picture)).to eq picture.name
+      end
+    end
+
+    context 'not grouping into albums' do
+      group_into_albums = false
+
+      it 'displays picture name' do
+        picture = FactoryBot.create :valid_picture
+        album =
+          FactoryBot.create :valid_album,
+                            category: picture.category,
+                            pictures: [picture]
+        expect(title_in_gallery(group_into_albums, picture)).to eq picture.name
+      end
+    end
+  end
+
   describe 'picture source link text' do
     it 'displays deviantart link text' do
       source_url =
