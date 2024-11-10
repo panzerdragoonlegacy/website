@@ -14,7 +14,7 @@ end
 group :development, :test do
   gem 'byebug', '~> 11.1.3'
   gem 'dotenv-rails', '~> 2.8.1'
-  gem 'factory_bot_rails', '~> 6.2.0'
+  gem 'factory_bot_rails', '~> 6.4.4'
   gem 'rspec-rails', '~> 7.1.0'
 end
 
