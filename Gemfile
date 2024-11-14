@@ -24,10 +24,10 @@ group :test do
   gem 'shoulda-matchers', '~> 5.3.0'
 end
 
-gem 'bcrypt', '~> 3.1.18'
+gem 'bcrypt', '~> 3.1.20'
 gem 'bootsnap', '~> 1.16'
 gem 'cocoon', '~> 1.2.15'
-gem 'devise', '~> 4.9.2'
+gem 'devise', '~> 4.9.4'
 gem 'jbuilder', '~> 2.11.5'
 gem 'jquery-rails', '~> 4.5.1'
 gem 'kaminari', '~> 1.2.2'
