@@ -1,7 +1,14 @@
 FactoryBot.define do
   factory :video do
     factory :valid_video do
-      sequence(:name) { |n| "Video #{n}" }
+      sequence(:name) do
+        n = ''
+        loop do
+          n = "Video #{rand(1000)}"
+          break unless Video.where(name: n).exists?
+        end
+        n
+      end
       description { 'Test Description' }
       mp4_video do
         Rack::Test::UploadedFile.new('spec/fixtures/video.mp4', 'video/mp4')

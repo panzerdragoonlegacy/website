@@ -1,7 +1,14 @@
 FactoryBot.define do
   factory :page do
     factory :valid_page do
-      sequence(:name) { |n| "Page #{n}" }
+      sequence(:name) do
+        n = ''
+        loop do
+          n = "Page #{rand(1000)}"
+          break unless Page.where(name: n).exists?
+        end
+        n
+      end
       page_type { :top_level.to_s }
       content { 'Test Content' }
       page_picture do

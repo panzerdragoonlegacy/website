@@ -1,7 +1,14 @@
 FactoryBot.define do
   factory :download do
     factory :valid_download do
-      sequence(:name) { |n| "Download #{n}" }
+      sequence(:name) do
+        n = ''
+        loop do
+          n = "Download #{rand(1000)}"
+          break unless Download.where(name: n).exists?
+        end
+        n
+      end
       description { 'Test Description' }
       download do
         Rack::Test::UploadedFile.new(

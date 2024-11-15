@@ -1,7 +1,14 @@
 FactoryBot.define do
   factory :picture do
     factory :valid_picture do
-      sequence(:name) { |n| "Picture #{n}" }
+      sequence(:name) do
+        n = ''
+        loop do
+          n = "Picture #{rand(1000)}"
+          break unless Picture.where(name: n).exists?
+        end
+        n
+      end
       description { 'Test Description' }
       picture do
         Rack::Test::UploadedFile.new('spec/fixtures/picture.jpg', 'image/jpeg')

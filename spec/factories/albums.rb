@@ -1,7 +1,14 @@
 FactoryBot.define do
   factory :album do
     factory :valid_album do
-      sequence(:name) { |n| "Album #{n}" }
+      sequence(:name) do
+        n = ''
+        loop do
+          n = "Album #{rand(1000)}"
+          break unless Album.where(name: n).exists?
+        end
+        n
+      end
       description { 'Test Description' }
       category { FactoryBot.create(:valid_picture_category) }
       contributor_profiles { [FactoryBot.create(:valid_contributor_profile)] }

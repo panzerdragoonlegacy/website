@@ -1,7 +1,14 @@
 FactoryBot.define do
   factory :category do
     factory :valid_category do
-      sequence(:name) { |n| "Category #{n + 10}" }
+      sequence(:name) do
+        n = ''
+        loop do
+          n = "Category #{rand(1000)}"
+          break unless Category.where(name: n).exists?
+        end
+        n
+      end
       description { 'Test Description' }
       category_type { :literature }
 

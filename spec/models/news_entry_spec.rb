@@ -62,24 +62,24 @@ RSpec.describe NewsEntry, type: :model do
   describe 'slug' do
     context 'creating a new news entry' do
       let(:news_entry) do
-        FactoryBot.build :valid_news_entry, name: 'News Entry 1'
+        FactoryBot.build :valid_news_entry, name: 'News Entry A'
       end
 
       it 'generates a slug that is a parameterised version of the name' do
         news_entry.save
-        expect(news_entry.slug).to eq 'news-entry-1'
+        expect(news_entry.slug).to eq 'news-entry-a'
       end
     end
 
     context 'updating a news entry' do
       let(:news_entry) do
-        FactoryBot.create :valid_news_entry, name: 'News Entry 1'
+        FactoryBot.create :valid_news_entry, name: 'News Entry A'
       end
 
       it 'synchronises the slug with the updated name' do
-        news_entry.name = 'News Entry 2'
+        news_entry.name = 'News Entry B'
         news_entry.save
-        expect(news_entry.slug).to eq 'news-entry-2'
+        expect(news_entry.slug).to eq 'news-entry-b'
       end
     end
   end

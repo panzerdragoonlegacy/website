@@ -1,7 +1,14 @@
 FactoryBot.define do
   factory :music_track do
     factory :valid_music_track do
-      sequence(:name) { |n| "Music Track #{n}" }
+      sequence(:name) do
+        n = ''
+        loop do
+          n = "Music Track #{rand(1000)}"
+          break unless ContributorProfile.where(name: n).exists?
+        end
+        n
+      end
       description { 'Test Description' }
       mp3_music_track do
         Rack::Test::UploadedFile.new(

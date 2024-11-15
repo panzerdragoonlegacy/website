@@ -1,7 +1,14 @@
 FactoryBot.define do
   factory :news_entry do
     factory :valid_news_entry do
-      sequence(:name) { |n| "News Entry #{n}" }
+      sequence(:name) do
+        n = ''
+        loop do
+          n = "News Entry #{rand(1000)}"
+          break unless NewsEntry.where(name: n).exists?
+        end
+        n
+      end
       content { 'Test Content' }
       news_entry_picture do
         Rack::Test::UploadedFile.new(
