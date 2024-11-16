@@ -72,4 +72,12 @@ class MusicTrack < ApplicationRecord
     sync_file_name_of :flac_music_track, file_name: "#{slug}.flac"
     sync_file_name_of :music_track_picture, file_name: "#{slug}.jpg"
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name publish created_at updated_at published_at]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[category]
+  end
 end

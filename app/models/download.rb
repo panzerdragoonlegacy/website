@@ -55,4 +55,12 @@ class Download < ApplicationRecord
     sync_file_name_of :download, file_name: "#{slug_from_name}.zip"
     sync_file_name_of :download_picture, file_name: "#{slug_from_name}.jpg"
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name publish created_at updated_at published_at]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[category]
+  end
 end

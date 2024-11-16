@@ -63,6 +63,14 @@ class Picture < ApplicationRecord
     "#{name} (#{id})"
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name publish instagram_post_id created_at updated_at published_at]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[category]
+  end
+
   private
 
   def replace_picture

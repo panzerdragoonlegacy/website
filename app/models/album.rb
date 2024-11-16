@@ -43,6 +43,14 @@ class Album < ApplicationRecord
     videos.order :sequence_number, :name
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name publish created_at updated_at published_at]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[category]
+  end
+
   private
 
   # Publishes the pictures/videos in the album one second apart (to ensure

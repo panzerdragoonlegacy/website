@@ -39,6 +39,14 @@ class NewsEntry < ApplicationRecord
   before_save :set_slug
   before_save :sync_file_name if name.present?
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name publish created_at updated_at published_at]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[contributor_profile]
+  end
+
   private
 
   def sync_file_name

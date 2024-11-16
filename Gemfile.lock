@@ -244,7 +244,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
-    ransack (3.2.1)
+    ransack (4.2.1)
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
@@ -352,7 +352,7 @@ DEPENDENCIES
   rails (= 7.0.8.6)
   rails_autolink (~> 1.1.8)
   rake (= 13.0.6)
-  ransack (~> 3.2.1)
+  ransack (~> 4.2.1)
   rspec-rails (~> 7.1.0)
   rspec_junit_formatter
   sanitize (~> 6.0.1)

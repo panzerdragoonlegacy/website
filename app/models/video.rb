@@ -68,6 +68,14 @@ class Video < ApplicationRecord
     sync_file_name_of :video_picture, file_name: "#{slug_from_name}.jpg"
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name publish created_at updated_at published_at]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[category]
+  end
+
   private
 
   def strip_youtube_url_to_just_id

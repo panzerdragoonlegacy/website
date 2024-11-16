@@ -92,6 +92,10 @@ class ContributorProfile < ApplicationRecord
     attachment.instance.avatar_filename
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name publish created_at updated_at published_at]
+  end
+
   private
 
   def strip_discourse_url_to_just_username

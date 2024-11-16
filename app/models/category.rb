@@ -74,4 +74,8 @@ class Category < ApplicationRecord
   def ordered_categorisations
     categorisations.order :sequence_number
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name publish category_type created_at updated_at published_at]
+  end
 end

@@ -11,14 +11,10 @@
 
 <%= search_form_for @q, url: admin_users_path do |f| %>
   <div class="form-group">
-    <%=
-      f.label(
-        :email_or_contributor_profile_name_cont,
-        'Email or Contributor Profile:',
-        class: 'mr-1'
-      )
-    %>
-    <%= f.search_field :email_or_contributor_profile_name_cont, class: 'mr-2' %>
+    <%= f.label :email_cont, 'Email:', class: 'mr-1' %>
+    <%= f.search_field :email_cont, class: 'mr-2' %>
+    <%= f.label :contributor_profile_name_cont, 'Contributor Profile:', class: 'mr-1' %>
+    <%= f.search_field :contributor_profile_name_cont, class: 'mr-2' %>
     <%= render partial: 'admin/shared/search/search_button', locals: { f: f } %>
   </div>
 <% end %>

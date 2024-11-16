@@ -44,7 +44,7 @@ gem 'pundit', '~> 2.3.0'
 gem 'puma', '~> 6.4.2'
 gem 'rack-cors', '~> 2.0.1'
 gem 'rails_autolink', '~> 1.1.8'
-gem 'ransack', '~> 3.2.1' # 4.x contains breaking change.
+gem 'ransack', '~> 4.2.1'
 gem 'sanitize', '~> 6.0.1'
 gem 'sprockets-rails', require: 'sprockets/railtie'
 gem 'uglifier', '>= 4.2.0'

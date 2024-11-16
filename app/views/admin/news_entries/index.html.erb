@@ -24,7 +24,7 @@
       <tr>
         <th scope="col"></th>
         <th scope="col"><%= sort_link @q, :name %></th>
-        <th scope="col">Author</th>
+        <th scope="col"><%= sort_link @q, :contributor_profile_name, 'Author' %></th>
         <th scope="col"><%= sort_link @q, :created_at, 'Created' %></th>
         <th scope="col"><%= sort_link @q, :updated_at, 'Modified' %></th>
         <th scope="col">

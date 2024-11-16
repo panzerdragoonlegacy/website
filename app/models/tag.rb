@@ -64,4 +64,8 @@ class Tag < ApplicationRecord
       sync_file_name_of :tag_picture, file_name: "#{slug_from_name}.jpg"
     end
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name created_at updated_at]
+  end
 end

@@ -1,7 +1,9 @@
 <%= search_form_for q, url: path do |f| %>
   <div class="form-group">
-    <%= f.label :old_url_or_new_url_cont, 'Old or New URL:', class: 'mr-1' %>
-    <%= f.search_field :old_url_or_new_url_cont, class: 'mr-2' %>
+    <%= f.label :old_url_cont, 'Old URL:', class: 'mr-1' %>
+    <%= f.search_field :old_url_cont, class: 'mr-2' %>
+     <%= f.label :new_url_cont, 'New URL:', class: 'mr-1' %>
+    <%= f.search_field :new_url_cont, class: 'mr-2' %>
     <%= render partial: 'admin/shared/search/search_button', locals: { f: f } %>
   </div>
 <% end %>
