@@ -12,7 +12,7 @@ class PagePolicy < ApplicationPolicy
         return scope if user.administrator?
         return scope_user_contributes_to if user.contributor_profile
       end
-      scope.where(publish: true)
+      scope.where publish: true
     end
 
     private
