@@ -1,6 +1,6 @@
 <%= render partial: 'shared/meta_tags' %>
 
-<main class="home">
+<div class="home">
   <% unless params[:page] %>
     <% if @featured_news_entry.present? %>
       <%= render(
@@ -45,4 +45,4 @@
     </section>
   <% end %>
   <footer class="home__footer"></footer>
-</main>
+</div>

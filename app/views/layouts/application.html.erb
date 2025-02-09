@@ -22,13 +22,8 @@
           <div class="layout__logo">
             <%= link_to(
               image_pack_tag(
-                'media/images/logo-small.png',
-                alt: 'Panzer Dragoon Legacy logo',
-                srcset: [
-                  ['media/images/logo-small.png', '767w'],
-                  ['media/images/logo-medium.png', '768w']
-                ],
-                sizes: '(max-width: 767px) 285px, 768px'
+                'media/images/logo.png',
+                alt: 'Panzer Dragoon Legacy logo'
               ),
               root_url
             ) %>
@@ -42,17 +37,31 @@
               <i class="fas fa-bars"></i>
             </label>
           </div>
+          <div class="layout__header-icons">
+            <%= render 'layouts/icons' %>
+          </div>
         </div>
         <%= render 'layouts/main_menu' %>
       </header>
-      <%= render 'layouts/flash_messages' %>
-      <% if yield(:title).present? %>
-        <h1 class="layout__page-heading"><%= yield(:title) %></h1>
-      <% end %>
-      <main class="layout__page-content">
-        <%= yield %>
-      </main>
-      <footer class="layout__footer"></footer>
+      <div class="layout__body-and-footer">
+        <%= render 'layouts/flash_messages' %>
+        <% if yield(:title).present? %>
+          <h1 class="layout__page-heading"><%= yield(:title) %></h1>
+        <% end %>
+        <main class="layout__page-content">
+          <%= yield %>
+        </main>
+        <footer class="layout__footer">
+          <p class=layout__footer-text>
+            Panzer Dragoon Legacy is an <%= link_to(
+              'unofficial fan site', '/about#what-is-panzer-dragoon-legacy'
+            ) %>, excavated by and for fans of Panzer Dragoon.
+          </p>
+          <div class="layout__footer-icons">
+            <%= render 'layouts/icons' %>
+          </div>
+        </footer>
+      </div>
     </div>
   </body>
 </html>

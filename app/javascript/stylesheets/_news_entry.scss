@@ -20,7 +20,6 @@
   }
 
   &__contributor {
-    margin-top: var(--size-4);
     display: inline-flex;
     gap: var(--size-3);
     display: inline-flex;
@@ -38,7 +37,7 @@
   }
 
   &__date {
-    margin-top: var(--size-3);
+    margin-block: var(--size-3);
   }
 
   &__summary {

@@ -24,6 +24,13 @@
     <% end %>
     <% if category_name == 'More' %>
       <li class="sub-menu__divider"><hr /></li>
+       <li class="sub-menu__list-item">
+        <%= link_to(
+          'Panzer Dragoon Wiki',
+          'https://panzerdragoon.fandom.com'
+        ) %>
+      </li>
+      <li class="sub-menu__divider"><hr /></li>
       <li class="sub-menu__list-item">
         <%= link_to 'Links', '/links' %>
       </li>

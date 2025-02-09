@@ -1,0 +1,23 @@
+.icons {
+  ul {
+    margin-top: 0;
+    list-style: none;
+
+    li {
+      display: inline-block;
+      padding-inline: var(--size-1);
+
+      i {
+        font-size: var(--font-size-4);
+      }
+
+      a {
+        color: var(--link-colour);
+      }
+
+      a:hover {
+        color: var(--link-hover-colour);
+      }
+    }
+  }
+}

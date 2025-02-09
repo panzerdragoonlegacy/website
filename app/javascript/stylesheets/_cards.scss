@@ -1,4 +1,6 @@
 .cards {
+  margin-block: var(--size-2);
+
   &__footer {
     @media only screen and (max-width: $mobile-max) {
       margin-top: var(--size-5);

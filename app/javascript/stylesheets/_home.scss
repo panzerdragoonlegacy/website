@@ -2,16 +2,9 @@
   margin: var(--size-2);
   border-radius: $card-radius;
   text-align: left;
+  margin-top: var(--size-2);
 
   @include card-background-colour;
-
-  @media only screen and (max-width: $mobile-max) {
-    margin-top: var(--size-2);
-  }
-
-  @media only screen and (min-width: $tablet-min) {
-    margin-top: var(--size-5);
-  }
 
   &__picture {
     img {
@@ -144,12 +137,10 @@
   }
 }
 
-.home-news-entries {
-  @media only screen and (max-width: $mobile-max) {
-    margin-top: var(--size-2);
-  }
+.home-download {
+  margin-bottom: var(--size-5);
+}
 
-  @media only screen and (min-width: $tablet-min) {
-    margin-top: var(--size-5);
-  }
+.home-news-entries {
+  margin-top: var(--size-2);
 }

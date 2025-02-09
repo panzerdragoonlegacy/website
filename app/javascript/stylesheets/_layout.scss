@@ -41,11 +41,23 @@ body {
     }
   }
 
+  &__logo-and-main-menu-opener {
+    @media only screen and (max-width: $mobile-max) {
+      max-width: $mobile-max;
+    }
+
+    @media only screen and (min-width: $tablet-min) {
+      max-width: $tablet-min; // Enough room for two side by side illustrations.
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
   &__logo {
     img {
       @media only screen and (max-width: $mobile-l) {
         padding-top: 7px;
-        width: 310px;
+        width: 335px;
       }
 
       @media only screen and (min-width: $mobile-l) and (max-width: $mobile-max) {
@@ -60,10 +72,22 @@ body {
       }
 
       @media only screen and (min-width: $tablet-min) {
-        width: 500px;
+        width: 335px;
+        float: left;
+        margin-left: var(--size-3);
         margin-bottom: var(--size-3);
       }
     }
+  }
+
+  &__header-icons {
+    @media only screen and (max-width: $mobile-max) {
+      display: none;
+    }
+
+    float: right;
+    margin-right: var(--size-3);
+    margin-top: calc(var(--size-3) - var(--size-1));
   }
 
   &__main-menu-opener {
@@ -71,6 +95,8 @@ body {
       display: inline;
       float: right;
       margin-top: calc(var(--size-2) + var(--size-1));
+      margin-left: var(--size-3);
+
       margin-right: var(--size-3);
       margin-bottom: var(--size-3);
 
@@ -92,9 +118,36 @@ body {
     text-align: center;
   }
 
+  &__body-and-footer {
+    // Ensure that the content fills up the whole vertical height, even when
+    // the content is shorter. Min height should be height of page - approximate
+    // size of header.
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    @media only screen and (max-width: $mobile-max) {
+      min-height: calc(100vh - 66px);
+    }
+
+    @media only screen and (min-width: $tablet-min) {
+      min-height: calc(100vh - 142px);
+    }
+  }
+
   &__page-heading {
     font-weight: var(--font-weight-8);
     text-align: center;
+    margin: 0;
+    margin-bottom: var(--size-5);
+
+    @media only screen and (max-width: $mobile-max) {
+      margin-top: var(--size-4);
+    }
+
+    @media only screen and (min-width: $tablet-min) {
+      margin-top: var(--size-1);
+    }
   }
 
   &__page-content {
@@ -104,6 +157,7 @@ body {
     text-align: justify;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: var(--size-6);
 
     @media only screen and (max-width: $mobile-max) {
       max-width: $mobile-max;
@@ -125,6 +179,27 @@ body {
   }
 
   &__footer {
-    margin-bottom: var(--size-8);
+    margin-top: auto;
+    padding: var(--size-3);
+    background-color: black;
+  }
+
+  &__footer-text {
+    text-align: center;
+    padding-bottom: var(--size-1);
+
+    a {
+      color: var(--link-colour);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--link-hover-colour);
+      text-decoration: dotted underline;
+    }
+  }
+
+  &__footer-icons {
+    text-align: center;
   }
 }

@@ -16,7 +16,7 @@
   <p class="draft">Draft</p>
 <% end %>
 
-<main class="category">
+<div class="category">
   <header class="category__header">
     <% if @category.category_picture.present? %>
       <div class="category__picture">
@@ -77,4 +77,4 @@
       locals: { downloads: @downloads }
     ) %>
   <% end %>
-</main>
+</div>

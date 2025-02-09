@@ -59,64 +59,14 @@
         ]
       }
     ) %>
-    <li class="main-menu__list-item sub-menu">
-      <input
-        type="checkbox"
-        id="beyond-checkbox"
-        name="menu-selection"
-        class="main-menu__checkbox"
-      />
-      <label
-        for="beyond-checkbox"
-        class="main-menu__label sub-menu__title"
-        aria-expanded="false"
-        aria-controls="beyond-dropdown"
-      >
-        Beyond
+    <li class="main-menu__list-item">
+      <label class="main-menu__label">
+        <%= link_to(
+          'Forum',
+          'https://discuss.panzerdragoonlegacy.com',
+          class: 'about-link'
+        ) %>
       </label>
-      <ul class="sub-menu__list" id="beyond-dropdown">
-        <li class="sub-menu__list-item">
-          <a href="https://discuss.panzerdragoonlegacy.com">
-            <i class="fab fa-discourse"></i> Forum
-          </a>
-        </li>
-        <li class="sub-menu__list-item">
-          <a href="https://discordapp.com/invite/N3mrMh6">
-            <i class="fab fa-discord"></i> Discord
-          </a>
-        </li>
-        <li class="sub-menu__list-item">
-          <a href="https://www.patreon.com/panzerdragoonlegacy">
-            <i class="fab fa-patreon"></i> Patreon
-          </a>
-        </li>
-        <li class="sub-menu__divider">
-          <hr />
-        </li>
-        <li class="sub-menu__list-item">
-          <a rel="me" href="https://bsky.app/profile/panzerdragoonlegacy.com">
-            <i class="fa-brands fa-bluesky"></i> Bluesky
-          </a>
-        </li>
-        <li class="sub-menu__list-item">
-          <a href="https://www.youtube.com/c/panzerdragoonlegacy">
-            <i class="fab fa-youtube"></i> YouTube
-          </a>
-        </li>
-        <li class="sub-menu__divider">
-          <hr />
-        </li>
-        <li class="sub-menu__list-item">
-          <a href="https://panzerdragoon.fandom.com">
-            <i class="fas fa-book-open"></i> Wiki
-          </a>
-        </li>
-        <li class="sub-menu__list-item">
-          <a href="https://steamcommunity.com/groups/panzerdragoon">
-            <i class="fab fa-steam"></i> Steam Group
-          </a>
-        </li>
-      </ul>
     </li>
     <li class="main-menu__list-item main-menu__list-item--search search">
       <%= form_with url: search_index_path, method: :get do |form| %>
