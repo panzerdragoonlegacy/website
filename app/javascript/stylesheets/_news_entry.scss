@@ -45,8 +45,18 @@
   }
 
   &__content {
-    p {
+    p,
+    dl {
       padding: var(--size-2);
+    }
+
+    dt {
+      clear: both;
+      font-weight: bold;
+    }
+
+    dt:after {
+      content: ":";
     }
 
     blockquote p {
