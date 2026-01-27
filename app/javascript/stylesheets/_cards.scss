@@ -84,6 +84,7 @@
 
   &__heading--no-picture {
     margin-top: var(--size-2);
+    font-size: var(--font-size-3);
 
     @media only screen and (max-width: $mobile-max) {
       margin-bottom: 0;
@@ -96,6 +97,7 @@
 
   &__heading--has-picture {
     margin-top: -25px;
+    font-size: var(--font-size-3);
   }
 
   &__footer {
