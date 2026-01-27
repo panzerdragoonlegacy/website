@@ -63,8 +63,14 @@
       @include blockquote-paragraph;
     }
 
+    // Prevent YouTube videos and other embedded content from breaking mobile
+    // layout:
     .onebox {
       margin: var(--size-2);
+
+      iframe {
+        width: 100%;
+      }
     }
   }
 
