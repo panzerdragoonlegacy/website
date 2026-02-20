@@ -29,21 +29,21 @@ Step-by-step instructions for setting up a development environment for the site.
 
 6. Build and start the Docker containers:
 
-   `docker-compose up --build`
+   `docker compose up --build`
 
 7. If they do not already exist, create the development and test databases:
 
-   `docker-compose exec app bin/rails db:create`
+   `docker compose exec app bin/rails db:create`
 
 8. Load the database schema and run any pending migrations:
 
-   `docker-compose exec app bin/rails db:schema:load`
+   `docker compose exec app bin/rails db:schema:load`
 
-   `docker-compose exec app bin/rails db:migrate`
+   `docker compose exec app bin/rails db:migrate`
 
 9. Enter the Rails console and create an administrator user:
 
-   `docker-compose exec app bin/rails c`
+   `docker compose exec app bin/rails c`
 
    ```ruby
    User.create(
@@ -58,7 +58,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 10. For automatic reloading of webpack-dev-server, open a seperate tab and run:
 
-    `docker-compose exec app bash`
+    `docker compose exec app bash`
 
     `WEBPACKER_DEV_SERVER_HOST=0.0.0.0 ./bin/webpack-dev-server`
 
@@ -72,9 +72,9 @@ Step-by-step instructions for setting up a development environment for the site.
 
 2. Stop the app (if it is running) and start the database container only.
 
-   `docker-compose stop`
+   `docker compose stop`
 
-   `docker-compose start database`
+   `docker compose start database`
 
 3. Open psql in an interactive terminal.
 
@@ -127,13 +127,13 @@ Step-by-step instructions for setting up a development environment for the site.
 
 12. Restart the containers to reload from `.env`
 
-    `docker-compose down`
+    `docker compose down`
 
-    `docker-compose up`
+    `docker compose up`
 
 13. Run any outstanding migrations on the restored database
 
-    `docker-compose exec app bin/rails db:migrate`
+    `docker compose exec app bin/rails db:migrate`
 
 ## Restore Paperclip Attachments into Docker Volume
 
@@ -148,14 +148,14 @@ Step-by-step instructions for setting up a development environment for the site.
 
 3. Restart the app
 
-   `docker-compose down`
+   `docker compose down`
 
-   `docker-compose up`
+   `docker compose up`
 
 4. If new attachment styles have been added to the codebase since the backup was
    created you can generate these inside the container (this will take a while):
 
-   `docker-compose exec app bash`
+   `docker compose exec app bash`
 
    `bundle exec rake paperclip:refresh:missing_styles`
 
@@ -181,7 +181,7 @@ Step-by-step instructions for setting up a development environment for the site.
 
 2. Load the database schema into the test database:
 
-   `docker-compose exec app rails db:schema:load RAILS_ENV=test`
+   `docker compose exec app rails db:schema:load RAILS_ENV=test`
 
 3. Run the test suite (this will take a while):
 
